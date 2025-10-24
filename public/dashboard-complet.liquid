@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BetPro - Dashboard Paris Sportifs</title>
     <style>
+        /* Hide Shopify header only on this page */
+        .shopify-section-header,
+        header.header,
+        .header-wrapper,
+        #shopify-section-header {
+            display: none !important;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -459,28 +467,28 @@
         </div>
 
         <nav class="sidebar-nav">
-            <a class="nav-item active" data-page="accueil" onclick="navigateTo(event, 'accueil')">
+            <a href="#accueil" class="nav-item active" data-page="accueil" onclick="navigateTo(event, 'accueil')">
                 <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                 </svg>
                 <span>Accueil</span>
             </a>
 
-            <a class="nav-item" data-page="bet" onclick="navigateTo(event, 'bet')">
+            <a href="#bet" class="nav-item" data-page="bet" onclick="navigateTo(event, 'bet')">
                 <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
                 </svg>
                 <span>Bet</span>
             </a>
 
-            <a class="nav-item" data-page="historique" onclick="navigateTo(event, 'historique')">
+            <a href="#historique" class="nav-item" data-page="historique" onclick="navigateTo(event, 'historique')">
                 <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
                 <span>Historique</span>
             </a>
 
-            <a class="nav-item" data-page="communaute" onclick="navigateTo(event, 'communaute')">
+            <a href="#communaute" class="nav-item" data-page="communaute" onclick="navigateTo(event, 'communaute')">
                 <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
                 </svg>
@@ -947,24 +955,60 @@
             event.preventDefault();
             
             // Hide all pages
-            document.querySelectorAll('.page').forEach(page => {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
                 page.classList.remove('active');
             });
             
             // Show selected page
-            document.getElementById(pageName).classList.add('active');
+            const targetPage = document.getElementById(pageName);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
             
             // Update active nav item
-            document.querySelectorAll('.nav-item').forEach(item => {
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
                 item.classList.remove('active');
             });
             event.currentTarget.classList.add('active');
+            
+            // Update URL hash
+            window.location.hash = pageName;
             
             // Close mobile sidebar if open
             if (window.innerWidth < 768) {
                 toggleSidebar();
             }
         }
+
+        // Handle page load with hash
+        window.addEventListener('DOMContentLoaded', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                const targetNav = document.querySelector(`.nav-item[data-page="${hash}"]`);
+                if (targetNav) {
+                    targetNav.click();
+                }
+            }
+        });
+
+        // Handle browser back/forward buttons
+        window.addEventListener('hashchange', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                const targetNav = document.querySelector(`.nav-item[data-page="${hash}"]`);
+                if (targetNav) {
+                    const event = new Event('click');
+                    navigateTo(event, hash);
+                    // Update active nav
+                    document.querySelectorAll('.nav-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    targetNav.classList.add('active');
+                }
+            }
+        });
     </script>
 </body>
 </html>
