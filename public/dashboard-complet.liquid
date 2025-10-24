@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BetPro - Dashboard Paris Sportifs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #f5f7fa;
+            --bg-secondary: #ffffff;
+            --bg-sidebar: #1e2936;
+            --bg-sidebar-hover: #2d3e50;
+            --text-primary: #1a202c;
+            --text-secondary: #718096;
+            --text-sidebar: #d4dce6;
+            --accent-green: #22c55e;
+            --accent-green-hover: #16a34a;
+            --border-color: #e2e8f0;
+            --sidebar-border: #374151;
+            --destructive: #ef4444;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 256px;
+            background: var(--bg-sidebar);
+            border-right: 1px solid var(--sidebar-border);
+            z-index: 40;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar.mobile-hidden {
+            transform: translateX(-100%);
+        }
+
+        @media (min-width: 768px) {
+            .sidebar.mobile-hidden {
+                transform: translateX(0);
+            }
+        }
+
+        .sidebar-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--sidebar-border);
+        }
+
+        .sidebar-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--accent-green);
+        }
+
+        .sidebar-subtitle {
+            font-size: 12px;
+            color: var(--text-sidebar);
+            opacity: 0.7;
+            margin-top: 4px;
+        }
+
+        .sidebar-nav {
+            padding: 16px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            color: var(--text-sidebar);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            background: var(--bg-sidebar-hover);
+        }
+
+        .nav-item.active {
+            background: var(--bg-sidebar-hover);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .sidebar-footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 16px;
+            border-top: 1px solid var(--sidebar-border);
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-sidebar);
+            opacity: 0.6;
+        }
+
+        /* Mobile Menu Button */
+        .menu-toggle {
+            display: block;
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 50;
+            background: var(--bg-sidebar);
+            color: var(--text-sidebar);
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        @media (min-width: 768px) {
+            .menu-toggle {
+                display: none;
+            }
+        }
+
+        /* Overlay */
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 30;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 0;
+            min-height: 100vh;
+            padding: 24px;
+            padding-top: 80px;
+        }
+
+        @media (min-width: 768px) {
+            .main-content {
+                margin-left: 256px;
+                padding-top: 32px;
+            }
+        }
+
+        /* Page */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px var(--shadow);
+            margin-bottom: 24px;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 12px var(--shadow);
+            transition: box-shadow 0.3s;
+        }
+
+        .card-header {
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .card-description {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            gap: 24px;
+        }
+
+        .grid-2 {
+            grid-template-columns: 1fr;
+        }
+
+        .grid-3 {
+            grid-template-columns: 1fr;
+        }
+
+        .grid-4 {
+            grid-template-columns: 1fr;
+        }
+
+        @media (min-width: 768px) {
+            .grid-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .grid-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .grid-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .grid-4 {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* Stats Card */
+        .stat-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 8px 0;
+        }
+
+        .stat-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .badge-primary {
+            background: var(--accent-green);
+            color: white;
+        }
+
+        .badge-secondary {
+            background: #e2e8f0;
+            color: var(--text-primary);
+        }
+
+        .badge-destructive {
+            background: var(--destructive);
+            color: white;
+        }
+
+        /* Button */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: var(--accent-green);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background: var(--accent-green-hover);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-secondary);
+        }
+
+        .btn-ghost:hover {
+            background: #f1f5f9;
+        }
+
+        /* Bet Card */
+        .bet-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .bet-odds {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--accent-green);
+        }
+
+        /* History Item */
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .history-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+        }
+
+        /* Community */
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-green);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .post-header {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .post-actions {
+            display: flex;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        /* Utilities */
+        .flex {
+            display: flex;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .gap-2 {
+            gap: 8px;
+        }
+
+        .gap-3 {
+            gap: 12px;
+        }
+
+        .mb-2 {
+            margin-bottom: 8px;
+        }
+
+        .mb-4 {
+            margin-bottom: 16px;
+        }
+
+        .text-lg {
+            font-size: 18px;
+        }
+
+        .text-xl {
+            font-size: 20px;
+        }
+
+        .text-2xl {
+            font-size: 24px;
+        }
+
+        .text-3xl {
+            font-size: 30px;
+        }
+
+        .text-4xl {
+            font-size: 36px;
+        }
+
+        .font-bold {
+            font-weight: bold;
+        }
+
+        .text-secondary {
+            color: var(--text-secondary);
+        }
+
+        .text-green {
+            color: var(--accent-green);
+        }
+
+        .text-red {
+            color: var(--destructive);
+        }
+
+        h1 {
+            margin-bottom: 16px;
+        }
+
+        .page-header {
+            margin-bottom: 32px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu Button -->
+    <button class="menu-toggle" onclick="toggleSidebar()">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+    </button>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar mobile-hidden" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">BetPro</div>
+            <div class="sidebar-subtitle">Paris Sportifs Pro</div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a class="nav-item active" data-page="accueil" onclick="navigateTo(event, 'accueil')">
+                <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                </svg>
+                <span>Accueil</span>
+            </a>
+
+            <a class="nav-item" data-page="bet" onclick="navigateTo(event, 'bet')">
+                <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                </svg>
+                <span>Bet</span>
+            </a>
+
+            <a class="nav-item" data-page="historique" onclick="navigateTo(event, 'historique')">
+                <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span>Historique</span>
+            </a>
+
+            <a class="nav-item" data-page="communaute" onclick="navigateTo(event, 'communaute')">
+                <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+                <span>Communauté</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            © 2024 BetPro
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Page Accueil -->
+        <div class="page active" id="accueil">
+            <div class="page-header">
+                <h1 class="text-4xl font-bold">Tableau de Bord</h1>
+                <p class="text-secondary text-lg">Bienvenue sur votre dashboard de paris sportifs</p>
+            </div>
+
+            <div class="grid grid-4">
+                <div class="card">
+                    <div class="stat-card">
+                        <div>
+                            <div class="card-title">Taux de Réussite</div>
+                            <div class="stat-value text-green">78%</div>
+                            <div class="card-description">+5% ce mois</div>
+                        </div>
+                        <svg class="stat-icon text-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="stat-card">
+                        <div>
+                            <div class="card-title">Paris Actifs</div>
+                            <div class="stat-value">12</div>
+                            <div class="card-description">En cours</div>
+                        </div>
+                        <svg class="stat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="stat-card">
+                        <div>
+                            <div class="card-title">Gains Totaux</div>
+                            <div class="stat-value text-green">2,450€</div>
+                            <div class="card-description">+380€ cette semaine</div>
+                        </div>
+                        <svg class="stat-icon text-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="stat-card">
+                        <div>
+                            <div class="card-title">Classement</div>
+                            <div class="stat-value">#24</div>
+                            <div class="card-description">Sur 1,000 utilisateurs</div>
+                        </div>
+                        <svg class="stat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Performance Récente</h2>
+                        <p class="card-description">Vos derniers résultats</p>
+                    </div>
+                    <div>
+                        <div class="history-item">
+                            <div>
+                                <div class="font-bold">PSG vs Lyon</div>
+                                <div class="text-secondary">Gagné</div>
+                            </div>
+                            <div class="font-bold text-green">+150€</div>
+                        </div>
+                        <div class="history-item">
+                            <div>
+                                <div class="font-bold">Real vs Atlético</div>
+                                <div class="text-secondary">Gagné</div>
+                            </div>
+                            <div class="font-bold text-green">+180€</div>
+                        </div>
+                        <div class="history-item">
+                            <div>
+                                <div class="font-bold">Bayern vs Leipzig</div>
+                                <div class="text-secondary">Perdu</div>
+                            </div>
+                            <div class="font-bold text-red">-100€</div>
+                        </div>
+                        <div class="history-item">
+                            <div>
+                                <div class="font-bold">Chelsea vs Arsenal</div>
+                                <div class="text-secondary">Gagné</div>
+                            </div>
+                            <div class="font-bold text-green">+200€</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Prochains Matchs</h2>
+                        <p class="card-description">Paris recommandés aujourd'hui</p>
+                    </div>
+                    <div>
+                        <div class="history-item">
+                            <div>
+                                <div class="font-bold">Barcelona vs Real Madrid</div>
+                                <div class="text-secondary">21:00</div>
+                            </div>
+                            <div class="font-bold text-green text-xl">2.10</div>
+                        </div>
+                        <div class="history-item">
+                            <div>
+                                <div class="font-bold">Man City vs Liverpool</div>
+                                <div class="text-secondary">18:30</div>
+                            </div>
+                            <div class="font-bold text-green text-xl">1.85</div>
+                        </div>
+                        <div class="history-item">
+                            <div>
+                                <div class="font-bold">Juventus vs Milan</div>
+                                <div class="text-secondary">20:45</div>
+                            </div>
+                            <div class="font-bold text-green text-xl">1.95</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page Bet -->
+        <div class="page" id="bet">
+            <div class="page-header">
+                <h1 class="text-3xl font-bold">Paris Recommandés</h1>
+                <p class="text-secondary">Découvrez nos pronostics avec les meilleures cotes</p>
+            </div>
+
+            <div class="grid grid-3">
+                <div class="card">
+                    <div class="bet-card-header">
+                        <span class="badge badge-primary">Ligue 1</span>
+                        <span class="badge badge-primary">Haute</span>
+                    </div>
+                    <h3 class="card-title text-xl">PSG vs Marseille</h3>
+                    <p class="card-description mb-4">
+                        <svg style="display: inline; width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Aujourd'hui 21:00
+                    </p>
+                    <div class="mb-4">
+                        <p class="text-secondary">Pronostic</p>
+                        <p class="font-bold text-lg">PSG gagne</p>
+                    </div>
+                    <div class="flex items-center" style="justify-content: space-between;">
+                        <div>
+                            <p class="text-secondary">Cote</p>
+                            <p class="bet-odds">1.85</p>
+                        </div>
+                        <button class="btn">
+                            <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                            </svg>
+                            Placer Paris
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="bet-card-header">
+                        <span class="badge badge-secondary">La Liga</span>
+                        <span class="badge badge-secondary">Moyenne</span>
+                    </div>
+                    <h3 class="card-title text-xl">Real Madrid vs Barcelona</h3>
+                    <p class="card-description mb-4">
+                        <svg style="display: inline; width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Demain 16:00
+                    </p>
+                    <div class="mb-4">
+                        <p class="text-secondary">Pronostic</p>
+                        <p class="font-bold text-lg">Plus de 2.5 buts</p>
+                    </div>
+                    <div class="flex items-center" style="justify-content: space-between;">
+                        <div>
+                            <p class="text-secondary">Cote</p>
+                            <p class="bet-odds">2.10</p>
+                        </div>
+                        <button class="btn">
+                            <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                            </svg>
+                            Placer Paris
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="bet-card-header">
+                        <span class="badge badge-secondary">Premier League</span>
+                        <span class="badge badge-primary">Haute</span>
+                    </div>
+                    <h3 class="card-title text-xl">Manchester City vs Liverpool</h3>
+                    <p class="card-description mb-4">
+                        <svg style="display: inline; width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Samedi 18:30
+                    </p>
+                    <div class="mb-4">
+                        <p class="text-secondary">Pronostic</p>
+                        <p class="font-bold text-lg">Les deux équipes marquent</p>
+                    </div>
+                    <div class="flex items-center" style="justify-content: space-between;">
+                        <div>
+                            <p class="text-secondary">Cote</p>
+                            <p class="bet-odds">1.95</p>
+                        </div>
+                        <button class="btn">
+                            <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                            </svg>
+                            Placer Paris
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page Historique -->
+        <div class="page" id="historique">
+            <div class="page-header">
+                <h1 class="text-3xl font-bold">Historique des Paris</h1>
+                <p class="text-secondary">Consultez tous vos paris passés et en cours</p>
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <div class="flex items-center" style="justify-content: space-between; margin-bottom: 16px;">
+                        <div class="flex items-center gap-3">
+                            <svg class="history-icon text-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div>
+                                <h3 class="card-title">Bayern vs Dortmund</h3>
+                                <p class="text-secondary">Bayern gagne</p>
+                            </div>
+                        </div>
+                        <span class="badge badge-primary">Gagné</span>
+                    </div>
+                    <div class="grid grid-4">
+                        <div>
+                            <p class="text-secondary" style="font-size: 12px;">Cote</p>
+                            <p class="font-bold">1.75</p>
+                        </div>
+                        <div>
+                            <p class="text-secondary" style="font-size: 12px;">Date</p>
+                            <p class="font-bold">15 Oct 2024</p>
+                        </div>
+                        <div>
+                            <p class="text-secondary" style="font-size: 12px;">Résultat</p>
+                            <p class="font-bold text-green">+75€</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="flex items-center" style="justify-content: space-between; margin-bottom: 16px;">
+                        <div class="flex items-center gap-3">
+                            <svg class="history-icon text-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div>
+                                <h3 class="card-title">Juventus vs Inter</h3>
+                                <p class="text-secondary">Match nul</p>
+                            </div>
+                        </div>
+                        <span class="badge badge-destructive">Perdu</span>
+                    </div>
+                    <div class="grid grid-4">
+                        <div>
+                            <p class="text-secondary" style="font-size: 12px;">Cote</p>
+                            <p class="font-bold">3.20</p>
+                        </div>
+                        <div>
+                            <p class="text-secondary" style="font-size: 12px;">Date</p>
+                            <p class="font-bold">14 Oct 2024</p>
+                        </div>
+                        <div>
+                            <p class="text-secondary" style="font-size: 12px;">Résultat</p>
+                            <p class="font-bold text-red">-100€</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="flex items-center" style="justify-content: space-between; margin-bottom: 16px;">
+                        <div class="flex items-center gap-3">
+                            <svg class="history-icon text-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div>
+                                <h3 class="card-title">Arsenal vs Chelsea</h3>
+                                <p class="text-secondary">Plus de 2.5 buts</p>
+                            </div>
+                        </div>
+                        <span class="badge badge-primary">Gagné</span>
+                    </div>
+                    <div class="grid grid-4">
+                        <div>
+                            <p class="text-secondary" style="font-size: 12px;">Cote</p>
+                            <p class="font-bold">2.00</p>
+                        </div>
+                        <div>
+                            <p class="text-secondary" style="font-size: 12px;">Date</p>
+                            <p class="font-bold">13 Oct 2024</p>
+                        </div>
+                        <div>
+                            <p class="text-secondary" style="font-size: 12px;">Résultat</p>
+                            <p class="font-bold text-green">+100€</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page Communauté -->
+        <div class="page" id="communaute">
+            <div class="page-header">
+                <h1 class="text-3xl font-bold">Communauté</h1>
+                <p class="text-secondary">Partagez et découvrez des pronostics avec la communauté</p>
+            </div>
+
+            <div class="grid grid-3">
+                <div style="grid-column: span 2;">
+                    <div class="card">
+                        <div class="post-header">
+                            <div class="avatar">MB</div>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <span class="font-bold">MaxBet</span>
+                                    <span class="badge badge-secondary">Expert</span>
+                                </div>
+                                <p class="text-secondary" style="font-size: 12px;">Il y a 2h</p>
+                            </div>
+                        </div>
+                        <p>PSG va dominer ce soir contre Marseille. J'ai confiance en Mbappé pour marquer au moins 2 buts. Cote intéressante à 3.5 !</p>
+                        <div class="post-actions">
+                            <button class="btn-ghost btn">
+                                <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path>
+                                </svg>
+                                24
+                            </button>
+                            <button class="btn-ghost btn">
+                                <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                                </svg>
+                                8
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="post-header">
+                            <div class="avatar">SA</div>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <span class="font-bold">SportAnalyzer</span>
+                                    <span class="badge badge-secondary">Pro</span>
+                                </div>
+                                <p class="text-secondary" style="font-size: 12px;">Il y a 4h</p>
+                            </div>
+                        </div>
+                        <p>Statistiques Real Madrid vs Barcelona : Les 5 derniers matchs ont tous eu plus de 2.5 buts. Je mise dessus pour demain.</p>
+                        <div class="post-actions">
+                            <button class="btn-ghost btn">
+                                <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path>
+                                </svg>
+                                35
+                            </button>
+                            <button class="btn-ghost btn">
+                                <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                                </svg>
+                                12
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="card">
+                        <h3 class="card-title flex items-center gap-2 mb-4">
+                            <svg style="width: 20px; height: 20px;" class="text-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                            </svg>
+                            Top Parieurs
+                        </h3>
+                        <div style="margin-bottom: 16px;">
+                            <div class="flex items-center" style="justify-content: space-between;">
+                                <div class="flex items-center gap-3">
+                                    <span class="font-bold text-secondary text-lg">#1</span>
+                                    <div class="avatar" style="width: 32px; height: 32px; font-size: 12px;">PB</div>
+                                    <span class="font-bold">ProBetter</span>
+                                </div>
+                                <span class="badge badge-primary">85%</span>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 16px;">
+                            <div class="flex items-center" style="justify-content: space-between;">
+                                <div class="flex items-center gap-3">
+                                    <span class="font-bold text-secondary text-lg">#2</span>
+                                    <div class="avatar" style="width: 32px; height: 32px; font-size: 12px;">SK</div>
+                                    <span class="font-bold">SportKing</span>
+                                </div>
+                                <span class="badge badge-primary">78%</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex items-center" style="justify-content: space-between;">
+                                <div class="flex items-center gap-3">
+                                    <span class="font-bold text-secondary text-lg">#3</span>
+                                    <div class="avatar" style="width: 32px; height: 32px; font-size: 12px;">BG</div>
+                                    <span class="font-bold">BetGenius</span>
+                                </div>
+                                <span class="badge badge-primary">72%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Toggle Sidebar Mobile
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('mobile-hidden');
+            overlay.classList.toggle('show');
+        }
+
+        // Navigation
+        function navigateTo(event, pageName) {
+            event.preventDefault();
+            
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageName).classList.add('active');
+            
+            // Update active nav item
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+            
+            // Close mobile sidebar if open
+            if (window.innerWidth < 768) {
+                toggleSidebar();
+            }
+        }
+    </script>
+</body>
+</html>
+
+{% schema %}
+{
+  "name": "Dashboard BetPro",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titre du Dashboard",
+      "default": "BetPro"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Sous-titre",
+      "default": "Paris Sportifs Pro"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Dashboard BetPro"
+    }
+  ]
+}
+{% endschema %}
