@@ -1,4 +1,4 @@
-import { Home, TrendingUp, History, Users, Menu, X } from "lucide-react";
+import { TrendingUp, History, Target, Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -9,10 +9,9 @@ const Sidebar = () => {
   const location = useLocation();
 
   const menuItems = [
-    { icon: Home, label: "Accueil", path: "/" },
-    { icon: TrendingUp, label: "Bet", path: "/bet" },
+    { icon: TrendingUp, label: "Bet du jour", path: "/" },
+    { icon: Target, label: "Notre Stratégie", path: "/strategie" },
     { icon: History, label: "Historique", path: "/historique" },
-    { icon: Users, label: "Communauté", path: "/communaute" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
