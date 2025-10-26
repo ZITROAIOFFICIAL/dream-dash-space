@@ -10,9 +10,9 @@ const Sidebar = () => {
 
   const menuItems = [
     { label: "Bet du jour", path: "/" },
+    { label: "Parlay", path: "/parlay" },
     { label: "Notre Stratégie", path: "/strategie" },
     { label: "Historique", path: "/historique" },
-    { label: "Parlay", path: "/parlay" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
