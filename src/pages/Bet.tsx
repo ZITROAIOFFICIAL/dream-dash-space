@@ -125,8 +125,16 @@ const Bet = () => {
                     ))}
                     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                       <DialogTrigger asChild>
-                        <button className="px-4 py-2 rounded-full text-sm font-semibold bg-gray-100 text-black hover:bg-gray-200 transition-colors">
-                          Autre
+                        <button 
+                          className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
+                            ![10, 20, 50, 100, 150, 200, 500].includes(Number(betAmount))
+                              ? 'bg-black text-white'
+                              : 'bg-gray-100 text-black hover:bg-gray-200'
+                          }`}
+                        >
+                          {![10, 20, 50, 100, 150, 200, 500].includes(Number(betAmount)) 
+                            ? `$${betAmount}` 
+                            : 'Autre'}
                         </button>
                       </DialogTrigger>
                       <DialogContent className="sm:max-w-md">
