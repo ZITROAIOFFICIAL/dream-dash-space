@@ -63,25 +63,25 @@ const Bet = () => {
 
               {/* Match Details */}
               <div className="pt-4 border-t border-black">
-                <div className="flex flex-col items-center justify-center gap-2">
-                  <div className="flex items-center gap-3">
-                    {/* Vegas */}
-                    <div className="flex items-center gap-2">
-                      <img src={vegasLogo} alt="Vegas" className="w-10 h-10 object-contain opacity-60" />
-                      <span className="font-bold text-black text-sm">VEGAS</span>
-                    </div>
+                <div className="flex items-center justify-center gap-3">
+                  {/* Vegas */}
+                  <div className="flex items-center gap-2">
+                    <img src={vegasLogo} alt="Vegas" className="w-10 h-10 object-contain opacity-60" />
+                    <span className="font-bold text-black text-sm">VEGAS</span>
+                  </div>
 
-                    <div className="px-3 py-1 bg-black/5 rounded-full border border-black mx-2">
+                  <div className="flex flex-col items-center gap-1">
+                    <span className="text-black text-xs font-semibold">5:00 PM</span>
+                    <div className="px-3 py-1 bg-black/5 rounded-full border border-black">
                       <span className="text-black font-bold text-xs">VS</span>
                     </div>
-
-                    {/* Tampa Bay */}
-                    <div className="flex items-center gap-2">
-                      <span className="font-bold text-black text-sm">TAMPA BAY</span>
-                      <img src={tampaLogo} alt="Tampa Bay" className="w-10 h-10 object-contain" />
-                    </div>
                   </div>
-                  <span className="text-black/60 text-xs">5:00 PM</span>
+
+                  {/* Tampa Bay */}
+                  <div className="flex items-center gap-2">
+                    <span className="font-bold text-black text-sm">TAMPA BAY</span>
+                    <img src={tampaLogo} alt="Tampa Bay" className="w-10 h-10 object-contain" />
+                  </div>
                 </div>
               </div>
 
