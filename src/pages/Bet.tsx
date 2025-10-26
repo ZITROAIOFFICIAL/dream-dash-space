@@ -52,7 +52,18 @@ const Bet = () => {
                 </div>
               </div>
 
-              {/* Match Details Below */}
+              {/* Simulation Section */}
+              <div className="pt-4 border-t border-black">
+                <div className="text-center space-y-2">
+                  <h3 className="text-sm font-bold text-black tracking-wide">SIMULATION SI TU PLACES TON ARGENT</h3>
+                  <div className="flex items-center justify-center gap-4 text-lg font-bold text-black">
+                    <span>$100 →</span>
+                    <span className="text-primary text-2xl">$173.53</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Match Details */}
               <div className="pt-4 border-t border-black">
                 <div className="flex items-center justify-center gap-3">
                   {/* Vegas */}
@@ -69,6 +80,18 @@ const Bet = () => {
                   <div className="flex items-center gap-2">
                     <span className="font-bold text-black text-sm">TAMPA BAY</span>
                     <img src={tampaLogo} alt="Tampa Bay" className="w-10 h-10 object-contain" />
+                  </div>
+                </div>
+              </div>
+
+              {/* DraftKings Section */}
+              <div className="pt-4 border-t border-black">
+                <div className="text-center space-y-2">
+                  <p className="text-sm text-black">
+                    <span className="font-bold">DRAFTKINGS</span> est le meilleur site pour aller bet.
+                  </p>
+                  <div className="inline-block px-4 py-2 bg-primary/10 rounded-lg border border-primary">
+                    <span className="text-2xl font-black text-primary">-135</span>
                   </div>
                 </div>
               </div>
