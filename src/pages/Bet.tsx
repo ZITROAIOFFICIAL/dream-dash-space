@@ -13,7 +13,7 @@ const Bet = () => {
         </div>
 
         <div className="grid gap-6">
-          <Card className="max-w-3xl bg-background border-2 border-white/20 shadow-2xl overflow-hidden">
+          <Card className="max-w-3xl bg-background border-2 border-white shadow-2xl overflow-hidden">
             {/* AI Analysis Badge */}
             <div className="bg-gradient-to-r from-primary via-primary/80 to-primary px-6 py-4 flex items-center justify-center border-2 border-white shadow-[0_0_30px_rgba(255,255,255,0.3)]">
               <div className="flex items-center gap-3">
@@ -49,7 +49,7 @@ const Bet = () => {
               </div>
 
               {/* Match Details Below */}
-              <div className="pt-6 border-t border-white/10">
+              <div className="pt-6 border-t border-white">
                 <div className="flex items-center justify-center gap-6">
                   {/* Vegas */}
                   <div className="flex items-center gap-3">
