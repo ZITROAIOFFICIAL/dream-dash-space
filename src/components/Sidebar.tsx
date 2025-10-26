@@ -22,7 +22,7 @@ const Sidebar = () => {
       <Button
         variant="ghost"
         size="icon"
-        className="fixed top-4 left-4 z-50 md:hidden text-white"
+        className="fixed top-4 left-4 z-50 md:hidden text-white hover:bg-white/10 focus-visible:ring-0 focus-visible:ring-offset-0"
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
