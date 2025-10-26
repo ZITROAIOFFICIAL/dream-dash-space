@@ -26,8 +26,13 @@ const Bet = () => {
             <CardHeader className="space-y-6 pb-6">
               {/* Main Prediction - BIG */}
               <div className="text-center space-y-4 py-6">
+                <div className="flex items-center justify-center gap-2">
+                  <img src={tampaLogo} alt="Tampa Bay" className="w-6 h-6 object-contain" />
+                  <div className="text-lg font-bold text-black">
+                    TAMPA BAY -136
+                  </div>
+                </div>
                 <div className="space-y-1">
-                  <div className="text-xs font-bold text-primary/70 tracking-[0.3em]">PRONOSTIC</div>
                   <div className="text-xs font-bold text-black tracking-[0.25em]">MONEY LINE</div>
                 </div>
                 
@@ -42,12 +47,6 @@ const Bet = () => {
                     </h2>
                     <div className="text-3xl font-bold text-primary">
                       VICTOIRE
-                    </div>
-                    <div className="flex items-center justify-center gap-2">
-                      <img src={tampaLogo} alt="Tampa Bay" className="w-6 h-6 object-contain" />
-                      <div className="text-lg font-bold text-black">
-                        TAMPA BAY -136
-                      </div>
                     </div>
                   </div>
                 </div>
