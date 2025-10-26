@@ -30,8 +30,8 @@ const Bet = () => {
           <p className="text-muted-foreground">Découvrez nos pronostics avec les meilleures cotes</p>
         </div>
 
-        <div className="grid gap-6">
-          <Card className="max-w-md bg-black border-2 border-primary shadow-2xl overflow-hidden">
+        <div className="grid gap-6 justify-center">
+          <Card className="w-full max-w-md bg-black border-2 border-primary shadow-2xl overflow-hidden mx-auto">
             <CardHeader className="space-y-4 pb-4 pt-4">
               {/* AI Analysis */}
               <div className="text-center space-y-1">
