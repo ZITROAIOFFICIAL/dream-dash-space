@@ -59,10 +59,10 @@ const Sidebar = () => {
                   to={item.path}
                   onClick={() => setIsOpen(false)}
                   className={cn(
-                    "flex items-center justify-center px-4 py-3 rounded-lg transition-all duration-200 text-white",
+                    "flex items-center justify-center px-4 py-3 rounded-lg transition-all duration-200",
                     active 
-                      ? "bg-white/20 font-semibold" 
-                      : "hover:bg-white/10"
+                      ? "bg-primary/20 border-2 border-primary font-semibold text-primary" 
+                      : "bg-transparent border-2 border-transparent text-white hover:bg-white/10"
                   )}
                 >
                   <span>{item.label}</span>
