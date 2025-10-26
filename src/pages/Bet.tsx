@@ -61,6 +61,24 @@ const Bet = () => {
                 <div className="text-xs font-bold text-white/70 tracking-wider mb-2">
                   PARIER SUR
                 </div>
+                
+                {/* Win Statement */}
+                <div className="flex justify-center pb-3">
+                  <div className="flex items-center gap-2">
+                    <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                      <img src={tampaLogo} alt="Tampa Bay" className="w-7 h-7 object-contain" />
+                    </div>
+                    <div>
+                      <h3 className="text-base font-black text-white tracking-tight">
+                        TAMPA BAY
+                      </h3>
+                      <div className="text-xs font-bold text-primary">
+                        VICTOIRE
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <span className="text-white/60 text-xs font-semibold">5:00 PM</span>
                 <div className="flex items-center justify-center gap-2">
                   {/* Vegas */}
@@ -81,23 +99,6 @@ const Bet = () => {
                       <img src={tampaLogo} alt="Tampa Bay" className="w-7 h-7 object-contain" />
                     </div>
                     <span className="font-bold text-white text-xs">TAMPA BAY</span>
-                  </div>
-                </div>
-                
-                {/* Win Statement */}
-                <div className="flex justify-center pt-2">
-                  <div className="flex items-center gap-2">
-                    <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                      <img src={tampaLogo} alt="Tampa Bay" className="w-7 h-7 object-contain" />
-                    </div>
-                    <div>
-                      <h3 className="text-base font-black text-white tracking-tight">
-                        TAMPA BAY
-                      </h3>
-                      <div className="text-xs font-bold text-primary">
-                        VICTOIRE
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
