@@ -36,7 +36,7 @@ const Bet = () => {
         </div>
 
         <div className="grid gap-6">
-          <Card className="max-w-md bg-black border-2 border-primary shadow-2xl overflow-hidden">
+          <Card className="max-w-md bg-primary/10 border-2 border-primary shadow-2xl overflow-hidden">
             <CardHeader className="space-y-4 pb-4 pt-4">
               {/* AI Analysis */}
               <div className="text-center space-y-1">
