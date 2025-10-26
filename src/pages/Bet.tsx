@@ -82,8 +82,8 @@ const Bet = () => {
                 </div>
                 
                 {/* Win Statement */}
-                <div className="flex justify-center pt-2">
-                  <div className="bg-primary/20 border-2 border-primary rounded-lg px-6 py-3 flex flex-col items-center gap-3">
+                <div className="flex justify-center pt-4">
+                  <div className="bg-primary/20 border-2 border-primary rounded-lg px-8 py-4 flex flex-col items-center gap-3">
                     <div className="text-xs font-bold text-white/70 tracking-wider">
                       PARIER SUR
                     </div>
