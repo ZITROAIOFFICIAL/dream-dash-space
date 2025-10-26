@@ -89,72 +89,56 @@ const Bet = () => {
               {/* Bet Amount & Payout */}
               <div className="pt-3">
                 <div className="grid grid-cols-2 gap-2">
-                  <div className="px-4 py-3 bg-transparent border-2 border-white/40 rounded-2xl text-center">
-                    <div className="text-white/80 text-xs mb-1">Paris sportif :</div>
-                    <div className="text-white font-bold text-lg">${betAmount}</div>
-                  </div>
+                  <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                    <DialogTrigger asChild>
+                      <button className="px-4 py-3 bg-transparent border-2 border-white/40 rounded-2xl text-center hover:bg-white/5 transition-colors cursor-pointer">
+                        <div className="text-white/80 text-xs mb-1">Votre mise</div>
+                        <div className="text-white font-bold text-lg">${betAmount}</div>
+                        <div className="text-primary text-xs mt-1 font-semibold">Modifier</div>
+                      </button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-md bg-black border-primary">
+                      <DialogHeader>
+                        <DialogTitle className="text-white text-center">Modifier votre mise</DialogTitle>
+                      </DialogHeader>
+                      <div className="space-y-4">
+                        <div className="grid grid-cols-4 gap-2">
+                          {[10, 20, 50, 100, 150, 200, 500].map((amount) => (
+                            <button
+                              key={amount}
+                              onClick={() => {
+                                setBetAmount(amount.toString());
+                                setIsDialogOpen(false);
+                              }}
+                              className={`px-3 py-2 rounded-2xl text-sm font-semibold transition-colors ${
+                                betAmount === amount.toString()
+                                  ? 'bg-primary text-black'
+                                  : 'bg-white/10 text-white hover:bg-white/20'
+                              }`}
+                            >
+                              ${amount}
+                            </button>
+                          ))}
+                          <button 
+                            onClick={() => {
+                              const custom = prompt("Entrez le montant:");
+                              if (custom && parseFloat(custom) > 0) {
+                                setBetAmount(custom);
+                                setIsDialogOpen(false);
+                              }
+                            }}
+                            className="px-3 py-2 rounded-2xl text-sm font-semibold bg-white/10 text-white hover:bg-white/20"
+                          >
+                            Autre
+                          </button>
+                        </div>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+                  
                   <div className="px-4 py-3 bg-primary rounded-2xl text-center">
                     <div className="text-black/70 text-xs mb-1">Cashout x1.65 →</div>
                     <div className="text-black font-bold text-lg">${calculateReturn(betAmount)}</div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Simulation Calculator */}
-              <div className="pt-3 border-t border-white/10">
-                <div className="space-y-3">
-                  <h3 className="text-center text-white/80 font-bold text-xs tracking-wide">MODIFIER VOTRE MISE</h3>
-                  <div className="grid grid-cols-4 gap-2">
-                    {[10, 20, 50, 100, 150, 200, 500].map((amount) => (
-                      <button
-                        key={amount}
-                        onClick={() => setBetAmount(amount.toString())}
-                        className={`px-3 py-2 rounded-2xl text-xs font-semibold transition-colors ${
-                          betAmount === amount.toString()
-                            ? 'bg-primary text-black'
-                            : 'bg-white/10 text-white hover:bg-white/20'
-                        }`}
-                      >
-                        ${amount}
-                      </button>
-                    ))}
-                    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                      <DialogTrigger asChild>
-                        <button 
-                          className={`px-3 py-2 rounded-2xl text-xs font-semibold transition-colors ${
-                            ![10, 20, 50, 100, 150, 200, 500].includes(Number(betAmount))
-                              ? 'bg-primary text-black'
-                              : 'bg-white/10 text-white hover:bg-white/20'
-                          }`}
-                        >
-                          {![10, 20, 50, 100, 150, 200, 500].includes(Number(betAmount)) 
-                            ? `$${betAmount}` 
-                            : 'Autre'}
-                        </button>
-                      </DialogTrigger>
-                      <DialogContent className="sm:max-w-md bg-black border-primary">
-                        <DialogHeader>
-                          <DialogTitle className="text-white">Montant personnalisé</DialogTitle>
-                        </DialogHeader>
-                        <div className="space-y-4">
-                          <div>
-                            <Input
-                              type="number"
-                              placeholder="Entrez le montant"
-                              value={customAmount}
-                              onChange={(e) => setCustomAmount(e.target.value)}
-                              className="text-center font-bold bg-white/10 text-white border-white/20"
-                            />
-                          </div>
-                          <Button 
-                            onClick={handleCustomBet}
-                            className="w-full bg-primary text-black hover:bg-primary/90"
-                          >
-                            Miser
-                          </Button>
-                        </div>
-                      </DialogContent>
-                    </Dialog>
                   </div>
                 </div>
               </div>
