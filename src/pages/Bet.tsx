@@ -152,9 +152,9 @@ const Bet = () => {
                     </DialogContent>
                   </Dialog>
                   
-                  <div className="px-4 py-3 bg-primary rounded-2xl text-center">
-                    <div className="text-black/70 text-xs mb-1">Cashout x1.65 →</div>
-                    <div className="text-black font-bold text-lg">${calculateReturn(betAmount)}</div>
+                  <div className="px-4 py-3 bg-primary/20 border-2 border-primary rounded-2xl text-center">
+                    <div className="text-white/70 text-xs mb-1">Cashout x1.65 →</div>
+                    <div className="text-primary font-bold text-lg">${calculateReturn(betAmount)}</div>
                   </div>
                 </div>
               </div>
