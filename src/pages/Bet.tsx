@@ -1,18 +1,30 @@
 import DashboardLayout from "@/components/DashboardLayout";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import vegasLogo from "@/assets/vegas-logo.png";
 import tampaLogo from "@/assets/tampa-logo.png";
 import { useState } from "react";
 
 const Bet = () => {
   const [betAmount, setBetAmount] = useState<string>("100");
+  const [customAmount, setCustomAmount] = useState<string>("");
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   
   const calculateReturn = (amount: string) => {
     const numAmount = parseFloat(amount) || 0;
     // Pour -136: pour gagner $100, il faut miser $136
     // Retour total = mise + gain = mise * (1 + 100/136)
     return (numAmount * (1 + 100/136)).toFixed(2);
+  };
+
+  const handleCustomBet = () => {
+    if (customAmount && parseFloat(customAmount) > 0) {
+      setBetAmount(customAmount);
+      setIsDialogOpen(false);
+      setCustomAmount("");
+    }
   };
   return (
     <DashboardLayout>
@@ -98,7 +110,7 @@ const Bet = () => {
               <div className="pt-4 border-t border-black">
                 <div className="space-y-4">
                   <div className="flex items-center justify-center gap-2 flex-wrap">
-                    {[10, 20, 50, 100, 150, 200].map((amount) => (
+                    {[10, 20, 50, 100, 150, 200, 500].map((amount) => (
                       <button
                         key={amount}
                         onClick={() => setBetAmount(amount.toString())}
@@ -111,6 +123,35 @@ const Bet = () => {
                         ${amount}
                       </button>
                     ))}
+                    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                      <DialogTrigger asChild>
+                        <button className="px-4 py-2 rounded-full text-sm font-semibold bg-gray-100 text-black hover:bg-gray-200 transition-colors">
+                          Autre
+                        </button>
+                      </DialogTrigger>
+                      <DialogContent className="sm:max-w-md">
+                        <DialogHeader>
+                          <DialogTitle>Montant personnalisé</DialogTitle>
+                        </DialogHeader>
+                        <div className="space-y-4">
+                          <div>
+                            <Input
+                              type="number"
+                              placeholder="Entrez le montant"
+                              value={customAmount}
+                              onChange={(e) => setCustomAmount(e.target.value)}
+                              className="text-center font-bold"
+                            />
+                          </div>
+                          <Button 
+                            onClick={handleCustomBet}
+                            className="w-full bg-black text-white hover:bg-black/90"
+                          >
+                            Miser
+                          </Button>
+                        </div>
+                      </DialogContent>
+                    </Dialog>
                   </div>
                   <div className="flex items-center justify-between px-4">
                     <span className="text-black font-semibold">Payout</span>
