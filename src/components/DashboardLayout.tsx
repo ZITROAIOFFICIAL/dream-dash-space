@@ -16,7 +16,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           <span className="text-foreground">WIN</span>
           <span className="text-sidebar-primary">A</span>
           <span className="text-foreground">BET</span>
-          <span className="text-sidebar-primary text-base">.AI</span>
+          <span className="text-sidebar-primary text-sm">.AI</span>
         </h1>
       </header>
       
