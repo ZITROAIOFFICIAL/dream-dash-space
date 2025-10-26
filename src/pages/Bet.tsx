@@ -96,23 +96,25 @@ const Bet = () => {
 
               {/* Simulation Calculator */}
               <div className="pt-4 border-t border-black">
-                <div className="text-center space-y-3">
-                  <h3 className="text-sm font-bold text-black tracking-wide">SIMULATION SI TU PLACES TON ARGENT</h3>
-                  <div className="flex items-center justify-center gap-3 max-w-sm mx-auto">
-                    <div className="flex items-center gap-2">
-                      <span className="text-black font-bold">$</span>
-                      <Input
-                        type="number"
-                        value={betAmount}
-                        onChange={(e) => setBetAmount(e.target.value)}
-                        className="w-24 text-center font-bold border-2 border-black"
-                        placeholder="100"
-                      />
-                    </div>
-                    <span className="text-black font-bold text-lg">→</span>
-                    <div className="text-primary text-2xl font-black">
-                      ${calculateReturn(betAmount)}
-                    </div>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-center gap-2 flex-wrap">
+                    {[10, 20, 50, 100, 150, 200].map((amount) => (
+                      <button
+                        key={amount}
+                        onClick={() => setBetAmount(amount.toString())}
+                        className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
+                          betAmount === amount.toString()
+                            ? 'bg-black text-white'
+                            : 'bg-gray-100 text-black hover:bg-gray-200'
+                        }`}
+                      >
+                        ${amount}
+                      </button>
+                    ))}
+                  </div>
+                  <div className="flex items-center justify-between px-4">
+                    <span className="text-black font-semibold">Payout</span>
+                    <span className="text-black text-xl font-bold">${calculateReturn(betAmount)}</span>
                   </div>
                 </div>
               </div>
