@@ -32,7 +32,7 @@ const Bet = () => {
                 </div>
                 
                 {/* Tampa Bay Logo + Win Statement */}
-                <div className="flex flex-col items-center gap-4">
+                <div className="flex flex-col items-center gap-3">
                   <div className="relative">
                     <img src={tampaLogo} alt="Tampa Bay" className="w-32 h-32 object-contain relative z-10" />
                   </div>
@@ -43,15 +43,18 @@ const Bet = () => {
                     <div className="text-3xl font-bold text-primary">
                       VICTOIRE
                     </div>
-                    <div className="text-xl font-bold text-black">
-                      TAMPA BAY -136
+                    <div className="flex items-center justify-center gap-2">
+                      <img src={tampaLogo} alt="Tampa Bay" className="w-6 h-6 object-contain" />
+                      <div className="text-lg font-bold text-black">
+                        TAMPA BAY -136
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Match Details Below */}
-              <div className="pt-6 border-t border-black">
+              <div className="pt-4 border-t border-black">
                 <div className="flex items-center justify-center gap-3">
                   {/* Vegas */}
                   <div className="flex items-center gap-2">
