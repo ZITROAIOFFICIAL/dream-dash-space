@@ -15,7 +15,7 @@ const Bet = () => {
         <div className="grid gap-6">
           <Card className="max-w-3xl bg-white border-2 border-black shadow-2xl overflow-hidden">
             {/* AI Analysis Badge */}
-            <div className="bg-gradient-to-r from-primary via-primary/80 to-primary px-6 py-4 flex items-center justify-center border-t-2 border-l-2 border-r-2 border-black shadow-[0_0_30px_rgba(0,0,0,0.3)] rounded-t-lg">
+            <div className="bg-gradient-to-r from-primary via-primary/80 to-primary px-6 py-4 flex items-center justify-center rounded-t-lg">
               <div className="flex items-center gap-3">
                 <div className="w-2 h-2 bg-white rounded-full animate-pulse shadow-[0_0_10px_rgba(255,255,255,0.8)]"></div>
                 <span className="text-white text-xs font-bold tracking-widest">ANALYSE IA • 92% DE GAGNER LE BET</span>
