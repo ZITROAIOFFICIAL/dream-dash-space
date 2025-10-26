@@ -39,20 +39,12 @@ const Sidebar = () => {
         <div className="flex flex-col h-full">
           {/* Header with logo and close button */}
           <div className="h-16 border-b border-white/10 flex items-center justify-center relative">
-            <h1 className="text-2xl font-bold leading-none">
-              <span className="text-white">WIN</span>
-              <span className="text-sidebar-primary">A</span>
-              <span className="text-white">BET</span>
-              <span className="text-sidebar-primary text-sm">.AI</span>
-            </h1>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute right-4 text-white hover:bg-transparent focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 outline-none md:hidden"
-              onClick={() => setIsOpen(false)}
-            >
-              <X className="h-6 w-6 stroke-[2.5]" />
-            </Button>
+          <h1 className="text-2xl font-bold leading-none">
+            <span className="text-white">WIN</span>
+            <span className="text-sidebar-primary">A</span>
+            <span className="text-white">BET</span>
+            <span className="text-sidebar-primary text-sm">.AI</span>
+          </h1>
           </div>
 
           {/* Navigation */}
