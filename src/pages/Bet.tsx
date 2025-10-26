@@ -13,7 +13,7 @@ const Bet = () => {
         </div>
 
         <div className="grid gap-6">
-          <Card className="max-w-3xl bg-background border-2 border-white/20 shadow-2xl overflow-hidden">
+          <Card className="max-w-3xl bg-background border-2 border-white shadow-2xl overflow-hidden">
             {/* AI Analysis Badge */}
             <div className="bg-gradient-to-r from-primary/20 via-primary/30 to-primary/20 px-6 py-2 flex items-center justify-between border-b border-white/10">
               <div className="flex items-center gap-2">
@@ -34,7 +34,9 @@ const Bet = () => {
                 <div className="flex flex-col items-center gap-4">
                   <div className="relative">
                     <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-full"></div>
-                    <img src={tampaLogo} alt="Tampa Bay" className="w-32 h-32 object-contain relative z-10" />
+                    <div className="bg-white rounded-2xl p-6 shadow-xl border-2 border-white relative z-10">
+                      <img src={tampaLogo} alt="Tampa Bay" className="w-32 h-32 object-contain" />
+                    </div>
                   </div>
                   <div className="space-y-2">
                     <h2 className="text-5xl font-black text-white tracking-tight">
@@ -52,7 +54,9 @@ const Bet = () => {
                 <div className="flex items-center justify-center gap-6">
                   {/* Vegas */}
                   <div className="flex items-center gap-3">
-                    <img src={vegasLogo} alt="Vegas" className="w-12 h-12 object-contain opacity-60" />
+                    <div className="bg-white rounded-lg p-2 shadow-md">
+                      <img src={vegasLogo} alt="Vegas" className="w-10 h-10 object-contain" />
+                    </div>
                     <span className="font-bold text-muted-foreground">VEGAS</span>
                   </div>
 
@@ -63,7 +67,9 @@ const Bet = () => {
                   {/* Tampa Bay */}
                   <div className="flex items-center gap-3">
                     <span className="font-bold text-white">TAMPA BAY</span>
-                    <img src={tampaLogo} alt="Tampa Bay" className="w-12 h-12 object-contain" />
+                    <div className="bg-white rounded-lg p-2 shadow-md">
+                      <img src={tampaLogo} alt="Tampa Bay" className="w-10 h-10 object-contain" />
+                    </div>
                   </div>
                 </div>
               </div>
