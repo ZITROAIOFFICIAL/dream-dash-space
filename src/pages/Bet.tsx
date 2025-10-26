@@ -44,9 +44,9 @@ const Bet = () => {
               </div>
             </div>
 
-            <CardHeader className="space-y-6 pb-6">
+            <CardHeader className="space-y-6 pb-6 pt-3">
               {/* Match Details */}
-              <div className="text-center space-y-4 py-3">
+              <div className="text-center space-y-4">
                 <div className="flex flex-col items-center gap-3">
                   <span className="text-black text-xs font-semibold">5:00 PM</span>
                   <div className="flex items-center justify-center gap-3">
