@@ -25,7 +25,7 @@ const Bet = () => {
 
             <CardHeader className="space-y-6 pb-6">
               {/* Main Prediction - BIG */}
-              <div className="text-center space-y-4 py-6">
+              <div className="text-center space-y-4 py-3">
                 <div className="flex items-center justify-center gap-2">
                   <img src={tampaLogo} alt="Tampa Bay" className="w-6 h-6 object-contain" />
                   <div className="text-lg font-bold text-black">
