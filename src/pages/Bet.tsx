@@ -1,6 +1,7 @@
 import DashboardLayout from "@/components/DashboardLayout";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Shield, Zap } from "lucide-react";
+import vegasLogo from "@/assets/vegas-logo.png";
+import tampaLogo from "@/assets/tampa-logo.png";
 
 const Bet = () => {
   return (
@@ -19,9 +20,7 @@ const Bet = () => {
               <div className="flex items-center justify-between gap-4">
                 {/* Vegas */}
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center">
-                    <Shield className="h-6 w-6" />
-                  </div>
+                  <img src={vegasLogo} alt="Vegas" className="w-12 h-12 object-contain" />
                   <span className="font-semibold">VEGAS</span>
                 </div>
 
@@ -30,9 +29,7 @@ const Bet = () => {
                 {/* Tampa Bay */}
                 <div className="flex items-center gap-3">
                   <span className="font-semibold">TAMPA BAY</span>
-                  <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center">
-                    <Zap className="h-6 w-6" />
-                  </div>
+                  <img src={tampaLogo} alt="Tampa Bay" className="w-12 h-12 object-contain" />
                 </div>
               </div>
             </CardHeader>
