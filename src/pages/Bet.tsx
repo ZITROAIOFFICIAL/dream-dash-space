@@ -80,16 +80,18 @@ const Bet = () => {
                 </div>
                 
                 {/* Win Statement */}
-                <div className="flex items-center justify-center gap-2 pt-2">
-                  <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border border-white/20">
-                    <img src={tampaLogo} alt="Tampa Bay" className="w-9 h-9 object-contain" />
-                  </div>
-                  <div className="bg-primary/20 border-2 border-primary rounded-lg px-4 py-2">
-                    <h3 className="text-sm font-black text-white tracking-tight">
-                      TAMPA BAY
-                    </h3>
-                    <div className="text-xs font-bold text-primary">
-                      VICTOIRE
+                <div className="flex justify-center pt-2">
+                  <div className="bg-primary/20 border-2 border-primary rounded-lg px-4 py-2 flex items-center gap-2">
+                    <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                      <img src={tampaLogo} alt="Tampa Bay" className="w-7 h-7 object-contain" />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-black text-white tracking-tight">
+                        TAMPA BAY
+                      </h3>
+                      <div className="text-xs font-bold text-primary">
+                        VICTOIRE
+                      </div>
                     </div>
                   </div>
                 </div>
