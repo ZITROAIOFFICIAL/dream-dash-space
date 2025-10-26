@@ -15,33 +15,44 @@ const Bet = () => {
         <div className="grid gap-6">
           <Card className="max-w-3xl bg-background border-2 border-white/20 shadow-2xl overflow-hidden">
             {/* AI Analysis Badge */}
-            <div className="bg-gradient-to-r from-primary/20 via-primary/30 to-primary/20 px-6 py-3 flex items-center justify-center border-b border-white/10">
+            <div className="bg-gradient-to-r from-primary via-primary/80 to-primary px-6 py-4 flex items-center justify-center border-b-2 border-primary/50 shadow-[0_0_30px_rgba(139,92,246,0.3)]">
               <div className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-                <span className="text-primary text-xs font-bold tracking-widest">ANALYSE IA • 92% DE GAGNER LE BET</span>
-                <div className="text-primary text-xs font-bold">• 5:00 PM</div>
+                <div className="w-2 h-2 bg-white rounded-full animate-pulse shadow-[0_0_10px_rgba(255,255,255,0.8)]"></div>
+                <span className="text-white text-xs font-bold tracking-widest">ANALYSE IA</span>
+                <div className="text-white text-xs font-bold">• 5:00 PM</div>
               </div>
             </div>
 
             <CardHeader className="space-y-6 pb-6">
               {/* Main Prediction - BIG */}
-              <div className="text-center space-y-4 py-6">
+              <div className="text-center space-y-6 py-8">
                 <div className="space-y-1">
                   <div className="text-xs font-bold text-primary/70 tracking-[0.3em]">PRONOSTIC</div>
                   <div className="text-xs font-bold text-white/60 tracking-[0.25em]">MONEY LINE</div>
                 </div>
+
+                {/* HUGE 92% Probability */}
+                <div className="relative py-6">
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent blur-xl"></div>
+                  <div className="relative">
+                    <div className="text-[120px] font-black leading-none bg-gradient-to-br from-primary via-primary to-primary/60 bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(139,92,246,0.6)] animate-pulse">
+                      92%
+                    </div>
+                    <div className="text-sm font-bold text-primary/80 tracking-[0.3em] mt-2">DE GAGNER LE BET</div>
+                  </div>
+                </div>
                 
                 {/* Tampa Bay Logo + Win Statement */}
-                <div className="flex flex-col items-center gap-4">
+                <div className="flex flex-col items-center gap-4 pt-4">
                   <div className="relative">
-                    <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-full"></div>
+                    <div className="absolute inset-0 bg-primary/30 blur-3xl rounded-full animate-pulse"></div>
                     <img src={tampaLogo} alt="Tampa Bay" className="w-32 h-32 object-contain relative z-10" />
                   </div>
                   <div className="space-y-2">
-                    <h2 className="text-5xl font-black text-white tracking-tight">
+                    <h2 className="text-5xl font-black text-white tracking-tight drop-shadow-lg">
                       TAMPA BAY
                     </h2>
-                    <div className="text-3xl font-bold text-primary">
+                    <div className="text-3xl font-bold text-primary drop-shadow-[0_0_20px_rgba(139,92,246,0.5)]">
                       VICTOIRE
                     </div>
                   </div>
@@ -70,23 +81,6 @@ const Bet = () => {
               </div>
             </CardHeader>
 
-            <CardContent className="pb-6 space-y-4">
-              {/* AI Stats */}
-              <div className="grid grid-cols-3 gap-3">
-                <div className="bg-white/5 rounded-lg p-3 text-center border border-white/10">
-                  <div className="text-xs text-primary/70 mb-1 font-bold">PRÉCISION</div>
-                  <div className="text-xl font-black text-primary">92%</div>
-                </div>
-                <div className="bg-white/5 rounded-lg p-3 text-center border border-white/10">
-                  <div className="text-xs text-primary/70 mb-1 font-bold">CONFIANCE</div>
-                  <div className="text-xl font-black text-primary">HIGH</div>
-                </div>
-                <div className="bg-white/5 rounded-lg p-3 text-center border border-white/10">
-                  <div className="text-xs text-primary/70 mb-1 font-bold">SOURCES</div>
-                  <div className="text-xl font-black text-primary">250+</div>
-                </div>
-              </div>
-            </CardContent>
           </Card>
         </div>
       </div>
