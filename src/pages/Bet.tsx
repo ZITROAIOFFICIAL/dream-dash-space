@@ -35,84 +35,81 @@ const Bet = () => {
         </div>
 
         <div className="grid gap-6">
-          <Card className="max-w-3xl bg-black border-2 border-primary shadow-2xl overflow-hidden">
-            <CardHeader className="space-y-6 pb-6 pt-6">
+          <Card className="max-w-md bg-black border-2 border-primary shadow-2xl overflow-hidden">
+            <CardHeader className="space-y-4 pb-4 pt-4">
               {/* AI Analysis */}
-              <div className="text-center space-y-2">
-                <div className="space-y-1">
-                  <h2 className="text-white text-base">Analyse de notre <span className="text-primary font-bold">IA</span></h2>
-                  <div className="text-2xl font-black">
-                    <span className="text-primary">92%</span>
-                    <span className="text-white"> de chance de gagner</span>
-                  </div>
+              <div className="text-center space-y-1">
+                <h2 className="text-white text-sm">Analyse de notre <span className="text-primary font-bold">IA</span></h2>
+                <div className="text-xl font-black">
+                  <span className="text-primary">92%</span>
+                  <span className="text-white"> de chance de gagner</span>
                 </div>
               </div>
 
               {/* Odds Display */}
-              <div className="text-center space-y-3 py-4">
-                <div className="text-5xl font-black text-primary">
+              <div className="text-center space-y-2 py-3">
+                <div className="text-4xl font-black text-primary">
                   x1.65
                 </div>
-                <div className="h-1 bg-primary max-w-xs mx-auto"></div>
+                <div className="h-0.5 bg-primary max-w-[200px] mx-auto"></div>
               </div>
 
               {/* Match Details */}
-              <div className="text-center space-y-3">
+              <div className="text-center space-y-2">
                 <span className="text-white/60 text-xs font-semibold">5:00 PM</span>
-                <div className="flex items-center justify-center gap-4">
+                <div className="flex items-center justify-center gap-3">
                   {/* Vegas */}
                   <div className="flex flex-col items-center gap-1">
-                    <img src={vegasLogo} alt="Vegas" className="w-12 h-12 object-contain" />
+                    <img src={vegasLogo} alt="Vegas" className="w-10 h-10 object-contain" />
                     <span className="font-bold text-white/80 text-xs">VEGAS</span>
                   </div>
 
-                  <div className="px-3 py-1 bg-white/10 rounded-full border border-white/20">
+                  <div className="px-2 py-1 bg-white/10 rounded-full border border-white/20">
                     <span className="text-white font-bold text-xs">VS</span>
                   </div>
 
                   {/* Tampa Bay */}
                   <div className="flex flex-col items-center gap-1">
-                    <img src={tampaLogo} alt="Tampa Bay" className="w-12 h-12 object-contain" />
+                    <img src={tampaLogo} alt="Tampa Bay" className="w-10 h-10 object-contain" />
                     <span className="font-bold text-white text-xs">TAMPA BAY</span>
                   </div>
                 </div>
                 
                 {/* Win Statement */}
-                <div className="flex flex-col items-center gap-1 pt-2">
-                  <div className="relative">
-                    <img src={tampaLogo} alt="Tampa Bay" className="w-12 h-12 object-contain relative z-10" />
-                  </div>
-                  <h3 className="text-xl font-black text-white tracking-tight">
+                <div className="flex flex-col items-center gap-1 pt-1">
+                  <h3 className="text-base font-black text-white tracking-tight">
                     TAMPA BAY
                   </h3>
-                  <div className="text-base font-bold text-primary">
+                  <div className="text-sm font-bold text-primary">
                     VICTOIRE
                   </div>
                 </div>
               </div>
 
               {/* Bet Amount & Payout */}
-              <div className="pt-4 space-y-3">
-                <div className="flex items-center justify-center gap-3">
-                  <div className="px-6 py-2 bg-transparent border-2 border-white/40 rounded-full">
-                    <span className="text-white font-semibold text-sm">Paris sportif : ${betAmount}</span>
+              <div className="pt-3">
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="px-4 py-3 bg-transparent border-2 border-white/40 rounded-2xl text-center">
+                    <div className="text-white/80 text-xs mb-1">Paris sportif :</div>
+                    <div className="text-white font-bold text-lg">${betAmount}</div>
                   </div>
-                  <div className="px-6 py-2 bg-primary rounded-full">
-                    <span className="text-black font-bold text-sm">Cashout x1.65 → ${calculateReturn(betAmount)}</span>
+                  <div className="px-4 py-3 bg-primary rounded-2xl text-center">
+                    <div className="text-black/70 text-xs mb-1">Cashout x1.65 →</div>
+                    <div className="text-black font-bold text-lg">${calculateReturn(betAmount)}</div>
                   </div>
                 </div>
               </div>
 
               {/* Simulation Calculator */}
-              <div className="pt-4 border-t border-white/10">
-                <div className="space-y-4">
-                  <h3 className="text-center text-white/80 font-bold text-sm tracking-wide">MODIFIER VOTRE MISE</h3>
+              <div className="pt-3 border-t border-white/10">
+                <div className="space-y-3">
+                  <h3 className="text-center text-white/80 font-bold text-xs tracking-wide">MODIFIER VOTRE MISE</h3>
                   <div className="grid grid-cols-4 gap-2">
                     {[10, 20, 50, 100, 150, 200, 500].map((amount) => (
                       <button
                         key={amount}
                         onClick={() => setBetAmount(amount.toString())}
-                        className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
+                        className={`px-3 py-2 rounded-2xl text-xs font-semibold transition-colors ${
                           betAmount === amount.toString()
                             ? 'bg-primary text-black'
                             : 'bg-white/10 text-white hover:bg-white/20'
@@ -124,7 +121,7 @@ const Bet = () => {
                     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                       <DialogTrigger asChild>
                         <button 
-                          className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
+                          className={`px-3 py-2 rounded-2xl text-xs font-semibold transition-colors ${
                             ![10, 20, 50, 100, 150, 200, 500].includes(Number(betAmount))
                               ? 'bg-primary text-black'
                               : 'bg-white/10 text-white hover:bg-white/20'
@@ -163,7 +160,7 @@ const Bet = () => {
               </div>
 
               {/* DraftKings Section */}
-              <div className="pt-4 border-t border-white/10">
+              <div className="pt-3 border-t border-white/10">
                 <div className="flex items-center justify-center gap-2 text-xs">
                   <span className="text-white/60">Meilleur site:</span>
                   <span className="font-bold text-white">DRAFTKINGS</span>
