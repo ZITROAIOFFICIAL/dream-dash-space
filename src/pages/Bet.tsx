@@ -45,36 +45,8 @@ const Bet = () => {
             </div>
 
             <CardHeader className="space-y-6 pb-6">
-              {/* Main Prediction - BIG */}
-              <div className="text-center space-y-4 py-3">
-                <div className="flex items-center justify-center gap-2">
-                  <img src={tampaLogo} alt="Tampa Bay" className="w-6 h-6 object-contain" />
-                  <div className="text-lg font-bold text-black">
-                    TAMPA BAY -136
-                  </div>
-                </div>
-                <div className="space-y-1">
-                  <div className="text-xs font-bold text-black tracking-[0.25em]">MONEY LINE</div>
-                </div>
-                
-                {/* Tampa Bay Logo + Win Statement */}
-                <div className="flex flex-col items-center gap-3">
-                  <div className="relative">
-                    <img src={tampaLogo} alt="Tampa Bay" className="w-32 h-32 object-contain relative z-10" />
-                  </div>
-                  <div className="space-y-2">
-                    <h2 className="text-5xl font-black text-black tracking-tight">
-                      TAMPA BAY
-                    </h2>
-                    <div className="text-3xl font-bold text-primary">
-                      VICTOIRE
-                    </div>
-                  </div>
-                </div>
-              </div>
-
               {/* Match Details */}
-              <div className="pt-4 border-t border-black">
+              <div className="text-center space-y-4 py-3">
                 <div className="flex flex-col items-center gap-3">
                   <span className="text-black text-xs font-semibold">5:00 PM</span>
                   <div className="flex items-center justify-center gap-3">
@@ -92,6 +64,21 @@ const Bet = () => {
                     <div className="flex items-center gap-2">
                       <span className="font-bold text-black text-sm">TAMPA BAY</span>
                       <img src={tampaLogo} alt="Tampa Bay" className="w-10 h-10 object-contain" />
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Tampa Bay Logo + Win Statement */}
+                <div className="flex flex-col items-center gap-3 pt-4">
+                  <div className="relative">
+                    <img src={tampaLogo} alt="Tampa Bay" className="w-32 h-32 object-contain relative z-10" />
+                  </div>
+                  <div className="space-y-2">
+                    <h2 className="text-5xl font-black text-black tracking-tight">
+                      TAMPA BAY
+                    </h2>
+                    <div className="text-3xl font-bold text-primary">
+                      VICTOIRE
                     </div>
                   </div>
                 </div>
