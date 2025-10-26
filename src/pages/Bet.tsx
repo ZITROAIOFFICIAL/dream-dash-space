@@ -1,9 +1,19 @@
 import DashboardLayout from "@/components/DashboardLayout";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import vegasLogo from "@/assets/vegas-logo.png";
 import tampaLogo from "@/assets/tampa-logo.png";
+import { useState } from "react";
 
 const Bet = () => {
+  const [betAmount, setBetAmount] = useState<string>("100");
+  
+  const calculateReturn = (amount: string) => {
+    const numAmount = parseFloat(amount) || 0;
+    // Pour -136: pour gagner $100, il faut miser $136
+    // Retour total = mise + gain = mise * (1 + 100/136)
+    return (numAmount * (1 + 100/136)).toFixed(2);
+  };
   return (
     <DashboardLayout>
       <div className="space-y-6">
@@ -52,17 +62,6 @@ const Bet = () => {
                 </div>
               </div>
 
-              {/* Simulation Section */}
-              <div className="pt-4 border-t border-black">
-                <div className="text-center space-y-2">
-                  <h3 className="text-sm font-bold text-black tracking-wide">SIMULATION SI TU PLACES TON ARGENT</h3>
-                  <div className="flex items-center justify-center gap-4 text-lg font-bold text-black">
-                    <span>$100 →</span>
-                    <span className="text-primary text-2xl">$173.53</span>
-                  </div>
-                </div>
-              </div>
-
               {/* Match Details */}
               <div className="pt-4 border-t border-black">
                 <div className="flex items-center justify-center gap-3">
@@ -92,6 +91,29 @@ const Bet = () => {
                   </p>
                   <div className="inline-block px-4 py-2 bg-primary/10 rounded-lg border border-primary">
                     <span className="text-2xl font-black text-primary">-135</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Simulation Calculator */}
+              <div className="pt-4 border-t border-black">
+                <div className="text-center space-y-3">
+                  <h3 className="text-sm font-bold text-black tracking-wide">SIMULATION SI TU PLACES TON ARGENT</h3>
+                  <div className="flex items-center justify-center gap-3 max-w-sm mx-auto">
+                    <div className="flex items-center gap-2">
+                      <span className="text-black font-bold">$</span>
+                      <Input
+                        type="number"
+                        value={betAmount}
+                        onChange={(e) => setBetAmount(e.target.value)}
+                        className="w-24 text-center font-bold border-2 border-black"
+                        placeholder="100"
+                      />
+                    </div>
+                    <span className="text-black font-bold text-lg">→</span>
+                    <div className="text-primary text-2xl font-black">
+                      ${calculateReturn(betAmount)}
+                    </div>
                   </div>
                 </div>
               </div>
