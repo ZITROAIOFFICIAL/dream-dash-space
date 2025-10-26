@@ -15,35 +15,24 @@ const Bet = () => {
         <div className="grid gap-6">
           <Card className="max-w-3xl bg-background border-2 border-white/20 shadow-2xl overflow-hidden">
             {/* AI Analysis Badge */}
-            <div className="bg-gradient-to-r from-primary via-primary/80 to-primary px-6 py-4 flex items-center justify-center border-b-2 border-primary/50 shadow-[0_0_30px_rgba(139,92,246,0.3)]">
+            <div className="bg-gradient-to-r from-primary via-primary/80 to-primary px-6 py-4 flex items-center justify-center border-2 border-white shadow-[0_0_30px_rgba(255,255,255,0.3)]">
               <div className="flex items-center gap-3">
                 <div className="w-2 h-2 bg-white rounded-full animate-pulse shadow-[0_0_10px_rgba(255,255,255,0.8)]"></div>
-                <span className="text-white text-xs font-bold tracking-widest">ANALYSE IA</span>
+                <span className="text-white text-xs font-bold tracking-widest">ANALYSE IA • 92% DE GAGNER LE BET</span>
                 <div className="text-white text-xs font-bold">• 5:00 PM</div>
               </div>
             </div>
 
             <CardHeader className="space-y-6 pb-6">
               {/* Main Prediction - BIG */}
-              <div className="text-center space-y-6 py-8">
+              <div className="text-center space-y-4 py-6">
                 <div className="space-y-1">
                   <div className="text-xs font-bold text-primary/70 tracking-[0.3em]">PRONOSTIC</div>
                   <div className="text-xs font-bold text-white/60 tracking-[0.25em]">MONEY LINE</div>
                 </div>
-
-                {/* HUGE 92% Probability */}
-                <div className="relative py-6">
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent blur-xl"></div>
-                  <div className="relative">
-                    <div className="text-[120px] font-black leading-none bg-gradient-to-br from-primary via-primary to-primary/60 bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(139,92,246,0.6)] animate-pulse">
-                      92%
-                    </div>
-                    <div className="text-sm font-bold text-primary/80 tracking-[0.3em] mt-2">DE GAGNER LE BET</div>
-                  </div>
-                </div>
                 
                 {/* Tampa Bay Logo + Win Statement */}
-                <div className="flex flex-col items-center gap-4 pt-4">
+                <div className="flex flex-col items-center gap-4">
                   <div className="relative">
                     <div className="absolute inset-0 bg-primary/30 blur-3xl rounded-full animate-pulse"></div>
                     <img src={tampaLogo} alt="Tampa Bay" className="w-32 h-32 object-contain relative z-10" />
