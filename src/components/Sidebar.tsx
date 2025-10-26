@@ -38,7 +38,7 @@ const Sidebar = () => {
       >
         <div className="flex flex-col h-full">
           {/* Logo */}
-          <div className="p-6 border-b border-white/10">
+          <div className="p-6 border-b border-white/10 text-center">
             <h1 className="text-2xl font-bold leading-none">
               <span className="text-white">WIN</span>
               <span className="text-sidebar-primary">A</span>
