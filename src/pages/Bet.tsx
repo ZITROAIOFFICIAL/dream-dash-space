@@ -59,8 +59,10 @@ const Bet = () => {
                 <span className="text-white/60 text-xs font-semibold">5:00 PM</span>
                 <div className="flex items-center justify-center gap-3">
                   {/* Vegas */}
-                  <div className="flex flex-col items-center gap-1">
-                    <img src={vegasLogo} alt="Vegas" className="w-10 h-10 object-contain" />
+                  <div className="flex flex-col items-center gap-1.5">
+                    <div className="w-14 h-14 bg-white/10 rounded-full flex items-center justify-center border border-white/20 backdrop-blur-sm">
+                      <img src={vegasLogo} alt="Vegas" className="w-10 h-10 object-contain" />
+                    </div>
                     <span className="font-bold text-white/80 text-xs">VEGAS</span>
                   </div>
 
@@ -69,8 +71,10 @@ const Bet = () => {
                   </div>
 
                   {/* Tampa Bay */}
-                  <div className="flex flex-col items-center gap-1">
-                    <img src={tampaLogo} alt="Tampa Bay" className="w-10 h-10 object-contain" />
+                  <div className="flex flex-col items-center gap-1.5">
+                    <div className="w-14 h-14 bg-white/10 rounded-full flex items-center justify-center border border-primary/30 backdrop-blur-sm shadow-[0_0_20px_rgba(34,197,94,0.2)]">
+                      <img src={tampaLogo} alt="Tampa Bay" className="w-10 h-10 object-contain" />
+                    </div>
                     <span className="font-bold text-white text-xs">TAMPA BAY</span>
                   </div>
                 </div>
