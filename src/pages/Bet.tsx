@@ -57,10 +57,8 @@ const Bet = () => {
                   PARIER SUR
                 </div>
                 
-                {/* Win Statement */}
-                
-
-                <div className="flex items-center justify-center gap-3 px-4">
+                {/* Teams and VS (centered) */}
+                <div className="grid grid-cols-3 items-center justify-items-center gap-4 px-4">
                   {/* Vegas */}
                   <div className="flex flex-col items-center gap-1">
                     <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center border border-white/20">
@@ -69,7 +67,8 @@ const Bet = () => {
                     <span className="font-bold text-white/80 text-xs">VEGAS</span>
                   </div>
 
-                  <div className="flex flex-col items-center gap-1 ml-4">
+                  {/* Center time + VS */}
+                  <div className="flex flex-col items-center gap-1">
                     <span className="text-white/60 text-xs font-semibold">5:00 PM</span>
                     <div className="px-2 py-0.5 bg-white/10 rounded-full border border-white/20">
                       <span className="text-white font-bold text-xs">VS</span>
