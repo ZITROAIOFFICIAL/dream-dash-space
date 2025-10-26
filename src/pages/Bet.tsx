@@ -34,14 +34,13 @@ const Bet = () => {
                 {/* Tampa Bay Logo + Win Statement */}
                 <div className="flex flex-col items-center gap-4">
                   <div className="relative">
-                    <div className="absolute inset-0 bg-primary/30 blur-3xl rounded-full animate-pulse"></div>
                     <img src={tampaLogo} alt="Tampa Bay" className="w-32 h-32 object-contain relative z-10" />
                   </div>
                   <div className="space-y-2">
-                    <h2 className="text-5xl font-black text-black tracking-tight drop-shadow-lg">
+                    <h2 className="text-5xl font-black text-black tracking-tight">
                       TAMPA BAY
                     </h2>
-                    <div className="text-3xl font-bold text-primary drop-shadow-[0_0_20px_rgba(139,92,246,0.5)]">
+                    <div className="text-3xl font-bold text-primary">
                       VICTOIRE
                     </div>
                   </div>
