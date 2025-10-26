@@ -43,6 +43,9 @@ const Bet = () => {
                     <div className="text-3xl font-bold text-primary">
                       VICTOIRE
                     </div>
+                    <div className="text-xl font-bold text-black">
+                      TAMPA BAY -136
+                    </div>
                   </div>
                 </div>
               </div>
