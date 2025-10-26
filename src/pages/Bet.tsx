@@ -12,11 +12,12 @@ const Bet = () => {
   const [customAmount, setCustomAmount] = useState<string>("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   
+  const odds = -136;
+  const multiplier = 1 + (100 / Math.abs(odds));
+  
   const calculateReturn = (amount: string) => {
     const numAmount = parseFloat(amount) || 0;
-    // Pour -136: pour gagner $100, il faut miser $136
-    // Retour total = mise + gain = mise * (1 + 100/136)
-    return (numAmount * (1 + 100/136)).toFixed(2);
+    return (numAmount * multiplier).toFixed(2);
   };
 
   const handleCustomBet = () => {
@@ -49,7 +50,7 @@ const Bet = () => {
               {/* Odds Display */}
               <div className="text-center space-y-2 py-3">
                 <div className="text-4xl font-black text-primary">
-                  x1.65
+                  x{multiplier.toFixed(2)}
                 </div>
                 <div className="h-0.5 bg-primary max-w-[200px] mx-auto"></div>
               </div>
@@ -153,7 +154,7 @@ const Bet = () => {
                   </Dialog>
                   
                   <div className="px-4 py-3 bg-primary/20 border-2 border-primary rounded-2xl text-center">
-                    <div className="text-white/70 text-xs mb-1">Cashout x1.65 →</div>
+                    <div className="text-white/70 text-xs mb-1">Cashout x{multiplier.toFixed(2)} →</div>
                     <div className="text-primary font-bold text-lg">${calculateReturn(betAmount)}</div>
                   </div>
                 </div>
