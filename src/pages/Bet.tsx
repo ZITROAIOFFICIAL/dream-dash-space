@@ -40,8 +40,8 @@ const Bet = () => {
               {/* AI Analysis */}
               <div className="text-center space-y-2">
                 <div className="space-y-1">
-                  <h2 className="text-white text-lg">Analyse de notre <span className="text-primary font-bold">IA</span></h2>
-                  <div className="text-4xl font-black">
+                  <h2 className="text-white text-base">Analyse de notre <span className="text-primary font-bold">IA</span></h2>
+                  <div className="text-2xl font-black">
                     <span className="text-primary">92%</span>
                     <span className="text-white"> de chance de gagner</span>
                   </div>
@@ -49,21 +49,21 @@ const Bet = () => {
               </div>
 
               {/* Odds Display */}
-              <div className="text-center space-y-4 py-6">
-                <div className="text-8xl font-black text-primary">
+              <div className="text-center space-y-3 py-4">
+                <div className="text-5xl font-black text-primary">
                   x1.65
                 </div>
-                <div className="h-1 bg-primary max-w-md mx-auto"></div>
+                <div className="h-1 bg-primary max-w-xs mx-auto"></div>
               </div>
 
               {/* Match Details */}
               <div className="text-center space-y-3">
                 <span className="text-white/60 text-xs font-semibold">5:00 PM</span>
-                <div className="flex items-center justify-center gap-3">
+                <div className="flex items-center justify-center gap-4">
                   {/* Vegas */}
-                  <div className="flex items-center gap-2">
-                    <img src={vegasLogo} alt="Vegas" className="w-8 h-8 object-contain opacity-60" />
-                    <span className="font-bold text-white/60 text-sm">VEGAS</span>
+                  <div className="flex flex-col items-center gap-1">
+                    <img src={vegasLogo} alt="Vegas" className="w-12 h-12 object-contain" />
+                    <span className="font-bold text-white/80 text-xs">VEGAS</span>
                   </div>
 
                   <div className="px-3 py-1 bg-white/10 rounded-full border border-white/20">
@@ -71,21 +71,21 @@ const Bet = () => {
                   </div>
 
                   {/* Tampa Bay */}
-                  <div className="flex items-center gap-2">
-                    <span className="font-bold text-white text-sm">TAMPA BAY</span>
-                    <img src={tampaLogo} alt="Tampa Bay" className="w-8 h-8 object-contain" />
+                  <div className="flex flex-col items-center gap-1">
+                    <img src={tampaLogo} alt="Tampa Bay" className="w-12 h-12 object-contain" />
+                    <span className="font-bold text-white text-xs">TAMPA BAY</span>
                   </div>
                 </div>
                 
                 {/* Win Statement */}
                 <div className="flex flex-col items-center gap-1 pt-2">
                   <div className="relative">
-                    <img src={tampaLogo} alt="Tampa Bay" className="w-16 h-16 object-contain relative z-10" />
+                    <img src={tampaLogo} alt="Tampa Bay" className="w-12 h-12 object-contain relative z-10" />
                   </div>
-                  <h3 className="text-2xl font-black text-white tracking-tight">
+                  <h3 className="text-xl font-black text-white tracking-tight">
                     TAMPA BAY
                   </h3>
-                  <div className="text-lg font-bold text-primary">
+                  <div className="text-base font-bold text-primary">
                     VICTOIRE
                   </div>
                 </div>
