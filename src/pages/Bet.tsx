@@ -6,20 +6,16 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import vegasLogo from "@/assets/vegas-logo.png";
 import tampaLogo from "@/assets/tampa-logo.png";
 import { useState } from "react";
-
 const Bet = () => {
   const [betAmount, setBetAmount] = useState<string>("100");
   const [customAmount, setCustomAmount] = useState<string>("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  
   const odds = -136;
-  const multiplier = 1 + (100 / Math.abs(odds));
-  
+  const multiplier = 1 + 100 / Math.abs(odds);
   const calculateReturn = (amount: string) => {
     const numAmount = parseFloat(amount) || 0;
     return (numAmount * multiplier).toFixed(2);
   };
-
   const handleCustomBet = () => {
     if (customAmount && parseFloat(customAmount) > 0) {
       setBetAmount(customAmount);
@@ -27,8 +23,7 @@ const Bet = () => {
       setCustomAmount("");
     }
   };
-  return (
-    <DashboardLayout>
+  return <DashboardLayout>
       <div className="space-y-6">
         <div>
           <h1 className="text-3xl font-bold text-foreground mb-2">Paris Recommandés</h1>
@@ -63,21 +58,7 @@ const Bet = () => {
                 </div>
                 
                 {/* Win Statement */}
-                <div className="flex justify-center pb-3">
-                  <div className="flex items-center gap-2">
-                    <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                      <img src={tampaLogo} alt="Tampa Bay" className="w-7 h-7 object-contain" />
-                    </div>
-                    <div>
-                      <h3 className="text-base font-black text-white tracking-tight">
-                        TAMPA BAY
-                      </h3>
-                      <div className="text-xs font-bold text-primary">
-                        VICTOIRE
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                
 
                 <span className="text-white/60 text-xs font-semibold">5:00 PM</span>
                 <div className="flex items-center justify-center gap-2">
@@ -123,32 +104,19 @@ const Bet = () => {
                       </DialogHeader>
                       <div className="space-y-4">
                         <div className="grid grid-cols-4 gap-2">
-                          {[10, 20, 50, 100, 150, 200, 500].map((amount) => (
-                            <button
-                              key={amount}
-                              onClick={() => {
-                                setBetAmount(amount.toString());
-                                setIsDialogOpen(false);
-                              }}
-                              className={`px-3 py-2 rounded-2xl text-sm font-semibold transition-colors ${
-                                betAmount === amount.toString()
-                                  ? 'bg-primary text-black'
-                                  : 'bg-white/10 text-white hover:bg-white/20'
-                              }`}
-                            >
+                          {[10, 20, 50, 100, 150, 200, 500].map(amount => <button key={amount} onClick={() => {
+                          setBetAmount(amount.toString());
+                          setIsDialogOpen(false);
+                        }} className={`px-3 py-2 rounded-2xl text-sm font-semibold transition-colors ${betAmount === amount.toString() ? 'bg-primary text-black' : 'bg-white/10 text-white hover:bg-white/20'}`}>
                               ${amount}
-                            </button>
-                          ))}
-                          <button 
-                            onClick={() => {
-                              const custom = prompt("Entrez le montant:");
-                              if (custom && parseFloat(custom) > 0) {
-                                setBetAmount(custom);
-                                setIsDialogOpen(false);
-                              }
-                            }}
-                            className="px-3 py-2 rounded-2xl text-sm font-semibold bg-white/10 text-white hover:bg-white/20"
-                          >
+                            </button>)}
+                          <button onClick={() => {
+                          const custom = prompt("Entrez le montant:");
+                          if (custom && parseFloat(custom) > 0) {
+                            setBetAmount(custom);
+                            setIsDialogOpen(false);
+                          }
+                        }} className="px-3 py-2 rounded-2xl text-sm font-semibold bg-white/10 text-white hover:bg-white/20">
                             Autre
                           </button>
                         </div>
@@ -176,8 +144,6 @@ const Bet = () => {
           </Card>
         </div>
       </div>
-    </DashboardLayout>
-  );
+    </DashboardLayout>;
 };
-
 export default Bet;
