@@ -48,11 +48,12 @@ const Bet = () => {
               </div>
 
               {/* Odds Display */}
-              <div className="text-center space-y-2 py-3">
-                <div className="text-4xl font-black text-primary">
-                  x{multiplier.toFixed(2)}
+              <div className="flex justify-center py-3">
+                <div className="bg-primary/20 border-2 border-primary rounded-lg px-6 py-2">
+                  <div className="text-3xl font-black text-primary">
+                    x{multiplier.toFixed(2)}
+                  </div>
                 </div>
-                <div className="h-0.5 bg-primary w-[calc(100%+2rem)] -mx-4"></div>
               </div>
 
               {/* Match Details */}
