@@ -52,7 +52,7 @@ const Bet = () => {
                 <div className="text-4xl font-black text-primary">
                   x{multiplier.toFixed(2)}
                 </div>
-                <div className="h-0.5 bg-primary max-w-[200px] mx-auto"></div>
+                <div className="h-0.5 bg-primary w-full"></div>
               </div>
 
               {/* Match Details */}
