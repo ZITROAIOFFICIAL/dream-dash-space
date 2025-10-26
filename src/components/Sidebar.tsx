@@ -1,4 +1,4 @@
-import { TrendingUp, History, Target, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -9,9 +9,10 @@ const Sidebar = () => {
   const location = useLocation();
 
   const menuItems = [
-    { icon: TrendingUp, label: "Bet du jour", path: "/" },
-    { icon: Target, label: "Notre Stratégie", path: "/strategie" },
-    { icon: History, label: "Historique", path: "/historique" },
+    { label: "Bet du jour", path: "/" },
+    { label: "Notre Stratégie", path: "/strategie" },
+    { label: "Historique", path: "/historique" },
+    { label: "Parlay", path: "/parlay" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -50,7 +51,6 @@ const Sidebar = () => {
           {/* Navigation */}
           <nav className="flex-1 p-4 space-y-2">
             {menuItems.map((item) => {
-              const Icon = item.icon;
               const active = isActive(item.path);
               
               return (
@@ -59,13 +59,12 @@ const Sidebar = () => {
                   to={item.path}
                   onClick={() => setIsOpen(false)}
                   className={cn(
-                    "flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 text-white",
+                    "flex items-center justify-center px-4 py-3 rounded-lg transition-all duration-200 text-white",
                     active 
                       ? "bg-white/20 font-semibold" 
                       : "hover:bg-white/10"
                   )}
                 >
-                  <Icon className="h-5 w-5" />
                   <span>{item.label}</span>
                 </Link>
               );
