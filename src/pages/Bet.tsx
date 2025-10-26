@@ -15,23 +15,21 @@ const Bet = () => {
         <div className="grid gap-6">
           <Card className="max-w-3xl bg-background border-2 border-white/20 shadow-2xl overflow-hidden">
             {/* AI Analysis Badge */}
-            <div className="bg-gradient-to-r from-primary/20 via-primary/30 to-primary/20 px-6 py-2 flex items-center justify-between border-b border-white/10">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-                <span className="text-primary text-xs font-bold tracking-widest">ANALYSE IA • 92% DE GAGNER</span>
-              </div>
+            <div className="bg-gradient-to-r from-primary/20 via-primary/30 to-primary/20 px-6 py-3 flex items-center justify-center border-b border-white/10">
               <div className="flex items-center gap-3">
-                <span className="text-white/60 text-xs font-bold">MONEY LINE</span>
-                <div className="text-primary text-xs font-bold">
-                  5:00 PM
-                </div>
+                <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+                <span className="text-primary text-sm font-bold tracking-widest">ANALYSE IA • 92% DE GAGNER LE BET</span>
+                <div className="text-primary text-sm font-bold">• 5:00 PM</div>
               </div>
             </div>
 
             <CardHeader className="space-y-6 pb-6">
               {/* Main Prediction - BIG */}
               <div className="text-center space-y-4 py-6">
-                <div className="text-xs font-bold text-primary/70 tracking-[0.3em]">PRONOSTIC</div>
+                <div className="space-y-1">
+                  <div className="text-xs font-bold text-primary/70 tracking-[0.3em]">PRONOSTIC</div>
+                  <div className="text-xs font-bold text-white/60 tracking-[0.25em]">MONEY LINE</div>
+                </div>
                 
                 {/* Tampa Bay Logo + Win Statement */}
                 <div className="flex flex-col items-center gap-4">
