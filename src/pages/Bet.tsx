@@ -109,7 +109,7 @@ const Bet = () => {
               {/* Simulation Calculator */}
               <div className="pt-4 border-t border-black">
                 <div className="space-y-4">
-                  <h3 className="text-center text-black font-bold text-sm tracking-wide">SIMULER VOTRE MISE</h3>
+                  <h3 className="text-center text-black font-bold text-sm tracking-wide">VOTRE MISE</h3>
                   <div className="grid grid-cols-4 gap-2">
                     {[10, 20, 50, 100, 150, 200, 500].map((amount) => (
                       <button
