@@ -13,10 +13,10 @@ const Bet = () => {
         </div>
 
         <div className="grid gap-6">
-          <Card className="max-w-3xl border-border/50 bg-card/80 backdrop-blur-sm">
+          <Card className="max-w-3xl border-2 border-primary/20 bg-card shadow-lg shadow-primary/5">
             <CardHeader className="space-y-6 pb-4">
               <div className="flex items-center justify-between">
-                <div className="text-sm font-medium text-muted-foreground bg-muted/50 px-3 py-1.5 rounded-full">
+                <div className="text-sm font-semibold text-primary bg-primary/10 px-4 py-2 rounded-full border border-primary/30">
                   5:00 PM
                 </div>
               </div>
@@ -40,10 +40,10 @@ const Bet = () => {
               </div>
             </CardHeader>
 
-            <CardContent className="pt-4 border-t border-border/50">
-              <div className="bg-primary/10 rounded-lg p-4 text-center">
-                <div className="text-xs font-medium text-muted-foreground mb-1">PRONOSTIC</div>
-                <div className="text-xl font-bold text-primary">
+            <CardContent className="pt-4 border-t border-primary/20">
+              <div className="bg-primary/15 rounded-lg p-5 text-center border border-primary/30">
+                <div className="text-xs font-bold text-primary/80 mb-2 tracking-wider">PRONOSTIC</div>
+                <div className="text-2xl font-bold text-primary">
                   Victoire Tampa Bay
                 </div>
               </div>
