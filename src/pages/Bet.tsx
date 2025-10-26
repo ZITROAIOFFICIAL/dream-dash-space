@@ -85,7 +85,7 @@ const Bet = () => {
 
               {/* DraftKings Section */}
               <div className="pt-4 border-t border-black">
-                <div className="flex items-center justify-end gap-2 text-xs">
+                <div className="flex items-center justify-center gap-2 text-xs">
                   <span className="text-black">Meilleur site:</span>
                   <span className="font-bold text-black">DRAFTKINGS</span>
                   <span className="px-2 py-1 bg-primary/10 rounded border border-primary font-bold text-primary">-135</span>
