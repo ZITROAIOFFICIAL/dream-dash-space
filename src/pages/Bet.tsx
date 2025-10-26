@@ -50,21 +50,21 @@ const Bet = () => {
 
               {/* Match Details Below */}
               <div className="pt-6 border-t border-white">
-                <div className="flex items-center justify-center gap-6">
+                <div className="flex items-center justify-center gap-3">
                   {/* Vegas */}
-                  <div className="flex items-center gap-3">
-                    <img src={vegasLogo} alt="Vegas" className="w-12 h-12 object-contain opacity-60" />
-                    <span className="font-bold text-white">VEGAS</span>
+                  <div className="flex items-center gap-2">
+                    <img src={vegasLogo} alt="Vegas" className="w-10 h-10 object-contain opacity-60" />
+                    <span className="font-bold text-white text-sm">VEGAS</span>
                   </div>
 
-                  <div className="px-4 py-1 bg-white/5 rounded-full border border-white">
-                    <span className="text-white font-bold text-sm">VS</span>
+                  <div className="px-3 py-1 bg-white/5 rounded-full border border-white mx-2">
+                    <span className="text-white font-bold text-xs">VS</span>
                   </div>
 
                   {/* Tampa Bay */}
-                  <div className="flex items-center gap-3">
-                    <span className="font-bold text-white">TAMPA BAY</span>
-                    <img src={tampaLogo} alt="Tampa Bay" className="w-12 h-12 object-contain" />
+                  <div className="flex items-center gap-2">
+                    <span className="font-bold text-white text-sm">TAMPA BAY</span>
+                    <img src={tampaLogo} alt="Tampa Bay" className="w-10 h-10 object-contain" />
                   </div>
                 </div>
               </div>
