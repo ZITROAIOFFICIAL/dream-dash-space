@@ -60,7 +60,7 @@ const Bet = () => {
                 {/* Win Statement */}
                 
 
-                <div className="flex items-center justify-center gap-2">
+                <div className="flex items-center justify-center gap-3 px-4">
                   {/* Vegas */}
                   <div className="flex flex-col items-center gap-1">
                     <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center border border-white/20">
@@ -78,7 +78,7 @@ const Bet = () => {
 
                   {/* Tampa Bay */}
                   <div className="flex flex-col items-center gap-1">
-                    <div className="bg-primary/20 border-2 border-primary rounded-lg p-2 flex flex-col items-center justify-center gap-2 min-w-[120px]">
+                    <div className="bg-primary/20 border-2 border-primary rounded-lg p-2 flex flex-col items-center justify-center gap-1.5">
                       <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
                         <img src={tampaLogo} alt="Tampa Bay" className="w-7 h-7 object-contain" />
                       </div>
