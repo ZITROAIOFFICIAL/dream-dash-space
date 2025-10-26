@@ -18,8 +18,8 @@ const Bet = () => {
             <div className="bg-gradient-to-r from-primary/20 via-primary/30 to-primary/20 px-6 py-3 flex items-center justify-center border-b border-white/10">
               <div className="flex items-center gap-3">
                 <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-                <span className="text-primary text-sm font-bold tracking-widest">ANALYSE IA • 92% DE GAGNER LE BET</span>
-                <div className="text-primary text-sm font-bold">• 5:00 PM</div>
+                <span className="text-primary text-xs font-bold tracking-widest">ANALYSE IA • 92% DE GAGNER LE BET</span>
+                <div className="text-primary text-xs font-bold">• 5:00 PM</div>
               </div>
             </div>
 
