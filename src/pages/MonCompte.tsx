@@ -1,13 +1,13 @@
 import DashboardLayout from "@/components/DashboardLayout";
 
-const Parlay = () => {
+const MonCompte = () => {
   return (
     <DashboardLayout>
       <div className="space-y-6">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Parlay du jour</h1>
+          <h1 className="text-3xl font-bold tracking-tight">Mon compte</h1>
           <p className="text-muted-foreground mt-2">
-            Gérez vos paris combinés
+            Gérez votre profil et vos préférences
           </p>
         </div>
       </div>
@@ -15,4 +15,4 @@ const Parlay = () => {
   );
 };
 
-export default Parlay;
+export default MonCompte;

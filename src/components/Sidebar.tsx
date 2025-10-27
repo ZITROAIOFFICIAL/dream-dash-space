@@ -13,6 +13,9 @@ const Sidebar = () => {
     { label: "Parlay", path: "/parlay" },
     { label: "Notre Stratégie", path: "/strategie" },
     { label: "Historique", path: "/historique" },
+    { label: "Support", path: "/support" },
+    { label: "Mon compte", path: "/mon-compte" },
+    { label: "Boutique", path: "/boutique" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
