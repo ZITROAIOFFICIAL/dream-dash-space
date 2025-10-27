@@ -14,13 +14,13 @@
     :root {
       --background: 0 0% 0%;
       --foreground: 0 0% 100%;
-      --primary: 142 76% 36%;
+      --primary: 120 100% 45%;
       --primary-foreground: 0 0% 100%;
-      --secondary: 142 30% 15%;
-      --muted: 0 0% 15%;
-      --muted-foreground: 0 0% 60%;
-      --border: 0 0% 20%;
-      --radius: 0.5rem;
+      --secondary: 220 25% 18%;
+      --muted: 220 25% 18%;
+      --muted-foreground: 220 15% 65%;
+      --border: 220 25% 20%;
+      --radius: 0.75rem;
     }
 
     /* Reset & Base */
@@ -32,8 +32,8 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-      background: hsl(var(--background));
-      color: hsl(var(--foreground));
+      background: #000000;
+      color: #ffffff;
       line-height: 1.5;
       overflow-x: hidden;
     }
@@ -86,8 +86,8 @@
       top: 1rem;
       left: 1rem;
       z-index: 60;
-      background: hsl(var(--primary));
-      color: hsl(var(--primary-foreground));
+      background: #16a34a;
+      color: #ffffff;
       border: none;
       border-radius: var(--radius);
       padding: 0.75rem;
@@ -97,7 +97,7 @@
     }
 
     .mobile-toggle:hover {
-      background: hsl(142 76% 30%);
+      background: #15803d;
     }
 
     @media (max-width: 768px) {
@@ -129,8 +129,8 @@
       left: 0;
       width: 16rem;
       height: 100vh;
-      background: hsl(var(--background));
-      border-right: 1px solid hsl(var(--border));
+      background: #000000;
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
       z-index: 50;
       display: flex;
       flex-direction: column;
@@ -149,7 +149,7 @@
 
     .sidebar-header {
       padding: 1.5rem 1rem;
-      border-bottom: 1px solid hsl(var(--border));
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .logo {
@@ -160,11 +160,11 @@
     }
 
     .logo .text-foreground {
-      color: hsl(var(--foreground));
+      color: #ffffff;
     }
 
     .logo .text-primary {
-      color: hsl(var(--primary));
+      color: #16a34a;
     }
 
     .logo .text-sm {
@@ -180,26 +180,28 @@
     .nav-item {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 0.75rem;
       padding: 0.75rem 1rem;
       margin: 0.25rem 0.5rem;
-      color: hsl(var(--muted-foreground));
+      color: #ffffff;
       text-decoration: none;
-      border-radius: var(--radius);
+      border-radius: 0.5rem;
+      border: 2px solid transparent;
       transition: all 0.2s;
       cursor: pointer;
       font-size: 0.875rem;
     }
 
     .nav-item:hover {
-      background: hsl(var(--muted));
-      color: hsl(var(--foreground));
+      background: rgba(255, 255, 255, 0.1);
     }
 
     .nav-item.active {
-      background: hsl(var(--primary) / 0.1);
-      color: hsl(var(--primary));
-      font-weight: 500;
+      background: rgba(22, 163, 74, 0.2);
+      border: 2px solid #16a34a;
+      color: #16a34a;
+      font-weight: 600;
     }
 
     .nav-icon {
@@ -210,10 +212,10 @@
 
     .sidebar-footer {
       padding: 1rem;
-      border-top: 1px solid hsl(var(--border));
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
       text-align: center;
       font-size: 0.75rem;
-      color: hsl(var(--muted-foreground));
+      color: rgba(255, 255, 255, 0.6);
     }
 
     /* Header */
@@ -223,8 +225,8 @@
       left: 0;
       right: 0;
       height: 4rem;
-      background: hsl(var(--background));
-      border-bottom: 1px solid hsl(var(--border));
+      background: #000000;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       z-index: 30;
       display: flex;
       align-items: center;
@@ -276,7 +278,7 @@
       font-size: 2rem;
       font-weight: 700;
       margin-bottom: 1.5rem;
-      color: hsl(var(--foreground));
+      color: #ffffff;
     }
 
     h2 {
@@ -292,62 +294,103 @@
     }
 
     .subtitle {
-      color: hsl(var(--muted-foreground));
+      color: rgba(255, 255, 255, 0.6);
       margin-bottom: 2rem;
     }
 
     /* Card */
     .card {
-      background: hsl(var(--background));
-      border: 2px solid hsl(var(--border));
-      border-radius: calc(var(--radius) * 2);
+      background: #000000;
+      border: 3px solid #16a34a;
+      border-radius: 0.125rem;
       padding: 1.5rem;
       margin-bottom: 1.5rem;
+      max-width: 28rem;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     /* Bet Card */
     .bet-card {
-      background: hsl(var(--background));
-      border: 3px solid hsl(var(--primary));
-      border-radius: calc(var(--radius) * 2);
+      background: #000000;
+      border: 3px solid #16a34a;
+      border-radius: 0.125rem;
       padding: 0;
       margin-bottom: 1.5rem;
+      max-width: 28rem;
+      margin-left: auto;
+      margin-right: auto;
       overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     }
 
     .bet-card-header {
-      background: hsl(var(--primary) / 0.1);
-      padding: 1rem 1.5rem;
-      border-bottom: 2px solid hsl(var(--primary));
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
+      padding: 0;
     }
 
+    /* AI Counter Section */
     .ai-counter {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      color: hsl(var(--primary));
-      font-weight: 600;
-      font-size: 0.875rem;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 0.5rem 1.5rem;
+      background: rgba(0, 0, 0, 0.4);
     }
 
+    .ai-counter span {
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 10px;
+      letter-spacing: 0.025em;
+    }
+
+    /* Confidence Badge - Bande verte 92% */
     .confidence-badge {
-      background: hsl(var(--primary));
-      color: hsl(var(--primary-foreground));
-      padding: 0.5rem 1rem;
-      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding: 10px 1rem;
+      background: #16a34a;
+    }
+
+    .confidence-badge span {
+      color: #ffffff;
       font-weight: 700;
-      font-size: 1.125rem;
+    }
+
+    .confidence-percentage {
+      font-size: 2.25rem;
+      line-height: 1;
+    }
+
+    .confidence-text {
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    /* Bouton Voir Analyse IA */
+    .btn-analysis {
+      padding: 0.25rem 0.75rem;
+      background: #000000;
+      border: 2px solid #16a34a;
+      border-radius: 0.25rem;
+      color: #4ade80;
+      font-weight: 700;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn-analysis:hover {
+      background: rgba(22, 163, 74, 0.2);
     }
 
     .multiplier {
       font-size: 2rem;
       font-weight: 700;
-      color: hsl(var(--primary));
+      color: #16a34a;
     }
 
     .bet-card-content {
@@ -385,18 +428,18 @@
     .match-vs {
       font-size: 1.5rem;
       font-weight: 700;
-      color: hsl(var(--muted-foreground));
+      color: rgba(255, 255, 255, 0.6);
     }
 
     .match-time {
       text-align: center;
-      color: hsl(var(--muted-foreground));
+      color: rgba(255, 255, 255, 0.6);
       margin-bottom: 2rem;
     }
 
     .bet-amount-section {
-      background: hsl(var(--muted));
-      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 0.375rem;
       padding: 1.5rem;
       margin-bottom: 1.5rem;
     }
@@ -410,19 +453,19 @@
 
     .bet-amount-label {
       font-size: 0.875rem;
-      color: hsl(var(--muted-foreground));
+      color: rgba(255, 255, 255, 0.6);
     }
 
     .bet-amount-value {
       font-size: 2rem;
       font-weight: 700;
-      color: hsl(var(--primary));
+      color: #16a34a;
     }
 
     .gain-value {
       font-size: 2rem;
       font-weight: 700;
-      color: hsl(var(--primary));
+      color: #16a34a;
     }
 
     .btn {
@@ -436,37 +479,38 @@
     }
 
     .btn-primary {
-      background: hsl(var(--primary));
-      color: hsl(var(--primary-foreground));
+      background: #16a34a;
+      color: #ffffff;
     }
 
     .btn-primary:hover {
-      background: hsl(142 76% 30%);
+      background: #15803d;
     }
 
     .btn-outline {
       background: transparent;
-      border: 2px solid hsl(var(--primary));
-      color: hsl(var(--primary));
+      border: 2px solid #16a34a;
+      color: #16a34a;
     }
 
     .btn-outline:hover {
-      background: hsl(var(--primary) / 0.1);
+      background: rgba(22, 163, 74, 0.1);
     }
 
     .btn-secondary {
-      background: hsl(var(--muted));
-      color: hsl(var(--foreground));
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      border: none;
     }
 
     .btn-secondary:hover {
-      background: hsl(0 0% 20%);
+      background: rgba(255, 255, 255, 0.15);
     }
 
     .best-odds-section {
-      background: hsl(var(--primary) / 0.1);
-      border: 2px solid hsl(var(--primary));
-      border-radius: var(--radius);
+      background: rgba(22, 163, 74, 0.1);
+      border: 2px solid #16a34a;
+      border-radius: 0.375rem;
       padding: 1rem;
       margin-bottom: 1.5rem;
     }
@@ -474,20 +518,20 @@
     .best-odds-text {
       text-align: center;
       font-weight: 600;
-      color: hsl(var(--primary));
+      color: #16a34a;
     }
 
     .ai-explanation {
-      color: hsl(var(--muted-foreground));
+      color: rgba(255, 255, 255, 0.6);
       font-size: 0.875rem;
       line-height: 1.6;
     }
 
     /* History Card */
     .history-card {
-      background: hsl(var(--background));
-      border: 2px solid hsl(var(--border));
-      border-radius: var(--radius);
+      background: #000000;
+      border: 3px solid #16a34a;
+      border-radius: 0.375rem;
       padding: 1rem;
       margin-bottom: 1rem;
       display: flex;
@@ -502,30 +546,30 @@
     }
 
     .history-date {
-      color: hsl(var(--muted-foreground));
+      color: rgba(255, 255, 255, 0.6);
       font-size: 0.875rem;
     }
 
     .badge {
       padding: 0.25rem 0.75rem;
-      border-radius: var(--radius);
+      border-radius: 0.375rem;
       font-size: 0.75rem;
       font-weight: 600;
     }
 
     .badge-success {
-      background: hsl(142 76% 36% / 0.2);
-      color: hsl(var(--primary));
+      background: rgba(22, 163, 74, 0.2);
+      color: #16a34a;
     }
 
     .badge-danger {
-      background: hsl(0 84% 60% / 0.2);
-      color: hsl(0 84% 60%);
+      background: rgba(239, 68, 68, 0.2);
+      color: #ef4444;
     }
 
     .badge-warning {
-      background: hsl(45 93% 47% / 0.2);
-      color: hsl(45 93% 47%);
+      background: rgba(234, 179, 8, 0.2);
+      color: #eab308;
     }
 
     /* Strategy Cards */
@@ -537,22 +581,22 @@
     }
 
     .strategy-card {
-      background: hsl(var(--background));
-      border: 2px solid hsl(var(--border));
-      border-radius: var(--radius);
+      background: #000000;
+      border: 3px solid #16a34a;
+      border-radius: 0.375rem;
       padding: 1.5rem;
       transition: all 0.3s;
     }
 
     .strategy-card:hover {
-      border-color: hsl(var(--primary));
+      border-color: #4ade80;
       transform: translateY(-4px);
     }
 
     .strategy-icon {
       width: 3rem;
       height: 3rem;
-      color: hsl(var(--primary));
+      color: #16a34a;
       margin-bottom: 1rem;
     }
 
@@ -563,7 +607,7 @@
     }
 
     .strategy-description {
-      color: hsl(var(--muted-foreground));
+      color: rgba(255, 255, 255, 0.6);
       font-size: 0.875rem;
     }
 
@@ -574,7 +618,7 @@
 
     .principles-list li {
       padding: 0.75rem 0;
-      border-bottom: 1px solid hsl(var(--border));
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       display: flex;
       align-items: center;
       gap: 0.5rem;
@@ -585,7 +629,7 @@
     }
 
     .check-icon {
-      color: hsl(var(--primary));
+      color: #16a34a;
       width: 1.25rem;
       height: 1.25rem;
     }
@@ -611,10 +655,10 @@
     }
 
     .dialog {
-      background: hsl(var(--background));
-      border: 2px solid hsl(var(--border));
-      border-radius: calc(var(--radius) * 2);
-      max-width: 500px;
+      background: #000000;
+      border: 3px solid #16a34a;
+      border-radius: 1.5rem;
+      max-width: 672px;
       width: 100%;
       max-height: 90vh;
       overflow-y: auto;
@@ -627,7 +671,7 @@
 
     .dialog-header {
       padding: 1.5rem;
-      border-bottom: 2px solid hsl(var(--border));
+      border-bottom: 2px solid #16a34a;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -641,16 +685,16 @@
     .dialog-close {
       background: transparent;
       border: none;
-      color: hsl(var(--muted-foreground));
+      color: rgba(255, 255, 255, 0.6);
       cursor: pointer;
       padding: 0.5rem;
-      border-radius: var(--radius);
+      border-radius: 0.375rem;
       transition: all 0.2s;
     }
 
     .dialog-close:hover {
-      background: hsl(var(--muted));
-      color: hsl(var(--foreground));
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
     }
 
     .dialog-content {
@@ -666,25 +710,26 @@
 
     .bet-button {
       padding: 1rem;
-      background: hsl(var(--muted));
-      border: 2px solid hsl(var(--border));
-      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid #16a34a;
+      border-radius: 0.375rem;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.2s;
+      color: #ffffff;
     }
 
     .bet-button:hover {
-      border-color: hsl(var(--primary));
-      background: hsl(var(--primary) / 0.1);
+      border-color: #4ade80;
+      background: rgba(22, 163, 74, 0.1);
     }
 
     /* Analysis Dialog */
     .analysis-header {
-      background: hsl(var(--primary) / 0.1);
+      background: rgba(22, 163, 74, 0.1);
       padding: 1.5rem;
       text-align: center;
-      border-bottom: 2px solid hsl(var(--primary));
+      border-bottom: 2px solid #16a34a;
     }
 
     .analysis-title {
@@ -709,7 +754,7 @@
     .loading-dot {
       width: 0.75rem;
       height: 0.75rem;
-      background: hsl(var(--primary));
+      background: #16a34a;
       border-radius: 50%;
       animation: bounce 1s ease-in-out infinite;
     }
@@ -723,9 +768,9 @@
     }
 
     .confidence-section {
-      background: hsl(var(--primary) / 0.2);
-      border: 2px solid hsl(var(--primary));
-      border-radius: var(--radius);
+      background: rgba(22, 163, 74, 0.2);
+      border: 2px solid #16a34a;
+      border-radius: 0.375rem;
       padding: 1.5rem;
       margin-bottom: 2rem;
       text-align: center;
@@ -733,14 +778,14 @@
 
     .confidence-label {
       font-size: 0.875rem;
-      color: hsl(var(--muted-foreground));
+      color: rgba(255, 255, 255, 0.6);
       margin-bottom: 0.5rem;
     }
 
     .confidence-value {
       font-size: 3rem;
       font-weight: 700;
-      color: hsl(var(--primary));
+      color: #16a34a;
     }
 
     .analysis-section {
@@ -752,12 +797,12 @@
       font-weight: 700;
       margin-bottom: 1rem;
       padding-bottom: 0.5rem;
-      border-bottom: 2px solid hsl(var(--border));
+      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
     }
 
     .analysis-subsection {
-      background: hsl(var(--muted));
-      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 0.375rem;
       padding: 1rem;
       margin-bottom: 1rem;
     }
@@ -765,22 +810,54 @@
     .analysis-subsection-title {
       font-weight: 600;
       margin-bottom: 0.5rem;
-      color: hsl(var(--primary));
+      color: #16a34a;
     }
 
     .analysis-subsection-content {
-      color: hsl(var(--muted-foreground));
+      color: rgba(255, 255, 255, 0.6);
       font-size: 0.875rem;
       line-height: 1.6;
     }
 
     .analysis-footer {
-      background: hsl(var(--muted));
+      background: rgba(255, 255, 255, 0.05);
       padding: 1rem;
-      border-radius: var(--radius);
+      border-radius: 0.375rem;
       font-size: 0.875rem;
-      color: hsl(var(--muted-foreground));
+      color: rgba(255, 255, 255, 0.6);
       text-align: center;
+    }
+
+    /* AI Spinner Animation */
+    .ai-spinner {
+      position: relative;
+      width: 1.5rem;
+      height: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .ai-spinner svg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      color: #ffffff;
+    }
+
+    .ai-badge {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 8px;
+    }
+
+    .confidence-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
     }
 
     /* Utilities */
@@ -906,17 +983,26 @@
         <h1>Paris Recommandés</h1>
 
         <div class="bet-card">
-          <div class="bet-card-header">
-            <div class="ai-counter">
-              <svg class="animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <!-- AI Data Counter -->
+          <div class="ai-counter">
+            <div class="ai-spinner">
+              <svg class="animate-spin" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
               </svg>
-              <span id="ai-data-count">{{ section.settings.ai_data_count | default: 2857 }}</span> DONNÉES ANALYSÉES
+              <span class="ai-badge">IA</span>
             </div>
-            <div class="confidence-badge">
-              <span id="win-percentage">{{ section.settings.win_percentage | default: 92 }}</span>% DE CHANCE DE GAGNER
+            <span><span id="ai-data-count">{{ section.settings.ai_data_count | default: 2857 }}</span> DONNÉES ANALYSÉES PAR NOTRE IA</span>
+          </div>
+
+          <!-- Confidence Badge - Bande verte 92% -->
+          <div class="confidence-badge">
+            <div class="confidence-left">
+              <span class="confidence-percentage"><span id="win-percentage">{{ section.settings.win_percentage | default: 92 }}</span>%</span>
+              <span class="confidence-text">DE CHANCE DE GAGNER SELON NOTRE IA</span>
             </div>
-            <button class="btn btn-primary" onclick="openAnalysisDialog()">VOIR ANALYSE IA</button>
+            <button class="btn-analysis" onclick="openAnalysisDialog()">
+              VOIR ANALYSE IA
+            </button>
           </div>
 
           <div class="bet-card-content">
@@ -976,7 +1062,7 @@
         <p class="subtitle">Gérez vos paris combinés</p>
         
         <div class="card">
-          <p class="text-center" style="color: hsl(var(--muted-foreground));">
+          <p class="text-center" style="color: rgba(255, 255, 255, 0.6);">
             Fonctionnalité à venir. Vous pourrez bientôt combiner plusieurs paris pour augmenter vos gains potentiels.
           </p>
         </div>
@@ -995,7 +1081,7 @@
           </div>
           <div class="flex items-center gap-2">
             <span class="badge badge-success">Gagné</span>
-            <span style="color: hsl(var(--primary)); font-weight: 600;">+75€</span>
+            <span style="color: #16a34a; font-weight: 600;">+75€</span>
           </div>
         </div>
 
@@ -1017,7 +1103,7 @@
           </div>
           <div class="flex items-center gap-2">
             <span class="badge badge-success">Gagné</span>
-            <span style="color: hsl(var(--primary)); font-weight: 600;">+100€</span>
+            <span style="color: #16a34a; font-weight: 600;">+100€</span>
           </div>
         </div>
 
@@ -1028,7 +1114,7 @@
           </div>
           <div class="flex items-center gap-2">
             <span class="badge badge-success">Gagné</span>
-            <span style="color: hsl(var(--primary)); font-weight: 600;">+90€</span>
+            <span style="color: #16a34a; font-weight: 600;">+90€</span>
           </div>
         </div>
 
@@ -1051,7 +1137,7 @@
         <p class="subtitle">Consultez l'historique de vos paris combinés</p>
         
         <div class="card">
-          <p class="text-center" style="color: hsl(var(--muted-foreground));">
+          <p class="text-center" style="color: rgba(255, 255, 255, 0.6);">
             Aucun historique de parlay pour le moment.
           </p>
         </div>
@@ -1138,7 +1224,7 @@
         <p class="subtitle">Gérez votre profil et vos préférences</p>
         
         <div class="card">
-          <p class="text-center" style="color: hsl(var(--muted-foreground));">
+          <p class="text-center" style="color: rgba(255, 255, 255, 0.6);">
             Fonctionnalité à venir. Vous pourrez bientôt gérer votre profil, vos préférences et vos paramètres.
           </p>
         </div>
@@ -1152,7 +1238,7 @@
         <p class="subtitle">Découvrez nos produits et services</p>
         
         <div class="card">
-          <p class="text-center" style="color: hsl(var(--muted-foreground));">
+          <p class="text-center" style="color: rgba(255, 255, 255, 0.6);">
             Fonctionnalité à venir. Découvrez bientôt nos offres exclusives et nos services premium.
           </p>
         </div>
@@ -1167,11 +1253,11 @@
         
         <div class="card">
           <h3 class="mb-4">Besoin d'aide ?</h3>
-          <p style="color: hsl(var(--muted-foreground)); margin-bottom: 1rem;">
+          <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1rem;">
             Notre équipe est disponible pour répondre à toutes vos questions.
           </p>
-          <p style="color: hsl(var(--muted-foreground));">
-            Email: <a href="mailto:support@winabet.ai" style="color: hsl(var(--primary));">support@winabet.ai</a>
+          <p style="color: rgba(255, 255, 255, 0.6);">
+            Email: <a href="mailto:support@winabet.ai" style="color: #16a34a;">support@winabet.ai</a>
           </p>
         </div>
       </div>
@@ -1229,7 +1315,7 @@
             <div class="loading-dot"></div>
             <div class="loading-dot"></div>
           </div>
-          <p style="color: hsl(var(--muted-foreground));">Analyse en cours...</p>
+          <p style="color: rgba(255, 255, 255, 0.6);">Analyse en cours...</p>
         </div>
 
         <div id="analysis-content" style="display: none;">
