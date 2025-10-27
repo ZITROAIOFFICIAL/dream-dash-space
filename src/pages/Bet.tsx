@@ -53,12 +53,11 @@ const Bet = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center justify-center gap-1">
-                  <p className="uppercase font-semibold tracking-tight -bottom-0.5 text-white">
+                <div className="flex items-center justify-center gap-2">
+                  <p className="text-[8px] uppercase font-semibold tracking-tight text-white">
                     Selon 482 variables analysées par notre IA
                   </p>
-                  <span className="text-white/50">•</span>
-                  <button onClick={handleShowAnalysis} disabled={isLoadingAnalysis || showAnalysis} className="text-[9px] uppercase font-semibold text-white underline hover:text-white/80 disabled:text-white/50 disabled:no-underline transition-colors">
+                  <button onClick={handleShowAnalysis} disabled={isLoadingAnalysis || showAnalysis} className="text-[9px] uppercase font-bold text-black bg-white px-2 py-1 rounded hover:bg-white/90 disabled:bg-white/50 transition-colors">
                     {isLoadingAnalysis ? "Analyse en cours..." : showAnalysis ? "Analyse affichée" : "Voir l'analyse"}
                   </button>
                 </div>
