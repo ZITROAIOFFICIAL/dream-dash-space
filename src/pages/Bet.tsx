@@ -62,6 +62,10 @@ const Bet = () => {
                   <span className="font-bold text-white text-4xl">92%</span>
                   <span className="text-white text-xs font-bold">DE CHANCE DE GAGNER SELON NOTRE IA</span>
                 </div>
+                <button onClick={handleShowAnalysis} className="px-3 py-1 bg-black rounded border-2 border-green-600 font-bold text-green-400 text-xs hover:bg-green-600/20 transition-colors">
+                  VOIR ANALYSE IA
+                </button>
+
                 {/* Loading Dialog */}
                 <Dialog open={isLoadingDialogOpen} onOpenChange={setIsLoadingDialogOpen}>
                   <DialogContent className="sm:max-w-md bg-black border-none p-0 flex items-center justify-center [&>button]:hidden">
@@ -79,11 +83,6 @@ const Bet = () => {
 
                 {/* Analysis Dialog */}
                 <Dialog open={isAnalysisDialogOpen} onOpenChange={setIsAnalysisDialogOpen}>
-                  <DialogTrigger asChild>
-                    <button onClick={handleShowAnalysis} className="px-3 py-1 bg-black rounded border-2 border-green-600 font-bold text-green-400 text-xs hover:bg-green-600/20 transition-colors">
-                      VOIR ANALYSE IA
-                    </button>
-                  </DialogTrigger>
                   <DialogContent className="sm:max-w-2xl bg-black border-[3px] border-green-600 p-0 max-h-[90vh] overflow-y-auto">
                     {/* AI Data Analysis Counter - Same as main card */}
                     <div className="flex items-center justify-center gap-3 py-2 px-6 bg-black/40">
