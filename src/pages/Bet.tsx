@@ -15,12 +15,10 @@ const Bet = () => {
   const [isLoadingDialogOpen, setIsLoadingDialogOpen] = useState(false);
   const [isAnalysisDialogOpen, setIsAnalysisDialogOpen] = useState(false);
   const [isPageLoading, setIsPageLoading] = useState(true);
-
   useEffect(() => {
     const shouldBeFast = Math.random() < 0.85; // 85% rapide, 15% lent
-    const randomDelay = shouldBeFast 
-      ? Math.random() * (700 - 500) + 500  // 0.5s à 0.7s
-      : 2000;  // 2 secondes
+    const randomDelay = shouldBeFast ? Math.random() * (700 - 500) + 500 // 0.5s à 0.7s
+    : 2000; // 2 secondes
     setTimeout(() => {
       setIsPageLoading(false);
     }, randomDelay);
@@ -48,8 +46,7 @@ const Bet = () => {
     }
   };
   if (isPageLoading) {
-    return (
-      <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
+    return <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
         <div className="flex flex-col items-center justify-center gap-8">
           <div className="relative w-24 h-24 flex-shrink-0">
             <Loader2 className="w-24 h-24 text-white animate-spin absolute" />
@@ -64,10 +61,8 @@ const Bet = () => {
             <span className="text-primary text-sm">.AI</span>
           </h1>
         </div>
-      </div>
-    );
+      </div>;
   }
-
   return <DashboardLayout>
       <div className="space-y-6">
         <div>
@@ -118,9 +113,18 @@ const Bet = () => {
                       <p className="text-white/70 text-sm text-center max-w-xs">
                         CHARGEMENT DE NOTRE IA ET DES DONNÉES LES PLUS RÉCENTES
                         <span className="inline-flex ml-0.5">
-                          <span className="animate-bounce" style={{ animationDelay: '0ms', animationDuration: '1.4s' }}>.</span>
-                          <span className="animate-bounce" style={{ animationDelay: '200ms', animationDuration: '1.4s' }}>.</span>
-                          <span className="animate-bounce" style={{ animationDelay: '400ms', animationDuration: '1.4s' }}>.</span>
+                          <span className="animate-bounce" style={{
+                          animationDelay: '0ms',
+                          animationDuration: '1.4s'
+                        }}>.</span>
+                          <span className="animate-bounce" style={{
+                          animationDelay: '200ms',
+                          animationDuration: '1.4s'
+                        }}>.</span>
+                          <span className="animate-bounce" style={{
+                          animationDelay: '400ms',
+                          animationDuration: '1.4s'
+                        }}>.</span>
                         </span>
                       </p>
                     </div>
@@ -141,17 +145,11 @@ const Bet = () => {
                       <span className="text-white font-semibold text-center text-xs">2857 DONNÉES ANALYSÉ PAR NOTRE IA POUR CE BET JUSQU'A PRÉSENT</span>
                     </div>
 
-                    <DialogHeader className="px-6 pt-4 pb-0">
-                      <DialogTitle className="text-white text-xl font-bold">📊 Analyse Complète de l'IA</DialogTitle>
-                      <DialogDescription className="text-white/70 text-sm">
-                        Analyse détaillée basée sur 482 variables et 2857 points de données
-                      </DialogDescription>
-                    </DialogHeader>
+                    
 
                     <div className="px-6 pb-6">
                       {/* Detailed Analysis */}
-                      {showAnalysis && (
-                        <div className="mt-4 space-y-4 animate-fade-in">
+                      {showAnalysis && <div className="mt-4 space-y-4 animate-fade-in">
                           {/* AI Confidence Section */}
                           <div className="bg-green-600/15 border-2 border-green-600 rounded-lg p-4">
                             <div className="text-center space-y-2">
@@ -160,7 +158,9 @@ const Bet = () => {
                               <div className="text-white/70 text-xs">STATISTIQUEMENT AVEC TOUTES CES DONNÉES CI-DESSOUS ANALYSÉES</div>
                             </div>
                             <div className="w-full bg-black/40 rounded-full h-3 overflow-hidden mt-3">
-                              <div className="bg-green-600 h-full rounded-full" style={{ width: '92%' }}></div>
+                              <div className="bg-green-600 h-full rounded-full" style={{
+                            width: '92%'
+                          }}></div>
                             </div>
                           </div>
 
@@ -548,8 +548,7 @@ const Bet = () => {
                               forme actuelle, blessures, conditions de jeu et tendances du marché.
                             </p>
                           </div>
-                        </div>
-                      )}
+                        </div>}
                     </div>
                   </DialogContent>
                 </Dialog>
