@@ -37,6 +37,15 @@ const Index = () => {
   return (
     <DashboardLayout>
       <div className="space-y-8">
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold text-white mb-2">
+            Paris Recommandés
+          </h1>
+          <p className="text-white/70 text-lg">
+            Découvrez nos pronostics avec les meilleures cotes
+          </p>
+        </div>
+
         <div>
           <h1 className="text-4xl font-bold text-foreground mb-2">
             Tableau de Bord
