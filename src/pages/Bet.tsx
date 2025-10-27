@@ -93,90 +93,140 @@ const Bet = () => {
                       {/* Detailed Analysis */}
                       {showAnalysis && !isLoadingAnalysis && (
                         <div className="mt-4 space-y-4 animate-fade-in">
-                          {/* Performance Section */}
+                          {/* 1) Spécial Teams */}
                           <div className="bg-black/40 rounded-lg p-4 border border-green-600/30">
-                            <h4 className="text-white font-bold text-sm mb-3 flex items-center gap-2">
-                              🏆 Performance et Statistiques
-                            </h4>
-                            <div className="space-y-2 text-xs">
-                              <div className="bg-white/5 p-2 rounded">
-                                <span className="text-white/70">Historique des confrontations:</span>
-                                <span className="text-green-400 font-semibold ml-2">Tampa Bay 7-3</span>
+                            <h4 className="text-white font-bold text-sm mb-3">✅ 1) Spécial Teams</h4>
+                            <div className="space-y-3 text-xs">
+                              <div className="bg-white/5 p-3 rounded">
+                                <div className="text-white/90 font-semibold mb-1">Power Play — Vegas</div>
+                                <div className="text-white/70">Analyse du rendement en avantage numérique : structure offensive, qualité des entrées de zone, création de chances dangereuses et efficacité globale des unités spéciales.</div>
                               </div>
-                              <div className="bg-white/5 p-2 rounded">
-                                <span className="text-white/70">Forme récente (10 matchs):</span>
-                                <span className="text-green-400 font-semibold ml-2">8 victoires</span>
+                              <div className="bg-white/5 p-3 rounded">
+                                <div className="text-white/90 font-semibold mb-1">Power Play — Tampa Bay</div>
+                                <div className="text-white/70">Analyse du rendement en avantage numérique : structure offensive, qualité des entrées de zone, création de chances dangereuses et efficacité globale des unités spéciales.</div>
                               </div>
-                              <div className="bg-white/5 p-2 rounded">
-                                <span className="text-white/70">Performance à domicile:</span>
-                                <span className="text-green-400 font-semibold ml-2">85% victoires</span>
+                              <div className="bg-white/5 p-3 rounded">
+                                <div className="text-white/90 font-semibold mb-1">Pénalités — Vegas</div>
+                                <div className="text-white/70">Analyse du niveau de discipline : fréquence des pénalités concédées, situations de désavantage numérique générées et impact sur le tempo du match.</div>
                               </div>
-                              <div className="bg-white/5 p-2 rounded">
-                                <span className="text-white/70">Moyenne de points marqués:</span>
-                                <span className="text-green-400 font-semibold ml-2">28.4 pts/match</span>
+                              <div className="bg-white/5 p-3 rounded">
+                                <div className="text-white/90 font-semibold mb-1">Pénalités — Tampa Bay</div>
+                                <div className="text-white/70">Analyse du niveau de discipline : fréquence des pénalités concédées, situations de désavantage numérique générées et impact sur le tempo du match.</div>
                               </div>
                             </div>
                           </div>
 
-                          {/* Team Analysis Section */}
+                          {/* 2) Possession & Qualité offensive */}
                           <div className="bg-black/40 rounded-lg p-4 border border-green-600/30">
-                            <h4 className="text-white font-bold text-sm mb-3 flex items-center gap-2">
-                              👥 Analyse d'Équipe
-                            </h4>
-                            <div className="space-y-2 text-xs">
-                              <div className="bg-white/5 p-2 rounded">
-                                <span className="text-white/70">Joueurs clés disponibles:</span>
-                                <span className="text-green-400 font-semibold ml-2">100%</span>
+                            <h4 className="text-white font-bold text-sm mb-3">✅ 2) Possession & Qualité offensive</h4>
+                            <div className="space-y-3 text-xs">
+                              <div className="bg-white/5 p-3 rounded">
+                                <div className="text-white/90 font-semibold mb-1">xG (Expected Goals) — Vegas</div>
+                                <div className="text-white/70">Analyse de la qualité offensive générée : volume de tirs dangereux, emplacements de tir et probabilité attendue de marquer.</div>
                               </div>
-                              <div className="bg-white/5 p-2 rounded">
-                                <span className="text-white/70">Blessures adverses:</span>
-                                <span className="text-green-400 font-semibold ml-2">3 titulaires absents</span>
+                              <div className="bg-white/5 p-3 rounded">
+                                <div className="text-white/90 font-semibold mb-1">xG (Expected Goals) — Tampa Bay</div>
+                                <div className="text-white/70">Analyse de la qualité offensive générée : volume de tirs dangereux, emplacements de tir et probabilité attendue de marquer.</div>
                               </div>
-                              <div className="bg-white/5 p-2 rounded">
-                                <span className="text-white/70">Moral de l'équipe:</span>
-                                <span className="text-green-400 font-semibold ml-2">Excellent (série de 5 victoires)</span>
+                              <div className="bg-white/5 p-3 rounded">
+                                <div className="text-white/90 font-semibold mb-1">Possession (Corsi/Fenwick) — Vegas</div>
+                                <div className="text-white/70">Analyse du contrôle du palet : volume de tirs tentés, séquences prolongées en zone offensive et capacité à dicter le rythme du jeu.</div>
+                              </div>
+                              <div className="bg-white/5 p-3 rounded">
+                                <div className="text-white/90 font-semibold mb-1">Possession (Corsi/Fenwick) — Tampa Bay</div>
+                                <div className="text-white/70">Analyse du contrôle du palet : volume de tirs tentés, séquences prolongées en zone offensive et capacité à dicter le rythme du jeu.</div>
                               </div>
                             </div>
                           </div>
 
-                          {/* Conditions Section */}
+                          {/* 3) Gardien / Défense */}
                           <div className="bg-black/40 rounded-lg p-4 border border-green-600/30">
-                            <h4 className="text-white font-bold text-sm mb-3 flex items-center gap-2">
-                              🌤️ Conditions de Jeu
-                            </h4>
-                            <div className="space-y-2 text-xs">
-                              <div className="bg-white/5 p-2 rounded">
-                                <span className="text-white/70">Conditions météo:</span>
-                                <span className="text-green-400 font-semibold ml-2">Favorables (22°C, ensoleillé)</span>
+                            <h4 className="text-white font-bold text-sm mb-3">✅ 3) Gardien / Défense</h4>
+                            <div className="space-y-3 text-xs">
+                              <div className="bg-white/5 p-3 rounded">
+                                <div className="text-white/90 font-semibold mb-1">Performance du gardien — Vegas</div>
+                                <div className="text-white/70">Analyse du rendement du gardien projeté : efficacité sur tirs dangereux, stabilité technique et capacité à maintenir un haut niveau sous pression.</div>
                               </div>
-                              <div className="bg-white/5 p-2 rounded">
-                                <span className="text-white/70">État du terrain:</span>
-                                <span className="text-green-400 font-semibold ml-2">Excellent</span>
+                              <div className="bg-white/5 p-3 rounded">
+                                <div className="text-white/90 font-semibold mb-1">Performance du gardien — Tampa Bay</div>
+                                <div className="text-white/70">Analyse du rendement du gardien projeté : efficacité sur tirs dangereux, stabilité technique et capacité à maintenir un haut niveau sous pression.</div>
                               </div>
-                              <div className="bg-white/5 p-2 rounded">
-                                <span className="text-white/70">Avantage du terrain:</span>
-                                <span className="text-green-400 font-semibold ml-2">Tampa Bay (+12% win rate)</span>
+                              <div className="bg-white/5 p-3 rounded">
+                                <div className="text-white/90 font-semibold mb-1">Solidité défensive — Vegas</div>
+                                <div className="text-white/70">Analyse de la structure défensive : protection du slot, limitation des rebonds offensifs adverses et efficacité des sorties de zone.</div>
+                              </div>
+                              <div className="bg-white/5 p-3 rounded">
+                                <div className="text-white/90 font-semibold mb-1">Solidité défensive — Tampa Bay</div>
+                                <div className="text-white/70">Analyse de la structure défensive : protection du slot, limitation des rebonds offensifs adverses et efficacité des sorties de zone.</div>
                               </div>
                             </div>
                           </div>
 
-                          {/* Market Analysis Section */}
+                          {/* 4) Alignement & santé de l'effectif */}
                           <div className="bg-black/40 rounded-lg p-4 border border-green-600/30">
-                            <h4 className="text-white font-bold text-sm mb-3 flex items-center gap-2">
-                              📈 Analyse du Marché
-                            </h4>
-                            <div className="space-y-2 text-xs">
-                              <div className="bg-white/5 p-2 rounded">
-                                <span className="text-white/70">Consensus des experts:</span>
-                                <span className="text-green-400 font-semibold ml-2">76% prédisent Tampa Bay</span>
+                            <h4 className="text-white font-bold text-sm mb-3">✅ 4) Alignement & santé de l'effectif</h4>
+                            <div className="space-y-3 text-xs">
+                              <div className="bg-white/5 p-3 rounded">
+                                <div className="text-white/90 font-semibold mb-1">Alignement/Top-6 — Vegas</div>
+                                <div className="text-white/70">Analyse de l'impact offensif disponible : profondeur du top-6, cohésion des trios et continuité des combinaisons attaquantes.</div>
                               </div>
-                              <div className="bg-white/5 p-2 rounded">
-                                <span className="text-white/70">Mouvement des cotes:</span>
-                                <span className="text-green-400 font-semibold ml-2">-140 → -136 (favorable)</span>
+                              <div className="bg-white/5 p-3 rounded">
+                                <div className="text-white/90 font-semibold mb-1">Alignement/Top-6 — Tampa Bay</div>
+                                <div className="text-white/70">Analyse de l'impact offensif disponible : profondeur du top-6, cohésion des trios et continuité des combinaisons attaquantes.</div>
                               </div>
-                              <div className="bg-white/5 p-2 rounded">
-                                <span className="text-white/70">Volume de paris:</span>
-                                <span className="text-green-400 font-semibold ml-2">68% sur Tampa Bay</span>
+                              <div className="bg-white/5 p-3 rounded">
+                                <div className="text-white/90 font-semibold mb-1">Défense/Top-4 — Vegas</div>
+                                <div className="text-white/70">Analyse de la stabilité défensive : niveau du top-4, mobilité en relance et capacité à absorber la pression adverse.</div>
+                              </div>
+                              <div className="bg-white/5 p-3 rounded">
+                                <div className="text-white/90 font-semibold mb-1">Défense/Top-4 — Tampa Bay</div>
+                                <div className="text-white/70">Analyse de la stabilité défensive : niveau du top-4, mobilité en relance et capacité à absorber la pression adverse.</div>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* 5) Contexte & fatigue */}
+                          <div className="bg-black/40 rounded-lg p-4 border border-green-600/30">
+                            <h4 className="text-white font-bold text-sm mb-3">✅ 5) Contexte & fatigue</h4>
+                            <div className="space-y-3 text-xs">
+                              <div className="bg-white/5 p-3 rounded">
+                                <div className="text-white/90 font-semibold mb-1">Fatigue / Calendrier — Vegas</div>
+                                <div className="text-white/70">Analyse du contexte physique : back-to-back éventuel, séquence de matchs rapprochés et accumulation des déplacements.</div>
+                              </div>
+                              <div className="bg-white/5 p-3 rounded">
+                                <div className="text-white/90 font-semibold mb-1">Fatigue / Calendrier — Tampa Bay</div>
+                                <div className="text-white/70">Analyse du contexte physique : back-to-back éventuel, séquence de matchs rapprochés et accumulation des déplacements.</div>
+                              </div>
+                              <div className="bg-white/5 p-3 rounded">
+                                <div className="text-white/90 font-semibold mb-1">Avantage domicile / extérieur — Vegas</div>
+                                <div className="text-white/70">Analyse de l'impact contextuel : rendement en déplacement, adaptation hors domicile et gestion des dernières mises au jeu.</div>
+                              </div>
+                              <div className="bg-white/5 p-3 rounded">
+                                <div className="text-white/90 font-semibold mb-1">Avantage domicile / extérieur — Tampa Bay</div>
+                                <div className="text-white/70">Analyse de l'impact contextuel : rendement en déplacement, adaptation hors domicile et gestion des dernières mises au jeu.</div>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* 6) Marché / Value */}
+                          <div className="bg-black/40 rounded-lg p-4 border border-green-600/30">
+                            <h4 className="text-white font-bold text-sm mb-3">✅ 6) Marché / Value</h4>
+                            <div className="space-y-3 text-xs">
+                              <div className="bg-white/5 p-3 rounded">
+                                <div className="text-white/90 font-semibold mb-1">Lecture du marché — Vegas</div>
+                                <div className="text-white/70">Analyse de la probabilité implicite des cotes : variation du marché, rapport entre perception publique et réalité statistique.</div>
+                              </div>
+                              <div className="bg-white/5 p-3 rounded">
+                                <div className="text-white/90 font-semibold mb-1">Lecture du marché — Tampa Bay</div>
+                                <div className="text-white/70">Analyse de la probabilité implicite des cotes : variation du marché, rapport entre perception publique et réalité statistique.</div>
+                              </div>
+                              <div className="bg-white/5 p-3 rounded">
+                                <div className="text-white/90 font-semibold mb-1">Value / Edge — Vegas</div>
+                                <div className="text-white/70">Analyse de l'écart entre le modèle et la cotation : comparaison des probabilités réelles et opportunités de value sur le marché.</div>
+                              </div>
+                              <div className="bg-white/5 p-3 rounded">
+                                <div className="text-white/90 font-semibold mb-1">Value / Edge — Tampa Bay</div>
+                                <div className="text-white/70">Analyse de l'écart entre le modèle et la cotation : comparaison des probabilités réelles et opportunités de value sur le marché.</div>
                               </div>
                             </div>
                           </div>
