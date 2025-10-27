@@ -83,7 +83,7 @@ const Bet = () => {
             })}
             </span>
           </div>
-          <h1 className="text-3xl font-bold text-foreground mb-2">Paris Recommandés</h1>
+          <h1 className="text-3xl font-bold text-foreground mb-2 text-center">BET DU JOUR</h1>
           <p className="text-muted-foreground">Découvrez nos pronostics avec les meilleures cotes</p>
         </div>
 
