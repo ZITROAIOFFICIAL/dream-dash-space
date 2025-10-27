@@ -43,7 +43,7 @@ const Bet = () => {
           <Card className="w-full max-w-md bg-black border-2 border-primary shadow-2xl overflow-hidden mx-auto">
             <CardHeader className="space-y-4 p-0">
               {/* AI Analysis */}
-              <div className="bg-green-600/80 px-6 py-3 rounded-t-lg">
+              <div className="px-6 py-3 rounded-t-lg bg-[#00df57]/80">
                 <div className="flex justify-center mb-3">
                   <span className="font-bold text-white">DRAFTKINGS</span>
                 </div>
