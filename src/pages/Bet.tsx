@@ -154,7 +154,7 @@ const Bet = () => {
                     <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center border border-white/20">
                       <img src={vegasLogo} alt="Vegas" className="w-7 h-7 object-contain" />
                     </div>
-                    <span className="font-bold text-white/80 text-xs">VEGAS</span>
+                    <span className="font-bold text-xs text-white">VEGAS</span>
                   </div>
 
                   {/* Center time + VS */}
