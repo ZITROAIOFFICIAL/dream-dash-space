@@ -49,16 +49,8 @@ const Bet = () => {
                 </div>
 
                 <div className="flex justify-center">
-                  <div className="bg-black border-2 border-green-500 rounded-lg px-6 py-3">
-                    <div className="text-base font-black text-green-500 text-center">
-                      <div className="text-xl">
-                        <span className="text-xl">92%</span>
-                        <span className="text-xs uppercase ml-1">de chance de gagner</span>
-                      </div>
-                      <p className="uppercase tracking-tight text-white mt-2 font-bold text-[7px]">
-                        Selon 482 variables analysées par notre IA
-                      </p>
-                    </div>
+                  <div className="bg-black border-2 border-green-500 rounded px-2 py-1">
+                    <span className="font-bold text-green-400 text-sm">92% de chance de gagner</span>
                   </div>
                 </div>
 
