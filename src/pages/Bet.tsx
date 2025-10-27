@@ -47,12 +47,7 @@ const Bet = () => {
             <CardHeader className="space-y-0 p-0">
               {/* AI Data Analysis Counter */}
               <div className="flex items-center justify-center gap-3 py-2 px-6 bg-black/40">
-                <div className="relative w-6 h-6 flex-shrink-0">
-                  <Loader2 className="w-6 h-6 text-white animate-spin absolute" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-white font-bold text-[8px]">IA</span>
-                  </div>
-                </div>
+                <Loader2 className="w-5 h-5 text-white animate-spin" />
                 <span className="text-white font-semibold text-center text-xs">2857 DONNÉES ANALYSÉ PAR NOTRE IA POUR CE BET JUSQU'A PRÉSENT</span>
               </div>
 
@@ -71,12 +66,7 @@ const Bet = () => {
                   <DialogContent className="sm:max-w-2xl bg-black border-[3px] border-green-600 p-0 max-h-[90vh] overflow-y-auto">
                     {/* AI Data Analysis Counter - Same as main card */}
                     <div className="flex items-center justify-center gap-3 py-2 px-6 bg-black/40">
-                      <div className="relative w-6 h-6 flex-shrink-0">
-                        <Loader2 className="w-6 h-6 text-white animate-spin absolute" />
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <span className="text-white font-bold text-[8px]">IA</span>
-                        </div>
-                      </div>
+                      <Loader2 className="w-5 h-5 text-white animate-spin" />
                       <span className="text-white font-semibold text-center text-xs">2857 DONNÉES ANALYSÉ PAR NOTRE IA POUR CE BET JUSQU'A PRÉSENT</span>
                     </div>
 
@@ -89,408 +79,112 @@ const Bet = () => {
 
                     <div className="px-6 pb-6">
                       {/* Loading Animation */}
-                      {isLoadingAnalysis && (
-                        <div className="mt-4 space-y-2 animate-fade-in">
-                          <div className="flex items-center justify-center gap-2">
-                            <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                            <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                            <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
-                          </div>
-                          <p className="text-white/60 text-xs text-center">L'IA analyse les données...</p>
-                        </div>
-                      )}
+                      {isLoadingAnalysis}
 
                       {/* Detailed Analysis */}
-                      {showAnalysis && !isLoadingAnalysis && (
-                        <div className="mt-4 space-y-4 animate-fade-in">
+                      {showAnalysis && !isLoadingAnalysis && <div className="mt-4 space-y-4 animate-fade-in">
+                          {/* Performance Section */}
+                          <div className="bg-black/40 rounded-lg p-4 border border-green-600/30">
+                            <h4 className="text-white font-bold text-sm mb-3 flex items-center gap-2">
+                              🏆 Performance et Statistiques
+                            </h4>
+                            <div className="space-y-2 text-xs">
+                              <div className="bg-white/5 p-2 rounded">
+                                <span className="text-white/70">Historique des confrontations:</span>
+                                <span className="text-green-400 font-semibold ml-2">Tampa Bay 7-3</span>
+                              </div>
+                              <div className="bg-white/5 p-2 rounded">
+                                <span className="text-white/70">Forme récente (10 matchs):</span>
+                                <span className="text-green-400 font-semibold ml-2">8 victoires</span>
+                              </div>
+                              <div className="bg-white/5 p-2 rounded">
+                                <span className="text-white/70">Performance à domicile:</span>
+                                <span className="text-green-400 font-semibold ml-2">85% victoires</span>
+                              </div>
+                              <div className="bg-white/5 p-2 rounded">
+                                <span className="text-white/70">Moyenne de points marqués:</span>
+                                <span className="text-green-400 font-semibold ml-2">28.4 pts/match</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Team Analysis Section */}
+                          <div className="bg-black/40 rounded-lg p-4 border border-green-600/30">
+                            <h4 className="text-white font-bold text-sm mb-3 flex items-center gap-2">
+                              👥 Analyse d'Équipe
+                            </h4>
+                            <div className="space-y-2 text-xs">
+                              <div className="bg-white/5 p-2 rounded">
+                                <span className="text-white/70">Joueurs clés disponibles:</span>
+                                <span className="text-green-400 font-semibold ml-2">100%</span>
+                              </div>
+                              <div className="bg-white/5 p-2 rounded">
+                                <span className="text-white/70">Blessures adverses:</span>
+                                <span className="text-green-400 font-semibold ml-2">3 titulaires absents</span>
+                              </div>
+                              <div className="bg-white/5 p-2 rounded">
+                                <span className="text-white/70">Moral de l'équipe:</span>
+                                <span className="text-green-400 font-semibold ml-2">Excellent (série de 5 victoires)</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Conditions Section */}
+                          <div className="bg-black/40 rounded-lg p-4 border border-green-600/30">
+                            <h4 className="text-white font-bold text-sm mb-3 flex items-center gap-2">
+                              🌤️ Conditions de Jeu
+                            </h4>
+                            <div className="space-y-2 text-xs">
+                              <div className="bg-white/5 p-2 rounded">
+                                <span className="text-white/70">Conditions météo:</span>
+                                <span className="text-green-400 font-semibold ml-2">Favorables (22°C, ensoleillé)</span>
+                              </div>
+                              <div className="bg-white/5 p-2 rounded">
+                                <span className="text-white/70">État du terrain:</span>
+                                <span className="text-green-400 font-semibold ml-2">Excellent</span>
+                              </div>
+                              <div className="bg-white/5 p-2 rounded">
+                                <span className="text-white/70">Avantage du terrain:</span>
+                                <span className="text-green-400 font-semibold ml-2">Tampa Bay (+12% win rate)</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Market Analysis Section */}
+                          <div className="bg-black/40 rounded-lg p-4 border border-green-600/30">
+                            <h4 className="text-white font-bold text-sm mb-3 flex items-center gap-2">
+                              📈 Analyse du Marché
+                            </h4>
+                            <div className="space-y-2 text-xs">
+                              <div className="bg-white/5 p-2 rounded">
+                                <span className="text-white/70">Consensus des experts:</span>
+                                <span className="text-green-400 font-semibold ml-2">76% prédisent Tampa Bay</span>
+                              </div>
+                              <div className="bg-white/5 p-2 rounded">
+                                <span className="text-white/70">Mouvement des cotes:</span>
+                                <span className="text-green-400 font-semibold ml-2">-140 → -136 (favorable)</span>
+                              </div>
+                              <div className="bg-white/5 p-2 rounded">
+                                <span className="text-white/70">Volume de paris:</span>
+                                <span className="text-green-400 font-semibold ml-2">68% sur Tampa Bay</span>
+                              </div>
+                            </div>
+                          </div>
+
                           {/* AI Confidence Section */}
                           <div className="bg-green-600/15 border-2 border-green-600 rounded-lg p-4">
-                            <div className="text-center space-y-2">
-                              <div className="text-white font-bold text-sm">CHANCE DE GAGNER</div>
-                              <div className="text-green-400 font-bold text-4xl">92%</div>
-                              <div className="text-white/70 text-xs">STATISTIQUEMENT AVEC TOUTES CES DONNÉES CI-DESSOUS ANALYSÉES</div>
+                            <div className="flex items-center justify-between mb-2">
+                              <span className="text-white font-bold text-sm">🎯 Niveau de Confiance IA</span>
+                              <span className="text-green-400 font-bold text-2xl">92%</span>
                             </div>
-                            <div className="w-full bg-black/40 rounded-full h-3 overflow-hidden mt-3">
-                              <div className="bg-green-600 h-full rounded-full" style={{ width: '92%' }}></div>
+                            <div className="w-full bg-black/40 rounded-full h-3 overflow-hidden">
+                              <div className="bg-green-600 h-full rounded-full" style={{
+                            width: '92%'
+                          }}></div>
                             </div>
-                          </div>
-
-                          {/* 1) Spécial Teams */}
-                          <div className="bg-black/40 rounded-lg p-4 border border-green-600/30">
-                            <h4 className="text-white font-bold text-sm mb-3 flex items-center gap-2">
-                              <div className="relative w-5 h-5 flex-shrink-0">
-                                <Loader2 className="w-5 h-5 text-green-400 animate-spin absolute" />
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                  <span className="text-green-400 font-bold text-[8px]">IA</span>
-                                </div>
-                              </div>
-                              ✅ 1) Spécial Teams
-                            </h4>
-                            <div className="space-y-3 text-xs">
-                              <div className="bg-white/5 p-3 rounded">
-                                <div className="text-white/90 font-semibold mb-1 pl-10">Power Play — Vegas</div>
-                                <div className="flex items-start gap-2">
-                                  <div className="relative w-8 h-8 flex-shrink-0">
-                                    <Loader2 className="w-8 h-8 text-white animate-spin absolute" />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                      <span className="text-white font-bold text-[10px]">IA</span>
-                                    </div>
-                                  </div>
-                                  <div className="text-white/70">Analyse du rendement en avantage numérique : structure offensive, qualité des entrées de zone, création de chances dangereuses et efficacité globale des unités spéciales.</div>
-                                </div>
-                              </div>
-                              <div className="bg-white/5 p-3 rounded">
-                                <div className="text-white/90 font-semibold mb-1 pl-10">Power Play — Tampa Bay</div>
-                                <div className="flex items-start gap-2">
-                                  <div className="relative w-8 h-8 flex-shrink-0">
-                                    <Loader2 className="w-8 h-8 text-white animate-spin absolute" />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                      <span className="text-white font-bold text-[10px]">IA</span>
-                                    </div>
-                                  </div>
-                                  <div className="text-white/70">Analyse du rendement en avantage numérique : structure offensive, qualité des entrées de zone, création de chances dangereuses et efficacité globale des unités spéciales.</div>
-                                </div>
-                              </div>
-                              <div className="bg-white/5 p-3 rounded">
-                                <div className="text-white/90 font-semibold mb-1 pl-10">Pénalités — Vegas</div>
-                                <div className="flex items-start gap-2">
-                                  <div className="relative w-8 h-8 flex-shrink-0">
-                                    <Loader2 className="w-8 h-8 text-white animate-spin absolute" />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                      <span className="text-white font-bold text-[10px]">IA</span>
-                                    </div>
-                                  </div>
-                                  <div className="text-white/70">Analyse du niveau de discipline : fréquence des pénalités concédées, situations de désavantage numérique générées et impact sur le tempo du match.</div>
-                                </div>
-                              </div>
-                              <div className="bg-white/5 p-3 rounded">
-                                <div className="text-white/90 font-semibold mb-1 pl-10">Pénalités — Tampa Bay</div>
-                                <div className="flex items-start gap-2">
-                                  <div className="relative w-8 h-8 flex-shrink-0">
-                                    <Loader2 className="w-8 h-8 text-white animate-spin absolute" />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                      <span className="text-white font-bold text-[10px]">IA</span>
-                                    </div>
-                                  </div>
-                                  <div className="text-white/70">Analyse du niveau de discipline : fréquence des pénalités concédées, situations de désavantage numérique générées et impact sur le tempo du match.</div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* 2) Possession & Qualité offensive */}
-                          <div className="bg-black/40 rounded-lg p-4 border border-green-600/30">
-                            <h4 className="text-white font-bold text-sm mb-3 flex items-center gap-2">
-                              <div className="relative w-5 h-5 flex-shrink-0">
-                                <Loader2 className="w-5 h-5 text-green-400 animate-spin absolute" />
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                  <span className="text-green-400 font-bold text-[8px]">IA</span>
-                                </div>
-                              </div>
-                              ✅ 2) Possession & Qualité offensive
-                            </h4>
-                            <div className="space-y-3 text-xs">
-                              <div className="bg-white/5 p-3 rounded">
-                                <div className="text-white/90 font-semibold mb-1 pl-10">xG (Expected Goals) — Vegas</div>
-                                <div className="flex items-start gap-2">
-                                  <div className="relative w-8 h-8 flex-shrink-0">
-                                    <Loader2 className="w-8 h-8 text-white animate-spin absolute" />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                      <span className="text-white font-bold text-[10px]">IA</span>
-                                    </div>
-                                  </div>
-                                  <div className="text-white/70">Analyse de la qualité offensive générée : volume de tirs dangereux, emplacements de tir et probabilité attendue de marquer.</div>
-                                </div>
-                              </div>
-                              <div className="bg-white/5 p-3 rounded">
-                                <div className="text-white/90 font-semibold mb-1 pl-10">xG (Expected Goals) — Tampa Bay</div>
-                                <div className="flex items-start gap-2">
-                                  <div className="relative w-8 h-8 flex-shrink-0">
-                                    <Loader2 className="w-8 h-8 text-white animate-spin absolute" />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                      <span className="text-white font-bold text-[10px]">IA</span>
-                                    </div>
-                                  </div>
-                                  <div className="text-white/70">Analyse de la qualité offensive générée : volume de tirs dangereux, emplacements de tir et probabilité attendue de marquer.</div>
-                                </div>
-                              </div>
-                              <div className="bg-white/5 p-3 rounded">
-                                <div className="text-white/90 font-semibold mb-1 pl-10">Possession (Corsi/Fenwick) — Vegas</div>
-                                <div className="flex items-start gap-2">
-                                  <div className="relative w-8 h-8 flex-shrink-0">
-                                    <Loader2 className="w-8 h-8 text-white animate-spin absolute" />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                      <span className="text-white font-bold text-[10px]">IA</span>
-                                    </div>
-                                  </div>
-                                  <div className="text-white/70">Analyse du contrôle du palet : volume de tirs tentés, séquences prolongées en zone offensive et capacité à dicter le rythme du jeu.</div>
-                                </div>
-                              </div>
-                              <div className="bg-white/5 p-3 rounded">
-                                <div className="text-white/90 font-semibold mb-1 pl-10">Possession (Corsi/Fenwick) — Tampa Bay</div>
-                                <div className="flex items-start gap-2">
-                                  <div className="relative w-8 h-8 flex-shrink-0">
-                                    <Loader2 className="w-8 h-8 text-white animate-spin absolute" />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                      <span className="text-white font-bold text-[10px]">IA</span>
-                                    </div>
-                                  </div>
-                                  <div className="text-white/70">Analyse du contrôle du palet : volume de tirs tentés, séquences prolongées en zone offensive et capacité à dicter le rythme du jeu.</div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* 3) Gardien / Défense */}
-                          <div className="bg-black/40 rounded-lg p-4 border border-green-600/30">
-                            <h4 className="text-white font-bold text-sm mb-3 flex items-center gap-2">
-                              <div className="relative w-5 h-5 flex-shrink-0">
-                                <Loader2 className="w-5 h-5 text-green-400 animate-spin absolute" />
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                  <span className="text-green-400 font-bold text-[8px]">IA</span>
-                                </div>
-                              </div>
-                              ✅ 3) Gardien / Défense
-                            </h4>
-                            <div className="space-y-3 text-xs">
-                              <div className="bg-white/5 p-3 rounded">
-                                <div className="text-white/90 font-semibold mb-1 pl-10">Performance du gardien — Vegas</div>
-                                <div className="flex items-start gap-2">
-                                  <div className="relative w-8 h-8 flex-shrink-0">
-                                    <Loader2 className="w-8 h-8 text-white animate-spin absolute" />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                      <span className="text-white font-bold text-[10px]">IA</span>
-                                    </div>
-                                  </div>
-                                  <div className="text-white/70">Analyse du rendement du gardien projeté : efficacité sur tirs dangereux, stabilité technique et capacité à maintenir un haut niveau sous pression.</div>
-                                </div>
-                              </div>
-                              <div className="bg-white/5 p-3 rounded">
-                                <div className="text-white/90 font-semibold mb-1 pl-10">Performance du gardien — Tampa Bay</div>
-                                <div className="flex items-start gap-2">
-                                  <div className="relative w-8 h-8 flex-shrink-0">
-                                    <Loader2 className="w-8 h-8 text-white animate-spin absolute" />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                      <span className="text-white font-bold text-[10px]">IA</span>
-                                    </div>
-                                  </div>
-                                  <div className="text-white/70">Analyse du rendement du gardien projeté : efficacité sur tirs dangereux, stabilité technique et capacité à maintenir un haut niveau sous pression.</div>
-                                </div>
-                              </div>
-                              <div className="bg-white/5 p-3 rounded">
-                                <div className="text-white/90 font-semibold mb-1 pl-10">Solidité défensive — Vegas</div>
-                                <div className="flex items-start gap-2">
-                                  <div className="relative w-8 h-8 flex-shrink-0">
-                                    <Loader2 className="w-8 h-8 text-white animate-spin absolute" />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                      <span className="text-white font-bold text-[10px]">IA</span>
-                                    </div>
-                                  </div>
-                                  <div className="text-white/70">Analyse de la structure défensive : protection du slot, limitation des rebonds offensifs adverses et efficacité des sorties de zone.</div>
-                                </div>
-                              </div>
-                              <div className="bg-white/5 p-3 rounded">
-                                <div className="text-white/90 font-semibold mb-1 pl-10">Solidité défensive — Tampa Bay</div>
-                                <div className="flex items-start gap-2">
-                                  <div className="relative w-8 h-8 flex-shrink-0">
-                                    <Loader2 className="w-8 h-8 text-white animate-spin absolute" />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                      <span className="text-white font-bold text-[10px]">IA</span>
-                                    </div>
-                                  </div>
-                                  <div className="text-white/70">Analyse de la structure défensive : protection du slot, limitation des rebonds offensifs adverses et efficacité des sorties de zone.</div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* 4) Alignement & santé de l'effectif */}
-                          <div className="bg-black/40 rounded-lg p-4 border border-green-600/30">
-                            <h4 className="text-white font-bold text-sm mb-3 flex items-center gap-2">
-                              <div className="relative w-5 h-5 flex-shrink-0">
-                                <Loader2 className="w-5 h-5 text-green-400 animate-spin absolute" />
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                  <span className="text-green-400 font-bold text-[8px]">IA</span>
-                                </div>
-                              </div>
-                              ✅ 4) Alignement & santé de l'effectif
-                            </h4>
-                            <div className="space-y-3 text-xs">
-                              <div className="bg-white/5 p-3 rounded">
-                                <div className="text-white/90 font-semibold mb-1 pl-10">Alignement/Top-6 — Vegas</div>
-                                <div className="flex items-start gap-2">
-                                  <div className="relative w-8 h-8 flex-shrink-0">
-                                    <Loader2 className="w-8 h-8 text-white animate-spin absolute" />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                      <span className="text-white font-bold text-[10px]">IA</span>
-                                    </div>
-                                  </div>
-                                  <div className="text-white/70">Analyse de l'impact offensif disponible : profondeur du top-6, cohésion des trios et continuité des combinaisons attaquantes.</div>
-                                </div>
-                              </div>
-                              <div className="bg-white/5 p-3 rounded">
-                                <div className="text-white/90 font-semibold mb-1 pl-10">Alignement/Top-6 — Tampa Bay</div>
-                                <div className="flex items-start gap-2">
-                                  <div className="relative w-8 h-8 flex-shrink-0">
-                                    <Loader2 className="w-8 h-8 text-white animate-spin absolute" />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                      <span className="text-white font-bold text-[10px]">IA</span>
-                                    </div>
-                                  </div>
-                                  <div className="text-white/70">Analyse de l'impact offensif disponible : profondeur du top-6, cohésion des trios et continuité des combinaisons attaquantes.</div>
-                                </div>
-                              </div>
-                              <div className="bg-white/5 p-3 rounded">
-                                <div className="text-white/90 font-semibold mb-1 pl-10">Défense/Top-4 — Vegas</div>
-                                <div className="flex items-start gap-2">
-                                  <div className="relative w-8 h-8 flex-shrink-0">
-                                    <Loader2 className="w-8 h-8 text-white animate-spin absolute" />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                      <span className="text-white font-bold text-[10px]">IA</span>
-                                    </div>
-                                  </div>
-                                  <div className="text-white/70">Analyse de la stabilité défensive : niveau du top-4, mobilité en relance et capacité à absorber la pression adverse.</div>
-                                </div>
-                              </div>
-                              <div className="bg-white/5 p-3 rounded">
-                                <div className="text-white/90 font-semibold mb-1 pl-10">Défense/Top-4 — Tampa Bay</div>
-                                <div className="flex items-start gap-2">
-                                  <div className="relative w-8 h-8 flex-shrink-0">
-                                    <Loader2 className="w-8 h-8 text-white animate-spin absolute" />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                      <span className="text-white font-bold text-[10px]">IA</span>
-                                    </div>
-                                  </div>
-                                  <div className="text-white/70">Analyse de la stabilité défensive : niveau du top-4, mobilité en relance et capacité à absorber la pression adverse.</div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* 5) Contexte & fatigue */}
-                          <div className="bg-black/40 rounded-lg p-4 border border-green-600/30">
-                            <h4 className="text-white font-bold text-sm mb-3 flex items-center gap-2">
-                              <div className="relative w-5 h-5 flex-shrink-0">
-                                <Loader2 className="w-5 h-5 text-green-400 animate-spin absolute" />
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                  <span className="text-green-400 font-bold text-[8px]">IA</span>
-                                </div>
-                              </div>
-                              ✅ 5) Contexte & fatigue
-                            </h4>
-                            <div className="space-y-3 text-xs">
-                              <div className="bg-white/5 p-3 rounded">
-                                <div className="text-white/90 font-semibold mb-1 pl-10">Fatigue / Calendrier — Vegas</div>
-                                <div className="flex items-start gap-2">
-                                  <div className="relative w-8 h-8 flex-shrink-0">
-                                    <Loader2 className="w-8 h-8 text-white animate-spin absolute" />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                      <span className="text-white font-bold text-[10px]">IA</span>
-                                    </div>
-                                  </div>
-                                  <div className="text-white/70">Analyse du contexte physique : back-to-back éventuel, séquence de matchs rapprochés et accumulation des déplacements.</div>
-                                </div>
-                              </div>
-                              <div className="bg-white/5 p-3 rounded">
-                                <div className="text-white/90 font-semibold mb-1 pl-10">Fatigue / Calendrier — Tampa Bay</div>
-                                <div className="flex items-start gap-2">
-                                  <div className="relative w-8 h-8 flex-shrink-0">
-                                    <Loader2 className="w-8 h-8 text-white animate-spin absolute" />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                      <span className="text-white font-bold text-[10px]">IA</span>
-                                    </div>
-                                  </div>
-                                  <div className="text-white/70">Analyse du contexte physique : back-to-back éventuel, séquence de matchs rapprochés et accumulation des déplacements.</div>
-                                </div>
-                              </div>
-                              <div className="bg-white/5 p-3 rounded">
-                                <div className="text-white/90 font-semibold mb-1 pl-10">Avantage domicile / extérieur — Vegas</div>
-                                <div className="flex items-start gap-2">
-                                  <div className="relative w-8 h-8 flex-shrink-0">
-                                    <Loader2 className="w-8 h-8 text-white animate-spin absolute" />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                      <span className="text-white font-bold text-[10px]">IA</span>
-                                    </div>
-                                  </div>
-                                  <div className="text-white/70">Analyse de l'impact contextuel : rendement en déplacement, adaptation hors domicile et gestion des dernières mises au jeu.</div>
-                                </div>
-                              </div>
-                              <div className="bg-white/5 p-3 rounded">
-                                <div className="text-white/90 font-semibold mb-1 pl-10">Avantage domicile / extérieur — Tampa Bay</div>
-                                <div className="flex items-start gap-2">
-                                  <div className="relative w-8 h-8 flex-shrink-0">
-                                    <Loader2 className="w-8 h-8 text-white animate-spin absolute" />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                      <span className="text-white font-bold text-[10px]">IA</span>
-                                    </div>
-                                  </div>
-                                  <div className="text-white/70">Analyse de l'impact contextuel : rendement en déplacement, adaptation hors domicile et gestion des dernières mises au jeu.</div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* 6) Marché / Value */}
-                          <div className="bg-black/40 rounded-lg p-4 border border-green-600/30">
-                            <h4 className="text-white font-bold text-sm mb-3 flex items-center gap-2">
-                              <div className="relative w-5 h-5 flex-shrink-0">
-                                <Loader2 className="w-5 h-5 text-green-400 animate-spin absolute" />
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                  <span className="text-green-400 font-bold text-[8px]">IA</span>
-                                </div>
-                              </div>
-                              ✅ 6) Marché / Value
-                            </h4>
-                            <div className="space-y-3 text-xs">
-                              <div className="bg-white/5 p-3 rounded">
-                                <div className="text-white/90 font-semibold mb-1 pl-10">Lecture du marché — Vegas</div>
-                                <div className="flex items-start gap-2">
-                                  <div className="relative w-8 h-8 flex-shrink-0">
-                                    <Loader2 className="w-8 h-8 text-white animate-spin absolute" />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                      <span className="text-white font-bold text-[10px]">IA</span>
-                                    </div>
-                                  </div>
-                                  <div className="text-white/70">Analyse de la probabilité implicite des cotes : variation du marché, rapport entre perception publique et réalité statistique.</div>
-                                </div>
-                              </div>
-                              <div className="bg-white/5 p-3 rounded">
-                                <div className="text-white/90 font-semibold mb-1 pl-10">Lecture du marché — Tampa Bay</div>
-                                <div className="flex items-start gap-2">
-                                  <div className="relative w-8 h-8 flex-shrink-0">
-                                    <Loader2 className="w-8 h-8 text-white animate-spin absolute" />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                      <span className="text-white font-bold text-[10px]">IA</span>
-                                    </div>
-                                  </div>
-                                  <div className="text-white/70">Analyse de la probabilité implicite des cotes : variation du marché, rapport entre perception publique et réalité statistique.</div>
-                                </div>
-                              </div>
-                              <div className="bg-white/5 p-3 rounded">
-                                <div className="text-white/90 font-semibold mb-1 pl-10">Value / Edge — Vegas</div>
-                                <div className="flex items-start gap-2">
-                                  <div className="relative w-8 h-8 flex-shrink-0">
-                                    <Loader2 className="w-8 h-8 text-white animate-spin absolute" />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                      <span className="text-white font-bold text-[10px]">IA</span>
-                                    </div>
-                                  </div>
-                                  <div className="text-white/70">Analyse de l'écart entre le modèle et la cotation : comparaison des probabilités réelles et opportunités de value sur le marché.</div>
-                                </div>
-                              </div>
-                              <div className="bg-white/5 p-3 rounded">
-                                <div className="text-white/90 font-semibold mb-1 pl-10">Value / Edge — Tampa Bay</div>
-                                <div className="flex items-start gap-2">
-                                  <div className="relative w-8 h-8 flex-shrink-0">
-                                    <Loader2 className="w-8 h-8 text-white animate-spin absolute" />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                      <span className="text-white font-bold text-[10px]">IA</span>
-                                    </div>
-                                  </div>
-                                  <div className="text-white/70">Analyse de l'écart entre le modèle et la cotation : comparaison des probabilités réelles et opportunités de value sur le marché.</div>
-                                </div>
-                              </div>
-                            </div>
+                            <p className="text-white/60 text-[10px] mt-2 text-center italic">
+                              ⚡ Confiance élevée basée sur la convergence de multiples indicateurs positifs
+                            </p>
                           </div>
 
                           <div className="mt-3 pt-3 border-t border-white/10">
@@ -499,8 +193,7 @@ const Bet = () => {
                               forme actuelle, blessures, conditions de jeu et tendances du marché.
                             </p>
                           </div>
-                        </div>
-                      )}
+                        </div>}
                     </div>
                   </DialogContent>
                 </Dialog>
