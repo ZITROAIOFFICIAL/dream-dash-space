@@ -84,7 +84,7 @@ const Bet = () => {
             </span>
           </div>
           <h1 className="text-3xl font-bold text-foreground mb-2 text-center">BET DU JOUR</h1>
-          <p className="text-muted-foreground">Découvrez nos pronostics avec les meilleures cotes</p>
+          <p className="text-muted-foreground text-center">Les paris avec la meilleure probabilité de réussite aujourd'hui </p>
         </div>
 
         <div className="grid gap-6 justify-center">
