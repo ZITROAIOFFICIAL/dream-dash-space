@@ -1,6 +1,5 @@
 import DashboardLayout from "@/components/DashboardLayout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-
 import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Loader2 } from "lucide-react";
@@ -15,7 +14,6 @@ const Index = () => {
   const [dataCountStLouis, setDataCountStLouis] = useState(2843);
   const [dataCountVegas, setDataCountVegas] = useState(2857);
   const [dataCountWashington, setDataCountWashington] = useState(7623);
-
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
@@ -87,7 +85,6 @@ const Index = () => {
       setShowAnalysisVegas(true);
     }, randomDelay);
   };
-
   const handleShowAnalysisWashington = () => {
     setIsLoadingDialogOpenWashington(true);
     const randomDelay = Math.random() * (5000 - 1500) + 1500;
@@ -102,7 +99,7 @@ const Index = () => {
         {/* Header Section */}
         <div className="text-center space-y-2 mb-8">
           <h1 className="text-white text-4xl font-bold">BET DU JOUR</h1>
-          <p className="text-white/70 text-sm">les paris avec la meilleur probabilité de réussite aujourd'hui</p>
+          <p className="text-white/70 text-sm">Les bet avec la meilleur probabilité de réussite aujourd'hui</p>
         </div>
 
         {/* ST. LOUIS vs PITTSBURGH CARD */}
