@@ -166,6 +166,13 @@ const Bet = () => {
                 </div>
               </div>
 
+              {/* Second "PARIER SUR" text */}
+              <div className="flex justify-center py-3">
+                <div className="text-sm font-bold text-white tracking-wider">
+                  PARIER SUR
+                </div>
+              </div>
+
               {/* Bet Amount & Payout */}
               <div className="pt-3">
                 <div className="grid grid-cols-2 gap-2 px-[10px]">
