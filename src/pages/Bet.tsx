@@ -43,14 +43,13 @@ const Bet = () => {
           <Card className="w-full max-w-md bg-black border-2 border-primary shadow-2xl overflow-hidden mx-auto">
             <CardHeader className="space-y-4 p-0">
               {/* AI Analysis */}
-              <div className="px-6 py-3 rounded-t-lg bg-[#00df57]/80">
-                <div className="flex items-center gap-2">
-                  <span className="px-2 py-1 bg-black rounded border-2 border-green-500 font-bold text-green-400">92%</span>
-                  <span className="text-white text-sm font-bold">DE CHANCE DE GAGNER SELON NOTRE IA</span>
-                </div>
+              <div className="flex items-center justify-center gap-2 text-xs py-[10px] border-t-2 border-green-500 bg-green-600 rounded-t-lg">
+                <span className="px-2 py-1 bg-black rounded border-2 border-green-500 font-bold text-green-400">92%</span>
+                <span className="text-white text-sm font-bold">DE CHANCE DE GAGNER SELON NOTRE IA</span>
+              </div>
 
                 {/* Loading Animation */}
-                {isLoadingAnalysis && <div className="mt-4 space-y-2 animate-fade-in">
+                {isLoadingAnalysis && <div className="mt-4 space-y-2 animate-fade-in px-6">
                     <div className="flex items-center justify-center gap-2">
                       <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{
                     animationDelay: '0ms'
@@ -64,7 +63,7 @@ const Bet = () => {
                     </div>
                     <p className="text-white/60 text-xs">L'IA analyse les données...</p>
                   </div>}
-              </div>
+
 
               {/* Detailed Analysis */}
               {showAnalysis && !isLoadingAnalysis && <div className="mt-4 bg-black/40 rounded-lg p-4 mx-6 text-left space-y-3 animate-fade-in border border-green-500/30">
