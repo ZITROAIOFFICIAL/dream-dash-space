@@ -46,7 +46,7 @@ const Bet = () => {
               <div className="bg-green-600/80 px-6 py-3 rounded-t-lg">
                 <div className="flex justify-center mb-3">
                   <button onClick={handleShowAnalysis} disabled={isLoadingAnalysis || showAnalysis} className="bg-white px-4 py-2 rounded-lg hover:bg-white/90 disabled:bg-white/60 transition-colors cursor-pointer">
-                    <h2 className="text-black text-sm uppercase text-center font-bold">Analyse de notre <span className="font-extrabold">IA</span></h2>
+                    <h2 className="text-black text-sm uppercase text-center font-bold">DRAFTKINGS</h2>
                   </button>
                 </div>
 
