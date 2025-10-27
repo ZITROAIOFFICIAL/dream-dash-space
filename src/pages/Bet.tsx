@@ -75,6 +75,12 @@ const Bet = () => {
   return <DashboardLayout>
       <div className="space-y-6">
         <div>
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+            <span className="text-white/70 text-sm">
+              Dernière mise à jour IA : {currentTime.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
+            </span>
+          </div>
           <h1 className="text-3xl font-bold text-foreground mb-2">Paris Recommandés</h1>
           <p className="text-muted-foreground">Découvrez nos pronostics avec les meilleures cotes</p>
         </div>
