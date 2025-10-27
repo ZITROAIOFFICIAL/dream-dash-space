@@ -30,7 +30,7 @@ const Sidebar = () => {
         className="fixed top-4 left-4 z-50 md:hidden text-white hover:bg-transparent focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 outline-none"
         onClick={() => setIsOpen(!isOpen)}
       >
-        {isOpen ? <X className="h-6 w-6 stroke-[2.5]" /> : <Menu className="h-6 w-6 stroke-[2.5]" />}
+        {isOpen ? <X className="h-7 w-7 stroke-[1.5]" /> : <Menu className="h-7 w-7 stroke-[1.5]" />}
       </Button>
 
       {/* Sidebar */}
