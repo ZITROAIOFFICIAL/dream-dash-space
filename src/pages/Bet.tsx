@@ -156,8 +156,8 @@ const Bet = () => {
 
                   {/* Center time + VS */}
                   <div className="flex flex-col items-center gap-1">
-                    <span className="text-white/60 font-semibold text-sm">5:00 PM</span>
-                    <div className="px-2 py-0.5 bg-white/10 rounded-full border border-white/20">
+                    <span className="font-semibold text-sm text-white">5:00 PM</span>
+                    <div className="px-2 py-0.5 rounded-full border border-white/20 bg-white/0">
                       <span className="text-white font-bold text-xs">VS</span>
                     </div>
                   </div>
