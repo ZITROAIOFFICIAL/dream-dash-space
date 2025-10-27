@@ -1115,7 +1115,7 @@
         {% assign bet_cards = section.blocks | where: 'type', 'bet_card' %}
         {% if bet_cards.size > 0 %}
           {% for block in bet_cards %}
-            {% if block.settings.show_card %}
+            {% if block.settings.show_card and block.settings.send_to_history != true %}
               <div class="bet-card" {{ block.shopify_attributes }}>
                 <!-- AI Data Counter -->
                 <div class="ai-counter">
@@ -1215,7 +1215,7 @@
         {% assign parlay_cards = section.blocks | where: 'type', 'parlay_card' %}
         {% if parlay_cards.size > 0 %}
           {% for block in parlay_cards %}
-            {% if block.settings.show_card %}
+            {% if block.settings.show_card and block.settings.send_to_history != true %}
               <div class="parlay-card" {{ block.shopify_attributes }}>
                 <div class="parlay-header">
                   <h2 class="parlay-title">{{ block.settings.parlay_title | default: 'Parlay Triple Gagnant' }}</h2>
@@ -1278,60 +1278,104 @@
     <div id="page-historique-bet" class="page">
       <div class="container">
         <h1>Historique Bet du jour</h1>
+        <p class="subtitle">Résultats de vos paris terminés</p>
 
-        <div class="history-card">
-          <div>
-            <div class="history-match">Bayern Munich vs Borussia Dortmund</div>
-            <div class="history-date">15 mars 2024</div>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="badge badge-success">Gagné</span>
-            <span style="color: #16a34a; font-weight: 600;">+75€</span>
-          </div>
-        </div>
+        {% assign history_bets = section.blocks | where: 'type', 'bet_card' %}
+        {% assign has_history = false %}
+        
+        {% for block in history_bets %}
+          {% if block.settings.send_to_history == true %}
+            {% assign has_history = true %}
+            
+            <div class="bet-card" {{ block.shopify_attributes }}>
+              <!-- Badge résultat en haut -->
+              <div style="padding: 1rem; background: {% if block.settings.result == 'win' %}#16a34a{% elsif block.settings.result == 'loose' %}hsl(0 84% 60%){% else %}#f59e0b{% endif %}; text-align: center;">
+                <span style="font-weight: 700; font-size: 1.25rem; color: #ffffff;">
+                  {% if block.settings.result == 'win' %}
+                    ✅ GAGNÉ
+                  {% elsif block.settings.result == 'loose' %}
+                    ❌ PERDU
+                  {% else %}
+                    ⏳ EN ATTENTE
+                  {% endif %}
+                </span>
+              </div>
 
-        <div class="history-card">
-          <div>
-            <div class="history-match">Juventus vs Inter Milan</div>
-            <div class="history-date">14 mars 2024</div>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="badge badge-danger">Perdu</span>
-            <span style="color: hsl(0 84% 60%); font-weight: 600;">-100€</span>
-          </div>
-        </div>
+              <!-- AI Data Counter -->
+              <div class="ai-counter">
+                <div class="ai-spinner">
+                  <svg class="animate-spin" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                  </svg>
+                  <span class="ai-badge">IA</span>
+                </div>
+                <span><span>{{ block.settings.ai_data_count | default: 2857 }}</span> DONNÉES ANALYSÉES PAR NOTRE IA</span>
+              </div>
 
-        <div class="history-card">
-          <div>
-            <div class="history-match">Arsenal vs Chelsea</div>
-            <div class="history-date">13 mars 2024</div>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="badge badge-success">Gagné</span>
-            <span style="color: #16a34a; font-weight: 600;">+100€</span>
-          </div>
-        </div>
+              <!-- Confidence Badge -->
+              <div class="confidence-badge">
+                <div class="confidence-left">
+                  <span class="confidence-percentage"><span>{{ block.settings.win_percentage | default: 92 }}</span>%</span>
+                  <span class="confidence-text">DE CHANCE DE GAGNER SELON NOTRE IA</span>
+                </div>
+              </div>
 
-        <div class="history-card">
-          <div>
-            <div class="history-match">Atletico Madrid vs Sevilla</div>
-            <div class="history-date">12 mars 2024</div>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="badge badge-success">Gagné</span>
-            <span style="color: #16a34a; font-weight: 600;">+90€</span>
-          </div>
-        </div>
+              <div class="bet-card-content">
+                <div class="multiplier text-center">x{{ block.settings.multiplier | default: '1.74' }}</div>
 
-        <div class="history-card">
-          <div>
-            <div class="history-match">AC Milan vs AS Roma</div>
-            <div class="history-date">11 mars 2024</div>
+                <div class="match-info">
+                  <div class="team">
+                    {% if block.settings.team1_logo %}
+                      <img src="{{ block.settings.team1_logo | image_url: width: 200 }}" alt="{{ block.settings.team1_name }}" class="team-logo">
+                    {% else %}
+                      <img src="{{ 'vegas-logo.png' | asset_url }}" alt="{{ block.settings.team1_name }}" class="team-logo">
+                    {% endif %}
+                    <div class="team-name">{{ block.settings.team1_name | default: 'VEGAS' }}</div>
+                  </div>
+
+                  <div class="match-vs">VS</div>
+
+                  <div class="team">
+                    {% if block.settings.team2_logo %}
+                      <img src="{{ block.settings.team2_logo | image_url: width: 200 }}" alt="{{ block.settings.team2_name }}" class="team-logo">
+                    {% else %}
+                      <img src="{{ 'tampa-logo.png' | asset_url }}" alt="{{ block.settings.team2_name }}" class="team-logo">
+                    {% endif %}
+                    <div class="team-name">{{ block.settings.team2_name | default: 'TAMPA BAY' }}</div>
+                  </div>
+                </div>
+
+                <div class="match-time">
+                  <span>{{ block.settings.match_date | default: "Aujourd'hui" }}</span> · <span>{{ block.settings.match_time | default: '5:00 PM' }}</span>
+                </div>
+
+                <!-- Affichage du gain/perte -->
+                <div class="bet-amount-section">
+                  <div class="bet-amount-header">
+                    <span class="bet-amount-label">Résultat</span>
+                  </div>
+                  <div style="font-size: 2rem; font-weight: 700; color: {% if block.settings.result == 'win' %}#16a34a{% elsif block.settings.result == 'loose' %}hsl(0 84% 60%){% else %}#f59e0b{% endif %};">
+                    {% if block.settings.result == 'win' %}
+                      +${{ 100 | times: block.settings.multiplier | default: 1.74 | minus: 100 | round: 2 }}
+                    {% elsif block.settings.result == 'loose' %}
+                      -$100
+                    {% else %}
+                      En cours...
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+
+        {% unless has_history %}
+          <div class="card text-center" style="padding: 2rem;">
+            <p style="color: rgba(255, 255, 255, 0.6);">
+              Aucun pari dans l'historique. Marquez vos paris terminés avec "Envoyer à l'historique" dans l'éditeur Shopify.
+            </p>
           </div>
-          <div class="flex items-center gap-2">
-            <span class="badge badge-warning">En cours</span>
-          </div>
-        </div>
+        {% endunless %}
       </div>
     </div>
 
@@ -1339,13 +1383,93 @@
     <div id="page-historique-parlay" class="page">
       <div class="container">
         <h1>Historique Parlay du jour</h1>
-        <p class="subtitle">Consultez l'historique de vos paris combinés</p>
+        <p class="subtitle">Résultats de vos parlays terminés</p>
+
+        {% assign history_parlays = section.blocks | where: 'type', 'parlay_card' %}
+        {% assign has_history = false %}
         
-        <div class="card">
-          <p class="text-center" style="color: rgba(255, 255, 255, 0.6);">
-            Aucun historique de parlay pour le moment.
-          </p>
-        </div>
+        {% for block in history_parlays %}
+          {% if block.settings.send_to_history == true %}
+            {% assign has_history = true %}
+            
+            <div class="parlay-card" {{ block.shopify_attributes }}>
+              <!-- Badge résultat en haut -->
+              <div style="padding: 1rem; background: {% if block.settings.result == 'win' %}#16a34a{% elsif block.settings.result == 'loose' %}hsl(0 84% 60%){% else %}#f59e0b{% endif %}; text-align: center;">
+                <span style="font-weight: 700; font-size: 1.25rem; color: #ffffff;">
+                  {% if block.settings.result == 'win' %}
+                    ✅ GAGNÉ
+                  {% elsif block.settings.result == 'loose' %}
+                    ❌ PERDU
+                  {% else %}
+                    ⏳ EN ATTENTE
+                  {% endif %}
+                </span>
+              </div>
+
+              <div class="parlay-header">
+                <h2 class="parlay-title">{{ block.settings.parlay_title | default: 'Parlay Triple Gagnant' }}</h2>
+              </div>
+              
+              <div class="parlay-stats">
+                <div class="parlay-stat">
+                  <span class="parlay-stat-label">DONNÉES IA</span>
+                  <span class="parlay-stat-value">{{ block.settings.ai_data_count | default: 5214 }}</span>
+                </div>
+                <div class="parlay-stat">
+                  <span class="parlay-stat-label">CONFIANCE IA</span>
+                  <span class="parlay-stat-value">{{ block.settings.win_percentage | default: 78 }}%</span>
+                </div>
+                <div class="parlay-stat">
+                  <span class="parlay-stat-label">MULTIPLICATEUR</span>
+                  <span class="parlay-multiplier">x{{ block.settings.multiplier | default: '5.24' }}</span>
+                </div>
+                <div class="parlay-stat">
+                  <span class="parlay-stat-label">PARIS</span>
+                  <span class="parlay-stat-value">{{ block.settings.num_bets | default: 3 }}</span>
+                </div>
+              </div>
+              
+              <div class="parlay-content">
+                <div class="parlay-bets-list">
+                  <div class="parlay-bet-item">
+                    <div class="parlay-bet-number">PARI #1</div>
+                    <div class="parlay-bet-details">{{ block.settings.bet1_details | default: 'VEGAS vs TAMPA BAY - VEGAS gagne (x1.74)' }}</div>
+                  </div>
+                  <div class="parlay-bet-item">
+                    <div class="parlay-bet-number">PARI #2</div>
+                    <div class="parlay-bet-details">{{ block.settings.bet2_details | default: 'LAKERS vs CELTICS - LAKERS gagne (x1.92)' }}</div>
+                  </div>
+                  <div class="parlay-bet-item">
+                    <div class="parlay-bet-number">PARI #3</div>
+                    <div class="parlay-bet-details">{{ block.settings.bet3_details | default: 'WARRIORS vs NETS - WARRIORS gagne (x1.56)' }}</div>
+                  </div>
+                </div>
+
+                <!-- Affichage du gain/perte -->
+                <div class="parlay-gain-section">
+                  <div class="parlay-gain-label">RÉSULTAT FINAL</div>
+                  <div style="font-size: 2.5rem; font-weight: 700; color: {% if block.settings.result == 'win' %}#16a34a{% elsif block.settings.result == 'loose' %}hsl(0 84% 60%){% else %}#f59e0b{% endif %};">
+                    {% if block.settings.result == 'win' %}
+                      +${{ 100 | times: block.settings.multiplier | default: 5.24 | minus: 100 | round: 2 }}
+                    {% elsif block.settings.result == 'loose' %}
+                      -$100
+                    {% else %}
+                      En cours...
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+
+        {% unless has_history %}
+          <div class="card text-center" style="padding: 2rem;">
+            <p style="color: rgba(255, 255, 255, 0.6);">
+              Aucun parlay dans l'historique. Marquez vos parlays terminés avec "Envoyer à l'historique" dans l'éditeur Shopify.
+            </p>
+          </div>
+        {% endunless %}
       </div>
     </div>
 
@@ -1997,6 +2121,34 @@
         },
         {
           "type": "checkbox",
+          "id": "send_to_history",
+          "label": "📋 Envoyer à l'historique",
+          "default": false,
+          "info": "Cochez pour déplacer cette carte vers l'historique"
+        },
+        {
+          "type": "select",
+          "id": "result",
+          "label": "🎯 Résultat du pari",
+          "options": [
+            {
+              "value": "pending",
+              "label": "En attente"
+            },
+            {
+              "value": "win",
+              "label": "✅ Gagné (Win)"
+            },
+            {
+              "value": "loose",
+              "label": "❌ Perdu (Loose)"
+            }
+          ],
+          "default": "pending",
+          "info": "Sélectionnez le résultat du pari"
+        },
+        {
+          "type": "checkbox",
           "id": "show_card",
           "label": "Afficher cette carte",
           "default": true
@@ -2065,6 +2217,34 @@
           "id": "ai_explanation",
           "label": "Explication de l'IA",
           "default": "Ce parlay combine 3 paris soigneusement sélectionnés par notre IA. Chaque pari a été analysé individuellement avec une haute confiance, et leur combinaison offre un excellent rapport risque/récompense."
+        },
+        {
+          "type": "checkbox",
+          "id": "send_to_history",
+          "label": "📋 Envoyer à l'historique",
+          "default": false,
+          "info": "Cochez pour déplacer cette carte vers l'historique"
+        },
+        {
+          "type": "select",
+          "id": "result",
+          "label": "🎯 Résultat du parlay",
+          "options": [
+            {
+              "value": "pending",
+              "label": "En attente"
+            },
+            {
+              "value": "win",
+              "label": "✅ Gagné (Win)"
+            },
+            {
+              "value": "loose",
+              "label": "❌ Perdu (Loose)"
+            }
+          ],
+          "default": "pending",
+          "info": "Sélectionnez le résultat du parlay"
         },
         {
           "type": "checkbox",
