@@ -168,7 +168,7 @@ const Bet = () => {
                       <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
                         <img src={tampaLogo} alt="Tampa Bay" className="w-7 h-7 object-contain" />
                       </div>
-                      <span className="font-bold text-white text-xs">TAMPA BAY</span>
+                      <span className="text-white -bottom-0.5 text-xs font-extrabold ">TAMPA BAY</span>
                       <div className="text-xs font-bold text-primary">VICTOIRE</div>
                     </div>
                   </div>
