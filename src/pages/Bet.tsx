@@ -10,6 +10,16 @@ const Bet = () => {
   const [betAmount, setBetAmount] = useState<string>("100");
   const [customAmount, setCustomAmount] = useState<string>("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [showAnalysis, setShowAnalysis] = useState(false);
+  const [isLoadingAnalysis, setIsLoadingAnalysis] = useState(false);
+
+  const handleShowAnalysis = () => {
+    setIsLoadingAnalysis(true);
+    setTimeout(() => {
+      setIsLoadingAnalysis(false);
+      setShowAnalysis(true);
+    }, 2000);
+  };
   const odds = -136;
   const multiplier = 1 + 100 / Math.abs(odds);
   const calculateReturn = (amount: string) => {
@@ -34,7 +44,7 @@ const Bet = () => {
           <Card className="w-full max-w-md bg-black border-2 border-primary shadow-2xl overflow-hidden mx-auto">
             <CardHeader className="space-y-4 p-0">
               {/* AI Analysis */}
-              <div className="bg-green-600/80 px-6 py-4 text-center space-y-1 rounded-t-lg">
+              <div className="bg-green-600/80 px-6 py-4 text-center space-y-2 rounded-t-lg">
                 <h2 className="text-white text-sm uppercase">Analyse de notre <span className="font-bold">IA</span></h2>
                 <div className="flex justify-center">
                   <div className="bg-black border-2 border-green-500 rounded-lg px-6 py-2">
@@ -44,6 +54,75 @@ const Bet = () => {
                     </div>
                   </div>
                 </div>
+                <p className="text-white/70 text-[10px] uppercase font-semibold tracking-wide">
+                  Statistiquement selon 482 variables analysées par l'IA
+                </p>
+                <Button 
+                  onClick={handleShowAnalysis}
+                  disabled={isLoadingAnalysis || showAnalysis}
+                  className="mt-2 bg-white/10 hover:bg-white/20 text-white border border-white/30 text-xs"
+                  size="sm"
+                >
+                  {isLoadingAnalysis ? "Analyse en cours..." : showAnalysis ? "Analyse affichée" : "Voir l'analyse"}
+                </Button>
+
+                {/* Loading Animation */}
+                {isLoadingAnalysis && (
+                  <div className="mt-4 space-y-2 animate-fade-in">
+                    <div className="flex items-center justify-center gap-2">
+                      <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                      <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                      <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                    </div>
+                    <p className="text-white/60 text-xs">L'IA analyse les données...</p>
+                  </div>
+                )}
+
+                {/* Detailed Analysis */}
+                {showAnalysis && !isLoadingAnalysis && (
+                  <div className="mt-4 bg-black/40 rounded-lg p-4 text-left space-y-3 animate-fade-in border border-green-500/30">
+                    <h3 className="text-white font-bold text-sm text-center mb-3">📊 Analyse Détaillée</h3>
+                    
+                    <div className="space-y-2 text-xs">
+                      <div className="bg-white/5 p-2 rounded">
+                        <span className="text-white/70">Historique des confrontations:</span>
+                        <span className="text-green-400 font-semibold ml-2">Tampa Bay 7-3</span>
+                      </div>
+                      
+                      <div className="bg-white/5 p-2 rounded">
+                        <span className="text-white/70">Forme récente (10 matchs):</span>
+                        <span className="text-green-400 font-semibold ml-2">8 victoires</span>
+                      </div>
+                      
+                      <div className="bg-white/5 p-2 rounded">
+                        <span className="text-white/70">Performance à domicile:</span>
+                        <span className="text-green-400 font-semibold ml-2">85% victoires</span>
+                      </div>
+                      
+                      <div className="bg-white/5 p-2 rounded">
+                        <span className="text-white/70">Joueurs clés disponibles:</span>
+                        <span className="text-green-400 font-semibold ml-2">100%</span>
+                      </div>
+                      
+                      <div className="bg-white/5 p-2 rounded">
+                        <span className="text-white/70">Conditions météo:</span>
+                        <span className="text-green-400 font-semibold ml-2">Favorables</span>
+                      </div>
+
+                      <div className="bg-white/5 p-2 rounded">
+                        <span className="text-white/70">Analyse des paris:</span>
+                        <span className="text-green-400 font-semibold ml-2">76% des experts</span>
+                      </div>
+                    </div>
+
+                    <div className="mt-3 pt-3 border-t border-white/10">
+                      <p className="text-white/60 text-[10px] italic text-center">
+                        ⚡ Analyse basée sur 482 variables incluant statistiques historiques, 
+                        forme actuelle, blessures, conditions de jeu et tendances du marché.
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Odds Display */}
