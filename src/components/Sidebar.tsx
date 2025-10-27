@@ -1,4 +1,4 @@
-import { Menu, X, Trophy, Layers, History, Clock, LifeBuoy, User, ShoppingBag, ChevronRight } from "lucide-react";
+import { Menu, X, Trophy, Layers, History, Clock, MessageCircle, User, ShoppingBag, ChevronRight } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -16,7 +16,7 @@ const Sidebar = () => {
     { label: "NOTRE STRATÉGIE", path: "/strategie", icon: Trophy },
     { label: "MON COMPTE", path: "/mon-compte", icon: User },
     { label: "BOUTIQUE", path: "/boutique", icon: ShoppingBag },
-    { label: "SUPPORT", path: "/support", icon: LifeBuoy },
+    { label: "SUPPORT", path: "/support", icon: MessageCircle },
   ];
 
   const isActive = (path: string) => location.pathname === path;
