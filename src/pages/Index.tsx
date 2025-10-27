@@ -48,7 +48,7 @@ const Index = () => {
     <DashboardLayout>
       <div className="space-y-8">
         <div className="mb-2">
-          <div className="flex items-center justify-center gap-2 mb-4">
+          <div className="flex items-center justify-center gap-2 mb-6">
             <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
             <span className="text-white/70 text-sm">
               Dernière mise à jour IA : {currentTime.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
