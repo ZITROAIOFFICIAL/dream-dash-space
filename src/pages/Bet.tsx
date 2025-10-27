@@ -52,14 +52,14 @@ const Bet = () => {
                 {isLoadingAnalysis && <div className="mt-4 space-y-2 animate-fade-in px-6">
                     <div className="flex items-center justify-center gap-2">
                       <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{
-                    animationDelay: '0ms'
-                  }}></div>
+                  animationDelay: '0ms'
+                }}></div>
                       <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{
-                    animationDelay: '150ms'
-                  }}></div>
+                  animationDelay: '150ms'
+                }}></div>
                       <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{
-                    animationDelay: '300ms'
-                  }}></div>
+                  animationDelay: '300ms'
+                }}></div>
                     </div>
                     <p className="text-white/60 text-xs">L'IA analyse les données...</p>
                   </div>}
@@ -115,7 +115,7 @@ const Bet = () => {
                   </div>}
 
               {/* Odds Display */}
-              <div className="flex justify-center py-3">
+              <div className="flex justify-center py-0">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
                   PARIER SUR
                 </div>
