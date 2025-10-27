@@ -49,7 +49,7 @@ const Bet = () => {
                   <span className="text-white text-xs font-medium">DE CHANCE DE GAGNER SELON NOTRE IA</span>
                 </div>
                 <button onClick={handleShowAnalysis} className="px-3 py-1 bg-black rounded border-2 border-green-600 font-bold text-green-400 text-xs hover:bg-green-600/20 transition-colors">
-                  Voir ANALYSE IA
+                  VOIR ANALYSE IA
                 </button>
               </div>
 
