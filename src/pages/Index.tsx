@@ -184,24 +184,40 @@ const Index = () => {
                             </h3>
                             
                             <div className="space-y-3">
-                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                              <div>
                                 <h4 className="text-white font-bold text-sm mb-2">Analyse — Marché & pricing (St. Louis)</h4>
-                                <ul className="text-white/80 text-sm space-y-1.5 ml-4">
-                                  <li>• Analyse de la probabilité implicite du marché pour St. Louis, obtenue par conversion des cotes en pourcentage réel.</li>
-                                  <li>• Comparaison inter-bookmakers pour identifier la meilleure cote disponible ("best price") et mesurer l'efficience du marché.</li>
-                                  <li>• Observation du mouvement de ligne (line movement) afin de déterminer si la valeur évolue en faveur ou en défaveur de St. Louis.</li>
-                                  <li>• Détection d'un éventuel closing line value (CLV) et influence du sharp money par rapport au public money.</li>
-                                </ul>
+                                <div className="space-y-3">
+                                  <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                    <p className="text-white/80 text-sm">• Analyse de la probabilité implicite du marché pour St. Louis, obtenue par conversion des cotes en pourcentage réel.</p>
+                                  </div>
+                                  <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                    <p className="text-white/80 text-sm">• Comparaison inter-bookmakers pour identifier la meilleure cote disponible ("best price") et mesurer l'efficience du marché.</p>
+                                  </div>
+                                  <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                    <p className="text-white/80 text-sm">• Observation du mouvement de ligne (line movement) afin de déterminer si la valeur évolue en faveur ou en défaveur de St. Louis.</p>
+                                  </div>
+                                  <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                    <p className="text-white/80 text-sm">• Détection d'un éventuel closing line value (CLV) et influence du sharp money par rapport au public money.</p>
+                                  </div>
+                                </div>
                               </div>
                               
-                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                              <div>
                                 <h4 className="text-white font-bold text-sm mb-2">Analyse — Marché & pricing (Pittsburgh)</h4>
-                                <ul className="text-white/80 text-sm space-y-1.5 ml-4">
-                                  <li>• Analyse de la probabilité implicite du marché pour Pittsburgh, obtenue par conversion des cotes en pourcentage réel.</li>
-                                  <li>• Comparaison inter-bookmakers pour identifier la meilleure cote disponible ("best price") et mesurer l'efficience du marché.</li>
-                                  <li>• Observation du mouvement de ligne (line movement) afin de déterminer si la valeur évolue en faveur ou en défaveur de Pittsburgh.</li>
-                                  <li>• Détection d'un éventuel closing line value (CLV) et influence du sharp money par rapport au public money.</li>
-                                </ul>
+                                <div className="space-y-3">
+                                  <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                    <p className="text-white/80 text-sm">• Analyse de la probabilité implicite du marché pour Pittsburgh, obtenue par conversion des cotes en pourcentage réel.</p>
+                                  </div>
+                                  <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                    <p className="text-white/80 text-sm">• Comparaison inter-bookmakers pour identifier la meilleure cote disponible ("best price") et mesurer l'efficience du marché.</p>
+                                  </div>
+                                  <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                    <p className="text-white/80 text-sm">• Observation du mouvement de ligne (line movement) afin de déterminer si la valeur évolue en faveur ou en défaveur de Pittsburgh.</p>
+                                  </div>
+                                  <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                    <p className="text-white/80 text-sm">• Détection d'un éventuel closing line value (CLV) et influence du sharp money par rapport au public money.</p>
+                                  </div>
+                                </div>
                               </div>
                             </div>
 
@@ -680,24 +696,40 @@ const Index = () => {
                             </h3>
                             
                             <div className="space-y-3">
-                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                              <div>
                                 <h4 className="text-white font-bold text-sm mb-2">Analyse — Marché & pricing (Vegas)</h4>
-                                <ul className="text-white/80 text-sm space-y-1.5 ml-4">
-                                  <li>• Analyse de la probabilité implicite du marché pour Vegas, obtenue par conversion des cotes en pourcentage réel.</li>
-                                  <li>• Comparaison inter-bookmakers pour identifier la meilleure cote disponible ("best price") et mesurer l'efficience du marché.</li>
-                                  <li>• Observation du mouvement de ligne (line movement) afin de déterminer si la valeur évolue en faveur ou en défaveur de Vegas.</li>
-                                  <li>• Détection d'un éventuel closing line value (CLV) et influence du sharp money par rapport au public money.</li>
-                                </ul>
+                                <div className="space-y-3">
+                                  <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                    <p className="text-white/80 text-sm">• Analyse de la probabilité implicite du marché pour Vegas, obtenue par conversion des cotes en pourcentage réel.</p>
+                                  </div>
+                                  <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                    <p className="text-white/80 text-sm">• Comparaison inter-bookmakers pour identifier la meilleure cote disponible ("best price") et mesurer l'efficience du marché.</p>
+                                  </div>
+                                  <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                    <p className="text-white/80 text-sm">• Observation du mouvement de ligne (line movement) afin de déterminer si la valeur évolue en faveur ou en défaveur de Vegas.</p>
+                                  </div>
+                                  <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                    <p className="text-white/80 text-sm">• Détection d'un éventuel closing line value (CLV) et influence du sharp money par rapport au public money.</p>
+                                  </div>
+                                </div>
                               </div>
                               
-                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                              <div>
                                 <h4 className="text-white font-bold text-sm mb-2">Analyse — Marché & pricing (Tampa Bay)</h4>
-                                <ul className="text-white/80 text-sm space-y-1.5 ml-4">
-                                  <li>• Analyse de la probabilité implicite du marché pour Tampa Bay, obtenue par conversion des cotes en pourcentage réel.</li>
-                                  <li>• Comparaison inter-bookmakers pour identifier la meilleure cote disponible ("best price") et mesurer l'efficience du marché.</li>
-                                  <li>• Observation du mouvement de ligne (line movement) afin de déterminer si la valeur évolue en faveur ou en défaveur de Tampa Bay.</li>
-                                  <li>• Détection d'un éventuel closing line value (CLV) et influence du sharp money par rapport au public money.</li>
-                                </ul>
+                                <div className="space-y-3">
+                                  <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                    <p className="text-white/80 text-sm">• Analyse de la probabilité implicite du marché pour Tampa Bay, obtenue par conversion des cotes en pourcentage réel.</p>
+                                  </div>
+                                  <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                    <p className="text-white/80 text-sm">• Comparaison inter-bookmakers pour identifier la meilleure cote disponible ("best price") et mesurer l'efficience du marché.</p>
+                                  </div>
+                                  <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                    <p className="text-white/80 text-sm">• Observation du mouvement de ligne (line movement) afin de déterminer si la valeur évolue en faveur ou en défaveur de Tampa Bay.</p>
+                                  </div>
+                                  <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                    <p className="text-white/80 text-sm">• Détection d'un éventuel closing line value (CLV) et influence du sharp money par rapport au public money.</p>
+                                  </div>
+                                </div>
                               </div>
                             </div>
 
