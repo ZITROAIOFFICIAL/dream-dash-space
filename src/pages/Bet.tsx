@@ -54,7 +54,7 @@ const Bet = () => {
                   </div>
                 </div>
                 <div className="flex items-center justify-center gap-1">
-                  <p className="text-white/70 text-[9px] uppercase font-semibold tracking-tight">
+                  <p className="uppercase font-semibold tracking-tight -bottom-0.5 text-white">
                     Selon 482 variables analysées par notre IA
                   </p>
                   <span className="text-white/50">•</span>
