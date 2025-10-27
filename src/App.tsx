@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Bet from "./pages/Bet";
 import Strategy from "./pages/Strategy";
 import Historique from "./pages/Historique";
+import HistoriqueParlay from "./pages/HistoriqueParlay";
 import Parlay from "./pages/Parlay";
 import Support from "./pages/Support";
 import MonCompte from "./pages/MonCompte";
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/" element={<Bet />} />
           <Route path="/strategie" element={<Strategy />} />
           <Route path="/historique" element={<Historique />} />
+          <Route path="/historique-parlay" element={<HistoriqueParlay />} />
           <Route path="/parlay" element={<Parlay />} />
           <Route path="/support" element={<Support />} />
           <Route path="/mon-compte" element={<MonCompte />} />

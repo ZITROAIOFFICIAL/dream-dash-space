@@ -11,11 +11,12 @@ const Sidebar = () => {
   const menuItems = [
     { label: "BET DU JOUR", path: "/" },
     { label: "PARLAY DU JOUR", path: "/parlay" },
+    { label: "HISTORIQUE BET DU JOUR", path: "/historique" },
+    { label: "HISTORIQUE PARLAY DU JOUR", path: "/historique-parlay" },
     { label: "NOTRE STRATÉGIE", path: "/strategie" },
-    { label: "HISTORIQUE", path: "/historique" },
-    { label: "SUPPORT", path: "/support" },
     { label: "MON COMPTE", path: "/mon-compte" },
     { label: "BOUTIQUE", path: "/boutique" },
+    { label: "SUPPORT", path: "/support" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
