@@ -43,24 +43,26 @@ const Bet = () => {
           <Card className="w-full max-w-md bg-black border-2 border-primary shadow-2xl overflow-hidden mx-auto">
             <CardHeader className="space-y-4 p-0">
               {/* AI Analysis */}
-              <div className="bg-green-600/80 px-6 py-3 text-center space-y-1 rounded-t-lg">
-                <h2 className="text-white text-sm uppercase">Analyse de notre <span className="font-bold">IA</span></h2>
+              <div className="bg-green-600/80 px-6 py-3 rounded-t-lg relative">
+                <h2 className="text-white text-sm uppercase text-center mb-3">Analyse de notre <span className="font-bold">IA</span></h2>
+                
+                {/* Bouton en haut à droite */}
+                <button onClick={handleShowAnalysis} disabled={isLoadingAnalysis || showAnalysis} className="absolute top-3 right-3 text-[9px] uppercase font-bold text-black bg-white px-2 py-1 rounded hover:bg-white/90 disabled:bg-white/50 transition-colors">
+                  {isLoadingAnalysis ? "Analyse en cours..." : showAnalysis ? "Analyse affichée" : "Voir l'analyse"}
+                </button>
+
                 <div className="flex justify-center">
-                  <div className="bg-black border-2 border-green-500 rounded-lg px-6 py-2">
-                    <div className="text-base font-black text-green-500">
-                      <span className="text-xl">92%</span>
-                      <span className="text-xs uppercase"> de chance de gagner</span>
+                  <div className="bg-black border-2 border-green-500 rounded-lg px-6 py-3">
+                    <div className="text-base font-black text-green-500 text-center">
+                      <div className="text-xl">92%</div>
+                      <div className="text-xs uppercase mt-1">de chance de gagner</div>
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center justify-center gap-2">
-                  <p className="text-[8px] uppercase font-semibold tracking-tight text-white">
-                    Selon 482 variables analysées par notre IA
-                  </p>
-                  <button onClick={handleShowAnalysis} disabled={isLoadingAnalysis || showAnalysis} className="text-[9px] uppercase font-bold text-black bg-white px-2 py-1 rounded hover:bg-white/90 disabled:bg-white/50 transition-colors">
-                    {isLoadingAnalysis ? "Analyse en cours..." : showAnalysis ? "Analyse affichée" : "Voir l'analyse"}
-                  </button>
-                </div>
+                
+                <p className="text-[8px] uppercase font-semibold tracking-tight text-white text-center mt-2">
+                  Selon 482 variables analysées par notre IA
+                </p>
 
                 {/* Loading Animation */}
                 {isLoadingAnalysis && <div className="mt-4 space-y-2 animate-fade-in">
