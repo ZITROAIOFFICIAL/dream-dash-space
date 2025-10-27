@@ -43,7 +43,7 @@ const Sidebar = () => {
       >
         <div className="flex flex-col h-full">
           {/* Header with logo and close button */}
-          <div className="h-16 border-b border-white/10 flex items-center justify-center relative">
+          <div className="h-16 flex items-center justify-center relative">
           <h1 className="text-2xl font-bold leading-none">
             <span className="text-white">WIN</span>
             <span className="text-sidebar-primary">A</span>
@@ -83,7 +83,7 @@ const Sidebar = () => {
           </nav>
 
           {/* Footer */}
-          <div className="p-4 border-t border-white/10">
+          <div className="p-4">
             <div className="text-xs text-center text-white/60">
               © 2024 WINABET.AI
             </div>

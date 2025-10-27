@@ -11,7 +11,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       <Sidebar />
       
       {/* Header with centered logo */}
-      <header className="fixed top-0 left-0 right-0 h-16 bg-background border-b border-border z-30 flex items-center justify-center md:left-64">
+      <header className="fixed top-0 left-0 right-0 h-16 bg-background z-30 flex items-center justify-center md:left-64">
         <h1 className="text-2xl font-bold leading-none">
           <span className="text-foreground">WIN</span>
           <span className="text-sidebar-primary">A</span>
