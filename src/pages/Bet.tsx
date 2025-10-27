@@ -83,7 +83,15 @@ const Bet = () => {
                 {/* Detailed Analysis */}
                 {showAnalysis && !isLoadingAnalysis && (
                   <div className="mt-4 bg-black/40 rounded-lg p-4 text-left space-y-3 animate-fade-in border border-green-500/30">
-                    <h3 className="text-white font-bold text-sm text-center mb-3">📊 Analyse Détaillée</h3>
+                    <div className="flex items-center justify-between mb-3">
+                      <h3 className="text-white font-bold text-sm">📊 Analyse Détaillée</h3>
+                      <button 
+                        onClick={() => setShowAnalysis(false)}
+                        className="text-white/50 hover:text-white transition-colors"
+                      >
+                        ✕
+                      </button>
+                    </div>
                     
                     <div className="space-y-2 text-xs">
                       <div className="bg-white/5 p-2 rounded">
