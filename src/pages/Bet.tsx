@@ -12,7 +12,6 @@ const Bet = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [showAnalysis, setShowAnalysis] = useState(false);
   const [isLoadingAnalysis, setIsLoadingAnalysis] = useState(false);
-
   const handleShowAnalysis = () => {
     setIsLoadingAnalysis(true);
     setTimeout(() => {
@@ -59,36 +58,32 @@ const Bet = () => {
                     Selon 482 variables analysées par notre IA
                   </p>
                   <span className="text-white/50">•</span>
-                  <button 
-                    onClick={handleShowAnalysis}
-                    disabled={isLoadingAnalysis || showAnalysis}
-                    className="text-[9px] uppercase font-semibold text-white underline hover:text-white/80 disabled:text-white/50 disabled:no-underline transition-colors"
-                  >
+                  <button onClick={handleShowAnalysis} disabled={isLoadingAnalysis || showAnalysis} className="text-[9px] uppercase font-semibold text-white underline hover:text-white/80 disabled:text-white/50 disabled:no-underline transition-colors">
                     {isLoadingAnalysis ? "Analyse en cours..." : showAnalysis ? "Analyse affichée" : "Voir l'analyse"}
                   </button>
                 </div>
 
                 {/* Loading Animation */}
-                {isLoadingAnalysis && (
-                  <div className="mt-4 space-y-2 animate-fade-in">
+                {isLoadingAnalysis && <div className="mt-4 space-y-2 animate-fade-in">
                     <div className="flex items-center justify-center gap-2">
-                      <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                      <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                      <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                      <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{
+                    animationDelay: '0ms'
+                  }}></div>
+                      <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{
+                    animationDelay: '150ms'
+                  }}></div>
+                      <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{
+                    animationDelay: '300ms'
+                  }}></div>
                     </div>
                     <p className="text-white/60 text-xs">L'IA analyse les données...</p>
-                  </div>
-                )}
+                  </div>}
 
                 {/* Detailed Analysis */}
-                {showAnalysis && !isLoadingAnalysis && (
-                  <div className="mt-4 bg-black/40 rounded-lg p-4 text-left space-y-3 animate-fade-in border border-green-500/30">
+                {showAnalysis && !isLoadingAnalysis && <div className="mt-4 bg-black/40 rounded-lg p-4 text-left space-y-3 animate-fade-in border border-green-500/30">
                     <div className="flex items-center justify-between mb-3">
                       <h3 className="text-white font-bold text-sm">📊 Analyse Détaillée</h3>
-                      <button 
-                        onClick={() => setShowAnalysis(false)}
-                        className="text-white/50 hover:text-white transition-colors"
-                      >
+                      <button onClick={() => setShowAnalysis(false)} className="text-white/50 hover:text-white transition-colors">
                         ✕
                       </button>
                     </div>
@@ -131,8 +126,7 @@ const Bet = () => {
                         forme actuelle, blessures, conditions de jeu et tendances du marché.
                       </p>
                     </div>
-                  </div>
-                )}
+                  </div>}
               </div>
 
               {/* Odds Display */}
@@ -218,7 +212,7 @@ const Bet = () => {
                     </DialogContent>
                   </Dialog>
                   
-                  <div className="px-4 py-3 bg-primary/20 border-2 border-primary rounded-2xl text-center">
+                  <div className="bg-primary/20 border-2 border-primary rounded-2xl text-center py-[25px] px-0">
                     <div className="text-white/70 text-xs mb-1">Cashout x{multiplier.toFixed(2)} →</div>
                     <div className="text-primary font-bold text-lg">${calculateReturn(betAmount)}</div>
                   </div>
