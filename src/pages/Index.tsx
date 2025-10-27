@@ -152,7 +152,7 @@ const Index = () => {
                       <div className="text-center pb-2 px-6 flex items-center justify-center gap-2">
                         <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
                         <span className="text-white/70 text-sm">
-                          Dernière mise à jour IA : {currentTime.toLocaleTimeString('fr-FR', {
+                          Dernière mise à jour IA pour ce bet : {currentTime.toLocaleTimeString('fr-FR', {
                           hour: '2-digit',
                           minute: '2-digit'
                         })}
@@ -912,7 +912,7 @@ const Index = () => {
                       <div className="text-center pb-2 px-6 flex items-center justify-center gap-2">
                         <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
                         <span className="text-white/70 text-sm">
-                          Dernière mise à jour IA : {currentTime.toLocaleTimeString('fr-FR', {
+                          Dernière mise à jour IA pour ce bet : {currentTime.toLocaleTimeString('fr-FR', {
                           hour: '2-digit',
                           minute: '2-digit'
                         })}
