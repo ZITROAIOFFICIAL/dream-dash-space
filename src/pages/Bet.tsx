@@ -155,7 +155,7 @@ const Bet = () => {
 
                   {/* Tampa Bay */}
                   <div className="flex flex-col items-center gap-1">
-                    <div className="bg-primary/20 border-2 border-green-600 rounded-sm p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[17px]">
+                    <div className="bg-green-600/15 border-2 border-green-600 rounded-sm p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[17px]">
                       <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
                         <img src={tampaLogo} alt="Tampa Bay" className="w-7 h-7 object-contain" />
                       </div>
@@ -210,7 +210,7 @@ const Bet = () => {
                     </DialogContent>
                   </Dialog>
                   
-                  <div className="bg-primary/20 border-2 border-green-600 rounded-sm text-center py-[25px] px-0">
+                  <div className="bg-green-600/15 border-2 border-green-600 rounded-sm text-center py-[25px] px-0">
                     <div className="text-white/70 text-xs mb-1">Cashout x{multiplier.toFixed(2)} →</div>
                     <div className="text-green-400 font-bold text-lg">${calculateReturn(betAmount)}</div>
                     <div className="text-white text-[10px] mt-0.5">
