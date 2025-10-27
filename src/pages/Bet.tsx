@@ -12,15 +12,15 @@ const Bet = () => {
   const [customAmount, setCustomAmount] = useState<string>("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [showAnalysis, setShowAnalysis] = useState(false);
-  const [isLoadingAnalysis, setIsLoadingAnalysis] = useState(false);
+  const [isLoadingDialogOpen, setIsLoadingDialogOpen] = useState(false);
   const [isAnalysisDialogOpen, setIsAnalysisDialogOpen] = useState(false);
   const handleShowAnalysis = () => {
-    setIsAnalysisDialogOpen(true);
-    setIsLoadingAnalysis(true);
+    setIsLoadingDialogOpen(true);
     setTimeout(() => {
-      setIsLoadingAnalysis(false);
+      setIsLoadingDialogOpen(false);
+      setIsAnalysisDialogOpen(true);
       setShowAnalysis(true);
-    }, 2000);
+    }, 3000);
   };
   const odds = -136;
   const multiplier = 1 + 100 / Math.abs(odds);
@@ -62,6 +62,22 @@ const Bet = () => {
                   <span className="font-bold text-white text-4xl">92%</span>
                   <span className="text-white text-xs font-bold">DE CHANCE DE GAGNER SELON NOTRE IA</span>
                 </div>
+                {/* Loading Dialog */}
+                <Dialog open={isLoadingDialogOpen} onOpenChange={setIsLoadingDialogOpen}>
+                  <DialogContent className="sm:max-w-md bg-black border-none p-0 flex items-center justify-center [&>button]:hidden">
+                    <div className="w-full h-full min-h-[400px] bg-black flex flex-col items-center justify-center gap-8 p-12">
+                      <div className="relative w-24 h-24 flex-shrink-0">
+                        <Loader2 className="w-24 h-24 text-white animate-spin absolute" />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <span className="text-white font-bold text-2xl">IA</span>
+                        </div>
+                      </div>
+                      <span className="text-white font-semibold text-xl">winabet.ai</span>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+
+                {/* Analysis Dialog */}
                 <Dialog open={isAnalysisDialogOpen} onOpenChange={setIsAnalysisDialogOpen}>
                   <DialogTrigger asChild>
                     <button onClick={handleShowAnalysis} className="px-3 py-1 bg-black rounded border-2 border-green-600 font-bold text-green-400 text-xs hover:bg-green-600/20 transition-colors">
@@ -88,20 +104,8 @@ const Bet = () => {
                     </DialogHeader>
 
                     <div className="px-6 pb-6">
-                      {/* Loading Animation */}
-                      {isLoadingAnalysis && (
-                        <div className="mt-4 space-y-2 animate-fade-in">
-                          <div className="flex items-center justify-center gap-2">
-                            <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                            <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                            <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
-                          </div>
-                          <p className="text-white/60 text-xs text-center">L'IA analyse les données...</p>
-                        </div>
-                      )}
-
                       {/* Detailed Analysis */}
-                      {showAnalysis && !isLoadingAnalysis && (
+                      {showAnalysis && (
                         <div className="mt-4 space-y-4 animate-fade-in">
                           {/* AI Confidence Section */}
                           <div className="bg-green-600/15 border-2 border-green-600 rounded-lg p-4">
