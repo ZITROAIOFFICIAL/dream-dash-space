@@ -45,7 +45,7 @@ const Bet = () => {
               {/* AI Analysis */}
               <div className="px-6 py-3 rounded-t-lg bg-[#00df57]/80">
                 <div className="flex justify-center mb-3">
-                  <span className="font-bold text-white">DRAFTKINGS</span>
+                  <span className="text-white text-sm font-extrabold">DRAFTKINGS</span>
                 </div>
 
                 <div className="flex justify-center">
