@@ -1,8 +1,18 @@
 import DashboardLayout from "@/components/DashboardLayout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { TrendingUp, Target, DollarSign, Award } from "lucide-react";
+import { useState, useEffect } from "react";
 
 const Index = () => {
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
   const stats = [
     {
       title: "Taux de Réussite",
@@ -37,6 +47,15 @@ const Index = () => {
   return (
     <DashboardLayout>
       <div className="space-y-8">
+        <div className="mb-2">
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+            <span className="text-white/70 text-sm">
+              Dernière mise à jour IA : {currentTime.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
+            </span>
+          </div>
+        </div>
+
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-white mb-2">
             Paris Recommandés
