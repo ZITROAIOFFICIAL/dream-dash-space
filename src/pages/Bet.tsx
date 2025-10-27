@@ -154,9 +154,10 @@ const Bet = () => {
                         </div>
                         <span className="text-white font-semibold text-center text-xs">2857 DONNÉES ANALYSÉ PAR NOTRE IA POUR CE BET JUSQU'À PRÉSENT</span>
                       </div>
-                      <div className="text-center pb-2 px-6">
+                      <div className="text-center pb-2 px-6 flex items-center justify-center gap-2">
+                        <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
                         <span className="text-white/70 text-[10px]">
-                          Dernière mise à jour : {currentTime.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
+                          Dernière mise à jour IA : {currentTime.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
                         </span>
                       </div>
                     </div>
