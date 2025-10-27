@@ -40,7 +40,7 @@ const Bet = () => {
         </div>
 
         <div className="grid gap-6 justify-center">
-          <Card className="w-full max-w-md bg-black border-2 border-primary shadow-2xl overflow-hidden mx-auto rounded-sm">
+          <Card className="w-full max-w-md bg-black border-2 border-green-600 shadow-2xl overflow-hidden mx-auto rounded-sm">
             <CardHeader className="space-y-4 p-0">
               {/* AI Analysis */}
               <div className="flex items-center justify-center gap-2 text-xs py-[10px] bg-green-600 px-4">
