@@ -56,13 +56,12 @@ const Bet = () => {
                     <div className="text-base font-black text-green-500 text-center">
                       <div className="text-xl">92%</div>
                       <div className="text-xs uppercase mt-1">de chance de gagner</div>
+                      <p className="text-[8px] uppercase font-semibold tracking-tight text-white mt-2">
+                        Selon 482 variables analysées par notre IA
+                      </p>
                     </div>
                   </div>
                 </div>
-                
-                <p className="text-[8px] uppercase font-semibold tracking-tight text-white text-center mt-2">
-                  Selon 482 variables analysées par notre IA
-                </p>
 
                 {/* Loading Animation */}
                 {isLoadingAnalysis && <div className="mt-4 space-y-2 animate-fade-in">
