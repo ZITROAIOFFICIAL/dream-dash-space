@@ -82,6 +82,9 @@ const Bet = () => {
                         <span className="text-white">BET</span>
                         <span className="text-primary text-sm">.AI</span>
                       </h1>
+                      <p className="text-white/70 text-sm text-center max-w-xs">
+                        CHARGEMENT DE NOTRE IA ET DES DONNÉES LES PLUS RÉCENTES...
+                      </p>
                     </div>
                   </DialogContent>
                 </Dialog>
