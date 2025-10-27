@@ -213,7 +213,7 @@ const Bet = () => {
                   <div className="bg-primary/20 border-2 border-primary rounded-sm text-center py-[25px] px-0">
                     <div className="text-white/70 text-xs mb-1">Cashout x{multiplier.toFixed(2)} →</div>
                     <div className="text-primary font-bold text-lg">${calculateReturn(betAmount)}</div>
-                    <div className="text-primary/70 text-[10px] mt-0.5">
+                    <div className="text-white text-[10px] mt-0.5">
                       +${(parseFloat(calculateReturn(betAmount)) - parseFloat(betAmount)).toFixed(2)} bénéfice
                     </div>
                   </div>
