@@ -59,12 +59,6 @@ const Bet = () => {
               {/* AI Analysis */}
               <div className="flex items-center justify-between gap-2 text-xs py-[10px] bg-green-600 px-4">
                 <div className="flex items-center gap-2">
-                  <div className="relative w-8 h-8 flex-shrink-0">
-                    <Loader2 className="w-8 h-8 text-white animate-spin absolute" />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-white font-bold text-[10px]">IA</span>
-                    </div>
-                  </div>
                   <span className="font-bold text-white text-4xl">92%</span>
                   <span className="text-white text-xs font-bold">DE CHANCE DE GAGNER SELON NOTRE IA</span>
                 </div>
