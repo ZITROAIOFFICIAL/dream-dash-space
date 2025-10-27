@@ -95,7 +95,10 @@ const Bet = () => {
                         <div className="mt-4 space-y-4 animate-fade-in">
                           {/* 1) Spécial Teams */}
                           <div className="bg-black/40 rounded-lg p-4 border border-green-600/30">
-                            <h4 className="text-white font-bold text-sm mb-3">✅ 1) Spécial Teams</h4>
+                            <h4 className="text-white font-bold text-sm mb-3 flex items-center gap-2">
+                              <Loader2 className="w-4 h-4 text-green-400 animate-spin" />
+                              ✅ 1) Spécial Teams
+                            </h4>
                             <div className="space-y-3 text-xs">
                               <div className="bg-white/5 p-3 rounded">
                                 <div className="text-white/90 font-semibold mb-1">Power Play — Vegas</div>
@@ -118,7 +121,10 @@ const Bet = () => {
 
                           {/* 2) Possession & Qualité offensive */}
                           <div className="bg-black/40 rounded-lg p-4 border border-green-600/30">
-                            <h4 className="text-white font-bold text-sm mb-3">✅ 2) Possession & Qualité offensive</h4>
+                            <h4 className="text-white font-bold text-sm mb-3 flex items-center gap-2">
+                              <Loader2 className="w-4 h-4 text-green-400 animate-spin" />
+                              ✅ 2) Possession & Qualité offensive
+                            </h4>
                             <div className="space-y-3 text-xs">
                               <div className="bg-white/5 p-3 rounded">
                                 <div className="text-white/90 font-semibold mb-1">xG (Expected Goals) — Vegas</div>
@@ -141,7 +147,10 @@ const Bet = () => {
 
                           {/* 3) Gardien / Défense */}
                           <div className="bg-black/40 rounded-lg p-4 border border-green-600/30">
-                            <h4 className="text-white font-bold text-sm mb-3">✅ 3) Gardien / Défense</h4>
+                            <h4 className="text-white font-bold text-sm mb-3 flex items-center gap-2">
+                              <Loader2 className="w-4 h-4 text-green-400 animate-spin" />
+                              ✅ 3) Gardien / Défense
+                            </h4>
                             <div className="space-y-3 text-xs">
                               <div className="bg-white/5 p-3 rounded">
                                 <div className="text-white/90 font-semibold mb-1">Performance du gardien — Vegas</div>
@@ -164,7 +173,10 @@ const Bet = () => {
 
                           {/* 4) Alignement & santé de l'effectif */}
                           <div className="bg-black/40 rounded-lg p-4 border border-green-600/30">
-                            <h4 className="text-white font-bold text-sm mb-3">✅ 4) Alignement & santé de l'effectif</h4>
+                            <h4 className="text-white font-bold text-sm mb-3 flex items-center gap-2">
+                              <Loader2 className="w-4 h-4 text-green-400 animate-spin" />
+                              ✅ 4) Alignement & santé de l'effectif
+                            </h4>
                             <div className="space-y-3 text-xs">
                               <div className="bg-white/5 p-3 rounded">
                                 <div className="text-white/90 font-semibold mb-1">Alignement/Top-6 — Vegas</div>
@@ -187,7 +199,10 @@ const Bet = () => {
 
                           {/* 5) Contexte & fatigue */}
                           <div className="bg-black/40 rounded-lg p-4 border border-green-600/30">
-                            <h4 className="text-white font-bold text-sm mb-3">✅ 5) Contexte & fatigue</h4>
+                            <h4 className="text-white font-bold text-sm mb-3 flex items-center gap-2">
+                              <Loader2 className="w-4 h-4 text-green-400 animate-spin" />
+                              ✅ 5) Contexte & fatigue
+                            </h4>
                             <div className="space-y-3 text-xs">
                               <div className="bg-white/5 p-3 rounded">
                                 <div className="text-white/90 font-semibold mb-1">Fatigue / Calendrier — Vegas</div>
@@ -210,7 +225,10 @@ const Bet = () => {
 
                           {/* 6) Marché / Value */}
                           <div className="bg-black/40 rounded-lg p-4 border border-green-600/30">
-                            <h4 className="text-white font-bold text-sm mb-3">✅ 6) Marché / Value</h4>
+                            <h4 className="text-white font-bold text-sm mb-3 flex items-center gap-2">
+                              <Loader2 className="w-4 h-4 text-green-400 animate-spin" />
+                              ✅ 6) Marché / Value
+                            </h4>
                             <div className="space-y-3 text-xs">
                               <div className="bg-white/5 p-3 rounded">
                                 <div className="text-white/90 font-semibold mb-1">Lecture du marché — Vegas</div>
