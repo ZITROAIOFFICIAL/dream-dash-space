@@ -46,9 +46,7 @@ const Bet = () => {
               {/* AI Data Analysis Counter */}
               <div className="flex items-center justify-center gap-3 py-2 px-6 bg-black/40">
                 <Loader2 className="w-5 h-5 text-white animate-spin" />
-                <span className="text-white text-xs font-semibold text-center">
-                  NOTRE IA A ANALYSÉ 2857 DONNÉES POUR CE BET JUSQU'À PRÉSENT
-                </span>
+                <span className="text-white text-xs font-semibold text-center">2857 DONNÉESANALYSÉ JUSQU'À PRÉSENT</span>
               </div>
 
               {/* AI Analysis */}
