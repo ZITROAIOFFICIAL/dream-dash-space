@@ -543,9 +543,8 @@ const Bet = () => {
                           </div>
 
                           <div className="mt-3 pt-3 border-t border-white/10">
-                            <p className="text-white/60 text-[10px] italic text-center">
-                              ⚡ Analyse basée sur 482 variables incluant statistiques historiques, 
-                              forme actuelle, blessures, conditions de jeu et tendances du marché.
+                            <p className="text-white/60 text-[10px] italic text-center flex items-center justify-center gap-2">
+                              L'ÉTAT DE NOTRE IA : <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> RÉSULTAT À JOUR À L'INSTANT MÊME
                             </p>
                           </div>
                         </div>}
