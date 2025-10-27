@@ -43,9 +43,11 @@ const Bet = () => {
           <Card className="w-full max-w-md bg-black border-2 border-primary shadow-2xl overflow-hidden mx-auto">
             <CardHeader className="space-y-4 p-0">
               {/* AI Analysis */}
-              <button onClick={handleShowAnalysis} disabled={isLoadingAnalysis || showAnalysis} className="bg-white px-6 py-3 rounded-t-lg w-full hover:bg-white/90 disabled:bg-white/60 transition-colors cursor-pointer">
-                <div className="flex flex-col items-center gap-0.5 mb-3">
-                  <h2 className="text-black text-sm uppercase text-center font-bold">Analyse de notre <span className="font-extrabold">IA</span></h2>
+              <div className="bg-green-600/80 px-6 py-3 rounded-t-lg">
+                <div className="flex justify-center mb-3">
+                  <button onClick={handleShowAnalysis} disabled={isLoadingAnalysis || showAnalysis} className="bg-white px-4 py-2 rounded-lg hover:bg-white/90 disabled:bg-white/60 transition-colors cursor-pointer">
+                    <h2 className="text-black text-sm uppercase text-center font-bold">Analyse de notre <span className="font-extrabold">IA</span></h2>
+                  </button>
                 </div>
 
                 <div className="flex justify-center">
@@ -77,7 +79,7 @@ const Bet = () => {
                     </div>
                     <p className="text-white/60 text-xs">L'IA analyse les données...</p>
                   </div>}
-              </button>
+              </div>
 
               {/* Detailed Analysis */}
               {showAnalysis && !isLoadingAnalysis && <div className="mt-4 bg-black/40 rounded-lg p-4 mx-6 text-left space-y-3 animate-fade-in border border-green-500/30">
