@@ -105,16 +105,14 @@ const Bet = () => {
                         <div className="mt-4 space-y-4 animate-fade-in">
                           {/* AI Confidence Section */}
                           <div className="bg-green-600/15 border-2 border-green-600 rounded-lg p-4">
-                            <div className="flex items-center justify-between mb-2">
-                              <span className="text-white font-bold text-sm">🎯 Niveau de Confiance IA</span>
-                              <span className="text-green-400 font-bold text-2xl">92%</span>
+                            <div className="text-center space-y-2">
+                              <div className="text-white font-bold text-sm">CHANCE DE GAGNER</div>
+                              <div className="text-green-400 font-bold text-4xl">92%</div>
+                              <div className="text-white/70 text-xs">STATISTIQUEMENT AVEC TOUTES CES DONNÉES CI-DESSOUS ANALYSÉES</div>
                             </div>
-                            <div className="w-full bg-black/40 rounded-full h-3 overflow-hidden">
+                            <div className="w-full bg-black/40 rounded-full h-3 overflow-hidden mt-3">
                               <div className="bg-green-600 h-full rounded-full" style={{ width: '92%' }}></div>
                             </div>
-                            <p className="text-white/60 text-[10px] mt-2 text-center italic">
-                              ⚡ Confiance élevée basée sur la convergence de multiples indicateurs positifs
-                            </p>
                           </div>
 
                           {/* 1) Spécial Teams */}
