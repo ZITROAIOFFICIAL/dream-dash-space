@@ -52,7 +52,7 @@ const Sidebar = () => {
       >
         <div className="flex flex-col h-full">
           {/* Header with logo */}
-          <div className="h-16 flex items-center justify-center relative border-b border-white/10">
+          <div className="py-4 flex items-center justify-center">
             <h1 className="text-2xl font-bold leading-none">
               <span className="text-white">WIN</span>
               <span className="text-sidebar-primary">A</span>
@@ -62,7 +62,7 @@ const Sidebar = () => {
           </div>
 
           {/* AI Update Indicator */}
-          <div className="px-4 py-3 border-b border-white/10">
+          <div className="bg-black py-2 px-4 flex items-center justify-center">
             <AIUpdateIndicator />
           </div>
 
