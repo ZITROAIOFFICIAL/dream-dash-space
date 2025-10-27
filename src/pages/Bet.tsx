@@ -40,12 +40,20 @@ const Bet = () => {
         </div>
 
         <div className="grid gap-6 justify-center">
-          <Card className="w-full max-w-md bg-black border-2 border-primary shadow-2xl overflow-hidden mx-auto rounded-sm">
+          <Card className="w-full max-w-md bg-black border-2 border-green-600 shadow-2xl overflow-hidden mx-auto rounded-sm">
             <CardHeader className="space-y-4 p-0">
               {/* AI Analysis */}
-              <div className="flex items-center justify-center gap-2 text-xs py-[10px] bg-green-600 px-4">
-                <span className="px-2 py-1 bg-black rounded-sm border-2 border-green-500 font-bold text-green-400">92%</span>
-                <span className="text-white font-bold text-3xl">DE CHANCE DE GAGNER SELON NOTRE IA</span>
+              <div className="flex items-center justify-between gap-2 text-xs py-[10px] bg-green-600 px-4">
+                <div className="flex items-center gap-2">
+                  <span className="font-bold text-white text-base">92%</span>
+                  <span className="text-white text-sm font-bold">DE CHANCE DE GAGNER SELON NOTRE IA</span>
+                </div>
+                <button 
+                  onClick={handleShowAnalysis}
+                  className="px-3 py-1 bg-black rounded border-2 border-green-600 font-bold text-green-400 text-xs hover:bg-green-600/20 transition-colors"
+                >
+                  Voir ANALYSE IA
+                </button>
               </div>
 
                 {/* Loading Animation */}
@@ -66,7 +74,7 @@ const Bet = () => {
 
 
               {/* Detailed Analysis */}
-              {showAnalysis && !isLoadingAnalysis && <div className="mt-4 bg-black/40 rounded-lg p-4 mx-6 text-left space-y-3 animate-fade-in border border-green-500/30">
+              {showAnalysis && !isLoadingAnalysis && <div className="mt-4 bg-black/40 rounded-lg p-4 mx-6 text-left space-y-3 animate-fade-in border border-green-600/30">
                     <div className="flex items-center justify-between mb-3">
                       <h3 className="text-white font-bold text-sm">📊 Analyse Détaillée</h3>
                       <button onClick={() => setShowAnalysis(false)} className="text-white/50 hover:text-white transition-colors">
@@ -115,15 +123,15 @@ const Bet = () => {
                   </div>}
 
               {/* Odds Display */}
-              <div className="flex justify-center py-0">
+              <div className="flex justify-center py-0 -mt-4">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
-                  PARIER SUR
+                  MONEYLINE MULTIPLICATEUR
                 </div>
               </div>
               
-              <div className="flex justify-center py-0">
-                <div className="bg-primary/20 border-2 border-primary rounded-sm px-6 py-2">
-                  <div className="text-3xl font-black text-primary">
+              <div className="flex justify-center py-0 -mt-6">
+                <div className="bg-green-600/15 border-2 border-green-600 rounded-sm px-6 py-2">
+                  <div className="text-3xl font-black text-green-400">
                     x{multiplier.toFixed(2)}
                   </div>
                 </div>
@@ -155,12 +163,12 @@ const Bet = () => {
 
                   {/* Tampa Bay */}
                   <div className="flex flex-col items-center gap-1">
-                    <div className="bg-primary/20 border-2 border-primary rounded-sm p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[17px]">
+                    <div className="bg-green-600/15 border-2 border-green-600 rounded-sm p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[17px]">
                       <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
                         <img src={tampaLogo} alt="Tampa Bay" className="w-7 h-7 object-contain" />
                       </div>
                       <span className="text-white -bottom-0.5 text-xs font-extrabold ">TAMPA BAY</span>
-                      <div className="text-xs font-bold text-primary">VICTOIRE</div>
+                      <div className="text-xs font-bold text-green-400">VICTOIRE</div>
                     </div>
                   </div>
                 </div>
@@ -169,7 +177,7 @@ const Bet = () => {
               {/* Second "PARIER SUR" text */}
               <div className="flex justify-center py-0">
                 <div className="text-sm font-bold text-white tracking-wider text-center ">
-                  PARIER SUR
+                  VOTRE GAIN
                 </div>
               </div>
 
@@ -178,13 +186,13 @@ const Bet = () => {
                 <div className="grid grid-cols-2 gap-2 px-[10px]">
                   <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                     <DialogTrigger asChild>
-                      <button className="px-4 py-3 bg-transparent border-2 border-white/40 rounded-sm text-center hover:bg-white/5 transition-colors cursor-pointer">
+                      <button className="px-4 py-3 bg-transparent border-2 border-green-600/40 rounded-sm text-center hover:bg-white/5 transition-colors cursor-pointer">
                         <div className="text-white/80 text-xs mb-1">Votre mise</div>
-                        <div className="text-white font-bold text-lg">${betAmount}</div>
-                        <div className="text-primary text-xs mt-1 font-semibold px-[5px]">Modifier</div>
+                        <div className="text-green-400 font-bold text-lg">${betAmount}</div>
+                        <div className="text-green-400 text-xs mt-1 font-semibold px-[5px]">Modifier</div>
                       </button>
                     </DialogTrigger>
-                    <DialogContent className="sm:max-w-md bg-black border-primary">
+                    <DialogContent className="sm:max-w-md bg-black border-green-600">
                       <DialogHeader>
                         <DialogTitle className="text-white text-center">Modifier votre mise</DialogTitle>
                       </DialogHeader>
@@ -210,9 +218,9 @@ const Bet = () => {
                     </DialogContent>
                   </Dialog>
                   
-                  <div className="bg-primary/20 border-2 border-primary rounded-sm text-center py-[25px] px-0">
+                  <div className="bg-green-600/15 border-2 border-green-600 rounded-sm text-center py-[25px] px-0">
                     <div className="text-white/70 text-xs mb-1">Cashout x{multiplier.toFixed(2)} →</div>
-                    <div className="text-primary font-bold text-lg">${calculateReturn(betAmount)}</div>
+                    <div className="text-green-400 font-bold text-lg">${calculateReturn(betAmount)}</div>
                     <div className="text-white text-[10px] mt-0.5">
                       +${(parseFloat(calculateReturn(betAmount)) - parseFloat(betAmount)).toFixed(2)} bénéfice
                     </div>
@@ -222,10 +230,10 @@ const Bet = () => {
 
               {/* DraftKings Section */}
               <div className="pt-0">
-              <div className="flex items-center justify-center gap-2 text-xs my-0 py-[10px] border-t-2 border-green-500 bg-green-600">
+              <div className="flex items-center justify-center gap-2 text-xs my-0 py-[10px] border-t-2 border-green-600 bg-green-600">
                 <span className="text-white">Meilleur odds:</span>
                 <span className="font-bold text-white">DRAFTKINGS</span>
-                <span className="px-2 py-1 bg-black rounded border-2 border-green-500 font-bold text-green-400">-135</span>
+                <span className="px-2 py-1 bg-black rounded border-2 border-green-600 font-bold text-green-400">-135</span>
               </div>
               </div>
             </CardHeader>
