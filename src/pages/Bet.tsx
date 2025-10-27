@@ -32,17 +32,13 @@ const Bet = () => {
 
         <div className="grid gap-6 justify-center">
           <Card className="w-full max-w-md bg-black border-2 border-primary shadow-2xl overflow-hidden mx-auto">
-            <CardHeader className="space-y-4 pb-4 p-0">
+            <CardHeader className="space-y-4 pb-4 pt-4">
               {/* AI Analysis */}
-              <div className="bg-green-600/80 px-6 py-4 text-center space-y-1">
-                <h2 className="text-white text-sm uppercase">Analyse de notre <span className="font-bold">IA</span></h2>
-                <div className="flex justify-center">
-                  <div className="bg-black border-2 border-green-500 rounded-lg px-6 py-2">
-                    <div className="text-base font-black text-green-500">
-                      <span className="text-xl">92%</span>
-                      <span className="text-xs uppercase"> de chance de gagner</span>
-                    </div>
-                  </div>
+              <div className="text-center space-y-1">
+                <h2 className="text-white text-sm">Analyse de notre <span className="text-primary font-bold">IA</span></h2>
+                <div className="text-xl font-black">
+                  <span className="text-primary">92%</span>
+                  <span className="text-white"> de chance de gagner</span>
                 </div>
               </div>
 
@@ -81,7 +77,7 @@ const Bet = () => {
 
                   {/* Tampa Bay */}
                   <div className="flex flex-col items-center gap-1">
-                    <div className="bg-primary/20 border-2 border-primary rounded-lg p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[25px]">
+                    <div className="bg-primary/20 border-2 border-primary rounded-lg p-2 flex flex-col items-center justify-center gap-1.5">
                       <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
                         <img src={tampaLogo} alt="Tampa Bay" className="w-7 h-7 object-contain" />
                       </div>
@@ -98,7 +94,7 @@ const Bet = () => {
                   <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                     <DialogTrigger asChild>
                       <button className="px-4 py-3 bg-transparent border-2 border-white/40 rounded-2xl text-center hover:bg-white/5 transition-colors cursor-pointer">
-                        <div className="text-white/80 text-xs mb-1">Votre mise</div>
+                        <div className="text-white/80 text-xs mb-1 px-[5px]">Votre mise</div>
                         <div className="text-white font-bold text-lg">${betAmount}</div>
                         <div className="text-primary text-xs mt-1 font-semibold">Modifier</div>
                       </button>
