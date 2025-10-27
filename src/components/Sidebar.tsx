@@ -34,9 +34,9 @@ const Sidebar = () => {
           <X className="h-8 w-8 stroke-[1.2]" />
         ) : (
           <div aria-hidden="true" className="flex flex-col items-center justify-center gap-1.5">
-            <span className="block h-[2px] w-9 bg-white rounded-full"></span>
-            <span className="block h-[2px] w-9 bg-white rounded-full"></span>
-            <span className="block h-[2px] w-9 bg-white rounded-full"></span>
+            <span className="block h-[2px] w-7 bg-white rounded-full"></span>
+            <span className="block h-[2px] w-7 bg-white rounded-full"></span>
+            <span className="block h-[2px] w-7 bg-white rounded-full"></span>
           </div>
         )}
       </Button>
