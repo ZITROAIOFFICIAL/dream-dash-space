@@ -531,6 +531,129 @@
       line-height: 1.6;
     }
 
+    /* Parlay Card */
+    .parlay-card {
+      background: #000000;
+      border: 3px solid #3b82f6;
+      border-radius: 0.125rem;
+      max-width: 42rem;
+      margin: 0 auto;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    .parlay-card + .parlay-card {
+      margin-top: 2rem;
+    }
+
+    .parlay-header {
+      background: #3b82f6;
+      padding: 1rem 1.5rem;
+      text-align: center;
+    }
+
+    .parlay-title {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin: 0;
+    }
+
+    .parlay-stats {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1.5rem;
+      background: rgba(59, 130, 246, 0.2);
+      border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .parlay-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .parlay-stat-label {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .parlay-stat-value {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1.125rem;
+    }
+
+    .parlay-multiplier {
+      color: #3b82f6;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .parlay-content {
+      padding: 1.5rem;
+    }
+
+    .parlay-bets-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .parlay-bet-item {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0.375rem;
+      padding: 1rem;
+    }
+
+    .parlay-bet-number {
+      color: #3b82f6;
+      font-weight: 700;
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .parlay-bet-details {
+      color: #ffffff;
+      font-size: 0.9375rem;
+      line-height: 1.5;
+    }
+
+    .parlay-explanation {
+      background: rgba(59, 130, 246, 0.1);
+      border-left: 3px solid #3b82f6;
+      padding: 1rem;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.875rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .parlay-gain-section {
+      background: rgba(59, 130, 246, 0.1);
+      border: 2px solid #3b82f6;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .parlay-gain-label {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .parlay-gain-value {
+      color: #3b82f6;
+      font-size: 2.25rem;
+      font-weight: 700;
+    }
+
     /* History Card */
     .history-card {
       background: #000000;
@@ -910,56 +1033,56 @@
     </div>
 
     <nav class="sidebar-nav">
-      <a class="nav-item active" onclick="navigateTo(event, 'bet')">
+      <a class="nav-item active" data-page="bet" onclick="navigateTo(event, 'bet')">
         <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v18m9-9H3"/>
         </svg>
         <span>BET DU JOUR</span>
       </a>
 
-      <a class="nav-item" onclick="navigateTo(event, 'parlay')">
+      <a class="nav-item" data-page="parlay" onclick="navigateTo(event, 'parlay')">
         <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
         </svg>
         <span>PARLAY DU JOUR</span>
       </a>
 
-      <a class="nav-item" onclick="navigateTo(event, 'historique-bet')">
+      <a class="nav-item" data-page="historique-bet" onclick="navigateTo(event, 'historique-bet')">
         <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
         </svg>
         <span>HISTORIQUE BET DU JOUR</span>
       </a>
 
-      <a class="nav-item" onclick="navigateTo(event, 'historique-parlay')">
+      <a class="nav-item" data-page="historique-parlay" onclick="navigateTo(event, 'historique-parlay')">
         <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
         </svg>
         <span>HISTORIQUE PARLAY DU JOUR</span>
       </a>
 
-      <a class="nav-item" onclick="navigateTo(event, 'strategy')">
+      <a class="nav-item" data-page="strategy" onclick="navigateTo(event, 'strategy')">
         <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
         </svg>
         <span>NOTRE STRATÉGIE</span>
       </a>
 
-      <a class="nav-item" onclick="navigateTo(event, 'account')">
+      <a class="nav-item" data-page="account" onclick="navigateTo(event, 'account')">
         <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
         </svg>
         <span>MON COMPTE</span>
       </a>
 
-      <a class="nav-item" onclick="navigateTo(event, 'boutique')">
+      <a class="nav-item" data-page="boutique" onclick="navigateTo(event, 'boutique')">
         <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
         </svg>
         <span>BOUTIQUE</span>
       </a>
 
-      <a class="nav-item" onclick="navigateTo(event, 'support')">
+      <a class="nav-item" data-page="support" onclick="navigateTo(event, 'support')">
         <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
         </svg>
@@ -986,8 +1109,9 @@
       <div class="container">
         <h1>Paris Recommandés</h1>
 
-        {% if section.blocks.size > 0 %}
-          {% for block in section.blocks %}
+        {% assign bet_cards = section.blocks | where: 'type', 'bet_card' %}
+        {% if bet_cards.size > 0 %}
+          {% for block in bet_cards %}
             {% if block.settings.show_card %}
               <div class="bet-card" {{ block.shopify_attributes }}>
                 <!-- AI Data Counter -->
@@ -1072,7 +1196,7 @@
         {% else %}
           <div class="card text-center" style="padding: 2rem;">
             <p style="color: rgba(255, 255, 255, 0.6);">
-              Aucune carte de pari ajoutée. Utilisez l'éditeur Shopify pour ajouter vos premières recommandations.
+              Aucune carte de pari ajoutée. Utilisez l'éditeur Shopify pour ajouter vos premières recommandations de type "🎯 Carte Bet du Jour".
             </p>
           </div>
         {% endif %}
@@ -1082,14 +1206,68 @@
     <!-- PAGE 2: PARLAY DU JOUR -->
     <div id="page-parlay" class="page">
       <div class="container">
-        <h1>Parlay du jour</h1>
-        <p class="subtitle">Gérez vos paris combinés</p>
-        
-        <div class="card">
-          <p class="text-center" style="color: rgba(255, 255, 255, 0.6);">
-            Fonctionnalité à venir. Vous pourrez bientôt combiner plusieurs paris pour augmenter vos gains potentiels.
-          </p>
-        </div>
+        <h1>Parlay du Jour</h1>
+        <p class="subtitle">Paris combinés recommandés par notre IA</p>
+
+        {% assign parlay_cards = section.blocks | where: 'type', 'parlay_card' %}
+        {% if parlay_cards.size > 0 %}
+          {% for block in parlay_cards %}
+            {% if block.settings.show_card %}
+              <div class="parlay-card" {{ block.shopify_attributes }}>
+                <div class="parlay-header">
+                  <h2 class="parlay-title">{{ block.settings.parlay_title | default: 'Parlay Triple Gagnant' }}</h2>
+                </div>
+                <div class="parlay-stats">
+                  <div class="parlay-stat">
+                    <span class="parlay-stat-label">DONNÉES IA</span>
+                    <span class="parlay-stat-value">{{ block.settings.ai_data_count | default: 5214 }}</span>
+                  </div>
+                  <div class="parlay-stat">
+                    <span class="parlay-stat-label">CONFIANCE IA</span>
+                    <span class="parlay-stat-value">{{ block.settings.win_percentage | default: 78 }}%</span>
+                  </div>
+                  <div class="parlay-stat">
+                    <span class="parlay-stat-label">MULTIPLICATEUR</span>
+                    <span class="parlay-multiplier">x{{ block.settings.multiplier | default: '5.24' }}</span>
+                  </div>
+                  <div class="parlay-stat">
+                    <span class="parlay-stat-label">PARIS</span>
+                    <span class="parlay-stat-value">{{ block.settings.num_bets | default: 3 }}</span>
+                  </div>
+                </div>
+                <div class="parlay-content">
+                  <div class="parlay-bets-list">
+                    <div class="parlay-bet-item">
+                      <div class="parlay-bet-number">PARI #1</div>
+                      <div class="parlay-bet-details">{{ block.settings.bet1_details | default: 'VEGAS vs TAMPA BAY - VEGAS gagne (x1.74)' }}</div>
+                    </div>
+                    <div class="parlay-bet-item">
+                      <div class="parlay-bet-number">PARI #2</div>
+                      <div class="parlay-bet-details">{{ block.settings.bet2_details | default: 'LAKERS vs CELTICS - LAKERS gagne (x1.92)' }}</div>
+                    </div>
+                    <div class="parlay-bet-item">
+                      <div class="parlay-bet-number">PARI #3</div>
+                      <div class="parlay-bet-details">{{ block.settings.bet3_details | default: 'WARRIORS vs NETS - WARRIORS gagne (x1.56)' }}</div>
+                    </div>
+                  </div>
+                  <div class="parlay-explanation">
+                    {{ block.settings.ai_explanation | default: "Ce parlay combine 3 paris soigneusement sélectionnés par notre IA. Chaque pari a été analysé individuellement avec une haute confiance, et leur combinaison offre un excellent rapport risque/récompense." }}
+                  </div>
+                  <div class="parlay-gain-section">
+                    <div class="parlay-gain-label">GAIN POTENTIEL AVEC 100$</div>
+                    <div class="parlay-gain-value">${{ 100 | times: block.settings.multiplier | default: 5.24 | round: 2 }}</div>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <div class="card text-center" style="padding: 2rem;">
+            <p style="color: rgba(255, 255, 255, 0.6);">
+              Aucune carte de parlay ajoutée. Utilisez l'éditeur Shopify pour ajouter vos premières recommandations de type "🎲 Carte Parlay".
+            </p>
+          </div>
+        {% endif %}
       </div>
     </div>
 
@@ -1624,13 +1802,19 @@
       });
 
       // Show selected page
-      document.getElementById('page-' + pageName).classList.add('active');
+      const targetPage = document.getElementById('page-' + pageName);
+      if (targetPage) {
+        targetPage.classList.add('active');
+      }
 
       // Update active nav item
       document.querySelectorAll('.nav-item').forEach(item => {
         item.classList.remove('active');
       });
-      event.currentTarget.classList.add('active');
+      const navItem = document.querySelector(`.nav-item[data-page="${pageName}"]`);
+      if (navItem) {
+        navItem.classList.add('active');
+      }
 
       // Close mobile sidebar
       if (isMobileSidebarOpen) {
@@ -1689,22 +1873,14 @@
 
       // Handle hash navigation
       const hash = window.location.hash.substring(1);
-      if (hash) {
-        const navItem = document.querySelector(`[onclick*="${hash}"]`);
-        if (navItem) {
-          navigateTo({ currentTarget: navItem, preventDefault: () => {} }, hash);
-        }
-      }
+      navigateTo(null, hash || 'bet');
     });
 
     // Handle browser back/forward
     window.addEventListener('hashchange', () => {
       const hash = window.location.hash.substring(1);
       if (hash) {
-        const navItem = document.querySelector(`[onclick*="${hash}"]`);
-        if (navItem) {
-          navigateTo({ currentTarget: navItem, preventDefault: () => {} }, hash);
-        }
+        navigateTo(null, hash);
       }
     });
   </script>
