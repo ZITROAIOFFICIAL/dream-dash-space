@@ -44,7 +44,10 @@ const Bet = () => {
             <CardHeader className="space-y-4 p-0">
               {/* AI Analysis */}
               <button onClick={handleShowAnalysis} disabled={isLoadingAnalysis || showAnalysis} className="bg-green-600/80 px-6 py-3 rounded-t-lg w-full hover:bg-green-600 disabled:bg-green-600/60 transition-colors cursor-pointer">
-                <h2 className="text-white text-sm uppercase text-center mb-3">Analyse de notre <span className="font-bold">IA</span></h2>
+                <div className="flex flex-col items-center gap-1">
+                  <h2 className="text-white text-sm uppercase text-center">Analyse de notre <span className="font-bold">IA</span></h2>
+                  <div className="w-12 h-0.5 bg-white/60"></div>
+                </div>
 
                 <div className="flex justify-center">
                   <div className="bg-black border-2 border-green-500 rounded-lg px-6 py-3">
