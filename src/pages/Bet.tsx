@@ -215,11 +215,7 @@ const Bet = () => {
               <div className="flex items-center justify-center gap-2 text-xs my-0 py-[10px] border-t-2 border-green-500 bg-green-600">
                 <span className="text-white">Meilleur odds:</span>
                 <span className="font-bold text-white">DRAFTKINGS</span>
-                <div className="bg-black border-2 border-green-500 rounded-lg px-6 py-3">
-                  <div className="text-base font-black text-green-500 text-center">
-                    -135
-                  </div>
-                </div>
+                <span className="px-2 py-1 bg-black rounded border-2 border-green-500 font-bold text-green-400">-135</span>
               </div>
               </div>
             </CardHeader>
