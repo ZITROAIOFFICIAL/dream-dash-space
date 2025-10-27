@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import vegasLogo from "@/assets/vegas-logo.png";
 import tampaLogo from "@/assets/tampa-logo.png";
-import { Loader2 } from "lucide-react";
 import { useState } from "react";
 const Bet = () => {
   const [betAmount, setBetAmount] = useState<string>("100");
@@ -42,15 +41,7 @@ const Bet = () => {
 
         <div className="grid gap-6 justify-center">
           <Card className="w-full max-w-md bg-black border-2 border-green-600 shadow-2xl overflow-hidden mx-auto rounded-sm">
-            <CardHeader className="space-y-0 p-0">
-              {/* AI Data Analysis Counter */}
-              <div className="flex items-center justify-center gap-3 py-2 px-6 bg-black/40">
-                <Loader2 className="w-5 h-5 text-white animate-spin" />
-                <span className="text-white text-xs font-semibold text-center">
-                  NOTRE IA A ANALYSÉ 2857 DONNÉES POUR CE BET JUSQU'À PRÉSENT
-                </span>
-              </div>
-
+            <CardHeader className="space-y-4 p-0">
               {/* AI Analysis */}
               <div className="flex items-center justify-between gap-2 text-xs py-[10px] bg-green-600 px-4">
                 <div className="flex items-center gap-2">
@@ -129,7 +120,7 @@ const Bet = () => {
                   </div>}
 
               {/* Odds Display */}
-              <div className="flex justify-center pt-4 pb-4">
+              <div className="flex justify-center py-0 -mt-4">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
                   MONEYLINE MULTIPLICATEUR
                 </div>
@@ -144,7 +135,7 @@ const Bet = () => {
               </div>
 
               {/* Match Details */}
-              <div className="text-center space-y-2 pt-4 pb-4">
+              <div className="text-center space-y-2">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
                   PARIER SUR
                 </div>
@@ -190,7 +181,7 @@ const Bet = () => {
               {/* Bet Amount & Payout */}
               <div className="pt-1">
                 <div className="grid grid-cols-2 gap-2 px-[10px]">
-                  <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                  <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen} className="py-0 my-[5px]">
                     <DialogTrigger asChild>
                       <button className="px-4 py-3 bg-transparent border-2 border-green-600/40 rounded-sm text-center hover:bg-white/5 transition-colors cursor-pointer">
                         <div className="text-white/80 text-xs mb-1">Votre mise</div>
@@ -198,7 +189,7 @@ const Bet = () => {
                         <div className="text-green-400 text-xs mt-1 font-semibold px-[5px]">Modifier</div>
                       </button>
                     </DialogTrigger>
-                    <DialogContent className="sm:max-w-md bg-black border-green-600">
+                    <DialogContent className="sm:max-w-md bg-black border-green-600 my-[15px]">
                       <DialogHeader>
                         <DialogTitle className="text-white text-center">Modifier votre mise</DialogTitle>
                       </DialogHeader>
