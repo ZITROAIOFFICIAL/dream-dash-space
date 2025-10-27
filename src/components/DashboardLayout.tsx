@@ -14,9 +14,9 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       <header className="fixed top-0 left-0 right-0 h-16 bg-background z-30 flex items-center justify-center md:left-64">
         <h1 className="text-2xl font-bold leading-none">
           <span className="text-foreground">WIN</span>
-          <span className="text-sidebar-primary">A</span>
+          <span className="text-primary">A</span>
           <span className="text-foreground">BET</span>
-          <span className="text-sidebar-primary text-sm">.AI</span>
+          <span className="text-primary text-sm">.AI</span>
         </h1>
       </header>
       
