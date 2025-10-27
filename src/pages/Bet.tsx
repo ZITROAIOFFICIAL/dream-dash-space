@@ -96,7 +96,7 @@ const Bet = () => {
                     <span className="text-white font-bold text-[8px]">IA</span>
                   </div>
                 </div>
-                <span className="text-white font-semibold text-center text-[10px]">2857 DONNÉES ANALYSÉES PAR NOTRE IA</span>
+                <span className="text-white font-semibold text-center text-[10px]">2857 DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
               </div>
 
               {/* AI Analysis */}
