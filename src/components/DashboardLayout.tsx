@@ -1,13 +1,12 @@
 import { ReactNode } from "react";
 import Sidebar from "./Sidebar";
-
 interface DashboardLayoutProps {
   children: ReactNode;
 }
-
-const DashboardLayout = ({ children }: DashboardLayoutProps) => {
-  return (
-    <div className="min-h-screen bg-background">
+const DashboardLayout = ({
+  children
+}: DashboardLayoutProps) => {
+  return <div className="min-h-screen bg-background">
       <Sidebar />
       
       {/* Header with centered logo */}
@@ -21,12 +20,10 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       </header>
       
       <main className="md:pl-64 min-h-screen pt-16">
-        <div className="p-6 md:p-8">
+        <div className="p-6 md:p-8 py-0">
           {children}
         </div>
       </main>
-    </div>
-  );
+    </div>;
 };
-
 export default DashboardLayout;
