@@ -99,6 +99,12 @@ const Index = () => {
   };
   return <DashboardLayout>
       <div className="space-y-8">
+        {/* Header Section */}
+        <div className="text-center space-y-2 mb-8">
+          <h1 className="text-white text-4xl font-bold">BET DU JOUR</h1>
+          <p className="text-white/70 text-sm">les paris avec la meilleur probabilité de réussite aujourd'hui</p>
+        </div>
+
         {/* ST. LOUIS vs PITTSBURGH CARD */}
         <div className="grid gap-6 justify-center">
           <Card className="w-full max-w-md bg-black border-[3px] border-green-600 shadow-2xl overflow-hidden mx-auto rounded-sm">
