@@ -84,10 +84,10 @@ const Bet = () => {
                       </h1>
                       <p className="text-white/70 text-sm text-center max-w-xs">
                         CHARGEMENT DE NOTRE IA ET DES DONNÉES LES PLUS RÉCENTES
-                        <span className="inline-flex">
-                          <span className="animate-[fade-in_1s_ease-in-out_infinite]">.</span>
-                          <span className="animate-[fade-in_1s_ease-in-out_0.33s_infinite]">.</span>
-                          <span className="animate-[fade-in_1s_ease-in-out_0.66s_infinite]">.</span>
+                        <span className="inline-flex ml-0.5">
+                          <span className="animate-bounce" style={{ animationDelay: '0ms', animationDuration: '1.4s' }}>.</span>
+                          <span className="animate-bounce" style={{ animationDelay: '200ms', animationDuration: '1.4s' }}>.</span>
+                          <span className="animate-bounce" style={{ animationDelay: '400ms', animationDuration: '1.4s' }}>.</span>
                         </span>
                       </p>
                     </div>
