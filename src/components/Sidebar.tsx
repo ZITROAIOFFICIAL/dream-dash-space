@@ -30,7 +30,15 @@ const Sidebar = () => {
         className="fixed top-4 left-4 z-50 md:hidden text-white hover:bg-transparent focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 outline-none"
         onClick={() => setIsOpen(!isOpen)}
       >
-        {isOpen ? <X className="h-8 w-8 stroke-[1.2]" /> : <Menu className="h-8 w-8 stroke-[1.2]" />}
+        {isOpen ? (
+          <X className="h-8 w-8 stroke-[1.2]" />
+        ) : (
+          <div aria-hidden="true" className="flex flex-col items-center justify-center gap-[3px]">
+            <span className="block h-px w-8 bg-white rounded"></span>
+            <span className="block h-px w-8 bg-white rounded"></span>
+            <span className="block h-px w-8 bg-white rounded"></span>
+          </div>
+        )}
       </Button>
 
       {/* Sidebar */}
