@@ -615,9 +615,18 @@ const Bet = () => {
               {/* DraftKings Section */}
               <div className="pt-0">
               <div className="flex items-center justify-center gap-2 text-xs my-0 py-[10px] border-t-2 border-green-600 bg-green-600">
+                <div className="relative w-5 h-5 flex-shrink-0">
+                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-white font-bold text-[8px]">IA</span>
+                  </div>
+                </div>
                 <span className="text-white">Meilleur odds:</span>
                 <span className="font-bold text-white">DRAFTKINGS</span>
                 <span className="px-2 py-1 bg-black rounded border-2 border-green-600 font-bold text-green-400">-135</span>
+              </div>
+              <div className="text-center py-2 px-4">
+                <p className="text-white/60 text-[10px]">(L'IA regarde tous les sites pour trouver le meilleur odds pour le bet.)</p>
               </div>
               </div>
             </CardHeader>
