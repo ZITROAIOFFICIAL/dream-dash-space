@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paris Recommandés - Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-25%); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .animate-spin { animation: spin 1s linear infinite; }
+    .animate-bounce { animation: bounce 1s infinite; }
+    .animate-fade-in { animation: fadeIn 0.3s ease-in; }
+    
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    
+    .dialog-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 50;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .dialog-overlay.active {
+      display: flex;
+    }
+    
+    .dialog-content {
+      background-color: #000;
+      border: 3px solid #16a34a;
+      border-radius: 0.375rem;
+      padding: 1.5rem;
+      max-width: 42rem;
+      max-height: 90vh;
+      overflow-y: auto;
+      width: 90%;
+    }
+    
+    .btn-primary {
+      background-color: #16a34a;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    
+    .btn-primary:hover {
+      background-color: #15803d;
+    }
+    
+    .btn-secondary {
+      background-color: transparent;
+      color: #16a34a;
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+      border: 2px solid #16a34a;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    
+    .btn-secondary:hover {
+      background-color: rgba(22, 163, 74, 0.1);
+    }
+    
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #1a1a1a;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #16a34a;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="min-h-screen p-4 md:p-8">
+    <div class="max-w-7xl mx-auto space-y-6">
+      <!-- Header -->
+      <div>
+        <h1 class="text-3xl font-bold mb-2">Paris Recommandés</h1>
+        <p class="text-gray-400">Découvrez nos pronostics avec les meilleures cotes</p>
+      </div>
+
+      <!-- Bet Card -->
+      <div class="max-w-md mx-auto">
+        <div class="bg-black border-[3px] border-green-600 shadow-2xl overflow-hidden rounded-sm">
+          
+          <!-- AI Data Counter -->
+          <div class="flex items-center justify-center gap-3 py-2 px-6 bg-black/40">
+            <div class="relative w-6 h-6 flex-shrink-0">
+              <svg class="w-6 h-6 text-white animate-spin absolute" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-white font-bold text-[8px]">IA</span>
+              </div>
+            </div>
+            <span class="text-white font-semibold text-center text-[10px]">2857 DONNÉES ANALYSÉES PAR NOTRE IA</span>
+          </div>
+
+          <!-- AI Confidence Banner -->
+          <div class="flex items-center justify-between gap-2 text-xs py-[10px] bg-green-600 px-4">
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-white text-4xl">92%</span>
+              <span class="text-white text-xs font-bold">DE CHANCE DE GAGNER SELON NOTRE IA</span>
+            </div>
+            <button onclick="openAnalysisDialog()" class="px-3 py-1 bg-black rounded border-2 border-green-600 font-bold text-green-400 text-xs hover:bg-green-600/20 transition-colors">
+              VOIR ANALYSE IA
+            </button>
+          </div>
+
+          <!-- Multiplier -->
+          <div class="flex justify-center pt-4 pb-4">
+            <div class="text-sm font-bold text-white tracking-wider mb-2">
+              MONEYLINE MULTIPLICATEUR
+            </div>
+          </div>
+          
+          <div class="flex justify-center py-0 -mt-6">
+            <div class="bg-green-600/15 border-2 border-green-600 rounded-sm px-6 py-2">
+              <div class="text-3xl font-black text-green-400">
+                x1.74
+              </div>
+            </div>
+          </div>
+
+          <!-- Match Details -->
+          <div class="text-center space-y-2 pt-4 pb-4">
+            <div class="text-sm font-bold text-white tracking-wider mb-2">
+              PARIER SUR
+            </div>
+            
+            <div class="grid grid-cols-3 items-center justify-items-center gap-4 px-4">
+              <!-- Vegas -->
+              <div class="flex flex-col items-center gap-1">
+                <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center border border-white/20">
+                  <span class="text-black font-bold text-xs">VGK</span>
+                </div>
+                <span class="font-bold text-xs text-white">VEGAS</span>
+              </div>
+
+              <!-- Center time + VS -->
+              <div class="flex flex-col items-center gap-1">
+                <span class="font-semibold text-sm text-white">5:00 PM</span>
+                <div class="px-2 py-0.5 rounded-full border border-white/20 bg-white/0">
+                  <span class="text-white font-bold text-xs">VS</span>
+                </div>
+              </div>
+
+              <!-- Tampa Bay -->
+              <div class="flex flex-col items-center gap-1">
+                <div class="bg-green-600/15 border-2 border-green-600 rounded-sm p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[17px]">
+                  <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                    <span class="text-black font-bold text-xs">TBL</span>
+                  </div>
+                  <span class="text-white text-xs font-extrabold">TAMPA BAY</span>
+                  <div class="text-xs font-bold text-green-400">VICTOIRE</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Gain Section -->
+          <div class="flex justify-center py-0">
+            <div class="text-sm font-bold text-white tracking-wider text-center">
+              VOTRE GAIN
+            </div>
+          </div>
+
+          <!-- Bet Amount & Payout -->
+          <div class="pt-1">
+            <div class="grid grid-cols-2 gap-2 px-[10px] my-[15px]">
+              <button onclick="openBetDialog()" class="px-4 py-3 bg-transparent border-2 border-green-600/40 rounded-sm text-center hover:bg-white/5 transition-colors cursor-pointer">
+                <div class="text-white text-xs mb-1">Votre mise</div>
+                <div class="text-green-400 font-bold text-lg" id="betAmountDisplay">$100</div>
+                <div class="text-white text-xs mt-1 font-semibold px-[5px]">Modifier</div>
+              </button>
+              
+              <div class="bg-green-600/15 border-2 border-green-600 rounded-sm text-center py-[25px] px-0">
+                <div class="text-white text-xs mb-1">Cashout x1.74 →</div>
+                <div class="text-green-400 font-bold text-lg" id="payoutDisplay">$173.53</div>
+                <div class="text-white text-[10px] mt-0.5" id="profitDisplay">
+                  +$73.53 bénéfice
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Best Odds Section -->
+          <div class="pt-0">
+            <div class="flex items-center justify-center gap-2 text-xs my-0 py-[10px] border-t-2 border-green-600 bg-green-600">
+              <div class="relative w-5 h-5 flex-shrink-0">
+                <svg class="w-5 h-5 text-white animate-spin absolute" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <span class="text-white font-bold text-[8px]">IA</span>
+                </div>
+              </div>
+              <span class="text-white">Meilleur odds:</span>
+              <span class="font-bold text-white">DRAFTKINGS</span>
+              <span class="px-2 py-1 bg-black rounded border-2 border-green-600 font-bold text-green-400">-135</span>
+            </div>
+            <div class="text-center py-2 px-4">
+              <p class="text-white/60 text-[10px]">(L'IA regarde tous les sites pour trouver le meilleur odds pour le bet.)</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bet Amount Dialog -->
+  <div id="betDialog" class="dialog-overlay">
+    <div class="dialog-content" style="max-width: 28rem;">
+      <h2 class="text-white text-center text-xl font-bold mb-4">Modifier votre mise</h2>
+      <div class="grid grid-cols-4 gap-2">
+        <button onclick="setBetAmount('10')" class="btn-secondary">$10</button>
+        <button onclick="setBetAmount('20')" class="btn-secondary">$20</button>
+        <button onclick="setBetAmount('50')" class="btn-secondary">$50</button>
+        <button onclick="setBetAmount('100')" class="btn-secondary">$100</button>
+        <button onclick="setBetAmount('150')" class="btn-secondary">$150</button>
+        <button onclick="setBetAmount('200')" class="btn-secondary">$200</button>
+        <button onclick="setBetAmount('500')" class="btn-secondary">$500</button>
+        <button onclick="customBetAmount()" class="btn-secondary">Autre</button>
+      </div>
+      <button onclick="closeBetDialog()" class="btn-primary mt-4 w-full">Fermer</button>
+    </div>
+  </div>
+
+  <!-- Analysis Dialog -->
+  <div id="analysisDialog" class="dialog-overlay">
+    <div class="dialog-content">
+      <!-- AI Data Counter -->
+      <div class="flex items-center justify-center gap-3 py-2 px-6 bg-black/40 -mx-6 -mt-6 mb-4">
+        <div class="relative w-6 h-6 flex-shrink-0">
+          <svg class="w-6 h-6 text-white animate-spin absolute" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <span class="text-white font-bold text-[8px]">IA</span>
+          </div>
+        </div>
+        <span class="text-white font-semibold text-center text-[10px]">2857 DONNÉES ANALYSÉES PAR NOTRE IA</span>
+      </div>
+
+      <h2 class="text-white text-xl font-bold mb-2">📊 Analyse Complète de l'IA</h2>
+      <p class="text-white/70 text-sm mb-4">Analyse détaillée basée sur 482 variables et 2857 points de données</p>
+
+      <div id="loadingAnalysis" class="mt-4 space-y-2">
+        <div class="flex items-center justify-center gap-2">
+          <div class="w-2 h-2 bg-white rounded-full animate-bounce"></div>
+          <div class="w-2 h-2 bg-white rounded-full animate-bounce" style="animation-delay: 150ms"></div>
+          <div class="w-2 h-2 bg-white rounded-full animate-bounce" style="animation-delay: 300ms"></div>
+        </div>
+        <p class="text-white/60 text-xs text-center">L'IA analyse les données...</p>
+      </div>
+
+      <div id="analysisContent" style="display: none;" class="mt-4 space-y-4">
+        <!-- Confidence Level -->
+        <div class="bg-green-600/15 border-2 border-green-600 rounded-lg p-4">
+          <div class="text-center space-y-2">
+            <div class="text-white font-bold text-sm">CHANCE DE GAGNER</div>
+            <div class="text-green-400 font-bold text-4xl">92%</div>
+            <div class="text-white/70 text-xs">STATISTIQUEMENT AVEC TOUTES CES DONNÉES CI-DESSOUS ANALYSÉES</div>
+          </div>
+          <div class="w-full bg-black/40 rounded-full h-3 overflow-hidden mt-3">
+            <div class="bg-green-600 h-full rounded-full" style="width: 92%"></div>
+          </div>
+        </div>
+
+        <!-- Analysis Sections -->
+        <div class="space-y-4">
+          <!-- 1) Special Teams -->
+          <div class="bg-black/40 rounded-lg p-4 border border-green-600/30">
+            <h4 class="text-white font-bold text-sm mb-3 flex items-center gap-2">
+              <div class="relative w-5 h-5 flex-shrink-0">
+                <svg class="w-5 h-5 text-green-400 animate-spin absolute" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <span class="text-green-400 font-bold text-[8px]">IA</span>
+                </div>
+              </div>
+              ✅ 1) Spécial Teams
+            </h4>
+            <div class="space-y-3 text-xs">
+              <div class="bg-white/5 p-3 rounded">
+                <div class="text-white/90 font-semibold mb-1 pl-10">Power Play — Vegas</div>
+                <div class="text-white/70">Analyse du rendement en avantage numérique : structure offensive, qualité des entrées de zone, création de chances dangereuses.</div>
+              </div>
+              <div class="bg-white/5 p-3 rounded">
+                <div class="text-white/90 font-semibold mb-1 pl-10">Power Play — Tampa Bay</div>
+                <div class="text-white/70">Analyse du rendement en avantage numérique : structure offensive, qualité des entrées de zone, création de chances dangereuses.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2) Possession & Quality -->
+          <div class="bg-black/40 rounded-lg p-4 border border-green-600/30">
+            <h4 class="text-white font-bold text-sm mb-3 flex items-center gap-2">
+              <div class="relative w-5 h-5 flex-shrink-0">
+                <svg class="w-5 h-5 text-green-400 animate-spin absolute" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <span class="text-green-400 font-bold text-[8px]">IA</span>
+                </div>
+              </div>
+              ✅ 2) Possession & Qualité offensive
+            </h4>
+            <div class="space-y-3 text-xs">
+              <div class="bg-white/5 p-3 rounded">
+                <div class="text-white/90 font-semibold mb-1 pl-10">xG (Expected Goals) — Vegas</div>
+                <div class="text-white/70">Analyse de la qualité offensive générée : volume de tirs dangereux, emplacements de tir et probabilité attendue de marquer.</div>
+              </div>
+              <div class="bg-white/5 p-3 rounded">
+                <div class="text-white/90 font-semibold mb-1 pl-10">xG (Expected Goals) — Tampa Bay</div>
+                <div class="text-white/70">Analyse de la qualité offensive générée : volume de tirs dangereux, emplacements de tir et probabilité attendue de marquer.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3) Goalie/Defense -->
+          <div class="bg-black/40 rounded-lg p-4 border border-green-600/30">
+            <h4 class="text-white font-bold text-sm mb-3 flex items-center gap-2">
+              <div class="relative w-5 h-5 flex-shrink-0">
+                <svg class="w-5 h-5 text-green-400 animate-spin absolute" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <span class="text-green-400 font-bold text-[8px]">IA</span>
+                </div>
+              </div>
+              ✅ 3) Gardien / Défense
+            </h4>
+            <div class="space-y-3 text-xs">
+              <div class="bg-white/5 p-3 rounded">
+                <div class="text-white/90 font-semibold mb-1 pl-10">Performance du gardien — Vegas</div>
+                <div class="text-white/70">Analyse du rendement du gardien projeté : efficacité sur tirs dangereux, stabilité technique.</div>
+              </div>
+              <div class="bg-white/5 p-3 rounded">
+                <div class="text-white/90 font-semibold mb-1 pl-10">Performance du gardien — Tampa Bay</div>
+                <div class="text-white/70">Analyse du rendement du gardien projeté : efficacité sur tirs dangereux, stabilité technique.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4) Lineup & Health -->
+          <div class="bg-black/40 rounded-lg p-4 border border-green-600/30">
+            <h4 class="text-white font-bold text-sm mb-3 flex items-center gap-2">
+              <div class="relative w-5 h-5 flex-shrink-0">
+                <svg class="w-5 h-5 text-green-400 animate-spin absolute" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <span class="text-green-400 font-bold text-[8px]">IA</span>
+                </div>
+              </div>
+              ✅ 4) Alignement & santé de l'effectif
+            </h4>
+            <div class="space-y-3 text-xs">
+              <div class="bg-white/5 p-3 rounded">
+                <div class="text-white/90 font-semibold mb-1 pl-10">Alignement/Top-6 — Vegas</div>
+                <div class="text-white/70">Analyse de l'impact offensif disponible : profondeur du top-6, cohésion des trios.</div>
+              </div>
+              <div class="bg-white/5 p-3 rounded">
+                <div class="text-white/90 font-semibold mb-1 pl-10">Alignement/Top-6 — Tampa Bay</div>
+                <div class="text-white/70">Analyse de l'impact offensif disponible : profondeur du top-6, cohésion des trios.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5) Context & Fatigue -->
+          <div class="bg-black/40 rounded-lg p-4 border border-green-600/30">
+            <h4 class="text-white font-bold text-sm mb-3 flex items-center gap-2">
+              <div class="relative w-5 h-5 flex-shrink-0">
+                <svg class="w-5 h-5 text-green-400 animate-spin absolute" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <span class="text-green-400 font-bold text-[8px]">IA</span>
+                </div>
+              </div>
+              ✅ 5) Contexte & fatigue
+            </h4>
+            <div class="space-y-3 text-xs">
+              <div class="bg-white/5 p-3 rounded">
+                <div class="text-white/90 font-semibold mb-1 pl-10">Fatigue / Calendrier — Vegas</div>
+                <div class="text-white/70">Analyse du contexte physique : back-to-back éventuel, séquence de matchs rapprochés.</div>
+              </div>
+              <div class="bg-white/5 p-3 rounded">
+                <div class="text-white/90 font-semibold mb-1 pl-10">Fatigue / Calendrier — Tampa Bay</div>
+                <div class="text-white/70">Analyse du contexte physique : back-to-back éventuel, séquence de matchs rapprochés.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6) Market/Value -->
+          <div class="bg-black/40 rounded-lg p-4 border border-green-600/30">
+            <h4 class="text-white font-bold text-sm mb-3 flex items-center gap-2">
+              <div class="relative w-5 h-5 flex-shrink-0">
+                <svg class="w-5 h-5 text-green-400 animate-spin absolute" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <span class="text-green-400 font-bold text-[8px]">IA</span>
+                </div>
+              </div>
+              ✅ 6) Marché / Value
+            </h4>
+            <div class="space-y-3 text-xs">
+              <div class="bg-white/5 p-3 rounded">
+                <div class="text-white/90 font-semibold mb-1 pl-10">Lecture du marché — Vegas</div>
+                <div class="text-white/70">Analyse de la probabilité implicite des cotes : variation du marché, rapport entre perception publique et réalité.</div>
+              </div>
+              <div class="bg-white/5 p-3 rounded">
+                <div class="text-white/90 font-semibold mb-1 pl-10">Lecture du marché — Tampa Bay</div>
+                <div class="text-white/70">Analyse de la probabilité implicite des cotes : variation du marché, rapport entre perception publique et réalité.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-3 pt-3 border-t border-white/10">
+          <p class="text-white/60 text-[10px] italic text-center">
+            ⚡ Analyse basée sur 482 variables incluant statistiques historiques, forme actuelle, blessures, conditions de jeu et tendances du marché.
+          </p>
+        </div>
+      </div>
+
+      <button onclick="closeAnalysisDialog()" class="btn-primary mt-4 w-full">Fermer</button>
+    </div>
+  </div>
+
+  <script>
+    let currentBetAmount = 100;
+    const multiplier = 1.74;
+
+    function calculateReturn(amount) {
+      return (amount * multiplier).toFixed(2);
+    }
+
+    function updateDisplay() {
+      document.getElementById('betAmountDisplay').textContent = '$' + currentBetAmount;
+      const payout = calculateReturn(currentBetAmount);
+      document.getElementById('payoutDisplay').textContent = '$' + payout;
+      const profit = (parseFloat(payout) - currentBetAmount).toFixed(2);
+      document.getElementById('profitDisplay').textContent = '+$' + profit + ' bénéfice';
+    }
+
+    function setBetAmount(amount) {
+      currentBetAmount = parseFloat(amount);
+      updateDisplay();
+      closeBetDialog();
+    }
+
+    function customBetAmount() {
+      const custom = prompt("Entrez le montant:");
+      if (custom && parseFloat(custom) > 0) {
+        currentBetAmount = parseFloat(custom);
+        updateDisplay();
+        closeBetDialog();
+      }
+    }
+
+    function openBetDialog() {
+      document.getElementById('betDialog').classList.add('active');
+    }
+
+    function closeBetDialog() {
+      document.getElementById('betDialog').classList.remove('active');
+    }
+
+    function openAnalysisDialog() {
+      document.getElementById('analysisDialog').classList.add('active');
+      document.getElementById('loadingAnalysis').style.display = 'block';
+      document.getElementById('analysisContent').style.display = 'none';
+      
+      setTimeout(() => {
+        document.getElementById('loadingAnalysis').style.display = 'none';
+        document.getElementById('analysisContent').style.display = 'block';
+      }, 2000);
+    }
+
+    function closeAnalysisDialog() {
+      document.getElementById('analysisDialog').classList.remove('active');
+    }
+
+    // Close dialogs on overlay click
+    document.querySelectorAll('.dialog-overlay').forEach(overlay => {
+      overlay.addEventListener('click', function(e) {
+        if (e.target === this) {
+          this.classList.remove('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
