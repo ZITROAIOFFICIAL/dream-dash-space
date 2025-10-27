@@ -39,11 +39,11 @@ const Bet = () => {
               </div>
               
               {/* AI Analysis */}
-              <div className="text-center space-y-1">
-                <h2 className="text-white text-sm">Analyse de notre <span className="text-primary font-bold">IA</span></h2>
-                <div className="text-xl font-black">
-                  <span className="text-primary">92%</span>
-                  <span className="text-white"> de chance de gagner</span>
+              <div className="bg-green-600 -mx-6 -mt-4 px-6 py-4 text-center space-y-1">
+                <h2 className="text-white text-sm">Analyse de notre <span className="font-bold">IA</span></h2>
+                <div className="text-xl font-black text-white">
+                  <span className="text-2xl">92%</span>
+                  <span> de chance de gagner</span>
                 </div>
               </div>
 
