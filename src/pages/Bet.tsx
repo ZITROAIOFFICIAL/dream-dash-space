@@ -123,7 +123,7 @@ const Bet = () => {
               
               <div className="flex justify-center py-0">
                 <div className="bg-primary/20 border-2 border-green-600 rounded-sm px-6 py-2">
-                  <div className="text-3xl font-black text-primary">
+                  <div className="text-3xl font-black text-green-400">
                     x{multiplier.toFixed(2)}
                   </div>
                 </div>
@@ -160,7 +160,7 @@ const Bet = () => {
                         <img src={tampaLogo} alt="Tampa Bay" className="w-7 h-7 object-contain" />
                       </div>
                       <span className="text-white -bottom-0.5 text-xs font-extrabold ">TAMPA BAY</span>
-                      <div className="text-xs font-bold text-primary">VICTOIRE</div>
+                      <div className="text-xs font-bold text-green-400">VICTOIRE</div>
                     </div>
                   </div>
                 </div>
@@ -180,8 +180,8 @@ const Bet = () => {
                     <DialogTrigger asChild>
                       <button className="px-4 py-3 bg-transparent border-2 border-green-600/40 rounded-sm text-center hover:bg-white/5 transition-colors cursor-pointer">
                         <div className="text-white/80 text-xs mb-1">Votre mise</div>
-                        <div className="text-white font-bold text-lg">${betAmount}</div>
-                        <div className="text-primary text-xs mt-1 font-semibold px-[5px]">Modifier</div>
+                        <div className="text-green-400 font-bold text-lg">${betAmount}</div>
+                        <div className="text-green-400 text-xs mt-1 font-semibold px-[5px]">Modifier</div>
                       </button>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-md bg-black border-green-600">
@@ -212,7 +212,7 @@ const Bet = () => {
                   
                   <div className="bg-primary/20 border-2 border-green-600 rounded-sm text-center py-[25px] px-0">
                     <div className="text-white/70 text-xs mb-1">Cashout x{multiplier.toFixed(2)} →</div>
-                    <div className="text-primary font-bold text-lg">${calculateReturn(betAmount)}</div>
+                    <div className="text-green-400 font-bold text-lg">${calculateReturn(betAmount)}</div>
                     <div className="text-white text-[10px] mt-0.5">
                       +${(parseFloat(calculateReturn(betAmount)) - parseFloat(betAmount)).toFixed(2)} bénéfice
                     </div>
