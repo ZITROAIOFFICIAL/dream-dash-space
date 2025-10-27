@@ -253,7 +253,7 @@ const Index = () => {
                   {/* ST. LOUIS */}
                   <div className="flex flex-col items-center gap-1">
                     <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center border border-white/20">
-                      <img src={stlouisLogo} alt="St. Louis" className="w-7 h-7 object-contain" />
+                      <img src={stlouisLogo} alt="St. Louis" className="w-9 h-9 object-contain" />
                     </div>
                     <span className="font-bold text-xs text-white">ST. LOUIS</span>
                   </div>
@@ -270,7 +270,7 @@ const Index = () => {
                   <div className="flex flex-col items-center gap-1">
                     <div className="bg-green-600/15 border-2 border-green-600 rounded-sm p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[17px]">
                       <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                        <img src={pittsburghLogo} alt="Pittsburgh" className="w-7 h-7 object-contain" />
+                        <img src={pittsburghLogo} alt="Pittsburgh" className="w-9 h-9 object-contain" />
                       </div>
                       <span className="text-white -bottom-0.5 text-xs font-extrabold">PITTSBURGH</span>
                       <div className="text-xs font-bold text-green-400">VICTOIRE</div>
@@ -504,7 +504,7 @@ const Index = () => {
                   {/* VEGAS */}
                   <div className="flex flex-col items-center gap-1">
                     <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center border border-white/20">
-                      <img src={vegasLogo} alt="Vegas" className="w-7 h-7 object-contain" />
+                      <img src={vegasLogo} alt="Vegas" className="w-9 h-9 object-contain" />
                     </div>
                     <span className="font-bold text-xs text-white">VEGAS</span>
                   </div>
@@ -521,7 +521,7 @@ const Index = () => {
                   <div className="flex flex-col items-center gap-1">
                     <div className="bg-green-600/15 border-2 border-green-600 rounded-sm p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[17px]">
                       <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                        <img src={tampaLogo} alt="Tampa Bay" className="w-7 h-7 object-contain" />
+                        <img src={tampaLogo} alt="Tampa Bay" className="w-9 h-9 object-contain" />
                       </div>
                       <span className="text-white -bottom-0.5 text-xs font-extrabold">TAMPA BAY</span>
                       <div className="text-xs font-bold text-green-400">VICTOIRE</div>
