@@ -40,11 +40,11 @@ const Bet = () => {
         </div>
 
         <div className="grid gap-6 justify-center">
-          <Card className="w-full max-w-md bg-black border-2 border-primary shadow-2xl overflow-hidden mx-auto">
+          <Card className="w-full max-w-md bg-black border-2 border-primary shadow-2xl overflow-hidden mx-auto rounded-md">
             <CardHeader className="space-y-4 p-0">
               {/* AI Analysis */}
-              <div className="flex items-center justify-center gap-2 text-xs py-[10px] border-t-2 border-green-500 bg-green-600 rounded-t-lg px-4">
-                <span className="px-2 py-1 bg-black rounded border-2 border-green-500 font-bold text-green-400">92%</span>
+              <div className="flex items-center justify-center gap-2 text-xs py-[10px] border-t-2 border-green-500 bg-green-600 rounded-t-md px-4">
+                <span className="px-2 py-1 bg-black rounded-sm border-2 border-green-500 font-bold text-green-400">92%</span>
                 <span className="text-white text-sm font-bold">DE CHANCE DE GAGNER SELON NOTRE IA</span>
               </div>
 
@@ -122,7 +122,7 @@ const Bet = () => {
               </div>
               
               <div className="flex justify-center py-0">
-                <div className="bg-primary/20 border-2 border-primary rounded-lg px-6 py-2">
+                <div className="bg-primary/20 border-2 border-primary rounded-sm px-6 py-2">
                   <div className="text-3xl font-black text-primary">
                     x{multiplier.toFixed(2)}
                   </div>
@@ -155,7 +155,7 @@ const Bet = () => {
 
                   {/* Tampa Bay */}
                   <div className="flex flex-col items-center gap-1">
-                    <div className="bg-primary/20 border-2 border-primary rounded-lg p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[22px]">
+                    <div className="bg-primary/20 border-2 border-primary rounded-sm p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[22px]">
                       <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
                         <img src={tampaLogo} alt="Tampa Bay" className="w-7 h-7 object-contain" />
                       </div>
@@ -171,7 +171,7 @@ const Bet = () => {
                 <div className="grid grid-cols-2 gap-2 px-[5px]">
                   <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                     <DialogTrigger asChild>
-                      <button className="px-4 py-3 bg-transparent border-2 border-white/40 rounded-2xl text-center hover:bg-white/5 transition-colors cursor-pointer">
+                      <button className="px-4 py-3 bg-transparent border-2 border-white/40 rounded-sm text-center hover:bg-white/5 transition-colors cursor-pointer">
                         <div className="text-white/80 text-xs mb-1">Votre mise</div>
                         <div className="text-white font-bold text-lg">${betAmount}</div>
                         <div className="text-primary text-xs mt-1 font-semibold px-[5px]">Modifier</div>
@@ -203,7 +203,7 @@ const Bet = () => {
                     </DialogContent>
                   </Dialog>
                   
-                  <div className="bg-primary/20 border-2 border-primary rounded-2xl text-center py-[25px] px-0">
+                  <div className="bg-primary/20 border-2 border-primary rounded-sm text-center py-[25px] px-0">
                     <div className="text-white/70 text-xs mb-1">Cashout x{multiplier.toFixed(2)} →</div>
                     <div className="text-primary font-bold text-lg">${calculateReturn(betAmount)}</div>
                   </div>
