@@ -164,7 +164,7 @@ const Bet = () => {
 
                   {/* Tampa Bay */}
                   <div className="flex flex-col items-center gap-1">
-                    <div className="bg-primary/20 border-2 border-primary rounded-lg p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[25px]">
+                    <div className="bg-primary/20 border-2 border-primary rounded-lg p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[20px]">
                       <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
                         <img src={tampaLogo} alt="Tampa Bay" className="w-7 h-7 object-contain" />
                       </div>
