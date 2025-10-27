@@ -4,10 +4,10 @@ import { TrendingUp, Target, DollarSign, Award } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Loader2 } from "lucide-react";
-import stlouisLogo from "@/assets/stlouis-logo.png";
-import pittsburghLogo from "@/assets/pittsburgh-logo.png";
-import vegasLogo from "@/assets/vegas-logo.png";
-import tampaLogo from "@/assets/tampa-logo.png";
+import stlouisLogo from "@/assets/stlouis-logo-new.png";
+import pittsburghLogo from "@/assets/pittsburgh-logo-new.png";
+import vegasLogo from "@/assets/vegas-logo-new.png";
+import tampaLogo from "@/assets/tampa-logo-new.png";
 
 const Index = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
