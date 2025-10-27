@@ -16,11 +16,12 @@ const Bet = () => {
   const [isAnalysisDialogOpen, setIsAnalysisDialogOpen] = useState(false);
   const handleShowAnalysis = () => {
     setIsLoadingDialogOpen(true);
+    const randomDelay = Math.random() * (5000 - 1500) + 1500; // Entre 1.5s et 5s
     setTimeout(() => {
       setIsLoadingDialogOpen(false);
       setIsAnalysisDialogOpen(true);
       setShowAnalysis(true);
-    }, 3000);
+    }, randomDelay);
   };
   const odds = -136;
   const multiplier = 1 + 100 / Math.abs(odds);
