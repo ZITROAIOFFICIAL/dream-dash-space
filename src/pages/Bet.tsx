@@ -32,9 +32,9 @@ const Bet = () => {
 
         <div className="grid gap-6 justify-center">
           <Card className="w-full max-w-md bg-black border-2 border-primary shadow-2xl overflow-hidden mx-auto">
-            <CardHeader className="space-y-4 pb-4 p-0">
+            <CardHeader className="space-y-4 p-0">
               {/* AI Analysis */}
-              <div className="bg-green-600/80 px-6 py-4 text-center space-y-1">
+              <div className="bg-green-600/80 px-6 py-4 text-center space-y-1 rounded-t-lg">
                 <h2 className="text-white text-sm uppercase">Analyse de notre <span className="font-bold">IA</span></h2>
                 <div className="flex justify-center">
                   <div className="bg-black border-2 border-green-500 rounded-lg px-6 py-2">
