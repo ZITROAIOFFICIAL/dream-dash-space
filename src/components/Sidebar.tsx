@@ -9,13 +9,13 @@ const Sidebar = () => {
   const location = useLocation();
 
   const menuItems = [
-    { label: "Bet du jour", path: "/" },
-    { label: "Parlay", path: "/parlay" },
-    { label: "Notre Stratégie", path: "/strategie" },
-    { label: "Historique", path: "/historique" },
-    { label: "Support", path: "/support" },
-    { label: "Mon compte", path: "/mon-compte" },
-    { label: "Boutique", path: "/boutique" },
+    { label: "BET DU JOUR", path: "/" },
+    { label: "PARLAY DU JOUR", path: "/parlay" },
+    { label: "NOTRE STRATÉGIE", path: "/strategie" },
+    { label: "HISTORIQUE", path: "/historique" },
+    { label: "SUPPORT", path: "/support" },
+    { label: "MON COMPTE", path: "/mon-compte" },
+    { label: "BOUTIQUE", path: "/boutique" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
