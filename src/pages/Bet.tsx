@@ -140,7 +140,7 @@ const Bet = () => {
 
               {/* Match Details */}
               <div className="text-center space-y-2">
-                <div className="text-xs font-bold text-white/70 tracking-wider mb-2">
+                <div className="text-sm font-bold text-white/70 tracking-wider mb-2">
                   PARIER SUR
                 </div>
                 
@@ -156,7 +156,7 @@ const Bet = () => {
 
                   {/* Center time + VS */}
                   <div className="flex flex-col items-center gap-1">
-                    <span className="text-white/60 text-xs font-semibold">5:00 PM</span>
+                    <span className="text-white/60 font-semibold text-sm">5:00 PM</span>
                     <div className="px-2 py-0.5 bg-white/10 rounded-full border border-white/20">
                       <span className="text-white font-bold text-xs">VS</span>
                     </div>
