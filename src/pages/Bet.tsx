@@ -43,9 +43,17 @@ const Bet = () => {
           <Card className="w-full max-w-md bg-black border-2 border-green-600 shadow-2xl overflow-hidden mx-auto rounded-sm">
             <CardHeader className="space-y-4 p-0">
               {/* AI Analysis */}
-              <div className="flex items-center justify-center gap-2 text-xs py-[10px] bg-green-600 px-4">
-                <span className="px-3 py-2 bg-black rounded border-2 border-green-600 font-bold text-green-400 text-base">92%</span>
-                <span className="text-white text-sm font-bold">DE CHANCE DE GAGNER SELON NOTRE IA</span>
+              <div className="flex items-center justify-between gap-2 text-xs py-[10px] bg-green-600 px-4">
+                <div className="flex items-center gap-2">
+                  <span className="px-3 py-2 bg-black rounded border-2 border-green-600 font-bold text-green-400 text-base">92%</span>
+                  <span className="text-white text-sm font-bold">DE CHANCE DE GAGNER SELON NOTRE IA</span>
+                </div>
+                <button 
+                  onClick={handleShowAnalysis}
+                  className="px-3 py-1 bg-black rounded border-2 border-green-600 font-bold text-green-400 text-xs hover:bg-green-600/20 transition-colors"
+                >
+                  Voir ANALYSE IA
+                </button>
               </div>
 
                 {/* Loading Animation */}
