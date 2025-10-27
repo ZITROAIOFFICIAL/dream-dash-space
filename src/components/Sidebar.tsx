@@ -11,8 +11,8 @@ const Sidebar = () => {
   const menuItems = [
     { label: "BET DU JOUR", path: "/", icon: Trophy },
     { label: "PARLAY DU JOUR", path: "/parlay", icon: Layers },
-    { label: "HISTORIQUE BET DU JOUR", path: "/historique", icon: History },
-    { label: "HISTORIQUE PARLAY DU JOUR", path: "/historique-parlay", icon: Clock },
+    { label: "HISTORIQUE BET DU JOUR", path: "/historique", icon: History, secondIcon: Trophy },
+    { label: "HISTORIQUE PARLAY DU JOUR", path: "/historique-parlay", icon: Clock, secondIcon: Layers },
     { label: "NOTRE STRATÉGIE", path: "/strategie", icon: Trophy },
     { label: "MON COMPTE", path: "/mon-compte", icon: User },
     { label: "BOUTIQUE", path: "/boutique", icon: ShoppingBag },
@@ -57,6 +57,7 @@ const Sidebar = () => {
           {menuItems.map((item) => {
               const active = isActive(item.path);
               const Icon = item.icon;
+              const SecondIcon = item.secondIcon;
               
               return (
                 <Link
@@ -73,6 +74,7 @@ const Sidebar = () => {
                   <div className="flex items-center gap-2">
                     <Icon className="h-4 w-4" />
                     <span>{item.label}</span>
+                    {SecondIcon && <SecondIcon className="h-4 w-4" />}
                   </div>
                   <ChevronRight className="h-4 w-4" />
                 </Link>
