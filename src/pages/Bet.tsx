@@ -83,7 +83,12 @@ const Bet = () => {
                         <span className="text-primary text-sm">.AI</span>
                       </h1>
                       <p className="text-white/70 text-sm text-center max-w-xs">
-                        CHARGEMENT DE NOTRE IA ET DES DONNÉES LES PLUS RÉCENTES...
+                        CHARGEMENT DE NOTRE IA ET DES DONNÉES LES PLUS RÉCENTES
+                        <span className="inline-flex">
+                          <span className="animate-[fade-in_1s_ease-in-out_infinite]">.</span>
+                          <span className="animate-[fade-in_1s_ease-in-out_0.33s_infinite]">.</span>
+                          <span className="animate-[fade-in_1s_ease-in-out_0.66s_infinite]">.</span>
+                        </span>
                       </p>
                     </div>
                   </DialogContent>
