@@ -121,7 +121,7 @@ const Bet = () => {
                 </div>
               </div>
               
-              <div className="flex justify-center py-3">
+              <div className="flex justify-center py-0">
                 <div className="bg-primary/20 border-2 border-primary rounded-lg px-6 py-2">
                   <div className="text-3xl font-black text-primary">
                     x{multiplier.toFixed(2)}
