@@ -144,7 +144,7 @@ const Bet = () => {
               </div>
 
               {/* Match Details */}
-              <div className="text-center space-y-2">
+              <div className="text-center space-y-2 pt-4 pb-4">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
                   PARIER SUR
                 </div>
