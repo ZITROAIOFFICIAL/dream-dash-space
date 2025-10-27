@@ -180,7 +180,7 @@ const Index = () => {
                           <div className="space-y-6">
                             {/* Section 1 - Analyse du marché */}
                             <h3 className="text-white font-bold text-lg mb-3">
-                              1️⃣ Analyse du marché & meilleures cotes
+                              Analyse du marché & meilleures cotes
                             </h3>
                             
                             <div className="space-y-3">
@@ -209,7 +209,7 @@ const Index = () => {
 
                             {/* Section 8 - Historique H2H */}
                             <h3 className="text-white font-bold text-lg mb-3">
-                              8️⃣ Historique des confrontations (H2H)
+                              Historique des confrontations (H2H)
                             </h3>
                             
                             <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
@@ -223,7 +223,7 @@ const Index = () => {
 
                             {/* Section 9 - Lineup projeté */}
                             <h3 className="text-white font-bold text-lg mb-3">
-                              9️⃣ Lineup / alignement projeté du jour
+                              Lineup / alignement projeté du jour
                             </h3>
                             
                             <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
@@ -237,7 +237,7 @@ const Index = () => {
 
                             {/* Section 2 - Power Play */}
                             <h3 className="text-white font-bold text-lg mb-3">
-                              2️⃣ Analyse du jeu de puissance & discipline
+                              Analyse du jeu de puissance & discipline
                             </h3>
                             
                             <div className="space-y-3">
@@ -274,7 +274,7 @@ const Index = () => {
 
                             {/* Section 3 - Gardien */}
                             <h3 className="text-white font-bold text-lg mb-3">
-                              3️⃣ Analyse du gardien & structure défensive
+                              Analyse du gardien & structure défensive
                             </h3>
                             
                             <div className="space-y-3">
@@ -311,7 +311,7 @@ const Index = () => {
 
                             {/* Section 4 - Possession */}
                             <h3 className="text-white font-bold text-lg mb-3">
-                              4️⃣ Analyse de la possession & qualité offensive
+                              Analyse de la possession & qualité offensive
                             </h3>
                             
                             <div className="space-y-3">
@@ -348,7 +348,7 @@ const Index = () => {
 
                             {/* Section 5 - Profondeur */}
                             <h3 className="text-white font-bold text-lg mb-3">
-                              5️⃣ Analyse de l'alignement & profondeur
+                              Analyse de l'alignement & profondeur
                             </h3>
                             
                             <div className="space-y-3">
@@ -385,7 +385,7 @@ const Index = () => {
 
                             {/* Section 6 - Contexte */}
                             <h3 className="text-white font-bold text-lg mb-3">
-                              6️⃣ Analyse du contexte & fatigue
+                              Analyse du contexte & fatigue
                             </h3>
                             
                             <div className="space-y-3">
@@ -422,7 +422,7 @@ const Index = () => {
 
                             {/* Section 7 - Facteurs additionnels */}
                             <h3 className="text-white font-bold text-lg mb-3">
-                              7️⃣ Autres analyses complémentaires
+                              Autres analyses complémentaires
                             </h3>
                             
                             <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
@@ -676,7 +676,7 @@ const Index = () => {
                           <div className="space-y-6">
                             {/* Section 1 - Analyse du marché */}
                             <h3 className="text-white font-bold text-lg mb-3">
-                              1️⃣ Analyse du marché & meilleures cotes
+                              Analyse du marché & meilleures cotes
                             </h3>
                             
                             <div className="space-y-3">
@@ -705,7 +705,7 @@ const Index = () => {
 
                             {/* Section 8 - Historique H2H */}
                             <h3 className="text-white font-bold text-lg mb-3">
-                              8️⃣ Historique des confrontations (H2H)
+                              Historique des confrontations (H2H)
                             </h3>
                             
                             <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
@@ -719,7 +719,7 @@ const Index = () => {
 
                             {/* Section 9 - Lineup projeté */}
                             <h3 className="text-white font-bold text-lg mb-3">
-                              9️⃣ Lineup / alignement projeté du jour
+                              Lineup / alignement projeté du jour
                             </h3>
                             
                             <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
@@ -733,7 +733,7 @@ const Index = () => {
 
                             {/* Section 2 - Power Play */}
                             <h3 className="text-white font-bold text-lg mb-3">
-                              2️⃣ Analyse du jeu de puissance & discipline
+                              Analyse du jeu de puissance & discipline
                             </h3>
                             
                             <div className="space-y-3">
@@ -770,7 +770,7 @@ const Index = () => {
 
                             {/* Section 3 - Gardien */}
                             <h3 className="text-white font-bold text-lg mb-3">
-                              3️⃣ Analyse du gardien & structure défensive
+                              Analyse du gardien & structure défensive
                             </h3>
                             
                             <div className="space-y-3">
@@ -807,7 +807,7 @@ const Index = () => {
 
                             {/* Section 4 - Possession */}
                             <h3 className="text-white font-bold text-lg mb-3">
-                              4️⃣ Analyse de la possession & qualité offensive
+                              Analyse de la possession & qualité offensive
                             </h3>
                             
                             <div className="space-y-3">
@@ -844,7 +844,7 @@ const Index = () => {
 
                             {/* Section 5 - Profondeur */}
                             <h3 className="text-white font-bold text-lg mb-3">
-                              5️⃣ Analyse de l'alignement & profondeur
+                              Analyse de l'alignement & profondeur
                             </h3>
                             
                             <div className="space-y-3">
@@ -881,7 +881,7 @@ const Index = () => {
 
                             {/* Section 6 - Contexte */}
                             <h3 className="text-white font-bold text-lg mb-3">
-                              6️⃣ Analyse du contexte & fatigue
+                              Analyse du contexte & fatigue
                             </h3>
                             
                             <div className="space-y-3">
@@ -918,7 +918,7 @@ const Index = () => {
 
                             {/* Section 7 - Facteurs additionnels */}
                             <h3 className="text-white font-bold text-lg mb-3">
-                              7️⃣ Autres analyses complémentaires
+                              Autres analyses complémentaires
                             </h3>
                             
                             <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
