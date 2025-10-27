@@ -10,12 +10,23 @@ import vegasLogo from "@/assets/vegas-logo.png";
 import tampaLogo from "@/assets/tampa-logo.png";
 const Index = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [dataCountStLouis, setDataCountStLouis] = useState(2843);
+  const [dataCountVegas, setDataCountVegas] = useState(2857);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
     return () => clearInterval(timer);
+  }, []);
+
+  // Increment data count every 2 minutes
+  useEffect(() => {
+    const dataTimer = setInterval(() => {
+      setDataCountStLouis(prev => prev + Math.floor(Math.random() * 3) + 1); // +1 to +3
+      setDataCountVegas(prev => prev + Math.floor(Math.random() * 3) + 1); // +1 to +3
+    }, 120000); // 120000ms = 2 minutes
+    return () => clearInterval(dataTimer);
   }, []);
 
   // States for ST. LOUIS vs PITTSBURGH card
@@ -75,7 +86,7 @@ const Index = () => {
                     <span className="text-white font-bold text-[8px]">IA</span>
                   </div>
                 </div>
-                <span className="text-white font-semibold text-center text-[10px]">2843 DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
+                <span className="text-white font-semibold text-center text-[10px]">{dataCountStLouis.toLocaleString()} DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
               </div>
 
               {/* AI Analysis */}
@@ -136,7 +147,7 @@ const Index = () => {
                             <span className="text-white font-bold text-[8px]">IA</span>
                           </div>
                         </div>
-                        <span className="text-white font-semibold text-center text-xs">2843 DONNÉES ANALYSÉ PAR NOTRE IA POUR CE BET JUSQU'À PRÉSENT</span>
+                        <span className="text-white font-semibold text-center text-xs">{dataCountStLouis.toLocaleString()} DONNÉES ANALYSÉ PAR NOTRE IA POUR CE BET JUSQU'À PRÉSENT</span>
                       </div>
                       <div className="text-center pb-2 px-6 flex items-center justify-center gap-2">
                         <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
@@ -325,7 +336,7 @@ const Index = () => {
                     <span className="text-white font-bold text-[8px]">IA</span>
                   </div>
                 </div>
-                <span className="text-white font-semibold text-center text-[10px]">2857 DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
+                <span className="text-white font-semibold text-center text-[10px]">{dataCountVegas.toLocaleString()} DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
               </div>
 
               {/* AI Analysis */}
@@ -386,7 +397,7 @@ const Index = () => {
                             <span className="text-white font-bold text-[8px]">IA</span>
                           </div>
                         </div>
-                        <span className="text-white font-semibold text-center text-xs">2857 DONNÉES ANALYSÉ PAR NOTRE IA POUR CE BET JUSQU'À PRÉSENT</span>
+                        <span className="text-white font-semibold text-center text-xs">{dataCountVegas.toLocaleString()} DONNÉES ANALYSÉ PAR NOTRE IA POUR CE BET JUSQU'À PRÉSENT</span>
                       </div>
                       <div className="text-center pb-2 px-6 flex items-center justify-center gap-2">
                         <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
