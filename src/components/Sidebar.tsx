@@ -1,4 +1,4 @@
-import { Menu, X, Trophy, Layers, History, Clock, LifeBuoy, User, ShoppingBag } from "lucide-react";
+import { Menu, X, Trophy, Layers, History, Clock, LifeBuoy, User, ShoppingBag, ChevronRight } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -64,14 +64,17 @@ const Sidebar = () => {
                   to={item.path}
                   onClick={() => setIsOpen(false)}
                   className={cn(
-                    "flex items-center justify-center gap-2 px-4 py-3 rounded-lg transition-all duration-200",
+                    "flex items-center justify-between px-4 py-3 rounded-lg transition-all duration-200",
                     active 
                       ? "bg-primary/20 border-2 border-primary font-semibold text-primary" 
                       : "bg-transparent border-2 border-transparent text-white hover:bg-white/10"
                   )}
                 >
-                  <Icon className="h-4 w-4" />
-                  <span>{item.label}</span>
+                  <div className="flex items-center gap-2">
+                    <Icon className="h-4 w-4" />
+                    <span>{item.label}</span>
+                  </div>
+                  <ChevronRight className="h-4 w-4" />
                 </Link>
               );
             })}
