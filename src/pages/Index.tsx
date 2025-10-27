@@ -8,7 +8,6 @@ import stlouisLogo from "@/assets/stlouis-logo-new.png";
 import pittsburghLogo from "@/assets/pittsburgh-logo-new.png";
 import vegasLogo from "@/assets/vegas-logo.png";
 import tampaLogo from "@/assets/tampa-logo.png";
-
 const Index = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
 
@@ -25,12 +24,10 @@ const Index = () => {
   const [showAnalysisVegas, setShowAnalysisVegas] = useState(false);
   const [isLoadingDialogOpenVegas, setIsLoadingDialogOpenVegas] = useState(false);
   const [isAnalysisDialogOpenVegas, setIsAnalysisDialogOpenVegas] = useState(false);
-
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
-
     return () => clearInterval(timer);
   }, []);
 
@@ -41,12 +38,10 @@ const Index = () => {
   // VEGAS vs TAMPA BAY odds
   const oddsVegas = -136;
   const multiplierVegas = 1 + 100 / Math.abs(oddsVegas);
-
   const calculateReturn = (amount: string, multiplier: number) => {
     const numAmount = parseFloat(amount) || 0;
     return (numAmount * multiplier).toFixed(2);
   };
-
   const handleShowAnalysisStLouis = () => {
     setIsLoadingDialogOpenStLouis(true);
     const randomDelay = Math.random() * (5000 - 1500) + 1500;
@@ -56,7 +51,6 @@ const Index = () => {
       setShowAnalysisStLouis(true);
     }, randomDelay);
   };
-
   const handleShowAnalysisVegas = () => {
     setIsLoadingDialogOpenVegas(true);
     const randomDelay = Math.random() * (5000 - 1500) + 1500;
@@ -66,40 +60,32 @@ const Index = () => {
       setShowAnalysisVegas(true);
     }, randomDelay);
   };
-
-  const stats = [
-    {
-      title: "Taux de Réussite",
-      value: "78%",
-      icon: Target,
-      description: "+5% ce mois",
-      color: "text-primary"
-    },
-    {
-      title: "Paris Actifs",
-      value: "12",
-      icon: TrendingUp,
-      description: "En cours",
-      color: "text-blue-500"
-    },
-    {
-      title: "Gains Totaux",
-      value: "2,450€",
-      icon: DollarSign,
-      description: "+380€ cette semaine",
-      color: "text-green-500"
-    },
-    {
-      title: "Classement",
-      value: "#24",
-      icon: Award,
-      description: "Sur 1,000 utilisateurs",
-      color: "text-yellow-500"
-    }
-  ];
-
-  return (
-    <DashboardLayout>
+  const stats = [{
+    title: "Taux de Réussite",
+    value: "78%",
+    icon: Target,
+    description: "+5% ce mois",
+    color: "text-primary"
+  }, {
+    title: "Paris Actifs",
+    value: "12",
+    icon: TrendingUp,
+    description: "En cours",
+    color: "text-blue-500"
+  }, {
+    title: "Gains Totaux",
+    value: "2,450€",
+    icon: DollarSign,
+    description: "+380€ cette semaine",
+    color: "text-green-500"
+  }, {
+    title: "Classement",
+    value: "#24",
+    icon: Award,
+    description: "Sur 1,000 utilisateurs",
+    color: "text-yellow-500"
+  }];
+  return <DashboardLayout>
       <div className="space-y-8">
         <div className="mb-2">
           <div className="flex items-center justify-center gap-2 mb-6">
@@ -110,7 +96,10 @@ const Index = () => {
               </div>
             </div>
             <span className="text-white/70 text-sm">
-              Dernière mise à jour IA : {currentTime.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
+              Dernière mise à jour IA : {currentTime.toLocaleTimeString('fr-FR', {
+              hour: '2-digit',
+              minute: '2-digit'
+            })}
             </span>
           </div>
         </div>
@@ -159,9 +148,18 @@ const Index = () => {
                       <p className="text-white/70 text-sm text-center max-w-xs">
                         CHARGEMENT DE NOTRE IA ET DES DONNÉES LES PLUS RÉCENTES
                         <span className="inline-flex ml-0.5">
-                          <span className="animate-bounce" style={{ animationDelay: '0ms', animationDuration: '1.4s' }}>.</span>
-                          <span className="animate-bounce" style={{ animationDelay: '200ms', animationDuration: '1.4s' }}>.</span>
-                          <span className="animate-bounce" style={{ animationDelay: '400ms', animationDuration: '1.4s' }}>.</span>
+                          <span className="animate-bounce" style={{
+                          animationDelay: '0ms',
+                          animationDuration: '1.4s'
+                        }}>.</span>
+                          <span className="animate-bounce" style={{
+                          animationDelay: '200ms',
+                          animationDuration: '1.4s'
+                        }}>.</span>
+                          <span className="animate-bounce" style={{
+                          animationDelay: '400ms',
+                          animationDuration: '1.4s'
+                        }}>.</span>
                         </span>
                       </p>
                     </div>
@@ -184,14 +182,16 @@ const Index = () => {
                       <div className="text-center pb-2 px-6 flex items-center justify-center gap-2">
                         <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
                         <span className="text-white/70 text-sm">
-                          Dernière mise à jour IA : {currentTime.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
+                          Dernière mise à jour IA : {currentTime.toLocaleTimeString('fr-FR', {
+                          hour: '2-digit',
+                          minute: '2-digit'
+                        })}
                         </span>
                       </div>
                     </div>
 
                     <div className="px-6 pb-6">
-                      {showAnalysisStLouis && (
-                        <div className="mt-4 space-y-4 animate-fade-in">
+                      {showAnalysisStLouis && <div className="mt-4 space-y-4 animate-fade-in">
                           {/* AI Confidence Section */}
                           <div className="bg-green-600/15 border-2 border-green-600 rounded-lg p-4">
                             <div className="text-center space-y-2">
@@ -200,7 +200,9 @@ const Index = () => {
                               <div className="text-white/70 text-xs">STATISTIQUEMENT AVEC TOUTES CES DONNÉES CI-DESSOUS ANALYSÉES</div>
                             </div>
                             <div className="w-full bg-black/40 rounded-full h-3 overflow-hidden mt-3">
-                              <div className="bg-green-600 h-full rounded-full" style={{ width: '92%' }}></div>
+                              <div className="bg-green-600 h-full rounded-full" style={{
+                            width: '92%'
+                          }}></div>
                             </div>
                           </div>
 
@@ -220,8 +222,7 @@ const Index = () => {
                               L'ÉTAT DE NOTRE IA : <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> RÉSULTAT À JOUR À L'INSTANT MÊME
                             </p>
                           </div>
-                        </div>
-                      )}
+                        </div>}
                     </div>
                   </DialogContent>
                 </Dialog>
@@ -268,7 +269,7 @@ const Index = () => {
 
                   {/* PITTSBURGH */}
                   <div className="flex flex-col items-center gap-1">
-                    <div className="bg-green-600/15 border-2 border-green-600 rounded-sm p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[17px]">
+                    <div className="bg-green-600/15 border-2 border-green-600 rounded-sm p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[9px]">
                       <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center p-2">
                         <img src={pittsburghLogo} alt="Pittsburgh" className="w-full h-full object-contain" />
                       </div>
@@ -302,32 +303,19 @@ const Index = () => {
                       </DialogHeader>
                       <div className="space-y-4">
                         <div className="grid grid-cols-4 gap-2">
-                          {[10, 20, 50, 100, 150, 200, 500].map(amount => (
-                            <button
-                              key={amount}
-                              onClick={() => {
-                                setBetAmountStLouis(amount.toString());
-                                setIsDialogOpenStLouis(false);
-                              }}
-                              className={`px-3 py-2 rounded-2xl text-sm font-semibold transition-colors ${
-                                betAmountStLouis === amount.toString()
-                                  ? 'bg-primary text-black'
-                                  : 'bg-white/10 text-white hover:bg-white/20'
-                              }`}
-                            >
+                          {[10, 20, 50, 100, 150, 200, 500].map(amount => <button key={amount} onClick={() => {
+                          setBetAmountStLouis(amount.toString());
+                          setIsDialogOpenStLouis(false);
+                        }} className={`px-3 py-2 rounded-2xl text-sm font-semibold transition-colors ${betAmountStLouis === amount.toString() ? 'bg-primary text-black' : 'bg-white/10 text-white hover:bg-white/20'}`}>
                               ${amount}
-                            </button>
-                          ))}
-                          <button
-                            onClick={() => {
-                              const custom = prompt("Entrez le montant:");
-                              if (custom && parseFloat(custom) > 0) {
-                                setBetAmountStLouis(custom);
-                                setIsDialogOpenStLouis(false);
-                              }
-                            }}
-                            className="px-3 py-2 rounded-2xl text-sm font-semibold bg-white/10 text-white hover:bg-white/20"
-                          >
+                            </button>)}
+                          <button onClick={() => {
+                          const custom = prompt("Entrez le montant:");
+                          if (custom && parseFloat(custom) > 0) {
+                            setBetAmountStLouis(custom);
+                            setIsDialogOpenStLouis(false);
+                          }
+                        }} className="px-3 py-2 rounded-2xl text-sm font-semibold bg-white/10 text-white hover:bg-white/20">
                             Autre
                           </button>
                         </div>
@@ -410,9 +398,18 @@ const Index = () => {
                       <p className="text-white/70 text-sm text-center max-w-xs">
                         CHARGEMENT DE NOTRE IA ET DES DONNÉES LES PLUS RÉCENTES
                         <span className="inline-flex ml-0.5">
-                          <span className="animate-bounce" style={{ animationDelay: '0ms', animationDuration: '1.4s' }}>.</span>
-                          <span className="animate-bounce" style={{ animationDelay: '200ms', animationDuration: '1.4s' }}>.</span>
-                          <span className="animate-bounce" style={{ animationDelay: '400ms', animationDuration: '1.4s' }}>.</span>
+                          <span className="animate-bounce" style={{
+                          animationDelay: '0ms',
+                          animationDuration: '1.4s'
+                        }}>.</span>
+                          <span className="animate-bounce" style={{
+                          animationDelay: '200ms',
+                          animationDuration: '1.4s'
+                        }}>.</span>
+                          <span className="animate-bounce" style={{
+                          animationDelay: '400ms',
+                          animationDuration: '1.4s'
+                        }}>.</span>
                         </span>
                       </p>
                     </div>
@@ -435,14 +432,16 @@ const Index = () => {
                       <div className="text-center pb-2 px-6 flex items-center justify-center gap-2">
                         <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
                         <span className="text-white/70 text-sm">
-                          Dernière mise à jour IA : {currentTime.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
+                          Dernière mise à jour IA : {currentTime.toLocaleTimeString('fr-FR', {
+                          hour: '2-digit',
+                          minute: '2-digit'
+                        })}
                         </span>
                       </div>
                     </div>
 
                     <div className="px-6 pb-6">
-                      {showAnalysisVegas && (
-                        <div className="mt-4 space-y-4 animate-fade-in">
+                      {showAnalysisVegas && <div className="mt-4 space-y-4 animate-fade-in">
                           {/* AI Confidence Section */}
                           <div className="bg-green-600/15 border-2 border-green-600 rounded-lg p-4">
                             <div className="text-center space-y-2">
@@ -451,7 +450,9 @@ const Index = () => {
                               <div className="text-white/70 text-xs">STATISTIQUEMENT AVEC TOUTES CES DONNÉES CI-DESSOUS ANALYSÉES</div>
                             </div>
                             <div className="w-full bg-black/40 rounded-full h-3 overflow-hidden mt-3">
-                              <div className="bg-green-600 h-full rounded-full" style={{ width: '92%' }}></div>
+                              <div className="bg-green-600 h-full rounded-full" style={{
+                            width: '92%'
+                          }}></div>
                             </div>
                           </div>
 
@@ -471,8 +472,7 @@ const Index = () => {
                               L'ÉTAT DE NOTRE IA : <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> RÉSULTAT À JOUR À L'INSTANT MÊME
                             </p>
                           </div>
-                        </div>
-                      )}
+                        </div>}
                     </div>
                   </DialogContent>
                 </Dialog>
@@ -553,32 +553,19 @@ const Index = () => {
                       </DialogHeader>
                       <div className="space-y-4">
                         <div className="grid grid-cols-4 gap-2">
-                          {[10, 20, 50, 100, 150, 200, 500].map(amount => (
-                            <button
-                              key={amount}
-                              onClick={() => {
-                                setBetAmountVegas(amount.toString());
-                                setIsDialogOpenVegas(false);
-                              }}
-                              className={`px-3 py-2 rounded-2xl text-sm font-semibold transition-colors ${
-                                betAmountVegas === amount.toString()
-                                  ? 'bg-primary text-black'
-                                  : 'bg-white/10 text-white hover:bg-white/20'
-                              }`}
-                            >
+                          {[10, 20, 50, 100, 150, 200, 500].map(amount => <button key={amount} onClick={() => {
+                          setBetAmountVegas(amount.toString());
+                          setIsDialogOpenVegas(false);
+                        }} className={`px-3 py-2 rounded-2xl text-sm font-semibold transition-colors ${betAmountVegas === amount.toString() ? 'bg-primary text-black' : 'bg-white/10 text-white hover:bg-white/20'}`}>
                               ${amount}
-                            </button>
-                          ))}
-                          <button
-                            onClick={() => {
-                              const custom = prompt("Entrez le montant:");
-                              if (custom && parseFloat(custom) > 0) {
-                                setBetAmountVegas(custom);
-                                setIsDialogOpenVegas(false);
-                              }
-                            }}
-                            className="px-3 py-2 rounded-2xl text-sm font-semibold bg-white/10 text-white hover:bg-white/20"
-                          >
+                            </button>)}
+                          <button onClick={() => {
+                          const custom = prompt("Entrez le montant:");
+                          if (custom && parseFloat(custom) > 0) {
+                            setBetAmountVegas(custom);
+                            setIsDialogOpenVegas(false);
+                          }
+                        }} className="px-3 py-2 rounded-2xl text-sm font-semibold bg-white/10 text-white hover:bg-white/20">
                             Autre
                           </button>
                         </div>
@@ -636,10 +623,9 @@ const Index = () => {
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {stats.map((stat) => {
-            const Icon = stat.icon;
-            return (
-              <Card key={stat.title} className="hover:shadow-lg transition-shadow">
+          {stats.map(stat => {
+          const Icon = stat.icon;
+          return <Card key={stat.title} className="hover:shadow-lg transition-shadow">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
                     {stat.title}
@@ -652,9 +638,8 @@ const Index = () => {
                     {stat.description}
                   </CardDescription>
                 </CardContent>
-              </Card>
-            );
-          })}
+              </Card>;
+        })}
         </div>
 
         <div className="grid gap-6 lg:grid-cols-2">
@@ -665,24 +650,31 @@ const Index = () => {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {[
-                  { match: "PSG vs Lyon", result: "Gagné", amount: "+150€" },
-                  { match: "Real vs Atlético", result: "Gagné", amount: "+180€" },
-                  { match: "Bayern vs Leipzig", result: "Perdu", amount: "-100€" },
-                  { match: "Chelsea vs Arsenal", result: "Gagné", amount: "+200€" }
-                ].map((bet, i) => (
-                  <div key={i} className="flex items-center justify-between py-2 border-b last:border-0">
+                {[{
+                match: "PSG vs Lyon",
+                result: "Gagné",
+                amount: "+150€"
+              }, {
+                match: "Real vs Atlético",
+                result: "Gagné",
+                amount: "+180€"
+              }, {
+                match: "Bayern vs Leipzig",
+                result: "Perdu",
+                amount: "-100€"
+              }, {
+                match: "Chelsea vs Arsenal",
+                result: "Gagné",
+                amount: "+200€"
+              }].map((bet, i) => <div key={i} className="flex items-center justify-between py-2 border-b last:border-0">
                     <div>
                       <p className="font-medium">{bet.match}</p>
                       <p className="text-sm text-muted-foreground">{bet.result}</p>
                     </div>
-                    <span className={`font-bold ${
-                      bet.result === "Gagné" ? "text-primary" : "text-destructive"
-                    }`}>
+                    <span className={`font-bold ${bet.result === "Gagné" ? "text-primary" : "text-destructive"}`}>
                       {bet.amount}
                     </span>
-                  </div>
-                ))}
+                  </div>)}
               </div>
             </CardContent>
           </Card>
@@ -694,12 +686,19 @@ const Index = () => {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {[
-                  { match: "Barcelona vs Real Madrid", time: "21:00", odds: "2.10" },
-                  { match: "Man City vs Liverpool", time: "18:30", odds: "1.85" },
-                  { match: "Juventus vs Milan", time: "20:45", odds: "1.95" }
-                ].map((match, i) => (
-                  <div key={i} className="flex items-center justify-between py-2 border-b last:border-0">
+                {[{
+                match: "Barcelona vs Real Madrid",
+                time: "21:00",
+                odds: "2.10"
+              }, {
+                match: "Man City vs Liverpool",
+                time: "18:30",
+                odds: "1.85"
+              }, {
+                match: "Juventus vs Milan",
+                time: "20:45",
+                odds: "1.95"
+              }].map((match, i) => <div key={i} className="flex items-center justify-between py-2 border-b last:border-0">
                     <div>
                       <p className="font-medium">{match.match}</p>
                       <p className="text-sm text-muted-foreground">{match.time}</p>
@@ -707,15 +706,12 @@ const Index = () => {
                     <span className="font-bold text-primary text-lg">
                       {match.odds}
                     </span>
-                  </div>
-                ))}
+                  </div>)}
               </div>
             </CardContent>
           </Card>
         </div>
       </div>
-    </DashboardLayout>
-  );
+    </DashboardLayout>;
 };
-
 export default Index;
