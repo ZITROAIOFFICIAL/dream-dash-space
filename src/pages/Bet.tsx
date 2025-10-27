@@ -47,7 +47,12 @@ const Bet = () => {
             <CardHeader className="space-y-0 p-0">
               {/* AI Data Analysis Counter */}
               <div className="flex items-center justify-center gap-3 py-2 px-6 bg-black/40">
-                <Loader2 className="w-5 h-5 text-white animate-spin" />
+                <div className="relative w-6 h-6 flex-shrink-0">
+                  <Loader2 className="w-6 h-6 text-white animate-spin absolute" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-white font-bold text-[8px]">IA</span>
+                  </div>
+                </div>
                 <span className="text-white font-semibold text-center text-xs">2857 DONNÉES ANALYSÉ PAR NOTRE IA POUR CE BET JUSQU'A PRÉSENT</span>
               </div>
 
@@ -66,7 +71,12 @@ const Bet = () => {
                   <DialogContent className="sm:max-w-2xl bg-black border-[3px] border-green-600 p-0 max-h-[90vh] overflow-y-auto">
                     {/* AI Data Analysis Counter - Same as main card */}
                     <div className="flex items-center justify-center gap-3 py-2 px-6 bg-black/40">
-                      <Loader2 className="w-5 h-5 text-white animate-spin" />
+                      <div className="relative w-6 h-6 flex-shrink-0">
+                        <Loader2 className="w-6 h-6 text-white animate-spin absolute" />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <span className="text-white font-bold text-[8px]">IA</span>
+                        </div>
+                      </div>
                       <span className="text-white font-semibold text-center text-xs">2857 DONNÉES ANALYSÉ PAR NOTRE IA POUR CE BET JUSQU'A PRÉSENT</span>
                     </div>
 
@@ -96,7 +106,12 @@ const Bet = () => {
                           {/* 1) Spécial Teams */}
                           <div className="bg-black/40 rounded-lg p-4 border border-green-600/30">
                             <h4 className="text-white font-bold text-sm mb-3 flex items-center gap-2">
-                              <Loader2 className="w-4 h-4 text-green-400 animate-spin" />
+                              <div className="relative w-5 h-5 flex-shrink-0">
+                                <Loader2 className="w-5 h-5 text-green-400 animate-spin absolute" />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <span className="text-green-400 font-bold text-[8px]">IA</span>
+                                </div>
+                              </div>
                               ✅ 1) Spécial Teams
                             </h4>
                             <div className="space-y-3 text-xs">
@@ -154,7 +169,12 @@ const Bet = () => {
                           {/* 2) Possession & Qualité offensive */}
                           <div className="bg-black/40 rounded-lg p-4 border border-green-600/30">
                             <h4 className="text-white font-bold text-sm mb-3 flex items-center gap-2">
-                              <Loader2 className="w-4 h-4 text-green-400 animate-spin" />
+                              <div className="relative w-5 h-5 flex-shrink-0">
+                                <Loader2 className="w-5 h-5 text-green-400 animate-spin absolute" />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <span className="text-green-400 font-bold text-[8px]">IA</span>
+                                </div>
+                              </div>
                               ✅ 2) Possession & Qualité offensive
                             </h4>
                             <div className="space-y-3 text-xs">
@@ -212,7 +232,12 @@ const Bet = () => {
                           {/* 3) Gardien / Défense */}
                           <div className="bg-black/40 rounded-lg p-4 border border-green-600/30">
                             <h4 className="text-white font-bold text-sm mb-3 flex items-center gap-2">
-                              <Loader2 className="w-4 h-4 text-green-400 animate-spin" />
+                              <div className="relative w-5 h-5 flex-shrink-0">
+                                <Loader2 className="w-5 h-5 text-green-400 animate-spin absolute" />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <span className="text-green-400 font-bold text-[8px]">IA</span>
+                                </div>
+                              </div>
                               ✅ 3) Gardien / Défense
                             </h4>
                             <div className="space-y-3 text-xs">
@@ -270,7 +295,12 @@ const Bet = () => {
                           {/* 4) Alignement & santé de l'effectif */}
                           <div className="bg-black/40 rounded-lg p-4 border border-green-600/30">
                             <h4 className="text-white font-bold text-sm mb-3 flex items-center gap-2">
-                              <Loader2 className="w-4 h-4 text-green-400 animate-spin" />
+                              <div className="relative w-5 h-5 flex-shrink-0">
+                                <Loader2 className="w-5 h-5 text-green-400 animate-spin absolute" />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <span className="text-green-400 font-bold text-[8px]">IA</span>
+                                </div>
+                              </div>
                               ✅ 4) Alignement & santé de l'effectif
                             </h4>
                             <div className="space-y-3 text-xs">
@@ -328,7 +358,12 @@ const Bet = () => {
                           {/* 5) Contexte & fatigue */}
                           <div className="bg-black/40 rounded-lg p-4 border border-green-600/30">
                             <h4 className="text-white font-bold text-sm mb-3 flex items-center gap-2">
-                              <Loader2 className="w-4 h-4 text-green-400 animate-spin" />
+                              <div className="relative w-5 h-5 flex-shrink-0">
+                                <Loader2 className="w-5 h-5 text-green-400 animate-spin absolute" />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <span className="text-green-400 font-bold text-[8px]">IA</span>
+                                </div>
+                              </div>
                               ✅ 5) Contexte & fatigue
                             </h4>
                             <div className="space-y-3 text-xs">
@@ -386,7 +421,12 @@ const Bet = () => {
                           {/* 6) Marché / Value */}
                           <div className="bg-black/40 rounded-lg p-4 border border-green-600/30">
                             <h4 className="text-white font-bold text-sm mb-3 flex items-center gap-2">
-                              <Loader2 className="w-4 h-4 text-green-400 animate-spin" />
+                              <div className="relative w-5 h-5 flex-shrink-0">
+                                <Loader2 className="w-5 h-5 text-green-400 animate-spin absolute" />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <span className="text-green-400 font-bold text-[8px]">IA</span>
+                                </div>
+                              </div>
                               ✅ 6) Marché / Value
                             </h4>
                             <div className="space-y-3 text-xs">
