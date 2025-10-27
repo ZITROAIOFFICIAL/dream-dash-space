@@ -56,7 +56,7 @@ const Bet = () => {
                       <p className="uppercase tracking-tight text-white mt-2 font-bold text-[[8px]]">
                         Selon 482 variables analysées par notre IA
                       </p>
-                      <button onClick={handleShowAnalysis} disabled={isLoadingAnalysis || showAnalysis} className="text-[9px] uppercase font-bold text-black bg-white px-3 py-1.5 rounded hover:bg-white/90 disabled:bg-white/50 transition-colors mt-2">
+                      <button onClick={handleShowAnalysis} disabled={isLoadingAnalysis || showAnalysis} className="text-sm font-bold text-white underline hover:text-white/80 disabled:text-white/50 disabled:no-underline transition-colors mt-2 cursor-pointer">
                         {isLoadingAnalysis ? "Analyse en cours..." : showAnalysis ? "Analyse affichée" : "Voir l'analyse"}
                       </button>
                     </div>
