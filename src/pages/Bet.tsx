@@ -187,7 +187,7 @@ const Bet = () => {
 
               {/* Bet Amount & Payout */}
               <div className="pt-1">
-                <div className="grid grid-cols-2 gap-2 px-[10px] my-[10px]">
+                <div className="grid grid-cols-2 gap-2 px-[10px] my-[15px]">
                   <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                     <DialogTrigger asChild>
                       <button className="px-4 py-3 bg-transparent border-2 border-green-600/40 rounded-sm text-center hover:bg-white/5 transition-colors cursor-pointer">
