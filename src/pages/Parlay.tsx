@@ -33,9 +33,7 @@ const Parlay = () => {
       <div className="space-y-6">
         <div>
           <h1 className="text-3xl font-bold tracking-tight text-center">Parlay du jour</h1>
-          <p className="text-muted-foreground mt-2">
-            Gérez vos paris combinés
-          </p>
+          <p className="text-muted-foreground mt-2">les paris avec la meilleur probabilité de réussite aujourd'hui </p>
         </div>
       </div>
     </DashboardLayout>;
