@@ -15,6 +15,7 @@ const Bet = () => {
   const [isLoadingDialogOpen, setIsLoadingDialogOpen] = useState(false);
   const [isAnalysisDialogOpen, setIsAnalysisDialogOpen] = useState(false);
   const [isPageLoading, setIsPageLoading] = useState(true);
+  const [currentTime, setCurrentTime] = useState(new Date());
   useEffect(() => {
     const shouldBeFast = Math.random() < 0.85; // 85% rapide, 15% lent
     const randomDelay = shouldBeFast ? Math.random() * (700 - 500) + 500 // 0.5s à 0.7s
@@ -22,6 +23,14 @@ const Bet = () => {
     setTimeout(() => {
       setIsPageLoading(false);
     }, randomDelay);
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000); // Met à jour chaque seconde
+
+    return () => clearInterval(timer);
   }, []);
   const handleShowAnalysis = () => {
     setIsLoadingDialogOpen(true);
@@ -135,14 +144,21 @@ const Bet = () => {
                 <Dialog open={isAnalysisDialogOpen} onOpenChange={setIsAnalysisDialogOpen}>
                   <DialogContent className="sm:max-w-2xl bg-black border-[3px] border-green-600 p-0 max-h-[90vh] overflow-y-auto">
                     {/* AI Data Analysis Counter - Same as main card */}
-                    <div className="flex items-center justify-center gap-3 py-2 px-6 bg-black/40">
-                      <div className="relative w-6 h-6 flex-shrink-0">
-                        <Loader2 className="w-6 h-6 text-white animate-spin absolute" />
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <span className="text-white font-bold text-[8px]">IA</span>
+                    <div className="bg-black/40">
+                      <div className="flex items-center justify-center gap-3 py-2 px-6">
+                        <div className="relative w-6 h-6 flex-shrink-0">
+                          <Loader2 className="w-6 h-6 text-white animate-spin absolute" />
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <span className="text-white font-bold text-[8px]">IA</span>
+                          </div>
                         </div>
+                        <span className="text-white font-semibold text-center text-xs">2857 DONNÉES ANALYSÉ PAR NOTRE IA POUR CE BET JUSQU'À PRÉSENT</span>
                       </div>
-                      <span className="text-white font-semibold text-center text-xs">2857 DONNÉES ANALYSÉ PAR NOTRE IA POUR CE BET JUSQU'A PRÉSENT</span>
+                      <div className="text-center pb-2 px-6">
+                        <span className="text-white/70 text-[10px]">
+                          Dernière mise à jour : {currentTime.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
+                        </span>
+                      </div>
                     </div>
 
                     
