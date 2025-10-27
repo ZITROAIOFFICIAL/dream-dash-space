@@ -169,7 +169,7 @@ const Bet = () => {
               {/* Second "PARIER SUR" text */}
               <div className="flex justify-center py-0">
                 <div className="text-sm font-bold text-white tracking-wider text-center ">
-                  PARIER SUR
+                  VOTRE GAIN
                 </div>
               </div>
 
