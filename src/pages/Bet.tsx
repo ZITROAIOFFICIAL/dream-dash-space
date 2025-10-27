@@ -115,7 +115,7 @@ const Bet = () => {
                   </div>}
 
               {/* Odds Display */}
-              <div className="flex justify-center py-0">
+              <div className="flex justify-center py-0 -mt-2">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
                   MONEYLINE PAYOUT
                 </div>
