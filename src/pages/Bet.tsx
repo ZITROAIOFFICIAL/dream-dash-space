@@ -76,7 +76,12 @@ const Bet = () => {
                           <span className="text-white font-bold text-2xl">IA</span>
                         </div>
                       </div>
-                      <span className="text-white font-semibold text-xl">winabet.ai</span>
+                      <h1 className="text-2xl font-bold leading-none">
+                        <span className="text-white">WIN</span>
+                        <span className="text-primary">A</span>
+                        <span className="text-white">BET</span>
+                        <span className="text-primary text-sm">.AI</span>
+                      </h1>
                     </div>
                   </DialogContent>
                 </Dialog>
