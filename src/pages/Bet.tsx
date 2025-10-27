@@ -183,7 +183,7 @@ const Bet = () => {
                       <button className="px-4 py-3 bg-transparent border-2 border-white/40 rounded-2xl text-center hover:bg-white/5 transition-colors cursor-pointer">
                         <div className="text-white/80 text-xs mb-1">Votre mise</div>
                         <div className="text-white font-bold text-lg">${betAmount}</div>
-                        <div className="text-primary text-xs mt-1 font-semibold">Modifier</div>
+                        <div className="text-primary text-xs mt-1 font-semibold px-[5px]">Modifier</div>
                       </button>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-md bg-black border-primary">
