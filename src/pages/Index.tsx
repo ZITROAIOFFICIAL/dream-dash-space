@@ -6,8 +6,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Loader2 } from "lucide-react";
 import stlouisLogo from "@/assets/stlouis-logo-new.png";
 import pittsburghLogo from "@/assets/pittsburgh-logo-new.png";
-import vegasLogo from "@/assets/vegas-logo-new.png";
-import tampaLogo from "@/assets/tampa-logo-new.png";
+import vegasLogo from "@/assets/vegas-logo.png";
+import tampaLogo from "@/assets/tampa-logo.png";
 
 const Index = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
