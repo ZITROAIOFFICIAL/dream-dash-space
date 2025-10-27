@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import vegasLogo from "@/assets/vegas-logo.png";
 import tampaLogo from "@/assets/tampa-logo.png";
+import { Loader2 } from "lucide-react";
 import { useState } from "react";
 const Bet = () => {
   const [betAmount, setBetAmount] = useState<string>("100");
@@ -42,6 +43,14 @@ const Bet = () => {
         <div className="grid gap-6 justify-center">
           <Card className="w-full max-w-md bg-black border-2 border-green-600 shadow-2xl overflow-hidden mx-auto rounded-sm">
             <CardHeader className="space-y-4 p-0">
+              {/* AI Data Analysis Counter */}
+              <div className="flex items-center justify-center gap-3 py-3 bg-black/40 border-b border-green-600/30">
+                <Loader2 className="w-5 h-5 text-white animate-spin" />
+                <span className="text-white text-xs font-semibold">
+                  NOTRE IA A ANALYSÉ 2857 DONNÉES POUR CE BET JUSQU'À PRÉSENT
+                </span>
+              </div>
+
               {/* AI Analysis */}
               <div className="flex items-center justify-between gap-2 text-xs py-[10px] bg-green-600 px-4">
                 <div className="flex items-center gap-2">
