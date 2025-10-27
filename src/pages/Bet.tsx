@@ -24,7 +24,6 @@ const Bet = () => {
       setIsPageLoading(false);
     }, randomDelay);
   }, []);
-
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
@@ -78,7 +77,10 @@ const Bet = () => {
           <div className="flex items-center justify-center gap-2 mb-4">
             <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
             <span className="text-white/70 text-sm">
-              Dernière mise à jour IA : {currentTime.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
+              Dernière mise à jour IA : {currentTime.toLocaleTimeString('fr-FR', {
+              hour: '2-digit',
+              minute: '2-digit'
+            })}
             </span>
           </div>
           <h1 className="text-3xl font-bold text-foreground mb-2">Paris Recommandés</h1>
@@ -163,7 +165,10 @@ const Bet = () => {
                       <div className="text-center pb-2 px-6 flex items-center justify-center gap-2">
                         <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
                         <span className="text-white/70 text-sm">
-                          Dernière mise à jour IA : {currentTime.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
+                          Dernière mise à jour IA : {currentTime.toLocaleTimeString('fr-FR', {
+                          hour: '2-digit',
+                          minute: '2-digit'
+                        })}
                         </span>
                       </div>
                     </div>
@@ -696,7 +701,7 @@ const Bet = () => {
                 <span className="px-2 py-1 bg-black rounded border-2 border-green-600 font-bold text-green-400">-135</span>
               </div>
               <div className="text-center py-2 px-4">
-                <p className="text-white/60 text-[10px]">(L'IA regarde tous les sites pour trouver le meilleur odds pour le bet.)</p>
+                <p className="text-white/60 text-[10px]">(L'IA regarde tous les sites pour trouver le meilleur odds pour ce bet.)</p>
               </div>
               </div>
             </CardHeader>
