@@ -27,7 +27,7 @@ const Sidebar = () => {
       <Button
         variant="ghost"
         size="icon"
-        className="fixed top-4 left-4 z-50 md:hidden text-white hover:bg-transparent focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 outline-none"
+        className="fixed top-4 left-4 z-50 md:hidden text-white hover:bg-transparent hover:text-white active:bg-transparent active:text-white focus:bg-transparent focus:text-white focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 outline-none"
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? (
@@ -46,7 +46,7 @@ const Sidebar = () => {
         className={cn(
           "fixed left-0 top-0 z-40 h-screen bg-black text-white transition-transform duration-300 ease-in-out",
           "md:w-64 md:border-r md:border-white/10 md:translate-x-0",
-          isOpen ? "w-full translate-x-0" : "-translate-x-full"
+          isOpen ? "w-full md:w-64 translate-x-0" : "w-full md:w-64 -translate-x-full"
         )}
       >
         <div className="flex flex-col h-full">
@@ -73,18 +73,18 @@ const Sidebar = () => {
                   to={item.path}
                   onClick={() => setIsOpen(false)}
                   className={cn(
-                    "flex items-center justify-between px-4 py-3 rounded-lg transition-all duration-200",
+                    "flex items-center justify-between px-4 py-3 rounded-lg transition-all duration-200 text-sm",
                     active 
                       ? "bg-primary/20 border-2 border-primary font-semibold text-primary" 
                       : "bg-transparent border-2 border-transparent text-white hover:bg-white/10"
                   )}
                 >
                   <div className="flex items-center gap-2">
-                    <Icon className="h-4 w-4" />
+                    <Icon className="h-5 w-5" />
                     <span>{item.label}</span>
-                    {SecondIcon && <SecondIcon className="h-4 w-4" />}
+                    {SecondIcon && <SecondIcon className="h-5 w-5" />}
                   </div>
-                  <ChevronRight className="h-4 w-4" />
+                  <ChevronRight className="h-5 w-5" />
                 </Link>
               );
             })}
