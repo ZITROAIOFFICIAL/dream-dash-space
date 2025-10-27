@@ -406,6 +406,10 @@
       gap: 1rem;
     }
 
+    .bet-card + .bet-card {
+      margin-top: 2rem;
+    }
+
     .team {
       display: flex;
       flex-direction: column;
@@ -982,76 +986,96 @@
       <div class="container">
         <h1>Paris Recommandés</h1>
 
-        <div class="bet-card">
-          <!-- AI Data Counter -->
-          <div class="ai-counter">
-            <div class="ai-spinner">
-              <svg class="animate-spin" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
-              </svg>
-              <span class="ai-badge">IA</span>
-            </div>
-            <span><span id="ai-data-count">{{ section.settings.ai_data_count | default: 2857 }}</span> DONNÉES ANALYSÉES PAR NOTRE IA</span>
+        {% if section.blocks.size > 0 %}
+          {% for block in section.blocks %}
+            {% if block.settings.show_card %}
+              <div class="bet-card" {{ block.shopify_attributes }}>
+                <!-- AI Data Counter -->
+                <div class="ai-counter">
+                  <div class="ai-spinner">
+                    <svg class="animate-spin" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                    </svg>
+                    <span class="ai-badge">IA</span>
+                  </div>
+                  <span><span>{{ block.settings.ai_data_count | default: 2857 }}</span> DONNÉES ANALYSÉES PAR NOTRE IA</span>
+                </div>
+
+                <!-- Confidence Badge - Bande verte 92% -->
+                <div class="confidence-badge">
+                  <div class="confidence-left">
+                    <span class="confidence-percentage"><span>{{ block.settings.win_percentage | default: 92 }}</span>%</span>
+                    <span class="confidence-text">DE CHANCE DE GAGNER SELON NOTRE IA</span>
+                  </div>
+                  <button class="btn-analysis" onclick="openAnalysisDialog()">
+                    VOIR ANALYSE IA
+                  </button>
+                </div>
+
+                <div class="bet-card-content">
+                  <div class="multiplier text-center">x{{ block.settings.multiplier | default: '1.74' }}</div>
+
+                  <div class="match-info">
+                    <div class="team">
+                      {% if block.settings.team1_logo %}
+                        <img src="{{ block.settings.team1_logo | image_url: width: 200 }}" alt="{{ block.settings.team1_name }}" class="team-logo">
+                      {% else %}
+                        <img src="{{ 'vegas-logo.png' | asset_url }}" alt="{{ block.settings.team1_name }}" class="team-logo">
+                      {% endif %}
+                      <div class="team-name">{{ block.settings.team1_name | default: 'VEGAS' }}</div>
+                    </div>
+
+                    <div class="match-vs">VS</div>
+
+                    <div class="team">
+                      {% if block.settings.team2_logo %}
+                        <img src="{{ block.settings.team2_logo | image_url: width: 200 }}" alt="{{ block.settings.team2_name }}" class="team-logo">
+                      {% else %}
+                        <img src="{{ 'tampa-logo.png' | asset_url }}" alt="{{ block.settings.team2_name }}" class="team-logo">
+                      {% endif %}
+                      <div class="team-name">{{ block.settings.team2_name | default: 'TAMPA BAY' }}</div>
+                    </div>
+                  </div>
+
+                  <div class="match-time">
+                    <span>{{ block.settings.match_date | default: "Aujourd'hui" }}</span> · <span>{{ block.settings.match_time | default: '5:00 PM' }}</span>
+                  </div>
+
+                  <div class="bet-amount-section">
+                    <div class="bet-amount-header">
+                      <span class="bet-amount-label">Votre Mise</span>
+                      <button class="btn btn-secondary" onclick="openBetDialog(this)" data-multiplier="{{ block.settings.multiplier | default: '1.74' }}">Modifier</button>
+                    </div>
+                    <div class="bet-amount-value">$100</div>
+                  </div>
+
+                  <div class="bet-amount-section">
+                    <div class="bet-amount-header">
+                      <span class="bet-amount-label">Votre Gain</span>
+                    </div>
+                    <div class="gain-value">${{ 100 | times: block.settings.multiplier | default: 1.74 | round: 2 }}</div>
+                  </div>
+
+                  <div class="best-odds-section">
+                    <div class="best-odds-text">
+                      MEILLEUR ODDS: <span>{{ block.settings.best_bookmaker | default: 'DRAFTKINGS' }}</span> <span>{{ block.settings.best_odds | default: -135 }}</span>
+                    </div>
+                  </div>
+
+                  <div class="ai-explanation">
+                    {{ block.settings.ai_explanation | default: "Notre IA a analysé plus de 2857 variables incluant les performances récentes, les statistiques head-to-head, les conditions de jeu, et les tendances du marché pour vous proposer ce pari avec une confiance élevée." }}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <div class="card text-center" style="padding: 2rem;">
+            <p style="color: rgba(255, 255, 255, 0.6);">
+              Aucune carte de pari ajoutée. Utilisez l'éditeur Shopify pour ajouter vos premières recommandations.
+            </p>
           </div>
-
-          <!-- Confidence Badge - Bande verte 92% -->
-          <div class="confidence-badge">
-            <div class="confidence-left">
-              <span class="confidence-percentage"><span id="win-percentage">{{ section.settings.win_percentage | default: 92 }}</span>%</span>
-              <span class="confidence-text">DE CHANCE DE GAGNER SELON NOTRE IA</span>
-            </div>
-            <button class="btn-analysis" onclick="openAnalysisDialog()">
-              VOIR ANALYSE IA
-            </button>
-          </div>
-
-          <div class="bet-card-content">
-            <div class="multiplier text-center">x1.74</div>
-
-            <div class="match-info">
-              <div class="team">
-                <img src="{{ 'vegas-logo.png' | asset_url }}" alt="Vegas" class="team-logo">
-                <div class="team-name" id="team1-name">{{ section.settings.team1_name | default: 'VEGAS' }}</div>
-              </div>
-
-              <div class="match-vs">VS</div>
-
-              <div class="team">
-                <img src="{{ 'tampa-logo.png' | asset_url }}" alt="Tampa Bay" class="team-logo">
-                <div class="team-name" id="team2-name">{{ section.settings.team2_name | default: 'TAMPA BAY' }}</div>
-              </div>
-            </div>
-
-            <div class="match-time">
-              <span id="match-time">{{ section.settings.match_time | default: '5:00 PM' }}</span>
-            </div>
-
-            <div class="bet-amount-section">
-              <div class="bet-amount-header">
-                <span class="bet-amount-label">Votre Mise</span>
-                <button class="btn btn-secondary" onclick="openBetDialog()">Modifier</button>
-              </div>
-              <div class="bet-amount-value" id="bet-amount-display">$100</div>
-            </div>
-
-            <div class="bet-amount-section">
-              <div class="bet-amount-header">
-                <span class="bet-amount-label">Votre Gain</span>
-              </div>
-              <div class="gain-value" id="gain-display">$174.00</div>
-            </div>
-
-            <div class="best-odds-section">
-              <div class="best-odds-text">
-                MEILLEUR ODDS: <span id="best-bookmaker">{{ section.settings.best_bookmaker | default: 'DRAFTKINGS' }}</span> <span id="best-odds">{{ section.settings.best_odds | default: -135 }}</span>
-              </div>
-            </div>
-
-            <div class="ai-explanation">
-              Notre IA a analysé plus de 2857 variables incluant les performances récentes, les statistiques head-to-head, les conditions de jeu, et les tendances du marché pour vous proposer ce pari avec une confiance de 92%.
-            </div>
-          </div>
-        </div>
+        {% endif %}
       </div>
     </div>
 
@@ -1533,19 +1557,29 @@
   <script>
     // State
     let currentBetAmount = 100;
-    const multiplier = 1.74;
+    let currentMultiplier = 1.74;
+    let currentCard = null;
     let currentPage = 'bet';
     let isMobileSidebarOpen = false;
 
     // Calculate return
     function calculateReturn(amount) {
-      return (amount * multiplier).toFixed(2);
+      return (amount * currentMultiplier).toFixed(2);
     }
 
     // Update display
     function updateDisplay() {
-      document.getElementById('bet-amount-display').textContent = '$' + currentBetAmount;
-      document.getElementById('gain-display').textContent = '$' + calculateReturn(currentBetAmount);
+      if (!currentCard) return;
+      
+      const betDisplay = currentCard.querySelector('.bet-amount-value');
+      const gainDisplay = currentCard.querySelector('.gain-value');
+      
+      if (betDisplay) {
+        betDisplay.textContent = '$' + currentBetAmount;
+      }
+      if (gainDisplay) {
+        gainDisplay.textContent = '$' + calculateReturn(currentBetAmount);
+      }
     }
 
     // Set bet amount
@@ -1611,7 +1645,14 @@
     }
 
     // Open bet dialog
-    function openBetDialog() {
+    function openBetDialog(element) {
+      currentCard = element.closest('.bet-card');
+      const multiplier = parseFloat(element.dataset.multiplier);
+      
+      if (!isNaN(multiplier)) {
+        currentMultiplier = multiplier;
+      }
+      
       document.getElementById('bet-dialog').classList.add('active');
     }
 
@@ -1685,59 +1726,127 @@
       "id": "subtitle",
       "label": "Sous-titre",
       "default": "Paris Sportifs Professionnels"
-    },
-    {
-      "type": "number",
-      "id": "ai_data_count",
-      "label": "Nombre de données IA analysées",
-      "default": 2857
-    },
-    {
-      "type": "number",
-      "id": "win_percentage",
-      "label": "Pourcentage de chance de gagner",
-      "default": 92
-    },
-    {
-      "type": "text",
-      "id": "team1_name",
-      "label": "Équipe 1",
-      "default": "VEGAS"
-    },
-    {
-      "type": "text",
-      "id": "team2_name",
-      "label": "Équipe 2",
-      "default": "TAMPA BAY"
-    },
-    {
-      "type": "text",
-      "id": "match_time",
-      "label": "Heure du match",
-      "default": "5:00 PM"
-    },
-    {
-      "type": "number",
-      "id": "odds",
-      "label": "Cote",
-      "default": -136
-    },
-    {
-      "type": "text",
-      "id": "best_bookmaker",
-      "label": "Meilleur bookmaker",
-      "default": "DRAFTKINGS"
-    },
-    {
-      "type": "number",
-      "id": "best_odds",
-      "label": "Meilleures cotes",
-      "default": -135
     }
   ],
+  "blocks": [
+    {
+      "type": "bet_card",
+      "name": "Carte de Pari",
+      "settings": [
+        {
+          "type": "number",
+          "id": "ai_data_count",
+          "label": "Nombre de données IA analysées",
+          "default": 2857
+        },
+        {
+          "type": "range",
+          "id": "win_percentage",
+          "label": "Pourcentage de chance de gagner (%)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 92
+        },
+        {
+          "type": "text",
+          "id": "team1_name",
+          "label": "Équipe 1 (à domicile)",
+          "default": "VEGAS"
+        },
+        {
+          "type": "image_picker",
+          "id": "team1_logo",
+          "label": "Logo Équipe 1"
+        },
+        {
+          "type": "text",
+          "id": "team2_name",
+          "label": "Équipe 2 (à l'extérieur)",
+          "default": "TAMPA BAY"
+        },
+        {
+          "type": "image_picker",
+          "id": "team2_logo",
+          "label": "Logo Équipe 2"
+        },
+        {
+          "type": "text",
+          "id": "match_time",
+          "label": "Heure du match",
+          "default": "5:00 PM"
+        },
+        {
+          "type": "text",
+          "id": "match_date",
+          "label": "Date du match",
+          "default": "Aujourd'hui",
+          "info": "Ex: Aujourd'hui, Demain, 28 Octobre"
+        },
+        {
+          "type": "text",
+          "id": "multiplier",
+          "label": "Multiplicateur (cote)",
+          "default": "1.74",
+          "info": "Ex: 1.74, 2.50, 3.25"
+        },
+        {
+          "type": "number",
+          "id": "odds",
+          "label": "Cote principale",
+          "default": -136,
+          "info": "Format américain (ex: -136, +150)"
+        },
+        {
+          "type": "text",
+          "id": "best_bookmaker",
+          "label": "Meilleur bookmaker",
+          "default": "DRAFTKINGS"
+        },
+        {
+          "type": "number",
+          "id": "best_odds",
+          "label": "Meilleures cotes",
+          "default": -135,
+          "info": "Format américain"
+        },
+        {
+          "type": "textarea",
+          "id": "ai_explanation",
+          "label": "Explication de l'IA",
+          "default": "Notre IA a analysé plus de 2857 variables incluant les performances récentes, les statistiques head-to-head, les conditions de jeu, et les tendances du marché pour vous proposer ce pari avec une confiance élevée."
+        },
+        {
+          "type": "checkbox",
+          "id": "show_card",
+          "label": "Afficher cette carte",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
   "presets": [
     {
-      "name": "Dashboard WINABET.AI"
+      "name": "Dashboard WINABET.AI",
+      "blocks": [
+        {
+          "type": "bet_card",
+          "settings": {
+            "ai_data_count": 2857,
+            "win_percentage": 92,
+            "team1_name": "VEGAS",
+            "team2_name": "TAMPA BAY",
+            "match_time": "5:00 PM",
+            "match_date": "Aujourd'hui",
+            "multiplier": "1.74",
+            "odds": -136,
+            "best_bookmaker": "DRAFTKINGS",
+            "best_odds": -135,
+            "show_card": true
+          }
+        }
+      ]
     }
   ]
 }
