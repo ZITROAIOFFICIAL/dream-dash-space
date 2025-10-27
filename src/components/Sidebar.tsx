@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import AIUpdateIndicator from "./AIUpdateIndicator";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,14 +51,19 @@ const Sidebar = () => {
         )}
       >
         <div className="flex flex-col h-full">
-          {/* Header with logo and close button */}
-          <div className="h-16 flex items-center justify-center relative">
-          <h1 className="text-2xl font-bold leading-none">
-            <span className="text-white">WIN</span>
-            <span className="text-sidebar-primary">A</span>
-            <span className="text-white">BET</span>
-            <span className="text-sidebar-primary text-sm">.AI</span>
-          </h1>
+          {/* Header with logo */}
+          <div className="h-16 flex items-center justify-center relative border-b border-white/10">
+            <h1 className="text-2xl font-bold leading-none">
+              <span className="text-white">WIN</span>
+              <span className="text-sidebar-primary">A</span>
+              <span className="text-white">BET</span>
+              <span className="text-sidebar-primary text-sm">.AI</span>
+            </h1>
+          </div>
+
+          {/* AI Update Indicator */}
+          <div className="px-4 py-3 border-b border-white/10">
+            <AIUpdateIndicator />
           </div>
 
           {/* Navigation */}

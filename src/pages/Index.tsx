@@ -11,6 +11,13 @@ import tampaLogo from "@/assets/tampa-logo.png";
 const Index = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   // States for ST. LOUIS vs PITTSBURGH card
   const [betAmountStLouis, setBetAmountStLouis] = useState<string>("100");
   const [isDialogOpenStLouis, setIsDialogOpenStLouis] = useState(false);
@@ -24,12 +31,6 @@ const Index = () => {
   const [showAnalysisVegas, setShowAnalysisVegas] = useState(false);
   const [isLoadingDialogOpenVegas, setIsLoadingDialogOpenVegas] = useState(false);
   const [isAnalysisDialogOpenVegas, setIsAnalysisDialogOpenVegas] = useState(false);
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
 
   // ST. LOUIS vs PITTSBURGH odds
   const oddsStLouis = -105;
@@ -62,23 +63,6 @@ const Index = () => {
   };
   return <DashboardLayout>
       <div className="space-y-8">
-        <div className="mb-2">
-          <div className="flex items-center justify-center gap-2 mb-6">
-            <div className="relative w-5 h-5 flex-shrink-0">
-              <Loader2 className="w-5 h-5 text-green-500 animate-spin absolute" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-green-500 font-bold text-[8px]">IA</span>
-              </div>
-            </div>
-            <span className="text-white/70 text-sm">
-              Dernière mise à jour IA : {currentTime.toLocaleTimeString('fr-FR', {
-              hour: '2-digit',
-              minute: '2-digit'
-            })}
-            </span>
-          </div>
-        </div>
-
         {/* ST. LOUIS vs PITTSBURGH CARD */}
         <div className="grid gap-6 justify-center">
           <Card className="w-full max-w-md bg-black border-[3px] border-green-600 shadow-2xl overflow-hidden mx-auto rounded-sm">
