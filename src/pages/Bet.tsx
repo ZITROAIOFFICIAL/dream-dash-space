@@ -44,14 +44,9 @@ const Bet = () => {
             <CardHeader className="space-y-4 p-0">
               {/* AI Analysis */}
               <div className="px-6 py-3 rounded-t-lg bg-[#00df57]/80">
-                <div className="flex justify-center mb-3">
-                  <span className="text-white text-sm font-bold">ANALYSE DE NOTRE IA</span>
-                </div>
-
-                <div className="flex justify-center">
-                  <div className="bg-black border-2 border-green-500 rounded px-2 py-1">
-                    <span className="font-bold text-green-400 text-sm">92% de chance de gagner</span>
-                  </div>
+                <div className="flex items-center gap-2">
+                  <span className="px-2 py-1 bg-black rounded border-2 border-green-500 font-bold text-green-400">92%</span>
+                  <span className="text-white text-sm font-bold">DE CHANCE DE GAGNER SELON NOTRE IA</span>
                 </div>
 
                 {/* Loading Animation */}
