@@ -179,275 +179,257 @@ const Index = () => {
                           {/* Detailed analysis sections for ST. LOUIS vs PITTSBURGH */}
                           <div className="space-y-6">
                             {/* Section 1 - Analyse du marché */}
-                            <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
-                              <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
-                                <span>1️⃣</span> Analyse du marché & meilleures cotes
-                              </h3>
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              1️⃣ Analyse du marché & meilleures cotes
+                            </h3>
+                            
+                            <div className="space-y-3">
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Marché & pricing (St. Louis)</h4>
+                                <ul className="text-white/80 text-sm space-y-1.5 ml-4">
+                                  <li>• Analyse de la probabilité implicite du marché pour St. Louis, obtenue par conversion des cotes en pourcentage réel.</li>
+                                  <li>• Comparaison inter-bookmakers pour identifier la meilleure cote disponible ("best price") et mesurer l'efficience du marché.</li>
+                                  <li>• Observation du mouvement de ligne (line movement) afin de déterminer si la valeur évolue en faveur ou en défaveur de St. Louis.</li>
+                                  <li>• Détection d'un éventuel closing line value (CLV) et influence du sharp money par rapport au public money.</li>
+                                </ul>
+                              </div>
                               
-                              <div className="space-y-4">
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Marché & pricing (St. Louis)</h4>
-                                  <ul className="text-white/80 text-sm space-y-1.5 ml-4">
-                                    <li>• Analyse de la probabilité implicite du marché pour St. Louis, obtenue par conversion des cotes en pourcentage réel.</li>
-                                    <li>• Comparaison inter-bookmakers pour identifier la meilleure cote disponible ("best price") et mesurer l'efficience du marché.</li>
-                                    <li>• Observation du mouvement de ligne (line movement) afin de déterminer si la valeur évolue en faveur ou en défaveur de St. Louis.</li>
-                                    <li>• Détection d'un éventuel closing line value (CLV) et influence du sharp money par rapport au public money.</li>
-                                  </ul>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Marché & pricing (Pittsburgh)</h4>
-                                  <ul className="text-white/80 text-sm space-y-1.5 ml-4">
-                                    <li>• Analyse de la probabilité implicite du marché pour Pittsburgh, obtenue par conversion des cotes en pourcentage réel.</li>
-                                    <li>• Comparaison inter-bookmakers pour identifier la meilleure cote disponible ("best price") et mesurer l'efficience du marché.</li>
-                                    <li>• Observation du mouvement de ligne (line movement) afin de déterminer si la valeur évolue en faveur ou en défaveur de Pittsburgh.</li>
-                                    <li>• Détection d'un éventuel closing line value (CLV) et influence du sharp money par rapport au public money.</li>
-                                  </ul>
-                                </div>
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Marché & pricing (Pittsburgh)</h4>
+                                <ul className="text-white/80 text-sm space-y-1.5 ml-4">
+                                  <li>• Analyse de la probabilité implicite du marché pour Pittsburgh, obtenue par conversion des cotes en pourcentage réel.</li>
+                                  <li>• Comparaison inter-bookmakers pour identifier la meilleure cote disponible ("best price") et mesurer l'efficience du marché.</li>
+                                  <li>• Observation du mouvement de ligne (line movement) afin de déterminer si la valeur évolue en faveur ou en défaveur de Pittsburgh.</li>
+                                  <li>• Détection d'un éventuel closing line value (CLV) et influence du sharp money par rapport au public money.</li>
+                                </ul>
                               </div>
                             </div>
 
-                            <div className="border-t border-white/10"></div>
+                            <div className="border-t border-white/10 my-6"></div>
 
                             {/* Section 8 - Historique H2H */}
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              8️⃣ Historique des confrontations (H2H)
+                            </h3>
+                            
                             <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
-                              <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
-                                <span>8️⃣</span> Historique des confrontations (H2H)
-                              </h3>
-                              
-                              <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Historique des confrontations (H2H)</h4>
-                                <p className="text-white/80 text-sm">
-                                  Analyse des précédents affrontements entre les deux équipes, incluant les tendances récurrentes du matchup, les styles dominants lors de ces duels, ainsi que les profils statistiques qui se répètent historiquement lorsque ces formations s'opposent.
-                                </p>
-                              </div>
+                              <h4 className="text-white font-bold text-sm mb-2">Analyse — Historique des confrontations (H2H)</h4>
+                              <p className="text-white/80 text-sm">
+                                Analyse des précédents affrontements entre les deux équipes, incluant les tendances récurrentes du matchup, les styles dominants lors de ces duels, ainsi que les profils statistiques qui se répètent historiquement lorsque ces formations s'opposent.
+                              </p>
                             </div>
 
-                            <div className="border-t border-white/10"></div>
+                            <div className="border-t border-white/10 my-6"></div>
 
                             {/* Section 9 - Lineup projeté */}
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              9️⃣ Lineup / alignement projeté du jour
+                            </h3>
+                            
                             <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
-                              <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
-                                <span>9️⃣</span> Lineup / alignement projeté du jour
-                              </h3>
-                              
-                              <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Alignement projeté du jour</h4>
-                                <p className="text-white/80 text-sm">
-                                  Analyse de l'alignement prévu pour chaque équipe, incluant les trios et paires défensives projetées, la disponibilité des joueurs clés, les éventuels absents, ainsi que l'impact attendu des lignes déployées sur le rythme offensif et la structure tactique globale.
-                                </p>
-                              </div>
+                              <h4 className="text-white font-bold text-sm mb-2">Analyse — Alignement projeté du jour</h4>
+                              <p className="text-white/80 text-sm">
+                                Analyse de l'alignement prévu pour chaque équipe, incluant les trios et paires défensives projetées, la disponibilité des joueurs clés, les éventuels absents, ainsi que l'impact attendu des lignes déployées sur le rythme offensif et la structure tactique globale.
+                              </p>
                             </div>
 
-                            <div className="border-t border-white/10"></div>
+                            <div className="border-t border-white/10 my-6"></div>
 
                             {/* Section 2 - Power Play */}
-                            <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
-                              <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
-                                <span>2️⃣</span> Analyse du jeu de puissance & discipline
-                              </h3>
-                              
-                              <div className="space-y-4">
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Power Play (St. Louis)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse de l'efficacité du power play de St. Louis, incluant la structure tactique en zone offensive, la qualité des entrées de zone contrôlées, la création de chances dangereuses (HDCF) et l'exécution globale des séquences en supériorité numérique (xGoals/PP).
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Power Play (Pittsburgh)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse de l'efficacité du power play de Pittsburgh, incluant la structure tactique en zone offensive, la qualité des entrées de zone contrôlées, la création de chances dangereuses (HDCF) et l'exécution globale des séquences en supériorité numérique (xGoals/PP).
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Discipline & Pénalités (St. Louis)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse du niveau de discipline de St. Louis, basée sur la fréquence des pénalités concédées, le temps passé en infériorité numérique, l'impact sur le momentum et l'exposition défensive répétée en PK.
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Discipline & Pénalités (Pittsburgh)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse du niveau de discipline de Pittsburgh, basée sur la fréquence des pénalités concédées, le temps passé en infériorité numérique, l'impact sur le momentum et l'exposition défensive répétée en PK.
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="border-t border-white/10"></div>
-
-                            {/* Section 3 - Gardien */}
-                            <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
-                              <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
-                                <span>3️⃣</span> Analyse du gardien & structure défensive
-                              </h3>
-                              
-                              <div className="space-y-4">
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Performance du gardien (St. Louis)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse du rendement du gardien projeté de St. Louis, basée sur l'efficacité face aux tirs à haut danger, la qualité technique, la constance sous pression et les indicateurs avancés type GSAA.
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Performance du gardien (Pittsburgh)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse du rendement du gardien projeté de Pittsburgh, basée sur l'efficacité face aux tirs à haut danger, la qualité technique, la constance sous pression et les indicateurs avancés type GSAA.
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Structure défensive (St. Louis)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse de la structure défensive de St. Louis, incluant la protection du slot, la gestion des rebonds, la transition défensive et la limitation des occasions adverses de haute qualité.
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Structure défensive (Pittsburgh)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse de la structure défensive de Pittsburgh, incluant la protection du slot, la gestion des rebonds, la transition défensive et la limitation des occasions adverses de haute qualité.
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="border-t border-white/10"></div>
-
-                            {/* Section 4 - Possession */}
-                            <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
-                              <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
-                                <span>4️⃣</span> Analyse de la possession & qualité offensive
-                              </h3>
-                              
-                              <div className="space-y-4">
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Expected Goals (St. Louis)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse de la production offensive de St. Louis, basée sur la quantité et la qualité des tirs générés, les emplacements de tir et la probabilité attendue de convertir les occasions (xG).
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Expected Goals (Pittsburgh)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse de la production offensive de Pittsburgh, basée sur la quantité et la qualité des tirs générés, les emplacements de tir et la probabilité attendue de convertir les occasions (xG).
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Possession (Corsi/Fenwick) (St. Louis)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse du contrôle du palet de St. Louis, à travers le volume de tirs tentés, la capacité à maintenir la zone offensive et la dictée du rythme de jeu.
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Possession (Corsi/Fenwick) (Pittsburgh)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse du contrôle du palet de Pittsburgh, à travers le volume de tirs tentés, la capacité à maintenir la zone offensive et la dictée du rythme de jeu.
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="border-t border-white/10"></div>
-
-                            {/* Section 5 - Profondeur */}
-                            <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
-                              <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
-                                <span>5️⃣</span> Analyse de l'alignement & profondeur
-                              </h3>
-                              
-                              <div className="space-y-4">
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Profondeur offensive (St. Louis)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse de la profondeur de St. Louis, incluant la contribution du top-6, l'impact du bottom-6, la flexibilité tactique et la capacité à maintenir la pression offensive sur plusieurs trios.
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Profondeur offensive (Pittsburgh)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse de la profondeur de Pittsburgh, incluant la contribution du top-6, l'impact du bottom-6, la flexibilité tactique et la capacité à maintenir la pression offensive sur plusieurs trios.
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Stabilité défensive (St. Louis)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse de la profondeur défensive de St. Louis, basée sur la solidité du top-4, la mobilité en relance et la gestion des transitions adverses.
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Stabilité défensive (Pittsburgh)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse de la profondeur défensive de Pittsburgh, basée sur la solidité du top-4, la mobilité en relance et la gestion des transitions adverses.
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="border-t border-white/10"></div>
-
-                            {/* Section 6 - Contexte */}
-                            <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
-                              <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
-                                <span>6️⃣</span> Analyse du contexte & fatigue
-                              </h3>
-                              
-                              <div className="space-y-4">
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Cadence & calendrier (St. Louis)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse du contexte physique de St. Louis, incluant l'enchaînement des matchs, le repos disponible, la présence éventuelle d'un back-to-back et la charge de déplacement.
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Cadence & calendrier (Pittsburgh)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse du contexte physique de Pittsburgh, incluant l'enchaînement des matchs, le repos disponible, la présence éventuelle d'un back-to-back et la charge de déplacement.
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Avantage domicile / extérieur (St. Louis)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse de la performance contextuelle de St. Louis, selon qu'elle évolue à domicile ou sur la route, et l'impact du dernier changement sur les matchups.
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Avantage domicile / extérieur (Pittsburgh)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse de la performance contextuelle de Pittsburgh, selon qu'elle évolue à domicile ou sur la route, et l'impact du dernier changement sur les matchups.
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="border-t border-white/10"></div>
-
-                            {/* Section 7 - Facteurs additionnels */}
-                            <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
-                              <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
-                                <span>7️⃣</span> Autres analyses complémentaires
-                              </h3>
-                              
-                              <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Facteurs additionnels</h4>
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              2️⃣ Analyse du jeu de puissance & discipline
+                            </h3>
+                            
+                            <div className="space-y-3">
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Power Play (St. Louis)</h4>
                                 <p className="text-white/80 text-sm">
-                                  L'IA peut également prendre en compte d'autres variables secondaires telles que la dynamique mentale, la confiance du vestiaire, la qualité du coaching staff, la stratégie d'entrée de zone, l'exécution en transition neutre, le style de match attendu (haut événement / bas événement) et l'adaptation tactique entre périodes.
+                                  Analyse de l'efficacité du power play de St. Louis, incluant la structure tactique en zone offensive, la qualité des entrées de zone contrôlées, la création de chances dangereuses (HDCF) et l'exécution globale des séquences en supériorité numérique (xGoals/PP).
                                 </p>
                               </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Power Play (Pittsburgh)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de l'efficacité du power play de Pittsburgh, incluant la structure tactique en zone offensive, la qualité des entrées de zone contrôlées, la création de chances dangereuses (HDCF) et l'exécution globale des séquences en supériorité numérique (xGoals/PP).
+                                </p>
+                              </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Discipline & Pénalités (St. Louis)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse du niveau de discipline de St. Louis, basée sur la fréquence des pénalités concédées, le temps passé en infériorité numérique, l'impact sur le momentum et l'exposition défensive répétée en PK.
+                                </p>
+                              </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Discipline & Pénalités (Pittsburgh)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse du niveau de discipline de Pittsburgh, basée sur la fréquence des pénalités concédées, le temps passé en infériorité numérique, l'impact sur le momentum et l'exposition défensive répétée en PK.
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="border-t border-white/10 my-6"></div>
+
+                            {/* Section 3 - Gardien */}
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              3️⃣ Analyse du gardien & structure défensive
+                            </h3>
+                            
+                            <div className="space-y-3">
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Performance du gardien (St. Louis)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse du rendement du gardien projeté de St. Louis, basée sur l'efficacité face aux tirs à haut danger, la qualité technique, la constance sous pression et les indicateurs avancés type GSAA.
+                                </p>
+                              </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Performance du gardien (Pittsburgh)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse du rendement du gardien projeté de Pittsburgh, basée sur l'efficacité face aux tirs à haut danger, la qualité technique, la constance sous pression et les indicateurs avancés type GSAA.
+                                </p>
+                              </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Structure défensive (St. Louis)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de la structure défensive de St. Louis, incluant la protection du slot, la gestion des rebonds, la transition défensive et la limitation des occasions adverses de haute qualité.
+                                </p>
+                              </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Structure défensive (Pittsburgh)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de la structure défensive de Pittsburgh, incluant la protection du slot, la gestion des rebonds, la transition défensive et la limitation des occasions adverses de haute qualité.
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="border-t border-white/10 my-6"></div>
+
+                            {/* Section 4 - Possession */}
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              4️⃣ Analyse de la possession & qualité offensive
+                            </h3>
+                            
+                            <div className="space-y-3">
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Expected Goals (St. Louis)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de la production offensive de St. Louis, basée sur la quantité et la qualité des tirs générés, les emplacements de tir et la probabilité attendue de convertir les occasions (xG).
+                                </p>
+                              </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Expected Goals (Pittsburgh)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de la production offensive de Pittsburgh, basée sur la quantité et la qualité des tirs générés, les emplacements de tir et la probabilité attendue de convertir les occasions (xG).
+                                </p>
+                              </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Possession (Corsi/Fenwick) (St. Louis)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse du contrôle du palet de St. Louis, à travers le volume de tirs tentés, la capacité à maintenir la zone offensive et la dictée du rythme de jeu.
+                                </p>
+                              </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Possession (Corsi/Fenwick) (Pittsburgh)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse du contrôle du palet de Pittsburgh, à travers le volume de tirs tentés, la capacité à maintenir la zone offensive et la dictée du rythme de jeu.
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="border-t border-white/10 my-6"></div>
+
+                            {/* Section 5 - Profondeur */}
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              5️⃣ Analyse de l'alignement & profondeur
+                            </h3>
+                            
+                            <div className="space-y-3">
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Profondeur offensive (St. Louis)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de la profondeur de St. Louis, incluant la contribution du top-6, l'impact du bottom-6, la flexibilité tactique et la capacité à maintenir la pression offensive sur plusieurs trios.
+                                </p>
+                              </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Profondeur offensive (Pittsburgh)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de la profondeur de Pittsburgh, incluant la contribution du top-6, l'impact du bottom-6, la flexibilité tactique et la capacité à maintenir la pression offensive sur plusieurs trios.
+                                </p>
+                              </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Stabilité défensive (St. Louis)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de la profondeur défensive de St. Louis, basée sur la solidité du top-4, la mobilité en relance et la gestion des transitions adverses.
+                                </p>
+                              </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Stabilité défensive (Pittsburgh)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de la profondeur défensive de Pittsburgh, basée sur la solidité du top-4, la mobilité en relance et la gestion des transitions adverses.
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="border-t border-white/10 my-6"></div>
+
+                            {/* Section 6 - Contexte */}
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              6️⃣ Analyse du contexte & fatigue
+                            </h3>
+                            
+                            <div className="space-y-3">
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Cadence & calendrier (St. Louis)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse du contexte physique de St. Louis, incluant l'enchaînement des matchs, le repos disponible, la présence éventuelle d'un back-to-back et la charge de déplacement.
+                                </p>
+                              </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Cadence & calendrier (Pittsburgh)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse du contexte physique de Pittsburgh, incluant l'enchaînement des matchs, le repos disponible, la présence éventuelle d'un back-to-back et la charge de déplacement.
+                                </p>
+                              </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Avantage domicile / extérieur (St. Louis)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de la performance contextuelle de St. Louis, selon qu'elle évolue à domicile ou sur la route, et l'impact du dernier changement sur les matchups.
+                                </p>
+                              </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Avantage domicile / extérieur (Pittsburgh)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de la performance contextuelle de Pittsburgh, selon qu'elle évolue à domicile ou sur la route, et l'impact du dernier changement sur les matchups.
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="border-t border-white/10 my-6"></div>
+
+                            {/* Section 7 - Facteurs additionnels */}
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              7️⃣ Autres analyses complémentaires
+                            </h3>
+                            
+                            <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                              <h4 className="text-white font-bold text-sm mb-2">Analyse — Facteurs additionnels</h4>
+                              <p className="text-white/80 text-sm">
+                                L'IA peut également prendre en compte d'autres variables secondaires telles que la dynamique mentale, la confiance du vestiaire, la qualité du coaching staff, la stratégie d'entrée de zone, l'exécution en transition neutre, le style de match attendu (haut événement / bas événement) et l'adaptation tactique entre périodes.
+                              </p>
                             </div>
                           </div>
 
@@ -693,275 +675,257 @@ const Index = () => {
                           {/* Detailed analysis sections for VEGAS vs TAMPA BAY */}
                           <div className="space-y-6">
                             {/* Section 1 - Analyse du marché */}
-                            <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
-                              <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
-                                <span>1️⃣</span> Analyse du marché & meilleures cotes
-                              </h3>
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              1️⃣ Analyse du marché & meilleures cotes
+                            </h3>
+                            
+                            <div className="space-y-3">
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Marché & pricing (Vegas)</h4>
+                                <ul className="text-white/80 text-sm space-y-1.5 ml-4">
+                                  <li>• Analyse de la probabilité implicite du marché pour Vegas, obtenue par conversion des cotes en pourcentage réel.</li>
+                                  <li>• Comparaison inter-bookmakers pour identifier la meilleure cote disponible ("best price") et mesurer l'efficience du marché.</li>
+                                  <li>• Observation du mouvement de ligne (line movement) afin de déterminer si la valeur évolue en faveur ou en défaveur de Vegas.</li>
+                                  <li>• Détection d'un éventuel closing line value (CLV) et influence du sharp money par rapport au public money.</li>
+                                </ul>
+                              </div>
                               
-                              <div className="space-y-4">
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Marché & pricing (Vegas)</h4>
-                                  <ul className="text-white/80 text-sm space-y-1.5 ml-4">
-                                    <li>• Analyse de la probabilité implicite du marché pour Vegas, obtenue par conversion des cotes en pourcentage réel.</li>
-                                    <li>• Comparaison inter-bookmakers pour identifier la meilleure cote disponible ("best price") et mesurer l'efficience du marché.</li>
-                                    <li>• Observation du mouvement de ligne (line movement) afin de déterminer si la valeur évolue en faveur ou en défaveur de Vegas.</li>
-                                    <li>• Détection d'un éventuel closing line value (CLV) et influence du sharp money par rapport au public money.</li>
-                                  </ul>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Marché & pricing (Tampa Bay)</h4>
-                                  <ul className="text-white/80 text-sm space-y-1.5 ml-4">
-                                    <li>• Analyse de la probabilité implicite du marché pour Tampa Bay, obtenue par conversion des cotes en pourcentage réel.</li>
-                                    <li>• Comparaison inter-bookmakers pour identifier la meilleure cote disponible ("best price") et mesurer l'efficience du marché.</li>
-                                    <li>• Observation du mouvement de ligne (line movement) afin de déterminer si la valeur évolue en faveur ou en défaveur de Tampa Bay.</li>
-                                    <li>• Détection d'un éventuel closing line value (CLV) et influence du sharp money par rapport au public money.</li>
-                                  </ul>
-                                </div>
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Marché & pricing (Tampa Bay)</h4>
+                                <ul className="text-white/80 text-sm space-y-1.5 ml-4">
+                                  <li>• Analyse de la probabilité implicite du marché pour Tampa Bay, obtenue par conversion des cotes en pourcentage réel.</li>
+                                  <li>• Comparaison inter-bookmakers pour identifier la meilleure cote disponible ("best price") et mesurer l'efficience du marché.</li>
+                                  <li>• Observation du mouvement de ligne (line movement) afin de déterminer si la valeur évolue en faveur ou en défaveur de Tampa Bay.</li>
+                                  <li>• Détection d'un éventuel closing line value (CLV) et influence du sharp money par rapport au public money.</li>
+                                </ul>
                               </div>
                             </div>
 
-                            <div className="border-t border-white/10"></div>
+                            <div className="border-t border-white/10 my-6"></div>
 
                             {/* Section 8 - Historique H2H */}
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              8️⃣ Historique des confrontations (H2H)
+                            </h3>
+                            
                             <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
-                              <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
-                                <span>8️⃣</span> Historique des confrontations (H2H)
-                              </h3>
-                              
-                              <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Historique des confrontations (H2H)</h4>
-                                <p className="text-white/80 text-sm">
-                                  Analyse des précédents affrontements entre les deux équipes, incluant les tendances récurrentes du matchup, les styles dominants lors de ces duels, ainsi que les profils statistiques qui se répètent historiquement lorsque ces formations s'opposent.
-                                </p>
-                              </div>
+                              <h4 className="text-white font-bold text-sm mb-2">Analyse — Historique des confrontations (H2H)</h4>
+                              <p className="text-white/80 text-sm">
+                                Analyse des précédents affrontements entre les deux équipes, incluant les tendances récurrentes du matchup, les styles dominants lors de ces duels, ainsi que les profils statistiques qui se répètent historiquement lorsque ces formations s'opposent.
+                              </p>
                             </div>
 
-                            <div className="border-t border-white/10"></div>
+                            <div className="border-t border-white/10 my-6"></div>
 
                             {/* Section 9 - Lineup projeté */}
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              9️⃣ Lineup / alignement projeté du jour
+                            </h3>
+                            
                             <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
-                              <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
-                                <span>9️⃣</span> Lineup / alignement projeté du jour
-                              </h3>
-                              
-                              <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Alignement projeté du jour</h4>
-                                <p className="text-white/80 text-sm">
-                                  Analyse de l'alignement prévu pour chaque équipe, incluant les trios et paires défensives projetées, la disponibilité des joueurs clés, les éventuels absents, ainsi que l'impact attendu des lignes déployées sur le rythme offensif et la structure tactique globale.
-                                </p>
-                              </div>
+                              <h4 className="text-white font-bold text-sm mb-2">Analyse — Alignement projeté du jour</h4>
+                              <p className="text-white/80 text-sm">
+                                Analyse de l'alignement prévu pour chaque équipe, incluant les trios et paires défensives projetées, la disponibilité des joueurs clés, les éventuels absents, ainsi que l'impact attendu des lignes déployées sur le rythme offensif et la structure tactique globale.
+                              </p>
                             </div>
 
-                            <div className="border-t border-white/10"></div>
+                            <div className="border-t border-white/10 my-6"></div>
 
                             {/* Section 2 - Power Play */}
-                            <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
-                              <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
-                                <span>2️⃣</span> Analyse du jeu de puissance & discipline
-                              </h3>
-                              
-                              <div className="space-y-4">
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Power Play (Vegas)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse de l'efficacité du power play de Vegas, incluant la structure tactique en zone offensive, la qualité des entrées de zone contrôlées, la création de chances dangereuses (HDCF) et l'exécution globale des séquences en supériorité numérique (xGoals/PP).
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Power Play (Tampa Bay)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse de l'efficacité du power play de Tampa Bay, incluant la structure tactique en zone offensive, la qualité des entrées de zone contrôlées, la création de chances dangereuses (HDCF) et l'exécution globale des séquences en supériorité numérique (xGoals/PP).
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Discipline & Pénalités (Vegas)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse du niveau de discipline de Vegas, basée sur la fréquence des pénalités concédées, le temps passé en infériorité numérique, l'impact sur le momentum et l'exposition défensive répétée en PK.
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Discipline & Pénalités (Tampa Bay)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse du niveau de discipline de Tampa Bay, basée sur la fréquence des pénalités concédées, le temps passé en infériorité numérique, l'impact sur le momentum et l'exposition défensive répétée en PK.
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="border-t border-white/10"></div>
-
-                            {/* Section 3 - Gardien */}
-                            <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
-                              <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
-                                <span>3️⃣</span> Analyse du gardien & structure défensive
-                              </h3>
-                              
-                              <div className="space-y-4">
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Performance du gardien (Vegas)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse du rendement du gardien projeté de Vegas, basée sur l'efficacité face aux tirs à haut danger, la qualité technique, la constance sous pression et les indicateurs avancés type GSAA.
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Performance du gardien (Tampa Bay)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse du rendement du gardien projeté de Tampa Bay, basée sur l'efficacité face aux tirs à haut danger, la qualité technique, la constance sous pression et les indicateurs avancés type GSAA.
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Structure défensive (Vegas)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse de la structure défensive de Vegas, incluant la protection du slot, la gestion des rebonds, la transition défensive et la limitation des occasions adverses de haute qualité.
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Structure défensive (Tampa Bay)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse de la structure défensive de Tampa Bay, incluant la protection du slot, la gestion des rebonds, la transition défensive et la limitation des occasions adverses de haute qualité.
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="border-t border-white/10"></div>
-
-                            {/* Section 4 - Possession */}
-                            <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
-                              <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
-                                <span>4️⃣</span> Analyse de la possession & qualité offensive
-                              </h3>
-                              
-                              <div className="space-y-4">
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Expected Goals (Vegas)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse de la production offensive de Vegas, basée sur la quantité et la qualité des tirs générés, les emplacements de tir et la probabilité attendue de convertir les occasions (xG).
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Expected Goals (Tampa Bay)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse de la production offensive de Tampa Bay, basée sur la quantité et la qualité des tirs générés, les emplacements de tir et la probabilité attendue de convertir les occasions (xG).
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Possession (Corsi/Fenwick) (Vegas)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse du contrôle du palet de Vegas, à travers le volume de tirs tentés, la capacité à maintenir la zone offensive et la dictée du rythme de jeu.
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Possession (Corsi/Fenwick) (Tampa Bay)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse du contrôle du palet de Tampa Bay, à travers le volume de tirs tentés, la capacité à maintenir la zone offensive et la dictée du rythme de jeu.
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="border-t border-white/10"></div>
-
-                            {/* Section 5 - Profondeur */}
-                            <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
-                              <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
-                                <span>5️⃣</span> Analyse de l'alignement & profondeur
-                              </h3>
-                              
-                              <div className="space-y-4">
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Profondeur offensive (Vegas)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse de la profondeur de Vegas, incluant la contribution du top-6, l'impact du bottom-6, la flexibilité tactique et la capacité à maintenir la pression offensive sur plusieurs trios.
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Profondeur offensive (Tampa Bay)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse de la profondeur de Tampa Bay, incluant la contribution du top-6, l'impact du bottom-6, la flexibilité tactique et la capacité à maintenir la pression offensive sur plusieurs trios.
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Stabilité défensive (Vegas)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse de la profondeur défensive de Vegas, basée sur la solidité du top-4, la mobilité en relance et la gestion des transitions adverses.
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Stabilité défensive (Tampa Bay)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse de la profondeur défensive de Tampa Bay, basée sur la solidité du top-4, la mobilité en relance et la gestion des transitions adverses.
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="border-t border-white/10"></div>
-
-                            {/* Section 6 - Contexte */}
-                            <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
-                              <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
-                                <span>6️⃣</span> Analyse du contexte & fatigue
-                              </h3>
-                              
-                              <div className="space-y-4">
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Cadence & calendrier (Vegas)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse du contexte physique de Vegas, incluant l'enchaînement des matchs, le repos disponible, la présence éventuelle d'un back-to-back et la charge de déplacement.
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Cadence & calendrier (Tampa Bay)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse du contexte physique de Tampa Bay, incluant l'enchaînement des matchs, le repos disponible, la présence éventuelle d'un back-to-back et la charge de déplacement.
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Avantage domicile / extérieur (Vegas)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse de la performance contextuelle de Vegas, selon qu'elle évolue à domicile ou sur la route, et l'impact du dernier changement sur les matchups.
-                                  </p>
-                                </div>
-                                
-                                <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Avantage domicile / extérieur (Tampa Bay)</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse de la performance contextuelle de Tampa Bay, selon qu'elle évolue à domicile ou sur la route, et l'impact du dernier changement sur les matchups.
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="border-t border-white/10"></div>
-
-                            {/* Section 7 - Facteurs additionnels */}
-                            <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
-                              <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
-                                <span>7️⃣</span> Autres analyses complémentaires
-                              </h3>
-                              
-                              <div className="bg-black/40 rounded-lg p-3 border border-green-600/30">
-                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Facteurs additionnels</h4>
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              2️⃣ Analyse du jeu de puissance & discipline
+                            </h3>
+                            
+                            <div className="space-y-3">
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Power Play (Vegas)</h4>
                                 <p className="text-white/80 text-sm">
-                                  L'IA peut également prendre en compte d'autres variables secondaires telles que la dynamique mentale, la confiance du vestiaire, la qualité du coaching staff, la stratégie d'entrée de zone, l'exécution en transition neutre, le style de match attendu (haut événement / bas événement) et l'adaptation tactique entre périodes.
+                                  Analyse de l'efficacité du power play de Vegas, incluant la structure tactique en zone offensive, la qualité des entrées de zone contrôlées, la création de chances dangereuses (HDCF) et l'exécution globale des séquences en supériorité numérique (xGoals/PP).
                                 </p>
                               </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Power Play (Tampa Bay)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de l'efficacité du power play de Tampa Bay, incluant la structure tactique en zone offensive, la qualité des entrées de zone contrôlées, la création de chances dangereuses (HDCF) et l'exécution globale des séquences en supériorité numérique (xGoals/PP).
+                                </p>
+                              </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Discipline & Pénalités (Vegas)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse du niveau de discipline de Vegas, basée sur la fréquence des pénalités concédées, le temps passé en infériorité numérique, l'impact sur le momentum et l'exposition défensive répétée en PK.
+                                </p>
+                              </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Discipline & Pénalités (Tampa Bay)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse du niveau de discipline de Tampa Bay, basée sur la fréquence des pénalités concédées, le temps passé en infériorité numérique, l'impact sur le momentum et l'exposition défensive répétée en PK.
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="border-t border-white/10 my-6"></div>
+
+                            {/* Section 3 - Gardien */}
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              3️⃣ Analyse du gardien & structure défensive
+                            </h3>
+                            
+                            <div className="space-y-3">
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Performance du gardien (Vegas)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse du rendement du gardien projeté de Vegas, basée sur l'efficacité face aux tirs à haut danger, la qualité technique, la constance sous pression et les indicateurs avancés type GSAA.
+                                </p>
+                              </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Performance du gardien (Tampa Bay)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse du rendement du gardien projeté de Tampa Bay, basée sur l'efficacité face aux tirs à haut danger, la qualité technique, la constance sous pression et les indicateurs avancés type GSAA.
+                                </p>
+                              </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Structure défensive (Vegas)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de la structure défensive de Vegas, incluant la protection du slot, la gestion des rebonds, la transition défensive et la limitation des occasions adverses de haute qualité.
+                                </p>
+                              </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Structure défensive (Tampa Bay)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de la structure défensive de Tampa Bay, incluant la protection du slot, la gestion des rebonds, la transition défensive et la limitation des occasions adverses de haute qualité.
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="border-t border-white/10 my-6"></div>
+
+                            {/* Section 4 - Possession */}
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              4️⃣ Analyse de la possession & qualité offensive
+                            </h3>
+                            
+                            <div className="space-y-3">
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Expected Goals (Vegas)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de la production offensive de Vegas, basée sur la quantité et la qualité des tirs générés, les emplacements de tir et la probabilité attendue de convertir les occasions (xG).
+                                </p>
+                              </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Expected Goals (Tampa Bay)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de la production offensive de Tampa Bay, basée sur la quantité et la qualité des tirs générés, les emplacements de tir et la probabilité attendue de convertir les occasions (xG).
+                                </p>
+                              </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Possession (Corsi/Fenwick) (Vegas)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse du contrôle du palet de Vegas, à travers le volume de tirs tentés, la capacité à maintenir la zone offensive et la dictée du rythme de jeu.
+                                </p>
+                              </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Possession (Corsi/Fenwick) (Tampa Bay)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse du contrôle du palet de Tampa Bay, à travers le volume de tirs tentés, la capacité à maintenir la zone offensive et la dictée du rythme de jeu.
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="border-t border-white/10 my-6"></div>
+
+                            {/* Section 5 - Profondeur */}
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              5️⃣ Analyse de l'alignement & profondeur
+                            </h3>
+                            
+                            <div className="space-y-3">
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Profondeur offensive (Vegas)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de la profondeur de Vegas, incluant la contribution du top-6, l'impact du bottom-6, la flexibilité tactique et la capacité à maintenir la pression offensive sur plusieurs trios.
+                                </p>
+                              </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Profondeur offensive (Tampa Bay)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de la profondeur de Tampa Bay, incluant la contribution du top-6, l'impact du bottom-6, la flexibilité tactique et la capacité à maintenir la pression offensive sur plusieurs trios.
+                                </p>
+                              </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Stabilité défensive (Vegas)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de la profondeur défensive de Vegas, basée sur la solidité du top-4, la mobilité en relance et la gestion des transitions adverses.
+                                </p>
+                              </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Stabilité défensive (Tampa Bay)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de la profondeur défensive de Tampa Bay, basée sur la solidité du top-4, la mobilité en relance et la gestion des transitions adverses.
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="border-t border-white/10 my-6"></div>
+
+                            {/* Section 6 - Contexte */}
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              6️⃣ Analyse du contexte & fatigue
+                            </h3>
+                            
+                            <div className="space-y-3">
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Cadence & calendrier (Vegas)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse du contexte physique de Vegas, incluant l'enchaînement des matchs, le repos disponible, la présence éventuelle d'un back-to-back et la charge de déplacement.
+                                </p>
+                              </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Cadence & calendrier (Tampa Bay)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse du contexte physique de Tampa Bay, incluant l'enchaînement des matchs, le repos disponible, la présence éventuelle d'un back-to-back et la charge de déplacement.
+                                </p>
+                              </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Avantage domicile / extérieur (Vegas)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de la performance contextuelle de Vegas, selon qu'elle évolue à domicile ou sur la route, et l'impact du dernier changement sur les matchups.
+                                </p>
+                              </div>
+                              
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Avantage domicile / extérieur (Tampa Bay)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de la performance contextuelle de Tampa Bay, selon qu'elle évolue à domicile ou sur la route, et l'impact du dernier changement sur les matchups.
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="border-t border-white/10 my-6"></div>
+
+                            {/* Section 7 - Facteurs additionnels */}
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              7️⃣ Autres analyses complémentaires
+                            </h3>
+                            
+                            <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4">
+                              <h4 className="text-white font-bold text-sm mb-2">Analyse — Facteurs additionnels</h4>
+                              <p className="text-white/80 text-sm">
+                                L'IA peut également prendre en compte d'autres variables secondaires telles que la dynamique mentale, la confiance du vestiaire, la qualité du coaching staff, la stratégie d'entrée de zone, l'exécution en transition neutre, le style de match attendu (haut événement / bas événement) et l'adaptation tactique entre périodes.
+                              </p>
                             </div>
                           </div>
 
