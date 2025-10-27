@@ -44,7 +44,7 @@ const Bet = () => {
           <Card className="w-full max-w-md bg-black border-2 border-primary shadow-2xl overflow-hidden mx-auto">
             <CardHeader className="space-y-4 p-0">
               {/* AI Analysis */}
-              <div className="bg-green-600/80 px-6 py-4 text-center space-y-2 rounded-t-lg">
+              <div className="bg-green-600/80 px-6 py-3 text-center space-y-1 rounded-t-lg">
                 <h2 className="text-white text-sm uppercase">Analyse de notre <span className="font-bold">IA</span></h2>
                 <div className="flex justify-center">
                   <div className="bg-black border-2 border-green-500 rounded-lg px-6 py-2">
@@ -54,17 +54,19 @@ const Bet = () => {
                     </div>
                   </div>
                 </div>
-                <p className="text-white/70 text-[10px] uppercase font-semibold tracking-wide">
-                  Statistiquement selon 482 variables analysées par l'IA
-                </p>
-                <Button 
-                  onClick={handleShowAnalysis}
-                  disabled={isLoadingAnalysis || showAnalysis}
-                  className="mt-2 bg-white/10 hover:bg-white/20 text-white border border-white/30 text-xs"
-                  size="sm"
-                >
-                  {isLoadingAnalysis ? "Analyse en cours..." : showAnalysis ? "Analyse affichée" : "Voir l'analyse"}
-                </Button>
+                <div className="flex items-center justify-center gap-1">
+                  <p className="text-white/70 text-[9px] uppercase font-semibold tracking-tight">
+                    Selon 482 variables analysées par notre IA
+                  </p>
+                  <span className="text-white/50">•</span>
+                  <button 
+                    onClick={handleShowAnalysis}
+                    disabled={isLoadingAnalysis || showAnalysis}
+                    className="text-[9px] uppercase font-semibold text-white underline hover:text-white/80 disabled:text-white/50 disabled:no-underline transition-colors"
+                  >
+                    {isLoadingAnalysis ? "Analyse en cours..." : showAnalysis ? "Analyse affichée" : "Voir l'analyse"}
+                  </button>
+                </div>
 
                 {/* Loading Animation */}
                 {isLoadingAnalysis && (
