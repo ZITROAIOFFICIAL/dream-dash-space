@@ -101,7 +101,10 @@ const Bet = () => {
                             </h4>
                             <div className="space-y-3 text-xs">
                               <div className="bg-white/5 p-3 rounded">
-                                <div className="text-white/90 font-semibold mb-1">Power Play — Vegas</div>
+                                <div className="text-white/90 font-semibold mb-1 flex items-center gap-2">
+                                  <Loader2 className="w-3 h-3 text-green-400 animate-spin" />
+                                  Power Play — Vegas
+                                </div>
                                 <div className="text-white/70">Analyse du rendement en avantage numérique : structure offensive, qualité des entrées de zone, création de chances dangereuses et efficacité globale des unités spéciales.</div>
                               </div>
                               <div className="bg-white/5 p-3 rounded">
