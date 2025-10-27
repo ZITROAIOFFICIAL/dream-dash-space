@@ -1823,9 +1823,80 @@
           "default": true
         }
       ]
+    },
+    {
+      "type": "parlay_card",
+      "name": "🎲 Carte Parlay",
+      "settings": [
+        {
+          "type": "text",
+          "id": "parlay_title",
+          "label": "Titre du Parlay",
+          "default": "Parlay Triple Gagnant"
+        },
+        {
+          "type": "number",
+          "id": "ai_data_count",
+          "label": "Nombre de données IA analysées",
+          "default": 5214
+        },
+        {
+          "type": "range",
+          "id": "win_percentage",
+          "label": "Pourcentage de chance de gagner (%)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 78
+        },
+        {
+          "type": "text",
+          "id": "multiplier",
+          "label": "Multiplicateur total (cote combinée)",
+          "default": "5.24",
+          "info": "Cote totale du parlay (ex: 5.24)"
+        },
+        {
+          "type": "number",
+          "id": "num_bets",
+          "label": "Nombre de paris dans le parlay",
+          "default": 3,
+          "info": "Nombre de paris combinés (2, 3, 4, etc.)"
+        },
+        {
+          "type": "textarea",
+          "id": "bet1_details",
+          "label": "Détails Pari #1",
+          "default": "VEGAS vs TAMPA BAY - VEGAS gagne (x1.74)"
+        },
+        {
+          "type": "textarea",
+          "id": "bet2_details",
+          "label": "Détails Pari #2",
+          "default": "LAKERS vs CELTICS - LAKERS gagne (x1.92)"
+        },
+        {
+          "type": "textarea",
+          "id": "bet3_details",
+          "label": "Détails Pari #3",
+          "default": "WARRIORS vs NETS - WARRIORS gagne (x1.56)"
+        },
+        {
+          "type": "textarea",
+          "id": "ai_explanation",
+          "label": "Explication de l'IA",
+          "default": "Ce parlay combine 3 paris soigneusement sélectionnés par notre IA. Chaque pari a été analysé individuellement avec une haute confiance, et leur combinaison offre un excellent rapport risque/récompense."
+        },
+        {
+          "type": "checkbox",
+          "id": "show_card",
+          "label": "Afficher cette carte",
+          "default": true
+        }
+      ]
     }
   ],
-  "max_blocks": 10,
+  "max_blocks": 20,
   "presets": [
     {
       "name": "Dashboard WINABET.AI",
@@ -1843,6 +1914,20 @@
             "odds": -136,
             "best_bookmaker": "DRAFTKINGS",
             "best_odds": -135,
+            "show_card": true
+          }
+        },
+        {
+          "type": "parlay_card",
+          "settings": {
+            "parlay_title": "Parlay Triple Gagnant",
+            "ai_data_count": 5214,
+            "win_percentage": 78,
+            "multiplier": "5.24",
+            "num_bets": 3,
+            "bet1_details": "VEGAS vs TAMPA BAY - VEGAS gagne (x1.74)",
+            "bet2_details": "LAKERS vs CELTICS - LAKERS gagne (x1.92)",
+            "bet3_details": "WARRIORS vs NETS - WARRIORS gagne (x1.56)",
             "show_card": true
           }
         }
