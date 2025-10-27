@@ -53,7 +53,7 @@ const Bet = () => {
                         <span className="text-xl">92%</span>
                         <span className="text-xs uppercase ml-1">de chance de gagner</span>
                       </div>
-                      <p className="text-[8px] uppercase font-semibold tracking-tight text-white mt-2">
+                      <p className="uppercase tracking-tight text-white mt-2 font-bold text-[[8px]]">
                         Selon 482 variables analysées par notre IA
                       </p>
                       <button onClick={handleShowAnalysis} disabled={isLoadingAnalysis || showAnalysis} className="text-[9px] uppercase font-bold text-black bg-white px-3 py-1.5 rounded hover:bg-white/90 disabled:bg-white/50 transition-colors mt-2">
