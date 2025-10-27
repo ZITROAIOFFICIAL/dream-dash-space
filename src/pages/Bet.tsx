@@ -75,10 +75,10 @@ const Bet = () => {
       <div className="space-y-6">
         <div>
           <div className="flex items-center justify-center gap-2 mb-4">
-            <div className="relative w-4 h-4 flex-shrink-0">
-              <Loader2 className="w-4 h-4 text-green-500 animate-spin absolute" />
+            <div className="relative w-5 h-5 flex-shrink-0">
+              <Loader2 className="w-5 h-5 text-green-500 animate-spin absolute" />
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-green-500 font-bold text-[6px]">IA</span>
+                <span className="text-green-500 font-bold text-[8px]">IA</span>
               </div>
             </div>
             <span className="text-white/70 text-sm">
