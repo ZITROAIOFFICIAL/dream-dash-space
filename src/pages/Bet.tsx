@@ -45,7 +45,7 @@ const Bet = () => {
               {/* AI Analysis */}
               <div className="flex items-center justify-between gap-2 text-xs py-[10px] bg-green-600 px-4">
                 <div className="flex items-center gap-2">
-                  <span className="px-3 py-2 bg-black rounded border-2 border-green-600 font-bold text-green-400 text-base">92%</span>
+                  <span className="font-bold text-white text-base">92%</span>
                   <span className="text-white text-sm font-bold">DE CHANCE DE GAGNER SELON NOTRE IA</span>
                 </div>
                 <button 
