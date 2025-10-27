@@ -43,7 +43,7 @@ const Bet = () => {
           <Card className="w-full max-w-md bg-black border-2 border-primary shadow-2xl overflow-hidden mx-auto">
             <CardHeader className="space-y-4 p-0">
               {/* AI Analysis */}
-              <div className="bg-green-600/80 px-6 py-3 rounded-t-lg">
+              <button onClick={handleShowAnalysis} disabled={isLoadingAnalysis || showAnalysis} className="bg-green-600/80 px-6 py-3 rounded-t-lg w-full hover:bg-green-600 disabled:bg-green-600/60 transition-colors cursor-pointer">
                 <h2 className="text-white text-sm uppercase text-center mb-3">Analyse de notre <span className="font-bold">IA</span></h2>
 
                 <div className="flex justify-center">
@@ -53,12 +53,9 @@ const Bet = () => {
                         <span className="text-xl">92%</span>
                         <span className="text-xs uppercase ml-1">de chance de gagner</span>
                       </div>
-                      <p className="uppercase tracking-tight text-white mt-2 font-bold text-[[8px]]">
+                      <p className="uppercase tracking-tight text-white mt-2 font-bold text-[7px]">
                         Selon 482 variables analysées par notre IA
                       </p>
-                      <button onClick={handleShowAnalysis} disabled={isLoadingAnalysis || showAnalysis} className="text-sm font-bold text-white underline hover:text-white/80 disabled:text-white/50 disabled:no-underline transition-colors mt-2 cursor-pointer">
-                        {isLoadingAnalysis ? "Analyse en cours..." : showAnalysis ? "Analyse affichée" : "Voir l'analyse"}
-                      </button>
                     </div>
                   </div>
                 </div>
@@ -78,9 +75,10 @@ const Bet = () => {
                     </div>
                     <p className="text-white/60 text-xs">L'IA analyse les données...</p>
                   </div>}
+              </button>
 
-                {/* Detailed Analysis */}
-                {showAnalysis && !isLoadingAnalysis && <div className="mt-4 bg-black/40 rounded-lg p-4 text-left space-y-3 animate-fade-in border border-green-500/30">
+              {/* Detailed Analysis */}
+              {showAnalysis && !isLoadingAnalysis && <div className="mt-4 bg-black/40 rounded-lg p-4 mx-6 text-left space-y-3 animate-fade-in border border-green-500/30">
                     <div className="flex items-center justify-between mb-3">
                       <h3 className="text-white font-bold text-sm">📊 Analyse Détaillée</h3>
                       <button onClick={() => setShowAnalysis(false)} className="text-white/50 hover:text-white transition-colors">
@@ -127,7 +125,6 @@ const Bet = () => {
                       </p>
                     </div>
                   </div>}
-              </div>
 
               {/* Odds Display */}
               <div className="flex justify-center py-3">
