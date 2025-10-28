@@ -856,9 +856,6 @@ const Index = () => {
                   <span className="font-bold text-white">DRAFTKINGS</span>
                   <span className="px-2 py-1 bg-black rounded border-2 border-green-600 font-bold text-green-400">-105</span>
                 </div>
-                <div className="text-center bg-green-600 px-0 py-0">
-                  <p className="text-[10px] text-white py-[5px]">(L'IA regarde tous les sites pour trouver le meilleur odds pour ce bet.)</p>
-                </div>
               </div>
             </CardHeader>
           </Card>
@@ -1616,9 +1613,6 @@ const Index = () => {
                   <span className="font-bold text-white">DRAFTKINGS</span>
                   <span className="px-2 py-1 bg-black rounded border-2 border-green-600 font-bold text-green-400">-135</span>
                 </div>
-                <div className="text-center py-2 px-4">
-                  <p className="text-white/60 text-[10px]">(L'IA regarde tous les sites pour trouver le meilleur odds pour ce bet.)</p>
-                </div>
               </div>
             </CardHeader>
           </Card>
@@ -2192,9 +2186,6 @@ const Index = () => {
                   <span className="text-white">Meilleur odds:</span>
                   <span className="font-bold text-white">BETMGM</span>
                   <span className="px-2 py-1 bg-black rounded border-2 border-green-600 font-bold text-green-400">+488</span>
-                </div>
-                <div className="text-center py-2 px-4">
-                  <p className="text-white/60 text-[10px]">(L'IA regarde tous les sites pour trouver le meilleur odds pour ce bet.)</p>
                 </div>
               </div>
             </CardHeader>
