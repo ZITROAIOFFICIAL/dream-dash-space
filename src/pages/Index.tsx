@@ -105,29 +105,26 @@ const Index = () => {
 
         {/* ST. LOUIS vs PITTSBURGH CARD */}
         <div className="grid gap-6 justify-center">
-          <Card className="w-full max-w-md bg-gray-900 border-2 border-gray-700 shadow-2xl overflow-hidden mx-auto rounded-none">
+          {/* AI Data Analysis Counter - Outside card */}
+          <div className="flex items-center justify-center gap-3 px-4 py-[5px] bg-black w-full max-w-md mx-auto">
+            <div className="relative w-6 h-6 flex-shrink-0">
+              <Loader2 className="w-6 h-6 text-white animate-spin absolute" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-white font-bold text-[8px]">IA</span>
+              </div>
+            </div>
+            <span className="text-white font-semibold text-center text-[10px]">{dataCountStLouis.toLocaleString()} DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
+          </div>
+          
+          <Card className="w-full max-w-md bg-black border-2 border-green-600 shadow-2xl overflow-hidden mx-auto rounded-none">
             <CardHeader className="space-y-0 p-0">
-              {/* AI Data Analysis Counter */}
-              <div className="flex items-center justify-center gap-3 px-0 py-[5px] bg-slate-950">
-                <div className="relative w-6 h-6 flex-shrink-0">
-                  <Loader2 className="w-6 h-6 text-white animate-spin absolute" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-white font-bold text-[8px]">IA</span>
-                  </div>
-                </div>
-                <span className="text-white font-semibold text-center text-[10px]">{dataCountStLouis.toLocaleString()} DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
-              </div>
-              {/* Separator line */}
-              <div className="flex justify-center bg-green-600 py-0">
-                <div className="w-full border-t-2 border-gray-600 py-[10px]"></div>
-              </div>
               {/* AI Analysis */}
-              <div className="flex items-center justify-between gap-2 text-xs bg-green-600 px-4 py-[5px]">
+              <div className="flex items-center justify-between gap-2 text-xs bg-green-600 px-4 py-[5px] -mt-1">
                 <div className="flex items-center gap-2">
                   <span className="font-bold text-white text-3xl">92%</span>
                   <span className="text-white text-xs font-bold">DE CHANCE DE GAGNER SELON NOTRE IA</span>
                 </div>
-                <button onClick={handleShowAnalysisStLouis} className="px-3 py-1 rounded-none border-2 border-gray-600 font-bold text-green-400 text-xs transition-colors bg-slate-950 hover:bg-slate-800">
+                <button onClick={handleShowAnalysisStLouis} className="px-3 py-1 rounded-none font-bold text-green-400 text-xs transition-colors bg-black hover:bg-black/80">
                   VOIR ANALYSE IA
                 </button>
 
@@ -740,8 +737,6 @@ const Index = () => {
                 </Dialog>
               </div>
 
-              <Separator className="bg-gray-600 h-[2px]" />
-
               {/* Odds Display */}
               <div className="flex justify-center pt-4 pb-4">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
@@ -750,8 +745,8 @@ const Index = () => {
               </div>
               
               <div className="flex justify-center py-0 -mt-6">
-                <div className="bg-green-600/15 border-2 border-green-600 rounded-none px-6 py-2">
-                  <div className="text-3xl font-black text-green-400">
+                <div className="bg-green-600 rounded-none px-10 py-4">
+                  <div className="text-4xl font-black text-white">
                     x{multiplierStLouis.toFixed(2)}
                   </div>
                 </div>
@@ -848,8 +843,6 @@ const Index = () => {
                 </div>
               </div>
 
-              <Separator className="bg-gray-600 h-[2px]" />
-
               {/* DraftKings Section */}
               <div className="pt-0">
                 <div className="flex items-center justify-center gap-2 text-xs my-0 border-t-2 border-green-600 bg-green-600 py-[5px]">
@@ -863,9 +856,6 @@ const Index = () => {
                   <span className="font-bold text-white">DRAFTKINGS</span>
                   <span className="px-2 py-1 bg-black rounded border-2 border-green-600 font-bold text-green-400">-105</span>
                 </div>
-                <div className="text-center bg-green-600 px-0 py-0">
-                  <p className="text-[10px] text-white py-[5px]">(L'IA regarde tous les sites pour trouver le meilleur odds pour ce bet.)</p>
-                </div>
               </div>
             </CardHeader>
           </Card>
@@ -873,25 +863,26 @@ const Index = () => {
 
         {/* VEGAS vs TAMPA BAY CARD */}
         <div className="grid gap-6 justify-center">
-          <Card className="w-full max-w-md bg-gray-900 border-2 border-gray-700 shadow-2xl overflow-hidden mx-auto rounded-none">
-            <CardHeader className="space-y-0 p-0">
-              {/* AI Data Analysis Counter */}
-              <div className="flex items-center justify-center gap-3 py-2 px-6 bg-black/40">
-                <div className="relative w-6 h-6 flex-shrink-0">
-                  <Loader2 className="w-6 h-6 text-white animate-spin absolute" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-white font-bold text-[8px]">IA</span>
-                  </div>
-                </div>
-                <span className="text-white font-semibold text-center text-[10px]">{dataCountVegas.toLocaleString()} DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
+          {/* AI Data Analysis Counter - Outside card */}
+          <div className="flex items-center justify-center gap-3 px-4 py-[5px] bg-black w-full max-w-md mx-auto">
+            <div className="relative w-6 h-6 flex-shrink-0">
+              <Loader2 className="w-6 h-6 text-white animate-spin absolute" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-white font-bold text-[8px]">IA</span>
               </div>
+            </div>
+            <span className="text-white font-semibold text-center text-[10px]">{dataCountVegas.toLocaleString()} DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
+          </div>
+          
+          <Card className="w-full max-w-md bg-black border-2 border-green-600 shadow-2xl overflow-hidden mx-auto rounded-none">
+            <CardHeader className="space-y-0 p-0">
               {/* AI Analysis */}
               <div className="flex items-center justify-between gap-2 text-xs py-[10px] bg-green-600 px-4">
                 <div className="flex items-center gap-2">
                   <span className="font-bold text-white text-4xl">92%</span>
                   <span className="text-white text-xs font-bold">DE CHANCE DE GAGNER SELON NOTRE IA</span>
                 </div>
-                <button onClick={handleShowAnalysisVegas} className="px-3 py-1 bg-black rounded-none border-2 border-gray-600 font-bold text-green-400 text-xs hover:bg-green-600/20 transition-colors">
+                <button onClick={handleShowAnalysisVegas} className="px-3 py-1 bg-black rounded-none font-bold text-green-400 text-xs hover:bg-green-600/20 transition-colors">
                   VOIR ANALYSE IA
                 </button>
 
@@ -1504,8 +1495,6 @@ const Index = () => {
                 </Dialog>
               </div>
 
-              <Separator className="bg-gray-600 h-[2px]" />
-
               {/* Odds Display */}
               <div className="flex justify-center pt-4 pb-4">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
@@ -1514,8 +1503,8 @@ const Index = () => {
               </div>
               
               <div className="flex justify-center py-0 -mt-6">
-                <div className="bg-green-600/15 border-2 border-green-600 rounded-none px-6 py-2">
-                  <div className="text-3xl font-black text-green-400">
+                <div className="bg-green-600 rounded-none px-6 py-2">
+                  <div className="text-3xl font-black text-white">
                     x{multiplierVegas.toFixed(2)}
                   </div>
                 </div>
@@ -1611,8 +1600,6 @@ const Index = () => {
                 </div>
               </div>
 
-              <Separator className="bg-gray-600 h-[2px]" />
-
               {/* DraftKings Section */}
               <div className="pt-0">
                 <div className="flex items-center justify-center gap-2 text-xs my-0 py-[10px] border-t-2 border-green-600 bg-green-600">
@@ -1626,33 +1613,31 @@ const Index = () => {
                   <span className="font-bold text-white">DRAFTKINGS</span>
                   <span className="px-2 py-1 bg-black rounded border-2 border-green-600 font-bold text-green-400">-135</span>
                 </div>
-                <div className="text-center py-2 px-4">
-                  <p className="text-white/60 text-[10px]">(L'IA regarde tous les sites pour trouver le meilleur odds pour ce bet.)</p>
-                </div>
               </div>
             </CardHeader>
           </Card>
 
           {/* WASHINGTON vs KANSAS CITY CARD - NFL */}
-          <Card className="w-full max-w-md bg-gray-900 border-2 border-gray-700 shadow-2xl overflow-hidden mx-auto rounded-none">
-            <CardHeader className="space-y-0 p-0">
-              {/* AI Data Analysis Counter */}
-              <div className="flex items-center justify-center gap-3 py-2 px-6 bg-black/40">
-                <div className="relative w-6 h-6 flex-shrink-0">
-                  <Loader2 className="w-6 h-6 text-white animate-spin absolute" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-white font-bold text-[8px]">IA</span>
-                  </div>
-                </div>
-                <span className="text-white font-semibold text-center text-[10px]">{dataCountWashington.toLocaleString()} DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
+          {/* AI Data Analysis Counter - Outside card */}
+          <div className="flex items-center justify-center gap-3 px-4 py-[5px] bg-black w-full max-w-md mx-auto">
+            <div className="relative w-6 h-6 flex-shrink-0">
+              <Loader2 className="w-6 h-6 text-white animate-spin absolute" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-white font-bold text-[8px]">IA</span>
               </div>
+            </div>
+            <span className="text-white font-semibold text-center text-[10px]">{dataCountWashington.toLocaleString()} DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
+          </div>
+          
+          <Card className="w-full max-w-md bg-black border-2 border-green-600 shadow-2xl overflow-hidden mx-auto rounded-none">
+            <CardHeader className="space-y-0 p-0">
               {/* AI Analysis */}
               <div className="flex items-center justify-between gap-2 text-xs py-[10px] bg-green-600 px-4">
                 <div className="flex items-center gap-2">
                   <span className="font-bold text-white text-4xl">87%</span>
                   <span className="text-white text-xs font-bold">DE CHANCE DE GAGNER SELON NOTRE IA</span>
                 </div>
-                <button onClick={handleShowAnalysisWashington} className="px-3 py-1 bg-black rounded-none border-2 border-gray-600 font-bold text-green-400 text-xs hover:bg-green-600/20 transition-colors">
+                <button onClick={handleShowAnalysisWashington} className="px-3 py-1 bg-black rounded-none font-bold text-green-400 text-xs hover:bg-green-600/20 transition-colors">
                   VOIR ANALYSE IA
                 </button>
               </div>
@@ -2084,8 +2069,6 @@ const Index = () => {
                 </DialogContent>
               </Dialog>
 
-              <Separator className="bg-gray-600 h-[2px]" />
-
               {/* Odds Display */}
               <div className="flex justify-center pt-4 pb-4">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
@@ -2094,8 +2077,8 @@ const Index = () => {
               </div>
               
               <div className="flex justify-center py-0 -mt-6">
-                <div className="bg-green-600/15 border-2 border-green-600 rounded-none px-6 py-2">
-                  <div className="text-3xl font-black text-green-400">
+                <div className="bg-green-600 rounded-none px-6 py-2">
+                  <div className="text-3xl font-black text-white">
                     x{multiplierWashington.toFixed(2)}
                   </div>
                 </div>
@@ -2191,8 +2174,6 @@ const Index = () => {
                 </div>
               </div>
 
-              <Separator className="bg-gray-600 h-[2px]" />
-
               {/* BetMGM Section */}
               <div className="pt-0">
                 <div className="flex items-center justify-center gap-2 text-xs my-0 py-[10px] border-t-2 border-green-600 bg-green-600">
@@ -2205,9 +2186,6 @@ const Index = () => {
                   <span className="text-white">Meilleur odds:</span>
                   <span className="font-bold text-white">BETMGM</span>
                   <span className="px-2 py-1 bg-black rounded border-2 border-green-600 font-bold text-green-400">+488</span>
-                </div>
-                <div className="text-center py-2 px-4">
-                  <p className="text-white/60 text-[10px]">(L'IA regarde tous les sites pour trouver le meilleur odds pour ce bet.)</p>
                 </div>
               </div>
             </CardHeader>
