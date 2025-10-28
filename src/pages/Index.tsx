@@ -795,7 +795,7 @@ const Index = () => {
               </div>
 
               {/* Bet Amount & Payout */}
-              <div className="flex justify-center pt-8 mb-2">
+              <div className="flex justify-center pt-6 mb-2">
                 <div className="text-sm font-bold text-white tracking-wider text-center">
                   VOTRE GAIN
                 </div>
@@ -1556,7 +1556,7 @@ const Index = () => {
               </div>
 
               {/* Bet Amount & Payout */}
-              <div className="flex justify-center pt-8 mb-2">
+              <div className="flex justify-center pt-6 mb-2">
                 <div className="text-sm font-bold text-white tracking-wider text-center">
                   VOTRE GAIN
                 </div>
@@ -2134,7 +2134,7 @@ const Index = () => {
               </div>
 
               {/* Bet Amount & Payout */}
-              <div className="flex justify-center pt-8 mb-2">
+              <div className="flex justify-center pt-6 mb-2">
                 <div className="text-sm font-bold text-white tracking-wider text-center">
                   VOTRE GAIN
                 </div>
