@@ -2117,7 +2117,8 @@ const Index = () => {
                       <div className="px-2 py-0.5 rounded-full border border-white/20 bg-white/0">
                         <span className="text-white font-bold text-xs">VS</span>
                       </div>
-                      <div className="text-xs font-bold text-white tracking-wider">MONEYLINE</div>
+                      <div className="text-xs font-bold text-white tracking-wider">UNDER</div>
+                      <div className="text-xs font-bold text-green-400 mt-1">50.5</div>
                     </div>
 
                     {/* KANSAS CITY */}
