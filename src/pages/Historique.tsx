@@ -228,41 +228,66 @@ const Historique = () => {
                 {/* Match Card */}
                 <div className="mx-4">
                   <div className="border-2 border-green-600 rounded-lg bg-black/40 backdrop-blur-sm p-4">
-                    {/* League and Time */}
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-2">
-                        <img src={item.league === "NHL" ? nhlLogo : nflLogo} alt={item.league} className="w-6 h-6 object-contain" />
-                        <span className="text-white text-xs font-bold">{item.league}</span>
-                      </div>
-                      <span className="text-white/70 text-xs font-semibold">
+                    
+                    {/* Time centered at top */}
+                    <div className="text-center mb-4">
+                      <span className="text-white text-sm font-bold">
                         {item.result === "pending" ? item.time : "TERMINÉ"}
                       </span>
                     </div>
 
-                    {/* Teams */}
-                    <div className="flex items-center justify-between mb-3">
+                    {/* Teams with VS in center */}
+                    <div className="flex items-center justify-center gap-4 mb-4">
+                      {/* Home Team */}
                       <div className="flex flex-col items-center">
-                        <div className={`w-16 h-16 mb-1 flex items-center justify-center rounded-full p-2 ${selectedTeam === "home" ? "border-4 border-green-600" : "border-2 border-white/20"}`}>
-                          <img src={item.teamHomeLogo} alt={item.teamHome} className="w-full h-full object-contain" />
+                        <div className={`w-14 h-14 rounded-full bg-white flex items-center justify-center ${
+                          selectedTeam === "home" 
+                            ? "border-4 border-green-600" 
+                            : ""
+                        }`}>
+                          <img 
+                            src={item.teamHomeLogo} 
+                            alt={item.teamHome} 
+                            className="w-10 h-10 object-contain"
+                          />
                         </div>
-                        <span className="font-bold text-[10px] text-white">{item.teamHome}</span>
+                        <span className="text-white text-[10px] font-bold mt-2">
+                          {item.teamHome}
+                        </span>
                       </div>
 
-                      <div className="text-white font-bold text-sm px-3">VS</div>
+                      {/* VS */}
+                      <div className="text-white font-bold text-base px-2">VS</div>
 
+                      {/* Away Team */}
                       <div className="flex flex-col items-center">
-                        <div className={`w-16 h-16 mb-1 flex items-center justify-center rounded-full p-2 ${selectedTeam === "away" ? "border-4 border-green-600" : "border-2 border-white/20"}`}>
-                          <img src={item.teamAwayLogo} alt={item.teamAway} className="w-full h-full object-contain" />
+                        <div className={`w-14 h-14 rounded-full bg-white flex items-center justify-center ${
+                          selectedTeam === "away" 
+                            ? "border-4 border-green-600" 
+                            : ""
+                        }`}>
+                          <img 
+                            src={item.teamAwayLogo} 
+                            alt={item.teamAway} 
+                            className="w-10 h-10 object-contain"
+                          />
                         </div>
-                        <span className="font-bold text-[10px] text-white">{item.teamAway}</span>
+                        <span className="text-white text-[10px] font-bold mt-2">
+                          {item.teamAway}
+                        </span>
                       </div>
                     </div>
 
-                    {/* Bet Type and Prediction */}
-                    <div className="text-center space-y-1">
-                      <div className="text-white text-xs font-bold">{item.betType}</div>
-                      <div className="text-green-600 text-sm font-bold">{item.prediction}</div>
+                    {/* Bet Type and Prediction in single line */}
+                    <div className="flex items-center justify-center gap-3">
+                      <span className="text-white text-xs font-bold">
+                        {item.betType}
+                      </span>
+                      <span className="text-green-600 text-sm font-bold">
+                        {item.prediction}
+                      </span>
                     </div>
+
                   </div>
                 </div>
 
