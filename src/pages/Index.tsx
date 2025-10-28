@@ -1004,19 +1004,19 @@ const Index = () => {
                 </div>
               </div>
 
+              {/* Match Details */}
+              <div className="text-center pb-2 pt-6">
+                <div className="text-sm font-bold text-white tracking-wider mb-2">
+                  PARIER SUR
+                </div>
+              </div>
+
               {/* 1 Units Badge */}
               <div className="mx-4 mt-4">
                 <div className="bg-green-600 rounded-lg px-10 py-2 text-center">
                   <div className="text-xl font-bold text-white">
                     1 UNITS
                   </div>
-                </div>
-              </div>
-
-              {/* Match Details */}
-              <div className="text-center pb-2 pt-6">
-                <div className="text-sm font-bold text-white tracking-wider mb-2">
-                  PARIER SUR
                 </div>
               </div>
 
