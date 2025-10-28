@@ -117,6 +117,10 @@ const Index = () => {
                 </div>
                 <span className="text-white font-semibold text-center text-[10px]">{dataCountStLouis.toLocaleString()} DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
               </div>
+              {/* Separator line */}
+              <div className="flex justify-center py-2">
+                <div className="w-3/4 border-t-2 border-gray-600"></div>
+              </div>
               {/* AI Analysis */}
               <div className="flex items-center justify-between gap-2 text-xs bg-green-600 px-4 py-[5px]">
                 <div className="flex items-center gap-2">
