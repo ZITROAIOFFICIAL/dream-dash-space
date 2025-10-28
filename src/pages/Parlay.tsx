@@ -149,29 +149,29 @@ const Parlay = () => {
           <div className="flex gap-2">
             <button
               onClick={() => setSelectedLeague('all')}
-              className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg border-2 transition-colors ${
+              className={`flex-1 flex items-center justify-center gap-1 py-3 px-3 rounded-lg border-2 transition-colors ${
                 selectedLeague === 'all' ? 'border-green-600 bg-green-600/20' : 'border-white/20 bg-black'
               }`}
             >
-              <span className="text-white font-bold">TOUS</span>
+              <span className="text-white font-bold text-sm">TOUS</span>
             </button>
             <button
               onClick={() => setSelectedLeague('NHL')}
-              className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg border-2 transition-colors ${
+              className={`flex-1 flex items-center justify-center gap-0 py-3 px-2 rounded-lg border-2 transition-colors ${
                 selectedLeague === 'NHL' ? 'border-green-600 bg-green-600/20' : 'border-white/20 bg-black'
               }`}
             >
-              <img src={nhlLogo} className="h-8 w-auto" alt="NHL" />
-              <span className="text-white font-bold">NHL</span>
+              <img src={nhlLogo} className="h-10 w-auto object-contain mix-blend-lighten" alt="NHL" />
+              <img src={nflLogo} className="h-10 w-auto object-contain mix-blend-lighten -ml-1" alt="NFL" />
             </button>
             <button
               onClick={() => setSelectedLeague('NFL')}
-              className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg border-2 transition-colors ${
+              className={`flex-1 flex items-center justify-center gap-0 py-3 px-2 rounded-lg border-2 transition-colors ${
                 selectedLeague === 'NFL' ? 'border-green-600 bg-green-600/20' : 'border-white/20 bg-black'
               }`}
             >
-              <img src={nflLogo} className="h-8 w-auto" alt="NFL" />
-              <span className="text-white font-bold">NFL</span>
+              <img src={nflLogo} className="h-10 w-auto object-contain mix-blend-lighten" alt="NFL" />
+              <img src={nhlLogo} className="h-10 w-auto object-contain mix-blend-lighten -ml-1" alt="NHL" />
             </button>
           </div>
           
