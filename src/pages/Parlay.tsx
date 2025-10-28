@@ -21,8 +21,8 @@ const Parlay = () => {
   
   // Filter states
   const [selectedLeague, setSelectedLeague] = useState<string>('all');
-  const [sortByMultiplier, setSortByMultiplier] = useState<string>('none');
-  const [sortByAI, setSortByAI] = useState<string>('none');
+  const [sortByMultiplier, setSortByMultiplier] = useState<string>('high');
+  const [sortByAI, setSortByAI] = useState<string>('high');
 
   useEffect(() => {
     const shouldBeFast = Math.random() < 0.85;
@@ -88,18 +88,21 @@ const Parlay = () => {
     { league: 'NHL', multiplier: totalMultiplierNHL, aiPercent: 94, show: shouldShowCard('NHL') }
   ].filter(card => card.show);
 
-  // Sort cards based on filters
+  // Sort cards based on filters (always sort, prioritize AI first, then multiplier)
   let sortedCards = [...cards];
-  if (sortByMultiplier === 'high') {
-    sortedCards.sort((a, b) => b.multiplier - a.multiplier);
-  } else if (sortByMultiplier === 'low') {
-    sortedCards.sort((a, b) => a.multiplier - b.multiplier);
-  }
   
+  // First sort by AI
   if (sortByAI === 'high') {
     sortedCards.sort((a, b) => b.aiPercent - a.aiPercent);
   } else if (sortByAI === 'low') {
     sortedCards.sort((a, b) => a.aiPercent - b.aiPercent);
+  }
+  
+  // Then by multiplier if needed
+  if (sortByMultiplier === 'high') {
+    sortedCards.sort((a, b) => b.multiplier - a.multiplier);
+  } else if (sortByMultiplier === 'low') {
+    sortedCards.sort((a, b) => a.multiplier - b.multiplier);
   }
 
   const showNFL = sortedCards.some(c => c.league === 'NFL');
@@ -175,10 +178,9 @@ const Parlay = () => {
           {/* Sort by Multiplier */}
           <Select value={sortByMultiplier} onValueChange={setSortByMultiplier}>
             <SelectTrigger className="w-full bg-black border-2 border-white/20 text-white hover:border-green-600/50 transition-colors">
-              <SelectValue placeholder="Multiplicateur" />
+              <SelectValue placeholder="Multiplicateur de mise" />
             </SelectTrigger>
             <SelectContent className="bg-black border-2 border-white/20 z-50">
-              <SelectItem value="none" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Multiplicateur</SelectItem>
               <SelectItem value="high" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Plus haut multiplicateur</SelectItem>
               <SelectItem value="low" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Plus bas multiplicateur</SelectItem>
             </SelectContent>
@@ -187,10 +189,9 @@ const Parlay = () => {
           {/* Sort by AI % */}
           <Select value={sortByAI} onValueChange={setSortByAI}>
             <SelectTrigger className="w-full bg-black border-2 border-white/20 text-white hover:border-green-600/50 transition-colors">
-              <SelectValue placeholder="Analyse IA %" />
+              <SelectValue placeholder="Chance de gagner IA %" />
             </SelectTrigger>
             <SelectContent className="bg-black border-2 border-white/20 z-50">
-              <SelectItem value="none" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Analyse IA %</SelectItem>
               <SelectItem value="high" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Plus haut %</SelectItem>
               <SelectItem value="low" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Plus bas %</SelectItem>
             </SelectContent>
