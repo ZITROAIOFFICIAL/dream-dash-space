@@ -738,7 +738,7 @@ const Index = () => {
               </div>
 
               {/* Odds Display */}
-              <div className="flex justify-center pt-4 pb-4">
+              <div className="flex justify-center pt-6 pb-4">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
                   MULTIPLICATEUR DE MISE
                 </div>
@@ -1500,7 +1500,7 @@ const Index = () => {
               </div>
 
               {/* Odds Display */}
-              <div className="flex justify-center pt-4 pb-4">
+              <div className="flex justify-center pt-6 pb-4">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
                   MONEYLINE MULTIPLICATEUR
                 </div>
@@ -2078,7 +2078,7 @@ const Index = () => {
               </Dialog>
 
               {/* Odds Display */}
-              <div className="flex justify-center pt-4 pb-4">
+              <div className="flex justify-center pt-6 pb-4">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
                   MONEYLINE MULTIPLICATEUR
                 </div>
