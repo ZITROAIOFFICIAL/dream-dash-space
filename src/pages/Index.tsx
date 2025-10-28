@@ -740,7 +740,7 @@ const Index = () => {
               {/* Middle section with vertical borders */}
               <div className="border-x-[2px] border-green-600">
               {/* Odds Display */}
-              <div className="flex justify-center pt-6 pb-4">
+              <div className="flex justify-center pt-5 pb-2">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
                   MULTIPLICATEUR DE MISE
                 </div>
@@ -1499,9 +1499,9 @@ const Index = () => {
               {/* Middle section with vertical borders */}
               <div className="border-x-[2px] border-green-600">
               {/* Odds Display */}
-              <div className="flex justify-center pt-6 pb-4">
+              <div className="flex justify-center pt-5 pb-2">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
-                  MONEYLINE MULTIPLICATEUR
+                  MULTIPLICATEUR DE MISE
                 </div>
               </div>
               
@@ -2076,9 +2076,9 @@ const Index = () => {
               {/* Middle section with vertical borders */}
               <div className="border-x-[2px] border-green-600">
               {/* Odds Display */}
-              <div className="flex justify-center pt-6 pb-4">
+              <div className="flex justify-center pt-5 pb-2">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
-                  MONEYLINE MULTIPLICATEUR
+                  MULTIPLICATEUR DE MISE
                 </div>
               </div>
               
