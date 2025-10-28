@@ -20,8 +20,9 @@ const Parlay = () => {
   const [dataCountParlayNHL, setDataCountParlayNHL] = useState(9823);
   
   // Filter states
-  const [selectedLeague, setSelectedLeague] = useState<'all' | 'NHL' | 'NFL'>('all');
-  const [selectedMultiplier, setSelectedMultiplier] = useState<string>('all');
+  const [selectedLeague, setSelectedLeague] = useState<string>('all');
+  const [sortByMultiplier, setSortByMultiplier] = useState<string>('none');
+  const [sortByAI, setSortByAI] = useState<string>('none');
 
   useEffect(() => {
     const shouldBeFast = Math.random() < 0.85;
@@ -76,22 +77,36 @@ const Parlay = () => {
     return (numAmount * multiplier).toFixed(2);
   };
 
-  const shouldShowCard = (league: 'NHL' | 'NFL', multiplier: number) => {
+  const shouldShowCard = (league: 'NHL' | 'NFL') => {
     if (selectedLeague !== 'all' && selectedLeague !== league) return false;
-    
-    if (selectedMultiplier !== 'all') {
-      if (selectedMultiplier === '1-2' && (multiplier < 1 || multiplier > 2)) return false;
-      if (selectedMultiplier === '2-3' && (multiplier < 2 || multiplier > 3)) return false;
-      if (selectedMultiplier === '3-4' && (multiplier < 3 || multiplier > 4)) return false;
-      if (selectedMultiplier === '4+' && multiplier < 4) return false;
-    }
-    
     return true;
   };
 
-  const showNFL = shouldShowCard('NFL', totalMultiplierNFL);
-  const showNHL = shouldShowCard('NHL', totalMultiplierNHL);
-  const hasVisibleCards = showNFL || showNHL;
+  // Prepare cards with their data
+  const cards = [
+    { league: 'NFL', multiplier: totalMultiplierNFL, aiPercent: 87, show: shouldShowCard('NFL') },
+    { league: 'NHL', multiplier: totalMultiplierNHL, aiPercent: 94, show: shouldShowCard('NHL') }
+  ].filter(card => card.show);
+
+  // Sort cards based on filters
+  let sortedCards = [...cards];
+  if (sortByMultiplier === 'high') {
+    sortedCards.sort((a, b) => b.multiplier - a.multiplier);
+  } else if (sortByMultiplier === 'low') {
+    sortedCards.sort((a, b) => a.multiplier - b.multiplier);
+  }
+  
+  if (sortByAI === 'high') {
+    sortedCards.sort((a, b) => b.aiPercent - a.aiPercent);
+  } else if (sortByAI === 'low') {
+    sortedCards.sort((a, b) => a.aiPercent - b.aiPercent);
+  }
+
+  const showNFL = sortedCards.some(c => c.league === 'NFL');
+  const showNHL = sortedCards.some(c => c.league === 'NHL');
+  const nflIndex = sortedCards.findIndex(c => c.league === 'NFL');
+  const nhlIndex = sortedCards.findIndex(c => c.league === 'NHL');
+  const hasVisibleCards = sortedCards.length > 0;
 
   const handleShowAnalysisParlayNFL = () => {
     setIsLoadingDialogOpenParlayNFL(true);
@@ -144,48 +159,40 @@ const Parlay = () => {
         </div>
 
         {/* Filters Section */}
-        <div className="max-w-md mx-auto mb-8 space-y-4">
-          {/* League Filter */}
-          <div className="flex gap-2">
-            <button
-              onClick={() => setSelectedLeague('all')}
-              className={`flex-1 flex items-center justify-center gap-1 py-3 px-3 rounded-lg border-2 transition-colors ${
-                selectedLeague === 'all' ? 'border-green-600 bg-green-600/20' : 'border-white/20 bg-black'
-              }`}
-            >
-              <span className="text-white font-bold text-sm">TOUS</span>
-            </button>
-            <button
-              onClick={() => setSelectedLeague('NHL')}
-              className={`flex-1 flex items-center justify-center gap-0 py-3 px-2 rounded-lg border-2 transition-colors ${
-                selectedLeague === 'NHL' ? 'border-green-600 bg-green-600/20' : 'border-white/20 bg-black'
-              }`}
-            >
-              <img src={nhlLogo} className="h-10 w-auto object-contain mix-blend-lighten" alt="NHL" />
-              <img src={nflLogo} className="h-10 w-auto object-contain mix-blend-lighten -ml-1" alt="NFL" />
-            </button>
-            <button
-              onClick={() => setSelectedLeague('NFL')}
-              className={`flex-1 flex items-center justify-center gap-0 py-3 px-2 rounded-lg border-2 transition-colors ${
-                selectedLeague === 'NFL' ? 'border-green-600 bg-green-600/20' : 'border-white/20 bg-black'
-              }`}
-            >
-              <img src={nflLogo} className="h-10 w-auto object-contain mix-blend-lighten" alt="NFL" />
-              <img src={nhlLogo} className="h-10 w-auto object-contain mix-blend-lighten -ml-1" alt="NHL" />
-            </button>
-          </div>
-          
-          {/* Multiplier Filter */}
-          <Select value={selectedMultiplier} onValueChange={setSelectedMultiplier}>
+        <div className="max-w-md mx-auto mb-8 space-y-3">
+          {/* Sport Filter */}
+          <Select value={selectedLeague} onValueChange={setSelectedLeague}>
             <SelectTrigger className="w-full bg-black border-2 border-white/20 text-white hover:border-green-600/50 transition-colors">
-              <SelectValue placeholder="Multiplicateur de mise" />
+              <SelectValue placeholder="Sport" />
             </SelectTrigger>
             <SelectContent className="bg-black border-2 border-white/20 z-50">
-              <SelectItem value="all" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Tous les multiplicateurs</SelectItem>
-              <SelectItem value="1-2" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">1.0x - 2.0x</SelectItem>
-              <SelectItem value="2-3" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">2.0x - 3.0x</SelectItem>
-              <SelectItem value="3-4" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">3.0x - 4.0x</SelectItem>
-              <SelectItem value="4+" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">4.0x et plus</SelectItem>
+              <SelectItem value="all" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Tous les sports</SelectItem>
+              <SelectItem value="NHL" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">NHL</SelectItem>
+              <SelectItem value="NFL" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">NFL</SelectItem>
+            </SelectContent>
+          </Select>
+
+          {/* Sort by Multiplier */}
+          <Select value={sortByMultiplier} onValueChange={setSortByMultiplier}>
+            <SelectTrigger className="w-full bg-black border-2 border-white/20 text-white hover:border-green-600/50 transition-colors">
+              <SelectValue placeholder="Multiplicateur" />
+            </SelectTrigger>
+            <SelectContent className="bg-black border-2 border-white/20 z-50">
+              <SelectItem value="none" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Multiplicateur</SelectItem>
+              <SelectItem value="high" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Plus haut multiplicateur</SelectItem>
+              <SelectItem value="low" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Plus bas multiplicateur</SelectItem>
+            </SelectContent>
+          </Select>
+
+          {/* Sort by AI % */}
+          <Select value={sortByAI} onValueChange={setSortByAI}>
+            <SelectTrigger className="w-full bg-black border-2 border-white/20 text-white hover:border-green-600/50 transition-colors">
+              <SelectValue placeholder="Analyse IA %" />
+            </SelectTrigger>
+            <SelectContent className="bg-black border-2 border-white/20 z-50">
+              <SelectItem value="none" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Analyse IA %</SelectItem>
+              <SelectItem value="high" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Plus haut %</SelectItem>
+              <SelectItem value="low" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Plus bas %</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -198,8 +205,8 @@ const Parlay = () => {
         )}
 
         {/* PARLAY NFL */}
-        {showNFL && (
-        <div className="grid gap-0.5 justify-center">
+        {showNFL && nflIndex !== -1 && (
+        <div className="grid gap-0.5 justify-center" style={{ order: nflIndex }}>
           {/* AI Data Analysis Counter - Outside card */}
           <div className="flex items-center justify-center gap-3 px-4 pt-[5px] pb-2 bg-black w-full max-w-md mx-auto">
             <div className="relative w-6 h-6 flex-shrink-0">
@@ -683,8 +690,8 @@ const Parlay = () => {
         )}
 
         {/* PARLAY NHL */}
-        {showNHL && (
-        <div className="grid gap-0.5 justify-center">
+        {showNHL && nhlIndex !== -1 && (
+        <div className="grid gap-0.5 justify-center" style={{ order: nhlIndex }}>
           {/* AI Data Analysis Counter - Outside card */}
           <div className="flex items-center justify-center gap-3 px-4 pt-[5px] pb-2 bg-black w-full max-w-md mx-auto">
             <div className="relative w-6 h-6 flex-shrink-0">
