@@ -1648,15 +1648,37 @@ const Index = () => {
 
               {/* Loading Dialog for Washington */}
               <Dialog open={isLoadingDialogOpenWashington} onOpenChange={setIsLoadingDialogOpenWashington}>
-                <DialogContent className="bg-black border-2 border-green-600 text-white max-w-md">
-                  <div className="flex flex-col items-center justify-center py-8 space-y-6">
-                    <div className="relative w-16 h-16">
-                      <Loader2 className="w-16 h-16 text-green-500 animate-spin absolute" />
+                <DialogContent className="sm:max-w-md bg-black border-none p-0 flex items-center justify-center [&>button]:hidden">
+                  <div className="w-full h-full min-h-[400px] bg-black flex flex-col items-center justify-center gap-8 p-12">
+                    <div className="relative w-24 h-24 flex-shrink-0">
+                      <Loader2 className="w-24 h-24 text-white animate-spin absolute" />
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="text-white font-bold text-xl">IA</span>
+                        <span className="text-white font-bold text-2xl">IA</span>
                       </div>
                     </div>
-                    <p className="text-center text-lg font-semibold text-green-400">L'IA analyse le bet en cours...</p>
+                    <h1 className="text-2xl font-bold leading-none">
+                      <span className="text-white">WIN</span>
+                      <span className="text-primary">A</span>
+                      <span className="text-white">BET</span>
+                      <span className="text-primary text-sm">.AI</span>
+                    </h1>
+                    <p className="text-white/70 text-sm text-center max-w-xs">
+                      CHARGEMENT DE NOTRE IA ET DES DONNÉES LES PLUS RÉCENTES
+                      <span className="inline-flex ml-0.5">
+                        <span className="animate-bounce" style={{
+                          animationDelay: '0ms',
+                          animationDuration: '1s'
+                        }}>.</span>
+                        <span className="animate-bounce" style={{
+                          animationDelay: '200ms',
+                          animationDuration: '1s'
+                        }}>.</span>
+                        <span className="animate-bounce" style={{
+                          animationDelay: '400ms',
+                          animationDuration: '1s'
+                        }}>.</span>
+                      </span>
+                    </p>
                   </div>
                 </DialogContent>
               </Dialog>
