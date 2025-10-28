@@ -1,6 +1,7 @@
 import DashboardLayout from "@/components/DashboardLayout";
 import { Card, CardHeader } from "@/components/ui/card";
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogHeader, DialogTrigger } from "@/components/ui/dialog";
 import { Loader2, ChevronDown, ChevronUp, X } from "lucide-react";
 import washingtonLogo from "@/assets/washington-logo.png";
@@ -18,6 +19,7 @@ const Parlay = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [dataCountParlayNFL, setDataCountParlayNFL] = useState(12456);
   const [dataCountParlayNHL, setDataCountParlayNHL] = useState(9823);
+  const location = useLocation();
   
   // Filter states
   const [selectedLeague, setSelectedLeague] = useState<string>('all');
@@ -34,12 +36,18 @@ const Parlay = () => {
   };
 
   useEffect(() => {
-    const shouldBeFast = Math.random() < 0.85;
-    const randomDelay = shouldBeFast ? Math.random() * (700 - 500) + 500 : 2000;
-    setTimeout(() => {
+    setIsPageLoading(true);
+    const shouldBeFast = Math.random() < 0.60; // 60% rapide, 40% lent
+    const randomDelay = shouldBeFast 
+      ? Math.random() * (700 - 500) + 500 // 0.5s à 0.7s
+      : Math.random() * (3000 - 2000) + 2000; // 2s à 3s
+    
+    const timer = setTimeout(() => {
       setIsPageLoading(false);
     }, randomDelay);
-  }, []);
+
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
 
   useEffect(() => {
     const timer = setInterval(() => {

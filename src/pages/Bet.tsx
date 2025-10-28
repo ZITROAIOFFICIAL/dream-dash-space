@@ -7,6 +7,7 @@ import vegasLogo from "@/assets/vegas-logo.png";
 import tampaLogo from "@/assets/tampa-logo.png";
 import { Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 const Bet = () => {
   const [betAmount, setBetAmount] = useState<string>("100");
   const [customAmount, setCustomAmount] = useState<string>("");
@@ -16,15 +17,21 @@ const Bet = () => {
   const [isAnalysisDialogOpen, setIsAnalysisDialogOpen] = useState(false);
   const [isPageLoading, setIsPageLoading] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date());
+  const location = useLocation();
+
   useEffect(() => {
+    setIsPageLoading(true);
     const shouldBeFast = Math.random() < 0.60; // 60% rapide, 40% lent
     const randomDelay = shouldBeFast 
       ? Math.random() * (700 - 500) + 500 // 0.5s à 0.7s
       : Math.random() * (3000 - 2000) + 2000; // 2s à 3s
-    setTimeout(() => {
+    
+    const timer = setTimeout(() => {
       setIsPageLoading(false);
     }, randomDelay);
-  }, []);
+
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
