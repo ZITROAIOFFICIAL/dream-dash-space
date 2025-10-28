@@ -1013,6 +1013,13 @@ const Index = () => {
                 </div>
               </div>
 
+              {/* Match Details */}
+              <div className="text-center pb-2 pt-6">
+                <div className="text-sm font-bold text-white tracking-wider mb-2">
+                  PARIER SUR
+                </div>
+              </div>
+
               {/* Bet Amount & Payout */}
               <div className="flex justify-center pt-6 mb-2">
                 <div className="text-sm font-bold text-white tracking-wider text-center">
