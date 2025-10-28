@@ -121,7 +121,7 @@ const Index = () => {
               {/* AI Analysis */}
               <div className="flex items-center justify-between gap-2 text-xs bg-green-600 px-4 py-[5px]">
                 <div className="flex items-center gap-2">
-                  <span className="font-bold text-white text-4xl">92%</span>
+                  <span className="font-bold text-white text-3xl">92%</span>
                   <span className="text-white text-xs font-bold">DE CHANCE DE GAGNER SELON NOTRE IA</span>
                 </div>
                 <button onClick={handleShowAnalysisStLouis} className="px-3 py-1 bg-black rounded border-2 border-green-600 font-bold text-green-400 text-xs hover:bg-green-600/20 transition-colors">
