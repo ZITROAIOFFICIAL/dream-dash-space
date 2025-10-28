@@ -53,9 +53,10 @@ const Parlay = () => {
   const [isLoadingDialogOpenParlayNHL, setIsLoadingDialogOpenParlayNHL] = useState(false);
   const [isAnalysisDialogOpenParlayNHL, setIsAnalysisDialogOpenParlayNHL] = useState(false);
 
-  // Parlay NFL calculations - UNDER 50.5 (-110)
+  // Parlay NFL calculations - UNDER 50.5 (-110), Spread +3.5 (-120)
   const multiplierNFLUnder = 1 + 100 / 110;
-  const totalMultiplierNFL = multiplierNFLUnder;
+  const multiplierNFLSpread = 1 + 100 / 120;
+  const totalMultiplierNFL = multiplierNFLUnder * multiplierNFLSpread;
 
   // Parlay NHL calculations - Pittsburgh ML (+140), Vegas +1.5 (-135), St. Louis ML (-105)
   const multiplierPittsburgh = 1 + 140 / 100;
@@ -119,21 +120,20 @@ const Parlay = () => {
         </div>
 
         {/* PARLAY NFL */}
-        <div className="grid gap-6 justify-center">
-          <Card className="w-full max-w-md bg-black border-[3px] border-green-600 shadow-2xl overflow-hidden mx-auto rounded-sm">
-            <CardHeader className="space-y-0 p-0">
-              {/* AI Data Analysis Counter */}
-              <div className="flex items-center justify-center gap-3 py-2 px-6 bg-black/40">
-                <div className="relative w-6 h-6 flex-shrink-0">
-                  <Loader2 className="w-6 h-6 text-white animate-spin absolute" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-white font-bold text-[8px]">IA</span>
-                  </div>
-                </div>
-                <span className="text-white font-semibold text-center text-[10px]">
-                  {dataCountParlayNFL.toLocaleString()} DONNÉES ANALYSÉES PAR NOTRE IA POUR CE PARLAY NFL
-                </span>
+        <div className="grid gap-0.5 justify-center">
+          {/* AI Data Analysis Counter - Outside card */}
+          <div className="flex items-center justify-center gap-3 px-4 pt-[5px] pb-2 bg-black w-full max-w-md mx-auto">
+            <div className="relative w-6 h-6 flex-shrink-0">
+              <Loader2 className="w-6 h-6 text-white animate-spin absolute" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-white font-bold text-[8px]">IA</span>
               </div>
+            </div>
+            <span className="text-white font-semibold text-center text-[10px]">{dataCountParlayNFL.toLocaleString()} DONNÉES ANALYSÉES PAR NOTRE IA POUR CE PARLAY NFL</span>
+          </div>
+          
+          <Card className="w-full max-w-md bg-black shadow-2xl overflow-hidden mx-auto rounded-lg -mt-2">
+            <CardHeader className="space-y-0 p-0">
 
               {/* AI Analysis */}
               <div className="flex items-center justify-between gap-2 text-xs py-[10px] bg-green-600 px-4">
@@ -488,6 +488,39 @@ const Parlay = () => {
                   </div>
                 </div>
 
+                {/* Leg 2: Washington SPREAD */}
+                <div className="mx-4 mb-3 border-2 border-green-600 rounded-lg bg-green-600/10 p-3">
+                  <div className="text-center">
+                    <div className="grid grid-cols-3 items-center justify-items-center gap-2">
+                      {/* WASHINGTON */}
+                      <div className="flex flex-col items-center gap-0.5">
+                        <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center p-1.5 border-2 border-green-600">
+                          <img src={washingtonLogo} alt="Washington" className="w-full h-full object-contain" />
+                        </div>
+                        <span className="text-white text-[10px] font-extrabold">WASHINGTON</span>
+                        <div className="text-[10px] font-bold text-green-400">+3.5</div>
+                      </div>
+
+                      {/* Center */}
+                      <div className="flex flex-col items-center gap-0.5">
+                        <span className="font-semibold text-xs text-white">1:00 PM</span>
+                        <div className="px-1.5 py-0.5 rounded-full border border-white/20 bg-white/0">
+                          <span className="text-white font-bold text-[10px]">VS</span>
+                        </div>
+                        <div className="text-[10px] font-bold text-white tracking-wider">SPREAD</div>
+                      </div>
+
+                      {/* KANSAS CITY */}
+                      <div className="flex flex-col items-center gap-0.5">
+                        <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center border border-white/20 p-1.5">
+                          <img src={kansascityLogo} alt="Kansas City" className="w-full h-full object-contain" />
+                        </div>
+                        <span className="font-bold text-[10px] text-white">KANSAS CITY</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 {/* Bet Amount & Payout */}
                 <div className="flex justify-center pt-4 mb-2">
                   <div className="text-sm font-bold text-white tracking-wider text-center">
@@ -570,21 +603,20 @@ const Parlay = () => {
         </div>
 
         {/* PARLAY NHL */}
-        <div className="grid gap-6 justify-center">
-          <Card className="w-full max-w-md bg-black border-[3px] border-green-600 shadow-2xl overflow-hidden mx-auto rounded-sm">
-            <CardHeader className="space-y-0 p-0">
-              {/* AI Data Analysis Counter */}
-              <div className="flex items-center justify-center gap-3 py-2 px-6 bg-black/40">
-                <div className="relative w-6 h-6 flex-shrink-0">
-                  <Loader2 className="w-6 h-6 text-white animate-spin absolute" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-white font-bold text-[8px]">IA</span>
-                  </div>
-                </div>
-                <span className="text-white font-semibold text-center text-[10px]">
-                  {dataCountParlayNHL.toLocaleString()} DONNÉES ANALYSÉES PAR NOTRE IA POUR CE PARLAY NHL
-                </span>
+        <div className="grid gap-0.5 justify-center">
+          {/* AI Data Analysis Counter - Outside card */}
+          <div className="flex items-center justify-center gap-3 px-4 pt-[5px] pb-2 bg-black w-full max-w-md mx-auto">
+            <div className="relative w-6 h-6 flex-shrink-0">
+              <Loader2 className="w-6 h-6 text-white animate-spin absolute" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-white font-bold text-[8px]">IA</span>
               </div>
+            </div>
+            <span className="text-white font-semibold text-center text-[10px]">{dataCountParlayNHL.toLocaleString()} DONNÉES ANALYSÉES PAR NOTRE IA POUR CE PARLAY NHL</span>
+          </div>
+          
+          <Card className="w-full max-w-md bg-black shadow-2xl overflow-hidden mx-auto rounded-lg -mt-2">
+            <CardHeader className="space-y-0 p-0">
 
               {/* AI Analysis */}
               <div className="flex items-center justify-between gap-2 text-xs py-[10px] bg-green-600 px-4">
