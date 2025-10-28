@@ -216,15 +216,7 @@ const Historique = () => {
                 <div className="mx-4">
                   <div className="border-2 border-green-600 rounded-lg bg-black/40 backdrop-blur-sm p-4">
                     {/* League and Time */}
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-2">
-                        <img src={item.league === "NHL" ? nhlLogo : nflLogo} alt={item.league} className="w-6 h-6 object-contain" />
-                        <span className="text-white text-xs font-bold">{item.league}</span>
-                      </div>
-                      <span className="text-white/70 text-xs font-semibold">
-                        {item.result === "pending" ? item.time : "TERMINÉ"}
-                      </span>
-                    </div>
+                    
 
                     {/* Teams */}
                     <div className="flex items-center justify-between mb-3">
