@@ -753,38 +753,40 @@ const Index = () => {
               </div>
 
               {/* Match Details */}
-              <div className="text-center space-y-2 pt-4 pb-4">
-                <div className="text-sm font-bold text-white tracking-wider mb-2">
-                  PARIER SUR
-                </div>
-                
-                {/* Teams and VS */}
-                <div className="grid grid-cols-3 items-center justify-items-center gap-4 px-4">
-                  {/* ST. LOUIS */}
-                  <div className="flex flex-col items-center gap-1">
-                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border border-white/20 p-2">
-                      <img src={stlouisLogo} alt="St. Louis" className="w-full h-full object-contain" />
-                    </div>
-                    <span className="font-bold text-xs text-white">ST. LOUIS</span>
+              <div className="mx-4 border-2 border-green-600 rounded-lg bg-black p-4">
+                <div className="text-center space-y-2">
+                  <div className="text-sm font-bold text-white tracking-wider mb-2">
+                    PARIER SUR
                   </div>
-
-                  {/* Center VS + MONEYLINE */}
-                  <div className="flex flex-col items-center gap-1">
-                    <span className="font-semibold text-sm text-white">7:00 PM</span>
-                    <div className="px-2 py-0.5 rounded-full border border-white/20 bg-white/0">
-                      <span className="text-white font-bold text-xs">VS</span>
-                    </div>
-                    <div className="text-xs font-bold text-white tracking-wider">MONEYLINE</div>
-                  </div>
-
-                  {/* PITTSBURGH */}
-                  <div className="flex flex-col items-center gap-1">
-                    <div className="bg-green-600/15 border-2 border-green-600 rounded-none p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[5px]">
-                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center p-2">
-                        <img src={pittsburghLogo} alt="Pittsburgh" className="w-full h-full object-contain" />
+                  
+                  {/* Teams and VS */}
+                  <div className="grid grid-cols-3 items-center justify-items-center gap-4 px-4">
+                    {/* ST. LOUIS */}
+                    <div className="flex flex-col items-center gap-1">
+                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border border-white/20 p-2">
+                        <img src={stlouisLogo} alt="St. Louis" className="w-full h-full object-contain" />
                       </div>
-                      <span className="text-white -bottom-0.5 text-xs font-extrabold">PITTSBURGH</span>
-                      <div className="text-xs font-bold text-green-400">VICTOIRE</div>
+                      <span className="font-bold text-xs text-white">ST. LOUIS</span>
+                    </div>
+
+                    {/* Center VS + MONEYLINE */}
+                    <div className="flex flex-col items-center gap-1">
+                      <span className="font-semibold text-sm text-white">7:00 PM</span>
+                      <div className="px-2 py-0.5 rounded-full border border-white/20 bg-white/0">
+                        <span className="text-white font-bold text-xs">VS</span>
+                      </div>
+                      <div className="text-xs font-bold text-white tracking-wider">MONEYLINE</div>
+                    </div>
+
+                    {/* PITTSBURGH */}
+                    <div className="flex flex-col items-center gap-1">
+                      <div className="bg-green-600/15 border-2 border-green-600 rounded-none p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[5px]">
+                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center p-2">
+                          <img src={pittsburghLogo} alt="Pittsburgh" className="w-full h-full object-contain" />
+                        </div>
+                        <span className="text-white -bottom-0.5 text-xs font-extrabold">PITTSBURGH</span>
+                        <div className="text-xs font-bold text-green-400">VICTOIRE</div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1511,37 +1513,39 @@ const Index = () => {
               </div>
 
               {/* Match Details */}
-              <div className="text-center space-y-2 pt-4 pb-4">
-                <div className="text-sm font-bold text-white tracking-wider mb-2">
-                  PARIER SUR
-                </div>
-                
-                {/* Teams and VS */}
-                <div className="grid grid-cols-3 items-center justify-items-center gap-4 px-4">
-                  {/* VEGAS */}
-                  <div className="flex flex-col items-center gap-1">
-                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border border-white/20 p-2">
-                      <img src={vegasLogo} alt="Vegas" className="w-full h-full object-contain" />
-                    </div>
-                    <span className="font-bold text-xs text-white">VEGAS</span>
+              <div className="mx-4 border-2 border-green-600 rounded-lg bg-black p-4">
+                <div className="text-center space-y-2">
+                  <div className="text-sm font-bold text-white tracking-wider mb-2">
+                    PARIER SUR
                   </div>
-
-                  {/* Center time + VS */}
-                  <div className="flex flex-col items-center gap-1">
-                    <span className="font-semibold text-sm text-white">5:00 PM</span>
-                    <div className="px-2 py-0.5 rounded-full border border-white/20 bg-white/0">
-                      <span className="text-white font-bold text-xs">VS</span>
-                    </div>
-                  </div>
-
-                  {/* TAMPA BAY */}
-                  <div className="flex flex-col items-center gap-1">
-                    <div className="bg-green-600/15 border-2 border-green-600 rounded-none p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[17px]">
-                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center p-2">
-                        <img src={tampaLogo} alt="Tampa Bay" className="w-full h-full object-contain" />
+                  
+                  {/* Teams and VS */}
+                  <div className="grid grid-cols-3 items-center justify-items-center gap-4 px-4">
+                    {/* VEGAS */}
+                    <div className="flex flex-col items-center gap-1">
+                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border border-white/20 p-2">
+                        <img src={vegasLogo} alt="Vegas" className="w-full h-full object-contain" />
                       </div>
-                      <span className="text-white -bottom-0.5 text-xs font-extrabold">TAMPA BAY</span>
-                      <div className="text-xs font-bold text-green-400">VICTOIRE</div>
+                      <span className="font-bold text-xs text-white">VEGAS</span>
+                    </div>
+
+                    {/* Center time + VS */}
+                    <div className="flex flex-col items-center gap-1">
+                      <span className="font-semibold text-sm text-white">5:00 PM</span>
+                      <div className="px-2 py-0.5 rounded-full border border-white/20 bg-white/0">
+                        <span className="text-white font-bold text-xs">VS</span>
+                      </div>
+                    </div>
+
+                    {/* TAMPA BAY */}
+                    <div className="flex flex-col items-center gap-1">
+                      <div className="bg-green-600/15 border-2 border-green-600 rounded-none p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[17px]">
+                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center p-2">
+                          <img src={tampaLogo} alt="Tampa Bay" className="w-full h-full object-contain" />
+                        </div>
+                        <span className="text-white -bottom-0.5 text-xs font-extrabold">TAMPA BAY</span>
+                        <div className="text-xs font-bold text-green-400">VICTOIRE</div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -2085,38 +2089,40 @@ const Index = () => {
               </div>
 
               {/* Match Details */}
-              <div className="text-center space-y-2 pt-4 pb-4">
-                <div className="text-sm font-bold text-white tracking-wider mb-2">
-                  PARIER SUR
-                </div>
-                
-                {/* Teams and VS */}
-                <div className="grid grid-cols-3 items-center justify-items-center gap-4 px-4">
-                  {/* WASHINGTON */}
-                  <div className="flex flex-col items-center gap-1">
-                    <div className="bg-green-600/15 border-2 border-green-600 rounded-none p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[5px]">
-                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center p-2">
-                        <img src={washingtonLogo} alt="Washington" className="w-full h-full object-contain" />
+              <div className="mx-4 border-2 border-green-600 rounded-lg bg-black p-4">
+                <div className="text-center space-y-2">
+                  <div className="text-sm font-bold text-white tracking-wider mb-2">
+                    PARIER SUR
+                  </div>
+                  
+                  {/* Teams and VS */}
+                  <div className="grid grid-cols-3 items-center justify-items-center gap-4 px-4">
+                    {/* WASHINGTON */}
+                    <div className="flex flex-col items-center gap-1">
+                      <div className="bg-green-600/15 border-2 border-green-600 rounded-none p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[5px]">
+                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center p-2">
+                          <img src={washingtonLogo} alt="Washington" className="w-full h-full object-contain" />
+                        </div>
+                        <span className="text-white -bottom-0.5 text-xs font-extrabold">WASHINGTON</span>
+                        <div className="text-xs font-bold text-green-400">VICTOIRE</div>
                       </div>
-                      <span className="text-white -bottom-0.5 text-xs font-extrabold">WASHINGTON</span>
-                      <div className="text-xs font-bold text-green-400">VICTOIRE</div>
                     </div>
-                  </div>
 
-                  {/* Center time + VS */}
-                  <div className="flex flex-col items-center gap-1">
-                    <span className="font-semibold text-sm text-white">3:25 PM</span>
-                    <div className="px-2 py-0.5 rounded-full border border-white/20 bg-white/0">
-                      <span className="text-white font-bold text-xs">VS</span>
+                    {/* Center time + VS */}
+                    <div className="flex flex-col items-center gap-1">
+                      <span className="font-semibold text-sm text-white">3:25 PM</span>
+                      <div className="px-2 py-0.5 rounded-full border border-white/20 bg-white/0">
+                        <span className="text-white font-bold text-xs">VS</span>
+                      </div>
                     </div>
-                  </div>
 
-                  {/* KANSAS CITY */}
-                  <div className="flex flex-col items-center gap-1">
-                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border border-white/20 p-2">
-                      <img src={kansascityLogo} alt="Kansas City" className="w-full h-full object-contain" />
+                    {/* KANSAS CITY */}
+                    <div className="flex flex-col items-center gap-1">
+                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border border-white/20 p-2">
+                        <img src={kansascityLogo} alt="Kansas City" className="w-full h-full object-contain" />
+                      </div>
+                      <span className="font-bold text-xs text-white">KANSAS CITY</span>
                     </div>
-                    <span className="font-bold text-xs text-white">KANSAS CITY</span>
                   </div>
                 </div>
               </div>
