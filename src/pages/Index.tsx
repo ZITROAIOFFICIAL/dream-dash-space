@@ -116,7 +116,7 @@ const Index = () => {
             <span className="text-white font-semibold text-center text-[10px]">{dataCountStLouis.toLocaleString()} DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
           </div>
           
-          <Card className="w-full max-w-md bg-black border-2 border-green-600 shadow-2xl overflow-hidden mx-auto rounded-none">
+          <Card className="w-full max-w-md bg-black border-2 border-green-600 shadow-2xl overflow-hidden mx-auto rounded-lg">
             <CardHeader className="space-y-0 p-0">
               {/* AI Analysis */}
               <div className="flex items-center justify-between gap-2 text-xs bg-green-600 px-4 -mt-1 py-[10px]">
@@ -878,7 +878,7 @@ const Index = () => {
             <span className="text-white font-semibold text-center text-[10px]">{dataCountVegas.toLocaleString()} DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
           </div>
           
-          <Card className="w-full max-w-md bg-black border-2 border-green-600 shadow-2xl overflow-hidden mx-auto rounded-none">
+          <Card className="w-full max-w-md bg-black border-2 border-green-600 shadow-2xl overflow-hidden mx-auto rounded-lg">
             <CardHeader className="space-y-0 p-0">
               {/* AI Analysis */}
               <div className="flex items-center justify-between gap-2 text-xs py-[10px] bg-green-600 px-4">
@@ -1637,7 +1637,7 @@ const Index = () => {
             <span className="text-white font-semibold text-center text-[10px]">{dataCountWashington.toLocaleString()} DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
           </div>
           
-          <Card className="w-full max-w-md bg-black border-2 border-green-600 shadow-2xl overflow-hidden mx-auto rounded-none">
+          <Card className="w-full max-w-md bg-black border-2 border-green-600 shadow-2xl overflow-hidden mx-auto rounded-lg">
             <CardHeader className="space-y-0 p-0">
               {/* AI Analysis */}
               <div className="flex items-center justify-between gap-2 text-xs py-[10px] bg-green-600 px-4">
