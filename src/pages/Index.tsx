@@ -1007,7 +1007,7 @@ const Index = () => {
               {/* Match Details */}
               <div className="text-center pb-1 pt-3">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
-                  PARIER SUR
+                  MISE
                 </div>
               </div>
 
