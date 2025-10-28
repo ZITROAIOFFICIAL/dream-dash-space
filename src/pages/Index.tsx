@@ -2,6 +2,7 @@ import DashboardLayout from "@/components/DashboardLayout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Separator } from "@/components/ui/separator";
 import { Loader2 } from "lucide-react";
 import stlouisLogo from "@/assets/stlouis-logo-new.png";
 import pittsburghLogo from "@/assets/pittsburgh-logo-new.png";
@@ -736,6 +737,8 @@ const Index = () => {
                 </Dialog>
               </div>
 
+              <Separator className="bg-gray-600" />
+
               {/* Odds Display */}
               <div className="flex justify-center pt-4 pb-4">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
@@ -841,6 +844,8 @@ const Index = () => {
                   </div>
                 </div>
               </div>
+
+              <Separator className="bg-gray-600" />
 
               {/* DraftKings Section */}
               <div className="pt-0">
@@ -1497,6 +1502,8 @@ const Index = () => {
                 </Dialog>
               </div>
 
+              <Separator className="bg-gray-600" />
+
               {/* Odds Display */}
               <div className="flex justify-center pt-4 pb-4">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
@@ -1601,6 +1608,8 @@ const Index = () => {
                   </div>
                 </div>
               </div>
+
+              <Separator className="bg-gray-600" />
 
               {/* DraftKings Section */}
               <div className="pt-0">
@@ -2074,6 +2083,8 @@ const Index = () => {
                 </DialogContent>
               </Dialog>
 
+              <Separator className="bg-gray-600" />
+
               {/* Odds Display */}
               <div className="flex justify-center pt-4 pb-4">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
@@ -2178,6 +2189,8 @@ const Index = () => {
                   </div>
                 </div>
               </div>
+
+              <Separator className="bg-gray-600" />
 
               {/* BetMGM Section */}
               <div className="pt-0">
