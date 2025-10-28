@@ -104,7 +104,7 @@ const Index = () => {
         </div>
 
         {/* ST. LOUIS vs PITTSBURGH CARD */}
-        <div className="grid gap-2 justify-center">
+        <div className="grid gap-0.5 justify-center">
           {/* AI Data Analysis Counter - Outside card */}
           <div className="flex items-center justify-center gap-3 px-4 pt-[5px] pb-2 bg-black w-full max-w-md mx-auto">
             <div className="relative w-6 h-6 flex-shrink-0">
@@ -866,7 +866,7 @@ const Index = () => {
         </div>
 
         {/* VEGAS vs TAMPA BAY CARD */}
-        <div className="grid gap-2 justify-center">
+        <div className="grid gap-0.5 justify-center">
           {/* AI Data Analysis Counter - Outside card */}
           <div className="flex items-center justify-center gap-3 px-4 pt-[5px] pb-2 bg-black w-full max-w-md mx-auto">
             <div className="relative w-6 h-6 flex-shrink-0">
@@ -1627,7 +1627,7 @@ const Index = () => {
         </div>
 
         {/* WASHINGTON vs KANSAS CITY CARD - NFL */}
-        <div className="grid gap-2 justify-center">
+        <div className="grid gap-0.5 justify-center">
           {/* AI Data Analysis Counter - Outside card */}
           <div className="flex items-center justify-center gap-3 px-4 pt-[5px] pb-2 bg-black w-full max-w-md mx-auto">
             <div className="relative w-6 h-6 flex-shrink-0">
