@@ -163,7 +163,7 @@ const Index = () => {
         {/* Filters Section */}
         <div className="max-w-md mx-auto mb-8">
           {/* Filters Header */}
-          <div className="flex items-center justify-between mb-4">
+          <div className={`flex items-center mb-4 ${showFilters ? 'justify-between' : 'justify-center'}`}>
             <button
               onClick={() => setShowFilters(!showFilters)}
               className="flex items-center gap-2 text-white font-bold text-sm hover:text-green-500 transition-colors"
@@ -171,13 +171,15 @@ const Index = () => {
               <span>FILTRES</span>
               {showFilters ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
             </button>
-            <button
-              onClick={resetFilters}
-              className="flex items-center gap-1 text-white/70 hover:text-white text-xs transition-colors"
-            >
-              <X className="w-4 h-4" />
-              <span>Effacer</span>
-            </button>
+            {showFilters && (
+              <button
+                onClick={resetFilters}
+                className="flex items-center gap-1 text-white/70 hover:text-white text-xs transition-colors"
+              >
+                <X className="w-4 h-4" />
+                <span>Effacer</span>
+              </button>
+            )}
           </div>
 
           {/* Filters Content */}
