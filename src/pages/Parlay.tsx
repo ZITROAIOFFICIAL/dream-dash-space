@@ -466,7 +466,7 @@ const Parlay = () => {
                 {/* Bet 1: Z. Flowers Under 68.5 Receiving Yards */}
                 <div className="mb-4">
                   <div className="bg-black rounded-lg overflow-hidden border-2 border-green-600">
-                    <div className="flex items-center justify-between p-3">
+                    <div className="flex items-center justify-between p-3 border-b-2 border-green-600">
                       <div className="flex flex-col items-center gap-1">
                         <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
                           <img src={stlouisLogo} alt="ST. LOUIS" className="w-10 h-10 object-contain" />
@@ -485,7 +485,7 @@ const Parlay = () => {
                         <div className="text-white text-[9px] font-bold">ST. LOUIS</div>
                       </div>
                     </div>
-                    <div className="bg-black border-2 border-t-0 border-green-600 px-3 py-2">
+                    <div className="px-3 py-2 bg-black">
                       <div className="text-white text-[9px] font-bold text-center">Z. Flowers Receiving Yards</div>
                     </div>
                   </div>
@@ -1003,7 +1003,7 @@ const Parlay = () => {
                 {/* Bet 2: Z. Flowers Under 68.5 Receiving Yards */}
                 <div className="mb-4">
                   <div className="bg-black rounded-lg overflow-hidden border-2 border-green-600">
-                    <div className="flex items-center justify-between p-3">
+                    <div className="flex items-center justify-between p-3 border-b-2 border-green-600">
                       <div className="flex flex-col items-center gap-1">
                         <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
                           <img src={kansascityLogo} alt="KANSAS CITY" className="w-10 h-10 object-contain" />
@@ -1022,7 +1022,7 @@ const Parlay = () => {
                         <div className="text-white text-[9px] font-bold">KANSAS CITY</div>
                       </div>
                     </div>
-                    <div className="bg-black border-2 border-t-0 border-green-600 px-3 py-2">
+                    <div className="px-3 py-2 bg-black">
                       <div className="text-white text-[9px] font-bold text-center">Z. Flowers Receiving Yards</div>
                     </div>
                   </div>
