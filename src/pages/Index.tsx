@@ -851,8 +851,10 @@ const Index = () => {
               <div className="pt-0">
                 <div className="flex items-center justify-between text-xs my-0 py-[10px] px-6 border-t-2 border-green-600 bg-green-600">
                   <span className="text-white font-bold">MEILLEUR ODDS</span>
-                  <span className="font-bold text-white">DRAFTKINGS</span>
-                  <span className="font-bold text-white">-105</span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-white">DRAFTKINGS</span>
+                    <span className="px-2 py-1 bg-white rounded text-black font-bold">-105</span>
+                  </div>
                 </div>
               </div>
             </CardHeader>
@@ -1606,8 +1608,10 @@ const Index = () => {
               <div className="pt-0">
                 <div className="flex items-center justify-between text-xs my-0 py-[10px] px-6 border-t-2 border-green-600 bg-green-600">
                   <span className="text-white font-bold">MEILLEUR ODDS</span>
-                  <span className="font-bold text-white">DRAFTKINGS</span>
-                  <span className="font-bold text-white">-135</span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-white">DRAFTKINGS</span>
+                    <span className="px-2 py-1 bg-white rounded text-black font-bold">-135</span>
+                  </div>
                 </div>
               </div>
             </CardHeader>
@@ -2180,8 +2184,10 @@ const Index = () => {
               <div className="pt-0">
                 <div className="flex items-center justify-between text-xs my-0 py-[10px] px-6 border-t-2 border-green-600 bg-green-600">
                   <span className="text-white font-bold">MEILLEUR ODDS</span>
-                  <span className="font-bold text-white">BETMGM</span>
-                  <span className="font-bold text-white">+488</span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-white">BETMGM</span>
+                    <span className="px-2 py-1 bg-white rounded text-black font-bold">+488</span>
+                  </div>
                 </div>
               </div>
             </CardHeader>
