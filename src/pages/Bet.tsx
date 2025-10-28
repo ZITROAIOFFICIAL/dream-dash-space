@@ -7,7 +7,7 @@ import vegasLogo from "@/assets/vegas-logo.png";
 import tampaLogo from "@/assets/tampa-logo.png";
 import { Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+
 const Bet = () => {
   const [betAmount, setBetAmount] = useState<string>("100");
   const [customAmount, setCustomAmount] = useState<string>("");
@@ -15,33 +15,18 @@ const Bet = () => {
   const [showAnalysis, setShowAnalysis] = useState(false);
   const [isLoadingDialogOpen, setIsLoadingDialogOpen] = useState(false);
   const [isAnalysisDialogOpen, setIsAnalysisDialogOpen] = useState(false);
-  const [isPageLoading, setIsPageLoading] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date());
-  const location = useLocation();
 
-  useEffect(() => {
-    setIsPageLoading(true);
-    const shouldBeFast = Math.random() < 0.60; // 60% rapide, 40% lent
-    const randomDelay = shouldBeFast 
-      ? Math.random() * (700 - 500) + 500 // 0.5s à 0.7s
-      : Math.random() * (3000 - 2000) + 2000; // 2s à 3s
-    
-    const timer = setTimeout(() => {
-      setIsPageLoading(false);
-    }, randomDelay);
-
-    return () => clearTimeout(timer);
-  }, [location.pathname]);
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
-    }, 1000); // Met à jour chaque seconde
+    }, 1000);
 
     return () => clearInterval(timer);
   }, []);
   const handleShowAnalysis = () => {
     setIsLoadingDialogOpen(true);
-    const randomDelay = Math.random() * (5000 - 1500) + 1500; // Entre 1.5s et 5s
+    const randomDelay = Math.random() * (5000 - 1500) + 1500;
     setTimeout(() => {
       setIsLoadingDialogOpen(false);
       setIsAnalysisDialogOpen(true);
@@ -61,24 +46,7 @@ const Bet = () => {
       setCustomAmount("");
     }
   };
-  if (isPageLoading) {
-    return <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
-        <div className="flex flex-col items-center justify-center gap-8">
-          <div className="relative w-24 h-24 flex-shrink-0">
-            <Loader2 className="w-24 h-24 text-white animate-spin absolute" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-white font-bold text-2xl">IA</span>
-            </div>
-          </div>
-          <h1 className="text-2xl font-bold leading-none">
-            <span className="text-white">WIN</span>
-            <span className="text-primary">A</span>
-            <span className="text-white">BET</span>
-            <span className="text-primary text-sm">.AI</span>
-          </h1>
-        </div>
-      </div>;
-  }
+
   return <DashboardLayout>
       <div className="space-y-6">
         <div>

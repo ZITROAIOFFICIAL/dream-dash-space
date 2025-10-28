@@ -13,11 +13,15 @@ import kansascityLogo from "@/assets/kansascity-logo.png";
 import nflLogo from "@/assets/nfl-logo.png";
 import nhlLogo from "@/assets/nhl-logo.png";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useLocation } from "react-router-dom";
+
 const Index = () => {
+  const [isPageLoading, setIsPageLoading] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [dataCountStLouis, setDataCountStLouis] = useState(2843);
   const [dataCountVegas, setDataCountVegas] = useState(2857);
   const [dataCountWashington, setDataCountWashington] = useState(7623);
+  const location = useLocation();
   
   // Filter states
   const [selectedLeague, setSelectedLeague] = useState<string>('all');
@@ -34,6 +38,21 @@ const Index = () => {
     setSortByAI('high');
     setLastSortKey('ai');
   };
+
+  useEffect(() => {
+    setIsPageLoading(true);
+    const shouldBeFast = Math.random() < 0.60; // 60% rapide, 40% lent
+    const randomDelay = shouldBeFast 
+      ? Math.random() * (700 - 500) + 500 // 0.5s à 0.7s
+      : Math.random() * (3000 - 2000) + 2000; // 2s à 3s
+    
+    const timer = setTimeout(() => {
+      setIsPageLoading(false);
+    }, randomDelay);
+
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
@@ -151,6 +170,26 @@ const Index = () => {
       setShowAnalysisWashington(true);
     }, randomDelay);
   };
+
+  if (isPageLoading) {
+    return (
+      <div className="fixed inset-0 bg-black z-50 flex flex-col items-center justify-center gap-8">
+        <div className="relative w-24 h-24 flex-shrink-0">
+          <Loader2 className="w-24 h-24 text-white animate-spin absolute" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-white font-bold text-2xl">IA</span>
+          </div>
+        </div>
+        <h1 className="text-2xl font-bold leading-none">
+          <span className="text-white">WIN</span>
+          <span className="text-green-600">A</span>
+          <span className="text-white">BET</span>
+          <span className="text-green-600 text-sm">.AI</span>
+        </h1>
+      </div>
+    );
+  }
+
   return (
     <DashboardLayout>
       <div className="space-y-8">
