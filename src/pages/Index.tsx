@@ -1012,7 +1012,7 @@ const Index = () => {
               </div>
 
               {/* 1 Units Badge */}
-              <div className="mx-4 mt-1">
+              <div className="mx-4 mt-0">
                 <div className="bg-green-600 rounded-lg px-10 py-2 text-center">
                   <div className="text-xl font-bold text-white">
                     1 UNITS
