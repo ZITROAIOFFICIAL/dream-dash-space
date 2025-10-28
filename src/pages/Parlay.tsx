@@ -1,20 +1,20 @@
 import DashboardLayout from "@/components/DashboardLayout";
 import { Card, CardHeader } from "@/components/ui/card";
 import { useState, useEffect } from "react";
-import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogHeader, DialogTrigger } from "@/components/ui/dialog";
 import { Loader2 } from "lucide-react";
+import washingtonLogo from "@/assets/washington-logo.png";
+import kansascityLogo from "@/assets/kansascity-logo.png";
 import stlouisLogo from "@/assets/stlouis-logo-new.png";
 import pittsburghLogo from "@/assets/pittsburgh-logo-new.png";
 import vegasLogo from "@/assets/vegas-logo.png";
 import tampaLogo from "@/assets/tampa-logo.png";
-import washingtonLogo from "@/assets/washington-logo.png";
-import kansascityLogo from "@/assets/kansascity-logo.png";
 
 const Parlay = () => {
   const [isPageLoading, setIsPageLoading] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date());
-  const [dataCountParlay1, setDataCountParlay1] = useState(8523);
-  const [dataCountParlay2, setDataCountParlay2] = useState(7894);
+  const [dataCountParlayNFL, setDataCountParlayNFL] = useState(12456);
+  const [dataCountParlayNHL, setDataCountParlayNHL] = useState(9823);
 
   useEffect(() => {
     const shouldBeFast = Math.random() < 0.85;
@@ -33,58 +33,58 @@ const Parlay = () => {
 
   useEffect(() => {
     const dataTimer = setInterval(() => {
-      setDataCountParlay1(prev => prev + Math.floor(Math.random() * 3) + 1);
-      setDataCountParlay2(prev => prev + Math.floor(Math.random() * 3) + 1);
+      setDataCountParlayNFL(prev => prev + Math.floor(Math.random() * 3) + 1);
+      setDataCountParlayNHL(prev => prev + Math.floor(Math.random() * 3) + 1);
     }, 120000);
     return () => clearInterval(dataTimer);
   }, []);
 
-  // States for Parlay 1 (3-leg: St. Louis + Vegas + Washington)
-  const [betAmountParlay1, setBetAmountParlay1] = useState<string>("100");
-  const [isDialogOpenParlay1, setIsDialogOpenParlay1] = useState(false);
-  const [showAnalysisParlay1, setShowAnalysisParlay1] = useState(false);
-  const [isLoadingDialogOpenParlay1, setIsLoadingDialogOpenParlay1] = useState(false);
-  const [isAnalysisDialogOpenParlay1, setIsAnalysisDialogOpenParlay1] = useState(false);
+  // States for Parlay NFL
+  const [betAmountParlayNFL, setBetAmountParlayNFL] = useState<string>("100");
+  const [isDialogOpenParlayNFL, setIsDialogOpenParlayNFL] = useState(false);
+  const [showAnalysisParlayNFL, setShowAnalysisParlayNFL] = useState(false);
+  const [isLoadingDialogOpenParlayNFL, setIsLoadingDialogOpenParlayNFL] = useState(false);
+  const [isAnalysisDialogOpenParlayNFL, setIsAnalysisDialogOpenParlayNFL] = useState(false);
 
-  // States for Parlay 2 (2-leg: Vegas + St. Louis)
-  const [betAmountParlay2, setBetAmountParlay2] = useState<string>("100");
-  const [isDialogOpenParlay2, setIsDialogOpenParlay2] = useState(false);
-  const [showAnalysisParlay2, setShowAnalysisParlay2] = useState(false);
-  const [isLoadingDialogOpenParlay2, setIsLoadingDialogOpenParlay2] = useState(false);
-  const [isAnalysisDialogOpenParlay2, setIsAnalysisDialogOpenParlay2] = useState(false);
+  // States for Parlay NHL
+  const [betAmountParlayNHL, setBetAmountParlayNHL] = useState<string>("100");
+  const [isDialogOpenParlayNHL, setIsDialogOpenParlayNHL] = useState(false);
+  const [showAnalysisParlayNHL, setShowAnalysisParlayNHL] = useState(false);
+  const [isLoadingDialogOpenParlayNHL, setIsLoadingDialogOpenParlayNHL] = useState(false);
+  const [isAnalysisDialogOpenParlayNHL, setIsAnalysisDialogOpenParlayNHL] = useState(false);
 
-  // Parlay 1 calculations (Under -114, Pittsburgh +140, Chicago -144, New Orleans -107)
-  const multiplierUnder = 1 + 100 / 114;
+  // Parlay NFL calculations - UNDER 50.5 (-110)
+  const multiplierNFLUnder = 1 + 100 / 110;
+  const totalMultiplierNFL = multiplierNFLUnder;
+
+  // Parlay NHL calculations - Pittsburgh ML (+140), Vegas +1.5 (-135), St. Louis ML (-105)
   const multiplierPittsburgh = 1 + 140 / 100;
-  const multiplierChicago = 1 + 100 / 144;
-  const multiplierNewOrleans = 1 + 100 / 107;
-  const totalMultiplierParlay1 = multiplierUnder * multiplierPittsburgh * multiplierChicago * multiplierNewOrleans;
-
-  // Parlay 2 calculations (Pittsburgh +140, Under -114, Chicago -144)
-  const totalMultiplierParlay2 = multiplierPittsburgh * multiplierUnder * multiplierChicago;
+  const multiplierVegas = 1 + 100 / 135;
+  const multiplierStLouis = 1 + 100 / 105;
+  const totalMultiplierNHL = multiplierPittsburgh * multiplierVegas * multiplierStLouis;
 
   const calculateReturn = (amount: string, multiplier: number) => {
     const numAmount = parseFloat(amount) || 0;
     return (numAmount * multiplier).toFixed(2);
   };
 
-  const handleShowAnalysisParlay1 = () => {
-    setIsLoadingDialogOpenParlay1(true);
+  const handleShowAnalysisParlayNFL = () => {
+    setIsLoadingDialogOpenParlayNFL(true);
     const randomDelay = Math.random() * (5000 - 1500) + 1500;
     setTimeout(() => {
-      setIsLoadingDialogOpenParlay1(false);
-      setIsAnalysisDialogOpenParlay1(true);
-      setShowAnalysisParlay1(true);
+      setIsLoadingDialogOpenParlayNFL(false);
+      setIsAnalysisDialogOpenParlayNFL(true);
+      setShowAnalysisParlayNFL(true);
     }, randomDelay);
   };
 
-  const handleShowAnalysisParlay2 = () => {
-    setIsLoadingDialogOpenParlay2(true);
+  const handleShowAnalysisParlayNHL = () => {
+    setIsLoadingDialogOpenParlayNHL(true);
     const randomDelay = Math.random() * (5000 - 1500) + 1500;
     setTimeout(() => {
-      setIsLoadingDialogOpenParlay2(false);
-      setIsAnalysisDialogOpenParlay2(true);
-      setShowAnalysisParlay2(true);
+      setIsLoadingDialogOpenParlayNHL(false);
+      setIsAnalysisDialogOpenParlayNHL(true);
+      setShowAnalysisParlayNHL(true);
     }, randomDelay);
   };
 
@@ -118,7 +118,7 @@ const Parlay = () => {
           <p className="text-white/70 text-sm">Les parlay avec la meilleur probabilité de réussite aujourd'hui</p>
         </div>
 
-        {/* PARLAY 1: 3-Leg (St. Louis + Vegas + Washington) */}
+        {/* PARLAY NFL */}
         <div className="grid gap-6 justify-center">
           <Card className="w-full max-w-md bg-black border-[3px] border-green-600 shadow-2xl overflow-hidden mx-auto rounded-sm">
             <CardHeader className="space-y-0 p-0">
@@ -131,28 +131,28 @@ const Parlay = () => {
                   </div>
                 </div>
                 <span className="text-white font-semibold text-center text-[10px]">
-                  {dataCountParlay1.toLocaleString()} DONNÉES ANALYSÉES PAR NOTRE IA POUR CE PARLAY
+                  {dataCountParlayNFL.toLocaleString()} DONNÉES ANALYSÉES PAR NOTRE IA POUR CE PARLAY NFL
                 </span>
               </div>
 
               {/* AI Analysis */}
               <div className="flex items-center justify-between gap-2 text-xs py-[10px] bg-green-600 px-4">
                 <div className="flex items-center gap-2">
-                  <span className="font-bold text-white text-4xl">74%</span>
+                  <span className="font-bold text-white text-4xl">87%</span>
                   <span className="text-white text-xs font-bold">DE CHANCE DE GAGNER SELON NOTRE IA</span>
                 </div>
                 <button
-                  onClick={handleShowAnalysisParlay1}
+                  onClick={handleShowAnalysisParlayNFL}
                   className="px-3 py-1 bg-black rounded border-2 border-green-600 font-bold text-green-400 text-xs hover:bg-green-600/20 transition-colors"
                 >
                   VOIR ANALYSE IA
                 </button>
 
                 {/* Loading Dialog */}
-                <Dialog open={isLoadingDialogOpenParlay1} onOpenChange={setIsLoadingDialogOpenParlay1}>
+                <Dialog open={isLoadingDialogOpenParlayNFL} onOpenChange={setIsLoadingDialogOpenParlayNFL}>
                   <DialogContent className="sm:max-w-md bg-black border-none p-0 flex items-center justify-center [&>button]:hidden">
                     <DialogTitle className="sr-only">Chargement de l'analyse IA</DialogTitle>
-                    <DialogDescription className="sr-only">Veuillez patienter pendant que nous chargeons l'analyse IA pour ce parlay.</DialogDescription>
+                    <DialogDescription className="sr-only">Veuillez patienter pendant que nous chargeons l'analyse IA pour ce parlay NFL.</DialogDescription>
                     <div className="w-full h-full min-h-[400px] bg-black flex flex-col items-center justify-center gap-8 p-12">
                       <div className="relative w-24 h-24 flex-shrink-0">
                         <Loader2 className="w-24 h-24 text-white animate-spin absolute" />
@@ -178,11 +178,11 @@ const Parlay = () => {
                   </DialogContent>
                 </Dialog>
 
-                {/* Analysis Dialog for Parlay 1 */}
-                <Dialog open={isAnalysisDialogOpenParlay1} onOpenChange={setIsAnalysisDialogOpenParlay1}>
+                {/* Analysis Dialog for Parlay NFL */}
+                <Dialog open={isAnalysisDialogOpenParlayNFL} onOpenChange={setIsAnalysisDialogOpenParlayNFL}>
                   <DialogContent className="sm:max-w-2xl bg-black border-[3px] border-green-600 p-0 max-h-[90vh] overflow-y-auto">
-                    <DialogTitle className="sr-only">Analyse IA du Parlay</DialogTitle>
-                    <DialogDescription className="sr-only">Analyse détaillée de l'IA pour ce parlay incluant les probabilités et facteurs clés.</DialogDescription>
+                    <DialogTitle className="sr-only">Analyse IA du Parlay NFL</DialogTitle>
+                    <DialogDescription className="sr-only">Analyse détaillée de l'IA pour ce parlay NFL incluant les probabilités et facteurs clés.</DialogDescription>
                     <div className="bg-black/40">
                       <div className="flex items-center justify-center gap-3 py-2 px-6">
                         <div className="relative w-6 h-6 flex-shrink-0">
@@ -191,7 +191,7 @@ const Parlay = () => {
                             <span className="text-white font-bold text-[8px]">IA</span>
                           </div>
                         </div>
-                        <span className="text-white font-semibold text-center text-xs">{dataCountParlay1.toLocaleString()} DONNÉES ANALYSÉ PAR NOTRE IA POUR CE PARLAY JUSQU'À PRÉSENT</span>
+                        <span className="text-white font-semibold text-center text-xs">{dataCountParlayNFL.toLocaleString()} DONNÉES ANALYSÉ PAR NOTRE IA POUR CE PARLAY NFL JUSQU'À PRÉSENT</span>
                       </div>
                       <div className="text-center pb-2 px-6 flex items-center justify-center gap-2">
                         <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
@@ -202,16 +202,16 @@ const Parlay = () => {
                     </div>
 
                     <div className="px-6 pb-6">
-                      {showAnalysisParlay1 && (
+                      {showAnalysisParlayNFL && (
                         <div className="mt-4 space-y-4 animate-fade-in">
                           <div className="bg-green-600/15 border-2 border-green-600 rounded-lg p-4">
                             <div className="text-center space-y-2">
                               <div className="text-white font-bold text-sm">CHANCE DE GAGNER</div>
-                              <div className="text-green-400 font-bold text-4xl">74%</div>
+                              <div className="text-green-400 font-bold text-4xl">87%</div>
                               <div className="text-white/70 text-xs">STATISTIQUEMENT AVEC TOUTES CES DONNÉES CI-DESSOUS ANALYSÉES</div>
                             </div>
                             <div className="w-full bg-black/40 rounded-full h-3 overflow-hidden mt-3">
-                              <div className="bg-green-600 h-full rounded-full" style={{ width: '74%' }}></div>
+                              <div className="bg-green-600 h-full rounded-full" style={{ width: '87%' }}></div>
                             </div>
                           </div>
 
@@ -255,17 +255,6 @@ const Parlay = () => {
                                   <p className="text-white/80 text-sm">• Observation du mouvement de ligne (line movement) afin d'évaluer si la cote se renforce ou se détériore avec l'arrivée du sharp money.</p>
                                 </div>
                               </div>
-                              <div className="flex items-center gap-3">
-                                <div className="relative w-5 h-5 flex-shrink-0">
-                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
-                                  <div className="absolute inset-0 flex items-center justify-center">
-                                    <span className="text-white font-bold text-[7px]">IA</span>
-                                  </div>
-                                </div>
-                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
-                                  <p className="text-white/80 text-sm">• Détection d'un éventuel closing line value (CLV) et différentiel entre l'opinion publique (public money) et l'argent professionnel (sharp money).</p>
-                                </div>
-                              </div>
                             </div>
 
                             <div className="border-t border-white/10 my-6"></div>
@@ -285,7 +274,7 @@ const Parlay = () => {
                               <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
                                 <h4 className="text-white font-bold text-sm mb-2">Analyse — Historique des confrontations (H2H)</h4>
                                 <p className="text-white/80 text-sm">
-                                  Analyse des duels précédents entre les équipes concernées, incluant les tendances récurrentes des matchups, la nature des rencontres (défensives, explosives, possession longue ou big plays), ainsi que les patterns stratégiques qui se répètent historiquement.
+                                  Analyse des duels précédents entre les équipes concernées, incluant les tendances récurrentes des matchups, la nature des rencontres (défensives, explosives, possession longue ou big plays), ainsi que les patterns stratégiques qui se répètent historiquement lorsque ces franchises se rencontrent.
                                 </p>
                               </div>
                             </div>
@@ -330,7 +319,7 @@ const Parlay = () => {
                                 <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
                                   <h4 className="text-white font-bold text-sm mb-2">Analyse — Passing Game</h4>
                                   <p className="text-white/80 text-sm">
-                                    Analyse de l'efficacité aérienne des équipes concernées, incluant l'EPA par passe, la capacité à générer des jeux explosifs (explosive pass rate), la séparation des receveurs et la réussite sur 3rd down.
+                                    Analyse de l'efficacité aérienne, incluant l'EPA par passe, la capacité à générer des jeux explosifs (explosive pass rate), la séparation des receveurs et la réussite sur 3rd down.
                                   </p>
                                 </div>
                               </div>
@@ -343,9 +332,9 @@ const Parlay = () => {
                                   </div>
                                 </div>
                                 <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Red Zone Offense</h4>
+                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Rushing Game</h4>
                                   <p className="text-white/80 text-sm">
-                                    Analyse de l'efficacité en red zone des équipes, basée sur le taux de conversion TD, la qualité du playcalling rapproché et la gestion du spacing offensif près de la ligne de but.
+                                    Analyse du jeu au sol, incluant les yards par carry, le taux de réussite au sol, la qualité du blocking et l'utilisation stratégique du run pour contrôler le clock et ouvrir le play-action.
                                   </p>
                                 </div>
                               </div>
@@ -353,9 +342,9 @@ const Parlay = () => {
 
                             <div className="border-t border-white/10 my-6"></div>
 
-                            {/* Section 5 - Défense */}
+                            {/* Section 5 - Jeu défensif */}
                             <h3 className="text-white font-bold text-lg mb-3">
-                              Analyse de la défense & couverture
+                              Analyse du jeu défensif & discipline défensive
                             </h3>
                             
                             <div className="space-y-3">
@@ -367,9 +356,9 @@ const Parlay = () => {
                                   </div>
                                 </div>
                                 <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Pass Rush & couverture</h4>
+                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Pass Rush</h4>
                                   <p className="text-white/80 text-sm">
-                                    Analyse de la capacité défensive à générer de la pression sur le quarterback, la discipline en couverture, l'efficacité en 3rd down et les ajustements sur jeu aérien explosif.
+                                    Analyse de la pression défensive, incluant le taux de sacks, la qualité du pass rush, les pressures générées et l'efficacité des blitzes.
                                   </p>
                                 </div>
                               </div>
@@ -384,7 +373,7 @@ const Parlay = () => {
                                 <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
                                   <h4 className="text-white font-bold text-sm mb-2">Analyse — Run Defense</h4>
                                   <p className="text-white/80 text-sm">
-                                    Analyse de la défense au sol, basée sur le taux de succès autorisé, l'occupation des gaps et la limitation des gains après contact.
+                                    Analyse de la défense contre le jeu au sol, incluant les yards per carry autorisés, le stuff rate et la capacité à stopper le run en situations clés.
                                   </p>
                                 </div>
                               </div>
@@ -392,9 +381,9 @@ const Parlay = () => {
 
                             <div className="border-t border-white/10 my-6"></div>
 
-                            {/* Section 6 - Facteurs externes */}
+                            {/* Section 6 - Contexte */}
                             <h3 className="text-white font-bold text-lg mb-3">
-                              Facteurs environnementaux & contextuels
+                              Analyse du contexte & facteurs externes
                             </h3>
                             
                             <div className="space-y-3">
@@ -406,9 +395,9 @@ const Parlay = () => {
                                   </div>
                                 </div>
                                 <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Météo & conditions de jeu</h4>
+                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Weather & conditions</h4>
                                   <p className="text-white/80 text-sm">
-                                    Analyse de l'impact des conditions météorologiques (vent, pluie, température), de l'état du terrain et de l'influence potentielle sur le passing game, le kicking game et les décisions stratégiques.
+                                    Analyse de l'impact météorologique, incluant le vent, la pluie, la température et leur influence sur le passing game et le kicking game.
                                   </p>
                                 </div>
                               </div>
@@ -421,28 +410,19 @@ const Parlay = () => {
                                   </div>
                                 </div>
                                 <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Momentum & situation contextuelle</h4>
+                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Momentum & trends</h4>
                                   <p className="text-white/80 text-sm">
                                     Analyse de l'élan récent de chaque équipe, des séries de victoires ou défaites, de l'importance stratégique du match (playoffs, division, wild card) et de l'impact psychologique du contexte.
                                   </p>
                                 </div>
                               </div>
-                              
-                              <div className="flex items-center gap-3">
-                                <div className="relative w-5 h-5 flex-shrink-0">
-                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
-                                  <div className="absolute inset-0 flex items-center justify-center">
-                                    <span className="text-white font-bold text-[7px]">IA</span>
-                                  </div>
-                                </div>
-                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Repos & fatigue</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse du nombre de jours de repos entre les matchs, de l'impact du voyage (distance, fuseaux horaires) et de la gestion de la fatigue physique et mentale des effectifs.
-                                  </p>
-                                </div>
-                              </div>
                             </div>
+                          </div>
+
+                          <div className="mt-3 pt-3 border-t border-white/10">
+                            <p className="text-white/60 text-[10px] italic text-center flex items-center justify-center gap-2">
+                              L'ÉTAT DE NOTRE IA : <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> RÉSULTAT À JOUR À L'INSTANT MÊME
+                            </p>
                           </div>
                         </div>
                       )}
@@ -451,194 +431,146 @@ const Parlay = () => {
                 </Dialog>
               </div>
 
-              {/* Moneyline Multiplier */}
-              <div className="py-4 px-6 bg-black/95">
-                <div className="text-center text-white font-bold text-xs mb-2">PARLAY MULTIPLICATEUR</div>
-                <div className="bg-green-600 text-white font-bold text-4xl py-3 px-4 rounded-lg text-center">
-                  x{totalMultiplierParlay1.toFixed(2)}
+              {/* Middle section with vertical borders */}
+              <div className="border-x-[2px] border-green-600">
+                {/* Odds Display */}
+                <div className="flex justify-center pt-5 pb-0">
+                  <div className="text-sm font-bold text-white tracking-wider mb-2">
+                    MULTIPLICATEUR DE MISE
+                  </div>
                 </div>
-              </div>
-
-              {/* Bet On - Multiple Bets */}
-              <div className="py-4 px-6 bg-black/95">
-                <div className="text-center text-white font-bold text-xs mb-4">PARIER SUR</div>
                 
-                {/* Bet 1: Z. Flowers Under 68.5 Receiving Yards */}
-                <div className="mb-4">
-                  <div className="bg-black rounded-lg overflow-hidden border-2 border-green-600">
-                    <div className="flex items-center justify-between p-3 pb-1">
-                      <div className="flex flex-col items-center gap-1">
-                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                          <img src={stlouisLogo} alt="ST. LOUIS" className="w-10 h-10 object-contain" />
-                        </div>
-                        <div className="text-white text-[9px] font-bold">ST. LOUIS</div>
-                      </div>
-                      <div className="text-center flex-1">
-                        <div className="text-white text-[10px] font-bold mb-1">7:00 PM</div>
-                        <div className="text-white text-xs font-bold mb-0.5">vs</div>
-                        <div className="text-white text-[9px]">under 68.5</div>
-                      </div>
-                      <div className="flex flex-col items-center gap-1">
-                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                          <img src={stlouisLogo} alt="ST. LOUIS" className="w-10 h-10 object-contain" />
-                        </div>
-                        <div className="text-white text-[9px] font-bold">ST. LOUIS</div>
-                      </div>
-                    </div>
-                    <div className="px-3 pb-2 pt-0.5 bg-black">
-                      <div className="text-white text-[9px] font-bold text-center">Z. Flowers Receiving Yards</div>
+                <div className="mx-4 mt-4">
+                  <div className="bg-green-600 rounded-lg px-10 py-2 text-center">
+                    <div className="text-3xl font-black text-white">
+                      x{totalMultiplierNFL.toFixed(2)}
                     </div>
                   </div>
                 </div>
 
-                {/* Bet 2: Pittsburgh Moneyline */}
-                <div className="mb-4">
-                  <div className="bg-black rounded-lg overflow-hidden border-2 border-green-600">
-                    <div className="flex items-center justify-between p-3">
-                      <div className="flex flex-col items-center gap-1">
-                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                          <img src={stlouisLogo} alt="ST. LOUIS" className="w-10 h-10 object-contain" />
+                {/* Parlay Legs Section */}
+                <div className="text-center pb-2 pt-6">
+                  <div className="text-sm font-bold text-white tracking-wider mb-2">
+                    PARIS INCLUS DANS LE PARLAY NFL
+                  </div>
+                </div>
+                
+                {/* Leg 1: Washington vs Kansas City - UNDER */}
+                <div className="mx-4 mb-3 border-2 border-green-600 rounded-lg bg-green-600/10 p-3">
+                  <div className="text-center">
+                    <div className="grid grid-cols-3 items-center justify-items-center gap-2">
+                      {/* WASHINGTON */}
+                      <div className="flex flex-col items-center gap-0.5">
+                        <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center p-1.5 border border-white/20">
+                          <img src={washingtonLogo} alt="Washington" className="w-full h-full object-contain" />
                         </div>
-                        <div className="text-white text-[9px] font-bold">ST. LOUIS</div>
+                        <span className="text-white text-[10px] font-bold">WASHINGTON</span>
                       </div>
-                      <div className="text-center flex-1">
-                        <div className="text-white text-[10px] font-bold mb-1">7:00 PM</div>
-                        <div className="text-white text-xs font-bold mb-0.5">vs</div>
-                        <div className="text-white text-[9px]">moneyline</div>
-                      </div>
-                      <div className="flex flex-col items-center gap-1">
-                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-green-600">
-                          <img src={pittsburghLogo} alt="PITTSBURGH" className="w-10 h-10 object-contain" />
+
+                      {/* Center */}
+                      <div className="flex flex-col items-center gap-0.5">
+                        <span className="font-semibold text-xs text-white">3:25 PM</span>
+                        <div className="px-1.5 py-0.5 rounded-full border border-white/20 bg-white/0">
+                          <span className="text-white font-bold text-[10px]">VS</span>
                         </div>
-                        <div className="text-white text-[9px] font-bold">PITTSBURGH</div>
-                        <div className="text-green-500 text-[9px] font-bold">VICTOIRE</div>
+                        <div className="text-[10px] font-bold text-white tracking-wider">UNDER</div>
+                        <div className="text-[10px] font-bold text-green-400">50.5</div>
+                      </div>
+
+                      {/* KANSAS CITY */}
+                      <div className="flex flex-col items-center gap-0.5">
+                        <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center border border-white/20 p-1.5">
+                          <img src={kansascityLogo} alt="Kansas City" className="w-full h-full object-contain" />
+                        </div>
+                        <span className="font-bold text-[10px] text-white">KANSAS CITY</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Bet 3: Chicago Moneyline */}
-                <div className="mb-4">
-                  <div className="bg-black rounded-lg overflow-hidden border-2 border-green-600">
-                    <div className="flex items-center justify-between p-3">
-                      <div className="flex flex-col items-center gap-1">
-                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                          <img src={vegasLogo} alt="VEGAS" className="w-10 h-10 object-contain" />
-                        </div>
-                        <div className="text-white text-[9px] font-bold">VEGAS</div>
-                      </div>
-                      <div className="text-center flex-1">
-                        <div className="text-white text-[10px] font-bold mb-1">7:00 PM</div>
-                        <div className="text-white text-xs font-bold mb-0.5">vs</div>
-                        <div className="text-white text-[9px]">moneyline</div>
-                      </div>
-                      <div className="flex flex-col items-center gap-1">
-                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-green-600">
-                          <img src={tampaLogo} alt="TAMPA" className="w-10 h-10 object-contain" />
-                        </div>
-                        <div className="text-white text-[9px] font-bold">TAMPA</div>
-                        <div className="text-green-500 text-[9px] font-bold">VICTOIRE</div>
-                      </div>
-                    </div>
+                {/* Bet Amount & Payout */}
+                <div className="flex justify-center pt-4 mb-2">
+                  <div className="text-sm font-bold text-white tracking-wider text-center">
+                    VOTRE GAIN
                   </div>
                 </div>
 
-                {/* Bet 4: New Orleans +13.5 Spread */}
-                <div>
-                  <div className="bg-black rounded-lg overflow-hidden border-2 border-green-600">
-                    <div className="flex items-center justify-between p-3 pb-1">
-                      <div className="flex flex-col items-center gap-1">
-                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                          <img src={stlouisLogo} alt="ST. LOUIS" className="w-10 h-10 object-contain" />
+                <div className="pt-1 py-[7px]">
+                  <div className="grid grid-cols-2 gap-2 px-[10px] my-[15px]">
+                    <Dialog open={isDialogOpenParlayNFL} onOpenChange={setIsDialogOpenParlayNFL}>
+                      <DialogTrigger asChild>
+                        <button className="px-4 py-3 bg-transparent rounded-none text-center cursor-pointer">
+                          <div className="bg-green-600 text-white text-xs font-semibold px-3 py-1 rounded mb-2 inline-block">Modifier</div>
+                          <div className="text-white text-xs mb-1">Votre mise</div>
+                          <div className="text-green-400 font-bold text-lg">${betAmountParlayNFL}</div>
+                        </button>
+                      </DialogTrigger>
+                      <DialogContent className="sm:max-w-md bg-black border-green-600">
+                        <DialogHeader>
+                          <DialogTitle className="text-white text-center">Modifier votre mise</DialogTitle>
+                        </DialogHeader>
+                        <div className="space-y-4">
+                          <div className="grid grid-cols-4 gap-2">
+                            {[10, 20, 50, 100, 150, 200, 500].map((amount) => (
+                              <button
+                                key={amount}
+                                onClick={() => {
+                                  setBetAmountParlayNFL(amount.toString());
+                                  setIsDialogOpenParlayNFL(false);
+                                }}
+                                className={`px-3 py-2 rounded-2xl text-sm font-semibold transition-colors ${
+                                  betAmountParlayNFL === amount.toString()
+                                    ? 'bg-primary text-black'
+                                    : 'bg-white/10 text-white hover:bg-white/20'
+                                }`}
+                              >
+                                ${amount}
+                              </button>
+                            ))}
+                            <button
+                              onClick={() => {
+                                const custom = prompt("Entrez le montant:");
+                                if (custom && parseFloat(custom) > 0) {
+                                  setBetAmountParlayNFL(custom);
+                                  setIsDialogOpenParlayNFL(false);
+                                }
+                              }}
+                              className="px-3 py-2 rounded-2xl text-sm font-semibold bg-white/10 text-white hover:bg-white/20"
+                            >
+                              Autre
+                            </button>
+                          </div>
                         </div>
-                        <div className="text-white text-[9px] font-bold">ST. LOUIS</div>
+                      </DialogContent>
+                    </Dialog>
+                    
+                    <div className="bg-green-600/15 border-2 border-green-600 rounded-lg text-center py-[25px] px-0">
+                      <div className="text-[#fff] text-xs mb-1">CASHOUT</div>
+                      <div className="text-green-400 font-bold text-3xl">${calculateReturn(betAmountParlayNFL, totalMultiplierNFL)}</div>
+                      <div className="text-white text-[10px] mt-0.5">
+                        +${(parseFloat(calculateReturn(betAmountParlayNFL, totalMultiplierNFL)) - parseFloat(betAmountParlayNFL)).toFixed(2)} bénéfice
                       </div>
-                      <div className="text-center flex-1">
-                        <div className="text-white text-[10px] font-bold mb-1">7:00 PM</div>
-                        <div className="text-white text-xs font-bold mb-0.5">vs</div>
-                        <div className="text-white text-[9px]">spread</div>
-                      </div>
-                      <div className="flex flex-col items-center gap-1">
-                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-green-600">
-                          <img src={pittsburghLogo} alt="PITTSBURGH" className="w-10 h-10 object-contain" />
-                        </div>
-                        <div className="text-white text-[9px] font-bold">PITTSBURGH</div>
-                        <div className="text-green-500 text-[9px] font-bold">VICTOIRE</div>
-                      </div>
-                    </div>
-                    <div className="px-3 pb-2 pt-0.5 bg-black">
-                      <div className="text-white text-[9px] font-bold text-center">+13.5</div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Your Gain */}
-              <div className="py-4 px-6 bg-black/95">
-                <div className="text-center text-white font-bold text-xs mb-3">VOTRE GAIN</div>
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="space-y-1">
-                    <button
-                      onClick={() => setIsDialogOpenParlay1(true)}
-                      className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition-colors text-sm"
-                    >
-                      MODIFIER VOTRE MISE
-                    </button>
-                    <div className="text-center text-white/70 text-xs">Mise: {betAmountParlay1}$</div>
-                  </div>
-                  <div className="bg-green-600/20 border-2 border-green-600 rounded-lg p-3 flex flex-col items-center justify-center">
-                    <div className="text-white text-xs mb-1">CASHOUT</div>
-                    <div className="text-green-400 font-bold text-xl">
-                      {calculateReturn(betAmountParlay1, totalMultiplierParlay1)}$
-                    </div>
-                    <div className="text-white/70 text-[10px]">
-                      Bénéfice: +{(parseFloat(calculateReturn(betAmountParlay1, totalMultiplierParlay1)) - parseFloat(betAmountParlay1)).toFixed(2)}$
-                    </div>
-                  </div>
-                </div>
-
-                <Dialog open={isDialogOpenParlay1} onOpenChange={setIsDialogOpenParlay1}>
-                  <DialogContent className="sm:max-w-md bg-black border-[3px] border-green-600">
-                    <DialogTitle className="text-center text-white font-bold text-lg mb-2">MODIFIER VOTRE MISE</DialogTitle>
-                    <DialogDescription className="text-center text-white/70 text-sm">Entrez le montant que vous souhaitez parier</DialogDescription>
-                    <div className="space-y-4">
-                      <div className="space-y-2">
-                        <input
-                          type="number"
-                          value={betAmountParlay1}
-                          onChange={(e) => setBetAmountParlay1(e.target.value)}
-                          className="w-full bg-black border-2 border-green-600 text-white font-bold text-2xl py-3 px-4 rounded-lg text-center"
-                          placeholder="100"
-                        />
-                        <div className="text-center text-white/70 text-sm">
-                          Retour potentiel: {calculateReturn(betAmountParlay1, totalMultiplierParlay1)}$
-                        </div>
-                      </div>
-                      <button
-                        onClick={() => setIsDialogOpenParlay1(false)}
-                        className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition-colors"
-                      >
-                        CONFIRMER
-                      </button>
-                    </div>
-                  </DialogContent>
-                </Dialog>
-              </div>
-
-              {/* Best Odds */}
-              <div className="bg-green-600 py-2 px-6">
-                <div className="flex items-center justify-between text-xs">
+              {/* DraftKings Section */}
+              <div className="pt-0">
+                <div className="flex items-center justify-between text-xs my-0 py-[10px] px-6 border-t-2 border-green-600 bg-green-600">
                   <span className="text-white font-bold">MEILLEUR ODDS</span>
                   <div className="flex items-center gap-2">
-                    <span className="text-white">FANDUEL</span>
-                    <span className="text-black font-bold bg-white px-2 py-1 rounded">+{((totalMultiplierParlay1 - 1) * 100).toFixed(0)}</span>
+                    <span className="text-white">DRAFTKINGS</span>
+                    <span className="px-2 py-1 bg-white rounded text-black font-bold">-110</span>
                   </div>
                 </div>
               </div>
             </CardHeader>
           </Card>
+        </div>
 
-          {/* PARLAY 2: 2-Leg (Vegas + St. Louis) */}
+        {/* PARLAY NHL */}
+        <div className="grid gap-6 justify-center">
           <Card className="w-full max-w-md bg-black border-[3px] border-green-600 shadow-2xl overflow-hidden mx-auto rounded-sm">
             <CardHeader className="space-y-0 p-0">
               {/* AI Data Analysis Counter */}
@@ -650,28 +582,28 @@ const Parlay = () => {
                   </div>
                 </div>
                 <span className="text-white font-semibold text-center text-[10px]">
-                  {dataCountParlay2.toLocaleString()} DONNÉES ANALYSÉES PAR NOTRE IA POUR CE PARLAY
+                  {dataCountParlayNHL.toLocaleString()} DONNÉES ANALYSÉES PAR NOTRE IA POUR CE PARLAY NHL
                 </span>
               </div>
 
               {/* AI Analysis */}
               <div className="flex items-center justify-between gap-2 text-xs py-[10px] bg-green-600 px-4">
                 <div className="flex items-center gap-2">
-                  <span className="font-bold text-white text-4xl">85%</span>
+                  <span className="font-bold text-white text-4xl">91%</span>
                   <span className="text-white text-xs font-bold">DE CHANCE DE GAGNER SELON NOTRE IA</span>
                 </div>
                 <button
-                  onClick={handleShowAnalysisParlay2}
+                  onClick={handleShowAnalysisParlayNHL}
                   className="px-3 py-1 bg-black rounded border-2 border-green-600 font-bold text-green-400 text-xs hover:bg-green-600/20 transition-colors"
                 >
                   VOIR ANALYSE IA
                 </button>
 
                 {/* Loading Dialog */}
-                <Dialog open={isLoadingDialogOpenParlay2} onOpenChange={setIsLoadingDialogOpenParlay2}>
+                <Dialog open={isLoadingDialogOpenParlayNHL} onOpenChange={setIsLoadingDialogOpenParlayNHL}>
                   <DialogContent className="sm:max-w-md bg-black border-none p-0 flex items-center justify-center [&>button]:hidden">
                     <DialogTitle className="sr-only">Chargement de l'analyse IA</DialogTitle>
-                    <DialogDescription className="sr-only">Veuillez patienter pendant que nous chargeons l'analyse IA pour ce parlay.</DialogDescription>
+                    <DialogDescription className="sr-only">Veuillez patienter pendant que nous chargeons l'analyse IA pour ce parlay NHL.</DialogDescription>
                     <div className="w-full h-full min-h-[400px] bg-black flex flex-col items-center justify-center gap-8 p-12">
                       <div className="relative w-24 h-24 flex-shrink-0">
                         <Loader2 className="w-24 h-24 text-white animate-spin absolute" />
@@ -697,11 +629,11 @@ const Parlay = () => {
                   </DialogContent>
                 </Dialog>
 
-                {/* Analysis Dialog for Parlay 2 */}
-                <Dialog open={isAnalysisDialogOpenParlay2} onOpenChange={setIsAnalysisDialogOpenParlay2}>
+                {/* Analysis Dialog for Parlay NHL */}
+                <Dialog open={isAnalysisDialogOpenParlayNHL} onOpenChange={setIsAnalysisDialogOpenParlayNHL}>
                   <DialogContent className="sm:max-w-2xl bg-black border-[3px] border-green-600 p-0 max-h-[90vh] overflow-y-auto">
-                    <DialogTitle className="sr-only">Analyse IA du Parlay</DialogTitle>
-                    <DialogDescription className="sr-only">Analyse détaillée de l'IA pour ce parlay incluant les probabilités et facteurs clés.</DialogDescription>
+                    <DialogTitle className="sr-only">Analyse IA du Parlay NHL</DialogTitle>
+                    <DialogDescription className="sr-only">Analyse détaillée de l'IA pour ce parlay NHL incluant les probabilités et facteurs clés.</DialogDescription>
                     <div className="bg-black/40">
                       <div className="flex items-center justify-center gap-3 py-2 px-6">
                         <div className="relative w-6 h-6 flex-shrink-0">
@@ -710,7 +642,7 @@ const Parlay = () => {
                             <span className="text-white font-bold text-[8px]">IA</span>
                           </div>
                         </div>
-                        <span className="text-white font-semibold text-center text-xs">{dataCountParlay2.toLocaleString()} DONNÉES ANALYSÉ PAR NOTRE IA POUR CE PARLAY JUSQU'À PRÉSENT</span>
+                        <span className="text-white font-semibold text-center text-xs">{dataCountParlayNHL.toLocaleString()} DONNÉES ANALYSÉ PAR NOTRE IA POUR CE PARLAY NHL JUSQU'À PRÉSENT</span>
                       </div>
                       <div className="text-center pb-2 px-6 flex items-center justify-center gap-2">
                         <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
@@ -721,16 +653,16 @@ const Parlay = () => {
                     </div>
 
                     <div className="px-6 pb-6">
-                      {showAnalysisParlay2 && (
+                      {showAnalysisParlayNHL && (
                         <div className="mt-4 space-y-4 animate-fade-in">
                           <div className="bg-green-600/15 border-2 border-green-600 rounded-lg p-4">
                             <div className="text-center space-y-2">
                               <div className="text-white font-bold text-sm">CHANCE DE GAGNER</div>
-                              <div className="text-green-400 font-bold text-4xl">85%</div>
+                              <div className="text-green-400 font-bold text-4xl">91%</div>
                               <div className="text-white/70 text-xs">STATISTIQUEMENT AVEC TOUTES CES DONNÉES CI-DESSOUS ANALYSÉES</div>
                             </div>
                             <div className="w-full bg-black/40 rounded-full h-3 overflow-hidden mt-3">
-                              <div className="bg-green-600 h-full rounded-full" style={{ width: '85%' }}></div>
+                              <div className="bg-green-600 h-full rounded-full" style={{ width: '91%' }}></div>
                             </div>
                           </div>
 
@@ -774,17 +706,6 @@ const Parlay = () => {
                                   <p className="text-white/80 text-sm">• Observation du mouvement de ligne (line movement) afin d'évaluer si la cote se renforce ou se détériore avec l'arrivée du sharp money.</p>
                                 </div>
                               </div>
-                              <div className="flex items-center gap-3">
-                                <div className="relative w-5 h-5 flex-shrink-0">
-                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
-                                  <div className="absolute inset-0 flex items-center justify-center">
-                                    <span className="text-white font-bold text-[7px]">IA</span>
-                                  </div>
-                                </div>
-                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
-                                  <p className="text-white/80 text-sm">• Détection d'un éventuel closing line value (CLV) et différentiel entre l'opinion publique (public money) et l'argent professionnel (sharp money).</p>
-                                </div>
-                              </div>
                             </div>
 
                             <div className="border-t border-white/10 my-6"></div>
@@ -826,7 +747,7 @@ const Parlay = () => {
                               <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
                                 <h4 className="text-white font-bold text-sm mb-2">Analyse — Alignement projeté du jour</h4>
                                 <p className="text-white/80 text-sm">
-                                  Analyse de la composition prévue pour chaque équipe, incluant l'état du roster offensif et défensif, les joueurs clés disponibles ou incertains, le statut du quarterback, ainsi que l'impact tactique attendu de l'alignement projeté sur le plan de match initial.
+                                  Analyse de la composition prévue pour chaque équipe, incluant le statut du gardien partant, l'état du roster offensif et défensif, les joueurs clés disponibles ou incertains, ainsi que l'impact tactique attendu de l'alignement projeté.
                                 </p>
                               </div>
                             </div>
@@ -835,7 +756,7 @@ const Parlay = () => {
 
                             {/* Section 4 - Jeu offensif */}
                             <h3 className="text-white font-bold text-lg mb-3">
-                              Analyse du jeu offensif & discipline offensive
+                              Analyse du jeu offensif & production
                             </h3>
                             
                             <div className="space-y-3">
@@ -847,9 +768,9 @@ const Parlay = () => {
                                   </div>
                                 </div>
                                 <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Passing Game</h4>
+                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Génération offensive</h4>
                                   <p className="text-white/80 text-sm">
-                                    Analyse de l'efficacité aérienne des équipes concernées, incluant l'EPA par passe, la capacité à générer des jeux explosifs (explosive pass rate), la séparation des receveurs et la réussite sur 3rd down.
+                                    Analyse de la capacité à générer des occasions de qualité (expected goals xG), du taux de tirs au but, de l'efficacité du powerplay et de la créativité offensive.
                                   </p>
                                 </div>
                               </div>
@@ -862,9 +783,9 @@ const Parlay = () => {
                                   </div>
                                 </div>
                                 <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Red Zone Offense</h4>
+                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Profondeur offensive</h4>
                                   <p className="text-white/80 text-sm">
-                                    Analyse de l'efficacité en red zone des équipes, basée sur le taux de conversion TD, la qualité du playcalling rapproché et la gestion du spacing offensif près de la ligne de but.
+                                    Analyse de la profondeur offensive, incluant la contribution du top-6, l'impact du bottom-6, la flexibilité tactique et la capacité à maintenir la pression offensive sur plusieurs trios.
                                   </p>
                                 </div>
                               </div>
@@ -872,9 +793,9 @@ const Parlay = () => {
 
                             <div className="border-t border-white/10 my-6"></div>
 
-                            {/* Section 5 - Défense */}
+                            {/* Section 5 - Jeu défensif */}
                             <h3 className="text-white font-bold text-lg mb-3">
-                              Analyse de la défense & couverture
+                              Analyse du jeu défensif & gardien de but
                             </h3>
                             
                             <div className="space-y-3">
@@ -886,9 +807,9 @@ const Parlay = () => {
                                   </div>
                                 </div>
                                 <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Pass Rush & couverture</h4>
+                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Performance du gardien</h4>
                                   <p className="text-white/80 text-sm">
-                                    Analyse de la capacité défensive à générer de la pression sur le quarterback, la discipline en couverture, l'efficacité en 3rd down et les ajustements sur jeu aérien explosif.
+                                    Analyse du taux d'arrêts (save percentage), du goals saved above expected (GSAx), de la forme récente du gardien et de son historique contre l'adversaire.
                                   </p>
                                 </div>
                               </div>
@@ -901,9 +822,9 @@ const Parlay = () => {
                                   </div>
                                 </div>
                                 <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Run Defense</h4>
+                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Stabilité défensive</h4>
                                   <p className="text-white/80 text-sm">
-                                    Analyse de la défense au sol, basée sur le taux de succès autorisé, l'occupation des gaps et la limitation des gains après contact.
+                                    Analyse de la profondeur défensive, basée sur la solidité du top-4, la mobilité en relance, la gestion des transitions adverses et l'efficacité du penalty kill.
                                   </p>
                                 </div>
                               </div>
@@ -911,9 +832,9 @@ const Parlay = () => {
 
                             <div className="border-t border-white/10 my-6"></div>
 
-                            {/* Section 6 - Facteurs externes */}
+                            {/* Section 6 - Contexte */}
                             <h3 className="text-white font-bold text-lg mb-3">
-                              Facteurs environnementaux & contextuels
+                              Analyse du contexte & fatigue
                             </h3>
                             
                             <div className="space-y-3">
@@ -925,9 +846,9 @@ const Parlay = () => {
                                   </div>
                                 </div>
                                 <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Météo & conditions de jeu</h4>
+                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Cadence & calendrier</h4>
                                   <p className="text-white/80 text-sm">
-                                    Analyse de l'impact des conditions météorologiques (vent, pluie, température), de l'état du terrain et de l'influence potentielle sur le passing game, le kicking game et les décisions stratégiques.
+                                    Analyse du contexte physique, incluant l'enchaînement des matchs, le repos disponible, la présence éventuelle d'un back-to-back et la charge de déplacement.
                                   </p>
                                 </div>
                               </div>
@@ -940,28 +861,19 @@ const Parlay = () => {
                                   </div>
                                 </div>
                                 <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Momentum & situation contextuelle</h4>
+                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Avantage domicile / extérieur</h4>
                                   <p className="text-white/80 text-sm">
-                                    Analyse de l'élan récent de chaque équipe, des séries de victoires ou défaites, de l'importance stratégique du match (playoffs, division, wild card) et de l'impact psychologique du contexte.
-                                  </p>
-                                </div>
-                              </div>
-                              
-                              <div className="flex items-center gap-3">
-                                <div className="relative w-5 h-5 flex-shrink-0">
-                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
-                                  <div className="absolute inset-0 flex items-center justify-center">
-                                    <span className="text-white font-bold text-[7px]">IA</span>
-                                  </div>
-                                </div>
-                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
-                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Repos & fatigue</h4>
-                                  <p className="text-white/80 text-sm">
-                                    Analyse du nombre de jours de repos entre les matchs, de l'impact du voyage (distance, fuseaux horaires) et de la gestion de la fatigue physique et mentale des effectifs.
+                                    Analyse de la performance contextuelle selon que l'équipe évolue à domicile ou sur la route, et l'impact du dernier changement sur les matchups.
                                   </p>
                                 </div>
                               </div>
                             </div>
+                          </div>
+
+                          <div className="mt-3 pt-3 border-t border-white/10">
+                            <p className="text-white/60 text-[10px] italic text-center flex items-center justify-center gap-2">
+                              L'ÉTAT DE NOTRE IA : <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> RÉSULTAT À JOUR À L'INSTANT MÊME
+                            </p>
                           </div>
                         </div>
                       )}
@@ -970,158 +882,203 @@ const Parlay = () => {
                 </Dialog>
               </div>
 
-              {/* Moneyline Multiplier */}
-              <div className="py-4 px-6 bg-black/95">
-                <div className="text-center text-white font-bold text-xs mb-2">PARLAY MULTIPLICATEUR</div>
-                <div className="bg-green-600 text-white font-bold text-4xl py-3 px-4 rounded-lg text-center">
-                  x{totalMultiplierParlay2.toFixed(2)}
+              {/* Middle section with vertical borders */}
+              <div className="border-x-[2px] border-green-600">
+                {/* Odds Display */}
+                <div className="flex justify-center pt-5 pb-0">
+                  <div className="text-sm font-bold text-white tracking-wider mb-2">
+                    MULTIPLICATEUR DE MISE
+                  </div>
                 </div>
-              </div>
-
-              {/* Bet On - Multiple Bets */}
-              <div className="py-4 px-6 bg-black/95">
-                <div className="text-center text-white font-bold text-xs mb-4">PARIER SUR</div>
                 
-                {/* Bet 1: Pittsburgh Moneyline */}
-                <div className="mb-4">
-                  <div className="bg-black rounded-lg overflow-hidden border-2 border-green-600">
-                    <div className="flex items-center justify-between p-3">
-                      <div className="flex flex-col items-center gap-1">
-                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                          <img src={washingtonLogo} alt="WASHINGTON" className="w-10 h-10 object-contain" />
+                <div className="mx-4 mt-4">
+                  <div className="bg-green-600 rounded-lg px-10 py-2 text-center">
+                    <div className="text-3xl font-black text-white">
+                      x{totalMultiplierNHL.toFixed(2)}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Parlay Legs Section */}
+                <div className="text-center pb-2 pt-6">
+                  <div className="text-sm font-bold text-white tracking-wider mb-2">
+                    PARIS INCLUS DANS LE PARLAY NHL
+                  </div>
+                </div>
+                
+                {/* Leg 1: St. Louis vs Pittsburgh - MONEYLINE */}
+                <div className="mx-4 mb-3 border-2 border-green-600 rounded-lg bg-green-600/10 p-3">
+                  <div className="text-center">
+                    <div className="grid grid-cols-3 items-center justify-items-center gap-2">
+                      {/* ST. LOUIS */}
+                      <div className="flex flex-col items-center gap-0.5">
+                        <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center border border-white/20 p-1.5">
+                          <img src={stlouisLogo} alt="St. Louis" className="w-full h-full object-contain" />
                         </div>
-                        <div className="text-white text-[9px] font-bold">WASHINGTON</div>
+                        <span className="font-bold text-[10px] text-white">ST. LOUIS</span>
                       </div>
-                      <div className="text-center flex-1">
-                        <div className="text-white text-[10px] font-bold mb-1">7:00 PM</div>
-                        <div className="text-white text-xs font-bold mb-0.5">vs</div>
-                        <div className="text-white text-[9px]">moneyline</div>
-                      </div>
-                      <div className="flex flex-col items-center gap-1">
-                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-green-600">
-                          <img src={pittsburghLogo} alt="PITTSBURGH" className="w-10 h-10 object-contain" />
+
+                      {/* Center */}
+                      <div className="flex flex-col items-center gap-0.5">
+                        <span className="font-semibold text-xs text-white">7:00 PM</span>
+                        <div className="px-1.5 py-0.5 rounded-full border border-white/20 bg-white/0">
+                          <span className="text-white font-bold text-[10px]">VS</span>
                         </div>
-                        <div className="text-white text-[9px] font-bold">PITTSBURGH</div>
-                        <div className="text-green-500 text-[9px] font-bold">VICTOIRE</div>
+                        <div className="text-[10px] font-bold text-white tracking-wider">MONEYLINE</div>
+                      </div>
+
+                      {/* PITTSBURGH */}
+                      <div className="flex flex-col items-center gap-0.5">
+                        <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center p-1.5 border-2 border-green-600">
+                          <img src={pittsburghLogo} alt="Pittsburgh" className="w-full h-full object-contain" />
+                        </div>
+                        <span className="text-white text-[10px] font-extrabold">PITTSBURGH</span>
+                        <div className="text-[10px] font-bold text-green-400">VICTOIRE</div>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Bet 2: Z. Flowers Under 68.5 Receiving Yards */}
-                <div className="mb-4">
-                  <div className="bg-black rounded-lg overflow-hidden border-2 border-green-600">
-                    <div className="flex items-center justify-between p-3 pb-1">
-                      <div className="flex flex-col items-center gap-1">
-                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                          <img src={kansascityLogo} alt="KANSAS CITY" className="w-10 h-10 object-contain" />
+                {/* Leg 2: Vegas vs Tampa Bay - SPREAD */}
+                <div className="mx-4 mb-3 border-2 border-green-600 rounded-lg bg-green-600/10 p-3">
+                  <div className="text-center">
+                    <div className="grid grid-cols-3 items-center justify-items-center gap-2">
+                      {/* VEGAS */}
+                      <div className="flex flex-col items-center gap-0.5">
+                        <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center p-1.5 border border-white/20">
+                          <img src={vegasLogo} alt="Vegas" className="w-full h-full object-contain" />
                         </div>
-                        <div className="text-white text-[9px] font-bold">KANSAS CITY</div>
+                        <span className="font-bold text-[10px] text-white">VEGAS</span>
                       </div>
-                      <div className="text-center flex-1">
-                        <div className="text-white text-[10px] font-bold mb-1">7:00 PM</div>
-                        <div className="text-white text-xs font-bold mb-0.5">vs</div>
-                        <div className="text-white text-[9px]">under 68.5</div>
-                      </div>
-                      <div className="flex flex-col items-center gap-1">
-                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                          <img src={kansascityLogo} alt="KANSAS CITY" className="w-10 h-10 object-contain" />
+
+                      {/* Center */}
+                      <div className="flex flex-col items-center gap-0.5">
+                        <span className="font-semibold text-xs text-white">5:00 PM</span>
+                        <div className="px-1.5 py-0.5 rounded-full border border-white/20 bg-white/0">
+                          <span className="text-white font-bold text-[10px]">VS</span>
                         </div>
-                        <div className="text-white text-[9px] font-bold">KANSAS CITY</div>
+                        <div className="text-[10px] font-bold text-white tracking-wider">SPREAD</div>
                       </div>
-                    </div>
-                    <div className="px-3 pb-2 pt-0.5 bg-black">
-                      <div className="text-white text-[9px] font-bold text-center">Z. Flowers Receiving Yards</div>
+
+                      {/* TAMPA BAY */}
+                      <div className="flex flex-col items-center gap-0.5">
+                        <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center p-1.5 border-2 border-green-600">
+                          <img src={tampaLogo} alt="Tampa Bay" className="w-full h-full object-contain" />
+                        </div>
+                        <span className="text-white text-[10px] font-extrabold">TAMPA BAY</span>
+                        <div className="text-[10px] font-bold text-green-400">+1.5</div>
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Bet 3: Chicago Moneyline */}
-                <div>
-                  <div className="bg-black rounded-lg overflow-hidden border-2 border-green-600">
-                    <div className="flex items-center justify-between p-3">
-                      <div className="flex flex-col items-center gap-1">
-                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                          <img src={vegasLogo} alt="VEGAS" className="w-10 h-10 object-contain" />
+                {/* Leg 3: St. Louis MONEYLINE */}
+                <div className="mx-4 mb-3 border-2 border-green-600 rounded-lg bg-green-600/10 p-3">
+                  <div className="text-center">
+                    <div className="grid grid-cols-3 items-center justify-items-center gap-2">
+                      {/* ST. LOUIS */}
+                      <div className="flex flex-col items-center gap-0.5">
+                        <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center border-2 border-green-600 p-1.5">
+                          <img src={stlouisLogo} alt="St. Louis" className="w-full h-full object-contain" />
                         </div>
-                        <div className="text-white text-[9px] font-bold">VEGAS</div>
+                        <span className="text-white text-[10px] font-extrabold">ST. LOUIS</span>
+                        <div className="text-[10px] font-bold text-green-400">VICTOIRE</div>
                       </div>
-                      <div className="text-center flex-1">
-                        <div className="text-white text-[10px] font-bold mb-1">7:00 PM</div>
-                        <div className="text-white text-xs font-bold mb-0.5">vs</div>
-                        <div className="text-white text-[9px]">moneyline</div>
-                      </div>
-                      <div className="flex flex-col items-center gap-1">
-                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-green-600">
-                          <img src={tampaLogo} alt="TAMPA" className="w-10 h-10 object-contain" />
+
+                      {/* Center */}
+                      <div className="flex flex-col items-center gap-0.5">
+                        <span className="font-semibold text-xs text-white">9:00 PM</span>
+                        <div className="px-1.5 py-0.5 rounded-full border border-white/20 bg-white/0">
+                          <span className="text-white font-bold text-[10px]">VS</span>
                         </div>
-                        <div className="text-white text-[9px] font-bold">TAMPA</div>
-                        <div className="text-green-500 text-[9px] font-bold">VICTOIRE</div>
+                        <div className="text-[10px] font-bold text-white tracking-wider">MONEYLINE</div>
+                      </div>
+
+                      {/* VEGAS */}
+                      <div className="flex flex-col items-center gap-0.5">
+                        <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center p-1.5 border border-white/20">
+                          <img src={vegasLogo} alt="Vegas" className="w-full h-full object-contain" />
+                        </div>
+                        <span className="font-bold text-[10px] text-white">VEGAS</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bet Amount & Payout */}
+                <div className="flex justify-center pt-4 mb-2">
+                  <div className="text-sm font-bold text-white tracking-wider text-center">
+                    VOTRE GAIN
+                  </div>
+                </div>
+
+                <div className="pt-1 py-[7px]">
+                  <div className="grid grid-cols-2 gap-2 px-[10px] my-[15px]">
+                    <Dialog open={isDialogOpenParlayNHL} onOpenChange={setIsDialogOpenParlayNHL}>
+                      <DialogTrigger asChild>
+                        <button className="px-4 py-3 bg-transparent rounded-none text-center cursor-pointer">
+                          <div className="bg-green-600 text-white text-xs font-semibold px-3 py-1 rounded mb-2 inline-block">Modifier</div>
+                          <div className="text-white text-xs mb-1">Votre mise</div>
+                          <div className="text-green-400 font-bold text-lg">${betAmountParlayNHL}</div>
+                        </button>
+                      </DialogTrigger>
+                      <DialogContent className="sm:max-w-md bg-black border-green-600">
+                        <DialogHeader>
+                          <DialogTitle className="text-white text-center">Modifier votre mise</DialogTitle>
+                        </DialogHeader>
+                        <div className="space-y-4">
+                          <div className="grid grid-cols-4 gap-2">
+                            {[10, 20, 50, 100, 150, 200, 500].map((amount) => (
+                              <button
+                                key={amount}
+                                onClick={() => {
+                                  setBetAmountParlayNHL(amount.toString());
+                                  setIsDialogOpenParlayNHL(false);
+                                }}
+                                className={`px-3 py-2 rounded-2xl text-sm font-semibold transition-colors ${
+                                  betAmountParlayNHL === amount.toString()
+                                    ? 'bg-primary text-black'
+                                    : 'bg-white/10 text-white hover:bg-white/20'
+                                }`}
+                              >
+                                ${amount}
+                              </button>
+                            ))}
+                            <button
+                              onClick={() => {
+                                const custom = prompt("Entrez le montant:");
+                                if (custom && parseFloat(custom) > 0) {
+                                  setBetAmountParlayNHL(custom);
+                                  setIsDialogOpenParlayNHL(false);
+                                }
+                              }}
+                              className="px-3 py-2 rounded-2xl text-sm font-semibold bg-white/10 text-white hover:bg-white/20"
+                            >
+                              Autre
+                            </button>
+                          </div>
+                        </div>
+                      </DialogContent>
+                    </Dialog>
+                    
+                    <div className="bg-green-600/15 border-2 border-green-600 rounded-lg text-center py-[25px] px-0">
+                      <div className="text-[#fff] text-xs mb-1">CASHOUT</div>
+                      <div className="text-green-400 font-bold text-3xl">${calculateReturn(betAmountParlayNHL, totalMultiplierNHL)}</div>
+                      <div className="text-white text-[10px] mt-0.5">
+                        +${(parseFloat(calculateReturn(betAmountParlayNHL, totalMultiplierNHL)) - parseFloat(betAmountParlayNHL)).toFixed(2)} bénéfice
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Your Gain */}
-              <div className="py-4 px-6 bg-black/95">
-                <div className="text-center text-white font-bold text-xs mb-3">VOTRE GAIN</div>
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="space-y-1">
-                    <button
-                      onClick={() => setIsDialogOpenParlay2(true)}
-                      className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition-colors text-sm"
-                    >
-                      MODIFIER VOTRE MISE
-                    </button>
-                    <div className="text-center text-white/70 text-xs">Mise: {betAmountParlay2}$</div>
-                  </div>
-                  <div className="bg-green-600/20 border-2 border-green-600 rounded-lg p-3 flex flex-col items-center justify-center">
-                    <div className="text-white text-xs mb-1">CASHOUT</div>
-                    <div className="text-green-400 font-bold text-xl">
-                      {calculateReturn(betAmountParlay2, totalMultiplierParlay2)}$
-                    </div>
-                    <div className="text-white/70 text-[10px]">
-                      Bénéfice: +{(parseFloat(calculateReturn(betAmountParlay2, totalMultiplierParlay2)) - parseFloat(betAmountParlay2)).toFixed(2)}$
-                    </div>
-                  </div>
-                </div>
-
-                <Dialog open={isDialogOpenParlay2} onOpenChange={setIsDialogOpenParlay2}>
-                  <DialogContent className="sm:max-w-md bg-black border-[3px] border-green-600">
-                    <DialogTitle className="text-center text-white font-bold text-lg mb-2">MODIFIER VOTRE MISE</DialogTitle>
-                    <DialogDescription className="text-center text-white/70 text-sm">Entrez le montant que vous souhaitez parier</DialogDescription>
-                    <div className="space-y-4">
-                      <div className="space-y-2">
-                        <input
-                          type="number"
-                          value={betAmountParlay2}
-                          onChange={(e) => setBetAmountParlay2(e.target.value)}
-                          className="w-full bg-black border-2 border-green-600 text-white font-bold text-2xl py-3 px-4 rounded-lg text-center"
-                          placeholder="100"
-                        />
-                        <div className="text-center text-white/70 text-sm">
-                          Retour potentiel: {calculateReturn(betAmountParlay2, totalMultiplierParlay2)}$
-                        </div>
-                      </div>
-                      <button
-                        onClick={() => setIsDialogOpenParlay2(false)}
-                        className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition-colors"
-                      >
-                        CONFIRMER
-                      </button>
-                    </div>
-                  </DialogContent>
-                </Dialog>
-              </div>
-
-              {/* Best Odds */}
-              <div className="bg-green-600 py-2 px-6">
-                <div className="flex items-center justify-between text-xs">
+              {/* DraftKings Section */}
+              <div className="pt-0">
+                <div className="flex items-center justify-between text-xs my-0 py-[10px] px-6 border-t-2 border-green-600 bg-green-600">
                   <span className="text-white font-bold">MEILLEUR ODDS</span>
                   <div className="flex items-center gap-2">
                     <span className="text-white">DRAFTKINGS</span>
-                    <span className="text-black font-bold bg-white px-2 py-1 rounded">+{((totalMultiplierParlay2 - 1) * 100).toFixed(0)}</span>
+                    <span className="px-2 py-1 bg-white rounded text-black font-bold">+285</span>
                   </div>
                 </div>
               </div>
