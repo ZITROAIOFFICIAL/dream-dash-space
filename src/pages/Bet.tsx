@@ -107,7 +107,7 @@ const Bet = () => {
               </div>
 
               {/* AI Analysis */}
-              <div className="flex items-center justify-between gap-2 text-xs py-[10px] bg-green-600 px-4">
+              <div className="flex items-center justify-between gap-2 text-xs py-[10px] bg-green-600 px-4 rounded-t-sm">
                 <div className="flex items-center gap-2">
                   <span className="font-bold text-white text-4xl">92%</span>
                   <span className="text-white text-xs font-bold">DE CHANCE DE GAGNER SELON NOTRE IA</span>
@@ -694,7 +694,7 @@ const Bet = () => {
 
               {/* DraftKings Section */}
               <div className="pt-0">
-              <div className="flex items-center justify-center gap-2 text-xs my-0 py-[10px] border-t-2 border-green-600 bg-green-600">
+              <div className="flex items-center justify-center gap-2 text-xs my-0 py-[10px] border-t-2 border-green-600 bg-green-600 rounded-b-sm">
                 <div className="relative w-5 h-5 flex-shrink-0">
                   <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
                   <div className="absolute inset-0 flex items-center justify-center">
