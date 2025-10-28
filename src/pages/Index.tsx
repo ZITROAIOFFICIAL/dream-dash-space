@@ -835,7 +835,7 @@ const Index = () => {
                   </Dialog>
                   
                   <div className="bg-green-600/15 border-2 border-green-600 rounded-none text-center py-[25px] px-0">
-                    <div className="text-white text-xs mb-1">Cashout x{multiplierStLouis.toFixed(2)} →</div>
+                    <div className="text-[#fff] text-xs mb-1">CASHOUT</div>
                     <div className="text-green-400 font-bold text-lg">${calculateReturn(betAmountStLouis, multiplierStLouis)}</div>
                     <div className="text-white text-[10px] mt-0.5">
                       +${(parseFloat(calculateReturn(betAmountStLouis, multiplierStLouis)) - parseFloat(betAmountStLouis)).toFixed(2)} bénéfice
