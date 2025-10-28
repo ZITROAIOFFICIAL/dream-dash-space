@@ -82,7 +82,7 @@ const Historique = () => {
     prediction: "KANSAS CITY -3.5",
     odds: -110,
     betAmount: 100,
-    result: "pending",
+    result: "won",
     date: "10/28/2025",
     time: "4:00 PM",
     aiPercent: 81,
