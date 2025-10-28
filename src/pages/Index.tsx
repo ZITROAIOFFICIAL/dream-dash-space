@@ -1727,16 +1727,32 @@ const Index = () => {
               {/* Middle section with vertical borders */}
               <div className="border-x-[2px] border-green-600">
               {/* Odds Display */}
-              <div className="flex justify-center pt-5 pb-0">
+              <div className="flex justify-center pt-2 pb-0">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
                   MULTIPLICATEUR DE MISE
                 </div>
               </div>
               
-              <div className="mx-4 mt-4">
+              <div className="mx-4 mt-2">
                 <div className="bg-green-600 rounded-lg px-6 py-1.5 text-center">
                   <div className="text-2xl font-black text-white">
                     x{multiplierVegas.toFixed(2)}
+                  </div>
+                </div>
+              </div>
+
+              {/* Match Details */}
+              <div className="text-center pb-1 pt-3">
+                <div className="text-sm font-bold text-white tracking-wider mb-2">
+                  MISE
+                </div>
+              </div>
+
+              {/* 1 Units Badge */}
+              <div className="mx-4 mt-0">
+                <div className="bg-green-600 rounded-lg px-10 py-2 text-center">
+                  <div className="text-xl font-bold text-white">
+                    1 UNITS
                   </div>
                 </div>
               </div>
@@ -2307,16 +2323,32 @@ const Index = () => {
               {/* Middle section with vertical borders */}
               <div className="border-x-[2px] border-green-600">
               {/* Odds Display */}
-              <div className="flex justify-center pt-5 pb-0">
+              <div className="flex justify-center pt-2 pb-0">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
                   MULTIPLICATEUR DE MISE
                 </div>
               </div>
               
-              <div className="mx-4 mt-4">
+              <div className="mx-4 mt-2">
                 <div className="bg-green-600 rounded-lg px-6 py-1.5 text-center">
                   <div className="text-2xl font-black text-white">
                     x{multiplierWashington.toFixed(2)}
+                  </div>
+                </div>
+              </div>
+
+              {/* Match Details */}
+              <div className="text-center pb-1 pt-3">
+                <div className="text-sm font-bold text-white tracking-wider mb-2">
+                  MISE
+                </div>
+              </div>
+
+              {/* 1 Units Badge */}
+              <div className="mx-4 mt-0">
+                <div className="bg-green-600 rounded-lg px-10 py-2 text-center">
+                  <div className="text-xl font-bold text-white">
+                    1 UNITS
                   </div>
                 </div>
               </div>
