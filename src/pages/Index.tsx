@@ -105,7 +105,7 @@ const Index = () => {
 
         {/* ST. LOUIS vs PITTSBURGH CARD */}
         <div className="grid gap-6 justify-center">
-          <Card className="w-full max-w-md bg-gray-900 border-2 border-gray-700 shadow-2xl overflow-hidden mx-auto rounded-none">
+          <Card className="w-full max-w-md bg-black border-2 border-green-600 shadow-2xl overflow-hidden mx-auto rounded-none">
             <CardHeader className="space-y-0 p-0">
               {/* AI Data Analysis Counter */}
               <div className="flex items-center justify-center gap-3 px-0 py-[5px] bg-green-600">
@@ -746,8 +746,8 @@ const Index = () => {
               </div>
               
               <div className="flex justify-center py-0 -mt-6">
-                <div className="bg-green-600/15 border-2 border-green-600 rounded-none px-10 py-4">
-                  <div className="text-4xl font-black text-green-400">
+                <div className="bg-green-600 rounded-none px-10 py-4">
+                  <div className="text-4xl font-black text-white">
                     x{multiplierStLouis.toFixed(2)}
                   </div>
                 </div>
@@ -869,7 +869,7 @@ const Index = () => {
 
         {/* VEGAS vs TAMPA BAY CARD */}
         <div className="grid gap-6 justify-center">
-          <Card className="w-full max-w-md bg-gray-900 border-2 border-gray-700 shadow-2xl overflow-hidden mx-auto rounded-none">
+          <Card className="w-full max-w-md bg-black border-2 border-green-600 shadow-2xl overflow-hidden mx-auto rounded-none">
             <CardHeader className="space-y-0 p-0">
               {/* AI Data Analysis Counter */}
               <div className="flex items-center justify-center gap-3 py-2 px-6 bg-black/40">
@@ -1510,8 +1510,8 @@ const Index = () => {
               </div>
               
               <div className="flex justify-center py-0 -mt-6">
-                <div className="bg-green-600/15 border-2 border-green-600 rounded-none px-6 py-2">
-                  <div className="text-3xl font-black text-green-400">
+                <div className="bg-green-600 rounded-none px-6 py-2">
+                  <div className="text-3xl font-black text-white">
                     x{multiplierVegas.toFixed(2)}
                   </div>
                 </div>
@@ -1630,7 +1630,7 @@ const Index = () => {
           </Card>
 
           {/* WASHINGTON vs KANSAS CITY CARD - NFL */}
-          <Card className="w-full max-w-md bg-gray-900 border-2 border-gray-700 shadow-2xl overflow-hidden mx-auto rounded-none">
+          <Card className="w-full max-w-md bg-black border-2 border-green-600 shadow-2xl overflow-hidden mx-auto rounded-none">
             <CardHeader className="space-y-0 p-0">
               {/* AI Data Analysis Counter */}
               <div className="flex items-center justify-center gap-3 py-2 px-6 bg-black/40">
@@ -2090,8 +2090,8 @@ const Index = () => {
               </div>
               
               <div className="flex justify-center py-0 -mt-6">
-                <div className="bg-green-600/15 border-2 border-green-600 rounded-none px-6 py-2">
-                  <div className="text-3xl font-black text-green-400">
+                <div className="bg-green-600 rounded-none px-6 py-2">
+                  <div className="text-3xl font-black text-white">
                     x{multiplierWashington.toFixed(2)}
                   </div>
                 </div>
