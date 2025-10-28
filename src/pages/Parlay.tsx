@@ -465,23 +465,28 @@ const Parlay = () => {
                 
                 {/* Bet 1: Z. Flowers Under 68.5 Receiving Yards */}
                 <div className="mb-4">
-                  <div className="bg-black rounded-lg overflow-hidden">
-                    <div className="flex items-center justify-between p-3 bg-black border-2 border-green-600">
-                      <div className="flex items-center gap-3">
+                  <div className="bg-black rounded-lg overflow-hidden border-2 border-green-600">
+                    <div className="flex items-center justify-between p-3">
+                      <div className="flex flex-col items-center gap-1">
                         <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
                           <img src={stlouisLogo} alt="ST. LOUIS" className="w-10 h-10 object-contain" />
                         </div>
-                        <div className="text-center">
-                          <div className="text-white text-[10px] font-bold mb-1">7:00 PM</div>
-                          <div className="text-white text-xs font-bold">Under 68.5</div>
-                        </div>
+                        <div className="text-white text-[9px] font-bold">ST. LOUIS</div>
+                      </div>
+                      <div className="text-center flex-1">
+                        <div className="text-white text-[10px] font-bold mb-1">7:00 PM</div>
+                        <div className="text-white text-xs font-bold mb-0.5">vs</div>
+                        <div className="text-white text-[9px]">under 68.5</div>
+                      </div>
+                      <div className="flex flex-col items-center gap-1">
                         <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
                           <img src={stlouisLogo} alt="ST. LOUIS" className="w-10 h-10 object-contain" />
                         </div>
+                        <div className="text-white text-[9px] font-bold">ST. LOUIS</div>
                       </div>
                     </div>
                     <div className="bg-black border-2 border-t-0 border-green-600 px-3 py-2">
-                      <div className="text-white text-[11px] font-bold text-center">Z. Flowers Receiving Yards</div>
+                      <div className="text-white text-[9px] font-bold text-center">Z. Flowers Receiving Yards</div>
                     </div>
                   </div>
                 </div>
@@ -997,23 +1002,28 @@ const Parlay = () => {
 
                 {/* Bet 2: Z. Flowers Under 68.5 Receiving Yards */}
                 <div className="mb-4">
-                  <div className="bg-black rounded-lg overflow-hidden">
-                    <div className="flex items-center justify-between p-3 bg-black border-2 border-green-600">
-                      <div className="flex items-center gap-3">
+                  <div className="bg-black rounded-lg overflow-hidden border-2 border-green-600">
+                    <div className="flex items-center justify-between p-3">
+                      <div className="flex flex-col items-center gap-1">
                         <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
                           <img src={kansascityLogo} alt="KANSAS CITY" className="w-10 h-10 object-contain" />
                         </div>
-                        <div className="text-center">
-                          <div className="text-white text-[10px] font-bold mb-1">7:00 PM</div>
-                          <div className="text-white text-xs font-bold">Under 68.5</div>
-                        </div>
+                        <div className="text-white text-[9px] font-bold">KANSAS CITY</div>
+                      </div>
+                      <div className="text-center flex-1">
+                        <div className="text-white text-[10px] font-bold mb-1">7:00 PM</div>
+                        <div className="text-white text-xs font-bold mb-0.5">vs</div>
+                        <div className="text-white text-[9px]">under 68.5</div>
+                      </div>
+                      <div className="flex flex-col items-center gap-1">
                         <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
                           <img src={kansascityLogo} alt="KANSAS CITY" className="w-10 h-10 object-contain" />
                         </div>
+                        <div className="text-white text-[9px] font-bold">KANSAS CITY</div>
                       </div>
                     </div>
                     <div className="bg-black border-2 border-t-0 border-green-600 px-3 py-2">
-                      <div className="text-white text-[11px] font-bold text-center">Z. Flowers Receiving Yards</div>
+                      <div className="text-white text-[9px] font-bold text-center">Z. Flowers Receiving Yards</div>
                     </div>
                   </div>
                 </div>
