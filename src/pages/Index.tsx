@@ -1538,6 +1538,7 @@ const Index = () => {
                       <div className="px-2 py-0.5 rounded-full border border-white/20 bg-white/0">
                         <span className="text-white font-bold text-xs">VS</span>
                       </div>
+                      <div className="text-xs font-bold text-white tracking-wider">MONEYLINE</div>
                     </div>
 
                     {/* TAMPA BAY */}
@@ -1559,14 +1560,14 @@ const Index = () => {
                 </div>
               </div>
 
-              <div className="pt-1">
+              <div className="pt-1 py-[7px]">
                 <div className="grid grid-cols-2 gap-2 px-[10px] my-[15px]">
                   <Dialog open={isDialogOpenVegas} onOpenChange={setIsDialogOpenVegas}>
                     <DialogTrigger asChild>
-                      <button className="px-4 py-3 bg-transparent border-2 border-green-600/40 rounded-none text-center hover:bg-white/5 transition-colors cursor-pointer">
+                      <button className="px-4 py-3 bg-transparent rounded-none text-center cursor-pointer">
+                        <div className="bg-green-600 text-white text-xs font-semibold px-3 py-1 rounded mb-2 inline-block">Modifier</div>
                         <div className="text-white text-xs mb-1">Votre mise</div>
                         <div className="text-green-400 font-bold text-lg">${betAmountVegas}</div>
-                        <div className="text-WHITE text-xs mt-1 font-semibold px-[5px]">Modifier</div>
                       </button>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-md bg-black border-green-600">
@@ -1596,8 +1597,8 @@ const Index = () => {
                   </Dialog>
                   
                   <div className="bg-green-600/15 border-2 border-green-600 rounded-lg text-center py-[25px] px-0">
-                    <div className="text-white text-xs mb-1">Cashout x{multiplierVegas.toFixed(2)} →</div>
-                    <div className="text-green-400 font-bold text-lg">${calculateReturn(betAmountVegas, multiplierVegas)}</div>
+                    <div className="text-[#fff] text-xs mb-1">CASHOUT</div>
+                    <div className="text-green-400 font-bold text-3xl">${calculateReturn(betAmountVegas, multiplierVegas)}</div>
                     <div className="text-white text-[10px] mt-0.5">
                       +${(parseFloat(calculateReturn(betAmountVegas, multiplierVegas)) - parseFloat(betAmountVegas)).toFixed(2)} bénéfice
                     </div>
@@ -2116,6 +2117,7 @@ const Index = () => {
                       <div className="px-2 py-0.5 rounded-full border border-white/20 bg-white/0">
                         <span className="text-white font-bold text-xs">VS</span>
                       </div>
+                      <div className="text-xs font-bold text-white tracking-wider">MONEYLINE</div>
                     </div>
 
                     {/* KANSAS CITY */}
@@ -2136,14 +2138,14 @@ const Index = () => {
                 </div>
               </div>
 
-              <div className="pt-1">
+              <div className="pt-1 py-[7px]">
                 <div className="grid grid-cols-2 gap-2 px-[10px] my-[15px]">
                   <Dialog open={isDialogOpenWashington} onOpenChange={setIsDialogOpenWashington}>
                     <DialogTrigger asChild>
-                      <button className="px-4 py-3 bg-transparent border-2 border-green-600/40 rounded-none text-center hover:bg-white/5 transition-colors cursor-pointer">
+                      <button className="px-4 py-3 bg-transparent rounded-none text-center cursor-pointer">
+                        <div className="bg-green-600 text-white text-xs font-semibold px-3 py-1 rounded mb-2 inline-block">Modifier</div>
                         <div className="text-white text-xs mb-1">Votre mise</div>
                         <div className="text-green-400 font-bold text-lg">${betAmountWashington}</div>
-                        <div className="text-WHITE text-xs mt-1 font-semibold px-[5px]">Modifier</div>
                       </button>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-md bg-black border-green-600">
@@ -2173,8 +2175,8 @@ const Index = () => {
                   </Dialog>
                   
                   <div className="bg-green-600/15 border-2 border-green-600 rounded-lg text-center py-[25px] px-0">
-                    <div className="text-white text-xs mb-1">Cashout x{multiplierWashington.toFixed(2)} →</div>
-                    <div className="text-green-400 font-bold text-lg">${calculateReturn(betAmountWashington, multiplierWashington)}</div>
+                    <div className="text-[#fff] text-xs mb-1">CASHOUT</div>
+                    <div className="text-green-400 font-bold text-3xl">${calculateReturn(betAmountWashington, multiplierWashington)}</div>
                     <div className="text-white text-[10px] mt-0.5">
                       +${(parseFloat(calculateReturn(betAmountWashington, multiplierWashington)) - parseFloat(betAmountWashington)).toFixed(2)} bénéfice
                     </div>
