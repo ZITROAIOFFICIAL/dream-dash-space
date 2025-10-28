@@ -105,7 +105,7 @@ const Index = () => {
 
         {/* ST. LOUIS vs PITTSBURGH CARD */}
         <div className="grid gap-6 justify-center">
-          <Card className="w-full max-w-md bg-gray-900 border-2 border-gray-700 shadow-2xl overflow-hidden mx-auto rounded-none">
+          <Card className="w-full max-w-md bg-gray-950 border-2 border-gray-700 shadow-2xl overflow-hidden mx-auto rounded-none">
             <CardHeader className="space-y-0 p-0">
               {/* AI Data Analysis Counter */}
               <div className="flex items-center justify-center gap-3 px-0 py-[5px] bg-green-600">
