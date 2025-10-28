@@ -124,7 +124,7 @@ const Index = () => {
                   <span className="font-bold text-white text-3xl">92%</span>
                   <span className="text-white text-xs font-bold">DE CHANCE DE GAGNER SELON NOTRE IA</span>
                 </div>
-                <button onClick={handleShowAnalysisStLouis} className="px-3 py-1 rounded-none font-bold text-green-400 text-xs transition-colors bg-slate-950 hover:bg-slate-800">
+                <button onClick={handleShowAnalysisStLouis} className="px-3 py-1 rounded-none font-bold text-green-400 text-xs transition-colors bg-black hover:bg-black/80">
                   VOIR ANALYSE IA
                 </button>
 
