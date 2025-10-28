@@ -2104,11 +2104,10 @@ const Index = () => {
                   <div className="grid grid-cols-3 items-center justify-items-center gap-4 px-4">
                     {/* WASHINGTON */}
                     <div className="flex flex-col items-center gap-1">
-                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center p-2 border-2 border-green-600">
+                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center p-2 border border-white/20">
                         <img src={washingtonLogo} alt="Washington" className="w-full h-full object-contain" />
                       </div>
                       <span className="text-white -bottom-0.5 text-xs font-extrabold">WASHINGTON</span>
-                      <div className="text-xs font-bold text-green-400">VICTOIRE</div>
                     </div>
 
                     {/* Center time + VS */}
