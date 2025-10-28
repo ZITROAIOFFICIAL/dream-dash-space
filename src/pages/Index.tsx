@@ -849,16 +849,10 @@ const Index = () => {
 
               {/* DraftKings Section */}
               <div className="pt-0">
-                <div className="flex items-center justify-center gap-2 text-xs my-0 border-t-2 border-green-600 bg-green-600 py-[10px]">
-                  <div className="relative w-5 h-5 flex-shrink-0">
-                    <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-white font-bold text-[8px]">IA</span>
-                    </div>
-                  </div>
-                  <span className="text-white">Meilleur odds:</span>
+                <div className="flex items-center justify-between text-xs my-0 py-[10px] px-6 border-t-2 border-green-600 bg-green-600">
+                  <span className="text-white font-bold">MEILLEUR ODDS</span>
                   <span className="font-bold text-white">DRAFTKINGS</span>
-                  <span className="px-2 py-1 bg-black rounded border-2 border-green-600 font-bold text-green-400">-105</span>
+                  <span className="font-bold text-white">-105</span>
                 </div>
               </div>
             </CardHeader>
@@ -1610,16 +1604,10 @@ const Index = () => {
 
               {/* DraftKings Section */}
               <div className="pt-0">
-                <div className="flex items-center justify-center gap-2 text-xs my-0 py-[10px] border-t-2 border-green-600 bg-green-600">
-                  <div className="relative w-5 h-5 flex-shrink-0">
-                    <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-white font-bold text-[8px]">IA</span>
-                    </div>
-                  </div>
-                  <span className="text-white">Meilleur odds:</span>
+                <div className="flex items-center justify-between text-xs my-0 py-[10px] px-6 border-t-2 border-green-600 bg-green-600">
+                  <span className="text-white font-bold">MEILLEUR ODDS</span>
                   <span className="font-bold text-white">DRAFTKINGS</span>
-                  <span className="px-2 py-1 bg-black rounded border-2 border-green-600 font-bold text-green-400">-135</span>
+                  <span className="font-bold text-white">-135</span>
                 </div>
               </div>
             </CardHeader>
@@ -2190,16 +2178,10 @@ const Index = () => {
 
               {/* BetMGM Section */}
               <div className="pt-0">
-                <div className="flex items-center justify-center gap-2 text-xs my-0 py-[10px] border-t-2 border-green-600 bg-green-600">
-                  <div className="relative w-5 h-5 flex-shrink-0">
-                    <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-white font-bold text-[8px]">IA</span>
-                    </div>
-                  </div>
-                  <span className="text-white">Meilleur odds:</span>
+                <div className="flex items-center justify-between text-xs my-0 py-[10px] px-6 border-t-2 border-green-600 bg-green-600">
+                  <span className="text-white font-bold">MEILLEUR ODDS</span>
                   <span className="font-bold text-white">BETMGM</span>
-                  <span className="px-2 py-1 bg-black rounded border-2 border-green-600 font-bold text-green-400">+488</span>
+                  <span className="font-bold text-white">+488</span>
                 </div>
               </div>
             </CardHeader>
