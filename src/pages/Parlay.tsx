@@ -216,7 +216,11 @@ const Parlay = () => {
                           </div>
 
                           <div className="space-y-6">
-                            <h3 className="text-white font-bold text-lg mb-3">Analyse du marché & meilleures cotes</h3>
+                            {/* Section 1 - Analyse du marché */}
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              Analyse du marché & meilleures cotes
+                            </h3>
+                            
                             <div className="space-y-3">
                               <div className="flex items-center gap-3">
                                 <div className="relative w-5 h-5 flex-shrink-0">
@@ -226,7 +230,7 @@ const Parlay = () => {
                                   </div>
                                 </div>
                                 <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
-                                  <p className="text-white/80 text-sm">• Analyse de la probabilité implicite combinée du marché pour ce parlay, obtenue par conversion des cotes en pourcentage réel.</p>
+                                  <p className="text-white/80 text-sm">• Analyse de la probabilité implicite du marché pour chaque pari, obtenue par conversion des cotes en pourcentage réel.</p>
                                 </div>
                               </div>
                               <div className="flex items-center gap-3">
@@ -237,68 +241,40 @@ const Parlay = () => {
                                   </div>
                                 </div>
                                 <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
-                                  <p className="text-white/80 text-sm">• Comparaison inter-bookmakers pour identifier les meilleures cotes disponibles sur chaque leg du parlay.</p>
+                                  <p className="text-white/80 text-sm">• Comparaison inter-bookmakers pour identifier la meilleure cote disponible ("best price") et mesurer l'efficience du marché.</p>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <p className="text-white/80 text-sm">• Observation du mouvement de ligne (line movement) afin d'évaluer si la cote se renforce ou se détériore avec l'arrivée du sharp money.</p>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <p className="text-white/80 text-sm">• Détection d'un éventuel closing line value (CLV) et différentiel entre l'opinion publique (public money) et l'argent professionnel (sharp money).</p>
                                 </div>
                               </div>
                             </div>
 
                             <div className="border-t border-white/10 my-6"></div>
 
-                            <h3 className="text-white font-bold text-lg mb-3">Analyse individuelle des paris</h3>
-                            <div className="space-y-3">
-                              <div className="flex items-center gap-3">
-                                <div className="relative w-5 h-5 flex-shrink-0">
-                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
-                                  <div className="absolute inset-0 flex items-center justify-center">
-                                    <span className="text-white font-bold text-[7px]">IA</span>
-                                  </div>
-                                </div>
-                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
-                                  <h4 className="text-white font-bold text-sm mb-2">Under 68.5 - Z. Flowers Receiving Yards</h4>
-                                  <p className="text-white/80 text-sm">Analyse des performances récentes de Z. Flowers, de la défense adverse et des conditions de jeu pour ce prop.</p>
-                                </div>
-                              </div>
-                              <div className="flex items-center gap-3">
-                                <div className="relative w-5 h-5 flex-shrink-0">
-                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
-                                  <div className="absolute inset-0 flex items-center justify-center">
-                                    <span className="text-white font-bold text-[7px]">IA</span>
-                                  </div>
-                                </div>
-                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
-                                  <h4 className="text-white font-bold text-sm mb-2">Pittsburgh Moneyline (+140)</h4>
-                                  <p className="text-white/80 text-sm">Analyse des forces offensives et défensives de Pittsburgh face à Indianapolis, incluant le momentum et les matchups clés.</p>
-                                </div>
-                              </div>
-                              <div className="flex items-center gap-3">
-                                <div className="relative w-5 h-5 flex-shrink-0">
-                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
-                                  <div className="absolute inset-0 flex items-center justify-center">
-                                    <span className="text-white font-bold text-[7px]">IA</span>
-                                  </div>
-                                </div>
-                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
-                                  <h4 className="text-white font-bold text-sm mb-2">Chicago Moneyline (-144)</h4>
-                                  <p className="text-white/80 text-sm">Analyse de l'avantage de Chicago contre Cincinnati, basée sur les performances récentes et les tendances H2H.</p>
-                                </div>
-                              </div>
-                              <div className="flex items-center gap-3">
-                                <div className="relative w-5 h-5 flex-shrink-0">
-                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
-                                  <div className="absolute inset-0 flex items-center justify-center">
-                                    <span className="text-white font-bold text-[7px]">IA</span>
-                                  </div>
-                                </div>
-                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
-                                  <h4 className="text-white font-bold text-sm mb-2">New Orleans +13.5 Spread (-107)</h4>
-                                  <p className="text-white/80 text-sm">Analyse de la capacité de New Orleans à couvrir le spread de 13.5 points face aux Rams, incluant les facteurs défensifs et le style de jeu.</p>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="border-t border-white/10 my-6"></div>
-
-                            <h3 className="text-white font-bold text-lg mb-3">Facteurs de corrélation</h3>
+                            {/* Section 2 - Historique H2H */}
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              Historique des confrontations (H2H)
+                            </h3>
+                            
                             <div className="flex items-center gap-3">
                               <div className="relative w-5 h-5 flex-shrink-0">
                                 <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
@@ -307,8 +283,164 @@ const Parlay = () => {
                                 </div>
                               </div>
                               <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
-                                <h4 className="text-white font-bold text-sm mb-2">Indépendance des paris</h4>
-                                <p className="text-white/80 text-sm">Analyse de l'indépendance statistique entre chaque leg du parlay pour valider l'absence de corrélations négatives significatives.</p>
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Historique des confrontations (H2H)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse des duels précédents entre les équipes concernées, incluant les tendances récurrentes des matchups, la nature des rencontres (défensives, explosives, possession longue ou big plays), ainsi que les patterns stratégiques qui se répètent historiquement.
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="border-t border-white/10 my-6"></div>
+
+                            {/* Section 3 - Lineup projeté */}
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              Lineup / alignement projeté du jour
+                            </h3>
+                            
+                            <div className="flex items-center gap-3">
+                              <div className="relative w-5 h-5 flex-shrink-0">
+                                <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <span className="text-white font-bold text-[7px]">IA</span>
+                                </div>
+                              </div>
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Alignement projeté du jour</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de la composition prévue pour chaque équipe, incluant l'état du roster offensif et défensif, les joueurs clés disponibles ou incertains, le statut du quarterback, ainsi que l'impact tactique attendu de l'alignement projeté sur le plan de match initial.
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="border-t border-white/10 my-6"></div>
+
+                            {/* Section 4 - Jeu offensif */}
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              Analyse du jeu offensif & discipline offensive
+                            </h3>
+                            
+                            <div className="space-y-3">
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Passing Game</h4>
+                                  <p className="text-white/80 text-sm">
+                                    Analyse de l'efficacité aérienne des équipes concernées, incluant l'EPA par passe, la capacité à générer des jeux explosifs (explosive pass rate), la séparation des receveurs et la réussite sur 3rd down.
+                                  </p>
+                                </div>
+                              </div>
+                              
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Red Zone Offense</h4>
+                                  <p className="text-white/80 text-sm">
+                                    Analyse de l'efficacité en red zone des équipes, basée sur le taux de conversion TD, la qualité du playcalling rapproché et la gestion du spacing offensif près de la ligne de but.
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="border-t border-white/10 my-6"></div>
+
+                            {/* Section 5 - Défense */}
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              Analyse de la défense & couverture
+                            </h3>
+                            
+                            <div className="space-y-3">
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Pass Rush & couverture</h4>
+                                  <p className="text-white/80 text-sm">
+                                    Analyse de la capacité défensive à générer de la pression sur le quarterback, la discipline en couverture, l'efficacité en 3rd down et les ajustements sur jeu aérien explosif.
+                                  </p>
+                                </div>
+                              </div>
+                              
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Run Defense</h4>
+                                  <p className="text-white/80 text-sm">
+                                    Analyse de la défense au sol, basée sur le taux de succès autorisé, l'occupation des gaps et la limitation des gains après contact.
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="border-t border-white/10 my-6"></div>
+
+                            {/* Section 6 - Facteurs externes */}
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              Facteurs environnementaux & contextuels
+                            </h3>
+                            
+                            <div className="space-y-3">
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Météo & conditions de jeu</h4>
+                                  <p className="text-white/80 text-sm">
+                                    Analyse de l'impact des conditions météorologiques (vent, pluie, température), de l'état du terrain et de l'influence potentielle sur le passing game, le kicking game et les décisions stratégiques.
+                                  </p>
+                                </div>
+                              </div>
+                              
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Momentum & situation contextuelle</h4>
+                                  <p className="text-white/80 text-sm">
+                                    Analyse de l'élan récent de chaque équipe, des séries de victoires ou défaites, de l'importance stratégique du match (playoffs, division, wild card) et de l'impact psychologique du contexte.
+                                  </p>
+                                </div>
+                              </div>
+                              
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Repos & fatigue</h4>
+                                  <p className="text-white/80 text-sm">
+                                    Analyse du nombre de jours de repos entre les matchs, de l'impact du voyage (distance, fuseaux horaires) et de la gestion de la fatigue physique et mentale des effectifs.
+                                  </p>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -554,7 +686,11 @@ const Parlay = () => {
                           </div>
 
                           <div className="space-y-6">
-                            <h3 className="text-white font-bold text-lg mb-3">Analyse du marché & meilleures cotes</h3>
+                            {/* Section 1 - Analyse du marché */}
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              Analyse du marché & meilleures cotes
+                            </h3>
+                            
                             <div className="space-y-3">
                               <div className="flex items-center gap-3">
                                 <div className="relative w-5 h-5 flex-shrink-0">
@@ -564,7 +700,7 @@ const Parlay = () => {
                                   </div>
                                 </div>
                                 <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
-                                  <p className="text-white/80 text-sm">• Analyse de la probabilité implicite combinée du marché pour ce parlay, obtenue par conversion des cotes en pourcentage réel.</p>
+                                  <p className="text-white/80 text-sm">• Analyse de la probabilité implicite du marché pour chaque pari, obtenue par conversion des cotes en pourcentage réel.</p>
                                 </div>
                               </div>
                               <div className="flex items-center gap-3">
@@ -575,56 +711,40 @@ const Parlay = () => {
                                   </div>
                                 </div>
                                 <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
-                                  <p className="text-white/80 text-sm">• Comparaison inter-bookmakers pour identifier les meilleures cotes disponibles sur chaque leg du parlay.</p>
+                                  <p className="text-white/80 text-sm">• Comparaison inter-bookmakers pour identifier la meilleure cote disponible ("best price") et mesurer l'efficience du marché.</p>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <p className="text-white/80 text-sm">• Observation du mouvement de ligne (line movement) afin d'évaluer si la cote se renforce ou se détériore avec l'arrivée du sharp money.</p>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <p className="text-white/80 text-sm">• Détection d'un éventuel closing line value (CLV) et différentiel entre l'opinion publique (public money) et l'argent professionnel (sharp money).</p>
                                 </div>
                               </div>
                             </div>
 
                             <div className="border-t border-white/10 my-6"></div>
 
-                            <h3 className="text-white font-bold text-lg mb-3">Analyse individuelle des paris</h3>
-                            <div className="space-y-3">
-                              <div className="flex items-center gap-3">
-                                <div className="relative w-5 h-5 flex-shrink-0">
-                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
-                                  <div className="absolute inset-0 flex items-center justify-center">
-                                    <span className="text-white font-bold text-[7px]">IA</span>
-                                  </div>
-                                </div>
-                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
-                                  <h4 className="text-white font-bold text-sm mb-2">Pittsburgh Moneyline (+140)</h4>
-                                  <p className="text-white/80 text-sm">Analyse des forces offensives et défensives de Pittsburgh face à Indianapolis, incluant le momentum et les matchups clés.</p>
-                                </div>
-                              </div>
-                              <div className="flex items-center gap-3">
-                                <div className="relative w-5 h-5 flex-shrink-0">
-                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
-                                  <div className="absolute inset-0 flex items-center justify-center">
-                                    <span className="text-white font-bold text-[7px]">IA</span>
-                                  </div>
-                                </div>
-                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
-                                  <h4 className="text-white font-bold text-sm mb-2">Under 68.5 - Z. Flowers Receiving Yards</h4>
-                                  <p className="text-white/80 text-sm">Analyse des performances récentes de Z. Flowers, de la défense adverse et des conditions de jeu pour ce prop.</p>
-                                </div>
-                              </div>
-                              <div className="flex items-center gap-3">
-                                <div className="relative w-5 h-5 flex-shrink-0">
-                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
-                                  <div className="absolute inset-0 flex items-center justify-center">
-                                    <span className="text-white font-bold text-[7px]">IA</span>
-                                  </div>
-                                </div>
-                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
-                                  <h4 className="text-white font-bold text-sm mb-2">Chicago Moneyline (-144)</h4>
-                                  <p className="text-white/80 text-sm">Analyse de l'avantage de Chicago contre Cincinnati, basée sur les performances récentes et les tendances H2H.</p>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="border-t border-white/10 my-6"></div>
-
-                            <h3 className="text-white font-bold text-lg mb-3">Facteurs de corrélation</h3>
+                            {/* Section 2 - Historique H2H */}
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              Historique des confrontations (H2H)
+                            </h3>
+                            
                             <div className="flex items-center gap-3">
                               <div className="relative w-5 h-5 flex-shrink-0">
                                 <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
@@ -633,8 +753,164 @@ const Parlay = () => {
                                 </div>
                               </div>
                               <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
-                                <h4 className="text-white font-bold text-sm mb-2">Indépendance des paris</h4>
-                                <p className="text-white/80 text-sm">Analyse de l'indépendance statistique entre chaque leg du parlay pour valider l'absence de corrélations négatives significatives.</p>
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Historique des confrontations (H2H)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse des duels précédents entre les équipes concernées, incluant les tendances récurrentes des matchups, la nature des rencontres (défensives, explosives, possession longue ou big plays), ainsi que les patterns stratégiques qui se répètent historiquement.
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="border-t border-white/10 my-6"></div>
+
+                            {/* Section 3 - Lineup projeté */}
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              Lineup / alignement projeté du jour
+                            </h3>
+                            
+                            <div className="flex items-center gap-3">
+                              <div className="relative w-5 h-5 flex-shrink-0">
+                                <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <span className="text-white font-bold text-[7px]">IA</span>
+                                </div>
+                              </div>
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Alignement projeté du jour</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de la composition prévue pour chaque équipe, incluant l'état du roster offensif et défensif, les joueurs clés disponibles ou incertains, le statut du quarterback, ainsi que l'impact tactique attendu de l'alignement projeté sur le plan de match initial.
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="border-t border-white/10 my-6"></div>
+
+                            {/* Section 4 - Jeu offensif */}
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              Analyse du jeu offensif & discipline offensive
+                            </h3>
+                            
+                            <div className="space-y-3">
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Passing Game</h4>
+                                  <p className="text-white/80 text-sm">
+                                    Analyse de l'efficacité aérienne des équipes concernées, incluant l'EPA par passe, la capacité à générer des jeux explosifs (explosive pass rate), la séparation des receveurs et la réussite sur 3rd down.
+                                  </p>
+                                </div>
+                              </div>
+                              
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Red Zone Offense</h4>
+                                  <p className="text-white/80 text-sm">
+                                    Analyse de l'efficacité en red zone des équipes, basée sur le taux de conversion TD, la qualité du playcalling rapproché et la gestion du spacing offensif près de la ligne de but.
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="border-t border-white/10 my-6"></div>
+
+                            {/* Section 5 - Défense */}
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              Analyse de la défense & couverture
+                            </h3>
+                            
+                            <div className="space-y-3">
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Pass Rush & couverture</h4>
+                                  <p className="text-white/80 text-sm">
+                                    Analyse de la capacité défensive à générer de la pression sur le quarterback, la discipline en couverture, l'efficacité en 3rd down et les ajustements sur jeu aérien explosif.
+                                  </p>
+                                </div>
+                              </div>
+                              
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Run Defense</h4>
+                                  <p className="text-white/80 text-sm">
+                                    Analyse de la défense au sol, basée sur le taux de succès autorisé, l'occupation des gaps et la limitation des gains après contact.
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="border-t border-white/10 my-6"></div>
+
+                            {/* Section 6 - Facteurs externes */}
+                            <h3 className="text-white font-bold text-lg mb-3">
+                              Facteurs environnementaux & contextuels
+                            </h3>
+                            
+                            <div className="space-y-3">
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Météo & conditions de jeu</h4>
+                                  <p className="text-white/80 text-sm">
+                                    Analyse de l'impact des conditions météorologiques (vent, pluie, température), de l'état du terrain et de l'influence potentielle sur le passing game, le kicking game et les décisions stratégiques.
+                                  </p>
+                                </div>
+                              </div>
+                              
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Momentum & situation contextuelle</h4>
+                                  <p className="text-white/80 text-sm">
+                                    Analyse de l'élan récent de chaque équipe, des séries de victoires ou défaites, de l'importance stratégique du match (playoffs, division, wild card) et de l'impact psychologique du contexte.
+                                  </p>
+                                </div>
+                              </div>
+                              
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <h4 className="text-white font-bold text-sm mb-2">Analyse — Repos & fatigue</h4>
+                                  <p className="text-white/80 text-sm">
+                                    Analyse du nombre de jours de repos entre les matchs, de l'impact du voyage (distance, fuseaux horaires) et de la gestion de la fatigue physique et mentale des effectifs.
+                                  </p>
+                                </div>
                               </div>
                             </div>
                           </div>
