@@ -117,7 +117,6 @@ const Index = () => {
                 </div>
                 <span className="text-white font-semibold text-center text-[10px]">{dataCountStLouis.toLocaleString()} DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
               </div>
-
               {/* AI Analysis */}
               <div className="flex items-center justify-between gap-2 text-xs bg-green-600 px-4 py-[5px]">
                 <div className="flex items-center gap-2">
@@ -882,7 +881,6 @@ const Index = () => {
                 </div>
                 <span className="text-white font-semibold text-center text-[10px]">{dataCountVegas.toLocaleString()} DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
               </div>
-
               {/* AI Analysis */}
               <div className="flex items-center justify-between gap-2 text-xs py-[10px] bg-green-600 px-4">
                 <div className="flex items-center gap-2">
@@ -1644,7 +1642,6 @@ const Index = () => {
                 </div>
                 <span className="text-white font-semibold text-center text-[10px]">{dataCountWashington.toLocaleString()} DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
               </div>
-
               {/* AI Analysis */}
               <div className="flex items-center justify-between gap-2 text-xs py-[10px] bg-green-600 px-4">
                 <div className="flex items-center gap-2">
