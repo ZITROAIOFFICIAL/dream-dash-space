@@ -178,30 +178,18 @@ const Historique = () => {
         </div>
 
         {/* Global Summary */}
-        <div className="max-w-2xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div className="max-w-2xl mx-auto grid grid-cols-2 gap-4 mb-8">
           <div className="bg-black border-2 border-green-600 rounded-lg p-4 text-center">
             <div className="text-green-400 font-bold text-3xl">
-              {totalWins}
+              +{totalWins - totalLosses}
             </div>
-            <div className="text-white/70 text-xs mt-1 font-semibold">VICTOIRES</div>
-          </div>
-          <div className="bg-black border-2 border-red-600 rounded-lg p-4 text-center">
-            <div className="text-red-400 font-bold text-3xl">
-              {totalLosses}
-            </div>
-            <div className="text-white/70 text-xs mt-1 font-semibold">DÉFAITES</div>
+            <div className="text-white/70 text-xs mt-1 font-semibold">PARIS EN +</div>
           </div>
           <div className="bg-black border-2 border-green-600 rounded-lg p-4 text-center">
             <div className="text-green-400 font-bold text-3xl">
-              +{totalUnitsWon.toFixed(2)}
+              +{(totalUnitsWon - totalUnitsLost).toFixed(2)}
             </div>
-            <div className="text-white/70 text-xs mt-1 font-semibold">UNITS GAGNÉS</div>
-          </div>
-          <div className="bg-black border-2 border-red-600 rounded-lg p-4 text-center">
-            <div className="text-red-400 font-bold text-3xl">
-              -{totalUnitsLost.toFixed(2)}
-            </div>
-            <div className="text-white/70 text-xs mt-1 font-semibold">UNITS PERDUS</div>
+            <div className="text-white/70 text-xs mt-1 font-semibold">UNITS EN +</div>
           </div>
         </div>
 
