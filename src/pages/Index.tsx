@@ -747,8 +747,8 @@ const Index = () => {
               </div>
               
               <div className="mx-4 mt-4">
-                <div className="bg-green-600 rounded-lg px-10 py-4 text-center">
-                  <div className="text-4xl font-black text-white">
+                <div className="bg-green-600 rounded-lg px-10 py-2 text-center">
+                  <div className="text-3xl font-black text-white">
                     x{multiplierStLouis.toFixed(2)}
                   </div>
                 </div>
@@ -1506,8 +1506,8 @@ const Index = () => {
               </div>
               
               <div className="mx-4 mt-4">
-                <div className="bg-green-600 rounded-lg px-6 py-2 text-center">
-                  <div className="text-3xl font-black text-white">
+                <div className="bg-green-600 rounded-lg px-6 py-1.5 text-center">
+                  <div className="text-2xl font-black text-white">
                     x{multiplierVegas.toFixed(2)}
                   </div>
                 </div>
@@ -2083,8 +2083,8 @@ const Index = () => {
               </div>
               
               <div className="mx-4 mt-4">
-                <div className="bg-green-600 rounded-lg px-6 py-2 text-center">
-                  <div className="text-3xl font-black text-white">
+                <div className="bg-green-600 rounded-lg px-6 py-1.5 text-center">
+                  <div className="text-2xl font-black text-white">
                     x{multiplierWashington.toFixed(2)}
                   </div>
                 </div>
