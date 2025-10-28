@@ -737,7 +737,7 @@ const Index = () => {
                 </Dialog>
               </div>
 
-              <Separator className="bg-gray-600" />
+              <Separator className="bg-gray-600 h-[2px]" />
 
               {/* Odds Display */}
               <div className="flex justify-center pt-4 pb-4">
@@ -845,7 +845,7 @@ const Index = () => {
                 </div>
               </div>
 
-              <Separator className="bg-gray-600" />
+              <Separator className="bg-gray-600 h-[2px]" />
 
               {/* DraftKings Section */}
               <div className="pt-0">
@@ -1502,7 +1502,7 @@ const Index = () => {
                 </Dialog>
               </div>
 
-              <Separator className="bg-gray-600" />
+              <Separator className="bg-gray-600 h-[2px]" />
 
               {/* Odds Display */}
               <div className="flex justify-center pt-4 pb-4">
@@ -1609,7 +1609,7 @@ const Index = () => {
                 </div>
               </div>
 
-              <Separator className="bg-gray-600" />
+              <Separator className="bg-gray-600 h-[2px]" />
 
               {/* DraftKings Section */}
               <div className="pt-0">
@@ -2083,7 +2083,7 @@ const Index = () => {
                 </DialogContent>
               </Dialog>
 
-              <Separator className="bg-gray-600" />
+              <Separator className="bg-gray-600 h-[2px]" />
 
               {/* Odds Display */}
               <div className="flex justify-center pt-4 pb-4">
@@ -2190,7 +2190,7 @@ const Index = () => {
                 </div>
               </div>
 
-              <Separator className="bg-gray-600" />
+              <Separator className="bg-gray-600 h-[2px]" />
 
               {/* BetMGM Section */}
               <div className="pt-0">
