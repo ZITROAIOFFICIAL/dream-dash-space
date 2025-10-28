@@ -950,13 +950,13 @@ const Index = () => {
               {/* Middle section with vertical borders */}
               <div className="border-x-[2px] border-green-600">
               {/* Odds Display */}
-              <div className="flex justify-center pt-5 pb-0">
+              <div className="flex justify-center pt-2 pb-0">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
                   MULTIPLICATEUR DE MISE
                 </div>
               </div>
               
-              <div className="mx-4 mt-4">
+              <div className="mx-4 mt-2">
                 <div className="bg-green-600 rounded-lg px-10 py-2 text-center">
                   <div className="text-3xl font-black text-white">
                     x{multiplierStLouis.toFixed(2)}
