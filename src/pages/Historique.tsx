@@ -8,95 +8,88 @@ import vegasLogo from "@/assets/vegas-logo-new.png";
 import tampaLogo from "@/assets/tampa-logo-new.png";
 import washingtonLogo from "@/assets/washington-logo.png";
 import kansasCityLogo from "@/assets/kansascity-logo.png";
-
 const Historique = () => {
-  const history = [
-    {
-      id: 1,
-      teamHome: "ST. LOUIS",
-      teamAway: "PITTSBURGH",
-      league: "NHL",
-      betType: "MONEYLINE",
-      prediction: "VICTOIRE",
-      odds: -105,
-      betAmount: 100,
-      result: "won",
-      date: "7:00 PM",
-      time: "7:00 PM",
-      aiPercent: 92,
-      multiplier: 1.95,
-      teamHomeLogo: stLouisLogo,
-      teamAwayLogo: pittsburghLogo
-    },
-    {
-      id: 2,
-      teamHome: "WASHINGTON",
-      teamAway: "KANSAS CITY",
-      league: "NFL",
-      betType: "UNDER/OVER",
-      prediction: "UNDER 47.5",
-      odds: 488,
-      betAmount: 100,
-      result: "won",
-      date: "1:00 PM",
-      time: "1:00 PM",
-      aiPercent: 85,
-      multiplier: 5.88,
-      teamHomeLogo: washingtonLogo,
-      teamAwayLogo: kansasCityLogo
-    },
-    {
-      id: 3,
-      teamHome: "VEGAS",
-      teamAway: "TAMPA BAY",
-      league: "NHL",
-      betType: "SPREAD",
-      prediction: "VEGAS -1.5",
-      odds: -136,
-      betAmount: 100,
-      result: "lost",
-      date: "9:00 PM",
-      time: "9:00 PM",
-      aiPercent: 88,
-      multiplier: 1.74,
-      teamHomeLogo: vegasLogo,
-      teamAwayLogo: tampaLogo
-    },
-    {
-      id: 4,
-      teamHome: "PITTSBURGH",
-      teamAway: "ST. LOUIS",
-      league: "NHL",
-      betType: "MONEYLINE",
-      prediction: "VICTOIRE",
-      odds: -120,
-      betAmount: 100,
-      result: "won",
-      date: "7:30 PM",
-      time: "7:30 PM",
-      aiPercent: 78,
-      multiplier: 1.83,
-      teamHomeLogo: pittsburghLogo,
-      teamAwayLogo: stLouisLogo
-    },
-    {
-      id: 5,
-      teamHome: "KANSAS CITY",
-      teamAway: "TAMPA BAY",
-      league: "NFL",
-      betType: "SPREAD",
-      prediction: "KANSAS CITY -3.5",
-      odds: -110,
-      betAmount: 100,
-      result: "pending",
-      date: "EN COURS",
-      time: "4:00 PM",
-      aiPercent: 81,
-      multiplier: 1.91,
-      teamHomeLogo: kansasCityLogo,
-      teamAwayLogo: tampaLogo
-    }
-  ];
+  const history = [{
+    id: 1,
+    teamHome: "ST. LOUIS",
+    teamAway: "PITTSBURGH",
+    league: "NHL",
+    betType: "MONEYLINE",
+    prediction: "VICTOIRE",
+    odds: -105,
+    betAmount: 100,
+    result: "won",
+    date: "7:00 PM",
+    time: "7:00 PM",
+    aiPercent: 92,
+    multiplier: 1.95,
+    teamHomeLogo: stLouisLogo,
+    teamAwayLogo: pittsburghLogo
+  }, {
+    id: 2,
+    teamHome: "WASHINGTON",
+    teamAway: "KANSAS CITY",
+    league: "NFL",
+    betType: "UNDER/OVER",
+    prediction: "UNDER 47.5",
+    odds: 488,
+    betAmount: 100,
+    result: "won",
+    date: "1:00 PM",
+    time: "1:00 PM",
+    aiPercent: 85,
+    multiplier: 5.88,
+    teamHomeLogo: washingtonLogo,
+    teamAwayLogo: kansasCityLogo
+  }, {
+    id: 3,
+    teamHome: "VEGAS",
+    teamAway: "TAMPA BAY",
+    league: "NHL",
+    betType: "SPREAD",
+    prediction: "VEGAS -1.5",
+    odds: -136,
+    betAmount: 100,
+    result: "lost",
+    date: "9:00 PM",
+    time: "9:00 PM",
+    aiPercent: 88,
+    multiplier: 1.74,
+    teamHomeLogo: vegasLogo,
+    teamAwayLogo: tampaLogo
+  }, {
+    id: 4,
+    teamHome: "PITTSBURGH",
+    teamAway: "ST. LOUIS",
+    league: "NHL",
+    betType: "MONEYLINE",
+    prediction: "VICTOIRE",
+    odds: -120,
+    betAmount: 100,
+    result: "won",
+    date: "7:30 PM",
+    time: "7:30 PM",
+    aiPercent: 78,
+    multiplier: 1.83,
+    teamHomeLogo: pittsburghLogo,
+    teamAwayLogo: stLouisLogo
+  }, {
+    id: 5,
+    teamHome: "KANSAS CITY",
+    teamAway: "TAMPA BAY",
+    league: "NFL",
+    betType: "SPREAD",
+    prediction: "KANSAS CITY -3.5",
+    odds: -110,
+    betAmount: 100,
+    result: "pending",
+    date: "EN COURS",
+    time: "4:00 PM",
+    aiPercent: 81,
+    multiplier: 1.91,
+    teamHomeLogo: kansasCityLogo,
+    teamAwayLogo: tampaLogo
+  }];
 
   // Calculate units won/lost
   const calculateUnits = (result: string, multiplier: number) => {
@@ -109,40 +102,32 @@ const Historique = () => {
   };
 
   // Calculate totals
-  const totalWins = history.filter((h) => h.result === "won").length;
-  const totalLosses = history.filter((h) => h.result === "lost").length;
-  const totalUnitsWon = history
-    .filter((h) => h.result === "won")
-    .reduce((sum, h) => sum + (h.multiplier - 1), 0);
-  const totalUnitsLost = history.filter((h) => h.result === "lost").length; // Each loss = -1 unit
+  const totalWins = history.filter(h => h.result === "won").length;
+  const totalLosses = history.filter(h => h.result === "lost").length;
+  const totalUnitsWon = history.filter(h => h.result === "won").reduce((sum, h) => sum + (h.multiplier - 1), 0);
+  const totalUnitsLost = history.filter(h => h.result === "lost").length; // Each loss = -1 unit
 
   // Get units badge for each bet
   const getUnitsBadge = (result: string, multiplier: number) => {
     const units = calculateUnits(result, multiplier);
     if (result === "won") {
-      return (
-        <div className="bg-green-600 rounded-lg px-6 py-3 text-center">
+      return <div className="bg-green-600 rounded-lg px-6 py-3 text-center">
           <div className="text-xl font-bold text-white">
             +{units.toFixed(2)} UNITS
           </div>
-        </div>
-      );
+        </div>;
     } else if (result === "lost") {
-      return (
-        <div className="bg-red-600 rounded-lg px-6 py-3 text-center">
+      return <div className="bg-red-600 rounded-lg px-6 py-3 text-center">
           <div className="text-xl font-bold text-white">
             -1.00 UNITS
           </div>
-        </div>
-      );
+        </div>;
     } else {
-      return (
-        <div className="bg-gray-600 rounded-lg px-6 py-3 text-center">
+      return <div className="bg-gray-600 rounded-lg px-6 py-3 text-center">
           <div className="text-xl font-bold text-white">
             EN COURS
           </div>
-        </div>
-      );
+        </div>;
     }
   };
 
@@ -150,7 +135,6 @@ const Historique = () => {
   const getCashoutInfo = (result: string, betAmount: number, multiplier: number) => {
     const cashout = betAmount * multiplier;
     const profit = cashout - betAmount;
-
     if (result === "won") {
       return {
         amount: `$${cashout.toFixed(2)}`,
@@ -171,9 +155,7 @@ const Historique = () => {
       };
     }
   };
-
-  return (
-    <DashboardLayout>
+  return <DashboardLayout>
       <div className="space-y-8">
         {/* Header Section */}
         <div className="text-center space-y-2 mb-8">
@@ -213,19 +195,10 @@ const Historique = () => {
 
         {/* History Cards */}
         <div className="flex flex-col gap-6">
-          {history.map((item) => {
-            const cashoutInfo = getCashoutInfo(item.result, item.betAmount, item.multiplier);
-            const borderColor = item.result === "won" 
-              ? "border-green-600" 
-              : item.result === "lost" 
-              ? "border-red-600" 
-              : "border-gray-600";
-
-            return (
-              <Card
-                key={item.id}
-                className={`w-full max-w-md bg-black border-2 ${borderColor} shadow-2xl overflow-hidden mx-auto rounded-lg`}
-              >
+          {history.map(item => {
+          const cashoutInfo = getCashoutInfo(item.result, item.betAmount, item.multiplier);
+          const borderColor = item.result === "won" ? "border-green-600" : item.result === "lost" ? "border-red-600" : "border-gray-600";
+          return <Card key={item.id} className={`w-full max-w-md bg-black border-2 ${borderColor} shadow-2xl overflow-hidden mx-auto rounded-lg`}>
                 {/* Units Result Badge - Top */}
                 <div className="mx-4 mt-4">
                   {getUnitsBadge(item.result, item.multiplier)}
@@ -233,19 +206,11 @@ const Historique = () => {
 
                 {/* Multiplier Badge */}
                 <div className="mx-4 mt-4">
-                  <div className="bg-green-600 rounded-lg px-10 py-2 text-center">
-                    <div className="text-xl font-bold text-white">
-                      x{item.multiplier.toFixed(2)}
-                    </div>
-                  </div>
+                  
                 </div>
 
                 {/* PARIER SUR Section */}
-                <div className="text-center pb-2 pt-6">
-                  <div className="text-sm font-bold text-white tracking-wider mb-2">
-                    PARIER SUR
-                  </div>
-                </div>
+                
 
                 {/* Match Card */}
                 <div className="mx-4">
@@ -253,11 +218,7 @@ const Historique = () => {
                     {/* League and Time */}
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-2">
-                        <img 
-                          src={item.league === "NHL" ? nhlLogo : nflLogo} 
-                          alt={item.league}
-                          className="w-6 h-6 object-contain"
-                        />
+                        <img src={item.league === "NHL" ? nhlLogo : nflLogo} alt={item.league} className="w-6 h-6 object-contain" />
                         <span className="text-white text-xs font-bold">{item.league}</span>
                       </div>
                       <span className="text-white/70 text-xs font-semibold">
@@ -269,11 +230,7 @@ const Historique = () => {
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex flex-col items-center">
                         <div className="w-12 h-12 mb-1 flex items-center justify-center">
-                          <img 
-                            src={item.teamHomeLogo} 
-                            alt={item.teamHome}
-                            className="max-w-full max-h-full object-contain"
-                          />
+                          <img src={item.teamHomeLogo} alt={item.teamHome} className="max-w-full max-h-full object-contain" />
                         </div>
                         <span className="font-bold text-[10px] text-white">{item.teamHome}</span>
                       </div>
@@ -282,11 +239,7 @@ const Historique = () => {
 
                       <div className="flex flex-col items-center">
                         <div className="w-12 h-12 mb-1 flex items-center justify-center">
-                          <img 
-                            src={item.teamAwayLogo} 
-                            alt={item.teamAway}
-                            className="max-w-full max-h-full object-contain"
-                          />
+                          <img src={item.teamAwayLogo} alt={item.teamAway} className="max-w-full max-h-full object-contain" />
                         </div>
                         <span className="font-bold text-[10px] text-white">{item.teamAway}</span>
                       </div>
@@ -301,44 +254,21 @@ const Historique = () => {
                 </div>
 
                 {/* MISE Section */}
-                <div className="text-center pb-1 pt-4">
-                  <div className="text-sm font-bold text-white tracking-wider mb-2">
-                    MISE
-                  </div>
-                </div>
+                
 
                 {/* 1 Units Badge */}
                 <div className="mx-4 mt-0">
-                  <div className="bg-green-600 rounded-lg px-10 py-2 text-center">
-                    <div className="text-xl font-bold text-white">
-                      1 UNITS
-                    </div>
-                  </div>
+                  
                 </div>
 
                 {/* Cashout Section */}
                 <div className="mx-4 mt-4 mb-4">
-                  <div className="border-2 border-green-600 rounded-lg bg-black/40 backdrop-blur-sm p-4">
-                    <div className="text-center space-y-1">
-                      <div className="text-white/70 text-xs font-bold tracking-wider">
-                        CASHOUT
-                      </div>
-                      <div className={`text-3xl font-bold ${cashoutInfo.colorClass}`}>
-                        {cashoutInfo.amount}
-                      </div>
-                      <div className="text-white/50 text-sm">
-                        {cashoutInfo.profit}
-                      </div>
-                    </div>
-                  </div>
+                  
                 </div>
-              </Card>
-            );
-          })}
+              </Card>;
+        })}
         </div>
       </div>
-    </DashboardLayout>
-  );
+    </DashboardLayout>;
 };
-
 export default Historique;
