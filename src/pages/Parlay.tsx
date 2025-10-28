@@ -1,7 +1,7 @@
 import DashboardLayout from "@/components/DashboardLayout";
 import { Card, CardHeader } from "@/components/ui/card";
 import { useState, useEffect } from "react";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Loader2 } from "lucide-react";
 import stlouisLogo from "@/assets/stlouis-logo-new.png";
 import pittsburghLogo from "@/assets/pittsburgh-logo-new.png";
@@ -151,6 +151,8 @@ const Parlay = () => {
                 {/* Loading Dialog */}
                 <Dialog open={isLoadingDialogOpenParlay1} onOpenChange={setIsLoadingDialogOpenParlay1}>
                   <DialogContent className="sm:max-w-md bg-black border-none p-0 flex items-center justify-center [&>button]:hidden">
+                    <DialogTitle className="sr-only">Chargement de l'analyse IA</DialogTitle>
+                    <DialogDescription className="sr-only">Veuillez patienter pendant que nous chargeons l'analyse IA pour ce parlay.</DialogDescription>
                     <div className="w-full h-full min-h-[400px] bg-black flex flex-col items-center justify-center gap-8 p-12">
                       <div className="relative w-24 h-24 flex-shrink-0">
                         <Loader2 className="w-24 h-24 text-white animate-spin absolute" />
@@ -172,6 +174,146 @@ const Parlay = () => {
                           <span className="animate-bounce" style={{ animationDelay: '400ms', animationDuration: '1.4s' }}>.</span>
                         </span>
                       </p>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+
+                {/* Analysis Dialog for Parlay 1 */}
+                <Dialog open={isAnalysisDialogOpenParlay1} onOpenChange={setIsAnalysisDialogOpenParlay1}>
+                  <DialogContent className="sm:max-w-2xl bg-black border-[3px] border-green-600 p-0 max-h-[90vh] overflow-y-auto">
+                    <DialogTitle className="sr-only">Analyse IA du Parlay</DialogTitle>
+                    <DialogDescription className="sr-only">Analyse détaillée de l'IA pour ce parlay incluant les probabilités et facteurs clés.</DialogDescription>
+                    <div className="bg-black/40">
+                      <div className="flex items-center justify-center gap-3 py-2 px-6">
+                        <div className="relative w-6 h-6 flex-shrink-0">
+                          <Loader2 className="w-6 h-6 text-white animate-spin absolute" />
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <span className="text-white font-bold text-[8px]">IA</span>
+                          </div>
+                        </div>
+                        <span className="text-white font-semibold text-center text-xs">{dataCountParlay1.toLocaleString()} DONNÉES ANALYSÉ PAR NOTRE IA POUR CE PARLAY JUSQU'À PRÉSENT</span>
+                      </div>
+                      <div className="text-center pb-2 px-6 flex items-center justify-center gap-2">
+                        <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                        <span className="text-white/70 text-sm">
+                          Dernière mise à jour IA : {currentTime.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="px-6 pb-6">
+                      {showAnalysisParlay1 && (
+                        <div className="mt-4 space-y-4 animate-fade-in">
+                          <div className="bg-green-600/15 border-2 border-green-600 rounded-lg p-4">
+                            <div className="text-center space-y-2">
+                              <div className="text-white font-bold text-sm">CHANCE DE GAGNER</div>
+                              <div className="text-green-400 font-bold text-4xl">74%</div>
+                              <div className="text-white/70 text-xs">STATISTIQUEMENT AVEC TOUTES CES DONNÉES CI-DESSOUS ANALYSÉES</div>
+                            </div>
+                            <div className="w-full bg-black/40 rounded-full h-3 overflow-hidden mt-3">
+                              <div className="bg-green-600 h-full rounded-full" style={{ width: '74%' }}></div>
+                            </div>
+                          </div>
+
+                          <div className="space-y-6">
+                            <h3 className="text-white font-bold text-lg mb-3">Analyse du marché & meilleures cotes</h3>
+                            <div className="space-y-3">
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <p className="text-white/80 text-sm">• Analyse de la probabilité implicite combinée du marché pour ce parlay, obtenue par conversion des cotes en pourcentage réel.</p>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <p className="text-white/80 text-sm">• Comparaison inter-bookmakers pour identifier les meilleures cotes disponibles sur chaque leg du parlay.</p>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="border-t border-white/10 my-6"></div>
+
+                            <h3 className="text-white font-bold text-lg mb-3">Analyse individuelle des paris</h3>
+                            <div className="space-y-3">
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <h4 className="text-white font-bold text-sm mb-2">Under 68.5 - Z. Flowers Receiving Yards</h4>
+                                  <p className="text-white/80 text-sm">Analyse des performances récentes de Z. Flowers, de la défense adverse et des conditions de jeu pour ce prop.</p>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <h4 className="text-white font-bold text-sm mb-2">Pittsburgh Moneyline (+140)</h4>
+                                  <p className="text-white/80 text-sm">Analyse des forces offensives et défensives de Pittsburgh face à Indianapolis, incluant le momentum et les matchups clés.</p>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <h4 className="text-white font-bold text-sm mb-2">Chicago Moneyline (-144)</h4>
+                                  <p className="text-white/80 text-sm">Analyse de l'avantage de Chicago contre Cincinnati, basée sur les performances récentes et les tendances H2H.</p>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <h4 className="text-white font-bold text-sm mb-2">New Orleans +13.5 Spread (-107)</h4>
+                                  <p className="text-white/80 text-sm">Analyse de la capacité de New Orleans à couvrir le spread de 13.5 points face aux Rams, incluant les facteurs défensifs et le style de jeu.</p>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="border-t border-white/10 my-6"></div>
+
+                            <h3 className="text-white font-bold text-lg mb-3">Facteurs de corrélation</h3>
+                            <div className="flex items-center gap-3">
+                              <div className="relative w-5 h-5 flex-shrink-0">
+                                <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <span className="text-white font-bold text-[7px]">IA</span>
+                                </div>
+                              </div>
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                <h4 className="text-white font-bold text-sm mb-2">Indépendance des paris</h4>
+                                <p className="text-white/80 text-sm">Analyse de l'indépendance statistique entre chaque leg du parlay pour valider l'absence de corrélations négatives significatives.</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </DialogContent>
                 </Dialog>
@@ -276,11 +418,9 @@ const Parlay = () => {
 
                 <Dialog open={isDialogOpenParlay1} onOpenChange={setIsDialogOpenParlay1}>
                   <DialogContent className="sm:max-w-md bg-black border-[3px] border-green-600">
+                    <DialogTitle className="text-center text-white font-bold text-lg mb-2">MODIFIER VOTRE MISE</DialogTitle>
+                    <DialogDescription className="text-center text-white/70 text-sm">Entrez le montant que vous souhaitez parier</DialogDescription>
                     <div className="space-y-4">
-                      <div className="text-center">
-                        <h3 className="text-white font-bold text-lg mb-2">MODIFIER VOTRE MISE</h3>
-                        <p className="text-white/70 text-sm">Entrez le montant que vous souhaitez parier</p>
-                      </div>
                       <div className="space-y-2">
                         <input
                           type="number"
@@ -349,6 +489,8 @@ const Parlay = () => {
                 {/* Loading Dialog */}
                 <Dialog open={isLoadingDialogOpenParlay2} onOpenChange={setIsLoadingDialogOpenParlay2}>
                   <DialogContent className="sm:max-w-md bg-black border-none p-0 flex items-center justify-center [&>button]:hidden">
+                    <DialogTitle className="sr-only">Chargement de l'analyse IA</DialogTitle>
+                    <DialogDescription className="sr-only">Veuillez patienter pendant que nous chargeons l'analyse IA pour ce parlay.</DialogDescription>
                     <div className="w-full h-full min-h-[400px] bg-black flex flex-col items-center justify-center gap-8 p-12">
                       <div className="relative w-24 h-24 flex-shrink-0">
                         <Loader2 className="w-24 h-24 text-white animate-spin absolute" />
@@ -370,6 +512,134 @@ const Parlay = () => {
                           <span className="animate-bounce" style={{ animationDelay: '400ms', animationDuration: '1.4s' }}>.</span>
                         </span>
                       </p>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+
+                {/* Analysis Dialog for Parlay 2 */}
+                <Dialog open={isAnalysisDialogOpenParlay2} onOpenChange={setIsAnalysisDialogOpenParlay2}>
+                  <DialogContent className="sm:max-w-2xl bg-black border-[3px] border-green-600 p-0 max-h-[90vh] overflow-y-auto">
+                    <DialogTitle className="sr-only">Analyse IA du Parlay</DialogTitle>
+                    <DialogDescription className="sr-only">Analyse détaillée de l'IA pour ce parlay incluant les probabilités et facteurs clés.</DialogDescription>
+                    <div className="bg-black/40">
+                      <div className="flex items-center justify-center gap-3 py-2 px-6">
+                        <div className="relative w-6 h-6 flex-shrink-0">
+                          <Loader2 className="w-6 h-6 text-white animate-spin absolute" />
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <span className="text-white font-bold text-[8px]">IA</span>
+                          </div>
+                        </div>
+                        <span className="text-white font-semibold text-center text-xs">{dataCountParlay2.toLocaleString()} DONNÉES ANALYSÉ PAR NOTRE IA POUR CE PARLAY JUSQU'À PRÉSENT</span>
+                      </div>
+                      <div className="text-center pb-2 px-6 flex items-center justify-center gap-2">
+                        <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                        <span className="text-white/70 text-sm">
+                          Dernière mise à jour IA : {currentTime.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="px-6 pb-6">
+                      {showAnalysisParlay2 && (
+                        <div className="mt-4 space-y-4 animate-fade-in">
+                          <div className="bg-green-600/15 border-2 border-green-600 rounded-lg p-4">
+                            <div className="text-center space-y-2">
+                              <div className="text-white font-bold text-sm">CHANCE DE GAGNER</div>
+                              <div className="text-green-400 font-bold text-4xl">85%</div>
+                              <div className="text-white/70 text-xs">STATISTIQUEMENT AVEC TOUTES CES DONNÉES CI-DESSOUS ANALYSÉES</div>
+                            </div>
+                            <div className="w-full bg-black/40 rounded-full h-3 overflow-hidden mt-3">
+                              <div className="bg-green-600 h-full rounded-full" style={{ width: '85%' }}></div>
+                            </div>
+                          </div>
+
+                          <div className="space-y-6">
+                            <h3 className="text-white font-bold text-lg mb-3">Analyse du marché & meilleures cotes</h3>
+                            <div className="space-y-3">
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <p className="text-white/80 text-sm">• Analyse de la probabilité implicite combinée du marché pour ce parlay, obtenue par conversion des cotes en pourcentage réel.</p>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <p className="text-white/80 text-sm">• Comparaison inter-bookmakers pour identifier les meilleures cotes disponibles sur chaque leg du parlay.</p>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="border-t border-white/10 my-6"></div>
+
+                            <h3 className="text-white font-bold text-lg mb-3">Analyse individuelle des paris</h3>
+                            <div className="space-y-3">
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <h4 className="text-white font-bold text-sm mb-2">Pittsburgh Moneyline (+140)</h4>
+                                  <p className="text-white/80 text-sm">Analyse des forces offensives et défensives de Pittsburgh face à Indianapolis, incluant le momentum et les matchups clés.</p>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <h4 className="text-white font-bold text-sm mb-2">Under 68.5 - Z. Flowers Receiving Yards</h4>
+                                  <p className="text-white/80 text-sm">Analyse des performances récentes de Z. Flowers, de la défense adverse et des conditions de jeu pour ce prop.</p>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-5 h-5 flex-shrink-0">
+                                  <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="text-white font-bold text-[7px]">IA</span>
+                                  </div>
+                                </div>
+                                <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                  <h4 className="text-white font-bold text-sm mb-2">Chicago Moneyline (-144)</h4>
+                                  <p className="text-white/80 text-sm">Analyse de l'avantage de Chicago contre Cincinnati, basée sur les performances récentes et les tendances H2H.</p>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="border-t border-white/10 my-6"></div>
+
+                            <h3 className="text-white font-bold text-lg mb-3">Facteurs de corrélation</h3>
+                            <div className="flex items-center gap-3">
+                              <div className="relative w-5 h-5 flex-shrink-0">
+                                <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <span className="text-white font-bold text-[7px]">IA</span>
+                                </div>
+                              </div>
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                <h4 className="text-white font-bold text-sm mb-2">Indépendance des paris</h4>
+                                <p className="text-white/80 text-sm">Analyse de l'indépendance statistique entre chaque leg du parlay pour valider l'absence de corrélations négatives significatives.</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </DialogContent>
                 </Dialog>
@@ -459,11 +729,9 @@ const Parlay = () => {
 
                 <Dialog open={isDialogOpenParlay2} onOpenChange={setIsDialogOpenParlay2}>
                   <DialogContent className="sm:max-w-md bg-black border-[3px] border-green-600">
+                    <DialogTitle className="text-center text-white font-bold text-lg mb-2">MODIFIER VOTRE MISE</DialogTitle>
+                    <DialogDescription className="text-center text-white/70 text-sm">Entrez le montant que vous souhaitez parier</DialogDescription>
                     <div className="space-y-4">
-                      <div className="text-center">
-                        <h3 className="text-white font-bold text-lg mb-2">MODIFIER VOTRE MISE</h3>
-                        <p className="text-white/70 text-sm">Entrez le montant que vous souhaitez parier</p>
-                      </div>
                       <div className="space-y-2">
                         <input
                           type="number"
