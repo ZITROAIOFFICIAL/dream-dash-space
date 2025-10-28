@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
-import { Loader2 } from "lucide-react";
+import { Loader2, ChevronDown, ChevronUp, X } from "lucide-react";
 import stlouisLogo from "@/assets/stlouis-logo-new.png";
 import pittsburghLogo from "@/assets/pittsburgh-logo-new.png";
 import vegasLogo from "@/assets/vegas-logo.png";
@@ -25,6 +25,15 @@ const Index = () => {
   const [sortByMultiplier, setSortByMultiplier] = useState<string>('high');
   const [sortByAI, setSortByAI] = useState<string>('high');
   const [lastSortKey, setLastSortKey] = useState<'ai' | 'multiplier'>('ai');
+  const [showFilters, setShowFilters] = useState(true);
+
+  const resetFilters = () => {
+    setSelectedLeague('all');
+    setSelectedBetType('all');
+    setSortByMultiplier('high');
+    setSortByAI('high');
+    setLastSortKey('ai');
+  };
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
@@ -152,65 +161,88 @@ const Index = () => {
         </div>
 
         {/* Filters Section */}
-        <div className="max-w-md mx-auto mb-8 space-y-3">
-          {/* Sport Filter */}
-          <div>
-            <label className="text-white text-xs font-bold mb-1.5 block">SPORT</label>
-            <Select value={selectedLeague} onValueChange={setSelectedLeague}>
-              <SelectTrigger className="w-full bg-black border-2 border-green-600 text-white hover:border-green-500 transition-colors">
-                <SelectValue placeholder="Sport" />
-              </SelectTrigger>
-              <SelectContent className="bg-black border-2 border-white/20 z-50">
-                <SelectItem value="all" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Tous les sports</SelectItem>
-                <SelectItem value="NHL" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">NHL</SelectItem>
-                <SelectItem value="NFL" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">NFL</SelectItem>
-              </SelectContent>
-            </Select>
+        <div className="max-w-md mx-auto mb-8">
+          {/* Filters Header */}
+          <div className="flex items-center justify-between mb-4">
+            <button
+              onClick={() => setShowFilters(!showFilters)}
+              className="flex items-center gap-2 text-white font-bold text-sm hover:text-green-500 transition-colors"
+            >
+              <span>FILTRES</span>
+              {showFilters ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            </button>
+            <button
+              onClick={resetFilters}
+              className="flex items-center gap-1 text-white/70 hover:text-white text-xs transition-colors"
+            >
+              <X className="w-4 h-4" />
+              <span>Effacer</span>
+            </button>
           </div>
 
-          {/* Bet Type Filter */}
-          <div>
-            <label className="text-white text-xs font-bold mb-1.5 block">TYPE DE BET</label>
-            <Select value={selectedBetType} onValueChange={setSelectedBetType}>
-              <SelectTrigger className="w-full bg-black border-2 border-green-600 text-white hover:border-green-500 transition-colors">
-                <SelectValue placeholder="Type de pari" />
-              </SelectTrigger>
-              <SelectContent className="bg-black border-2 border-white/20 z-50">
-                <SelectItem value="all" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Tous les types</SelectItem>
-                <SelectItem value="MONEYLINE" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">MONEYLINE</SelectItem>
-                <SelectItem value="SPREAD" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">SPREAD</SelectItem>
-                <SelectItem value="UNDER/OVER" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">UNDER/OVER</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+          {/* Filters Content */}
+          {showFilters && (
+            <div className="space-y-3">
+              {/* Sport Filter */}
+              <div>
+                <label className="text-white text-xs font-bold mb-1.5 block">SPORT</label>
+                <Select value={selectedLeague} onValueChange={setSelectedLeague}>
+                  <SelectTrigger className="w-full bg-black border-2 border-green-600 text-white hover:border-green-500 transition-colors">
+                    <SelectValue placeholder="Sport" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-black border-2 border-white/20 z-50">
+                    <SelectItem value="all" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Tous les sports</SelectItem>
+                    <SelectItem value="NHL" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">NHL</SelectItem>
+                    <SelectItem value="NFL" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">NFL</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
 
-          {/* Sort by Multiplier */}
-          <div>
-            <label className="text-white text-xs font-bold mb-1.5 block">MULTIPLICATEUR DE MISE</label>
-            <Select value={sortByMultiplier} onValueChange={(v) => { setSortByMultiplier(v); setLastSortKey('multiplier'); }}>
-              <SelectTrigger className="w-full bg-black border-2 border-green-600 text-white hover:border-green-500 transition-colors">
-                <SelectValue placeholder="Multiplicateur de mise" />
-              </SelectTrigger>
-              <SelectContent className="bg-black border-2 border-white/20 z-50">
-                <SelectItem value="high" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Plus haut multiplicateur</SelectItem>
-                <SelectItem value="low" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Plus bas multiplicateur</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+              {/* Bet Type Filter */}
+              <div>
+                <label className="text-white text-xs font-bold mb-1.5 block">TYPE DE BET</label>
+                <Select value={selectedBetType} onValueChange={setSelectedBetType}>
+                  <SelectTrigger className="w-full bg-black border-2 border-green-600 text-white hover:border-green-500 transition-colors">
+                    <SelectValue placeholder="Type de pari" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-black border-2 border-white/20 z-50">
+                    <SelectItem value="all" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Tous les types</SelectItem>
+                    <SelectItem value="MONEYLINE" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">MONEYLINE</SelectItem>
+                    <SelectItem value="SPREAD" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">SPREAD</SelectItem>
+                    <SelectItem value="UNDER/OVER" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">UNDER/OVER</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
 
-          {/* Sort by AI % */}
-          <div>
-            <label className="text-white text-xs font-bold mb-1.5 block">% DE CHANCE DE GAGNER SELON IA</label>
-            <Select value={sortByAI} onValueChange={(v) => { setSortByAI(v); setLastSortKey('ai'); }}>
-              <SelectTrigger className="w-full bg-black border-2 border-green-600 text-white hover:border-green-500 transition-colors">
-                <SelectValue placeholder="Chance de gagner IA %" />
-              </SelectTrigger>
-              <SelectContent className="bg-black border-2 border-white/20 z-50">
-                <SelectItem value="high" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Plus haut %</SelectItem>
-                <SelectItem value="low" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Plus bas %</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+              {/* Sort by Multiplier */}
+              <div>
+                <label className="text-white text-xs font-bold mb-1.5 block">MULTIPLICATEUR DE MISE</label>
+                <Select value={sortByMultiplier} onValueChange={(v) => { setSortByMultiplier(v); setLastSortKey('multiplier'); }}>
+                  <SelectTrigger className="w-full bg-black border-2 border-green-600 text-white hover:border-green-500 transition-colors">
+                    <SelectValue placeholder="Multiplicateur de mise" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-black border-2 border-white/20 z-50">
+                    <SelectItem value="high" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Plus haut multiplicateur</SelectItem>
+                    <SelectItem value="low" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Plus bas multiplicateur</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Sort by AI % */}
+              <div>
+                <label className="text-white text-xs font-bold mb-1.5 block">% DE CHANCE DE GAGNER SELON IA</label>
+                <Select value={sortByAI} onValueChange={(v) => { setSortByAI(v); setLastSortKey('ai'); }}>
+                  <SelectTrigger className="w-full bg-black border-2 border-green-600 text-white hover:border-green-500 transition-colors">
+                    <SelectValue placeholder="Chance de gagner IA %" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-black border-2 border-white/20 z-50">
+                    <SelectItem value="high" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Plus haut %</SelectItem>
+                    <SelectItem value="low" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Plus bas %</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* No Results Message */}

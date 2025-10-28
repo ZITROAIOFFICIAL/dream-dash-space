@@ -2,7 +2,7 @@ import DashboardLayout from "@/components/DashboardLayout";
 import { Card, CardHeader } from "@/components/ui/card";
 import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogHeader, DialogTrigger } from "@/components/ui/dialog";
-import { Loader2 } from "lucide-react";
+import { Loader2, ChevronDown, ChevronUp, X } from "lucide-react";
 import washingtonLogo from "@/assets/washington-logo.png";
 import kansascityLogo from "@/assets/kansascity-logo.png";
 import stlouisLogo from "@/assets/stlouis-logo-new.png";
@@ -24,6 +24,14 @@ const Parlay = () => {
   const [sortByMultiplier, setSortByMultiplier] = useState<string>('high');
   const [sortByAI, setSortByAI] = useState<string>('high');
   const [lastSortKey, setLastSortKey] = useState<'ai' | 'multiplier'>('ai');
+  const [showFilters, setShowFilters] = useState(true);
+
+  const resetFilters = () => {
+    setSelectedLeague('all');
+    setSortByMultiplier('high');
+    setSortByAI('high');
+    setLastSortKey('ai');
+  };
 
   useEffect(() => {
     const shouldBeFast = Math.random() < 0.85;
@@ -162,49 +170,72 @@ const Parlay = () => {
         </div>
 
         {/* Filters Section */}
-        <div className="max-w-md mx-auto mb-8 space-y-3">
-          {/* Sport Filter */}
-          <div>
-            <label className="text-white text-xs font-bold mb-1.5 block">SPORT</label>
-            <Select value={selectedLeague} onValueChange={setSelectedLeague}>
-              <SelectTrigger className="w-full bg-black border-2 border-green-600 text-white hover:border-green-500 transition-colors">
-                <SelectValue placeholder="Sport" />
-              </SelectTrigger>
-              <SelectContent className="bg-black border-2 border-white/20 z-50">
-                <SelectItem value="all" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Tous les sports</SelectItem>
-                <SelectItem value="NHL" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">NHL</SelectItem>
-                <SelectItem value="NFL" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">NFL</SelectItem>
-              </SelectContent>
-            </Select>
+        <div className="max-w-md mx-auto mb-8">
+          {/* Filters Header */}
+          <div className="flex items-center justify-between mb-4">
+            <button
+              onClick={() => setShowFilters(!showFilters)}
+              className="flex items-center gap-2 text-white font-bold text-sm hover:text-green-500 transition-colors"
+            >
+              <span>FILTRES</span>
+              {showFilters ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            </button>
+            <button
+              onClick={resetFilters}
+              className="flex items-center gap-1 text-white/70 hover:text-white text-xs transition-colors"
+            >
+              <X className="w-4 h-4" />
+              <span>Effacer</span>
+            </button>
           </div>
 
-          {/* Sort by Multiplier */}
-          <div>
-            <label className="text-white text-xs font-bold mb-1.5 block">MULTIPLICATEUR DE MISE</label>
-            <Select value={sortByMultiplier} onValueChange={(v) => { setSortByMultiplier(v); setLastSortKey('multiplier'); }}>
-              <SelectTrigger className="w-full bg-black border-2 border-green-600 text-white hover:border-green-500 transition-colors">
-                <SelectValue placeholder="Multiplicateur de mise" />
-              </SelectTrigger>
-              <SelectContent className="bg-black border-2 border-white/20 z-50">
-                <SelectItem value="high" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Plus haut multiplicateur</SelectItem>
-                <SelectItem value="low" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Plus bas multiplicateur</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+          {/* Filters Content */}
+          {showFilters && (
+            <div className="space-y-3">
+              {/* Sport Filter */}
+              <div>
+                <label className="text-white text-xs font-bold mb-1.5 block">SPORT</label>
+                <Select value={selectedLeague} onValueChange={setSelectedLeague}>
+                  <SelectTrigger className="w-full bg-black border-2 border-green-600 text-white hover:border-green-500 transition-colors">
+                    <SelectValue placeholder="Sport" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-black border-2 border-white/20 z-50">
+                    <SelectItem value="all" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Tous les sports</SelectItem>
+                    <SelectItem value="NHL" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">NHL</SelectItem>
+                    <SelectItem value="NFL" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">NFL</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
 
-          {/* Sort by AI % */}
-          <div>
-            <label className="text-white text-xs font-bold mb-1.5 block">% DE CHANCE DE GAGNER SELON IA</label>
-            <Select value={sortByAI} onValueChange={(v) => { setSortByAI(v); setLastSortKey('ai'); }}>
-              <SelectTrigger className="w-full bg-black border-2 border-green-600 text-white hover:border-green-500 transition-colors">
-                <SelectValue placeholder="Chance de gagner IA %" />
-              </SelectTrigger>
-              <SelectContent className="bg-black border-2 border-white/20 z-50">
-                <SelectItem value="high" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Plus haut %</SelectItem>
-                <SelectItem value="low" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Plus bas %</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+              {/* Sort by Multiplier */}
+              <div>
+                <label className="text-white text-xs font-bold mb-1.5 block">MULTIPLICATEUR DE MISE</label>
+                <Select value={sortByMultiplier} onValueChange={(v) => { setSortByMultiplier(v); setLastSortKey('multiplier'); }}>
+                  <SelectTrigger className="w-full bg-black border-2 border-green-600 text-white hover:border-green-500 transition-colors">
+                    <SelectValue placeholder="Multiplicateur de mise" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-black border-2 border-white/20 z-50">
+                    <SelectItem value="high" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Plus haut multiplicateur</SelectItem>
+                    <SelectItem value="low" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Plus bas multiplicateur</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Sort by AI % */}
+              <div>
+                <label className="text-white text-xs font-bold mb-1.5 block">% DE CHANCE DE GAGNER SELON IA</label>
+                <Select value={sortByAI} onValueChange={(v) => { setSortByAI(v); setLastSortKey('ai'); }}>
+                  <SelectTrigger className="w-full bg-black border-2 border-green-600 text-white hover:border-green-500 transition-colors">
+                    <SelectValue placeholder="Chance de gagner IA %" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-black border-2 border-white/20 z-50">
+                    <SelectItem value="high" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Plus haut %</SelectItem>
+                    <SelectItem value="low" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Plus bas %</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* No Results Message */}
