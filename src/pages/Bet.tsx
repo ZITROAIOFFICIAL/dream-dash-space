@@ -17,9 +17,10 @@ const Bet = () => {
   const [isPageLoading, setIsPageLoading] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date());
   useEffect(() => {
-    const shouldBeFast = Math.random() < 0.85; // 85% rapide, 15% lent
-    const randomDelay = shouldBeFast ? Math.random() * (700 - 500) + 500 // 0.5s à 0.7s
-    : 2000; // 2 secondes
+    const shouldBeFast = Math.random() < 0.60; // 60% rapide, 40% lent
+    const randomDelay = shouldBeFast 
+      ? Math.random() * (700 - 500) + 500 // 0.5s à 0.7s
+      : Math.random() * (3000 - 2000) + 2000; // 2s à 3s
     setTimeout(() => {
       setIsPageLoading(false);
     }, randomDelay);
