@@ -9,12 +9,19 @@ import stlouisLogo from "@/assets/stlouis-logo-new.png";
 import pittsburghLogo from "@/assets/pittsburgh-logo-new.png";
 import vegasLogo from "@/assets/vegas-logo.png";
 import tampaLogo from "@/assets/tampa-logo.png";
+import nflLogo from "@/assets/nfl-logo.png";
+import nhlLogo from "@/assets/nhl-logo.png";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const Parlay = () => {
   const [isPageLoading, setIsPageLoading] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [dataCountParlayNFL, setDataCountParlayNFL] = useState(12456);
   const [dataCountParlayNHL, setDataCountParlayNHL] = useState(9823);
+  
+  // Filter states
+  const [selectedLeague, setSelectedLeague] = useState<'all' | 'NHL' | 'NFL'>('all');
+  const [selectedMultiplier, setSelectedMultiplier] = useState<string>('all');
 
   useEffect(() => {
     const shouldBeFast = Math.random() < 0.85;
@@ -69,6 +76,23 @@ const Parlay = () => {
     return (numAmount * multiplier).toFixed(2);
   };
 
+  const shouldShowCard = (league: 'NHL' | 'NFL', multiplier: number) => {
+    if (selectedLeague !== 'all' && selectedLeague !== league) return false;
+    
+    if (selectedMultiplier !== 'all') {
+      if (selectedMultiplier === '1-2' && (multiplier < 1 || multiplier > 2)) return false;
+      if (selectedMultiplier === '2-3' && (multiplier < 2 || multiplier > 3)) return false;
+      if (selectedMultiplier === '3-4' && (multiplier < 3 || multiplier > 4)) return false;
+      if (selectedMultiplier === '4+' && multiplier < 4) return false;
+    }
+    
+    return true;
+  };
+
+  const showNFL = shouldShowCard('NFL', totalMultiplierNFL);
+  const showNHL = shouldShowCard('NHL', totalMultiplierNHL);
+  const hasVisibleCards = showNFL || showNHL;
+
   const handleShowAnalysisParlayNFL = () => {
     setIsLoadingDialogOpenParlayNFL(true);
     const randomDelay = Math.random() * (5000 - 1500) + 1500;
@@ -119,7 +143,62 @@ const Parlay = () => {
           <p className="text-white/70 text-sm">Les parlay avec la meilleur probabilité de réussite aujourd'hui</p>
         </div>
 
+        {/* Filters Section */}
+        <div className="max-w-md mx-auto mb-8 space-y-4">
+          {/* League Filter */}
+          <div className="flex gap-2">
+            <button
+              onClick={() => setSelectedLeague('all')}
+              className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg border-2 transition-colors ${
+                selectedLeague === 'all' ? 'border-green-600 bg-green-600/20' : 'border-white/20 bg-black'
+              }`}
+            >
+              <span className="text-white font-bold">TOUS</span>
+            </button>
+            <button
+              onClick={() => setSelectedLeague('NHL')}
+              className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg border-2 transition-colors ${
+                selectedLeague === 'NHL' ? 'border-green-600 bg-green-600/20' : 'border-white/20 bg-black'
+              }`}
+            >
+              <img src={nhlLogo} className="h-8 w-auto" alt="NHL" />
+              <span className="text-white font-bold">NHL</span>
+            </button>
+            <button
+              onClick={() => setSelectedLeague('NFL')}
+              className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg border-2 transition-colors ${
+                selectedLeague === 'NFL' ? 'border-green-600 bg-green-600/20' : 'border-white/20 bg-black'
+              }`}
+            >
+              <img src={nflLogo} className="h-8 w-auto" alt="NFL" />
+              <span className="text-white font-bold">NFL</span>
+            </button>
+          </div>
+          
+          {/* Multiplier Filter */}
+          <Select value={selectedMultiplier} onValueChange={setSelectedMultiplier}>
+            <SelectTrigger className="w-full bg-black border-2 border-white/20 text-white hover:border-green-600/50 transition-colors">
+              <SelectValue placeholder="Multiplicateur de mise" />
+            </SelectTrigger>
+            <SelectContent className="bg-black border-2 border-white/20 z-50">
+              <SelectItem value="all" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Tous les multiplicateurs</SelectItem>
+              <SelectItem value="1-2" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">1.0x - 2.0x</SelectItem>
+              <SelectItem value="2-3" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">2.0x - 3.0x</SelectItem>
+              <SelectItem value="3-4" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">3.0x - 4.0x</SelectItem>
+              <SelectItem value="4+" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">4.0x et plus</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        {/* No Results Message */}
+        {!hasVisibleCards && (
+          <div className="text-center py-12">
+            <p className="text-white/70">Aucun parlay ne correspond à vos critères de recherche</p>
+          </div>
+        )}
+
         {/* PARLAY NFL */}
+        {showNFL && (
         <div className="grid gap-0.5 justify-center">
           {/* AI Data Analysis Counter - Outside card */}
           <div className="flex items-center justify-center gap-3 px-4 pt-[5px] pb-2 bg-black w-full max-w-md mx-auto">
@@ -601,8 +680,10 @@ const Parlay = () => {
             </CardHeader>
           </Card>
         </div>
+        )}
 
         {/* PARLAY NHL */}
+        {showNHL && (
         <div className="grid gap-0.5 justify-center">
           {/* AI Data Analysis Counter - Outside card */}
           <div className="flex items-center justify-center gap-3 px-4 pt-[5px] pb-2 bg-black w-full max-w-md mx-auto">
@@ -1117,6 +1198,7 @@ const Parlay = () => {
             </CardHeader>
           </Card>
         </div>
+        )}
       </div>
     </DashboardLayout>
   );
