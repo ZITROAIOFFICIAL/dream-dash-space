@@ -131,6 +131,18 @@ const Historique = () => {
     }
   };
 
+  // Determine which team was selected for the bet
+  const getSelectedTeam = (betType: string, prediction: string, teamHome: string) => {
+    if (betType === "MONEYLINE" && prediction === "VICTOIRE") {
+      return "home"; // Home team selected for MONEYLINE
+    } else if (betType === "SPREAD") {
+      // Parse spread to find which team (e.g., "VEGAS -1.5" or "KANSAS CITY -3.5")
+      const teamInPrediction = prediction.split(/[-+]/)[0].trim();
+      return teamInPrediction === teamHome ? "home" : "away";
+    }
+    return null; // No specific team for UNDER/OVER
+  };
+
   // Calculate cashout amount and profit
   const getCashoutInfo = (result: string, betAmount: number, multiplier: number) => {
     const cashout = betAmount * multiplier;
@@ -198,6 +210,7 @@ const Historique = () => {
           {history.map(item => {
           const cashoutInfo = getCashoutInfo(item.result, item.betAmount, item.multiplier);
           const borderColor = item.result === "won" ? "border-green-600" : item.result === "lost" ? "border-red-600" : "border-gray-600";
+          const selectedTeam = getSelectedTeam(item.betType, item.prediction, item.teamHome);
           return <Card key={item.id} className={`w-full max-w-md bg-black border-2 ${borderColor} shadow-2xl overflow-hidden mx-auto rounded-lg`}>
                 {/* Units Result Badge - Top */}
                 <div className="mx-4 mt-4">
@@ -229,8 +242,8 @@ const Historique = () => {
                     {/* Teams */}
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex flex-col items-center">
-                        <div className="w-12 h-12 mb-1 flex items-center justify-center">
-                          <img src={item.teamHomeLogo} alt={item.teamHome} className="max-w-full max-h-full object-contain" />
+                        <div className={`w-16 h-16 mb-1 flex items-center justify-center rounded-full p-2 ${selectedTeam === "home" ? "border-4 border-green-600" : "border-2 border-white/20"}`}>
+                          <img src={item.teamHomeLogo} alt={item.teamHome} className="w-full h-full object-contain" />
                         </div>
                         <span className="font-bold text-[10px] text-white">{item.teamHome}</span>
                       </div>
@@ -238,8 +251,8 @@ const Historique = () => {
                       <div className="text-white font-bold text-sm px-3">VS</div>
 
                       <div className="flex flex-col items-center">
-                        <div className="w-12 h-12 mb-1 flex items-center justify-center">
-                          <img src={item.teamAwayLogo} alt={item.teamAway} className="max-w-full max-h-full object-contain" />
+                        <div className={`w-16 h-16 mb-1 flex items-center justify-center rounded-full p-2 ${selectedTeam === "away" ? "border-4 border-green-600" : "border-2 border-white/20"}`}>
+                          <img src={item.teamAwayLogo} alt={item.teamAway} className="w-full h-full object-contain" />
                         </div>
                         <span className="font-bold text-[10px] text-white">{item.teamAway}</span>
                       </div>
