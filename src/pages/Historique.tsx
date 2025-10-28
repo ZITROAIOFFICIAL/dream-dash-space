@@ -293,6 +293,11 @@ const Historique = () => {
                       <span className="text-white text-xs font-bold">
                         {item.betType}
                       </span>
+                      {item.betType === "UNDER/OVER" && (
+                        <div className="text-green-600 text-xs font-bold mt-1">
+                          {item.prediction}
+                        </div>
+                      )}
                     </div>
 
                   </div>
