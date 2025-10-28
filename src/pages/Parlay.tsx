@@ -205,9 +205,11 @@ const Parlay = () => {
           </div>
         )}
 
-        {/* PARLAY NFL */}
-        {showNFL && nflIndex !== -1 && (
-        <div className="grid gap-0.5 justify-center" style={{ order: nflIndex }}>
+        {/* Cards Container with Flex for ordering */}
+        <div className="flex flex-col gap-8">
+          {/* PARLAY NFL */}
+          {showNFL && nflIndex !== -1 && (
+          <div className="grid gap-0.5 justify-center" style={{ order: nflIndex }}>
           {/* AI Data Analysis Counter - Outside card */}
           <div className="flex items-center justify-center gap-3 px-4 pt-[5px] pb-2 bg-black w-full max-w-md mx-auto">
             <div className="relative w-6 h-6 flex-shrink-0">
@@ -1207,6 +1209,7 @@ const Parlay = () => {
           </Card>
         </div>
         )}
+        </div>
       </div>
     </DashboardLayout>
   );

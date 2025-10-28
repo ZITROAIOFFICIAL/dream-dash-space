@@ -207,9 +207,11 @@ const Index = () => {
           </div>
         )}
 
-        {/* ST. LOUIS vs PITTSBURGH CARD */}
-        {showStLouis && stlouisIndex !== -1 && (
-        <div className="grid gap-0.5 justify-center" style={{ order: stlouisIndex }}>
+        {/* Cards Container with Flex for ordering */}
+        <div className="flex flex-col gap-8">
+          {/* ST. LOUIS vs PITTSBURGH CARD */}
+          {showStLouis && stlouisIndex !== -1 && (
+          <div className="grid gap-0.5 justify-center" style={{ order: stlouisIndex }}>
           {/* AI Data Analysis Counter - Outside card */}
           <div className="flex items-center justify-center gap-3 px-4 pt-[5px] pb-2 bg-black w-full max-w-md mx-auto">
             <div className="relative w-6 h-6 flex-shrink-0">
@@ -2308,6 +2310,7 @@ const Index = () => {
           </Card>
         </div>
         )}
+        </div>
 
       </div>
     </DashboardLayout>;
