@@ -237,10 +237,10 @@ const Historique = () => {
                     </div>
 
                     {/* Teams with VS in center */}
-                    <div className="flex items-center justify-center gap-4 mb-4">
+                    <div className="flex items-center justify-center gap-4 mb-3">
                       {/* Home Team */}
-                      <div className="flex flex-col items-center">
-                        <div className={`w-14 h-14 rounded-full bg-white flex items-center justify-center ${
+                      <div className="flex flex-col items-center gap-1">
+                        <div className={`w-14 h-14 rounded-full bg-white flex items-center justify-center p-2 ${
                           selectedTeam === "home" 
                             ? "border-4 border-green-600" 
                             : ""
@@ -248,20 +248,25 @@ const Historique = () => {
                           <img 
                             src={item.teamHomeLogo} 
                             alt={item.teamHome} 
-                            className="w-10 h-10 object-contain"
+                            className="w-full h-full object-contain"
                           />
                         </div>
-                        <span className="text-white text-[10px] font-bold mt-2">
+                        <span className="text-white text-[10px] font-bold">
                           {item.teamHome}
                         </span>
+                        {selectedTeam === "home" && (
+                          <span className="text-green-600 text-xs font-bold">
+                            {item.prediction}
+                          </span>
+                        )}
                       </div>
 
                       {/* VS */}
-                      <div className="text-white font-bold text-base px-2">VS</div>
+                      <div className="text-white font-bold text-base px-2 self-start mt-3">VS</div>
 
                       {/* Away Team */}
-                      <div className="flex flex-col items-center">
-                        <div className={`w-14 h-14 rounded-full bg-white flex items-center justify-center ${
+                      <div className="flex flex-col items-center gap-1">
+                        <div className={`w-14 h-14 rounded-full bg-white flex items-center justify-center p-2 ${
                           selectedTeam === "away" 
                             ? "border-4 border-green-600" 
                             : ""
@@ -269,22 +274,24 @@ const Historique = () => {
                           <img 
                             src={item.teamAwayLogo} 
                             alt={item.teamAway} 
-                            className="w-10 h-10 object-contain"
+                            className="w-full h-full object-contain"
                           />
                         </div>
-                        <span className="text-white text-[10px] font-bold mt-2">
+                        <span className="text-white text-[10px] font-bold">
                           {item.teamAway}
                         </span>
+                        {selectedTeam === "away" && (
+                          <span className="text-green-600 text-xs font-bold">
+                            {item.prediction}
+                          </span>
+                        )}
                       </div>
                     </div>
 
-                    {/* Bet Type and Prediction in single line */}
-                    <div className="flex items-center justify-center gap-3">
+                    {/* Bet Type centered */}
+                    <div className="text-center">
                       <span className="text-white text-xs font-bold">
                         {item.betType}
-                      </span>
-                      <span className="text-green-600 text-sm font-bold">
-                        {item.prediction}
                       </span>
                     </div>
 
