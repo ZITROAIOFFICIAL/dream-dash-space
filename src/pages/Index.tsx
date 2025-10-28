@@ -1685,689 +1685,391 @@ const Index = () => {
 
               {/* Analysis Dialog for Washington */}
               <Dialog open={isAnalysisDialogOpenWashington} onOpenChange={setIsAnalysisDialogOpenWashington}>
-                <DialogContent className="bg-black border-2 border-green-600 text-white max-w-4xl max-h-[80vh] overflow-y-auto">
-                  <DialogHeader>
-                    <DialogTitle className="text-2xl font-bold text-green-400 text-center pb-4">Analyse IA complète - Washington vs Kansas City</DialogTitle>
-                  </DialogHeader>
-                  
-                  {showAnalysisWashington && <div className="space-y-6">
-                      
-                      {/* Analyse du marché & meilleures cotes */}
-                      <div className="space-y-4">
-                        <h3 className="text-xl font-bold text-green-400 border-b-2 border-green-600 pb-2">Analyse du marché & meilleures cotes</h3>
-                        
-                        {/* Washington */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Marché & pricing (Washington)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse de la probabilité implicite du marché pour Washington, obtenue par conversion des cotes en pourcentage réel.
-                              Comparaison inter-bookmakers pour identifier la meilleure cote disponible ("best price") et mesurer l'efficience du marché.
-                              Observation du mouvement de ligne (line movement) afin d'évaluer si la cote se renforce ou se détériore avec l'arrivée du sharp money.
-                              Détection d'un éventuel closing line value (CLV) et différentiel entre l'opinion publique (public money) et l'argent professionnel (sharp money).
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Kansas City */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Marché & pricing (Kansas City)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse de la probabilité implicite du marché pour Kansas City, obtenue par conversion des cotes en pourcentage réel.
-                              Comparaison inter-bookmakers pour identifier la meilleure cote disponible ("best price") et mesurer l'efficience du marché.
-                              Observation du mouvement de ligne (line movement) afin d'évaluer si la cote se renforce ou se détériore avec l'arrivée du sharp money.
-                              Détection d'un éventuel closing line value (CLV) et différentiel entre l'opinion publique (public money) et l'argent professionnel (sharp money).
-                            </p>
-                          </div>
+                <DialogContent className="sm:max-w-2xl bg-black border-[3px] border-green-600 p-0 max-h-[90vh] overflow-y-auto">
+                  <div className="bg-black/40">
+                    <div className="flex items-center justify-center gap-3 py-2 px-6">
+                      <div className="relative w-6 h-6 flex-shrink-0">
+                        <Loader2 className="w-6 h-6 text-white animate-spin absolute" />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <span className="text-white font-bold text-[8px]">IA</span>
                         </div>
                       </div>
+                      <span className="text-white font-semibold text-center text-xs">{dataCountWashington.toLocaleString()} DONNÉES ANALYSÉ PAR NOTRE IA POUR CE BET JUSQU'À PRÉSENT</span>
+                    </div>
+                    <div className="text-center pb-2 px-6 flex items-center justify-center gap-2">
+                      <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                      <span className="text-white/70 text-sm">
+                        Dernière mise à jour IA pour ce bet : {currentTime.toLocaleTimeString('fr-FR', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                      })}
+                      </span>
+                    </div>
+                  </div>
 
-                      {/* Historique des confrontations (H2H) */}
-                      <div className="space-y-4">
-                        <h3 className="text-xl font-bold text-green-400 border-b-2 border-green-600 pb-2">Historique des confrontations (H2H)</h3>
-                        
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
+                  <div className="px-6 pb-6">
+                    {showAnalysisWashington && <div className="mt-4 space-y-4 animate-fade-in">
+                        {/* AI Confidence Section */}
+                        <div className="bg-green-600/15 border-2 border-green-600 rounded-lg p-4">
+                          <div className="text-center space-y-2">
+                            <div className="text-white font-bold text-sm">CHANCE DE GAGNER</div>
+                            <div className="text-green-400 font-bold text-4xl">87%</div>
+                            <div className="text-white/70 text-xs">STATISTIQUEMENT AVEC TOUTES CES DONNÉES CI-DESSOUS ANALYSÉES</div>
                           </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Historique des confrontations (H2H)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse des duels précédents entre les deux franchises, incluant les tendances récurrentes du matchup, la nature des rencontres (défensives, explosives, possession longue ou big plays), ainsi que les patterns stratégiques qui se répètent historiquement lorsque ces équipes se rencontrent.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Lineup / alignement projeté du jour */}
-                      <div className="space-y-4">
-                        <h3 className="text-xl font-bold text-green-400 border-b-2 border-green-600 pb-2">Lineup / alignement projeté du jour</h3>
-                        
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Alignement projeté du jour</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse de la composition prévue pour chaque équipe, incluant l'état du roster offensif et défensif, les joueurs clés disponibles ou incertains, le statut du quarterback, ainsi que l'impact tactique attendu de l'alignement projeté sur le plan de match initial.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Analyse du jeu offensif & discipline offensive */}
-                      <div className="space-y-4">
-                        <h3 className="text-xl font-bold text-green-400 border-b-2 border-green-600 pb-2">Analyse du jeu offensif & discipline offensive</h3>
-                        
-                        {/* Passing Game Washington */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Passing Game (Washington)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse de l'efficacité aérienne de Washington, incluant l'EPA par passe, la capacité à générer des jeux explosifs (explosive pass rate), la séparation des receveurs et la réussite sur 3rd down.
-                            </p>
+                          <div className="w-full bg-black/40 rounded-full h-3 overflow-hidden mt-3">
+                            <div className="bg-green-600 h-full rounded-full" style={{
+                          width: '87%'
+                        }}></div>
                           </div>
                         </div>
 
-                        {/* Passing Game Kansas City */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
+                        {/* Detailed analysis sections for WASHINGTON vs KANSAS CITY */}
+                        <div className="space-y-6">
+                          {/* Section 1 - Analyse du marché */}
+                          <h3 className="text-white font-bold text-lg mb-3">
+                            Analyse du marché & meilleures cotes
+                          </h3>
+                          
+                          <div className="space-y-3">
+                            <div>
+                              <h4 className="text-white font-bold text-sm mb-2">Analyse — Marché & pricing (Washington)</h4>
+                              <div className="space-y-3">
+                                <div className="flex items-center gap-3">
+                                  <div className="relative w-5 h-5 flex-shrink-0">
+                                    <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                      <span className="text-white font-bold text-[7px]">IA</span>
+                                    </div>
+                                  </div>
+                                  <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                    <p className="text-white/80 text-sm">• Analyse de la probabilité implicite du marché pour Washington, obtenue par conversion des cotes en pourcentage réel.</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                  <div className="relative w-5 h-5 flex-shrink-0">
+                                    <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                      <span className="text-white font-bold text-[7px]">IA</span>
+                                    </div>
+                                  </div>
+                                  <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                    <p className="text-white/80 text-sm">• Comparaison inter-bookmakers pour identifier la meilleure cote disponible ("best price") et mesurer l'efficience du marché.</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                  <div className="relative w-5 h-5 flex-shrink-0">
+                                    <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                      <span className="text-white font-bold text-[7px]">IA</span>
+                                    </div>
+                                  </div>
+                                  <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                    <p className="text-white/80 text-sm">• Observation du mouvement de ligne (line movement) afin d'évaluer si la cote se renforce ou se détériore avec l'arrivée du sharp money.</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                  <div className="relative w-5 h-5 flex-shrink-0">
+                                    <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                      <span className="text-white font-bold text-[7px]">IA</span>
+                                    </div>
+                                  </div>
+                                  <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                    <p className="text-white/80 text-sm">• Détection d'un éventuel closing line value (CLV) et différentiel entre l'opinion publique (public money) et l'argent professionnel (sharp money).</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <div>
+                              <h4 className="text-white font-bold text-sm mb-2">Analyse — Marché & pricing (Kansas City)</h4>
+                              <div className="space-y-3">
+                                <div className="flex items-center gap-3">
+                                  <div className="relative w-5 h-5 flex-shrink-0">
+                                    <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                      <span className="text-white font-bold text-[7px]">IA</span>
+                                    </div>
+                                  </div>
+                                  <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                    <p className="text-white/80 text-sm">• Analyse de la probabilité implicite du marché pour Kansas City, obtenue par conversion des cotes en pourcentage réel.</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                  <div className="relative w-5 h-5 flex-shrink-0">
+                                    <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                      <span className="text-white font-bold text-[7px]">IA</span>
+                                    </div>
+                                  </div>
+                                  <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                    <p className="text-white/80 text-sm">• Comparaison inter-bookmakers pour identifier la meilleure cote disponible ("best price") et mesurer l'efficience du marché.</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                  <div className="relative w-5 h-5 flex-shrink-0">
+                                    <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                      <span className="text-white font-bold text-[7px]">IA</span>
+                                    </div>
+                                  </div>
+                                  <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                    <p className="text-white/80 text-sm">• Observation du mouvement de ligne (line movement) afin d'évaluer si la cote se renforce ou se détériore avec l'arrivée du sharp money.</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                  <div className="relative w-5 h-5 flex-shrink-0">
+                                    <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                      <span className="text-white font-bold text-[7px]">IA</span>
+                                    </div>
+                                  </div>
+                                  <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                    <p className="text-white/80 text-sm">• Détection d'un éventuel closing line value (CLV) et différentiel entre l'opinion publique (public money) et l'argent professionnel (sharp money).</p>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                           </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Passing Game (Kansas City)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse de l'efficacité aérienne de Kansas City, incluant l'EPA par passe, la capacité à générer des jeux explosifs (explosive pass rate), la séparation des receveurs et la réussite sur 3rd down.
-                            </p>
-                          </div>
-                        </div>
 
-                        {/* Red Zone Offense Washington */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
+                          <div className="border-t border-white/10 my-6"></div>
+
+                          {/* Section 2 - Historique H2H */}
+                          <h3 className="text-white font-bold text-lg mb-3">
+                            Historique des confrontations (H2H)
+                          </h3>
+                          
+                          <div className="flex items-center gap-3">
+                            <div className="relative w-5 h-5 flex-shrink-0">
+                              <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                              <div className="absolute inset-0 flex items-center justify-center">
+                                <span className="text-white font-bold text-[7px]">IA</span>
+                              </div>
+                            </div>
+                            <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                              <h4 className="text-white font-bold text-sm mb-2">Analyse — Historique des confrontations (H2H)</h4>
+                              <p className="text-white/80 text-sm">
+                                Analyse des duels précédents entre les deux franchises, incluant les tendances récurrentes du matchup, la nature des rencontres (défensives, explosives, possession longue ou big plays), ainsi que les patterns stratégiques qui se répètent historiquement lorsque ces équipes se rencontrent.
+                              </p>
                             </div>
                           </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Red Zone Offense (Washington)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse de l'efficacité en red zone de Washington, basée sur le taux de conversion TD, la qualité du playcalling rapproché et la gestion du spacing offensif près de la ligne de but.
-                            </p>
-                          </div>
-                        </div>
 
-                        {/* Red Zone Offense Kansas City */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
+                          <div className="border-t border-white/10 my-6"></div>
+
+                          {/* Section 3 - Lineup projeté */}
+                          <h3 className="text-white font-bold text-lg mb-3">
+                            Lineup / alignement projeté du jour
+                          </h3>
+                          
+                          <div className="flex items-center gap-3">
+                            <div className="relative w-5 h-5 flex-shrink-0">
+                              <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                              <div className="absolute inset-0 flex items-center justify-center">
+                                <span className="text-white font-bold text-[7px]">IA</span>
+                              </div>
+                            </div>
+                            <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                              <h4 className="text-white font-bold text-sm mb-2">Analyse — Alignement projeté du jour</h4>
+                              <p className="text-white/80 text-sm">
+                                Analyse de la composition prévue pour chaque équipe, incluant l'état du roster offensif et défensif, les joueurs clés disponibles ou incertains, le statut du quarterback, ainsi que l'impact tactique attendu de l'alignement projeté sur le plan de match initial.
+                              </p>
                             </div>
                           </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Red Zone Offense (Kansas City)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse de l'efficacité en red zone de Kansas City, basée sur le taux de conversion TD, la qualité du playcalling rapproché et la gestion du spacing offensif près de la ligne de but.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
 
-                      {/* Analyse de la défense & couverture */}
-                      <div className="space-y-4">
-                        <h3 className="text-xl font-bold text-green-400 border-b-2 border-green-600 pb-2">Analyse de la défense & couverture</h3>
-                        
-                        {/* Pass Rush Washington */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
+                          <div className="border-t border-white/10 my-6"></div>
+
+                          {/* Section 4 - Jeu offensif */}
+                          <h3 className="text-white font-bold text-lg mb-3">
+                            Analyse du jeu offensif & discipline offensive
+                          </h3>
+                          
+                          <div className="space-y-3">
+                            <div className="flex items-center gap-3">
+                              <div className="relative w-5 h-5 flex-shrink-0">
+                                <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <span className="text-white font-bold text-[7px]">IA</span>
+                                </div>
+                              </div>
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Passing Game (Washington)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de l'efficacité aérienne de Washington, incluant l'EPA par passe, la capacité à générer des jeux explosifs (explosive pass rate), la séparation des receveurs et la réussite sur 3rd down.
+                                </p>
+                              </div>
+                            </div>
+                            
+                            <div className="flex items-center gap-3">
+                              <div className="relative w-5 h-5 flex-shrink-0">
+                                <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <span className="text-white font-bold text-[7px]">IA</span>
+                                </div>
+                              </div>
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Passing Game (Kansas City)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de l'efficacité aérienne de Kansas City, incluant l'EPA par passe, la capacité à générer des jeux explosifs (explosive pass rate), la séparation des receveurs et la réussite sur 3rd down.
+                                </p>
+                              </div>
+                            </div>
+                            
+                            <div className="flex items-center gap-3">
+                              <div className="relative w-5 h-5 flex-shrink-0">
+                                <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <span className="text-white font-bold text-[7px]">IA</span>
+                                </div>
+                              </div>
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Red Zone Offense (Washington)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de l'efficacité en red zone de Washington, basée sur le taux de conversion TD, la qualité du playcalling rapproché et la gestion du spacing offensif près de la ligne de but.
+                                </p>
+                              </div>
+                            </div>
+                            
+                            <div className="flex items-center gap-3">
+                              <div className="relative w-5 h-5 flex-shrink-0">
+                                <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <span className="text-white font-bold text-[7px]">IA</span>
+                                </div>
+                              </div>
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Red Zone Offense (Kansas City)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de l'efficacité en red zone de Kansas City, basée sur le taux de conversion TD, la qualité du playcalling rapproché et la gestion du spacing offensif près de la ligne de but.
+                                </p>
+                              </div>
                             </div>
                           </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Pass Rush & couverture (Washington)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse de la capacité défensive de Washington à générer de la pression sur le quarterback, la discipline en couverture, l'efficacité en 3rd down et les ajustements sur jeu aérien explosif.
-                            </p>
-                          </div>
-                        </div>
 
-                        {/* Pass Rush Kansas City */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
+                          <div className="border-t border-white/10 my-6"></div>
+
+                          {/* Section 5 - Défense */}
+                          <h3 className="text-white font-bold text-lg mb-3">
+                            Analyse de la défense & couverture
+                          </h3>
+                          
+                          <div className="space-y-3">
+                            <div className="flex items-center gap-3">
+                              <div className="relative w-5 h-5 flex-shrink-0">
+                                <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <span className="text-white font-bold text-[7px]">IA</span>
+                                </div>
+                              </div>
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Pass Rush & couverture (Washington)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de la capacité défensive de Washington à générer de la pression sur le quarterback, la discipline en couverture, l'efficacité en 3rd down et les ajustements sur jeu aérien explosif.
+                                </p>
+                              </div>
+                            </div>
+                            
+                            <div className="flex items-center gap-3">
+                              <div className="relative w-5 h-5 flex-shrink-0">
+                                <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <span className="text-white font-bold text-[7px]">IA</span>
+                                </div>
+                              </div>
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Pass Rush & couverture (Kansas City)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de la capacité défensive de Kansas City à générer de la pression sur le quarterback, la discipline en couverture, l'efficacité en 3rd down et les ajustements sur jeu aérien explosif.
+                                </p>
+                              </div>
+                            </div>
+                            
+                            <div className="flex items-center gap-3">
+                              <div className="relative w-5 h-5 flex-shrink-0">
+                                <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <span className="text-white font-bold text-[7px]">IA</span>
+                                </div>
+                              </div>
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Run Defense (Washington)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de la défense au sol de Washington, basée sur le taux de succès autorisé, l'occupation des gaps et la limitation des gains après contact.
+                                </p>
+                              </div>
+                            </div>
+                            
+                            <div className="flex items-center gap-3">
+                              <div className="relative w-5 h-5 flex-shrink-0">
+                                <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <span className="text-white font-bold text-[7px]">IA</span>
+                                </div>
+                              </div>
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Run Defense (Kansas City)</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de la défense au sol de Kansas City, basée sur le taux de succès autorisé, l'occupation des gaps et la limitation des gains après contact.
+                                </p>
+                              </div>
                             </div>
                           </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Pass Rush & couverture (Kansas City)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse de la capacité défensive de Kansas City à générer de la pression sur le quarterback, la discipline en couverture, l'efficacité en 3rd down et les ajustements sur jeu aérien explosif.
-                            </p>
-                          </div>
-                        </div>
 
-                        {/* Run Defense Washington */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
+                          <div className="border-t border-white/10 my-6"></div>
+
+                          {/* Section 6 - Facteurs externes */}
+                          <h3 className="text-white font-bold text-lg mb-3">
+                            Facteurs environnementaux & contextuels
+                          </h3>
+                          
+                          <div className="space-y-3">
+                            <div className="flex items-center gap-3">
+                              <div className="relative w-5 h-5 flex-shrink-0">
+                                <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <span className="text-white font-bold text-[7px]">IA</span>
+                                </div>
+                              </div>
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Météo & conditions de jeu</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de l'impact des conditions météorologiques (vent, pluie, température), de l'état du terrain et de l'influence potentielle sur le passing game, le kicking game et les décisions stratégiques.
+                                </p>
+                              </div>
+                            </div>
+                            
+                            <div className="flex items-center gap-3">
+                              <div className="relative w-5 h-5 flex-shrink-0">
+                                <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <span className="text-white font-bold text-[7px]">IA</span>
+                                </div>
+                              </div>
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Momentum & situation contextuelle</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse de l'élan récent de chaque équipe, des séries de victoires ou défaites, de l'importance stratégique du match (playoffs, division, wild card) et de l'impact psychologique du contexte.
+                                </p>
+                              </div>
+                            </div>
+                            
+                            <div className="flex items-center gap-3">
+                              <div className="relative w-5 h-5 flex-shrink-0">
+                                <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <span className="text-white font-bold text-[7px]">IA</span>
+                                </div>
+                              </div>
+                              <div className="bg-green-600/10 border-2 border-green-600 rounded-lg p-4 flex-1">
+                                <h4 className="text-white font-bold text-sm mb-2">Analyse — Repos & fatigue</h4>
+                                <p className="text-white/80 text-sm">
+                                  Analyse du nombre de jours de repos entre les matchs, de l'impact du voyage (distance, fuseaux horaires) et de la gestion de la fatigue physique et mentale des effectifs.
+                                </p>
+                              </div>
                             </div>
                           </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Run Defense (Washington)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse de la défense au sol de Washington, basée sur le taux de succès autorisé, l'occupation des gaps et la limitation des gains après contact.
-                            </p>
-                          </div>
                         </div>
-
-                        {/* Run Defense Kansas City */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Run Defense (Kansas City)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse de la défense au sol de Kansas City, basée sur le taux de succès autorisé, l'occupation des gaps et la limitation des gains après contact.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Analyse du jeu au sol & contrôle du tempo */}
-                      <div className="space-y-4">
-                        <h3 className="text-xl font-bold text-green-400 border-b-2 border-green-600 pb-2">Analyse du jeu au sol & contrôle du tempo</h3>
-                        
-                        {/* Run Game Washington */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Run Game (Washington)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse de l'attaque au sol de Washington, incluant le taux de succès, la création de yards après contact, la qualité du run blocking et l'impact sur la gestion du tempo.
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Run Game Kansas City */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Run Game (Kansas City)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse de l'attaque au sol de Kansas City, incluant le taux de succès, la création de yards après contact, la qualité du run blocking et l'impact sur la gestion du tempo.
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Gestion du rythme Washington */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Gestion du rythme (Washington)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse du tempo offensif de Washington, incluant la capacité à prolonger les drives, contrôler l'horloge et réduire l'exposition défensive.
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Gestion du rythme Kansas City */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Gestion du rythme (Kansas City)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse du tempo offensif de Kansas City, incluant la capacité à prolonger les drives, contrôler l'horloge et réduire l'exposition défensive.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Analyse de l'alignement & profondeur */}
-                      <div className="space-y-4">
-                        <h3 className="text-xl font-bold text-green-400 border-b-2 border-green-600 pb-2">Analyse de l'alignement & profondeur</h3>
-                        
-                        {/* Roster Washington */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Qualité du roster / profondeur (Washington)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse de la profondeur de Washington, incluant la contribution de l'unité offensive secondaire, la flexibilité tactique, la résilience aux blessures et la présence de playmakers.
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Roster Kansas City */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Qualité du roster / profondeur (Kansas City)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse de la profondeur de Kansas City, incluant la contribution de l'unité offensive secondaire, la flexibilité tactique, la résilience aux blessures et la présence de playmakers.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Analyse du contexte & conditions */}
-                      <div className="space-y-4">
-                        <h3 className="text-xl font-bold text-green-400 border-b-2 border-green-600 pb-2">Analyse du contexte & conditions</h3>
-                        
-                        {/* Conditions externes Washington */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Conditions externes (Washington)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse de l'environnement de match de Washington, incluant météo, surface, stade (extérieur/intérieur), bruit ambiant et impact potentiel sur l'exécution offensive.
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Conditions externes Kansas City */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Conditions externes (Kansas City)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse de l'environnement de match de Kansas City, incluant météo, surface, stade (extérieur/intérieur), bruit ambiant et impact potentiel sur l'exécution offensive.
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Voyage Washington */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Voyage / préparation (Washington)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse du contexte logistique de Washington, incluant les déplacements, le repos disponible, le temps de récupération et l'impact sur l'intensité du début de match.
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Voyage Kansas City */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Voyage / préparation (Kansas City)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse du contexte logistique de Kansas City, incluant les déplacements, le repos disponible, le temps de récupération et l'impact sur l'intensité du début de match.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Autres analyses complémentaires */}
-                      <div className="space-y-4">
-                        <h3 className="text-xl font-bold text-green-400 border-b-2 border-green-600 pb-2">Autres analyses complémentaires</h3>
-                        
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Facteurs additionnels</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              L'IA peut également prendre en compte des variables secondaires telles que le playcalling tendanciel, la prise de risque sur 4th down, l'efficacité en script plays (début de match), la qualité des ajustements à la mi-temps et l'expérience du coaching staff dans les matchs serrés.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Analyse Quarterback */}
-                      <div className="space-y-4">
-                        <h3 className="text-xl font-bold text-green-400 border-b-2 border-green-600 pb-2">Analyse — Quarterback</h3>
-                        
-                        {/* QB Washington */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Quarterback (Washington)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse du rendement du quarterback de Washington, incluant la gestion de la poche, la lecture pré-snap, la performance sous pression, la création de jeux en dehors du schéma initial et la production globale en situations clé (3rd & long / red zone).
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* QB Kansas City */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Quarterback (Kansas City)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse du rendement du quarterback de Kansas City, incluant la gestion de la poche, la lecture pré-snap, la performance sous pression, la création de jeux en dehors du schéma initial et la production globale en situations clé (3rd & long / red zone).
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Analyse Ligne offensive */}
-                      <div className="space-y-4">
-                        <h3 className="text-xl font-bold text-green-400 border-b-2 border-green-600 pb-2">Analyse — Ligne offensive (O-Line)</h3>
-                        
-                        {/* O-Line Washington */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Ligne offensive (Washington)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse de la ligne offensive de Washington, incluant l'efficacité en protection de passe (pass block win rate), la création de couloirs au sol (run block win rate) et la capacité à limiter la pression sur le quarterback.
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* O-Line Kansas City */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Ligne offensive (Kansas City)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse de la ligne offensive de Kansas City, incluant l'efficacité en protection de passe (pass block win rate), la création de couloirs au sol (run block win rate) et la capacité à limiter la pression sur le quarterback.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Matchups directs */}
-                      <div className="space-y-4">
-                        <h3 className="text-xl font-bold text-green-400 border-b-2 border-green-600 pb-2">Analyse — Matchups directs (unités vs unités)</h3>
-                        
-                        {/* Matchups Washington */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Matchups clés (Washington)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse des confrontations individuelles de Washington, incluant WR vs CB, TE vs coverage linebacker, duel edge rusher vs tackle, et avantages structurels créés par les mismatchs offensifs.
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Matchups Kansas City */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Matchups clés (Kansas City)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse des confrontations individuelles de Kansas City, incluant WR vs CB, TE vs coverage linebacker, duel edge rusher vs tackle, et avantages structurels créés par les mismatchs offensifs.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Coaching & playcalling */}
-                      <div className="space-y-4">
-                        <h3 className="text-xl font-bold text-green-400 border-b-2 border-green-600 pb-2">Analyse — Coaching & playcalling</h3>
-                        
-                        {/* Coaching Washington */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Coaching & stratégie (Washington)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse de l'approche tactique de Washington, incluant l'agressivité sur 4th down, l'orientation run/pass en neutral script, la qualité des ajustements à la mi-temps et la gestion stratégique des moments critiques.
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Coaching Kansas City */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Coaching & stratégie (Kansas City)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse de l'approche tactique de Kansas City, incluant l'agressivité sur 4th down, l'orientation run/pass en neutral script, la qualité des ajustements à la mi-temps et la gestion stratégique des moments critiques.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Explosivité & variance */}
-                      <div className="space-y-4">
-                        <h3 className="text-xl font-bold text-green-400 border-b-2 border-green-600 pb-2">Analyse — Explosivité & variance</h3>
-                        
-                        {/* Explosivité Washington */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Explosivité offensive (Washington)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse de la capacité de Washington à générer des jeux explosifs (passes profondes, gros gains YAC), ainsi que le degré de variance associé au style offensif.
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Explosivité Kansas City */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Explosivité offensive (Kansas City)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse de la capacité de Kansas City à générer des jeux explosifs (passes profondes, gros gains YAC), ainsi que le degré de variance associé au style offensif.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Football situationnel */}
-                      <div className="space-y-4">
-                        <h3 className="text-xl font-bold text-green-400 border-b-2 border-green-600 pb-2">Analyse — Football situationnel</h3>
-                        
-                        {/* Situational Washington */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Situational football (Washington)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse de l'efficacité de Washington dans les moments critiques : 3rd down, red zone défensive, 2-minute drill, gestion de chrono et capacité à fermer un match avec l'avantage.
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Situational Kansas City */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Situational football (Kansas City)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse de l'efficacité de Kansas City dans les moments critiques : 3rd down, red zone défensive, 2-minute drill, gestion de chrono et capacité à fermer un match avec l'avantage.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Style de match attendu */}
-                      <div className="space-y-4">
-                        <h3 className="text-xl font-bold text-green-400 border-b-2 border-green-600 pb-2">Analyse — Style de match attendu</h3>
-                        
-                        {/* Style Washington */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Style de match (Washington)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse du rythme prévu pour Washington, incluant la vitesse du tempo offensif, l'intention stratégique (contrôle vs explosivité) et l'impact anticipé sur la physionomie globale du match.
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Style Kansas City */}
-                        <div className="flex gap-3 items-start">
-                          <div className="relative w-6 h-6 flex-shrink-0 mt-1">
-                            <Loader2 className="w-6 h-6 text-green-500 animate-spin absolute" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white font-bold text-[8px]">IA</span>
-                            </div>
-                          </div>
-                          <div className="flex-1 border-2 border-green-600 rounded-lg p-4 bg-green-950/20">
-                            <h4 className="font-bold text-white mb-2">Analyse — Style de match (Kansas City)</h4>
-                            <p className="text-white/80 text-sm leading-relaxed">
-                              Analyse du rythme prévu pour Kansas City, incluant la vitesse du tempo offensif, l'intention stratégique (contrôle vs explosivité) et l'impact anticipé sur la physionomie globale du match.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                    </div>}
+                      </div>}
+                  </div>
                 </DialogContent>
               </Dialog>
 
@@ -2394,22 +2096,6 @@ const Index = () => {
                 
                 {/* Teams and VS */}
                 <div className="grid grid-cols-3 items-center justify-items-center gap-4 px-4">
-                  {/* KANSAS CITY */}
-                  <div className="flex flex-col items-center gap-1">
-                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border border-white/20 p-2">
-                      <img src={kansascityLogo} alt="Kansas City" className="w-full h-full object-contain" />
-                    </div>
-                    <span className="font-bold text-xs text-white">KANSAS CITY</span>
-                  </div>
-
-                  {/* Center time + VS */}
-                  <div className="flex flex-col items-center gap-1">
-                    <span className="font-semibold text-sm text-white">8:15 PM</span>
-                    <div className="px-2 py-0.5 rounded-full border border-white/20 bg-white/0">
-                      <span className="text-white font-bold text-xs">VS</span>
-                    </div>
-                  </div>
-
                   {/* WASHINGTON */}
                   <div className="flex flex-col items-center gap-1">
                     <div className="bg-green-600/15 border-2 border-green-600 rounded-sm p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[5px]">
@@ -2419,6 +2105,22 @@ const Index = () => {
                       <span className="text-white -bottom-0.5 text-xs font-extrabold">WASHINGTON</span>
                       <div className="text-xs font-bold text-green-400">VICTOIRE</div>
                     </div>
+                  </div>
+
+                  {/* Center time + VS */}
+                  <div className="flex flex-col items-center gap-1">
+                    <span className="font-semibold text-sm text-white">3:25 PM</span>
+                    <div className="px-2 py-0.5 rounded-full border border-white/20 bg-white/0">
+                      <span className="text-white font-bold text-xs">VS</span>
+                    </div>
+                  </div>
+
+                  {/* KANSAS CITY */}
+                  <div className="flex flex-col items-center gap-1">
+                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border border-white/20 p-2">
+                      <img src={kansascityLogo} alt="Kansas City" className="w-full h-full object-contain" />
+                    </div>
+                    <span className="font-bold text-xs text-white">KANSAS CITY</span>
                   </div>
                 </div>
               </div>
