@@ -107,7 +107,7 @@ const Index = () => {
           <Card className="w-full max-w-md bg-black border-[3px] border-green-600 shadow-2xl overflow-hidden mx-auto rounded-sm">
             <CardHeader className="space-y-0 p-0">
               {/* AI Data Analysis Counter */}
-              <div className="flex items-center justify-center gap-3 pt-2 pb-1 px-6 bg-green-600">
+              <div className="flex items-center justify-center gap-3 py-2 px-6 bg-green-600">
                 <div className="relative w-6 h-6 flex-shrink-0">
                   <Loader2 className="w-6 h-6 text-white animate-spin absolute" />
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -118,7 +118,7 @@ const Index = () => {
               </div>
 
               {/* AI Analysis */}
-              <div className="flex items-center justify-between gap-2 text-xs py-[10px] bg-green-600 px-4">
+              <div className="flex items-center justify-between gap-2 text-xs bg-green-600 px-4 py-0">
                 <div className="flex items-center gap-2">
                   <span className="font-bold text-white text-4xl">92%</span>
                   <span className="text-white text-xs font-bold">DE CHANCE DE GAGNER SELON NOTRE IA</span>
