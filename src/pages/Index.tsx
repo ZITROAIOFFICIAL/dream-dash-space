@@ -739,7 +739,7 @@ const Index = () => {
               {/* Odds Display */}
               <div className="flex justify-center pt-4 pb-4">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
-                  MONEYLINE MULTIPLICATEUR
+                  MULTIPLICATEUR DE MISE
                 </div>
               </div>
               
@@ -767,9 +767,10 @@ const Index = () => {
                     <span className="font-bold text-xs text-white">ST. LOUIS</span>
                   </div>
 
-                  {/* Center time + VS */}
+                  {/* Center MONEYLINE + VS */}
                   <div className="flex flex-col items-center gap-1">
                     <span className="font-semibold text-sm text-white">7:00 PM</span>
+                    <div className="text-xs font-bold text-white tracking-wider">MONEYLINE</div>
                     <div className="px-2 py-0.5 rounded-full border border-white/20 bg-white/0">
                       <span className="text-white font-bold text-xs">VS</span>
                     </div>
