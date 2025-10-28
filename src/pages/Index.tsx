@@ -738,7 +738,7 @@ const Index = () => {
               </div>
 
               {/* Middle section with vertical borders */}
-              <div className="border-x-[1px] border-green-600">
+              <div className="border-x-[2px] border-green-600">
               {/* Odds Display */}
               <div className="flex justify-center pt-6 pb-4">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
@@ -1499,7 +1499,7 @@ const Index = () => {
               </div>
 
               {/* Middle section with vertical borders */}
-              <div className="border-x-[1px] border-green-600">
+              <div className="border-x-[2px] border-green-600">
               {/* Odds Display */}
               <div className="flex justify-center pt-6 pb-4">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
@@ -2078,7 +2078,7 @@ const Index = () => {
               </Dialog>
 
               {/* Middle section with vertical borders */}
-              <div className="border-x-[1px] border-green-600">
+              <div className="border-x-[2px] border-green-600">
               {/* Odds Display */}
               <div className="flex justify-center pt-6 pb-4">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
