@@ -747,7 +747,7 @@ const Index = () => {
               </div>
               
               <div className="flex justify-center py-0 -mt-6">
-                <div className="bg-green-600/15 border-2 border-green-600 rounded-sm px-6 py-2">
+                <div className="bg-green-600/15 border-2 border-green-600 rounded-none px-6 py-2">
                   <div className="text-3xl font-black text-green-400">
                     x{multiplierStLouis.toFixed(2)}
                   </div>
@@ -781,7 +781,7 @@ const Index = () => {
 
                   {/* PITTSBURGH */}
                   <div className="flex flex-col items-center gap-1">
-                    <div className="bg-green-600/15 border-2 border-green-600 rounded-sm p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[5px]">
+                    <div className="bg-green-600/15 border-2 border-green-600 rounded-none p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[5px]">
                       <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center p-2">
                         <img src={pittsburghLogo} alt="Pittsburgh" className="w-full h-full object-contain" />
                       </div>
@@ -803,7 +803,7 @@ const Index = () => {
                 <div className="grid grid-cols-2 gap-2 px-[10px] my-[15px]">
                   <Dialog open={isDialogOpenStLouis} onOpenChange={setIsDialogOpenStLouis}>
                     <DialogTrigger asChild>
-                      <button className="px-4 py-3 bg-transparent border-2 border-green-600/40 rounded-sm text-center hover:bg-white/5 transition-colors cursor-pointer">
+                      <button className="px-4 py-3 bg-transparent border-2 border-green-600/40 rounded-none text-center hover:bg-white/5 transition-colors cursor-pointer">
                         <div className="text-white text-xs mb-1">Votre mise</div>
                         <div className="text-green-400 font-bold text-lg">${betAmountStLouis}</div>
                         <div className="text-WHITE text-xs mt-1 font-semibold px-[5px]">Modifier</div>
@@ -835,7 +835,7 @@ const Index = () => {
                     </DialogContent>
                   </Dialog>
                   
-                  <div className="bg-green-600/15 border-2 border-green-600 rounded-sm text-center py-[25px] px-0">
+                  <div className="bg-green-600/15 border-2 border-green-600 rounded-none text-center py-[25px] px-0">
                     <div className="text-white text-xs mb-1">Cashout x{multiplierStLouis.toFixed(2)} →</div>
                     <div className="text-green-400 font-bold text-lg">${calculateReturn(betAmountStLouis, multiplierStLouis)}</div>
                     <div className="text-white text-[10px] mt-0.5">
@@ -1512,7 +1512,7 @@ const Index = () => {
               </div>
               
               <div className="flex justify-center py-0 -mt-6">
-                <div className="bg-green-600/15 border-2 border-green-600 rounded-sm px-6 py-2">
+                <div className="bg-green-600/15 border-2 border-green-600 rounded-none px-6 py-2">
                   <div className="text-3xl font-black text-green-400">
                     x{multiplierVegas.toFixed(2)}
                   </div>
@@ -1545,7 +1545,7 @@ const Index = () => {
 
                   {/* TAMPA BAY */}
                   <div className="flex flex-col items-center gap-1">
-                    <div className="bg-green-600/15 border-2 border-green-600 rounded-sm p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[17px]">
+                    <div className="bg-green-600/15 border-2 border-green-600 rounded-none p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[17px]">
                       <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center p-2">
                         <img src={tampaLogo} alt="Tampa Bay" className="w-full h-full object-contain" />
                       </div>
@@ -1567,7 +1567,7 @@ const Index = () => {
                 <div className="grid grid-cols-2 gap-2 px-[10px] my-[15px]">
                   <Dialog open={isDialogOpenVegas} onOpenChange={setIsDialogOpenVegas}>
                     <DialogTrigger asChild>
-                      <button className="px-4 py-3 bg-transparent border-2 border-green-600/40 rounded-sm text-center hover:bg-white/5 transition-colors cursor-pointer">
+                      <button className="px-4 py-3 bg-transparent border-2 border-green-600/40 rounded-none text-center hover:bg-white/5 transition-colors cursor-pointer">
                         <div className="text-white text-xs mb-1">Votre mise</div>
                         <div className="text-green-400 font-bold text-lg">${betAmountVegas}</div>
                         <div className="text-WHITE text-xs mt-1 font-semibold px-[5px]">Modifier</div>
@@ -1599,7 +1599,7 @@ const Index = () => {
                     </DialogContent>
                   </Dialog>
                   
-                  <div className="bg-green-600/15 border-2 border-green-600 rounded-sm text-center py-[25px] px-0">
+                  <div className="bg-green-600/15 border-2 border-green-600 rounded-none text-center py-[25px] px-0">
                     <div className="text-white text-xs mb-1">Cashout x{multiplierVegas.toFixed(2)} →</div>
                     <div className="text-green-400 font-bold text-lg">${calculateReturn(betAmountVegas, multiplierVegas)}</div>
                     <div className="text-white text-[10px] mt-0.5">
@@ -2093,7 +2093,7 @@ const Index = () => {
               </div>
               
               <div className="flex justify-center py-0 -mt-6">
-                <div className="bg-green-600/15 border-2 border-green-600 rounded-sm px-6 py-2">
+                <div className="bg-green-600/15 border-2 border-green-600 rounded-none px-6 py-2">
                   <div className="text-3xl font-black text-green-400">
                     x{multiplierWashington.toFixed(2)}
                   </div>
@@ -2110,7 +2110,7 @@ const Index = () => {
                 <div className="grid grid-cols-3 items-center justify-items-center gap-4 px-4">
                   {/* WASHINGTON */}
                   <div className="flex flex-col items-center gap-1">
-                    <div className="bg-green-600/15 border-2 border-green-600 rounded-sm p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[5px]">
+                    <div className="bg-green-600/15 border-2 border-green-600 rounded-none p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[5px]">
                       <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center p-2">
                         <img src={washingtonLogo} alt="Washington" className="w-full h-full object-contain" />
                       </div>
@@ -2148,7 +2148,7 @@ const Index = () => {
                 <div className="grid grid-cols-2 gap-2 px-[10px] my-[15px]">
                   <Dialog open={isDialogOpenWashington} onOpenChange={setIsDialogOpenWashington}>
                     <DialogTrigger asChild>
-                      <button className="px-4 py-3 bg-transparent border-2 border-green-600/40 rounded-sm text-center hover:bg-white/5 transition-colors cursor-pointer">
+                      <button className="px-4 py-3 bg-transparent border-2 border-green-600/40 rounded-none text-center hover:bg-white/5 transition-colors cursor-pointer">
                         <div className="text-white text-xs mb-1">Votre mise</div>
                         <div className="text-green-400 font-bold text-lg">${betAmountWashington}</div>
                         <div className="text-WHITE text-xs mt-1 font-semibold px-[5px]">Modifier</div>
@@ -2180,7 +2180,7 @@ const Index = () => {
                     </DialogContent>
                   </Dialog>
                   
-                  <div className="bg-green-600/15 border-2 border-green-600 rounded-sm text-center py-[25px] px-0">
+                  <div className="bg-green-600/15 border-2 border-green-600 rounded-none text-center py-[25px] px-0">
                     <div className="text-white text-xs mb-1">Cashout x{multiplierWashington.toFixed(2)} →</div>
                     <div className="text-green-400 font-bold text-lg">${calculateReturn(betAmountWashington, multiplierWashington)}</div>
                     <div className="text-white text-[10px] mt-0.5">
