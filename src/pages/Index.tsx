@@ -116,7 +116,7 @@ const Index = () => {
             <span className="text-white font-semibold text-center text-[10px]">{dataCountStLouis.toLocaleString()} DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
           </div>
           
-          <Card className="w-full max-w-md bg-black border-x-2 border-green-600 shadow-2xl overflow-hidden mx-auto rounded-lg -mt-2">
+          <Card className="w-full max-w-md bg-black shadow-2xl overflow-hidden mx-auto rounded-lg -mt-2">
             <CardHeader className="space-y-0 p-0">
               {/* AI Analysis */}
               <div className="flex items-center justify-between gap-2 text-xs bg-green-600 px-4 py-[10px]">
@@ -737,6 +737,8 @@ const Index = () => {
                 </Dialog>
               </div>
 
+              {/* Middle section with vertical borders */}
+              <div className="border-x-[1px] border-green-600">
               {/* Odds Display */}
               <div className="flex justify-center pt-6 pb-4">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
@@ -846,6 +848,7 @@ const Index = () => {
                   </div>
                 </div>
               </div>
+              </div>
 
               {/* DraftKings Section */}
               <div className="pt-0">
@@ -874,7 +877,7 @@ const Index = () => {
             <span className="text-white font-semibold text-center text-[10px]">{dataCountVegas.toLocaleString()} DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
           </div>
           
-          <Card className="w-full max-w-md bg-black border-x-2 border-green-600 shadow-2xl overflow-hidden mx-auto rounded-lg -mt-2">
+          <Card className="w-full max-w-md bg-black shadow-2xl overflow-hidden mx-auto rounded-lg -mt-2">
             <CardHeader className="space-y-0 p-0">
               {/* AI Analysis */}
               <div className="flex items-center justify-between gap-2 text-xs py-[10px] bg-green-600 px-4">
@@ -1495,6 +1498,8 @@ const Index = () => {
                 </Dialog>
               </div>
 
+              {/* Middle section with vertical borders */}
+              <div className="border-x-[1px] border-green-600">
               {/* Odds Display */}
               <div className="flex justify-center pt-6 pb-4">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
@@ -1603,6 +1608,7 @@ const Index = () => {
                   </div>
                 </div>
               </div>
+              </div>
 
               {/* DraftKings Section */}
               <div className="pt-0">
@@ -1631,7 +1637,7 @@ const Index = () => {
             <span className="text-white font-semibold text-center text-[10px]">{dataCountWashington.toLocaleString()} DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
           </div>
           
-          <Card className="w-full max-w-md bg-black border-x-2 border-green-600 shadow-2xl overflow-hidden mx-auto rounded-lg -mt-2">
+          <Card className="w-full max-w-md bg-black shadow-2xl overflow-hidden mx-auto rounded-lg -mt-2">
             <CardHeader className="space-y-0 p-0">
               {/* AI Analysis */}
               <div className="flex items-center justify-between gap-2 text-xs py-[10px] bg-green-600 px-4">
@@ -2071,6 +2077,8 @@ const Index = () => {
                 </DialogContent>
               </Dialog>
 
+              {/* Middle section with vertical borders */}
+              <div className="border-x-[1px] border-green-600">
               {/* Odds Display */}
               <div className="flex justify-center pt-6 pb-4">
                 <div className="text-sm font-bold text-white tracking-wider mb-2">
@@ -2178,6 +2186,7 @@ const Index = () => {
                     </div>
                   </div>
                 </div>
+              </div>
               </div>
 
               {/* BetMGM Section */}
