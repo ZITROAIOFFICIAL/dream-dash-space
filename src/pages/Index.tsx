@@ -746,8 +746,8 @@ const Index = () => {
               </div>
               
               <div className="flex justify-center py-0 -mt-6">
-                <div className="bg-green-600/15 border-2 border-green-600 rounded-none px-6 py-2">
-                  <div className="text-3xl font-black text-green-400">
+                <div className="bg-green-600/15 border-2 border-green-600 rounded-none px-10 py-4">
+                  <div className="text-4xl font-black text-green-400">
                     x{multiplierStLouis.toFixed(2)}
                   </div>
                 </div>
