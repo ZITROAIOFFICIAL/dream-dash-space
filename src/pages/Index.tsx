@@ -106,7 +106,7 @@ const Index = () => {
         {/* ST. LOUIS vs PITTSBURGH CARD */}
         <div className="grid gap-6 justify-center">
           {/* AI Data Analysis Counter - Outside card */}
-          <div className="flex items-center justify-center gap-3 px-4 py-[5px] bg-black w-full max-w-md mx-auto">
+          <div className="flex items-center justify-center gap-3 px-4 pt-[5px] pb-2 bg-black w-full max-w-md mx-auto">
             <div className="relative w-6 h-6 flex-shrink-0">
               <Loader2 className="w-6 h-6 text-white animate-spin absolute" />
               <div className="absolute inset-0 flex items-center justify-center">
@@ -868,7 +868,7 @@ const Index = () => {
         {/* VEGAS vs TAMPA BAY CARD */}
         <div className="grid gap-6 justify-center">
           {/* AI Data Analysis Counter - Outside card */}
-          <div className="flex items-center justify-center gap-3 px-4 py-[5px] bg-black w-full max-w-md mx-auto">
+          <div className="flex items-center justify-center gap-3 px-4 pt-[5px] pb-2 bg-black w-full max-w-md mx-auto">
             <div className="relative w-6 h-6 flex-shrink-0">
               <Loader2 className="w-6 h-6 text-white animate-spin absolute" />
               <div className="absolute inset-0 flex items-center justify-center">
@@ -1627,7 +1627,7 @@ const Index = () => {
 
           {/* WASHINGTON vs KANSAS CITY CARD - NFL */}
           {/* AI Data Analysis Counter - Outside card */}
-          <div className="flex items-center justify-center gap-3 px-4 py-[5px] bg-black w-full max-w-md mx-auto">
+          <div className="flex items-center justify-center gap-3 px-4 pt-[5px] pb-2 bg-black w-full max-w-md mx-auto">
             <div className="relative w-6 h-6 flex-shrink-0">
               <Loader2 className="w-6 h-6 text-white animate-spin absolute" />
               <div className="absolute inset-0 flex items-center justify-center">
