@@ -107,7 +107,7 @@ const Index = () => {
           <Card className="w-full max-w-md bg-gray-900 border-2 border-gray-700 shadow-2xl overflow-hidden mx-auto rounded-none">
             <CardHeader className="space-y-0 p-0">
               {/* AI Data Analysis Counter */}
-              <div className="flex items-center justify-center gap-3 bg-green-600 py-px px-0">
+              <div className="flex items-center justify-center gap-3 bg-green-600 px-0 py-[5px]">
                 <div className="relative w-6 h-6 flex-shrink-0">
                   <Loader2 className="w-6 h-6 text-white animate-spin absolute" />
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -118,7 +118,7 @@ const Index = () => {
               </div>
 
               {/* AI Analysis */}
-              <div className="flex items-center justify-between gap-2 text-xs bg-green-600 px-4 py-0">
+              <div className="flex items-center justify-between gap-2 text-xs bg-green-600 px-4 py-[5px]">
                 <div className="flex items-center gap-2">
                   <span className="font-bold text-white text-4xl">92%</span>
                   <span className="text-white text-xs font-bold">DE CHANCE DE GAGNER SELON NOTRE IA</span>
@@ -795,7 +795,7 @@ const Index = () => {
                 </div>
               </div>
 
-              <div className="pt-1">
+              <div className="pt-1 py-[7px]">
                 <div className="grid grid-cols-2 gap-2 px-[10px] my-[15px]">
                   <Dialog open={isDialogOpenStLouis} onOpenChange={setIsDialogOpenStLouis}>
                     <DialogTrigger asChild>
@@ -843,7 +843,7 @@ const Index = () => {
 
               {/* DraftKings Section */}
               <div className="pt-0">
-                <div className="flex items-center justify-center gap-2 text-xs my-0 border-t-2 border-green-600 bg-green-600 py-0">
+                <div className="flex items-center justify-center gap-2 text-xs my-0 border-t-2 border-green-600 bg-green-600 py-[5px]">
                   <div className="relative w-5 h-5 flex-shrink-0">
                     <Loader2 className="w-5 h-5 text-white animate-spin absolute" />
                     <div className="absolute inset-0 flex items-center justify-center">
@@ -855,7 +855,7 @@ const Index = () => {
                   <span className="px-2 py-1 bg-black rounded border-2 border-green-600 font-bold text-green-400">-105</span>
                 </div>
                 <div className="text-center bg-green-600 px-0 py-0">
-                  <p className="text-[10px] text-white">(L'IA regarde tous les sites pour trouver le meilleur odds pour ce bet.)</p>
+                  <p className="text-[10px] text-white py-[5px]">(L'IA regarde tous les sites pour trouver le meilleur odds pour ce bet.)</p>
                 </div>
               </div>
             </CardHeader>
