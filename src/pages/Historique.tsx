@@ -1,8 +1,13 @@
 import DashboardLayout from "@/components/DashboardLayout";
 import { Card } from "@/components/ui/card";
-import { CheckCircle2, XCircle, Clock } from "lucide-react";
 import nhlLogo from "@/assets/nhl-logo.png";
 import nflLogo from "@/assets/nfl-logo.png";
+import stLouisLogo from "@/assets/stlouis-logo-new.png";
+import pittsburghLogo from "@/assets/pittsburgh-logo-new.png";
+import vegasLogo from "@/assets/vegas-logo-new.png";
+import tampaLogo from "@/assets/tampa-logo-new.png";
+import washingtonLogo from "@/assets/washington-logo.png";
+import kansasCityLogo from "@/assets/kansascity-logo.png";
 
 const Historique = () => {
   const history = [
@@ -12,13 +17,16 @@ const Historique = () => {
       teamAway: "PITTSBURGH",
       league: "NHL",
       betType: "MONEYLINE",
-      prediction: "ST. LOUIS GAGNE",
+      prediction: "VICTOIRE",
       odds: -105,
       betAmount: 100,
       result: "won",
-      date: "15 Oct 2024",
+      date: "7:00 PM",
+      time: "7:00 PM",
       aiPercent: 92,
-      multiplier: 1.95
+      multiplier: 1.95,
+      teamHomeLogo: stLouisLogo,
+      teamAwayLogo: pittsburghLogo
     },
     {
       id: 2,
@@ -30,9 +38,12 @@ const Historique = () => {
       odds: 488,
       betAmount: 100,
       result: "won",
-      date: "14 Oct 2024",
+      date: "1:00 PM",
+      time: "1:00 PM",
       aiPercent: 85,
-      multiplier: 5.88
+      multiplier: 5.88,
+      teamHomeLogo: washingtonLogo,
+      teamAwayLogo: kansasCityLogo
     },
     {
       id: 3,
@@ -44,9 +55,12 @@ const Historique = () => {
       odds: -136,
       betAmount: 100,
       result: "lost",
-      date: "13 Oct 2024",
+      date: "9:00 PM",
+      time: "9:00 PM",
       aiPercent: 88,
-      multiplier: 1.74
+      multiplier: 1.74,
+      teamHomeLogo: vegasLogo,
+      teamAwayLogo: tampaLogo
     },
     {
       id: 4,
@@ -54,13 +68,16 @@ const Historique = () => {
       teamAway: "ST. LOUIS",
       league: "NHL",
       betType: "MONEYLINE",
-      prediction: "PITTSBURGH GAGNE",
+      prediction: "VICTOIRE",
       odds: -120,
       betAmount: 100,
       result: "won",
-      date: "12 Oct 2024",
+      date: "7:30 PM",
+      time: "7:30 PM",
       aiPercent: 78,
-      multiplier: 1.83
+      multiplier: 1.83,
+      teamHomeLogo: pittsburghLogo,
+      teamAwayLogo: stLouisLogo
     },
     {
       id: 5,
@@ -73,46 +90,86 @@ const Historique = () => {
       betAmount: 100,
       result: "pending",
       date: "EN COURS",
+      time: "4:00 PM",
       aiPercent: 81,
-      multiplier: 1.91
+      multiplier: 1.91,
+      teamHomeLogo: kansasCityLogo,
+      teamAwayLogo: tampaLogo
     }
   ];
 
-  const getStatusBadge = (result: string) => {
-    switch (result) {
-      case "won":
-        return (
-          <div className="flex items-center gap-2 bg-green-600 px-4 py-2 rounded">
-            <CheckCircle2 className="h-5 w-5 text-white" />
-            <span className="text-white font-bold text-sm">GAGNÉ</span>
+  // Calculate units won/lost
+  const calculateUnits = (result: string, multiplier: number) => {
+    if (result === "won") {
+      return multiplier - 1; // Ex: x1.95 → +0.95 units
+    } else if (result === "lost") {
+      return -1; // Always -1 unit
+    }
+    return 0; // Pending
+  };
+
+  // Calculate totals
+  const totalWins = history.filter((h) => h.result === "won").length;
+  const totalLosses = history.filter((h) => h.result === "lost").length;
+  const totalUnitsWon = history
+    .filter((h) => h.result === "won")
+    .reduce((sum, h) => sum + (h.multiplier - 1), 0);
+  const totalUnitsLost = history.filter((h) => h.result === "lost").length; // Each loss = -1 unit
+
+  // Get units badge for each bet
+  const getUnitsBadge = (result: string, multiplier: number) => {
+    const units = calculateUnits(result, multiplier);
+    if (result === "won") {
+      return (
+        <div className="bg-green-600 rounded-lg px-6 py-3 text-center">
+          <div className="text-xl font-bold text-white">
+            +{units.toFixed(2)} UNITS
           </div>
-        );
-      case "lost":
-        return (
-          <div className="flex items-center gap-2 bg-red-600 px-4 py-2 rounded">
-            <XCircle className="h-5 w-5 text-white" />
-            <span className="text-white font-bold text-sm">PERDU</span>
+        </div>
+      );
+    } else if (result === "lost") {
+      return (
+        <div className="bg-red-600 rounded-lg px-6 py-3 text-center">
+          <div className="text-xl font-bold text-white">
+            -1.00 UNITS
           </div>
-        );
-      case "pending":
-        return (
-          <div className="flex items-center gap-2 bg-gray-600 px-4 py-2 rounded">
-            <Clock className="h-5 w-5 text-white" />
-            <span className="text-white font-bold text-sm">EN COURS</span>
+        </div>
+      );
+    } else {
+      return (
+        <div className="bg-gray-600 rounded-lg px-6 py-3 text-center">
+          <div className="text-xl font-bold text-white">
+            EN COURS
           </div>
-        );
-      default:
-        return null;
+        </div>
+      );
     }
   };
 
-  const calculateProfit = (result: string, betAmount: number, multiplier: number) => {
+  // Calculate cashout amount and profit
+  const getCashoutInfo = (result: string, betAmount: number, multiplier: number) => {
+    const cashout = betAmount * multiplier;
+    const profit = cashout - betAmount;
+
     if (result === "won") {
-      return `+${(betAmount * multiplier - betAmount).toFixed(2)}$`;
+      return {
+        amount: `$${cashout.toFixed(2)}`,
+        profit: `+$${profit.toFixed(2)} bénéfice`,
+        colorClass: "text-green-400"
+      };
     } else if (result === "lost") {
-      return `-${betAmount.toFixed(2)}$`;
+      return {
+        amount: "$0.00",
+        profit: `-$${betAmount.toFixed(2)} perte`,
+        colorClass: "text-red-400"
+      };
+    } else {
+      return {
+        amount: `$${cashout.toFixed(2)}`,
+        profit: "Potentiel",
+        colorClass: "text-white"
+      };
     }
-    return "---";
   };
 
   return (
@@ -126,121 +183,158 @@ const Historique = () => {
           </p>
         </div>
 
-        {/* History Cards */}
-        <div className="flex flex-col gap-6">
-          {history.map((item) => (
-            <Card
-              key={item.id}
-              className="w-full max-w-md bg-black border-2 border-green-600 shadow-2xl overflow-hidden mx-auto rounded-lg"
-            >
-              {/* Status Banner */}
-              <div className="flex items-center justify-between gap-2 text-xs bg-green-600 px-4 py-3">
-                <div className="flex items-center gap-2">
-                  <span className="font-bold text-white text-lg">{item.aiPercent}%</span>
-                  <span className="text-white text-xs font-bold">
-                    DE CHANCE DE GAGNER SELON NOTRE IA
-                  </span>
-                </div>
-                {getStatusBadge(item.result)}
-              </div>
-
-              {/* Match Info */}
-              <div className="bg-black/40 border-b-2 border-white/10 p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <img
-                      src={item.league === "NHL" ? nhlLogo : nflLogo}
-                      alt={item.league}
-                      className="w-8 h-8 object-contain"
-                    />
-                    <span className="text-white font-bold text-xs">{item.league}</span>
-                  </div>
-                  <span className="text-white/70 text-xs">{item.date}</span>
-                </div>
-
-                <div className="text-center py-3">
-                  <h3 className="text-white font-bold text-lg mb-1">
-                    {item.teamHome} vs {item.teamAway}
-                  </h3>
-                  <div className="inline-block bg-white/10 px-3 py-1 rounded">
-                    <span className="text-white text-xs font-bold">{item.betType}</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Bet Details */}
-              <div className="bg-black/40 border-b-2 border-white/10 p-4">
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-white/70 text-xs">PRÉDICTION:</span>
-                    <span className="text-white font-bold text-sm">{item.prediction}</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-white/70 text-xs">COTE:</span>
-                    <span className="text-white font-bold text-sm">
-                      {item.odds > 0 ? `+${item.odds}` : item.odds}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-white/70 text-xs">MULTIPLICATEUR:</span>
-                    <span className="text-green-400 font-bold text-sm">
-                      {item.multiplier.toFixed(2)}x
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Result Section */}
-              <div className="bg-black p-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <span className="text-white/70 text-xs block mb-1">MISE</span>
-                    <span className="text-white font-bold text-lg">{item.betAmount}$</span>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-white/70 text-xs block mb-1">
-                      {item.result === "pending" ? "CASHOUT POTENTIEL" : "RÉSULTAT"}
-                    </span>
-                    <span
-                      className={`font-bold text-lg ${
-                        item.result === "won"
-                          ? "text-green-400"
-                          : item.result === "lost"
-                          ? "text-red-400"
-                          : "text-white"
-                      }`}
-                    >
-                      {item.result === "pending"
-                        ? `${(item.betAmount * item.multiplier).toFixed(2)}$`
-                        : calculateProfit(item.result, item.betAmount, item.multiplier)}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </Card>
-          ))}
-        </div>
-
-        {/* Stats Summary - Optional */}
-        <div className="max-w-md mx-auto mt-8 grid grid-cols-3 gap-4">
+        {/* Global Summary */}
+        <div className="max-w-2xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <div className="bg-black border-2 border-green-600 rounded-lg p-4 text-center">
-            <div className="text-green-400 font-bold text-2xl">
-              {history.filter((h) => h.result === "won").length}
+            <div className="text-green-400 font-bold text-3xl">
+              {totalWins}
             </div>
-            <div className="text-white/70 text-xs mt-1">GAGNÉS</div>
+            <div className="text-white/70 text-xs mt-1 font-semibold">VICTOIRES</div>
           </div>
           <div className="bg-black border-2 border-red-600 rounded-lg p-4 text-center">
-            <div className="text-red-400 font-bold text-2xl">
-              {history.filter((h) => h.result === "lost").length}
+            <div className="text-red-400 font-bold text-3xl">
+              {totalLosses}
             </div>
-            <div className="text-white/70 text-xs mt-1">PERDUS</div>
+            <div className="text-white/70 text-xs mt-1 font-semibold">DÉFAITES</div>
           </div>
-          <div className="bg-black border-2 border-gray-600 rounded-lg p-4 text-center">
-            <div className="text-white font-bold text-2xl">
-              {history.filter((h) => h.result === "pending").length}
+          <div className="bg-black border-2 border-green-600 rounded-lg p-4 text-center">
+            <div className="text-green-400 font-bold text-3xl">
+              +{totalUnitsWon.toFixed(2)}
             </div>
-            <div className="text-white/70 text-xs mt-1">EN COURS</div>
+            <div className="text-white/70 text-xs mt-1 font-semibold">UNITS GAGNÉS</div>
           </div>
+          <div className="bg-black border-2 border-red-600 rounded-lg p-4 text-center">
+            <div className="text-red-400 font-bold text-3xl">
+              -{totalUnitsLost.toFixed(2)}
+            </div>
+            <div className="text-white/70 text-xs mt-1 font-semibold">UNITS PERDUS</div>
+          </div>
+        </div>
+
+        {/* History Cards */}
+        <div className="flex flex-col gap-6">
+          {history.map((item) => {
+            const cashoutInfo = getCashoutInfo(item.result, item.betAmount, item.multiplier);
+            const borderColor = item.result === "won" 
+              ? "border-green-600" 
+              : item.result === "lost" 
+              ? "border-red-600" 
+              : "border-gray-600";
+
+            return (
+              <Card
+                key={item.id}
+                className={`w-full max-w-md bg-black border-2 ${borderColor} shadow-2xl overflow-hidden mx-auto rounded-lg`}
+              >
+                {/* Units Result Badge - Top */}
+                <div className="mx-4 mt-4">
+                  {getUnitsBadge(item.result, item.multiplier)}
+                </div>
+
+                {/* Multiplier Badge */}
+                <div className="mx-4 mt-4">
+                  <div className="bg-green-600 rounded-lg px-10 py-2 text-center">
+                    <div className="text-xl font-bold text-white">
+                      x{item.multiplier.toFixed(2)}
+                    </div>
+                  </div>
+                </div>
+
+                {/* PARIER SUR Section */}
+                <div className="text-center pb-2 pt-6">
+                  <div className="text-sm font-bold text-white tracking-wider mb-2">
+                    PARIER SUR
+                  </div>
+                </div>
+
+                {/* Match Card */}
+                <div className="mx-4">
+                  <div className="border-2 border-green-600 rounded-lg bg-black/40 backdrop-blur-sm p-4">
+                    {/* League and Time */}
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-2">
+                        <img 
+                          src={item.league === "NHL" ? nhlLogo : nflLogo} 
+                          alt={item.league}
+                          className="w-6 h-6 object-contain"
+                        />
+                        <span className="text-white text-xs font-bold">{item.league}</span>
+                      </div>
+                      <span className="text-white/70 text-xs font-semibold">
+                        {item.result === "pending" ? item.time : "TERMINÉ"}
+                      </span>
+                    </div>
+
+                    {/* Teams */}
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex flex-col items-center">
+                        <div className="w-12 h-12 mb-1 flex items-center justify-center">
+                          <img 
+                            src={item.teamHomeLogo} 
+                            alt={item.teamHome}
+                            className="max-w-full max-h-full object-contain"
+                          />
+                        </div>
+                        <span className="font-bold text-[10px] text-white">{item.teamHome}</span>
+                      </div>
+
+                      <div className="text-white font-bold text-sm px-3">VS</div>
+
+                      <div className="flex flex-col items-center">
+                        <div className="w-12 h-12 mb-1 flex items-center justify-center">
+                          <img 
+                            src={item.teamAwayLogo} 
+                            alt={item.teamAway}
+                            className="max-w-full max-h-full object-contain"
+                          />
+                        </div>
+                        <span className="font-bold text-[10px] text-white">{item.teamAway}</span>
+                      </div>
+                    </div>
+
+                    {/* Bet Type and Prediction */}
+                    <div className="text-center space-y-1">
+                      <div className="text-white text-xs font-bold">{item.betType}</div>
+                      <div className="text-red-500 text-sm font-bold">{item.prediction}</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* MISE Section */}
+                <div className="text-center pb-1 pt-4">
+                  <div className="text-sm font-bold text-white tracking-wider mb-2">
+                    MISE
+                  </div>
+                </div>
+
+                {/* 1 Units Badge */}
+                <div className="mx-4 mt-0">
+                  <div className="bg-green-600 rounded-lg px-10 py-2 text-center">
+                    <div className="text-xl font-bold text-white">
+                      1 UNITS
+                    </div>
+                  </div>
+                </div>
+
+                {/* Cashout Section */}
+                <div className="mx-4 mt-4 mb-4">
+                  <div className="border-2 border-green-600 rounded-lg bg-black/40 backdrop-blur-sm p-4">
+                    <div className="text-center space-y-1">
+                      <div className="text-white/70 text-xs font-bold tracking-wider">
+                        CASHOUT
+                      </div>
+                      <div className={`text-3xl font-bold ${cashoutInfo.colorClass}`}>
+                        {cashoutInfo.amount}
+                      </div>
+                      <div className="text-white/50 text-sm">
+                        {cashoutInfo.profit}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            );
+          })}
         </div>
       </div>
     </DashboardLayout>
