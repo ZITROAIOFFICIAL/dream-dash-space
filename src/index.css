@@ -17,7 +17,7 @@ All colors MUST be HSL.
     --popover: 220 28% 12%;
     --popover-foreground: 0 0% 100%;
 
-    --primary: 120 100% 45%;
+    --primary: 142.1 76.2% 36.3%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 220 25% 18%;
@@ -26,7 +26,7 @@ All colors MUST be HSL.
     --muted: 220 25% 18%;
     --muted-foreground: 220 15% 65%;
 
-    --accent: 120 100% 45%;
+    --accent: 142.1 76.2% 36.3%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
@@ -34,20 +34,20 @@ All colors MUST be HSL.
 
     --border: 220 25% 20%;
     --input: 220 25% 20%;
-    --ring: 120 100% 45%;
+    --ring: 142.1 76.2% 36.3%;
 
     --radius: 0.75rem;
 
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 0 0% 0%;
-    --sidebar-primary: 120 100% 45%;
+    --sidebar-primary: 142.1 76.2% 36.3%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 120 100% 95%;
+    --sidebar-accent: 142.1 76.2% 95%;
     --sidebar-accent-foreground: 0 0% 0%;
     --sidebar-border: 220 15% 88%;
-    --sidebar-ring: 120 100% 45%;
+    --sidebar-ring: 142.1 76.2% 36.3%;
 
-    --success: 120 100% 45%;
+    --success: 142.1 76.2% 36.3%;
     --warning: 38 92% 50%;
     --info: 217 91% 60%;
   }
@@ -62,7 +62,7 @@ All colors MUST be HSL.
     --popover: 220 28% 12%;
     --popover-foreground: 220 15% 95%;
 
-    --primary: 120 100% 45%;
+    --primary: 142.1 76.2% 36.3%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 220 25% 18%;
@@ -71,7 +71,7 @@ All colors MUST be HSL.
     --muted: 220 25% 18%;
     --muted-foreground: 220 15% 65%;
 
-    --accent: 120 100% 45%;
+    --accent: 142.1 76.2% 36.3%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
@@ -79,18 +79,18 @@ All colors MUST be HSL.
 
     --border: 220 25% 20%;
     --input: 220 25% 20%;
-    --ring: 120 100% 45%;
+    --ring: 142.1 76.2% 36.3%;
 
     --sidebar-background: 220 30% 10%;
     --sidebar-foreground: 220 15% 85%;
-    --sidebar-primary: 120 100% 45%;
+    --sidebar-primary: 142.1 76.2% 36.3%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 220 25% 15%;
     --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 220 25% 18%;
-    --sidebar-ring: 120 100% 45%;
+    --sidebar-ring: 142.1 76.2% 36.3%;
 
-    --success: 120 100% 45%;
+    --success: 142.1 76.2% 36.3%;
     --warning: 38 92% 50%;
     --info: 217 91% 60%;
   }
