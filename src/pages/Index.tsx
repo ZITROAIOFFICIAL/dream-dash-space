@@ -1004,36 +1004,11 @@ const Index = () => {
                 </div>
               </div>
 
-              {/* Second Bet Card */}
-              <div className="mx-4 mt-4 border-2 border-green-600 rounded-lg bg-black p-4">
-                <div className="text-center">
-                  {/* Teams and VS */}
-                  <div className="grid grid-cols-3 items-center justify-items-center gap-4 px-4">
-                    {/* ST. LOUIS */}
-                    <div className="flex flex-col items-center gap-1">
-                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border border-white/20 p-2">
-                        <img src={stlouisLogo} alt="St. Louis" className="w-full h-full object-contain" />
-                      </div>
-                      <span className="font-bold text-xs text-white">ST. LOUIS</span>
-                    </div>
-
-                    {/* Center VS + MONEYLINE */}
-                    <div className="flex flex-col items-center gap-1">
-                      <span className="font-semibold text-sm text-white">7:00 PM</span>
-                      <div className="px-2 py-0.5 rounded-full border border-white/20 bg-white/0">
-                        <span className="text-white font-bold text-xs">VS</span>
-                      </div>
-                      <div className="text-xs font-bold text-white tracking-wider">1 UNITS</div>
-                    </div>
-
-                    {/* PITTSBURGH */}
-                    <div className="flex flex-col items-center gap-1">
-                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center p-2 border-2 border-green-600">
-                        <img src={pittsburghLogo} alt="Pittsburgh" className="w-full h-full object-contain" />
-                      </div>
-                      <span className="text-white -bottom-0.5 text-xs font-extrabold">PITTSBURGH</span>
-                      <div className="text-xs font-bold text-green-400">VICTOIRE</div>
-                    </div>
+              {/* 1 Units Badge */}
+              <div className="mx-4 mt-4">
+                <div className="bg-green-600 rounded-lg px-10 py-2 text-center">
+                  <div className="text-xl font-bold text-white">
+                    1 UNITS
                   </div>
                 </div>
               </div>
