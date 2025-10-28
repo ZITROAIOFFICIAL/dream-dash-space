@@ -107,7 +107,7 @@ const Index = () => {
           <Card className="w-full max-w-md bg-black border-[3px] border-green-600 shadow-2xl overflow-hidden mx-auto rounded-sm">
             <CardHeader className="space-y-0 p-0">
               {/* AI Data Analysis Counter */}
-              <div className="flex items-center justify-center gap-3 py-2 px-6 bg-black/40">
+              <div className="flex items-center justify-center gap-3 py-2 px-6 bg-green-600">
                 <div className="relative w-6 h-6 flex-shrink-0">
                   <Loader2 className="w-6 h-6 text-white animate-spin absolute" />
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -854,8 +854,8 @@ const Index = () => {
                   <span className="font-bold text-white">DRAFTKINGS</span>
                   <span className="px-2 py-1 bg-black rounded border-2 border-green-600 font-bold text-green-400">-105</span>
                 </div>
-                <div className="text-center py-2 px-4">
-                  <p className="text-white/60 text-[10px]">(L'IA regarde tous les sites pour trouver le meilleur odds pour ce bet.)</p>
+                <div className="text-center py-2 px-4 bg-green-600">
+                  <p className="text-[10px] text-white">(L'IA regarde tous les sites pour trouver le meilleur odds pour ce bet.)</p>
                 </div>
               </div>
             </CardHeader>
@@ -1666,17 +1666,17 @@ const Index = () => {
                       CHARGEMENT DE NOTRE IA ET DES DONNÉES LES PLUS RÉCENTES
                       <span className="inline-flex ml-0.5">
                         <span className="animate-bounce" style={{
-                          animationDelay: '0ms',
-                          animationDuration: '1s'
-                        }}>.</span>
+                        animationDelay: '0ms',
+                        animationDuration: '1s'
+                      }}>.</span>
                         <span className="animate-bounce" style={{
-                          animationDelay: '200ms',
-                          animationDuration: '1s'
-                        }}>.</span>
+                        animationDelay: '200ms',
+                        animationDuration: '1s'
+                      }}>.</span>
                         <span className="animate-bounce" style={{
-                          animationDelay: '400ms',
-                          animationDuration: '1s'
-                        }}>.</span>
+                        animationDelay: '400ms',
+                        animationDuration: '1s'
+                      }}>.</span>
                       </span>
                     </p>
                   </div>
