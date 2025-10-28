@@ -25,7 +25,7 @@ const Index = () => {
   const [sortByMultiplier, setSortByMultiplier] = useState<string>('high');
   const [sortByAI, setSortByAI] = useState<string>('high');
   const [lastSortKey, setLastSortKey] = useState<'ai' | 'multiplier'>('ai');
-  const [showFilters, setShowFilters] = useState(true);
+  const [showFilters, setShowFilters] = useState(false);
 
   const resetFilters = () => {
     setSelectedLeague('all');
