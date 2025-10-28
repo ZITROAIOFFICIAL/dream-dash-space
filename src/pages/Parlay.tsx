@@ -53,14 +53,15 @@ const Parlay = () => {
   const [isLoadingDialogOpenParlay2, setIsLoadingDialogOpenParlay2] = useState(false);
   const [isAnalysisDialogOpenParlay2, setIsAnalysisDialogOpenParlay2] = useState(false);
 
-  // Parlay 1 calculations (St. Louis -105, Vegas -136, Washington +488)
-  const multiplierStLouis = 1 + 100 / 105;
-  const multiplierVegas = 1 + 100 / 136;
-  const multiplierWashington = 1 + 488 / 100;
-  const totalMultiplierParlay1 = multiplierStLouis * multiplierVegas * multiplierWashington;
+  // Parlay 1 calculations (Under -114, Pittsburgh +140, Chicago -144, New Orleans -107)
+  const multiplierUnder = 1 + 100 / 114;
+  const multiplierPittsburgh = 1 + 140 / 100;
+  const multiplierChicago = 1 + 100 / 144;
+  const multiplierNewOrleans = 1 + 100 / 107;
+  const totalMultiplierParlay1 = multiplierUnder * multiplierPittsburgh * multiplierChicago * multiplierNewOrleans;
 
-  // Parlay 2 calculations (Vegas -136, St. Louis -105)
-  const totalMultiplierParlay2 = multiplierVegas * multiplierStLouis;
+  // Parlay 2 calculations (Pittsburgh +140, Under -114, Chicago -144)
+  const totalMultiplierParlay2 = multiplierPittsburgh * multiplierUnder * multiplierChicago;
 
   const calculateReturn = (amount: string, multiplier: number) => {
     const numAmount = parseFloat(amount) || 0;
@@ -184,75 +185,66 @@ const Parlay = () => {
                 </div>
               </div>
 
-              {/* Bet On - Multiple Matches */}
+              {/* Bet On - Multiple Bets */}
               <div className="py-4 px-6 bg-black/95">
                 <div className="text-center text-white font-bold text-xs mb-4">PARIER SUR</div>
                 
-                {/* Match 1: St. Louis vs Pittsburgh */}
+                {/* Bet 1: Z. Flowers Under 68.5 Receiving Yards */}
                 <div className="mb-4 pb-4 border-b border-white/10">
-                  <div className="grid grid-cols-3 gap-4 items-center">
-                    <div className="flex flex-col items-center gap-2">
-                      <div className="relative">
-                        <img src={stlouisLogo} alt="St. Louis Blues" className="w-16 h-16 object-contain rounded-full border-4 border-green-600" />
-                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-green-600 text-white text-[8px] font-bold px-2 py-0.5 rounded whitespace-nowrap">
-                          VICTOIRE
-                        </div>
-                      </div>
-                      <span className="text-white text-xs font-bold text-center">ST. LOUIS</span>
+                  <div className="bg-green-600/10 border border-green-600 rounded-lg p-3">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-white font-bold text-xs">BAL @ MIA</span>
+                      <span className="text-white/70 text-[10px]">Thu 8:15 pm EDT</span>
                     </div>
-                    <div className="flex flex-col items-center gap-1">
-                      <div className="bg-green-600 text-white font-bold text-xs px-3 py-1 rounded">VS</div>
-                      <span className="text-white/70 text-[10px]">19:00</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-2">
-                      <img src={pittsburghLogo} alt="Pittsburgh Penguins" className="w-16 h-16 object-contain opacity-50" />
-                      <span className="text-white/50 text-xs font-bold text-center">PITTSBURGH</span>
+                    <div className="text-white text-sm font-bold mb-1">Under 68.5</div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-white/90 text-xs">Z. Flowers Receiving Yards</span>
+                      <span className="text-white font-bold text-sm">-114</span>
                     </div>
                   </div>
                 </div>
 
-                {/* Match 2: Vegas vs Tampa Bay */}
+                {/* Bet 2: Pittsburgh Moneyline */}
                 <div className="mb-4 pb-4 border-b border-white/10">
-                  <div className="grid grid-cols-3 gap-4 items-center">
-                    <div className="flex flex-col items-center gap-2">
-                      <div className="relative">
-                        <img src={vegasLogo} alt="Vegas Golden Knights" className="w-16 h-16 object-contain rounded-full border-4 border-green-600" />
-                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-green-600 text-white text-[8px] font-bold px-2 py-0.5 rounded whitespace-nowrap">
-                          VICTOIRE
-                        </div>
-                      </div>
-                      <span className="text-white text-xs font-bold text-center">VEGAS</span>
+                  <div className="bg-green-600/10 border border-green-600 rounded-lg p-3">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-white font-bold text-xs">IND @ PIT</span>
+                      <span className="text-white/70 text-[10px]">Nov 02, 1:00 pm EST</span>
                     </div>
-                    <div className="flex flex-col items-center gap-1">
-                      <div className="bg-green-600 text-white font-bold text-xs px-3 py-1 rounded">VS</div>
-                      <span className="text-white/70 text-[10px]">20:30</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-2">
-                      <img src={tampaLogo} alt="Tampa Bay Lightning" className="w-16 h-16 object-contain opacity-50" />
-                      <span className="text-white/50 text-xs font-bold text-center">TAMPA BAY</span>
+                    <div className="text-white text-sm font-bold mb-1">Pittsburgh</div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-white/90 text-xs">Moneyline</span>
+                      <span className="text-white font-bold text-sm">+140</span>
                     </div>
                   </div>
                 </div>
 
-                {/* Match 3: Washington vs Kansas City */}
+                {/* Bet 3: Chicago Moneyline */}
+                <div className="mb-4 pb-4 border-b border-white/10">
+                  <div className="bg-green-600/10 border border-green-600 rounded-lg p-3">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-white font-bold text-xs">CHI @ CIN</span>
+                      <span className="text-white/70 text-[10px]">Nov 02, 1:00 pm EST</span>
+                    </div>
+                    <div className="text-white text-sm font-bold mb-1">Chicago</div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-white/90 text-xs">Moneyline</span>
+                      <span className="text-white font-bold text-sm">-144</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bet 4: New Orleans +13.5 Spread */}
                 <div>
-                  <div className="grid grid-cols-3 gap-4 items-center">
-                    <div className="flex flex-col items-center gap-2">
-                      <div className="relative">
-                        <img src={washingtonLogo} alt="Washington" className="w-16 h-16 object-contain rounded-full border-4 border-green-600" />
-                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-green-600 text-white text-[8px] font-bold px-2 py-0.5 rounded whitespace-nowrap">
-                          VICTOIRE
-                        </div>
-                      </div>
-                      <span className="text-white text-xs font-bold text-center">WASHINGTON</span>
+                  <div className="bg-green-600/10 border border-green-600 rounded-lg p-3">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-white font-bold text-xs">NO @ LAR</span>
+                      <span className="text-white/70 text-[10px]">Nov 02, 4:05 pm EST</span>
                     </div>
-                    <div className="flex flex-col items-center gap-1">
-                      <div className="bg-green-600 text-white font-bold text-xs px-3 py-1 rounded">VS</div>
-                      <span className="text-white/70 text-[10px]">21:15</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-2">
-                      <img src={kansascityLogo} alt="Kansas City" className="w-16 h-16 object-contain opacity-50" />
-                      <span className="text-white/50 text-xs font-bold text-center">KANSAS CITY</span>
+                    <div className="text-white text-sm font-bold mb-1">New Orleans +13.5</div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-white/90 text-xs">Spread</span>
+                      <span className="text-white font-bold text-sm">-107</span>
                     </div>
                   </div>
                 </div>
@@ -391,52 +383,51 @@ const Parlay = () => {
                 </div>
               </div>
 
-              {/* Bet On - Multiple Matches */}
+              {/* Bet On - Multiple Bets */}
               <div className="py-4 px-6 bg-black/95">
                 <div className="text-center text-white font-bold text-xs mb-4">PARIER SUR</div>
                 
-                {/* Match 1: Vegas vs Tampa Bay */}
+                {/* Bet 1: Pittsburgh Moneyline */}
                 <div className="mb-4 pb-4 border-b border-white/10">
-                  <div className="grid grid-cols-3 gap-4 items-center">
-                    <div className="flex flex-col items-center gap-2">
-                      <div className="relative">
-                        <img src={vegasLogo} alt="Vegas Golden Knights" className="w-16 h-16 object-contain rounded-full border-4 border-green-600" />
-                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-green-600 text-white text-[8px] font-bold px-2 py-0.5 rounded whitespace-nowrap">
-                          VICTOIRE
-                        </div>
-                      </div>
-                      <span className="text-white text-xs font-bold text-center">VEGAS</span>
+                  <div className="bg-green-600/10 border border-green-600 rounded-lg p-3">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-white font-bold text-xs">IND @ PIT</span>
+                      <span className="text-white/70 text-[10px]">Nov 02, 1:00 pm EST</span>
                     </div>
-                    <div className="flex flex-col items-center gap-1">
-                      <div className="bg-green-600 text-white font-bold text-xs px-3 py-1 rounded">VS</div>
-                      <span className="text-white/70 text-[10px]">20:30</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-2">
-                      <img src={tampaLogo} alt="Tampa Bay Lightning" className="w-16 h-16 object-contain opacity-50" />
-                      <span className="text-white/50 text-xs font-bold text-center">TAMPA BAY</span>
+                    <div className="text-white text-sm font-bold mb-1">Pittsburgh</div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-white/90 text-xs">Moneyline</span>
+                      <span className="text-white font-bold text-sm">+140</span>
                     </div>
                   </div>
                 </div>
 
-                {/* Match 2: St. Louis vs Pittsburgh */}
+                {/* Bet 2: Z. Flowers Under 68.5 Receiving Yards */}
+                <div className="mb-4 pb-4 border-b border-white/10">
+                  <div className="bg-green-600/10 border border-green-600 rounded-lg p-3">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-white font-bold text-xs">BAL @ MIA</span>
+                      <span className="text-white/70 text-[10px]">Thu 8:15 pm EDT</span>
+                    </div>
+                    <div className="text-white text-sm font-bold mb-1">Under 68.5</div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-white/90 text-xs">Z. Flowers Receiving Yards</span>
+                      <span className="text-white font-bold text-sm">-114</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bet 3: Chicago Moneyline */}
                 <div>
-                  <div className="grid grid-cols-3 gap-4 items-center">
-                    <div className="flex flex-col items-center gap-2">
-                      <div className="relative">
-                        <img src={stlouisLogo} alt="St. Louis Blues" className="w-16 h-16 object-contain rounded-full border-4 border-green-600" />
-                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-green-600 text-white text-[8px] font-bold px-2 py-0.5 rounded whitespace-nowrap">
-                          VICTOIRE
-                        </div>
-                      </div>
-                      <span className="text-white text-xs font-bold text-center">ST. LOUIS</span>
+                  <div className="bg-green-600/10 border border-green-600 rounded-lg p-3">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-white font-bold text-xs">CHI @ CIN</span>
+                      <span className="text-white/70 text-[10px]">Nov 02, 1:00 pm EST</span>
                     </div>
-                    <div className="flex flex-col items-center gap-1">
-                      <div className="bg-green-600 text-white font-bold text-xs px-3 py-1 rounded">VS</div>
-                      <span className="text-white/70 text-[10px]">19:00</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-2">
-                      <img src={pittsburghLogo} alt="Pittsburgh Penguins" className="w-16 h-16 object-contain opacity-50" />
-                      <span className="text-white/50 text-xs font-bold text-center">PITTSBURGH</span>
+                    <div className="text-white text-sm font-bold mb-1">Chicago</div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-white/90 text-xs">Moneyline</span>
+                      <span className="text-white font-bold text-sm">-144</span>
                     </div>
                   </div>
                 </div>
