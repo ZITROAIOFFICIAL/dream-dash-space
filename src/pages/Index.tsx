@@ -108,7 +108,7 @@ const Index = () => {
           <Card className="w-full max-w-md bg-gray-900 border-2 border-gray-700 shadow-2xl overflow-hidden mx-auto rounded-none">
             <CardHeader className="space-y-0 p-0">
               {/* AI Data Analysis Counter */}
-              <div className="flex items-center justify-center gap-3 bg-green-600 px-0 py-[5px]">
+              <div className="flex items-center justify-center gap-3 px-0 py-[5px] bg-slate-950">
                 <div className="relative w-6 h-6 flex-shrink-0">
                   <Loader2 className="w-6 h-6 text-white animate-spin absolute" />
                   <div className="absolute inset-0 flex items-center justify-center">
