@@ -1538,7 +1538,7 @@ const Index = () => {
                       <div className="px-2 py-0.5 rounded-full border border-white/20 bg-white/0">
                         <span className="text-white font-bold text-xs">VS</span>
                       </div>
-                      <div className="text-xs font-bold text-white tracking-wider">MONEYLINE</div>
+                      <div className="text-xs font-bold text-white tracking-wider">SPREAD</div>
                     </div>
 
                     {/* TAMPA BAY */}
@@ -1547,7 +1547,7 @@ const Index = () => {
                         <img src={tampaLogo} alt="Tampa Bay" className="w-full h-full object-contain" />
                       </div>
                       <span className="text-white -bottom-0.5 text-xs font-extrabold">TAMPA BAY</span>
-                      <div className="text-xs font-bold text-green-400">VICTOIRE</div>
+                      <div className="text-xs font-bold text-green-400">+1.5</div>
                     </div>
                   </div>
                 </div>
