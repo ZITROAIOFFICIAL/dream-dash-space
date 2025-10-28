@@ -802,10 +802,10 @@ const Index = () => {
                 <div className="grid grid-cols-2 gap-2 px-[10px] my-[15px]">
                   <Dialog open={isDialogOpenStLouis} onOpenChange={setIsDialogOpenStLouis}>
                     <DialogTrigger asChild>
-                      <button className="px-4 py-3 bg-transparent border-2 border-green-600/40 rounded-none text-center hover:bg-white/5 transition-colors cursor-pointer">
+                      <button className="px-4 py-3 bg-transparent rounded-none text-center hover:bg-white/5 transition-colors cursor-pointer">
+                        <div className="bg-green-600 text-white text-xs font-semibold px-3 py-1 rounded mb-2 inline-block">Modifier</div>
                         <div className="text-white text-xs mb-1">Votre mise</div>
                         <div className="text-green-400 font-bold text-lg">${betAmountStLouis}</div>
-                        <div className="text-WHITE text-xs mt-1 font-semibold px-[5px]">Modifier</div>
                       </button>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-md bg-black border-green-600">
