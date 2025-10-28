@@ -783,7 +783,7 @@ const Index = () => {
                     {/* PITTSBURGH */}
                     <div className="flex flex-col items-center gap-1">
                       <div className="text-xs font-bold text-green-400 mb-1">VICTOIRE</div>
-                      <div className="bg-green-600/15 border-2 border-green-600 rounded-none p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[5px]">
+                      <div className="bg-green-600/15 border-2 border-green-600 rounded-lg p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[5px]">
                         <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center p-2">
                           <img src={pittsburghLogo} alt="Pittsburgh" className="w-full h-full object-contain" />
                         </div>
@@ -837,7 +837,7 @@ const Index = () => {
                     </DialogContent>
                   </Dialog>
                   
-                  <div className="bg-green-600/15 border-2 border-green-600 rounded-none text-center py-[25px] px-0">
+                  <div className="bg-green-600/15 border-2 border-green-600 rounded-lg text-center py-[25px] px-0">
                     <div className="text-[#fff] text-xs mb-1">CASHOUT</div>
                     <div className="text-green-400 font-bold text-3xl">${calculateReturn(betAmountStLouis, multiplierStLouis)}</div>
                     <div className="text-white text-[10px] mt-0.5">
@@ -1544,7 +1544,7 @@ const Index = () => {
                     {/* TAMPA BAY */}
                     <div className="flex flex-col items-center gap-1">
                       <div className="text-xs font-bold text-green-400 mb-1">VICTOIRE</div>
-                      <div className="bg-green-600/15 border-2 border-green-600 rounded-none p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[17px]">
+                      <div className="bg-green-600/15 border-2 border-green-600 rounded-lg p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[17px]">
                         <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center p-2">
                           <img src={tampaLogo} alt="Tampa Bay" className="w-full h-full object-contain" />
                         </div>
@@ -1598,7 +1598,7 @@ const Index = () => {
                     </DialogContent>
                   </Dialog>
                   
-                  <div className="bg-green-600/15 border-2 border-green-600 rounded-none text-center py-[25px] px-0">
+                  <div className="bg-green-600/15 border-2 border-green-600 rounded-lg text-center py-[25px] px-0">
                     <div className="text-white text-xs mb-1">Cashout x{multiplierVegas.toFixed(2)} →</div>
                     <div className="text-green-400 font-bold text-lg">${calculateReturn(betAmountVegas, multiplierVegas)}</div>
                     <div className="text-white text-[10px] mt-0.5">
@@ -2106,7 +2106,7 @@ const Index = () => {
                     {/* WASHINGTON */}
                     <div className="flex flex-col items-center gap-1">
                       <div className="text-xs font-bold text-green-400 mb-1">VICTOIRE</div>
-                      <div className="bg-green-600/15 border-2 border-green-600 rounded-none p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[5px]">
+                      <div className="bg-green-600/15 border-2 border-green-600 rounded-lg p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[5px]">
                         <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center p-2">
                           <img src={washingtonLogo} alt="Washington" className="w-full h-full object-contain" />
                         </div>
@@ -2176,7 +2176,7 @@ const Index = () => {
                     </DialogContent>
                   </Dialog>
                   
-                  <div className="bg-green-600/15 border-2 border-green-600 rounded-none text-center py-[25px] px-0">
+                  <div className="bg-green-600/15 border-2 border-green-600 rounded-lg text-center py-[25px] px-0">
                     <div className="text-white text-xs mb-1">Cashout x{multiplierWashington.toFixed(2)} →</div>
                     <div className="text-green-400 font-bold text-lg">${calculateReturn(betAmountWashington, multiplierWashington)}</div>
                     <div className="text-white text-[10px] mt-0.5">
