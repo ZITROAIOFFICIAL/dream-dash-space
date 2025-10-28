@@ -232,7 +232,7 @@ const Historique = () => {
                     {/* Time centered at top */}
                     <div className="text-center mb-4">
                       <span className="text-white text-sm font-bold">
-                        {item.result === "pending" ? item.time : "TERMINÉ"}
+                        {item.result === "pending" ? item.time : item.date}
                       </span>
                     </div>
 
