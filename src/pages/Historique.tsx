@@ -248,7 +248,7 @@ const Historique = () => {
                     {/* Bet Type and Prediction */}
                     <div className="text-center space-y-1">
                       <div className="text-white text-xs font-bold">{item.betType}</div>
-                      <div className="text-red-500 text-sm font-bold">{item.prediction}</div>
+                      <div className="text-green-600 text-sm font-bold">{item.prediction}</div>
                     </div>
                   </div>
                 </div>
