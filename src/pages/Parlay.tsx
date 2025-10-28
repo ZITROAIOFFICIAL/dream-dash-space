@@ -166,7 +166,7 @@ const Parlay = () => {
         {/* Header Section */}
         <div className="text-center space-y-2 mb-8">
           <h1 className="text-white text-4xl font-bold">PARLAY DU JOUR</h1>
-          <p className="text-white/70 text-sm">Les parlay avec la meilleur probabilité de réussite aujourd'hui</p>
+          <p className="text-white text-sm">Les parlay avec la meilleur probabilité de réussite aujourd'hui. Nous affichons tous les parlay avec minimum de 60% de chance de gagner selon notre IA.</p>
         </div>
 
         {/* Filters Section */}
