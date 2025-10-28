@@ -464,61 +464,87 @@ const Parlay = () => {
                 <div className="text-center text-white font-bold text-xs mb-4">PARIER SUR</div>
                 
                 {/* Bet 1: Z. Flowers Under 68.5 Receiving Yards */}
-                <div className="mb-4 pb-4 border-b border-white/10">
-                  <div className="bg-green-600/10 border border-green-600 rounded-lg p-3">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-white font-bold text-xs">BAL @ MIA</span>
-                      <span className="text-white/70 text-[10px]">Thu 8:15 pm EDT</span>
+                <div className="mb-4">
+                  <div className="bg-black rounded-lg overflow-hidden">
+                    <div className="flex items-center justify-between p-3 bg-black border-2 border-green-600">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                          <img src={stlouisLogo} alt="ST. LOUIS" className="w-10 h-10 object-contain" />
+                        </div>
+                        <div className="text-center">
+                          <div className="text-white text-[10px] font-bold mb-1">7:00 PM</div>
+                          <div className="text-white text-xs font-bold">Under 68.5</div>
+                        </div>
+                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                          <img src={stlouisLogo} alt="ST. LOUIS" className="w-10 h-10 object-contain" />
+                        </div>
+                      </div>
                     </div>
-                    <div className="text-white text-sm font-bold mb-1">Under 68.5</div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-white/90 text-xs">Z. Flowers Receiving Yards</span>
-                      <span className="text-white font-bold text-sm">-114</span>
+                    <div className="bg-black border-2 border-t-0 border-green-600 px-3 py-2">
+                      <div className="text-white text-[11px] font-bold text-center">Z. Flowers Receiving Yards</div>
                     </div>
                   </div>
                 </div>
 
                 {/* Bet 2: Pittsburgh Moneyline */}
-                <div className="mb-4 pb-4 border-b border-white/10">
-                  <div className="bg-green-600/10 border border-green-600 rounded-lg p-3">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-white font-bold text-xs">IND @ PIT</span>
-                      <span className="text-white/70 text-[10px]">Nov 02, 1:00 pm EST</span>
+                <div className="mb-4">
+                  <div className="bg-black rounded-lg overflow-hidden">
+                    <div className="flex items-center justify-between p-3 bg-black border-2 border-green-600">
+                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                        <img src={stlouisLogo} alt="ST. LOUIS" className="w-10 h-10 object-contain" />
+                      </div>
+                      <div className="text-center flex-1">
+                        <div className="text-white text-[10px] font-bold mb-1">7:00 PM</div>
+                        <div className="text-white text-xs font-bold">vs</div>
+                      </div>
+                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-green-600">
+                        <img src={pittsburghLogo} alt="PITTSBURGH" className="w-10 h-10 object-contain" />
+                      </div>
                     </div>
-                    <div className="text-white text-sm font-bold mb-1">Pittsburgh</div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-white/90 text-xs">Moneyline</span>
-                      <span className="text-white font-bold text-sm">+140</span>
+                    <div className="bg-black border-2 border-t-0 border-green-600 px-3 py-2">
+                      <div className="text-white text-[11px] font-bold text-center">moneyline</div>
                     </div>
                   </div>
                 </div>
 
                 {/* Bet 3: Chicago Moneyline */}
-                <div className="mb-4 pb-4 border-b border-white/10">
-                  <div className="bg-green-600/10 border border-green-600 rounded-lg p-3">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-white font-bold text-xs">CHI @ CIN</span>
-                      <span className="text-white/70 text-[10px]">Nov 02, 1:00 pm EST</span>
+                <div className="mb-4">
+                  <div className="bg-black rounded-lg overflow-hidden">
+                    <div className="flex items-center justify-between p-3 bg-black border-2 border-green-600">
+                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                        <img src={vegasLogo} alt="VEGAS" className="w-10 h-10 object-contain" />
+                      </div>
+                      <div className="text-center flex-1">
+                        <div className="text-white text-[10px] font-bold mb-1">7:00 PM</div>
+                        <div className="text-white text-xs font-bold">vs</div>
+                      </div>
+                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-green-600">
+                        <img src={tampaLogo} alt="TAMPA" className="w-10 h-10 object-contain" />
+                      </div>
                     </div>
-                    <div className="text-white text-sm font-bold mb-1">Chicago</div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-white/90 text-xs">Moneyline</span>
-                      <span className="text-white font-bold text-sm">-144</span>
+                    <div className="bg-black border-2 border-t-0 border-green-600 px-3 py-2">
+                      <div className="text-white text-[11px] font-bold text-center">moneyline</div>
                     </div>
                   </div>
                 </div>
 
                 {/* Bet 4: New Orleans +13.5 Spread */}
                 <div>
-                  <div className="bg-green-600/10 border border-green-600 rounded-lg p-3">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-white font-bold text-xs">NO @ LAR</span>
-                      <span className="text-white/70 text-[10px]">Nov 02, 4:05 pm EST</span>
+                  <div className="bg-black rounded-lg overflow-hidden">
+                    <div className="flex items-center justify-between p-3 bg-black border-2 border-green-600">
+                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                        <img src={stlouisLogo} alt="ST. LOUIS" className="w-10 h-10 object-contain" />
+                      </div>
+                      <div className="text-center flex-1">
+                        <div className="text-white text-[10px] font-bold mb-1">7:00 PM</div>
+                        <div className="text-white text-xs font-bold">vs</div>
+                      </div>
+                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-green-600">
+                        <img src={pittsburghLogo} alt="PITTSBURGH" className="w-10 h-10 object-contain" />
+                      </div>
                     </div>
-                    <div className="text-white text-sm font-bold mb-1">New Orleans +13.5</div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-white/90 text-xs">Spread</span>
-                      <span className="text-white font-bold text-sm">-107</span>
+                    <div className="bg-black border-2 border-t-0 border-green-600 px-3 py-2">
+                      <div className="text-white text-[11px] font-bold text-center">Spread +13.5</div>
                     </div>
                   </div>
                 </div>
@@ -934,46 +960,66 @@ const Parlay = () => {
                 <div className="text-center text-white font-bold text-xs mb-4">PARIER SUR</div>
                 
                 {/* Bet 1: Pittsburgh Moneyline */}
-                <div className="mb-4 pb-4 border-b border-white/10">
-                  <div className="bg-green-600/10 border border-green-600 rounded-lg p-3">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-white font-bold text-xs">IND @ PIT</span>
-                      <span className="text-white/70 text-[10px]">Nov 02, 1:00 pm EST</span>
+                <div className="mb-4">
+                  <div className="bg-black rounded-lg overflow-hidden">
+                    <div className="flex items-center justify-between p-3 bg-black border-2 border-green-600">
+                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                        <img src={washingtonLogo} alt="WASHINGTON" className="w-10 h-10 object-contain" />
+                      </div>
+                      <div className="text-center flex-1">
+                        <div className="text-white text-[10px] font-bold mb-1">7:00 PM</div>
+                        <div className="text-white text-xs font-bold">vs</div>
+                      </div>
+                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-green-600">
+                        <img src={pittsburghLogo} alt="PITTSBURGH" className="w-10 h-10 object-contain" />
+                      </div>
                     </div>
-                    <div className="text-white text-sm font-bold mb-1">Pittsburgh</div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-white/90 text-xs">Moneyline</span>
-                      <span className="text-white font-bold text-sm">+140</span>
+                    <div className="bg-black border-2 border-t-0 border-green-600 px-3 py-2">
+                      <div className="text-white text-[11px] font-bold text-center">moneyline</div>
                     </div>
                   </div>
                 </div>
 
                 {/* Bet 2: Z. Flowers Under 68.5 Receiving Yards */}
-                <div className="mb-4 pb-4 border-b border-white/10">
-                  <div className="bg-green-600/10 border border-green-600 rounded-lg p-3">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-white font-bold text-xs">BAL @ MIA</span>
-                      <span className="text-white/70 text-[10px]">Thu 8:15 pm EDT</span>
+                <div className="mb-4">
+                  <div className="bg-black rounded-lg overflow-hidden">
+                    <div className="flex items-center justify-between p-3 bg-black border-2 border-green-600">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                          <img src={kansascityLogo} alt="KANSAS CITY" className="w-10 h-10 object-contain" />
+                        </div>
+                        <div className="text-center">
+                          <div className="text-white text-[10px] font-bold mb-1">7:00 PM</div>
+                          <div className="text-white text-xs font-bold">Under 68.5</div>
+                        </div>
+                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                          <img src={kansascityLogo} alt="KANSAS CITY" className="w-10 h-10 object-contain" />
+                        </div>
+                      </div>
                     </div>
-                    <div className="text-white text-sm font-bold mb-1">Under 68.5</div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-white/90 text-xs">Z. Flowers Receiving Yards</span>
-                      <span className="text-white font-bold text-sm">-114</span>
+                    <div className="bg-black border-2 border-t-0 border-green-600 px-3 py-2">
+                      <div className="text-white text-[11px] font-bold text-center">Z. Flowers Receiving Yards</div>
                     </div>
                   </div>
                 </div>
 
                 {/* Bet 3: Chicago Moneyline */}
                 <div>
-                  <div className="bg-green-600/10 border border-green-600 rounded-lg p-3">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-white font-bold text-xs">CHI @ CIN</span>
-                      <span className="text-white/70 text-[10px]">Nov 02, 1:00 pm EST</span>
+                  <div className="bg-black rounded-lg overflow-hidden">
+                    <div className="flex items-center justify-between p-3 bg-black border-2 border-green-600">
+                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                        <img src={vegasLogo} alt="VEGAS" className="w-10 h-10 object-contain" />
+                      </div>
+                      <div className="text-center flex-1">
+                        <div className="text-white text-[10px] font-bold mb-1">7:00 PM</div>
+                        <div className="text-white text-xs font-bold">vs</div>
+                      </div>
+                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-green-600">
+                        <img src={tampaLogo} alt="TAMPA" className="w-10 h-10 object-contain" />
+                      </div>
                     </div>
-                    <div className="text-white text-sm font-bold mb-1">Chicago</div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-white/90 text-xs">Moneyline</span>
-                      <span className="text-white font-bold text-sm">-144</span>
+                    <div className="bg-black border-2 border-t-0 border-green-600 px-3 py-2">
+                      <div className="text-white text-[11px] font-bold text-center">moneyline</div>
                     </div>
                   </div>
                 </div>
