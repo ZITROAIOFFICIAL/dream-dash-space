@@ -753,12 +753,14 @@ const Index = () => {
               </div>
 
               {/* Match Details */}
+              <div className="text-center pb-2">
+                <div className="text-sm font-bold text-white tracking-wider mb-2">
+                  PARIER SUR
+                </div>
+              </div>
+              
               <div className="mx-4 border-2 border-green-600 rounded-lg bg-black p-4">
-                <div className="text-center space-y-2">
-                  <div className="text-sm font-bold text-white tracking-wider mb-2">
-                    PARIER SUR
-                  </div>
-                  
+                <div className="text-center">
                   {/* Teams and VS */}
                   <div className="grid grid-cols-3 items-center justify-items-center gap-4 px-4">
                     {/* ST. LOUIS */}
@@ -780,12 +782,12 @@ const Index = () => {
 
                     {/* PITTSBURGH */}
                     <div className="flex flex-col items-center gap-1">
+                      <div className="text-xs font-bold text-green-400 mb-1">VICTOIRE</div>
                       <div className="bg-green-600/15 border-2 border-green-600 rounded-none p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[5px]">
                         <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center p-2">
                           <img src={pittsburghLogo} alt="Pittsburgh" className="w-full h-full object-contain" />
                         </div>
                         <span className="text-white -bottom-0.5 text-xs font-extrabold">PITTSBURGH</span>
-                        <div className="text-xs font-bold text-green-400">VICTOIRE</div>
                       </div>
                     </div>
                   </div>
@@ -1513,12 +1515,14 @@ const Index = () => {
               </div>
 
               {/* Match Details */}
+              <div className="text-center pb-2">
+                <div className="text-sm font-bold text-white tracking-wider mb-2">
+                  PARIER SUR
+                </div>
+              </div>
+              
               <div className="mx-4 border-2 border-green-600 rounded-lg bg-black p-4">
-                <div className="text-center space-y-2">
-                  <div className="text-sm font-bold text-white tracking-wider mb-2">
-                    PARIER SUR
-                  </div>
-                  
+                <div className="text-center">
                   {/* Teams and VS */}
                   <div className="grid grid-cols-3 items-center justify-items-center gap-4 px-4">
                     {/* VEGAS */}
@@ -1539,12 +1543,12 @@ const Index = () => {
 
                     {/* TAMPA BAY */}
                     <div className="flex flex-col items-center gap-1">
+                      <div className="text-xs font-bold text-green-400 mb-1">VICTOIRE</div>
                       <div className="bg-green-600/15 border-2 border-green-600 rounded-none p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[17px]">
                         <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center p-2">
                           <img src={tampaLogo} alt="Tampa Bay" className="w-full h-full object-contain" />
                         </div>
                         <span className="text-white -bottom-0.5 text-xs font-extrabold">TAMPA BAY</span>
-                        <div className="text-xs font-bold text-green-400">VICTOIRE</div>
                       </div>
                     </div>
                   </div>
@@ -2089,22 +2093,24 @@ const Index = () => {
               </div>
 
               {/* Match Details */}
+              <div className="text-center pb-2">
+                <div className="text-sm font-bold text-white tracking-wider mb-2">
+                  PARIER SUR
+                </div>
+              </div>
+              
               <div className="mx-4 border-2 border-green-600 rounded-lg bg-black p-4">
-                <div className="text-center space-y-2">
-                  <div className="text-sm font-bold text-white tracking-wider mb-2">
-                    PARIER SUR
-                  </div>
-                  
+                <div className="text-center">
                   {/* Teams and VS */}
                   <div className="grid grid-cols-3 items-center justify-items-center gap-4 px-4">
                     {/* WASHINGTON */}
                     <div className="flex flex-col items-center gap-1">
+                      <div className="text-xs font-bold text-green-400 mb-1">VICTOIRE</div>
                       <div className="bg-green-600/15 border-2 border-green-600 rounded-none p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[5px]">
                         <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center p-2">
                           <img src={washingtonLogo} alt="Washington" className="w-full h-full object-contain" />
                         </div>
                         <span className="text-white -bottom-0.5 text-xs font-extrabold">WASHINGTON</span>
-                        <div className="text-xs font-bold text-green-400">VICTOIRE</div>
                       </div>
                     </div>
 
