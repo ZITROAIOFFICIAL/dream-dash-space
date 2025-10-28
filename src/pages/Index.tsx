@@ -24,6 +24,7 @@ const Index = () => {
   const [selectedBetType, setSelectedBetType] = useState<string>('all');
   const [sortByMultiplier, setSortByMultiplier] = useState<string>('high');
   const [sortByAI, setSortByAI] = useState<string>('high');
+  const [lastSortKey, setLastSortKey] = useState<'ai' | 'multiplier'>('ai');
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
@@ -91,21 +92,20 @@ const Index = () => {
     { id: 'washington', league: 'NFL', betType: 'UNDER/OVER', multiplier: multiplierWashington, aiPercent: 85, show: shouldShowCard('NFL', 'UNDER/OVER') }
   ].filter(card => card.show);
 
-  // Sort cards based on filters (always sort, prioritize AI first, then multiplier)
+  // Sort cards based on the last changed sort control
   let sortedCards = [...cards];
-  
-  // First sort by AI
-  if (sortByAI === 'high') {
-    sortedCards.sort((a, b) => b.aiPercent - a.aiPercent);
-  } else if (sortByAI === 'low') {
-    sortedCards.sort((a, b) => a.aiPercent - b.aiPercent);
-  }
-  
-  // Then by multiplier if needed
-  if (sortByMultiplier === 'high') {
-    sortedCards.sort((a, b) => b.multiplier - a.multiplier);
-  } else if (sortByMultiplier === 'low') {
-    sortedCards.sort((a, b) => a.multiplier - b.multiplier);
+  if (lastSortKey === 'ai') {
+    if (sortByAI === 'high') {
+      sortedCards.sort((a, b) => b.aiPercent - a.aiPercent);
+    } else {
+      sortedCards.sort((a, b) => a.aiPercent - b.aiPercent);
+    }
+  } else {
+    if (sortByMultiplier === 'high') {
+      sortedCards.sort((a, b) => b.multiplier - a.multiplier);
+    } else {
+      sortedCards.sort((a, b) => a.multiplier - b.multiplier);
+    }
   }
 
   const showStLouis = sortedCards.some(c => c.id === 'stlouis');
@@ -178,7 +178,7 @@ const Index = () => {
           </Select>
 
           {/* Sort by Multiplier */}
-          <Select value={sortByMultiplier} onValueChange={setSortByMultiplier}>
+          <Select value={sortByMultiplier} onValueChange={(v) => { setSortByMultiplier(v); setLastSortKey('multiplier'); }}>
             <SelectTrigger className="w-full bg-black border-2 border-white/20 text-white hover:border-green-600/50 transition-colors">
               <SelectValue placeholder="Multiplicateur de mise" />
             </SelectTrigger>

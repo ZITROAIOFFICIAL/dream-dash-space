@@ -23,6 +23,7 @@ const Parlay = () => {
   const [selectedLeague, setSelectedLeague] = useState<string>('all');
   const [sortByMultiplier, setSortByMultiplier] = useState<string>('high');
   const [sortByAI, setSortByAI] = useState<string>('high');
+  const [lastSortKey, setLastSortKey] = useState<'ai' | 'multiplier'>('ai');
 
   useEffect(() => {
     const shouldBeFast = Math.random() < 0.85;
@@ -88,21 +89,20 @@ const Parlay = () => {
     { league: 'NHL', multiplier: totalMultiplierNHL, aiPercent: 94, show: shouldShowCard('NHL') }
   ].filter(card => card.show);
 
-  // Sort cards based on filters (always sort, prioritize AI first, then multiplier)
+  // Sort cards based on the last changed sort control
   let sortedCards = [...cards];
-  
-  // First sort by AI
-  if (sortByAI === 'high') {
-    sortedCards.sort((a, b) => b.aiPercent - a.aiPercent);
-  } else if (sortByAI === 'low') {
-    sortedCards.sort((a, b) => a.aiPercent - b.aiPercent);
-  }
-  
-  // Then by multiplier if needed
-  if (sortByMultiplier === 'high') {
-    sortedCards.sort((a, b) => b.multiplier - a.multiplier);
-  } else if (sortByMultiplier === 'low') {
-    sortedCards.sort((a, b) => a.multiplier - b.multiplier);
+  if (lastSortKey === 'ai') {
+    if (sortByAI === 'high') {
+      sortedCards.sort((a, b) => b.aiPercent - a.aiPercent);
+    } else {
+      sortedCards.sort((a, b) => a.aiPercent - b.aiPercent);
+    }
+  } else {
+    if (sortByMultiplier === 'high') {
+      sortedCards.sort((a, b) => b.multiplier - a.multiplier);
+    } else {
+      sortedCards.sort((a, b) => a.multiplier - b.multiplier);
+    }
   }
 
   const showNFL = sortedCards.some(c => c.league === 'NFL');
@@ -163,20 +163,8 @@ const Parlay = () => {
 
         {/* Filters Section */}
         <div className="max-w-md mx-auto mb-8 space-y-3">
-          {/* Sport Filter */}
-          <Select value={selectedLeague} onValueChange={setSelectedLeague}>
-            <SelectTrigger className="w-full bg-black border-2 border-white/20 text-white hover:border-green-600/50 transition-colors">
-              <SelectValue placeholder="Sport" />
-            </SelectTrigger>
-            <SelectContent className="bg-black border-2 border-white/20 z-50">
-              <SelectItem value="all" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">Tous les sports</SelectItem>
-              <SelectItem value="NHL" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">NHL</SelectItem>
-              <SelectItem value="NFL" className="text-white hover:bg-green-600/20 focus:bg-green-600/20">NFL</SelectItem>
-            </SelectContent>
-          </Select>
-
           {/* Sort by Multiplier */}
-          <Select value={sortByMultiplier} onValueChange={setSortByMultiplier}>
+          <Select value={sortByMultiplier} onValueChange={(v) => { setSortByMultiplier(v); setLastSortKey('multiplier'); }}>
             <SelectTrigger className="w-full bg-black border-2 border-white/20 text-white hover:border-green-600/50 transition-colors">
               <SelectValue placeholder="Multiplicateur de mise" />
             </SelectTrigger>
@@ -187,7 +175,7 @@ const Parlay = () => {
           </Select>
 
           {/* Sort by AI % */}
-          <Select value={sortByAI} onValueChange={setSortByAI}>
+          <Select value={sortByAI} onValueChange={(v) => { setSortByAI(v); setLastSortKey('ai'); }}>
             <SelectTrigger className="w-full bg-black border-2 border-white/20 text-white hover:border-green-600/50 transition-colors">
               <SelectValue placeholder="Chance de gagner IA %" />
             </SelectTrigger>
