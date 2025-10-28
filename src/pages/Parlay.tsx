@@ -488,42 +488,52 @@ const Parlay = () => {
 
                 {/* Bet 2: Pittsburgh Moneyline */}
                 <div className="mb-4">
-                  <div className="bg-black rounded-lg overflow-hidden">
-                    <div className="flex items-center justify-between p-3 bg-black border-2 border-green-600">
-                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                        <img src={stlouisLogo} alt="ST. LOUIS" className="w-10 h-10 object-contain" />
+                  <div className="bg-black rounded-lg overflow-hidden border-2 border-green-600">
+                    <div className="flex items-center justify-between p-3">
+                      <div className="flex flex-col items-center gap-1">
+                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                          <img src={stlouisLogo} alt="ST. LOUIS" className="w-10 h-10 object-contain" />
+                        </div>
+                        <div className="text-white text-[9px] font-bold">ST. LOUIS</div>
                       </div>
                       <div className="text-center flex-1">
                         <div className="text-white text-[10px] font-bold mb-1">7:00 PM</div>
-                        <div className="text-white text-xs font-bold">vs</div>
+                        <div className="text-white text-xs font-bold mb-0.5">vs</div>
+                        <div className="text-white text-[9px]">moneyline</div>
                       </div>
-                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-green-600">
-                        <img src={pittsburghLogo} alt="PITTSBURGH" className="w-10 h-10 object-contain" />
+                      <div className="flex flex-col items-center gap-1">
+                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-green-600">
+                          <img src={pittsburghLogo} alt="PITTSBURGH" className="w-10 h-10 object-contain" />
+                        </div>
+                        <div className="text-white text-[9px] font-bold">PITTSBURGH</div>
+                        <div className="text-green-500 text-[9px] font-bold">VICTOIRE</div>
                       </div>
-                    </div>
-                    <div className="bg-black border-2 border-t-0 border-green-600 px-3 py-2">
-                      <div className="text-white text-[11px] font-bold text-center">moneyline</div>
                     </div>
                   </div>
                 </div>
 
                 {/* Bet 3: Chicago Moneyline */}
                 <div className="mb-4">
-                  <div className="bg-black rounded-lg overflow-hidden">
-                    <div className="flex items-center justify-between p-3 bg-black border-2 border-green-600">
-                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                        <img src={vegasLogo} alt="VEGAS" className="w-10 h-10 object-contain" />
+                  <div className="bg-black rounded-lg overflow-hidden border-2 border-green-600">
+                    <div className="flex items-center justify-between p-3">
+                      <div className="flex flex-col items-center gap-1">
+                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                          <img src={vegasLogo} alt="VEGAS" className="w-10 h-10 object-contain" />
+                        </div>
+                        <div className="text-white text-[9px] font-bold">VEGAS</div>
                       </div>
                       <div className="text-center flex-1">
                         <div className="text-white text-[10px] font-bold mb-1">7:00 PM</div>
-                        <div className="text-white text-xs font-bold">vs</div>
+                        <div className="text-white text-xs font-bold mb-0.5">vs</div>
+                        <div className="text-white text-[9px]">moneyline</div>
                       </div>
-                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-green-600">
-                        <img src={tampaLogo} alt="TAMPA" className="w-10 h-10 object-contain" />
+                      <div className="flex flex-col items-center gap-1">
+                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-green-600">
+                          <img src={tampaLogo} alt="TAMPA" className="w-10 h-10 object-contain" />
+                        </div>
+                        <div className="text-white text-[9px] font-bold">TAMPA</div>
+                        <div className="text-green-500 text-[9px] font-bold">VICTOIRE</div>
                       </div>
-                    </div>
-                    <div className="bg-black border-2 border-t-0 border-green-600 px-3 py-2">
-                      <div className="text-white text-[11px] font-bold text-center">moneyline</div>
                     </div>
                   </div>
                 </div>
@@ -961,21 +971,26 @@ const Parlay = () => {
                 
                 {/* Bet 1: Pittsburgh Moneyline */}
                 <div className="mb-4">
-                  <div className="bg-black rounded-lg overflow-hidden">
-                    <div className="flex items-center justify-between p-3 bg-black border-2 border-green-600">
-                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                        <img src={washingtonLogo} alt="WASHINGTON" className="w-10 h-10 object-contain" />
+                  <div className="bg-black rounded-lg overflow-hidden border-2 border-green-600">
+                    <div className="flex items-center justify-between p-3">
+                      <div className="flex flex-col items-center gap-1">
+                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                          <img src={washingtonLogo} alt="WASHINGTON" className="w-10 h-10 object-contain" />
+                        </div>
+                        <div className="text-white text-[9px] font-bold">WASHINGTON</div>
                       </div>
                       <div className="text-center flex-1">
                         <div className="text-white text-[10px] font-bold mb-1">7:00 PM</div>
-                        <div className="text-white text-xs font-bold">vs</div>
+                        <div className="text-white text-xs font-bold mb-0.5">vs</div>
+                        <div className="text-white text-[9px]">moneyline</div>
                       </div>
-                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-green-600">
-                        <img src={pittsburghLogo} alt="PITTSBURGH" className="w-10 h-10 object-contain" />
+                      <div className="flex flex-col items-center gap-1">
+                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-green-600">
+                          <img src={pittsburghLogo} alt="PITTSBURGH" className="w-10 h-10 object-contain" />
+                        </div>
+                        <div className="text-white text-[9px] font-bold">PITTSBURGH</div>
+                        <div className="text-green-500 text-[9px] font-bold">VICTOIRE</div>
                       </div>
-                    </div>
-                    <div className="bg-black border-2 border-t-0 border-green-600 px-3 py-2">
-                      <div className="text-white text-[11px] font-bold text-center">moneyline</div>
                     </div>
                   </div>
                 </div>
@@ -1005,21 +1020,26 @@ const Parlay = () => {
 
                 {/* Bet 3: Chicago Moneyline */}
                 <div>
-                  <div className="bg-black rounded-lg overflow-hidden">
-                    <div className="flex items-center justify-between p-3 bg-black border-2 border-green-600">
-                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                        <img src={vegasLogo} alt="VEGAS" className="w-10 h-10 object-contain" />
+                  <div className="bg-black rounded-lg overflow-hidden border-2 border-green-600">
+                    <div className="flex items-center justify-between p-3">
+                      <div className="flex flex-col items-center gap-1">
+                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                          <img src={vegasLogo} alt="VEGAS" className="w-10 h-10 object-contain" />
+                        </div>
+                        <div className="text-white text-[9px] font-bold">VEGAS</div>
                       </div>
                       <div className="text-center flex-1">
                         <div className="text-white text-[10px] font-bold mb-1">7:00 PM</div>
-                        <div className="text-white text-xs font-bold">vs</div>
+                        <div className="text-white text-xs font-bold mb-0.5">vs</div>
+                        <div className="text-white text-[9px]">moneyline</div>
                       </div>
-                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-green-600">
-                        <img src={tampaLogo} alt="TAMPA" className="w-10 h-10 object-contain" />
+                      <div className="flex flex-col items-center gap-1">
+                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-green-600">
+                          <img src={tampaLogo} alt="TAMPA" className="w-10 h-10 object-contain" />
+                        </div>
+                        <div className="text-white text-[9px] font-bold">TAMPA</div>
+                        <div className="text-green-500 text-[9px] font-bold">VICTOIRE</div>
                       </div>
-                    </div>
-                    <div className="bg-black border-2 border-t-0 border-green-600 px-3 py-2">
-                      <div className="text-white text-[11px] font-bold text-center">moneyline</div>
                     </div>
                   </div>
                 </div>
