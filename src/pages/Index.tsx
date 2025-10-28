@@ -186,6 +186,23 @@ const Index = () => {
           <span className="text-white">BET</span>
           <span className="text-green-600 text-sm">.AI</span>
         </h1>
+        <p className="text-white/70 text-sm text-center max-w-xs">
+          CHARGEMENT DE NOTRE IA ET DES DONNÉES LES PLUS RÉCENTES
+          <span className="inline-flex ml-0.5">
+            <span className="animate-bounce" style={{
+              animationDelay: '0ms',
+              animationDuration: '1.4s'
+            }}>.</span>
+            <span className="animate-bounce" style={{
+              animationDelay: '200ms',
+              animationDuration: '1.4s'
+            }}>.</span>
+            <span className="animate-bounce" style={{
+              animationDelay: '400ms',
+              animationDuration: '1.4s'
+            }}>.</span>
+          </span>
+        </p>
       </div>
     );
   }
