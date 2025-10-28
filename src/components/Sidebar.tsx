@@ -81,8 +81,8 @@ const Sidebar = () => {
                   className={cn(
                     "flex items-center justify-between px-4 py-3 rounded-lg transition-all duration-200 text-sm",
                     active 
-                      ? "bg-primary/20 border-2 border-primary font-semibold text-primary" 
-                      : "bg-transparent border-2 border-transparent text-white hover:bg-white/10"
+                      ? "bg-green-600/20 border-2 border-green-600 font-semibold text-green-500" 
+                      : "bg-transparent border-2 border-transparent text-white hover:bg-green-600/10"
                   )}
                 >
                   <div className="flex items-center gap-2">
