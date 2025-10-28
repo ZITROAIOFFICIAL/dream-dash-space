@@ -166,7 +166,7 @@ const Index = () => {
 
                 {/* Analysis Dialog - ST. LOUIS */}
                 <Dialog open={isAnalysisDialogOpenStLouis} onOpenChange={setIsAnalysisDialogOpenStLouis}>
-                  <DialogContent className="sm:max-w-2xl bg-black border-t-[3px] border-b-[3px] border-green-600 p-0 max-h-[90vh] overflow-y-auto">
+                  <DialogContent className="sm:max-w-2xl bg-black p-0 max-h-[90vh] overflow-y-auto">
                     <div className="bg-black/40">
                       <div className="flex items-center justify-center gap-3 py-2 px-6">
                         <div className="relative w-6 h-6 flex-shrink-0">
@@ -864,7 +864,7 @@ const Index = () => {
 
         {/* VEGAS vs TAMPA BAY CARD */}
         <div className="grid gap-6 justify-center">
-          <Card className="w-full max-w-md bg-black border-t-[3px] border-b-[3px] border-green-600 shadow-2xl overflow-hidden mx-auto rounded-sm">
+          <Card className="w-full max-w-md bg-black shadow-2xl overflow-hidden mx-auto rounded-sm">
             <CardHeader className="space-y-0 p-0">
               {/* AI Data Analysis Counter */}
               <div className="flex items-center justify-center gap-3 py-2 px-6 bg-black/40">
@@ -926,7 +926,7 @@ const Index = () => {
 
                 {/* Analysis Dialog - VEGAS */}
                 <Dialog open={isAnalysisDialogOpenVegas} onOpenChange={setIsAnalysisDialogOpenVegas}>
-                  <DialogContent className="sm:max-w-2xl bg-black border-t-[3px] border-b-[3px] border-green-600 p-0 max-h-[90vh] overflow-y-auto">
+                  <DialogContent className="sm:max-w-2xl bg-black p-0 max-h-[90vh] overflow-y-auto">
                     <div className="bg-black/40">
                       <div className="flex items-center justify-center gap-3 py-2 px-6">
                         <div className="relative w-6 h-6 flex-shrink-0">
@@ -1622,7 +1622,7 @@ const Index = () => {
           </Card>
 
           {/* WASHINGTON vs KANSAS CITY CARD - NFL */}
-          <Card className="w-full max-w-md bg-black border-t-[3px] border-b-[3px] border-green-600 shadow-2xl overflow-hidden mx-auto rounded-sm">
+          <Card className="w-full max-w-md bg-black shadow-2xl overflow-hidden mx-auto rounded-sm">
             <CardHeader className="space-y-0 p-0">
               {/* AI Data Analysis Counter */}
               <div className="flex items-center justify-center gap-3 py-2 px-6 bg-black/40">
@@ -1685,7 +1685,7 @@ const Index = () => {
 
               {/* Analysis Dialog for Washington */}
               <Dialog open={isAnalysisDialogOpenWashington} onOpenChange={setIsAnalysisDialogOpenWashington}>
-                <DialogContent className="sm:max-w-2xl bg-black border-t-[3px] border-b-[3px] border-green-600 p-0 max-h-[90vh] overflow-y-auto">
+                <DialogContent className="sm:max-w-2xl bg-black p-0 max-h-[90vh] overflow-y-auto">
                   <div className="bg-black/40">
                     <div className="flex items-center justify-center gap-3 py-2 px-6">
                       <div className="relative w-6 h-6 flex-shrink-0">
