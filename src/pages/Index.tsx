@@ -777,13 +777,11 @@ const Index = () => {
 
                   {/* PITTSBURGH */}
                   <div className="flex flex-col items-center gap-1">
-                    <div className="bg-green-600/15 border-2 border-green-600 rounded-sm p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[5px]">
-                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center p-2">
-                        <img src={pittsburghLogo} alt="Pittsburgh" className="w-full h-full object-contain" />
-                      </div>
-                      <span className="text-white -bottom-0.5 text-xs font-extrabold">PITTSBURGH</span>
-                      <div className="text-xs font-bold text-green-400">VICTOIRE</div>
+                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border-[3px] border-green-600 p-2">
+                      <img src={pittsburghLogo} alt="Pittsburgh" className="w-full h-full object-contain" />
                     </div>
+                    <span className="font-bold text-xs text-white">PITTSBURGH</span>
+                    <div className="text-xs font-bold text-green-400">VICTOIRE</div>
                   </div>
                 </div>
               </div>
@@ -1537,13 +1535,11 @@ const Index = () => {
 
                   {/* TAMPA BAY */}
                   <div className="flex flex-col items-center gap-1">
-                    <div className="bg-green-600/15 border-2 border-green-600 rounded-sm p-2 flex flex-col items-center justify-center gap-1.5 py-[6px] px-[17px]">
-                      <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center p-2">
-                        <img src={tampaLogo} alt="Tampa Bay" className="w-full h-full object-contain" />
-                      </div>
-                      <span className="text-white -bottom-0.5 text-xs font-extrabold">TAMPA BAY</span>
-                      <div className="text-xs font-bold text-green-400">VICTOIRE</div>
+                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border-[3px] border-green-600 p-2">
+                      <img src={tampaLogo} alt="Tampa Bay" className="w-full h-full object-contain" />
                     </div>
+                    <span className="font-bold text-xs text-white">TAMPA BAY</span>
+                    <div className="text-xs font-bold text-green-400">VICTOIRE</div>
                   </div>
                 </div>
               </div>
