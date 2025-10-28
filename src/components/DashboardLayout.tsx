@@ -15,9 +15,9 @@ const DashboardLayout = ({
         <div className="flex items-center justify-center py-4">
           <h1 className="text-2xl font-bold leading-none">
             <span className="text-foreground">WIN</span>
-            <span className="text-primary">A</span>
+            <span className="text-green-600">A</span>
             <span className="text-foreground">BET</span>
-            <span className="text-primary text-sm">.AI</span>
+            <span className="text-sm text-green-600">.AI</span>
           </h1>
         </div>
         <div className="bg-black py-2 px-6 flex items-center justify-center">
