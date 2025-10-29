@@ -637,6 +637,12 @@
       object-fit: contain;
       background: #ffffff;
       padding: 0.25rem;
+      border: 3px solid transparent;
+    }
+
+    .team-side.selected .team-logo {
+      border: 3px solid #16a34a;
+      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
     }
 
     .team-name-new {
@@ -648,7 +654,7 @@
 
     .team-bet-type {
       font-size: 1.5rem;
-      color: #ffffff;
+      color: #16a34a;
       font-weight: 600;
     }
 
@@ -1567,13 +1573,14 @@
                       <div class="team-bet-type">{{ block.settings.team1_bet_type | default: 'MONEYLINE' }}</div>
                     </div>
 
-                    <div class="team-side">
+                    <div class="team-side selected">
                       {% if block.settings.team2_logo %}
                         <img src="{{ block.settings.team2_logo | image_url: width: 200 }}" alt="{{ block.settings.team2_name }}" class="team-logo">
                       {% else %}
                         <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ block.settings.team2_name }}" class="team-logo">
                       {% endif %}
                       <div class="team-name-new">{{ block.settings.team2_name | default: 'PITTSBURGH' }}</div>
+                      <div class="team-bet-type">{{ block.settings.team2_bet_type | default: 'VICTOIRE' }}</div>
                     </div>
                   </div>
 
