@@ -2466,6 +2466,25 @@
         event.preventDefault();
       }
 
+      // Afficher le chargement AI pour les pages bet et parlay
+      if (pageName === 'bet' || pageName === 'parlay') {
+        const loadingOverlay = document.getElementById('ai-loading-overlay');
+        loadingOverlay.classList.add('active');
+        
+        // 75% du temps: 0.7s, 25% du temps: 3s
+        const loadingDuration = Math.random() < 0.75 ? 700 : 3000;
+        
+        setTimeout(() => {
+          loadingOverlay.classList.remove('active');
+          performNavigation(pageName);
+        }, loadingDuration);
+      } else {
+        performNavigation(pageName);
+      }
+    }
+
+    // Perform the actual navigation
+    function performNavigation(pageName) {
       // Hide all pages
       document.querySelectorAll('.page').forEach(page => {
         page.classList.remove('active');
