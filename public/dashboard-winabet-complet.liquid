@@ -517,8 +517,15 @@
       align-items: center;
       justify-content: space-between;
       gap: 0.5rem;
-      padding: 10px 1rem;
+      padding: 1rem 1.5rem;
       background: #16a34a;
+    }
+
+    .confidence-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex: 1;
     }
 
     .confidence-badge span {
@@ -527,30 +534,35 @@
     }
 
     .confidence-percentage {
-      font-size: 2.25rem;
+      font-size: 3rem;
       line-height: 1;
+      font-weight: 700;
     }
 
     .confidence-text {
       font-size: 0.75rem;
       font-weight: 700;
+      line-height: 1.2;
+      max-width: 120px;
+      text-align: left;
     }
 
     /* Bouton Voir Analyse IA */
     .btn-analysis {
-      padding: 0.25rem 0.75rem;
+      padding: 0.5rem 1rem;
       background: #000000;
-      border: 2px solid #16a34a;
+      border: 2px solid #000000;
       border-radius: 0.25rem;
       color: #4ade80;
       font-weight: 700;
       font-size: 0.75rem;
       cursor: pointer;
       transition: background-color 0.2s;
+      white-space: nowrap;
     }
 
     .btn-analysis:hover {
-      background: rgba(22, 163, 74, 0.2);
+      background: rgba(0, 0, 0, 0.8);
     }
 
     /* New Bet Card Design */
