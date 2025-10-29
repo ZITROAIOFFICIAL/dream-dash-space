@@ -709,13 +709,12 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1rem;
-      margin-bottom: 1rem;
     }
 
     .bet-modify-box {
-      background: rgba(255, 255, 255, 0.05);
+      background: transparent;
       border-radius: 0.5rem;
-      padding: 1rem;
+      padding: 0;
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
@@ -726,8 +725,8 @@
       color: #ffffff;
       border: none;
       border-radius: 0.5rem;
-      padding: 0.5rem 1rem;
-      font-size: 0.75rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1.125rem;
       font-weight: 700;
       cursor: pointer;
       transition: background 0.2s;
@@ -738,21 +737,22 @@
     }
 
     .bet-amount-small {
-      font-size: 0.75rem;
+      font-size: 1rem;
       color: rgba(255, 255, 255, 0.6);
+      margin-top: 0.5rem;
     }
 
     .bet-amount-value-small {
-      font-size: 1.25rem;
+      font-size: 1.75rem;
       font-weight: 700;
       color: #16a34a;
     }
 
     .cashout-box {
-      background: rgba(255, 255, 255, 0.05);
+      background: transparent;
       border: 2px solid #16a34a;
       border-radius: 0.75rem;
-      padding: 1rem;
+      padding: 1.5rem 1rem;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -760,19 +760,19 @@
     }
 
     .cashout-label {
-      font-size: 0.875rem;
+      font-size: 1.125rem;
       color: #ffffff;
-      font-weight: 600;
+      font-weight: 700;
     }
 
     .cashout-amount {
-      font-size: 2rem;
+      font-size: 2.5rem;
       font-weight: 700;
       color: #16a34a;
     }
 
     .cashout-profit {
-      font-size: 0.875rem;
+      font-size: 1rem;
       color: #16a34a;
       font-weight: 600;
     }
@@ -1543,19 +1543,16 @@
                   <!-- Votre Gain -->
                   <div class="gain-section">
                     <div class="gain-section-label">VOTRE GAIN</div>
-                    <div class="cashout-box">
-                      <div class="cashout-label">CASHOUT</div>
-                      <div class="cashout-amount">${{ 100 | times: block.settings.multiplier | default: 1.95 | round: 2 }}</div>
-                      <div class="cashout-profit">+${{ 100 | times: block.settings.multiplier | default: 1.95 | minus: 100 | round: 2 }} bénéfice</div>
-                    </div>
-                    <div class="gain-grid" style="margin-top: 1rem;">
+                    <div class="gain-grid">
                       <div class="bet-modify-box">
                         <button class="modify-btn" onclick="openBetDialog(this)" data-multiplier="{{ block.settings.multiplier | default: '1.95' }}">Modifier</button>
                         <div class="bet-amount-small">Votre mise</div>
                         <div class="bet-amount-value-small">$100</div>
                       </div>
-                      <div class="bet-modify-box">
-                        <!-- Empty space for symmetry -->
+                      <div class="cashout-box">
+                        <div class="cashout-label">CASHOUT</div>
+                        <div class="cashout-amount">${{ 100 | times: block.settings.multiplier | default: 1.95 | round: 2 }}</div>
+                        <div class="cashout-profit">+${{ 100 | times: block.settings.multiplier | default: 1.95 | minus: 100 | round: 2 }} bénéfice</div>
                       </div>
                     </div>
                   </div>
