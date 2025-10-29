@@ -707,7 +707,8 @@
 
     .gain-grid {
       display: grid;
-      grid-template-columns: 1fr auto;
+      grid-template-columns: auto auto;
+      justify-content: space-between;
       align-items: end;
       gap: 1rem;
     }
@@ -1554,10 +1555,10 @@
                   <div class="gain-section">
                     <div class="gain-section-label">VOTRE GAIN</div>
                     <div class="gain-grid">
-                      <div class="bet-modify-box">
-                        <button class="modify-btn" onclick="openBetDialog(this)" data-multiplier="{{ block.settings.multiplier | default: '1.95' }}">Modifier</button>
-                        <div class="bet-amount-small">Votre mise</div>
-                        <div class="bet-amount-value-small">$100</div>
+                      <div class="cashout-box">
+                        <div class="cashout-label">CASHOUT</div>
+                        <div class="cashout-amount">${{ 100 | times: block.settings.multiplier | default: 1.95 | round: 2 }}</div>
+                        <div class="cashout-profit">+${{ 100 | times: block.settings.multiplier | default: 1.95 | minus: 100 | round: 2 }} bénéfice</div>
                       </div>
                       <div class="cashout-box">
                         <div class="cashout-label">CASHOUT</div>
