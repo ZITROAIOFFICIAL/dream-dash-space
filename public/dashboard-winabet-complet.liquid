@@ -706,9 +706,9 @@
     }
 
     .gain-grid {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
       gap: 1rem;
     }
 
@@ -720,7 +720,6 @@
       flex-direction: column;
       gap: 0.5rem;
       align-items: flex-start;
-      flex: 1;
     }
 
     .modify-btn {
@@ -762,9 +761,11 @@
       align-items: center;
       justify-content: center;
       gap: 0.25rem;
-      width: 10rem;
-      height: 10rem;
+      width: 9rem;
+      height: 9rem;
       flex-shrink: 0;
+      justify-self: end;
+      align-self: end;
     }
 
     .cashout-label {
