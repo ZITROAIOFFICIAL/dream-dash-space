@@ -197,7 +197,8 @@
       border: 2px solid transparent;
       transition: all 0.2s;
       cursor: pointer;
-      font-size: 1.125rem;
+      font-size: 1.375rem;
+      font-weight: 600;
     }
 
     .nav-item-content {
@@ -258,8 +259,8 @@
 
     .ai-spinner {
       position: relative;
-      width: 1.25rem;
-      height: 1.25rem;
+      width: 1.75rem;
+      height: 1.75rem;
       flex-shrink: 0;
     }
 
@@ -277,8 +278,9 @@
       transform: translate(-50%, -50%);
       color: #16a34a;
       font-weight: 700;
-      font-size: 8px;
+      font-size: 10px;
       line-height: 1;
+      z-index: 1;
     }
 
     .ai-update-text {
@@ -1146,12 +1148,9 @@
       <a class="nav-item" data-page="parlay" onclick="navigateTo(event, 'parlay')">
         <div class="nav-item-content">
           <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect>
-            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-            <path d="M12 11h4"></path>
-            <path d="M12 16h4"></path>
-            <path d="M8 11h.01"></path>
-            <path d="M8 16h.01"></path>
+            <path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"></path>
+            <path d="m6.08 9.5-3.5 1.6a1 1 0 0 0 0 1.81l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9a1 1 0 0 0 0-1.83l-3.5-1.59"></path>
+            <path d="m6.08 14.5-3.5 1.6a1 1 0 0 0 0 1.81l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9a1 1 0 0 0 0-1.83l-3.5-1.59"></path>
           </svg>
           <span>PARLAY DU JOUR</span>
         </div>
@@ -1189,12 +1188,9 @@
             <polyline points="12 6 12 12 16 14"></polyline>
           </svg>
           <svg class="nav-icon-small" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect>
-            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-            <path d="M12 11h4"></path>
-            <path d="M12 16h4"></path>
-            <path d="M8 11h.01"></path>
-            <path d="M8 16h.01"></path>
+            <path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"></path>
+            <path d="m6.08 9.5-3.5 1.6a1 1 0 0 0 0 1.81l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9a1 1 0 0 0 0-1.83l-3.5-1.59"></path>
+            <path d="m6.08 14.5-3.5 1.6a1 1 0 0 0 0 1.81l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9a1 1 0 0 0 0-1.83l-3.5-1.59"></path>
           </svg>
           <span>HISTORIQUE PARLAY DU JOUR</span>
         </div>
