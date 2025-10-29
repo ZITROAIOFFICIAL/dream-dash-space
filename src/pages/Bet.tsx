@@ -65,7 +65,7 @@ const Bet = () => {
             </span>
           </div>
           <h1 className="text-3xl font-bold text-foreground mb-2 text-center">BET DU JOUR</h1>
-          <p className="text-muted-foreground text-center">Les paris avec la meilleure probabilité de réussite aujourd'hui </p>
+          <p className="text-muted-foreground text-center">Les bet avec la meilleur probabilité de réussite aujourd'hui. Nous affichons tous les bet avec minimum de 70% de chance de gagner selon notre IA.</p>
         </div>
 
         <div className="grid gap-6 justify-center">
