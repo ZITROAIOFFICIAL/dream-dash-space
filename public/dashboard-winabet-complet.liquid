@@ -765,6 +765,40 @@
       flex-shrink: 0;
     }
 
+    .cashout-box-large {
+      background: #000000;
+      border: 3px solid #16a34a;
+      border-radius: 1rem;
+      padding: 1.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-width: 12rem;
+      flex-shrink: 0;
+    }
+
+    .cashout-box-large .cashout-label {
+      font-size: 0.875rem;
+      color: #ffffff;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .cashout-box-large .cashout-amount {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #16a34a;
+      line-height: 1;
+    }
+
+    .cashout-box-large .cashout-profit {
+      font-size: 0.875rem;
+      color: #16a34a;
+      font-weight: 600;
+    }
+
     .cashout-label {
       font-size: 1rem;
       color: #ffffff;
@@ -1556,7 +1590,7 @@
                         <div class="cashout-amount">${{ 100 | times: block.settings.multiplier | default: 1.95 | round: 2 }}</div>
                         <div class="cashout-profit">+${{ 100 | times: block.settings.multiplier | default: 1.95 | minus: 100 | round: 2 }} bénéfice</div>
                       </div>
-                      <div class="cashout-box">
+                      <div class="cashout-box-large">
                         <div class="cashout-label">CASHOUT</div>
                         <div class="cashout-amount">${{ 100 | times: block.settings.multiplier | default: 1.95 | round: 2 }}</div>
                         <div class="cashout-profit">+${{ 100 | times: block.settings.multiplier | default: 1.95 | minus: 100 | round: 2 }} bénéfice</div>
