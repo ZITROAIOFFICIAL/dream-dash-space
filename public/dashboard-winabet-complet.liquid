@@ -2249,10 +2249,10 @@
           <!-- Chance de gagner -->
           <div class="confidence-section">
             <div class="confidence-label">CHANCE DE GAGNER</div>
-            <div class="confidence-value">92%</div>
+            <div class="confidence-value"><span id="dialog-win-percentage">92</span>%</div>
             <div class="confidence-subtitle">STATISTIQUEMENT AVEC TOUTES CES DONNÉES CI-DESSOUS ANALYSÉES</div>
             <div class="confidence-progress">
-              <div class="confidence-progress-bar" style="width: 92%"></div>
+              <div id="dialog-progress-bar" class="confidence-progress-bar" style="width: 92%"></div>
             </div>
           </div>
 
@@ -2819,6 +2819,16 @@
       const dialogDataCount = document.getElementById('dialog-data-count');
       if (cardDataCount && dialogDataCount) {
         dialogDataCount.textContent = cardDataCount.textContent;
+      }
+      
+      // Copier le pourcentage de chance de gagner de la carte vers le dialog
+      const cardWinPercentage = document.querySelector('.confidence-percentage span');
+      const dialogWinPercentage = document.getElementById('dialog-win-percentage');
+      const dialogProgressBar = document.getElementById('dialog-progress-bar');
+      if (cardWinPercentage && dialogWinPercentage && dialogProgressBar) {
+        const percentage = cardWinPercentage.textContent;
+        dialogWinPercentage.textContent = percentage;
+        dialogProgressBar.style.width = percentage + '%';
       }
       
       // Afficher l'overlay de chargement AI
