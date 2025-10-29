@@ -269,30 +269,31 @@
 
     .ai-spinner {
       position: relative;
-      width: 1.75rem;
-      height: 1.75rem;
+      width: 2rem;
+      height: 2rem;
       flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    .ai-spinner svg {
+    .ai-spinner::before {
+      content: '';
       position: absolute;
       width: 100%;
       height: 100%;
-      color: #16a34a;
-      stroke: #16a34a;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: #16a34a;
+      border-right-color: #16a34a;
+      animation: spin 1s linear infinite;
     }
 
     .ai-badge {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      position: relative;
       color: #16a34a;
       font-weight: 700;
-      font-size: 10px;
+      font-size: 11px;
       line-height: 1;
       z-index: 10;
     }
@@ -1138,9 +1139,6 @@
     <!-- AI Update Indicator in Sidebar -->
     <div class="ai-update-indicator">
       <div class="ai-spinner">
-        <svg class="animate-spin" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
-        </svg>
         <span class="ai-badge">IA</span>
       </div>
       <span class="ai-update-text">Dernière mise à jour IA : <span id="sidebar-time">17:34</span></span>
@@ -1289,9 +1287,6 @@
     </div>
     <div class="header-ai-update">
       <div class="ai-spinner">
-        <svg class="animate-spin" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
-        </svg>
         <span class="ai-badge">IA</span>
       </div>
       <span class="ai-update-text">Dernière mise à jour IA : <span id="header-time">17:34</span></span>
