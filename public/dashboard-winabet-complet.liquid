@@ -706,11 +706,10 @@
     }
 
     .gain-grid {
-      display: flex;
-      align-items: flex-start;
+      display: grid;
+      grid-template-columns: 1fr 45%;
       gap: 1rem;
-      position: relative;
-      flex-direction: row-reverse;
+      align-items: start;
     }
 
     .bet-modify-box {
@@ -763,7 +762,7 @@
       align-items: center;
       justify-content: center;
       gap: 0.25rem;
-      width: 45%;
+      width: 100%;
       aspect-ratio: 1;
       flex-shrink: 0;
     }
