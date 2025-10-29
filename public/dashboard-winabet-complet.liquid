@@ -2289,6 +2289,26 @@
     function updateDisplay() {
       if (!currentCard) return;
       
+      // Mise (votre mise)
+      const betAmountSmall = currentCard.querySelector('.bet-amount-value-small');
+      if (betAmountSmall) {
+        betAmountSmall.textContent = '$' + currentBetAmount;
+      }
+      
+      // Cashout (montant total)
+      const cashoutAmount = currentCard.querySelector('.cashout-amount');
+      if (cashoutAmount) {
+        cashoutAmount.textContent = '$' + calculateReturn(currentBetAmount);
+      }
+      
+      // Bénéfice
+      const cashoutProfit = currentCard.querySelector('.cashout-profit');
+      if (cashoutProfit) {
+        const profit = (currentBetAmount * currentMultiplier - currentBetAmount).toFixed(2);
+        cashoutProfit.textContent = '+$' + profit + ' bénéfice';
+      }
+      
+      // Anciens éléments (pour compatibilité)
       const betDisplay = currentCard.querySelector('.bet-amount-value');
       const gainDisplay = currentCard.querySelector('.gain-value');
       
