@@ -1215,6 +1215,72 @@
       border-bottom: 2px solid #16a34a;
     }
 
+    /* AI Loading Overlay */
+    .ai-loading-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .ai-loading-overlay.active {
+      display: flex;
+    }
+
+    .ai-loading-spinner {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ai-loading-spinner::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 8px solid transparent;
+      border-top-color: #ffffff;
+      border-right-color: #ffffff;
+      border-bottom-color: #ffffff;
+      animation: spin 1.5s linear infinite;
+    }
+
+    .ai-loading-spinner-text {
+      position: relative;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 3rem;
+      z-index: 10;
+    }
+
+    .ai-loading-logo {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1;
+      text-align: center;
+    }
+
+    .ai-loading-message {
+      color: #ffffff;
+      font-size: 1.125rem;
+      font-weight: 600;
+      text-align: center;
+      max-width: 80%;
+      line-height: 1.5;
+    }
+
     .analysis-title {
       font-size: 1.75rem;
       font-weight: 700;
@@ -2039,6 +2105,17 @@
     </div>
   </main>
 
+  <!-- AI Loading Overlay -->
+  <div id="ai-loading-overlay" class="ai-loading-overlay">
+    <div class="ai-loading-spinner">
+      <span class="ai-loading-spinner-text">IA</span>
+    </div>
+    <div class="ai-loading-logo">
+      <span style="color: #ffffff;">WIN</span><span style="color: #16a34a;">A</span><span style="color: #ffffff;">BET</span><span style="color: #16a34a; font-size: 0.6em;">.AI</span>
+    </div>
+    <p class="ai-loading-message">CHARGEMENT DE NOTRE IA ET DES DONNÉES<br>LES PLUS RÉCENTES…</p>
+  </div>
+
   <!-- Dialog: Modifier la mise -->
   <div id="bet-dialog" class="dialog-overlay">
     <div class="dialog">
@@ -2440,19 +2517,32 @@
 
     // Open analysis dialog
     function openAnalysisDialog() {
-      const dialog = document.getElementById('analysis-dialog');
-      const loading = document.getElementById('loading-section');
-      const content = document.getElementById('analysis-content');
+      // Afficher l'overlay de chargement AI
+      const loadingOverlay = document.getElementById('ai-loading-overlay');
+      loadingOverlay.classList.add('active');
       
-      dialog.classList.add('active');
-      loading.style.display = 'flex';
-      content.style.display = 'none';
-
-      // Simulate loading
+      // Durée aléatoire entre 2 et 3 secondes (2000-3000ms)
+      const randomDuration = Math.floor(Math.random() * 1000) + 2000;
+      
       setTimeout(() => {
-        loading.style.display = 'none';
-        content.style.display = 'block';
-      }, 2000);
+        // Cacher l'overlay de chargement
+        loadingOverlay.classList.remove('active');
+        
+        // Ouvrir le dialog d'analyse
+        const dialog = document.getElementById('analysis-dialog');
+        const loading = document.getElementById('loading-section');
+        const content = document.getElementById('analysis-content');
+        
+        dialog.classList.add('active');
+        loading.style.display = 'flex';
+        content.style.display = 'none';
+
+        // Simulate loading
+        setTimeout(() => {
+          loading.style.display = 'none';
+          content.style.display = 'block';
+        }, 2000);
+      }, randomDuration);
     }
 
     // Close analysis dialog
