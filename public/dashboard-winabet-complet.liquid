@@ -2528,20 +2528,14 @@
         // Cacher l'overlay de chargement
         loadingOverlay.classList.remove('active');
         
-        // Ouvrir le dialog d'analyse
+        // Ouvrir le dialog d'analyse directement avec le contenu
         const dialog = document.getElementById('analysis-dialog');
         const loading = document.getElementById('loading-section');
         const content = document.getElementById('analysis-content');
         
         dialog.classList.add('active');
-        loading.style.display = 'flex';
-        content.style.display = 'none';
-
-        // Simulate loading
-        setTimeout(() => {
-          loading.style.display = 'none';
-          content.style.display = 'block';
-        }, 2000);
+        loading.style.display = 'none';
+        content.style.display = 'block';
       }, randomDuration);
     }
 
