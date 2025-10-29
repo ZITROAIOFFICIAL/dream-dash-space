@@ -668,7 +668,15 @@
     .match-vs-new {
       font-size: 1.75rem;
       font-weight: 700;
-      color: rgba(255, 255, 255, 0.6);
+      color: #ffffff;
+      background: #000000;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      width: 4rem;
+      height: 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .units-button {
@@ -1559,12 +1567,12 @@
                         <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ block.settings.team1_name }}" class="team-logo">
                       {% endif %}
                       <div class="team-name-new">{{ block.settings.team1_name | default: 'ST. LOUIS' }}</div>
-                      <div class="team-bet-type">{{ block.settings.team1_bet_type | default: 'MONEYLINE' }}</div>
                     </div>
 
                     <div class="match-center">
                       <div class="match-time-new">{{ block.settings.match_time | default: '7:00 PM' }}</div>
                       <div class="match-vs-new">VS</div>
+                      <div class="team-bet-type">{{ block.settings.team1_bet_type | default: 'MONEYLINE' }}</div>
                     </div>
 
                     <div class="team-side">
@@ -1574,7 +1582,6 @@
                         <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ block.settings.team2_name }}" class="team-logo">
                       {% endif %}
                       <div class="team-name-new">{{ block.settings.team2_name | default: 'PITTSBURGH' }}</div>
-                      <div class="team-bet-type">{{ block.settings.team2_bet_type | default: 'VICTOIRE' }}</div>
                     </div>
                   </div>
 
