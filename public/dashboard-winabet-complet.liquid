@@ -1585,10 +1585,10 @@
                   <div class="gain-section">
                     <div class="gain-section-label">VOTRE GAIN</div>
                     <div class="gain-grid">
-                      <div class="cashout-box">
-                        <div class="cashout-label">CASHOUT</div>
-                        <div class="cashout-amount">${{ 100 | times: block.settings.multiplier | default: 1.95 | round: 2 }}</div>
-                        <div class="cashout-profit">+${{ 100 | times: block.settings.multiplier | default: 1.95 | minus: 100 | round: 2 }} bénéfice</div>
+                      <div class="bet-modify-box">
+                        <button class="modify-btn" onclick="openBetDialog(this)" data-multiplier="{{ block.settings.multiplier | default: '1.95' }}">Modifier</button>
+                        <div class="bet-amount-small">Votre mise</div>
+                        <div class="bet-amount-value-small">$100</div>
                       </div>
                       <div class="cashout-box-large">
                         <div class="cashout-label">CASHOUT</div>
