@@ -1298,7 +1298,8 @@
     <!-- PAGE 1: BET DU JOUR -->
     <div id="page-bet" class="page active">
       <div class="container">
-        <h1>Paris Recommandés</h1>
+        <h1>BET DU JOUR</h1>
+        <p class="subtitle">Les bet avec la meilleur probabilité de réussite aujourd'hui. Nous affichons tous les bet avec minimum de 70% de chance de gagner selon notre IA.</p>
 
         {% assign bet_cards = section.blocks | where: 'type', 'bet_card' %}
         {% if bet_cards.size > 0 %}
@@ -1397,8 +1398,8 @@
     <!-- PAGE 2: PARLAY DU JOUR -->
     <div id="page-parlay" class="page">
       <div class="container">
-        <h1>Parlay du Jour</h1>
-        <p class="subtitle">Paris combinés recommandés par notre IA</p>
+        <h1>PARLAY DU JOUR</h1>
+        <p class="subtitle">Les parlay avec la meilleur probabilité de réussite aujourd'hui. Nous affichons tous les parlay avec minimum de 60% de chance de gagner selon notre IA.</p>
 
         {% assign parlay_cards = section.blocks | where: 'type', 'parlay_card' %}
         {% if parlay_cards.size > 0 %}
@@ -1465,8 +1466,8 @@
     <!-- PAGE 3: HISTORIQUE BET DU JOUR -->
     <div id="page-historique-bet" class="page">
       <div class="container">
-        <h1>Historique Bet du jour</h1>
-        <p class="subtitle">Résultats de vos paris terminés</p>
+        <h1>HISTORIQUE BET DU JOUR</h1>
+        <p class="subtitle">Consultez l'historique de vos paris du jour et analysez vos performances</p>
 
         {% assign history_bets = section.blocks | where: 'type', 'bet_card' %}
         {% assign has_history = false %}
