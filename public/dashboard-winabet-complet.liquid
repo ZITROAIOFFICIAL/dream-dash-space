@@ -444,6 +444,56 @@
       padding: 0;
     }
 
+    /* AI Counter Section - Above Card */
+    .ai-counter-above {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 0.5rem 1.5rem;
+      margin-bottom: 0.5rem;
+      background: transparent;
+    }
+
+    .ai-counter-above .ai-spinner {
+      position: relative;
+      width: 2.4rem;
+      height: 2.4rem;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ai-counter-above .ai-spinner::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: #16a34a;
+      border-right-color: #16a34a;
+      border-bottom-color: #16a34a;
+      animation: spin 1s linear infinite;
+    }
+
+    .ai-counter-above .ai-badge {
+      position: relative;
+      color: #16a34a;
+      font-weight: 700;
+      font-size: 10px;
+      line-height: 1;
+      z-index: 10;
+    }
+
+    .ai-counter-above span {
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 10px;
+      letter-spacing: 0.025em;
+    }
+
     /* AI Counter Section */
     .ai-counter {
       display: flex;
@@ -1413,18 +1463,15 @@
         {% if bet_cards.size > 0 %}
           {% for block in bet_cards %}
             {% if block.settings.show_card and block.settings.send_to_history != true %}
-              <div class="bet-card" {{ block.shopify_attributes }}>
-                <!-- AI Data Counter -->
-                <div class="ai-counter">
-                  <div class="ai-spinner">
-                    <svg class="animate-spin" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
-                    </svg>
-                    <span class="ai-badge">IA</span>
-                  </div>
-                  <span><span>{{ block.settings.ai_data_count | default: 2843 }}</span> DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
+              <!-- AI Data Counter Above Card -->
+              <div class="ai-counter-above">
+                <div class="ai-spinner">
+                  <span class="ai-badge">IA</span>
                 </div>
+                <span><span>{{ block.settings.ai_data_count | default: 2843 }}</span> DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
+              </div>
 
+              <div class="bet-card" {{ block.shopify_attributes }}>
                 <!-- Confidence Badge - Bande verte 92% -->
                 <div class="confidence-badge">
                   <div class="confidence-left">
