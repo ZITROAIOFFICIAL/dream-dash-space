@@ -173,7 +173,7 @@ const Historique = () => {
         <div className="text-center space-y-2 mb-8">
           <h1 className="text-white text-4xl font-bold">HISTORIQUE BET DU JOUR</h1>
           <p className="text-white text-sm">
-            Consultez l'historique de vos paris du jour et analysez vos performances
+            Consultez l'historique des paris de winabet.ai
           </p>
         </div>
 
