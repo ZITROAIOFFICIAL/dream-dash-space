@@ -1321,24 +1321,52 @@
     }
 
     .confidence-section {
-      background: rgba(22, 163, 74, 0.2);
-      border: 2px solid #16a34a;
-      border-radius: 0.375rem;
-      padding: 1.5rem;
+      background: transparent;
+      border: 3px solid #16a34a;
+      border-radius: 1rem;
+      padding: 2rem;
       margin-bottom: 2rem;
       text-align: center;
     }
 
     .confidence-label {
-      font-size: 0.875rem;
-      color: rgba(255, 255, 255, 0.6);
-      margin-bottom: 0.5rem;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
 
     .confidence-value {
-      font-size: 3rem;
+      font-size: 4rem;
       font-weight: 700;
       color: #16a34a;
+      margin-bottom: 0.5rem;
+      line-height: 1;
+    }
+
+    .confidence-subtitle {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+
+    .confidence-progress {
+      width: 100%;
+      height: 1rem;
+      background: rgba(22, 163, 74, 0.2);
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+
+    .confidence-progress-bar {
+      height: 100%;
+      background: #16a34a;
+      border-radius: 9999px;
+      transition: width 1s ease-out;
     }
 
     .analysis-section {
@@ -1346,28 +1374,51 @@
     }
 
     .analysis-section-title {
-      font-size: 1.25rem;
+      font-size: 1.125rem;
       font-weight: 700;
       margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+      color: #ffffff;
     }
 
     .analysis-subsection {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 0.375rem;
-      padding: 1rem;
+      background: transparent;
+      border: 2px solid #16a34a;
+      border-radius: 0.75rem;
+      padding: 1rem 1rem 1rem 3.5rem;
       margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .analysis-subsection-icon {
+      position: absolute;
+      left: 1rem;
+      top: 1.25rem;
+      width: 1.75rem;
+      height: 1.75rem;
+      background: transparent;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .analysis-subsection-icon svg {
+      width: 1rem;
+      height: 1rem;
+      color: #ffffff;
     }
 
     .analysis-subsection-title {
-      font-weight: 600;
+      font-weight: 700;
       margin-bottom: 0.5rem;
-      color: #16a34a;
+      color: #ffffff;
+      font-size: 0.875rem;
     }
 
     .analysis-subsection-content {
-      color: rgba(255, 255, 255, 0.6);
+      color: rgba(255, 255, 255, 0.8);
       font-size: 0.875rem;
       line-height: 1.6;
     }
@@ -2175,211 +2226,414 @@
         </div>
 
         <div id="analysis-content" style="display: none;">
+          <!-- Chance de gagner -->
           <div class="confidence-section">
-            <div class="confidence-label">Confiance Globale</div>
+            <div class="confidence-label">CHANCE DE GAGNER</div>
             <div class="confidence-value">92%</div>
+            <div class="confidence-subtitle">STATISTIQUEMENT AVEC TOUTES CES DONNÉES CI-DESSOUS ANALYSÉES</div>
+            <div class="confidence-progress">
+              <div class="confidence-progress-bar" style="width: 92%"></div>
+            </div>
           </div>
 
-          <!-- Section 1: Spécial Teams -->
+          <!-- Analyse du marché & meilleures cotes -->
           <div class="analysis-section">
-            <h3 class="analysis-section-title">1. Spécial Teams</h3>
+            <h3 class="analysis-section-title">Analyse du marché & meilleures cotes</h3>
             
             <div class="analysis-subsection">
-              <div class="analysis-subsection-title">Power Play — Vegas</div>
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="analysis-subsection-title">Analyse — Marché & pricing (St. Louis)</div>
               <div class="analysis-subsection-content">
-                Vegas affiche un taux de réussite de 24.5% en supériorité numérique, se classant dans le top 5 de la ligue. Leur première unité, menée par Jack Eichel, est particulièrement efficace avec un taux de conversion élevé sur les 10 derniers matchs.
+                • Analyse de la probabilité implicite du marché pour St. Louis, obtenue par conversion des cotes en pourcentage réel.
               </div>
             </div>
 
             <div class="analysis-subsection">
-              <div class="analysis-subsection-title">Power Play — Tampa Bay</div>
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="analysis-subsection-title">Analyse — Marché & pricing (St. Louis)</div>
               <div class="analysis-subsection-content">
-                Tampa Bay maintient un solide 22.1% en power play. Avec Nikita Kucherov et Steven Stamkos, leur unité spéciale reste dangereuse, particulièrement à domicile où leur taux grimpe à 25.3%.
+                • Comparaison inter-bookmakers pour identifier la meilleure cote disponible ("best price") et mesurer l'efficience du marché.
               </div>
             </div>
 
             <div class="analysis-subsection">
-              <div class="analysis-subsection-title">Pénalités — Vegas</div>
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="analysis-subsection-title">Analyse — Marché & pricing (St. Louis)</div>
               <div class="analysis-subsection-content">
-                Vegas a montré une discipline remarquable récemment avec seulement 2.1 pénalités par match sur les 5 dernières rencontres, bien en dessous de leur moyenne saisonnière de 3.4.
+                • Observation du mouvement de ligne (line movement) afin de déterminer si la valeur évolue en faveur ou en défaveur de St. Louis.
               </div>
             </div>
 
             <div class="analysis-subsection">
-              <div class="analysis-subsection-title">Pénalités — Tampa Bay</div>
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="analysis-subsection-title">Analyse — Marché & pricing (St. Louis)</div>
               <div class="analysis-subsection-content">
-                Tampa Bay affiche 3.2 pénalités par match, légèrement au-dessus de la moyenne de la ligue. Leur jeu physique peut parfois leur coûter des opportunités, surtout face à des équipes disciplinées.
+                • Détection d'un éventuel closing line value (CLV) et influence du sharp money par rapport au public money.
+              </div>
+            </div>
+
+            <div class="analysis-subsection">
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="analysis-subsection-title">Analyse — Marché & pricing (Pittsburgh)</div>
+              <div class="analysis-subsection-content">
+                • Analyse de la probabilité implicite du marché pour Pittsburgh, obtenue par conversion des cotes en pourcentage réel.
+              </div>
+            </div>
+
+            <div class="analysis-subsection">
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="analysis-subsection-title">Analyse — Marché & pricing (Pittsburgh)</div>
+              <div class="analysis-subsection-content">
+                • Comparaison inter-bookmakers pour identifier la meilleure cote disponible ("best price") et mesurer l'efficience du marché.
+              </div>
+            </div>
+
+            <div class="analysis-subsection">
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="analysis-subsection-title">Analyse — Marché & pricing (Pittsburgh)</div>
+              <div class="analysis-subsection-content">
+                • Observation du mouvement de ligne (line movement) afin de déterminer si la valeur évolue en faveur ou en défaveur de Pittsburgh.
+              </div>
+            </div>
+
+            <div class="analysis-subsection">
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="analysis-subsection-title">Analyse — Marché & pricing (Pittsburgh)</div>
+              <div class="analysis-subsection-content">
+                • Détection d'un éventuel closing line value (CLV) et influence du sharp money par rapport au public money.
               </div>
             </div>
           </div>
 
-          <!-- Section 2: Possession & Qualité offensive -->
+          <!-- Historique des confrontations (H2H) -->
           <div class="analysis-section">
-            <h3 class="analysis-section-title">2. Possession & Qualité offensive</h3>
+            <h3 class="analysis-section-title">Historique des confrontations (H2H)</h3>
             
             <div class="analysis-subsection">
-              <div class="analysis-subsection-title">xG (Expected Goals) — Vegas</div>
-              <div class="analysis-subsection-content">
-                Vegas génère en moyenne 3.2 xG par match, démontrant leur capacité à créer des occasions de qualité. Leur efficacité offensive se traduit par un ratio buts/xG de 1.08, indiquant une finition supérieure à la moyenne.
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
               </div>
-            </div>
-
-            <div class="analysis-subsection">
-              <div class="analysis-subsection-title">xG (Expected Goals) — Tampa Bay</div>
+              <div class="analysis-subsection-title">Analyse — Historique des confrontations (H2H)</div>
               <div class="analysis-subsection-content">
-                Tampa Bay affiche 2.9 xG par match avec un ratio buts/xG de 0.97. Bien qu'ils créent de bonnes occasions, leur finition a été légèrement en dessous des attentes sur les derniers matchs.
-              </div>
-            </div>
-
-            <div class="analysis-subsection">
-              <div class="analysis-subsection-title">Possession (Corsi/Fenwick) — Vegas</div>
-              <div class="analysis-subsection-content">
-                Vegas domine la possession avec un Corsi de 54.2% et un Fenwick de 53.8%. Leur capacité à contrôler le jeu se traduit par plus de temps en zone offensive et moins de pression défensive.
-              </div>
-            </div>
-
-            <div class="analysis-subsection">
-              <div class="analysis-subsection-title">Possession (Corsi/Fenwick) — Tampa Bay</div>
-              <div class="analysis-subsection-content">
-                Tampa Bay maintient un Corsi de 51.1% et un Fenwick de 50.9%. Leur style de jeu équilibré leur permet de s'adapter à différents scénarios, bien qu'ils soient parfois moins dominants en possession.
+                Analyse des précédents affrontements entre les deux équipes, incluant les tendances récurrentes du matchup, les styles dominants lors de ces duels, ainsi que les profils statistiques qui se répètent historiquement lorsque ces formations s'opposent.
               </div>
             </div>
           </div>
 
-          <!-- Section 3: Gardien / Défense -->
+          <!-- Lineup / alignement projeté du jour -->
           <div class="analysis-section">
-            <h3 class="analysis-section-title">3. Gardien / Défense</h3>
+            <h3 class="analysis-section-title">Lineup / alignement projeté du jour</h3>
             
             <div class="analysis-subsection">
-              <div class="analysis-subsection-title">Performance du gardien — Vegas</div>
-              <div class="analysis-subsection-content">
-                Adin Hill affiche un taux d'arrêt de .918 sur les 10 derniers matchs avec 2.31 GAA. Sa performance constante et sa capacité à réaliser des arrêts clés en fin de match font de lui un atout majeur.
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
               </div>
-            </div>
-
-            <div class="analysis-subsection">
-              <div class="analysis-subsection-title">Performance du gardien — Tampa Bay</div>
+              <div class="analysis-subsection-title">Analyse — Alignement projeté du jour</div>
               <div class="analysis-subsection-content">
-                Andrei Vasilevskiy maintient un .912 save% avec 2.54 GAA. Bien qu'il reste un gardien d'élite, sa forme récente montre quelques signes de fatigue avec 3 matchs en 5 jours.
-              </div>
-            </div>
-
-            <div class="analysis-subsection">
-              <div class="analysis-subsection-title">Solidité défensive — Vegas</div>
-              <div class="analysis-subsection-content">
-                La défense de Vegas concède seulement 2.4 buts contre par match, classée 3ème de la ligue. Leur structure défensive solide limite les chances de haute qualité avec seulement 2.1 xGA par match.
-              </div>
-            </div>
-
-            <div class="analysis-subsection">
-              <div class="analysis-subsection-title">Solidité défensive — Tampa Bay</div>
-              <div class="analysis-subsection-content">
-                Tampa Bay concède 2.8 buts par match avec 2.6 xGA. Leur défense, bien que compétente, a montré quelques failles récemment, particulièrement sur les transitions rapides.
+                Analyse de l'alignement prévu pour chaque équipe, incluant les trios et paires défensives projetées, la disponibilité des joueurs clés, les éventuels absents, ainsi que l'impact attendu des lignes déployées sur le rythme offensif et la structure tactique globale.
               </div>
             </div>
           </div>
 
-          <!-- Section 4: Alignement & santé de l'effectif -->
+          <!-- Analyse du jeu de puissance & discipline -->
           <div class="analysis-section">
-            <h3 class="analysis-section-title">4. Alignement & santé de l'effectif</h3>
+            <h3 class="analysis-section-title">Analyse du jeu de puissance & discipline</h3>
             
             <div class="analysis-subsection">
-              <div class="analysis-subsection-title">Alignement/Top-6 — Vegas</div>
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="analysis-subsection-title">Analyse — Power Play (St. Louis)</div>
               <div class="analysis-subsection-content">
-                Vegas dispose d'un top-6 au complet avec Jack Eichel (82 pts en 67 matchs) et Mark Stone (65 pts en 61 matchs) en pleine forme. Leur chimie offensive est à son apogée avec 3.8 buts marqués par match sur les 5 dernières sorties.
+                Analyse de l'efficacité du power play de St. Louis, incluant la structure tactique en zone offensive, la qualité des entrées de zone contrôlées, la création de chances dangereuses (HDCF) et l'exécution globale des séquences en supériorité numérique (xGoals/PP).
               </div>
             </div>
 
             <div class="analysis-subsection">
-              <div class="analysis-subsection-title">Alignement/Top-6 — Tampa Bay</div>
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="analysis-subsection-title">Analyse — Power Play (Pittsburgh)</div>
               <div class="analysis-subsection-content">
-                Tampa Bay joue sans Brayden Point (blessure au haut du corps), créant un vide important dans leur deuxième ligne. Steven Stamkos et Nikita Kucherov portent une charge offensive accrue.
+                Analyse de l'efficacité du power play de Pittsburgh, incluant la structure tactique en zone offensive, la qualité des entrées de zone contrôlées, la création de chances dangereuses (HDCF) et l'exécution globale des séquences en supériorité numérique (xGoals/PP).
               </div>
             </div>
 
             <div class="analysis-subsection">
-              <div class="analysis-subsection-title">Défense/Top-4 — Vegas</div>
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="analysis-subsection-title">Analyse — Discipline & Pénalités (St. Louis)</div>
               <div class="analysis-subsection-content">
-                La défense de Vegas est au complet avec Alex Pietrangelo et Shea Theodore formant une première paire solide. Leur mobilité et leur vision du jeu sont des atouts majeurs pour la transition.
+                Analyse du niveau de discipline de St. Louis, basée sur la fréquence des pénalités concédées, le temps passé en infériorité numérique, l'impact sur le momentum et l'exposition défensive répétée en PK.
               </div>
             </div>
 
             <div class="analysis-subsection">
-              <div class="analysis-subsection-title">Défense/Top-4 — Tampa Bay</div>
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="analysis-subsection-title">Analyse — Discipline & Pénalités (Pittsburgh)</div>
               <div class="analysis-subsection-content">
-                Victor Hedman et Mikhail Sergachev forment une paire fiable, mais la profondeur défensive est affectée par l'absence de Darren Raddysh. Cette situation pourrait exposer Tampa Bay face à l'attaque rapide de Vegas.
+                Analyse du niveau de discipline de Pittsburgh, basée sur la fréquence des pénalités concédées, le temps passé en infériorité numérique, l'impact sur le momentum et l'exposition défensive répétée en PK.
               </div>
             </div>
           </div>
 
-          <!-- Section 5: Contexte & fatigue -->
+          <!-- Analyse du gardien & structure défensive -->
           <div class="analysis-section">
-            <h3 class="analysis-section-title">5. Contexte & fatigue</h3>
+            <h3 class="analysis-section-title">Analyse du gardien & structure défensive</h3>
             
             <div class="analysis-subsection">
-              <div class="analysis-subsection-title">Fatigue / Calendrier — Vegas</div>
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="analysis-subsection-title">Analyse — Performance du gardien (St. Louis)</div>
               <div class="analysis-subsection-content">
-                Vegas joue son 2ème match en 3 jours mais bénéficie d'un calendrier favorable avec 2 jours de repos avant ce match. Leur dernière victoire 4-2 contre Arizona leur donne de la confiance sans fatigue excessive.
+                Analyse du rendement du gardien projeté de St. Louis, basée sur l'efficacité face aux tirs à haut danger, la qualité technique, la constance sous pression et les indicateurs avancés type GSAA.
               </div>
             </div>
 
             <div class="analysis-subsection">
-              <div class="analysis-subsection-title">Fatigue / Calendrier — Tampa Bay</div>
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="analysis-subsection-title">Analyse — Performance du gardien (Pittsburgh)</div>
               <div class="analysis-subsection-content">
-                Tampa Bay joue son 3ème match en 5 jours dans une séquence difficile. Après un déplacement en Californie, ce back-to-back à domicile pourrait affecter leur fraîcheur physique, particulièrement en troisième période.
+                Analyse du rendement du gardien projeté de Pittsburgh, basée sur l'efficacité face aux tirs à haut danger, la qualité technique, la constance sous pression et les indicateurs avancés type GSAA.
               </div>
             </div>
 
             <div class="analysis-subsection">
-              <div class="analysis-subsection-title">Avantage domicile / extérieur — Vegas</div>
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="analysis-subsection-title">Analyse — Structure défensive (St. Louis)</div>
               <div class="analysis-subsection-content">
-                Vegas affiche un excellent bilan de 23-7-2 à l'extérieur cette saison. Leur capacité à performer sur la route est l'une des meilleures de la ligue, avec une moyenne de 3.4 buts marqués en déplacement.
+                Analyse de la structure défensive de St. Louis, incluant la protection du slot, la gestion des rebonds, la transition défensive et la limitation des occasions adverses de haute qualité.
               </div>
             </div>
 
             <div class="analysis-subsection">
-              <div class="analysis-subsection-title">Avantage domicile / extérieur — Tampa Bay</div>
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="analysis-subsection-title">Analyse — Structure défensive (Pittsburgh)</div>
               <div class="analysis-subsection-content">
-                Tampa Bay est solide à domicile (26-9-3) mais leur avantage habituel de l'Amalie Arena semble diminué récemment avec 2 défaites sur leurs 4 derniers matchs à domicile.
+                Analyse de la structure défensive de Pittsburgh, incluant la protection du slot, la gestion des rebonds, la transition défensive et la limitation des occasions adverses de haute qualité.
               </div>
             </div>
           </div>
 
-          <!-- Section 6: Marché / Value -->
+          <!-- Analyse de la possession & qualité offensive -->
           <div class="analysis-section">
-            <h3 class="analysis-section-title">6. Marché / Value</h3>
+            <h3 class="analysis-section-title">Analyse de la possession & qualité offensive</h3>
             
             <div class="analysis-subsection">
-              <div class="analysis-subsection-title">Lecture du marché — Vegas</div>
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="analysis-subsection-title">Analyse — Expected Goals (St. Louis)</div>
               <div class="analysis-subsection-content">
-                La cote de Vegas s'est resserrée de -125 à -136 en 24h, indiquant un fort mouvement d'argent sharp sur Vegas. Les bookmakers ajustent face à la confiance du marché professionnel.
+                Analyse de la production offensive de St. Louis, basée sur la quantité et la qualité des tirs générés, les emplacements de tir et la probabilité attendue de convertir les occasions (xG).
               </div>
             </div>
 
             <div class="analysis-subsection">
-              <div class="analysis-subsection-title">Lecture du marché — Tampa Bay</div>
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="analysis-subsection-title">Analyse — Expected Goals (Pittsburgh)</div>
               <div class="analysis-subsection-content">
-                Tampa Bay est passé de +105 à +115, suggérant que le marché s'éloigne d'eux malgré l'avantage domicile. Ce mouvement contre l'équipe locale est significatif et confirme les tendances actuelles.
+                Analyse de la production offensive de Pittsburgh, basée sur la quantité et la qualité des tirs générés, les emplacements de tir et la probabilité attendue de convertir les occasions (xG).
               </div>
             </div>
 
             <div class="analysis-subsection">
-              <div class="analysis-subsection-title">Value / Edge — Vegas</div>
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="analysis-subsection-title">Analyse — Possession (Corsi/Fenwick) (St. Louis)</div>
               <div class="analysis-subsection-content">
-                À -136, Vegas offre toujours de la value malgré le mouvement de ligne. Notre modèle évalue leur vraie probabilité de victoire à 63.5%, ce qui correspond à une cote de -174, offrant un edge de +5.2% par rapport au marché.
+                Analyse du contrôle du palet de St. Louis, à travers le volume de tirs tentés, la capacité à maintenir la zone offensive et la dictée du rythme de jeu.
               </div>
             </div>
 
             <div class="analysis-subsection">
-              <div class="analysis-subsection-title">Value / Edge — Tampa Bay</div>
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="analysis-subsection-title">Analyse — Possession (Corsi/Fenwick) (Pittsburgh)</div>
               <div class="analysis-subsection-content">
-                À +115, Tampa Bay semble surévalué par le marché. Notre modèle leur donne 36.5% de chances de victoire (cote vraie: +174), indiquant que le marché surcompense le facteur domicile et sous-estime l'impact de la fatigue.
+                Analyse du contrôle du palet de Pittsburgh, à travers le volume de tirs tentés, la capacité à maintenir la zone offensive et la dictée du rythme de jeu.
               </div>
             </div>
           </div>
 
-          <div class="analysis-footer">
-            ⚡ Analyse basée sur 482 variables incluant statistiques avancées, conditions de jeu, tendances du marché, et algorithmes propriétaires. Mise à jour en temps réel.
+          <!-- Analyse de l'alignement & profondeur -->
+          <div class="analysis-section">
+            <h3 class="analysis-section-title">Analyse de l'alignement & profondeur</h3>
+            
+            <div class="analysis-subsection">
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="analysis-subsection-title">Analyse — Profondeur offensive (St. Louis)</div>
+              <div class="analysis-subsection-content">
+                Analyse de la profondeur de St. Louis, incluant la contribution du top-6, l'impact du bottom-6, la flexibilité tactique et la capacité à maintenir la pression offensive sur plusieurs trios.
+              </div>
+            </div>
+
+            <div class="analysis-subsection">
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="analysis-subsection-title">Analyse — Profondeur offensive (Pittsburgh)</div>
+              <div class="analysis-subsection-content">
+                Analyse de la profondeur de Pittsburgh, incluant la contribution du top-6, l'impact du bottom-6, la flexibilité tactique et la capacité à maintenir la pression offensive sur plusieurs trios.
+              </div>
+            </div>
+
+            <div class="analysis-subsection">
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="analysis-subsection-title">Analyse — Stabilité défensive (St. Louis)</div>
+              <div class="analysis-subsection-content">
+                Analyse de la profondeur défensive de St. Louis, basée sur la solidité du top-4, la mobilité en relance et la gestion des transitions adverses.
+              </div>
+            </div>
+
+            <div class="analysis-subsection">
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="analysis-subsection-title">Analyse — Stabilité défensive (Pittsburgh)</div>
+              <div class="analysis-subsection-content">
+                Analyse de la profondeur défensive de Pittsburgh, basée sur la solidité du top-4, la mobilité en relance et la gestion des transitions adverses.
+              </div>
+            </div>
+          </div>
+
+          <!-- Analyse du contexte & fatigue -->
+          <div class="analysis-section">
+            <h3 class="analysis-section-title">Analyse du contexte & fatigue</h3>
+            
+            <div class="analysis-subsection">
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="analysis-subsection-title">Analyse — Cadence & calendrier (St. Louis)</div>
+              <div class="analysis-subsection-content">
+                Analyse du contexte physique de St. Louis, incluant l'enchaînement des matchs, le repos disponible, la présence éventuelle d'un back-to-back et la charge de déplacement.
+              </div>
+            </div>
+
+            <div class="analysis-subsection">
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="analysis-subsection-title">Analyse — Cadence & calendrier (Pittsburgh)</div>
+              <div class="analysis-subsection-content">
+                Analyse du contexte physique de Pittsburgh, incluant l'enchaînement des matchs, le repos disponible, la présence éventuelle d'un back-to-back et la charge de déplacement.
+              </div>
+            </div>
+
+            <div class="analysis-subsection">
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="analysis-subsection-title">Analyse — Avantage domicile / extérieur (St. Louis)</div>
+              <div class="analysis-subsection-content">
+                Analyse de la performance contextuelle de St. Louis, selon qu'elle évolue à domicile ou sur la route, et l'impact du dernier changement sur les matchups.
+              </div>
+            </div>
+
+            <div class="analysis-subsection">
+              <div class="analysis-subsection-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="analysis-subsection-title">Analyse — Avantage domicile / extérieur (Pittsburgh)</div>
+              <div class="analysis-subsection-content">
+                Analyse de la performance contextuelle de Pittsburgh, selon qu'elle évolue à domicile ou sur la route, et l'impact du dernier changement sur les matchups.
+              </div>
+            </div>
           </div>
         </div>
       </div>
