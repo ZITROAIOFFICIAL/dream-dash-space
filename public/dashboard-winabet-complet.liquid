@@ -3201,73 +3201,48 @@
 
     <!-- PAGE 5: NOTRE STRATÉGIE -->
     <div id="page-strategy" class="page">
-      <div class="container">
-        <h1>Notre Stratégie</h1>
-
-        <div class="strategy-grid">
-          <div class="strategy-card">
-            <svg class="strategy-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-            </svg>
-            <h3 class="strategy-title">Analyse des Statistiques</h3>
-            <p class="strategy-description">
-              Nous utilisons des algorithmes avancés pour analyser des milliers de données statistiques et identifier les meilleures opportunités.
-            </p>
-          </div>
-
-          <div class="strategy-card">
-            <svg class="strategy-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-            </svg>
-            <h3 class="strategy-title">Gestion du Bankroll</h3>
-            <p class="strategy-description">
-              Une gestion rigoureuse de votre capital est essentielle. Nous recommandons de ne jamais miser plus de 2-5% de votre bankroll sur un seul pari.
-            </p>
-          </div>
-
-          <div class="strategy-card">
-            <svg class="strategy-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/>
-            </svg>
-            <h3 class="strategy-title">Sélection Rigoureuse</h3>
-            <p class="strategy-description">
-              Nous ne recommandons que les paris ayant passé nos critères stricts d'analyse, garantissant une qualité optimale.
-            </p>
-          </div>
-
-          <div class="strategy-card">
-            <svg class="strategy-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
-            </svg>
-            <h3 class="strategy-title">Suivi des Performances</h3>
-            <p class="strategy-description">
-              Consultez votre historique détaillé et suivez l'évolution de vos gains grâce à nos outils de tracking avancés.
-            </p>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2>Principes Clés</h2>
-          <ul class="principles-list">
-            <li>
-              <svg class="check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+      <div class="container" style="max-width: 1000px; margin: 0 auto;">
+        <h1 style="font-size: 3.5rem; margin-bottom: 1rem;">Notre Stratégie</h1>
+        <p class="subtitle" style="font-size: 1.3rem; margin-bottom: 3rem;">Découvrez notre approche gagnante</p>
+        
+        <div style="display: grid; gap: 2rem;">
+          
+          <!-- Carte Stratégie 1 -->
+          <a href="#strategy-detail-1" onclick="navigateTo(event, 'strategy-detail-1')" style="text-decoration: none; display: block; background: rgba(22, 163, 74, 0.08); border: 3px solid #16a34a; border-radius: 1rem; padding: 2rem 2.5rem; transition: all 0.3s; cursor: pointer;">
+            <div style="display: flex; align-items: center; gap: 2rem;">
+              <div style="flex-shrink: 0; width: 80px; height: 80px; background: #16a34a; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center;">
+                <svg style="width: 48px; height: 48px; color: #ffffff; stroke: #ffffff;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                </svg>
+              </div>
+              <div style="flex: 1;">
+                <h3 style="color: #16a34a; font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem;">Analyse des Statistiques</h3>
+                <p style="color: #16a34a; font-size: 1.1rem; margin: 0; opacity: 0.9;">Découvrez notre méthode d'analyse approfondie des données statistiques pour identifier les meilleures opportunités de paris.</p>
+              </div>
+              <svg style="width: 32px; height: 32px; color: #16a34a; flex-shrink: 0;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
               </svg>
-              <span><strong>Discipline</strong> - Suivez les recommandations et ne pariez jamais sous le coup de l'émotion</span>
-            </li>
-            <li>
-              <svg class="check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </div>
+          </a>
+          
+          <!-- Carte Stratégie 2 -->
+          <a href="#strategy-detail-2" onclick="navigateTo(event, 'strategy-detail-2')" style="text-decoration: none; display: block; background: rgba(22, 163, 74, 0.08); border: 3px solid #16a34a; border-radius: 1rem; padding: 2rem 2.5rem; transition: all 0.3s; cursor: pointer;">
+            <div style="display: flex; align-items: center; gap: 2rem;">
+              <div style="flex-shrink: 0; width: 80px; height: 80px; background: #16a34a; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center;">
+                <svg style="width: 48px; height: 48px; color: #ffffff; stroke: #ffffff;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+              </div>
+              <div style="flex: 1;">
+                <h3 style="color: #16a34a; font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem;">Gestion du Bankroll</h3>
+                <p style="color: #16a34a; font-size: 1.1rem; margin: 0; opacity: 0.9;">Apprenez les meilleures pratiques pour gérer votre capital et maximiser vos profits tout en minimisant les risques.</p>
+              </div>
+              <svg style="width: 32px; height: 32px; color: #16a34a; flex-shrink: 0;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
               </svg>
-              <span><strong>Patience</strong> - Les gains se construisent sur le long terme, pas du jour au lendemain</span>
-            </li>
-            <li>
-              <svg class="check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
-              <span><strong>Transparence</strong> - Nous partageons tous nos résultats, bons comme mauvais</span>
-            </li>
-          </ul>
+            </div>
+          </a>
+          
         </div>
       </div>
     </div>
