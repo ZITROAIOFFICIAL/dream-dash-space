@@ -1679,6 +1679,24 @@
               </svg>
             </div>
           </a>
+
+          <!-- Carte Stratégie : Lire les cotes -->
+          <a href="#page-odds" onclick="navigateTo(event, 'odds')" style="text-decoration: none; display: block; background: rgba(22, 163, 74, 0.08); border: 3px solid #16a34a; border-radius: 1rem; padding: 2rem 2.5rem; transition: all 0.3s; cursor: pointer; margin-top: 1.5rem;">
+            <div style="display: flex; align-items: center; gap: 2rem;">
+              <div style="flex-shrink: 0; width: 80px; height: 80px; background: #16a34a; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center;">
+                <svg style="width: 48px; height: 48px; color: #ffffff; stroke: #ffffff;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                </svg>
+              </div>
+              <div style="flex: 1;">
+                <h3 style="color: #16a34a; font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem;">Lire les cotes (Odds)</h3>
+                <p style="color: #16a34a; font-size: 1.1rem; margin: 0; opacity: 0.9;">Comprends rapidement les cotes américaines (+/–), fractionnelles et décimales, la probabilité implicite et le juice. Winabet.ai traduit tout en pourcentages et te pointe directement les paris NFL et NHL avec valeur.</p>
+              </div>
+              <svg style="width: 32px; height: 32px; color: #16a34a; flex-shrink: 0;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </div>
+          </a>
           
         </div>
       </div>
@@ -2618,6 +2636,328 @@
           </p>
           <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.15rem; margin: 1.5rem 0 0 0; line-height: 1.7;">
             Tu n'as pas besoin d'être un expert, mais en comprenant comment fonctionnent les parlays, tu sauras <strong style="color: #16a34a;">pourquoi certains sont rentables</strong> — et d'autres beaucoup moins.
+          </p>
+        </div>
+
+        <!-- Bouton retour en bas -->
+        <a href="#page-strategy" onclick="navigateTo(event, 'strategy')" style="display: inline-flex; align-items: center; gap: 0.5rem; color: #16a34a; text-decoration: none; font-size: 1.1rem; font-weight: 600;">
+          <svg style="width: 24px; height: 24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+          Retour à Notre Stratégie
+        </a>
+      </div>
+    </div>
+
+    <!-- PAGE LIRE LES COTES (ODDS) -->
+    <div id="page-odds" class="page">
+      <div class="container" style="max-width: 900px; margin: 0 auto;">
+        <!-- Bouton retour -->
+        <a href="#page-strategy" onclick="navigateTo(event, 'strategy')" style="display: inline-flex; align-items: center; gap: 0.5rem; color: #16a34a; text-decoration: none; margin-bottom: 2rem; font-size: 1.1rem; font-weight: 600;">
+          <svg style="width: 24px; height: 24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+          Retour à Notre Stratégie
+        </a>
+
+        <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+          <div style="flex-shrink: 0; width: 60px; height: 60px; background: #16a34a; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center;">
+            <svg style="width: 36px; height: 36px; color: #ffffff; stroke: #ffffff;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <h1 style="margin: 0; color: #ffffff; font-size: 2.5rem; font-weight: 700; line-height: 1.2;">Comprendre les cotes — formats, +/–, probabilité implicite et juice</h1>
+        </div>
+
+        <!-- Intro highlight -->
+        <div style="background: rgba(22, 163, 74, 0.1); border-left: 4px solid #16a34a; padding: 1.5rem 2rem; border-radius: 0.5rem; margin-bottom: 3rem;">
+          <h3 style="color: #16a34a; font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem;">À quoi servent les cotes ?</h3>
+          <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.15rem; margin: 0; line-height: 1.7;">
+            Les cotes expriment la probabilité qu'un événement arrive… avec la commission du bookmaker (le <strong>juice/vig</strong>). Lire correctement les cotes t'évite de confondre un pari "qui a l'air bon" avec un pari <strong style="color: #16a34a;">rentable</strong>.
+          </p>
+        </div>
+
+        <!-- Section 1: Cotes américaines -->
+        <div style="margin-bottom: 3rem;">
+          <h2 style="color: #16a34a; font-size: 2rem; font-weight: 700; margin-bottom: 1.5rem;">1) Cotes américaines (moneyline) — le langage du +/–</h2>
+          <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 1.5rem;">
+            <div style="background: rgba(30, 30, 30, 0.5); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+              <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.1rem; margin: 0; line-height: 1.6;">
+                <strong style="color: #16a34a;">Signe "–" = favori</strong>. Ex. –150 → il faut miser 150 $ pour gagner 100 $.
+              </p>
+            </div>
+            <div style="background: rgba(30, 30, 30, 0.5); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+              <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.1rem; margin: 0; line-height: 1.6;">
+                <strong style="color: #16a34a;">Signe "+" = outsider</strong>. Ex. +140 → en misant 100 $, tu gagnes 140 $.
+              </p>
+            </div>
+            <div style="background: rgba(30, 30, 30, 0.5); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+              <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.1rem; margin: 0; line-height: 1.6;">
+                <strong style="color: #16a34a;">Autour de +100 / –110</strong>, le match est considéré serré.
+              </p>
+            </div>
+          </div>
+
+          <div style="background: linear-gradient(135deg, rgba(22, 163, 74, 0.1) 0%, rgba(22, 163, 74, 0.05) 100%); padding: 2rem; border-radius: 1rem; border: 2px solid rgba(22, 163, 74, 0.3);">
+            <h3 style="color: #16a34a; font-size: 1.4rem; font-weight: 700; margin-bottom: 1.5rem;">Exemples NFL/NHL</h3>
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+              <div style="background: rgba(30, 30, 30, 0.3); padding: 1.25rem; border-radius: 0.5rem;">
+                <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.05rem; margin: 0; line-height: 1.6;">
+                  <strong style="color: #ffffff;">🏈 NFL :</strong> Buffalo <strong style="color: #16a34a;">–210</strong> vs New York <strong style="color: #16a34a;">+180</strong> → Buffalo est favori (210 $ pour 100 $).
+                </p>
+              </div>
+              <div style="background: rgba(30, 30, 30, 0.3); padding: 1.25rem; border-radius: 0.5rem;">
+                <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.05rem; margin: 0; line-height: 1.6;">
+                  <strong style="color: #ffffff;">🏒 NHL :</strong> Toronto <strong style="color: #16a34a;">–125</strong> vs Boston <strong style="color: #16a34a;">+140</strong> → Toronto favori modéré ; Boston paie plus, mais est moins probable.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Cotes fractionnelles -->
+        <div style="margin-bottom: 3rem;">
+          <h2 style="color: #16a34a; font-size: 2rem; font-weight: 700; margin-bottom: 1.5rem;">2) Cotes fractionnelles (ex. 5/2)</h2>
+          <div style="background: rgba(30, 30, 30, 0.5); padding: 2rem; border-radius: 1rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+            <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.1rem; margin: 0 0 1.5rem 0; line-height: 1.7;">
+              Lecture simple : <strong style="color: #16a34a;">mise × fraction = gain</strong> (hors mise).
+            </p>
+            <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.1rem; margin: 0 0 1.5rem 0; line-height: 1.7;">
+              Ex. <strong style="color: #16a34a;">2/1</strong> → 10 $ misés = 20 $ de gain (+ ta mise).
+            </p>
+            <p style="color: rgba(255, 255, 255, 0.75); font-size: 1rem; margin: 0; line-height: 1.6; font-style: italic;">
+              Plus la fraction est petite (1/2), plus le favori est fort ; plus elle est grande (100/1), plus l'outsider est long shot.
+            </p>
+          </div>
+        </div>
+
+        <!-- Section 3: Cotes décimales -->
+        <div style="margin-bottom: 3rem;">
+          <h2 style="color: #16a34a; font-size: 2rem; font-weight: 700; margin-bottom: 1.5rem;">3) Cotes décimales (ex. 1.80, 2.40)</h2>
+          <div style="background: rgba(30, 30, 30, 0.5); padding: 2rem; border-radius: 1rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+            <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.1rem; margin: 0 0 1rem 0; line-height: 1.7;">
+              Elles indiquent le <strong style="color: #16a34a;">retour total</strong> (mise incluse) :
+            </p>
+            <div style="display: flex; gap: 1rem;">
+              <div style="background: rgba(22, 163, 74, 0.1); padding: 1.25rem; border-radius: 0.5rem; flex: 1;">
+                <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.05rem; margin: 0; line-height: 1.6;">
+                  10 $ à <strong style="color: #16a34a;">1.80</strong> → 18 $ de retour (8 $ de gain)
+                </p>
+              </div>
+              <div style="background: rgba(22, 163, 74, 0.1); padding: 1.25rem; border-radius: 0.5rem; flex: 1;">
+                <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.05rem; margin: 0; line-height: 1.6;">
+                  10 $ à <strong style="color: #16a34a;">3.00</strong> → 30 $ de retour
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4: Probabilité implicite & break-even -->
+        <div style="margin-bottom: 3rem;">
+          <h2 style="color: #16a34a; font-size: 2rem; font-weight: 700; margin-bottom: 1.5rem;">4) Probabilité implicite & break-even</h2>
+          <p style="color: rgba(255, 255, 255, 0.85); font-size: 1.1rem; line-height: 1.7; margin-bottom: 1.5rem;">
+            Convertis une cote en % pour savoir à quelle fréquence tu dois gagner pour être à l'équilibre.
+          </p>
+          
+          <div style="background: rgba(30, 30, 30, 0.5); padding: 2rem; border-radius: 1rem; border: 1px solid rgba(255, 255, 255, 0.1); overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; color: rgba(255, 255, 255, 0.9); font-size: 1.05rem;">
+              <thead>
+                <tr style="border-bottom: 2px solid rgba(22, 163, 74, 0.5);">
+                  <th style="padding: 1rem; text-align: left; color: #16a34a; font-weight: 700;">Américain</th>
+                  <th style="padding: 1rem; text-align: left; color: #16a34a; font-weight: 700;">Décimal</th>
+                  <th style="padding: 1rem; text-align: left; color: #16a34a; font-weight: 700;">Implicite</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                  <td style="padding: 1rem;">–110</td>
+                  <td style="padding: 1rem;">1.91</td>
+                  <td style="padding: 1rem; color: #16a34a; font-weight: 600;">52,4 %</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                  <td style="padding: 1rem;">–150</td>
+                  <td style="padding: 1rem;">1.67</td>
+                  <td style="padding: 1rem; color: #16a34a; font-weight: 600;">60,0 %</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                  <td style="padding: 1rem;">+100</td>
+                  <td style="padding: 1rem;">2.00</td>
+                  <td style="padding: 1rem; color: #16a34a; font-weight: 600;">50,0 %</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                  <td style="padding: 1rem;">+140</td>
+                  <td style="padding: 1rem;">2.40</td>
+                  <td style="padding: 1rem; color: #16a34a; font-weight: 600;">41,7 %</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1rem;">+200</td>
+                  <td style="padding: 1rem;">3.00</td>
+                  <td style="padding: 1rem; color: #16a34a; font-weight: 600;">33,3 %</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="background: rgba(22, 163, 74, 0.15); border: 2px solid rgba(22, 163, 74, 0.4); padding: 1.5rem; border-radius: 0.75rem; margin-top: 1.5rem;">
+            <p style="color: #ffffff; font-size: 1.15rem; margin: 0; line-height: 1.7; font-weight: 600;">
+              💡 Idée clé : si ton estimation de victoire > probabilité implicite, le pari a de la valeur.
+            </p>
+          </div>
+        </div>
+
+        <!-- Section 5: Le juice -->
+        <div style="margin-bottom: 3rem;">
+          <h2 style="color: #16a34a; font-size: 2rem; font-weight: 700; margin-bottom: 1.5rem;">5) Le juice (vig) : pourquoi –105/–110 n'est pas neutre</h2>
+          <div style="background: rgba(239, 68, 68, 0.1); border: 2px solid rgba(239, 68, 68, 0.3); padding: 2rem; border-radius: 1rem;">
+            <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.1rem; margin: 0 0 1.5rem 0; line-height: 1.7;">
+              Sur un pile-ou-face "vrai" à 50/50, la cote équitable est <strong style="color: #16a34a;">+100</strong>.
+            </p>
+            <p style="color: rgba(255, 255, 255, 0.85); font-size: 1.05rem; margin: 0; line-height: 1.7;">
+              ⚠️ Quand le bookmaker affiche <strong style="color: rgba(239, 68, 68, 0.9);">–105 ou –110</strong>, il ajoute sa marge → à long terme, parier ces cotes sans edge te fait perdre.
+            </p>
+          </div>
+        </div>
+
+        <!-- Section 6: Odds selon le type de pari -->
+        <div style="margin-bottom: 3rem;">
+          <h2 style="color: #16a34a; font-size: 2rem; font-weight: 700; margin-bottom: 1.5rem;">6) Odds selon le type de pari</h2>
+          <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+            <div style="background: rgba(30, 30, 30, 0.5); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+              <h3 style="color: #16a34a; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem;">Moneyline</h3>
+              <p style="color: rgba(255, 255, 255, 0.85); font-size: 1.05rem; margin: 0; line-height: 1.6;">
+                Seul le vainqueur compte (voir +/– ci-dessus).
+              </p>
+            </div>
+            <div style="background: rgba(30, 30, 30, 0.5); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+              <h3 style="color: #16a34a; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem;">Point spread (NFL) / Puck line (NHL)</h3>
+              <p style="color: rgba(255, 255, 255, 0.85); font-size: 1.05rem; margin: 0; line-height: 1.6;">
+                Tu paries l'écart (ex. –3.5, +1.5).
+              </p>
+            </div>
+            <div style="background: rgba(30, 30, 30, 0.5); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+              <h3 style="color: #16a34a; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem;">Over/Under (Total)</h3>
+              <p style="color: rgba(255, 255, 255, 0.85); font-size: 1.05rem; margin: 0; line-height: 1.6;">
+                Tu paries le nombre de points/buts (ex. 45.5 en NFL, 6.5 en NHL).
+              </p>
+            </div>
+            <div style="background: rgba(30, 30, 30, 0.5); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+              <h3 style="color: #16a34a; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem;">Props</h3>
+              <p style="color: rgba(255, 255, 255, 0.85); font-size: 1.05rem; margin: 0; line-height: 1.6;">
+                Seuils joueurs/équipes (ex. QB Over 245.5 verges, buteur Over 0.5 but).
+              </p>
+            </div>
+          </div>
+          <div style="background: rgba(22, 163, 74, 0.1); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid rgba(22, 163, 74, 0.3); margin-top: 1.5rem;">
+            <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.05rem; margin: 0; line-height: 1.6;">
+              💡 <strong style="color: #16a34a;">"Hook" .5</strong> : le demi-point (.5) évite le push (égalité → mise remboursée quand il n'y a pas .5).
+            </p>
+          </div>
+        </div>
+
+        <!-- Section 7: Pourquoi les cotes bougent -->
+        <div style="margin-bottom: 3rem;">
+          <h2 style="color: #16a34a; font-size: 2rem; font-weight: 700; margin-bottom: 1.5rem;">7) Pourquoi les cotes bougent</h2>
+          <div style="background: rgba(30, 30, 30, 0.5); padding: 2rem; border-radius: 1rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+            <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.1rem; margin: 0; line-height: 1.7;">
+              <strong style="color: #16a34a;">Blessures</strong> (QB en NFL, gardien partant en NHL), <strong style="color: #16a34a;">météo</strong> (NFL), <strong style="color: #16a34a;">back-to-back</strong> (NHL), <strong style="color: #16a34a;">répartition de l'argent</strong>, infos tardives.
+            </p>
+            <p style="color: rgba(255, 255, 255, 0.75); font-size: 1.05rem; margin: 1.5rem 0 0 0; line-height: 1.7; font-style: italic;">
+              Les variations de –3 à –2.5 (NFL) ou 6 à 6.5 (totals) changent beaucoup la valeur réelle.
+            </p>
+          </div>
+        </div>
+
+        <!-- Section 8: Spécificités NFL vs NHL -->
+        <div style="margin-bottom: 3rem;">
+          <h2 style="color: #16a34a; font-size: 2rem; font-weight: 700; margin-bottom: 1.5rem;">8) Spécificités NFL vs NHL</h2>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+            <div style="background: linear-gradient(135deg, rgba(22, 163, 74, 0.1) 0%, rgba(22, 163, 74, 0.05) 100%); padding: 2rem; border-radius: 1rem; border: 2px solid rgba(22, 163, 74, 0.3);">
+              <h3 style="color: #16a34a; font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">🏈 NFL</h3>
+              <p style="color: rgba(255, 255, 255, 0.85); font-size: 1.05rem; margin: 0; line-height: 1.6;">
+                Peu de matchs → gros impacts des blessures/météo ; nombres clés de spread (3, 7, 10).
+              </p>
+            </div>
+            <div style="background: linear-gradient(135deg, rgba(22, 163, 74, 0.1) 0%, rgba(22, 163, 74, 0.05) 100%); padding: 2rem; border-radius: 1rem; border: 2px solid rgba(22, 163, 74, 0.3);">
+              <h3 style="color: #16a34a; font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">🏒 NHL</h3>
+              <p style="color: rgba(255, 255, 255, 0.85); font-size: 1.05rem; margin: 0; line-height: 1.6;">
+                Totaux plus bas (5.5–7), importance cruciale du gardien et de la fatigue ; attention à la 60-minute line (perds si OT).
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 9: Ce que fait Winabet.ai -->
+        <div style="background: linear-gradient(135deg, rgba(22, 163, 74, 0.15) 0%, rgba(22, 163, 74, 0.05) 100%); padding: 3rem; border-radius: 1.5rem; border: 3px solid rgba(22, 163, 74, 0.3); margin-bottom: 3rem;">
+          <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+            <svg style="width: 36px; height: 36px; color: #16a34a;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+            <h2 style="color: #16a34a; font-size: 2rem; font-weight: 700; margin: 0;">9) Ce que fait Winabet.ai pour toi</h2>
+          </div>
+          <ul style="color: rgba(255, 255, 255, 0.9); font-size: 1.1rem; line-height: 1.8; margin: 0 0 1.5rem 0; padding-left: 1.5rem;">
+            <li>Convertit toutes les cotes en <strong style="color: #16a34a;">probabilités implicites</strong>, estime la proba réelle via nos modèles, et repère les écarts de valeur.</li>
+            <li style="margin-top: 0.75rem;">Sur NFL/NHL, l'IA intègre gardiens, back-to-back, météo, blessures, rythme, efficacité offensive/défensive, et mouvements de ligne.</li>
+            <li style="margin-top: 0.75rem;">Tu reçois des sélections prêtes à jouer (type de pari, cote, book, % de confiance).</li>
+          </ul>
+          <div style="background: rgba(22, 163, 74, 0.2); padding: 1.5rem; border-radius: 0.75rem;">
+            <p style="color: #ffffff; font-size: 1.15rem; margin: 0; line-height: 1.7; font-weight: 600;">
+              Comprendre les cotes est un plus, pas une obligation : tu peux juste suivre les picks.
+            </p>
+          </div>
+        </div>
+
+        <!-- Section 10: Mini-référence rapide -->
+        <div style="margin-bottom: 3rem;">
+          <h2 style="color: #16a34a; font-size: 2rem; font-weight: 700; margin-bottom: 1.5rem;">10) Mini-référence rapide (utile en un coup d'œil)</h2>
+          <div style="background: rgba(30, 30, 30, 0.5); padding: 2rem; border-radius: 1rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div style="background: rgba(22, 163, 74, 0.1); padding: 1.25rem; border-radius: 0.5rem;">
+                <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.05rem; margin: 0; line-height: 1.6;">
+                  <strong style="color: #16a34a;">–110</strong> → break-even 52,4 %
+                </p>
+              </div>
+              <div style="background: rgba(22, 163, 74, 0.1); padding: 1.25rem; border-radius: 0.5rem;">
+                <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.05rem; margin: 0; line-height: 1.6;">
+                  <strong style="color: #16a34a;">–150</strong> → break-even 60,0 %
+                </p>
+              </div>
+              <div style="background: rgba(22, 163, 74, 0.1); padding: 1.25rem; border-radius: 0.5rem;">
+                <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.05rem; margin: 0; line-height: 1.6;">
+                  <strong style="color: #16a34a;">+120</strong> → il suffit de gagner 45,5 %
+                </p>
+              </div>
+              <div style="background: rgba(22, 163, 74, 0.1); padding: 1.25rem; border-radius: 0.5rem;">
+                <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.05rem; margin: 0; line-height: 1.6;">
+                  <strong style="color: #16a34a;">+200</strong> → il suffit de gagner 33,3 %
+                </p>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem;">
+              <div style="background: rgba(255, 255, 255, 0.05); padding: 1rem; border-radius: 0.5rem;">
+                <p style="color: rgba(255, 255, 255, 0.85); font-size: 1rem; margin: 0; line-height: 1.6;">
+                  <strong style="color: #16a34a;">Push :</strong> score = ligne (sans .5) → remboursé
+                </p>
+              </div>
+              <div style="background: rgba(255, 255, 255, 0.05); padding: 1rem; border-radius: 0.5rem;">
+                <p style="color: rgba(255, 255, 255, 0.85); font-size: 1rem; margin: 0; line-height: 1.6;">
+                  <strong style="color: #16a34a;">.5 (hook) :</strong> empêche le push (décision nette)
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Conclusion -->
+        <div style="background: rgba(22, 163, 74, 0.1); border: 2px solid rgba(22, 163, 74, 0.3); padding: 2.5rem; border-radius: 1rem; margin-bottom: 3rem;">
+          <p style="color: #16a34a; font-size: 1.4rem; font-weight: 700; margin: 0 0 1rem 0; text-align: center;">
+            Conclusion
+          </p>
+          <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.15rem; margin: 0; line-height: 1.7; text-align: center;">
+            Lis le +/–, pense en %, et laisse Winabet.ai détecter où le marché s'est trompé.
+          </p>
+          <p style="color: #ffffff; font-size: 1.2rem; font-weight: 600; margin: 1.5rem 0 0 0; text-align: center;">
+            Tu mises là où la proba réelle > proba implicite.
           </p>
         </div>
 
