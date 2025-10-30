@@ -2682,74 +2682,510 @@
           {% if block.settings.send_to_history == true %}
             {% assign has_history = true %}
             
-            <div class="parlay-card" {{ block.shopify_attributes }}>
-              <!-- Badge résultat en haut -->
-              <div style="padding: 1rem; background: {% if block.settings.result == 'win' %}#16a34a{% elsif block.settings.result == 'loose' %}hsl(0 84% 60%){% else %}#f59e0b{% endif %}; text-align: center;">
-                <span style="font-weight: 700; font-size: 1.25rem; color: #ffffff;">
-                  {% if block.settings.result == 'win' %}
-                    ✅ GAGNÉ
-                  {% elsif block.settings.result == 'loose' %}
-                    ❌ PERDU
-                  {% else %}
-                    ⏳ EN ATTENTE
-                  {% endif %}
-                </span>
-              </div>
+            <!-- Calcul des units pour le parlay -->
+            {% if block.settings.result == 'win' %}
+              {% assign units_value = block.settings.multiplier | default: 5.24 | minus: 1 %}
+              {% assign units_display = units_value | round: 2 %}
+              {% assign units_text = "+" | append: units_display | append: " UNITS" %}
+              {% assign units_color = "#22c55e" %}
+            {% elsif block.settings.result == 'loose' %}
+              {% assign units_text = "-1.00 UNITS" %}
+              {% assign units_color = "#ef4444" %}
+            {% else %}
+              {% assign units_text = "EN ATTENTE" %}
+              {% assign units_color = "#f59e0b" %}
+            {% endif %}
 
-              <div class="parlay-header">
-                <h2 class="parlay-title">{{ block.settings.parlay_title | default: 'Parlay Triple Gagnant' }}</h2>
-              </div>
-              
-              <div class="parlay-stats">
-                <div class="parlay-stat">
-                  <span class="parlay-stat-label">DONNÉES IA</span>
-                  <span class="parlay-stat-value">{{ block.settings.ai_data_count | default: 5214 }}</span>
-                </div>
-                <div class="parlay-stat">
-                  <span class="parlay-stat-label">CONFIANCE IA</span>
-                  <span class="parlay-stat-value">{{ block.settings.win_percentage | default: 78 }}%</span>
-                </div>
-                <div class="parlay-stat">
-                  <span class="parlay-stat-label">MULTIPLICATEUR</span>
-                  <span class="parlay-multiplier">x{{ block.settings.multiplier | default: '5.24' }}</span>
-                </div>
-                <div class="parlay-stat">
-                  <span class="parlay-stat-label">PARIS</span>
-                  <span class="parlay-stat-value">{{ block.settings.num_bets | default: 3 }}</span>
-                </div>
-              </div>
-              
-              <div class="parlay-content">
-                <div class="parlay-bets-list">
-                  <div class="parlay-bet-item">
-                    <div class="parlay-bet-number">PARI #1</div>
-                    <div class="parlay-bet-details">{{ block.settings.bet1_details | default: 'VEGAS vs TAMPA BAY - VEGAS gagne (x1.74)' }}</div>
-                  </div>
-                  <div class="parlay-bet-item">
-                    <div class="parlay-bet-number">PARI #2</div>
-                    <div class="parlay-bet-details">{{ block.settings.bet2_details | default: 'LAKERS vs CELTICS - LAKERS gagne (x1.92)' }}</div>
-                  </div>
-                  <div class="parlay-bet-item">
-                    <div class="parlay-bet-number">PARI #3</div>
-                    <div class="parlay-bet-details">{{ block.settings.bet3_details | default: 'WARRIORS vs NETS - WARRIORS gagne (x1.56)' }}</div>
-                  </div>
-                </div>
-
-                <!-- Affichage du gain/perte -->
-                <div class="parlay-gain-section">
-                  <div class="parlay-gain-label">RÉSULTAT FINAL</div>
-                  <div style="font-size: 2.5rem; font-weight: 700; color: {% if block.settings.result == 'win' %}#16a34a{% elsif block.settings.result == 'loose' %}hsl(0 84% 60%){% else %}#f59e0b{% endif %};">
-                    {% if block.settings.result == 'win' %}
-                      +${{ 100 | times: block.settings.multiplier | default: 5.24 | minus: 100 | round: 2 }}
-                    {% elsif block.settings.result == 'loose' %}
-                      -$100
-                    {% else %}
-                      En cours...
-                    {% endif %}
-                  </div>
-                </div>
+            <!-- Badge UNITS au-dessus de la carte (même largeur) -->
+            <div style="max-width: 32rem; margin: 2rem auto 0.5rem; padding: 0 2rem;">
+              <div style="background: {{ units_color }}; color: #ffffff; padding: 1rem 2rem; border-radius: 0.5rem; font-size: 1.5rem; font-weight: 700; text-align: center;">
+                {{ units_text }}
               </div>
             </div>
+
+            <!-- Date -->
+            <div style="max-width: 32rem; margin: 0 auto 0.5rem; text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1rem;">
+              {{ block.settings.parlay_date | default: "10/30/2025" }}
+            </div>
+
+            <!-- LEG 1 -->
+            {% if block.settings.leg1_team1_name != blank %}
+              {% assign leg_bet_type = block.settings.leg1_bet_type | default: 'moneyline' %}
+              <div style="background: #000000; border: 2px solid {{ units_color }}; border-radius: 1rem; padding: 2rem; margin: 0 auto 1rem; max-width: 32rem;">
+                {% if leg_bet_type == 'moneyline' %}
+                  <!-- MONEYLINE -->
+                  <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">MONEYLINE</div>
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
+                        {% if block.settings.leg1_team1_logo %}
+                          <img src="{{ block.settings.leg1_team1_logo | image_url: width: 300 }}" alt="{{ block.settings.leg1_team1_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% else %}
+                          <img src="{{ 'vegas-logo.png' | asset_url }}" alt="{{ block.settings.leg1_team1_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg1_team1_name | default: 'VEGAS' }}</div>
+                    </div>
+
+                    <div style="text-align: center;">
+                      <div style="font-size: 1.5rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
+                    </div>
+
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem; {% if block.settings.result == 'win' %}border: 3px solid #22c55e;{% endif %}">
+                        {% if block.settings.leg1_team2_logo %}
+                          <img src="{{ block.settings.leg1_team2_logo | image_url: width: 300 }}" alt="{{ block.settings.leg1_team2_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% else %}
+                          <img src="{{ 'tampa-logo.png' | asset_url }}" alt="{{ block.settings.leg1_team2_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg1_team2_name | default: 'TAMPA BAY' }}</div>
+                      <div style="font-size: 1rem; font-weight: 700; color: {{ units_color }}; margin-top: 0.5rem;">VICTOIRE</div>
+                    </div>
+                  </div>
+
+                {% elsif leg_bet_type == 'spread' %}
+                  <!-- SPREAD -->
+                  <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">SPREAD</div>
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem; {% if block.settings.result == 'win' and block.settings.leg1_spread_team == 'team1' %}border: 3px solid #22c55e;{% endif %}">
+                        {% if block.settings.leg1_team1_logo %}
+                          <img src="{{ block.settings.leg1_team1_logo | image_url: width: 300 }}" alt="{{ block.settings.leg1_team1_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% else %}
+                          <img src="{{ 'vegas-logo.png' | asset_url }}" alt="{{ block.settings.leg1_team1_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg1_team1_name | default: 'VEGAS' }}</div>
+                      {% if block.settings.leg1_spread_team == 'team1' %}
+                        <div style="font-size: 1rem; font-weight: 700; color: {{ units_color }}; margin-top: 0.5rem;">{{ block.settings.leg1_spread_value | default: '-3.5' }}</div>
+                      {% endif %}
+                    </div>
+
+                    <div style="text-align: center;">
+                      <div style="font-size: 1.5rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
+                    </div>
+
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem; {% if block.settings.result == 'win' and block.settings.leg1_spread_team == 'team2' %}border: 3px solid #22c55e;{% endif %}">
+                        {% if block.settings.leg1_team2_logo %}
+                          <img src="{{ block.settings.leg1_team2_logo | image_url: width: 300 }}" alt="{{ block.settings.leg1_team2_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% else %}
+                          <img src="{{ 'tampa-logo.png' | asset_url }}" alt="{{ block.settings.leg1_team2_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg1_team2_name | default: 'TAMPA BAY' }}</div>
+                      {% if block.settings.leg1_spread_team == 'team2' %}
+                        <div style="font-size: 1rem; font-weight: 700; color: {{ units_color }}; margin-top: 0.5rem;">{{ block.settings.leg1_spread_value | default: '-3.5' }}</div>
+                      {% endif %}
+                    </div>
+                  </div>
+
+                {% elsif leg_bet_type == 'over_under' %}
+                  <!-- OVER/UNDER -->
+                  <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">{{ block.settings.leg1_over_under_type | default: 'OVER' | upcase }}</div>
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
+                        {% if block.settings.leg1_team1_logo %}
+                          <img src="{{ block.settings.leg1_team1_logo | image_url: width: 300 }}" alt="{{ block.settings.leg1_team1_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% else %}
+                          <img src="{{ 'vegas-logo.png' | asset_url }}" alt="{{ block.settings.leg1_team1_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg1_team1_name | default: 'VEGAS' }}</div>
+                    </div>
+
+                    <div style="text-align: center;">
+                      <div style="font-size: 1.5rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
+                      <div style="margin-top: 0.75rem;">
+                        <div style="font-size: 1rem; font-weight: 700; color: {{ units_color }};">{{ block.settings.leg1_over_under_type | default: 'OVER' | upcase }}</div>
+                        <div style="font-size: 1.25rem; font-weight: 700; color: {{ units_color }}; margin-top: 0.25rem;">{{ block.settings.leg1_over_under_value | default: '225.5' }}</div>
+                        {% if block.settings.leg1_over_under_stat_type != blank %}
+                          <div style="font-size: 0.75rem; color: {{ units_color }}; margin-top: 0.25rem;">{{ block.settings.leg1_over_under_stat_type }}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
+                        {% if block.settings.leg1_team2_logo %}
+                          <img src="{{ block.settings.leg1_team2_logo | image_url: width: 300 }}" alt="{{ block.settings.leg1_team2_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% else %}
+                          <img src="{{ 'tampa-logo.png' | asset_url }}" alt="{{ block.settings.leg1_team2_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg1_team2_name | default: 'TAMPA BAY' }}</div>
+                    </div>
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            <!-- LEG 2 -->
+            {% if block.settings.leg2_team1_name != blank %}
+              {% assign leg_bet_type = block.settings.leg2_bet_type | default: 'moneyline' %}
+              <div style="background: #000000; border: 2px solid {{ units_color }}; border-radius: 1rem; padding: 2rem; margin: 0 auto 1rem; max-width: 32rem;">
+                {% if leg_bet_type == 'moneyline' %}
+                  <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">MONEYLINE</div>
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
+                        {% if block.settings.leg2_team1_logo %}
+                          <img src="{{ block.settings.leg2_team1_logo | image_url: width: 300 }}" alt="{{ block.settings.leg2_team1_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg2_team1_name }}</div>
+                    </div>
+                    <div style="text-align: center;">
+                      <div style="font-size: 1.5rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
+                    </div>
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem; {% if block.settings.result == 'win' %}border: 3px solid #22c55e;{% endif %}">
+                        {% if block.settings.leg2_team2_logo %}
+                          <img src="{{ block.settings.leg2_team2_logo | image_url: width: 300 }}" alt="{{ block.settings.leg2_team2_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg2_team2_name }}</div>
+                      <div style="font-size: 1rem; font-weight: 700; color: {{ units_color }}; margin-top: 0.5rem;">VICTOIRE</div>
+                    </div>
+                  </div>
+                {% elsif leg_bet_type == 'spread' %}
+                  <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">SPREAD</div>
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem; {% if block.settings.result == 'win' and block.settings.leg2_spread_team == 'team1' %}border: 3px solid #22c55e;{% endif %}">
+                        {% if block.settings.leg2_team1_logo %}
+                          <img src="{{ block.settings.leg2_team1_logo | image_url: width: 300 }}" alt="{{ block.settings.leg2_team1_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg2_team1_name }}</div>
+                      {% if block.settings.leg2_spread_team == 'team1' %}
+                        <div style="font-size: 1rem; font-weight: 700; color: {{ units_color }}; margin-top: 0.5rem;">{{ block.settings.leg2_spread_value }}</div>
+                      {% endif %}
+                    </div>
+                    <div style="text-align: center;">
+                      <div style="font-size: 1.5rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
+                    </div>
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem; {% if block.settings.result == 'win' and block.settings.leg2_spread_team == 'team2' %}border: 3px solid #22c55e;{% endif %}">
+                        {% if block.settings.leg2_team2_logo %}
+                          <img src="{{ block.settings.leg2_team2_logo | image_url: width: 300 }}" alt="{{ block.settings.leg2_team2_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg2_team2_name }}</div>
+                      {% if block.settings.leg2_spread_team == 'team2' %}
+                        <div style="font-size: 1rem; font-weight: 700; color: {{ units_color }}; margin-top: 0.5rem;">{{ block.settings.leg2_spread_value }}</div>
+                      {% endif %}
+                    </div>
+                  </div>
+                {% elsif leg_bet_type == 'over_under' %}
+                  <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">{{ block.settings.leg2_over_under_type | default: 'OVER' | upcase }}</div>
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
+                        {% if block.settings.leg2_team1_logo %}
+                          <img src="{{ block.settings.leg2_team1_logo | image_url: width: 300 }}" alt="{{ block.settings.leg2_team1_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg2_team1_name }}</div>
+                    </div>
+                    <div style="text-align: center;">
+                      <div style="font-size: 1.5rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
+                      <div style="margin-top: 0.75rem;">
+                        <div style="font-size: 1rem; font-weight: 700; color: {{ units_color }};">{{ block.settings.leg2_over_under_type | default: 'OVER' | upcase }}</div>
+                        <div style="font-size: 1.25rem; font-weight: 700; color: {{ units_color }}; margin-top: 0.25rem;">{{ block.settings.leg2_over_under_value }}</div>
+                        {% if block.settings.leg2_over_under_stat_type != blank %}
+                          <div style="font-size: 0.75rem; color: {{ units_color }}; margin-top: 0.25rem;">{{ block.settings.leg2_over_under_stat_type }}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
+                        {% if block.settings.leg2_team2_logo %}
+                          <img src="{{ block.settings.leg2_team2_logo | image_url: width: 300 }}" alt="{{ block.settings.leg2_team2_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg2_team2_name }}</div>
+                    </div>
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            <!-- LEG 3 -->
+            {% if block.settings.leg3_team1_name != blank %}
+              {% assign leg_bet_type = block.settings.leg3_bet_type | default: 'moneyline' %}
+              <div style="background: #000000; border: 2px solid {{ units_color }}; border-radius: 1rem; padding: 2rem; margin: 0 auto 1rem; max-width: 32rem;">
+                {% if leg_bet_type == 'moneyline' %}
+                  <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">MONEYLINE</div>
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
+                        {% if block.settings.leg3_team1_logo %}
+                          <img src="{{ block.settings.leg3_team1_logo | image_url: width: 300 }}" alt="{{ block.settings.leg3_team1_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg3_team1_name }}</div>
+                    </div>
+                    <div style="text-align: center;">
+                      <div style="font-size: 1.5rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
+                    </div>
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem; {% if block.settings.result == 'win' %}border: 3px solid #22c55e;{% endif %}">
+                        {% if block.settings.leg3_team2_logo %}
+                          <img src="{{ block.settings.leg3_team2_logo | image_url: width: 300 }}" alt="{{ block.settings.leg3_team2_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg3_team2_name }}</div>
+                      <div style="font-size: 1rem; font-weight: 700; color: {{ units_color }}; margin-top: 0.5rem;">VICTOIRE</div>
+                    </div>
+                  </div>
+                {% elsif leg_bet_type == 'spread' %}
+                  <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">SPREAD</div>
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem; {% if block.settings.result == 'win' and block.settings.leg3_spread_team == 'team1' %}border: 3px solid #22c55e;{% endif %}">
+                        {% if block.settings.leg3_team1_logo %}
+                          <img src="{{ block.settings.leg3_team1_logo | image_url: width: 300 }}" alt="{{ block.settings.leg3_team1_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg3_team1_name }}</div>
+                      {% if block.settings.leg3_spread_team == 'team1' %}
+                        <div style="font-size: 1rem; font-weight: 700; color: {{ units_color }}; margin-top: 0.5rem;">{{ block.settings.leg3_spread_value }}</div>
+                      {% endif %}
+                    </div>
+                    <div style="text-align: center;">
+                      <div style="font-size: 1.5rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
+                    </div>
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem; {% if block.settings.result == 'win' and block.settings.leg3_spread_team == 'team2' %}border: 3px solid #22c55e;{% endif %}">
+                        {% if block.settings.leg3_team2_logo %}
+                          <img src="{{ block.settings.leg3_team2_logo | image_url: width: 300 }}" alt="{{ block.settings.leg3_team2_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg3_team2_name }}</div>
+                      {% if block.settings.leg3_spread_team == 'team2' %}
+                        <div style="font-size: 1rem; font-weight: 700; color: {{ units_color }}; margin-top: 0.5rem;">{{ block.settings.leg3_spread_value }}</div>
+                      {% endif %}
+                    </div>
+                  </div>
+                {% elsif leg_bet_type == 'over_under' %}
+                  <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">{{ block.settings.leg3_over_under_type | default: 'OVER' | upcase }}</div>
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
+                        {% if block.settings.leg3_team1_logo %}
+                          <img src="{{ block.settings.leg3_team1_logo | image_url: width: 300 }}" alt="{{ block.settings.leg3_team1_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg3_team1_name }}</div>
+                    </div>
+                    <div style="text-align: center;">
+                      <div style="font-size: 1.5rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
+                      <div style="margin-top: 0.75rem;">
+                        <div style="font-size: 1rem; font-weight: 700; color: {{ units_color }};">{{ block.settings.leg3_over_under_type | default: 'OVER' | upcase }}</div>
+                        <div style="font-size: 1.25rem; font-weight: 700; color: {{ units_color }}; margin-top: 0.25rem;">{{ block.settings.leg3_over_under_value }}</div>
+                        {% if block.settings.leg3_over_under_stat_type != blank %}
+                          <div style="font-size: 0.75rem; color: {{ units_color }}; margin-top: 0.25rem;">{{ block.settings.leg3_over_under_stat_type }}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
+                        {% if block.settings.leg3_team2_logo %}
+                          <img src="{{ block.settings.leg3_team2_logo | image_url: width: 300 }}" alt="{{ block.settings.leg3_team2_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg3_team2_name }}</div>
+                    </div>
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            <!-- LEG 4 -->
+            {% if block.settings.leg4_team1_name != blank %}
+              {% assign leg_bet_type = block.settings.leg4_bet_type | default: 'moneyline' %}
+              <div style="background: #000000; border: 2px solid {{ units_color }}; border-radius: 1rem; padding: 2rem; margin: 0 auto 1rem; max-width: 32rem;">
+                {% if leg_bet_type == 'moneyline' %}
+                  <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">MONEYLINE</div>
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
+                        {% if block.settings.leg4_team1_logo %}
+                          <img src="{{ block.settings.leg4_team1_logo | image_url: width: 300 }}" alt="{{ block.settings.leg4_team1_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg4_team1_name }}</div>
+                    </div>
+                    <div style="text-align: center;">
+                      <div style="font-size: 1.5rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
+                    </div>
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem; {% if block.settings.result == 'win' %}border: 3px solid #22c55e;{% endif %}">
+                        {% if block.settings.leg4_team2_logo %}
+                          <img src="{{ block.settings.leg4_team2_logo | image_url: width: 300 }}" alt="{{ block.settings.leg4_team2_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg4_team2_name }}</div>
+                      <div style="font-size: 1rem; font-weight: 700; color: {{ units_color }}; margin-top: 0.5rem;">VICTOIRE</div>
+                    </div>
+                  </div>
+                {% elsif leg_bet_type == 'spread' %}
+                  <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">SPREAD</div>
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem; {% if block.settings.result == 'win' and block.settings.leg4_spread_team == 'team1' %}border: 3px solid #22c55e;{% endif %}">
+                        {% if block.settings.leg4_team1_logo %}
+                          <img src="{{ block.settings.leg4_team1_logo | image_url: width: 300 }}" alt="{{ block.settings.leg4_team1_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg4_team1_name }}</div>
+                      {% if block.settings.leg4_spread_team == 'team1' %}
+                        <div style="font-size: 1rem; font-weight: 700; color: {{ units_color }}; margin-top: 0.5rem;">{{ block.settings.leg4_spread_value }}</div>
+                      {% endif %}
+                    </div>
+                    <div style="text-align: center;">
+                      <div style="font-size: 1.5rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
+                    </div>
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem; {% if block.settings.result == 'win' and block.settings.leg4_spread_team == 'team2' %}border: 3px solid #22c55e;{% endif %}">
+                        {% if block.settings.leg4_team2_logo %}
+                          <img src="{{ block.settings.leg4_team2_logo | image_url: width: 300 }}" alt="{{ block.settings.leg4_team2_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg4_team2_name }}</div>
+                      {% if block.settings.leg4_spread_team == 'team2' %}
+                        <div style="font-size: 1rem; font-weight: 700; color: {{ units_color }}; margin-top: 0.5rem;">{{ block.settings.leg4_spread_value }}</div>
+                      {% endif %}
+                    </div>
+                  </div>
+                {% elsif leg_bet_type == 'over_under' %}
+                  <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">{{ block.settings.leg4_over_under_type | default: 'OVER' | upcase }}</div>
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
+                        {% if block.settings.leg4_team1_logo %}
+                          <img src="{{ block.settings.leg4_team1_logo | image_url: width: 300 }}" alt="{{ block.settings.leg4_team1_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg4_team1_name }}</div>
+                    </div>
+                    <div style="text-align: center;">
+                      <div style="font-size: 1.5rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
+                      <div style="margin-top: 0.75rem;">
+                        <div style="font-size: 1rem; font-weight: 700; color: {{ units_color }};">{{ block.settings.leg4_over_under_type | default: 'OVER' | upcase }}</div>
+                        <div style="font-size: 1.25rem; font-weight: 700; color: {{ units_color }}; margin-top: 0.25rem;">{{ block.settings.leg4_over_under_value }}</div>
+                        {% if block.settings.leg4_over_under_stat_type != blank %}
+                          <div style="font-size: 0.75rem; color: {{ units_color }}; margin-top: 0.25rem;">{{ block.settings.leg4_over_under_stat_type }}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
+                        {% if block.settings.leg4_team2_logo %}
+                          <img src="{{ block.settings.leg4_team2_logo | image_url: width: 300 }}" alt="{{ block.settings.leg4_team2_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg4_team2_name }}</div>
+                    </div>
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            <!-- LEG 5 -->
+            {% if block.settings.leg5_team1_name != blank %}
+              {% assign leg_bet_type = block.settings.leg5_bet_type | default: 'moneyline' %}
+              <div style="background: #000000; border: 2px solid {{ units_color }}; border-radius: 1rem; padding: 2rem; margin: 0 auto 2rem; max-width: 32rem;">
+                {% if leg_bet_type == 'moneyline' %}
+                  <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">MONEYLINE</div>
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
+                        {% if block.settings.leg5_team1_logo %}
+                          <img src="{{ block.settings.leg5_team1_logo | image_url: width: 300 }}" alt="{{ block.settings.leg5_team1_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg5_team1_name }}</div>
+                    </div>
+                    <div style="text-align: center;">
+                      <div style="font-size: 1.5rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
+                    </div>
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem; {% if block.settings.result == 'win' %}border: 3px solid #22c55e;{% endif %}">
+                        {% if block.settings.leg5_team2_logo %}
+                          <img src="{{ block.settings.leg5_team2_logo | image_url: width: 300 }}" alt="{{ block.settings.leg5_team2_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg5_team2_name }}</div>
+                      <div style="font-size: 1rem; font-weight: 700; color: {{ units_color }}; margin-top: 0.5rem;">VICTOIRE</div>
+                    </div>
+                  </div>
+                {% elsif leg_bet_type == 'spread' %}
+                  <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">SPREAD</div>
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem; {% if block.settings.result == 'win' and block.settings.leg5_spread_team == 'team1' %}border: 3px solid #22c55e;{% endif %}">
+                        {% if block.settings.leg5_team1_logo %}
+                          <img src="{{ block.settings.leg5_team1_logo | image_url: width: 300 }}" alt="{{ block.settings.leg5_team1_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg5_team1_name }}</div>
+                      {% if block.settings.leg5_spread_team == 'team1' %}
+                        <div style="font-size: 1rem; font-weight: 700; color: {{ units_color }}; margin-top: 0.5rem;">{{ block.settings.leg5_spread_value }}</div>
+                      {% endif %}
+                    </div>
+                    <div style="text-align: center;">
+                      <div style="font-size: 1.5rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
+                    </div>
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem; {% if block.settings.result == 'win' and block.settings.leg5_spread_team == 'team2' %}border: 3px solid #22c55e;{% endif %}">
+                        {% if block.settings.leg5_team2_logo %}
+                          <img src="{{ block.settings.leg5_team2_logo | image_url: width: 300 }}" alt="{{ block.settings.leg5_team2_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg5_team2_name }}</div>
+                      {% if block.settings.leg5_spread_team == 'team2' %}
+                        <div style="font-size: 1rem; font-weight: 700; color: {{ units_color }}; margin-top: 0.5rem;">{{ block.settings.leg5_spread_value }}</div>
+                      {% endif %}
+                    </div>
+                  </div>
+                {% elsif leg_bet_type == 'over_under' %}
+                  <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">{{ block.settings.leg5_over_under_type | default: 'OVER' | upcase }}</div>
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
+                        {% if block.settings.leg5_team1_logo %}
+                          <img src="{{ block.settings.leg5_team1_logo | image_url: width: 300 }}" alt="{{ block.settings.leg5_team1_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg5_team1_name }}</div>
+                    </div>
+                    <div style="text-align: center;">
+                      <div style="font-size: 1.5rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
+                      <div style="margin-top: 0.75rem;">
+                        <div style="font-size: 1rem; font-weight: 700; color: {{ units_color }};">{{ block.settings.leg5_over_under_type | default: 'OVER' | upcase }}</div>
+                        <div style="font-size: 1.25rem; font-weight: 700; color: {{ units_color }}; margin-top: 0.25rem;">{{ block.settings.leg5_over_under_value }}</div>
+                        {% if block.settings.leg5_over_under_stat_type != blank %}
+                          <div style="font-size: 0.75rem; color: {{ units_color }}; margin-top: 0.25rem;">{{ block.settings.leg5_over_under_stat_type }}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+                    <div style="text-align: center; flex: 1;">
+                      <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
+                        {% if block.settings.leg5_team2_logo %}
+                          <img src="{{ block.settings.leg5_team2_logo | image_url: width: 300 }}" alt="{{ block.settings.leg5_team2_name }}" style="width: 100%; height: 100%; object-fit: contain;">
+                        {% endif %}
+                      </div>
+                      <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.leg5_team2_name }}</div>
+                    </div>
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+
           {% endif %}
         {% endfor %}
 
