@@ -3592,6 +3592,9 @@
       // Update current page
       currentPage = pageName;
 
+      // Persist current page for editor reloads
+      try { localStorage.setItem('dashboard_current_page', pageName); } catch {}
+
       // Update URL hash
       window.location.hash = pageName;
     }
@@ -3758,18 +3761,34 @@
       // Initialiser l'auto-incrémentation globale des compteurs au-dessus des cartes
       initGlobalAutoIncrementCounters();
 
-      // Handle hash navigation
+      // Handle hash navigation with persistence
       const hash = window.location.hash.substring(1);
-      if (hash) {
-        navigateTo(null, hash);
-      } else if (!currentPage) {
-        // Seulement naviguer vers 'bet' si aucune page n'est déjà active
-        navigateTo(null, 'bet');
-      }
+      let savedPage = '';
+      try { savedPage = localStorage.getItem('dashboard_current_page') || ''; } catch {}
+      const targetPage = hash || savedPage || 'bet';
+      navigateTo(null, targetPage);
 
       // Update time display
       updateTime();
       setInterval(updateTime, 1000);
+
+      // In Shopify editor, preserve the current page across partial reloads
+      document.addEventListener('shopify:section:load', () => {
+        try {
+          const p = localStorage.getItem('dashboard_current_page');
+          if (p && typeof performNavigation === 'function') {
+            performNavigation(p);
+          }
+        } catch {}
+      });
+      document.addEventListener('shopify:section:select', () => {
+        try {
+          const p = localStorage.getItem('dashboard_current_page');
+          if (p && typeof performNavigation === 'function') {
+            performNavigation(p);
+          }
+        } catch {}
+      });
     });
 
     // Update time display
