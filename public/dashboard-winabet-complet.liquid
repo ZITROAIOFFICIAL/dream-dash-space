@@ -3039,12 +3039,14 @@
       
       let currentCount = parseInt(initialCount) || 2843;
       
+      console.log(`🚀 Auto-incrémentation démarrée: ${currentCount} données de base, +${amount} toutes les ${intervalMinutes} min`);
+      
       // Démarrer l'incrémentation automatique
       const intervalMs = intervalMinutes * 60 * 1000; // Convertir minutes en millisecondes
       autoIncrementInterval = setInterval(() => {
         currentCount += parseInt(amount);
         updateDataCount(currentCount);
-        console.log(`Auto-incrémentation: ${currentCount} données IA`);
+        console.log(`✅ Auto-incrémentation: ${currentCount} données IA (+${amount})`);
       }, intervalMs);
     }
     
@@ -3052,6 +3054,7 @@
       if (autoIncrementInterval) {
         clearInterval(autoIncrementInterval);
         autoIncrementInterval = null;
+        console.log('🛑 Auto-incrémentation arrêtée');
       }
     }
     
@@ -3059,6 +3062,7 @@
       const dialogDataCount = document.getElementById('dialog-data-count');
       if (dialogDataCount) {
         dialogDataCount.textContent = count.toLocaleString('fr-FR');
+        console.log(`📊 Compteur mis à jour: ${count}`);
       }
     }
 
@@ -3256,11 +3260,6 @@
             .replace(/Équipe extérieur/g, team2);
         });
       }
-      
-      // Démarrer l'auto-incrémentation si activée
-      if (autoIncrement) {
-        startAutoIncrement(dataCountRaw, incrementInterval, incrementAmount);
-      }
 
       // Fallback: chercher dans la carte parente si les data-attributes ne sont pas présents
       if (!pctRaw && trigger) {
@@ -3324,6 +3323,19 @@
         dialog.classList.add('active');
         loading.style.display = 'none';
         content.style.display = 'block';
+        
+        // Démarrer l'auto-incrémentation APRÈS l'ouverture du dialog
+        if (autoIncrement) {
+          console.log(`🎯 Paramètres auto-incrémentation:`, {
+            enabled: autoIncrement,
+            interval: incrementInterval,
+            amount: incrementAmount,
+            initialCount: dataCountRaw
+          });
+          startAutoIncrement(dataCountRaw, incrementInterval, incrementAmount);
+        } else {
+          console.log('⚠️ Auto-incrémentation désactivée');
+        }
       }, randomDuration);
     }
 
@@ -3428,6 +3440,10 @@
                   "label": "Toutes les 1 minute"
                 },
                 {
+                  "value": "2",
+                  "label": "Toutes les 2 minutes"
+                },
+                {
                   "value": "5",
                   "label": "Toutes les 5 minutes"
                 },
@@ -3440,13 +3456,32 @@
               "info": "Fréquence d'ajout automatique de données"
             },
             {
-              "type": "range",
+              "type": "select",
               "id": "auto_increment_amount",
-              "min": 1,
-              "max": 50,
-              "step": 1,
-              "label": "📊 Nombre de données à ajouter",
-              "default": 5,
+              "label": "📊 Quantité à ajouter",
+              "options": [
+                {
+                  "value": "1",
+                  "label": "1 donnée"
+                },
+                {
+                  "value": "5",
+                  "label": "5 données"
+                },
+                {
+                  "value": "10",
+                  "label": "10 données"
+                },
+                {
+                  "value": "25",
+                  "label": "25 données"
+                },
+                {
+                  "value": "50",
+                  "label": "50 données"
+                }
+              ],
+              "default": "5",
               "info": "Combien de données ajouter à chaque intervalle"
             },
         {
