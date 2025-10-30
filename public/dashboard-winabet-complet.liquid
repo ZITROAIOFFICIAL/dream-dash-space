@@ -3135,6 +3135,7 @@
     // SYSTÈME D'AUTO-INCRÉMENTATION
     // ===========================
     let autoIncrementInterval = null;
+    let activeCardCounterEl = null;
     
     function startAutoIncrement(initialCount, intervalMinutes, amount) {
       // Arrêter l'intervalle précédent s'il existe
@@ -3150,6 +3151,8 @@
       
       // Démarrer l'incrémentation automatique
       const intervalMs = intervalMinutes * 60 * 1000; // Convertir minutes en millisecondes
+      console.log(`⏱️ Lancement setInterval avec`, { intervalMinutes, intervalMs, firstTickIn: `${intervalMs}ms` });
+      
       autoIncrementInterval = setInterval(() => {
         currentCount += parseInt(amount);
         updateDataCount(currentCount);
@@ -3176,9 +3179,14 @@
         setTimeout(() => {
           dialogDataCount.style.color = ''; // Revenir à la couleur normale
         }, 500);
-        
-        console.log(`📊 Compteur mis à jour: ${count}`);
       }
+      
+      // Mettre à jour le compteur au-dessus de la carte
+      if (activeCardCounterEl) {
+        activeCardCounterEl.textContent = count.toLocaleString('fr-FR');
+      }
+      
+      console.log(`📊 Compteur mis à jour: ${count} (Dialog: ${!!dialogDataCount}, Card: ${!!activeCardCounterEl})`);
     }
 
     // ===========================
@@ -3346,7 +3354,9 @@
       
       // Récupérer les paramètres d'auto-incrémentation
       const autoIncrement = trigger?.dataset?.autoIncrement === 'true' || trigger?.dataset?.autoIncrement === true;
-      const incrementInterval = parseInt(trigger?.dataset?.incrementInterval) || 5;
+      const rawInterval = trigger?.dataset?.incrementInterval;
+      const parsedInterval = Number.parseFloat(rawInterval);
+      const incrementInterval = Number.isFinite(parsedInterval) && parsedInterval > 0 ? parsedInterval : 5;
       const incrementAmount = parseInt(trigger?.dataset?.incrementAmount) || 5;
 
       // Afficher le bon template
@@ -3392,6 +3402,7 @@
           const countEl = counterAbove.querySelector('span span');
           if (countEl) {
             dataCountRaw = countEl.textContent;
+            activeCardCounterEl = countEl; // Mémoriser l'élément à mettre à jour
           }
         }
       }
@@ -3461,6 +3472,7 @@
       document.getElementById('analysis-dialog').classList.remove('active');
       // Arrêter l'auto-incrémentation lors de la fermeture
       stopAutoIncrement();
+      activeCardCounterEl = null; // Réinitialiser la référence
     }
 
     // Initialize
