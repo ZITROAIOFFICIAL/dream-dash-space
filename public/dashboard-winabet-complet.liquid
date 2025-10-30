@@ -3190,6 +3190,78 @@
     }
 
     // ===========================
+    // AUTO-INCRÉMENTATION GLOBALE (compteurs au-dessus des cartes)
+    // ===========================
+    const cardAutoIntervals = new Map(); // Map<Element, number>
+
+    function updateCounterElement(el, count) {
+      if (!el) return;
+      el.textContent = Number(count).toLocaleString('fr-FR');
+    }
+
+    function startCardCounterAutoIncrement(counterEl, initialCount, intervalMinutes, amount) {
+      if (!counterEl) return;
+
+      // Stopper interval précédent pour cet élément
+      const previous = cardAutoIntervals.get(counterEl);
+      if (previous) clearInterval(previous);
+
+      // Nettoyage + parsing de la valeur initiale
+      const cleaned = String(initialCount).replace(/\s/g, '').replace(/[^\d]/g, '');
+      let current = parseInt(cleaned) || 2843;
+      const step = parseInt(String(amount)) || 5;
+
+      // Mettre à jour immédiatement l'affichage (optionnel, rend visible tout de suite)
+      updateCounterElement(counterEl, current);
+
+      const intervalMs = Number(intervalMinutes) * 60 * 1000;
+      if (!Number.isFinite(intervalMs) || intervalMs <= 0) return;
+
+      console.log('🔁 Auto-incrément global activé', { current, step, intervalMinutes, intervalMs });
+      const id = setInterval(() => {
+        current += step;
+        updateCounterElement(counterEl, current);
+        console.log('↗️ Compteur carte mis à jour', { current, step });
+      }, intervalMs);
+
+      cardAutoIntervals.set(counterEl, id);
+    }
+
+    function initGlobalAutoIncrementCounters() {
+      // Pour chaque carte, lire les paramètres sur le bouton "Voir analyse IA"
+      const buttons = document.querySelectorAll('.bet-card .btn-analysis');
+      buttons.forEach((btn) => {
+        try {
+          const card = btn.closest('.bet-card');
+          if (!card) return;
+
+          // Compteur au-dessus de la carte
+          const counterAbove = card.previousElementSibling;
+          if (!counterAbove || !counterAbove.classList.contains('ai-counter-above')) return;
+          const countEl = counterAbove.querySelector('span span');
+          if (!countEl) return;
+
+          // Paramètres
+          const autoIncRaw = btn.dataset.autoIncrement;
+          const enabled = String(autoIncRaw).toLowerCase() === 'true';
+          if (!enabled) return;
+
+          const rawInterval = btn.dataset.incrementInterval;
+          const intervalParsed = Number.parseFloat(rawInterval);
+          const interval = Number.isFinite(intervalParsed) && intervalParsed > 0 ? intervalParsed : 5;
+          const amount = parseInt(btn.dataset.incrementAmount || '5') || 5;
+
+          // Valeur initiale
+          const initial = countEl.textContent || btn.dataset.aiDataCount || '2843';
+
+          startCardCounterAutoIncrement(countEl, initial, interval, amount);
+        } catch (e) {
+          console.warn('❗Erreur init auto-incrément carte', e);
+        }
+      });
+    }
+
+    // ===========================
     // FONCTIONS PRINCIPALES
     // ===========================
 
@@ -3478,6 +3550,9 @@
     // Initialize
     document.addEventListener('DOMContentLoaded', () => {
       updateDisplay();
+
+      // Initialiser l'auto-incrémentation globale des compteurs au-dessus des cartes
+      initGlobalAutoIncrementCounters();
 
       // Handle hash navigation
       const hash = window.location.hash.substring(1);
