@@ -2035,10 +2035,10 @@
         <h1>PARLAY DU JOUR</h1>
         <p class="subtitle">Les parlay avec la meilleur probabilité de réussite aujourd'hui. Nous affichons tous les parlay avec minimum de 60% de chance de gagner selon notre IA.</p>
 
-        {% assign parlay_cards = section.blocks | where: 'type', 'parlay_card' %}
-        {% if parlay_cards.size > 0 %}
-          {% for block in parlay_cards %}
-            {% if block.settings.show_card and block.settings.send_to_history != true %}
+        {% assign has_parlay = false %}
+        {% for block in section.blocks %}
+          {% if block.type == 'parlay_card' and block.settings.show_card and block.settings.send_to_history != true %}
+            {% assign has_parlay = true %}
               <!-- AI Data Counter Above Card -->
               <div class="ai-counter-above">
                 <div class="ai-spinner">
@@ -2207,9 +2207,15 @@
                   <div class="odds-value">{{ block.settings.best_odds | default: '-105' }}</div>
                 </div>
               </div>
-            {% endif %}
-          {% endfor %}
-        {% else %}
+          {% endif %}
+        {% endfor %}
+        {% if has_parlay == false %}
+          <div class="card text-center" style="padding: 2rem;">
+            <p style="color: rgba(255, 255, 255, 0.6);">
+              Aucune carte de parlay ajoutée. Utilisez l'éditeur Shopify pour ajouter vos premières recommandations de type "🎲 Carte Parlay".
+            </p>
+          </div>
+        {% endif %}
           <div class="card text-center" style="padding: 2rem;">
             <p style="color: rgba(255, 255, 255, 0.6);">
               Aucune carte de parlay ajoutée. Utilisez l'éditeur Shopify pour ajouter vos premières recommandations de type "🎲 Carte Parlay".
