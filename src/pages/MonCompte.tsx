@@ -1,18 +1,11 @@
-import DashboardLayout from "@/components/DashboardLayout";
+import { useEffect } from "react";
 
 const MonCompte = () => {
-  return (
-    <DashboardLayout>
-      <div className="space-y-6">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Mon compte</h1>
-          <p className="text-muted-foreground mt-2">
-            Gérez votre profil et vos préférences
-          </p>
-        </div>
-      </div>
-    </DashboardLayout>
-  );
+  useEffect(() => {
+    window.location.href = "https://winabet.ai/apps/memberships";
+  }, []);
+
+  return null;
 };
 
 export default MonCompte;
