@@ -2038,11 +2038,10 @@
               
               <!-- AI Counter Above -->
               <div class="ai-counter-above">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 20h9"></path>
-                  <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                </svg>
-                <span><span>{{ block.settings.ai_data_count | default: 5214 }}</span> DONNÉES ANALYSÉES</span>
+                <div class="ai-spinner">
+                  <span class="ai-badge">IA</span>
+                </div>
+                <span><span>{{ block.settings.ai_data_count | default: 5214 }}</span> DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
               </div>
 
               <div class="bet-card" {{ block.shopify_attributes }}>
@@ -2054,6 +2053,7 @@
                   </div>
                   <button 
                     class="btn-analysis"
+                    onclick="openAnalysisDialog(this)"
                     data-sport-type="parlay"
                     data-ai-data-count="{{ block.settings.ai_data_count | default: 5214 }}"
                     data-win-percentage="{{ block.settings.win_percentage | default: 78 }}"
