@@ -856,6 +856,43 @@
         <p class="subtitle">Consultez l'historique des bets du jour de winabet.ai</p>
 
         {% assign history_bets = section.blocks | where: 'type', 'bet_card' %}
+        
+        <!-- Calcul des statistiques globales -->
+        {% assign total_wins = 0 %}
+        {% assign total_losses = 0 %}
+        {% assign total_units = 0 %}
+        
+        {% for block in history_bets %}
+          {% if block.settings.send_to_history == true %}
+            {% if block.settings.result == 'win' %}
+              {% assign total_wins = total_wins | plus: 1 %}
+              {% assign multiplier_val = block.settings.multiplier | default: 1.74 %}
+              {% assign units_gained = multiplier_val | minus: 1 %}
+              {% assign total_units = total_units | plus: units_gained %}
+            {% elsif block.settings.result == 'loose' %}
+              {% assign total_losses = total_losses | plus: 1 %}
+              {% assign total_units = total_units | minus: 1 %}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+        
+        {% assign net_wins = total_wins | minus: total_losses %}
+        
+        <!-- Boxes de statistiques -->
+        <div style="max-width: 40rem; margin: 2rem auto; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: 0 1rem;">
+          <div style="background: #000000; border: 2px solid #22c55e; border-radius: 0.5rem; padding: 1rem; text-align: center;">
+            <div style="color: #22c55e; font-weight: 700; font-size: 2rem;">
+              {% if net_wins >= 0 %}+{% endif %}{{ net_wins }}
+            </div>
+            <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem; margin-top: 0.25rem; font-weight: 600;">PARIS EN +</div>
+          </div>
+          <div style="background: #000000; border: 2px solid #22c55e; border-radius: 0.5rem; padding: 1rem; text-align: center;">
+            <div style="color: #22c55e; font-weight: 700; font-size: 2rem;">
+              {% if total_units >= 0 %}+{% endif %}{{ total_units | round: 2 }}
+            </div>
+            <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem; margin-top: 0.25rem; font-weight: 600;">UNITS EN +</div>
+          </div>
+        </div>
         {% assign has_history = false %}
         
         {% for block in history_bets %}
@@ -1021,6 +1058,43 @@
         <p class="subtitle">Consultez l'historique des paris combinés du jour de winabet.ai</p>
 
         {% assign history_parlays = section.blocks | where: 'type', 'parlay_card' %}
+        
+        <!-- Calcul des statistiques globales pour parlay -->
+        {% assign total_parlay_wins = 0 %}
+        {% assign total_parlay_losses = 0 %}
+        {% assign total_parlay_units = 0 %}
+        
+        {% for block in history_parlays %}
+          {% if block.settings.send_to_history == true %}
+            {% if block.settings.result == 'win' %}
+              {% assign total_parlay_wins = total_parlay_wins | plus: 1 %}
+              {% assign multiplier_val = block.settings.multiplier | default: 5.24 %}
+              {% assign units_gained = multiplier_val | minus: 1 %}
+              {% assign total_parlay_units = total_parlay_units | plus: units_gained %}
+            {% elsif block.settings.result == 'loose' %}
+              {% assign total_parlay_losses = total_parlay_losses | plus: 1 %}
+              {% assign total_parlay_units = total_parlay_units | minus: 1 %}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+        
+        {% assign net_parlay_wins = total_parlay_wins | minus: total_parlay_losses %}
+        
+        <!-- Boxes de statistiques -->
+        <div style="max-width: 40rem; margin: 2rem auto; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: 0 1rem;">
+          <div style="background: #000000; border: 2px solid #22c55e; border-radius: 0.5rem; padding: 1rem; text-align: center;">
+            <div style="color: #22c55e; font-weight: 700; font-size: 2rem;">
+              {% if net_parlay_wins >= 0 %}+{% endif %}{{ net_parlay_wins }}
+            </div>
+            <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem; margin-top: 0.25rem; font-weight: 600;">PARLAY EN +</div>
+          </div>
+          <div style="background: #000000; border: 2px solid #22c55e; border-radius: 0.5rem; padding: 1rem; text-align: center;">
+            <div style="color: #22c55e; font-weight: 700; font-size: 2rem;">
+              {% if total_parlay_units >= 0 %}+{% endif %}{{ total_parlay_units | round: 2 }}
+            </div>
+            <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem; margin-top: 0.25rem; font-weight: 600;">UNITS EN +</div>
+          </div>
+        </div>
         {% assign has_history = false %}
         
         {% for block in history_parlays %}
