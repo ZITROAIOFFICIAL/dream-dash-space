@@ -736,10 +736,17 @@
     .gain-grid {
       display: flex;
       flex-direction: row;
-      justify-content: flex-end;
+      justify-content: space-between;
       align-items: center;
-      gap: 1rem;
-      padding: 0 0.5rem 0 2rem;
+      gap: 1.5rem;
+      padding: 1rem;
+    }
+
+    .bet-info-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      flex: 1;
     }
 
     .bet-modify-box {
@@ -762,7 +769,7 @@
       font-weight: 700;
       cursor: pointer;
       transition: background 0.2s;
-      width: 100%;
+      white-space: nowrap;
     }
 
     .modify-btn:hover {
@@ -770,15 +777,33 @@
     }
 
     .bet-amount-small {
-      font-size: 1rem;
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .bet-amount-value-small {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .cashout-label {
+      font-size: 0.875rem;
       color: rgba(255, 255, 255, 0.6);
       margin-top: 0.5rem;
     }
 
-    .bet-amount-value-small {
-      font-size: 1.75rem;
+    .cashout-amount {
+      font-size: 2.5rem;
       font-weight: 700;
       color: #16a34a;
+      line-height: 1;
+    }
+
+    .cashout-profit {
+      font-size: 0.875rem;
+      color: #16a34a;
+      font-weight: 600;
     }
 
     .cashout-box {
@@ -1988,16 +2013,13 @@
                   <div class="gain-section">
                     <div class="gain-section-label">VOTRE GAIN</div>
                     <div class="gain-grid">
-                      <div class="bet-modify-box">
-                        <button class="modify-btn" onclick="openBetDialog(this)" data-multiplier="{{ block.settings.multiplier | default: '1.95' }}">Modifier</button>
+                      <div class="bet-info-left">
                         <div class="bet-amount-small">Votre mise</div>
-                        <div class="bet-amount-value-small">$100</div>
+                        <div class="bet-amount-value-small">$50</div>
+                        <div class="cashout-amount">${{ 50 | times: block.settings.multiplier | default: 1.95 | round: 2 }}</div>
+                        <div class="cashout-profit">+${{ 50 | times: block.settings.multiplier | default: 1.95 | minus: 50 | round: 2 }} bénéfice</div>
                       </div>
-                      <div class="cashout-box-large">
-                        <div class="cashout-label">CASHOUT</div>
-                        <div class="cashout-amount">${{ 100 | times: block.settings.multiplier | default: 1.95 | round: 2 }}</div>
-                        <div class="cashout-profit">+${{ 100 | times: block.settings.multiplier | default: 1.95 | minus: 100 | round: 2 }} bénéfice</div>
-                      </div>
+                      <button class="modify-btn" onclick="openBetDialog(this)" data-multiplier="{{ block.settings.multiplier | default: '1.95' }}">Modifier</button>
                     </div>
                   </div>
                 </div>
@@ -2149,17 +2171,13 @@
                   <div class="gain-section">
                     <div class="gain-section-label">VOTRE GAIN</div>
                     <div class="gain-grid">
-                      <div class="bet-modify-box">
-                        <button class="modify-btn" onclick="openModifyDialog(this, {{ block.settings.multiplier | default: 5.24 }})">MODIFIER</button>
-                        <div class="bet-amount-small">
-                          <div class="bet-amount-value-small">100$</div>
-                        </div>
+                      <div class="bet-info-left">
+                        <div class="bet-amount-small">Votre mise</div>
+                        <div class="bet-amount-value-small">$50</div>
+                        <div class="cashout-amount">${{ 50 | times: block.settings.multiplier | default: 5.24 | round: 2 }}</div>
+                        <div class="cashout-profit">+${{ 50 | times: block.settings.multiplier | default: 5.24 | minus: 50 | round: 2 }} bénéfice</div>
                       </div>
-                      <div class="cashout-box cashout-box-large">
-                        <div class="cashout-label">PAYOUT</div>
-                        <div class="cashout-amount">${{ 100 | times: block.settings.multiplier | default: 5.24 | round: 2 }}</div>
-                        <div class="cashout-profit">Profit: ${{ 100 | times: block.settings.multiplier | default: 5.24 | minus: 100 | round: 2 }}</div>
-                      </div>
+                      <button class="modify-btn" onclick="openBetDialog(this)" data-multiplier="{{ block.settings.multiplier | default: '5.24' }}">Modifier</button>
                     </div>
                   </div>
                 </div>
