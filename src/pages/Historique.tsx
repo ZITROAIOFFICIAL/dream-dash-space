@@ -111,23 +111,29 @@ const Historique = () => {
   const getUnitsBadge = (result: string, multiplier: number) => {
     const units = calculateUnits(result, multiplier);
     if (result === "won") {
-      return <div className="bg-green-600 rounded-lg px-6 py-3 text-center">
-          <div className="text-xl font-bold text-white">
+      return (
+        <div className="bg-[#22c55e] rounded-lg px-8 py-4 text-center">
+          <div className="text-2xl font-bold text-white">
             +{units.toFixed(2)} UNITS
           </div>
-        </div>;
+        </div>
+      );
     } else if (result === "lost") {
-      return <div className="bg-red-600 rounded-lg px-6 py-3 text-center">
-          <div className="text-xl font-bold text-white">
+      return (
+        <div className="bg-red-600 rounded-lg px-8 py-4 text-center">
+          <div className="text-2xl font-bold text-white">
             -1.00 UNITS
           </div>
-        </div>;
+        </div>
+      );
     } else {
-      return <div className="bg-gray-600 rounded-lg px-6 py-3 text-center">
-          <div className="text-xl font-bold text-white">
+      return (
+        <div className="bg-gray-600 rounded-lg px-8 py-4 text-center">
+          <div className="text-2xl font-bold text-white">
             EN COURS
           </div>
-        </div>;
+        </div>
+      );
     }
   };
 
@@ -199,78 +205,80 @@ const Historique = () => {
           const cashoutInfo = getCashoutInfo(item.result, item.betAmount, item.multiplier);
           const borderColor = item.result === "won" ? "border-green-600" : item.result === "lost" ? "border-red-600" : "border-gray-600";
           const selectedTeam = getSelectedTeam(item.betType, item.prediction, item.teamHome);
-          return <div key={item.id} className="w-full max-w-md mx-auto">
-                {/* Units Result Badge - Top */}
-                <div className="mb-4">
-                  {getUnitsBadge(item.result, item.multiplier)}
+          return (
+            <div key={item.id} className="w-full max-w-lg mx-auto">
+              {/* Units Result Badge - Top */}
+              <div className="mb-3">
+                {getUnitsBadge(item.result, item.multiplier)}
+              </div>
+
+              {/* Match Card */}
+              <div className="border-2 border-[#22c55e] rounded-lg bg-black p-8">
+                {/* Date centered at top */}
+                <div className="text-center mb-8">
+                  <span className="text-white text-lg font-bold">
+                    {item.date}
+                  </span>
                 </div>
 
-                {/* Match Card */}
-                <div className="border-2 border-green-600 rounded-lg bg-black p-6">
-                  {/* Date centered at top */}
-                  <div className="text-center mb-6">
-                    <span className="text-white text-base font-bold">
-                      {item.date}
-                    </span>
-                  </div>
-
-                  {/* Teams with VS in center */}
-                  <div className="flex items-center justify-center gap-6 mb-6">
-                    {/* Home Team */}
-                    <div className="flex flex-col items-center gap-2">
-                      <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center p-3">
-                        <img 
-                          src={item.teamHomeLogo} 
-                          alt={item.teamHome} 
-                          className="w-full h-full object-contain"
-                        />
-                      </div>
-                      <span className="text-white text-xs font-bold">
-                        {item.teamHome}
-                      </span>
-                      {selectedTeam === "home" && (
-                        <span className="text-green-400 text-sm font-bold">
-                          {item.prediction}
-                        </span>
-                      )}
+                {/* Teams with VS in center */}
+                <div className="flex items-center justify-center gap-8 mb-6">
+                  {/* Home Team */}
+                  <div className="flex flex-col items-center gap-3">
+                    <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center p-3">
+                      <img 
+                        src={item.teamHomeLogo} 
+                        alt={item.teamHome} 
+                        className="w-full h-full object-contain"
+                      />
                     </div>
-
-                    {/* VS */}
-                    <div className="text-white font-bold text-lg">VS</div>
-
-                    {/* Away Team */}
-                    <div className="flex flex-col items-center gap-2">
-                      <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center p-3">
-                        <img 
-                          src={item.teamAwayLogo} 
-                          alt={item.teamAway} 
-                          className="w-full h-full object-contain"
-                        />
-                      </div>
-                      <span className="text-white text-xs font-bold">
-                        {item.teamAway}
-                      </span>
-                      {selectedTeam === "away" && (
-                        <span className="text-green-400 text-sm font-bold">
-                          {item.prediction}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Bet Type centered */}
-                  <div className="text-center">
                     <span className="text-white text-sm font-bold">
-                      {item.betType}
+                      {item.teamHome}
                     </span>
-                    {item.betType === "UNDER/OVER" && (
-                      <div className="text-green-400 text-sm font-bold mt-1">
+                    {selectedTeam === "home" && (
+                      <span className="text-[#22c55e] text-base font-bold">
                         {item.prediction}
-                      </div>
+                      </span>
+                    )}
+                  </div>
+
+                  {/* VS */}
+                  <div className="text-white font-bold text-xl">VS</div>
+
+                  {/* Away Team */}
+                  <div className="flex flex-col items-center gap-3">
+                    <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center p-3">
+                      <img 
+                        src={item.teamAwayLogo} 
+                        alt={item.teamAway} 
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                    <span className="text-white text-sm font-bold">
+                      {item.teamAway}
+                    </span>
+                    {selectedTeam === "away" && (
+                      <span className="text-[#22c55e] text-base font-bold">
+                        {item.prediction}
+                      </span>
                     )}
                   </div>
                 </div>
-              </div>;
+
+                {/* Bet Type centered */}
+                <div className="text-center">
+                  <span className="text-white text-base font-bold">
+                    {item.betType}
+                  </span>
+                  {item.betType === "UNDER/OVER" && (
+                    <div className="text-[#22c55e] text-base font-bold mt-2">
+                      {item.prediction}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          );
         })}
         </div>
       </div>
