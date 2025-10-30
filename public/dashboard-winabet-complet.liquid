@@ -1729,6 +1729,9 @@
                     data-sport-type="{{ block.settings.sport_type | default: 'nhl' }}"
                     data-team1="{{ block.settings.team1_name | default: 'ÉQUIPE DOMICILE' }}"
                     data-team2="{{ block.settings.team2_name | default: 'ÉQUIPE EXTÉRIEUR' }}"
+                    data-auto-increment="{{ block.settings.auto_increment_enabled }}"
+                    data-increment-interval="{{ block.settings.auto_increment_interval | default: 5 }}"
+                    data-increment-amount="{{ block.settings.auto_increment_amount | default: 5 }}"
                   >
                     VOIR<br>ANALYSE<br>IA
                   </button>
@@ -3023,6 +3026,46 @@
     let currentPage = 'bet';
     let isMobileSidebarOpen = false;
 
+    // ===========================
+    // SYSTÈME D'AUTO-INCRÉMENTATION
+    // ===========================
+    let autoIncrementInterval = null;
+    
+    function startAutoIncrement(initialCount, intervalMinutes, amount) {
+      // Arrêter l'intervalle précédent s'il existe
+      if (autoIncrementInterval) {
+        clearInterval(autoIncrementInterval);
+      }
+      
+      let currentCount = parseInt(initialCount) || 2843;
+      
+      // Démarrer l'incrémentation automatique
+      const intervalMs = intervalMinutes * 60 * 1000; // Convertir minutes en millisecondes
+      autoIncrementInterval = setInterval(() => {
+        currentCount += parseInt(amount);
+        updateDataCount(currentCount);
+        console.log(`Auto-incrémentation: ${currentCount} données IA`);
+      }, intervalMs);
+    }
+    
+    function stopAutoIncrement() {
+      if (autoIncrementInterval) {
+        clearInterval(autoIncrementInterval);
+        autoIncrementInterval = null;
+      }
+    }
+    
+    function updateDataCount(count) {
+      const dialogDataCount = document.getElementById('dialog-data-count');
+      if (dialogDataCount) {
+        dialogDataCount.textContent = count.toLocaleString('fr-FR');
+      }
+    }
+
+    // ===========================
+    // FONCTIONS PRINCIPALES
+    // ===========================
+
     // Calculate return
     function calculateReturn(amount) {
       return (amount * currentMultiplier).toFixed(2);
@@ -3181,6 +3224,11 @@
       const sportType = (trigger?.dataset?.sportType || 'nhl').toLowerCase();
       const team1 = trigger?.dataset?.team1 || 'ÉQUIPE DOMICILE';
       const team2 = trigger?.dataset?.team2 || 'ÉQUIPE EXTÉRIEUR';
+      
+      // Récupérer les paramètres d'auto-incrémentation
+      const autoIncrement = trigger?.dataset?.autoIncrement === 'true';
+      const incrementInterval = parseInt(trigger?.dataset?.incrementInterval) || 5;
+      const incrementAmount = parseInt(trigger?.dataset?.incrementAmount) || 5;
 
       // Afficher le bon template
       const nhlEl = document.getElementById('template-nhl');
@@ -3207,6 +3255,11 @@
             .replace(/Équipe domicile/g, team1)
             .replace(/Équipe extérieur/g, team2);
         });
+      }
+      
+      // Démarrer l'auto-incrémentation si activée
+      if (autoIncrement) {
+        startAutoIncrement(dataCountRaw, incrementInterval, incrementAmount);
       }
 
       // Fallback: chercher dans la carte parente si les data-attributes ne sont pas présents
@@ -3277,6 +3330,8 @@
     // Close analysis dialog
     function closeAnalysisDialog() {
       document.getElementById('analysis-dialog').classList.remove('active');
+      // Arrêter l'auto-incrémentation lors de la fermeture
+      stopAutoIncrement();
     }
 
     // Initialize
@@ -3339,23 +3394,62 @@
       "type": "bet_card",
       "name": "Carte de Pari",
       "settings": [
-        {
-          "type": "select",
-          "id": "sport_type",
-          "label": "🏒🏈 Type de sport pour l'analyse IA",
-          "options": [
             {
-              "value": "nhl",
-              "label": "🏒 NHL (Hockey)"
+              "type": "select",
+              "id": "sport_type",
+              "label": "🏒🏈 Type de sport pour l'analyse IA",
+              "options": [
+                {
+                  "value": "nhl",
+                  "label": "🏒 NHL (Hockey)"
+                },
+                {
+                  "value": "nfl",
+                  "label": "🏈 NFL (Football américain)"
+                }
+              ],
+              "default": "nhl",
+              "info": "Sélectionnez le template d'analyse à afficher"
             },
             {
-              "value": "nfl",
-              "label": "🏈 NFL (Football américain)"
-            }
-          ],
-          "default": "nhl",
-          "info": "Sélectionnez le template d'analyse à afficher"
-        },
+              "type": "checkbox",
+              "id": "auto_increment_enabled",
+              "label": "🔄 Activer l'auto-incrémentation des données IA",
+              "default": false,
+              "info": "Les données IA analysées augmenteront automatiquement"
+            },
+            {
+              "type": "select",
+              "id": "auto_increment_interval",
+              "label": "⏱️ Intervalle d'incrémentation",
+              "options": [
+                {
+                  "value": "1",
+                  "label": "Toutes les 1 minute"
+                },
+                {
+                  "value": "5",
+                  "label": "Toutes les 5 minutes"
+                },
+                {
+                  "value": "10",
+                  "label": "Toutes les 10 minutes"
+                }
+              ],
+              "default": "5",
+              "info": "Fréquence d'ajout automatique de données"
+            },
+            {
+              "type": "range",
+              "id": "auto_increment_amount",
+              "min": 1,
+              "max": 50,
+              "step": 1,
+              "unit": "données",
+              "label": "📊 Nombre de données à ajouter",
+              "default": 5,
+              "info": "Combien de données ajouter à chaque intervalle"
+            },
         {
           "type": "number",
           "id": "ai_data_count",
