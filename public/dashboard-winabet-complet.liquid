@@ -3142,7 +3142,9 @@
         clearInterval(autoIncrementInterval);
       }
       
-      let currentCount = parseInt(initialCount) || 2843;
+      // Nettoyer la valeur : enlever tous les espaces et caractères non numériques sauf les chiffres
+      const cleanedCount = String(initialCount).replace(/\s/g, '').replace(/[^\d]/g, '');
+      let currentCount = parseInt(cleanedCount) || 2843;
       
       console.log(`🚀 Auto-incrémentation démarrée: ${currentCount} données de base, +${amount} toutes les ${intervalMinutes} min`);
       
@@ -3166,7 +3168,15 @@
     function updateDataCount(count) {
       const dialogDataCount = document.getElementById('dialog-data-count');
       if (dialogDataCount) {
+        // Animation flash pour rendre le changement visible
+        dialogDataCount.style.transition = 'color 0.3s ease';
+        dialogDataCount.style.color = '#16a34a'; // Vert
         dialogDataCount.textContent = count.toLocaleString('fr-FR');
+        
+        setTimeout(() => {
+          dialogDataCount.style.color = ''; // Revenir à la couleur normale
+        }, 500);
+        
         console.log(`📊 Compteur mis à jour: ${count}`);
       }
     }
@@ -3335,7 +3345,7 @@
       const team2 = trigger?.dataset?.team2 || 'ÉQUIPE EXTÉRIEUR';
       
       // Récupérer les paramètres d'auto-incrémentation
-      const autoIncrement = trigger?.dataset?.autoIncrement === 'true';
+      const autoIncrement = trigger?.dataset?.autoIncrement === 'true' || trigger?.dataset?.autoIncrement === true;
       const incrementInterval = parseInt(trigger?.dataset?.incrementInterval) || 5;
       const incrementAmount = parseInt(trigger?.dataset?.incrementAmount) || 5;
 
@@ -3433,9 +3443,11 @@
         if (autoIncrement) {
           console.log(`🎯 Paramètres auto-incrémentation:`, {
             enabled: autoIncrement,
-            interval: incrementInterval,
+            interval: `${incrementInterval} minutes`,
+            intervalMs: incrementInterval * 60 * 1000,
             amount: incrementAmount,
-            initialCount: dataCountRaw
+            initialCount: dataCountRaw,
+            cleanedCount: String(dataCountRaw).replace(/\s/g, '')
           });
           startAutoIncrement(dataCountRaw, incrementInterval, incrementAmount);
         } else {
@@ -3540,6 +3552,14 @@
               "id": "auto_increment_interval",
               "label": "⏱️ Intervalle d'incrémentation",
               "options": [
+                {
+                  "value": "0.1",
+                  "label": "⚡ Test: Toutes les 6 secondes"
+                },
+                {
+                  "value": "0.5",
+                  "label": "⚡ Test: Toutes les 30 secondes"
+                },
                 {
                   "value": "1",
                   "label": "Toutes les 1 minute"
