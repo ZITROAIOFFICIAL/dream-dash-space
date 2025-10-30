@@ -2274,6 +2274,8 @@
             </div>
           </div>
 
+          {% if block.settings.sport_type == 'nhl' %}
+          <!-- ========== TEMPLATE NHL ========== -->
           <!-- Analyse du marché & meilleures cotes -->
           <h3 class="analysis-section-title">Analyse du marché & meilleures cotes</h3>
           <div class="analysis-section">
@@ -2281,9 +2283,9 @@
               <div class="analysis-subsection-icon">
                 <span class="ai-badge">IA</span>
               </div>
-              <div class="analysis-subsection-title">Analyse — Marché & pricing ({{ block.settings.team1_name }})</div>
+              <div class="analysis-subsection-title">Analyse — Marché & pricing (Équipe domicile)</div>
               <div class="analysis-subsection-content">
-                • Analyse de la probabilité implicite du marché pour {{ block.settings.team1_name }}, obtenue par conversion des cotes en pourcentage réel.
+                • Analyse de la probabilité implicite du marché pour l'équipe domicile, obtenue par conversion des cotes en pourcentage réel.
               </div>
             </div>
 
@@ -2291,7 +2293,7 @@
               <div class="analysis-subsection-icon">
                 <span class="ai-badge">IA</span>
               </div>
-              <div class="analysis-subsection-title">Analyse — Marché & pricing ({{ block.settings.team1_name }})</div>
+              <div class="analysis-subsection-title">Analyse — Marché & pricing (Équipe domicile)</div>
               <div class="analysis-subsection-content">
                 • Comparaison inter-bookmakers pour identifier la meilleure cote disponible ("best price") et mesurer l'efficience du marché.
               </div>
@@ -2301,9 +2303,9 @@
               <div class="analysis-subsection-icon">
                 <span class="ai-badge">IA</span>
               </div>
-              <div class="analysis-subsection-title">Analyse — Marché & pricing ({{ block.settings.team1_name }})</div>
+              <div class="analysis-subsection-title">Analyse — Marché & pricing (Équipe domicile)</div>
               <div class="analysis-subsection-content">
-                • Observation du mouvement de ligne (line movement) afin de déterminer si la valeur évolue en faveur ou en défaveur de {{ block.settings.team1_name }}.
+                • Observation du mouvement de ligne (line movement) afin de déterminer si la valeur évolue en faveur ou en défaveur de l'équipe domicile.
               </div>
             </div>
 
@@ -2311,7 +2313,7 @@
               <div class="analysis-subsection-icon">
                 <span class="ai-badge">IA</span>
               </div>
-              <div class="analysis-subsection-title">Analyse — Marché & pricing ({{ block.settings.team1_name }})</div>
+              <div class="analysis-subsection-title">Analyse — Marché & pricing (Équipe domicile)</div>
               <div class="analysis-subsection-content">
                 • Détection d'un éventuel closing line value (CLV) et influence du sharp money par rapport au public money.
               </div>
@@ -2321,9 +2323,9 @@
               <div class="analysis-subsection-icon">
                 <span class="ai-badge">IA</span>
               </div>
-              <div class="analysis-subsection-title">Analyse — Marché & pricing ({{ block.settings.team2_name }})</div>
+              <div class="analysis-subsection-title">Analyse — Marché & pricing (Équipe extérieur)</div>
               <div class="analysis-subsection-content">
-                • Analyse de la probabilité implicite du marché pour {{ block.settings.team2_name }}, obtenue par conversion des cotes en pourcentage réel.
+                • Analyse de la probabilité implicite du marché pour l'équipe extérieur, obtenue par conversion des cotes en pourcentage réel.
               </div>
             </div>
 
@@ -2331,7 +2333,7 @@
               <div class="analysis-subsection-icon">
                 <span class="ai-badge">IA</span>
               </div>
-              <div class="analysis-subsection-title">Analyse — Marché & pricing ({{ block.settings.team2_name }})</div>
+              <div class="analysis-subsection-title">Analyse — Marché & pricing (Équipe extérieur)</div>
               <div class="analysis-subsection-content">
                 • Comparaison inter-bookmakers pour identifier la meilleure cote disponible ("best price") et mesurer l'efficience du marché.
               </div>
@@ -2341,9 +2343,9 @@
               <div class="analysis-subsection-icon">
                 <span class="ai-badge">IA</span>
               </div>
-              <div class="analysis-subsection-title">Analyse — Marché & pricing ({{ block.settings.team2_name }})</div>
+              <div class="analysis-subsection-title">Analyse — Marché & pricing (Équipe extérieur)</div>
               <div class="analysis-subsection-content">
-                • Observation du mouvement de ligne (line movement) afin de déterminer si la valeur évolue en faveur ou en défaveur de {{ block.settings.team2_name }}.
+                • Observation du mouvement de ligne (line movement) afin de déterminer si la valeur évolue en faveur ou en défaveur de l'équipe extérieur.
               </div>
             </div>
 
@@ -2351,7 +2353,7 @@
               <div class="analysis-subsection-icon">
                 <span class="ai-badge">IA</span>
               </div>
-              <div class="analysis-subsection-title">Analyse — Marché & pricing ({{ block.settings.team2_name }})</div>
+              <div class="analysis-subsection-title">Analyse — Marché & pricing (Équipe extérieur)</div>
               <div class="analysis-subsection-content">
                 • Détection d'un éventuel closing line value (CLV) et influence du sharp money par rapport au public money.
               </div>
@@ -2393,9 +2395,9 @@
               <div class="analysis-subsection-icon">
                 <span class="ai-badge">IA</span>
               </div>
-              <div class="analysis-subsection-title">Analyse — Power Play ({{ block.settings.team1_name }})</div>
+              <div class="analysis-subsection-title">Analyse — Power Play (Équipe domicile)</div>
               <div class="analysis-subsection-content">
-                Analyse de l'efficacité du power play de {{ block.settings.team1_name }}, incluant la structure tactique en zone offensive, la qualité des entrées de zone contrôlées, la création de chances dangereuses (HDCF) et l'exécution globale des séquences en supériorité numérique (xGoals/PP).
+                Analyse de l'efficacité du power play de l'équipe domicile, incluant la structure tactique en zone offensive, la qualité des entrées de zone contrôlées, la création de chances dangereuses (HDCF) et l'exécution globale des séquences en supériorité numérique (xGoals/PP).
               </div>
             </div>
 
@@ -2403,9 +2405,9 @@
               <div class="analysis-subsection-icon">
                 <span class="ai-badge">IA</span>
               </div>
-              <div class="analysis-subsection-title">Analyse — Power Play ({{ block.settings.team2_name }})</div>
+              <div class="analysis-subsection-title">Analyse — Power Play (Équipe extérieur)</div>
               <div class="analysis-subsection-content">
-                Analyse de l'efficacité du power play de {{ block.settings.team2_name }}, incluant la structure tactique en zone offensive, la qualité des entrées de zone contrôlées, la création de chances dangereuses (HDCF) et l'exécution globale des séquences en supériorité numérique (xGoals/PP).
+                Analyse de l'efficacité du power play de l'équipe extérieur, incluant la structure tactique en zone offensive, la qualité des entrées de zone contrôlées, la création de chances dangereuses (HDCF) et l'exécution globale des séquences en supériorité numérique (xGoals/PP).
               </div>
             </div>
 
@@ -2413,9 +2415,9 @@
               <div class="analysis-subsection-icon">
                 <span class="ai-badge">IA</span>
               </div>
-              <div class="analysis-subsection-title">Analyse — Discipline & Pénalités ({{ block.settings.team1_name }})</div>
+              <div class="analysis-subsection-title">Analyse — Discipline & Pénalités (Équipe domicile)</div>
               <div class="analysis-subsection-content">
-                Analyse du niveau de discipline de {{ block.settings.team1_name }}, basée sur la fréquence des pénalités concédées, le temps passé en infériorité numérique, l'impact sur le momentum et l'exposition défensive répétée en PK.
+                Analyse du niveau de discipline de l'équipe domicile, basée sur la fréquence des pénalités concédées, le temps passé en infériorité numérique, l'impact sur le momentum et l'exposition défensive répétée en PK.
               </div>
             </div>
 
@@ -2423,9 +2425,9 @@
               <div class="analysis-subsection-icon">
                 <span class="ai-badge">IA</span>
               </div>
-              <div class="analysis-subsection-title">Analyse — Discipline & Pénalités ({{ block.settings.team2_name }})</div>
+              <div class="analysis-subsection-title">Analyse — Discipline & Pénalités (Équipe extérieur)</div>
               <div class="analysis-subsection-content">
-                Analyse du niveau de discipline de {{ block.settings.team2_name }}, basée sur la fréquence des pénalités concédées, le temps passé en infériorité numérique, l'impact sur le momentum et l'exposition défensive répétée en PK.
+                Analyse du niveau de discipline de l'équipe extérieur, basée sur la fréquence des pénalités concédées, le temps passé en infériorité numérique, l'impact sur le momentum et l'exposition défensive répétée en PK.
               </div>
             </div>
           </div>
@@ -2437,9 +2439,9 @@
               <div class="analysis-subsection-icon">
                 <span class="ai-badge">IA</span>
               </div>
-              <div class="analysis-subsection-title">Analyse — Performance du gardien ({{ block.settings.team1_name }})</div>
+              <div class="analysis-subsection-title">Analyse — Performance du gardien (Équipe domicile)</div>
               <div class="analysis-subsection-content">
-                Analyse du rendement du gardien projeté de {{ block.settings.team1_name }}, basée sur l'efficacité face aux tirs à haut danger, la qualité technique, la constance sous pression et les indicateurs avancés type GSAA.
+                Analyse du rendement du gardien projeté de l'équipe domicile, basée sur l'efficacité face aux tirs à haut danger, la qualité technique, la constance sous pression et les indicateurs avancés type GSAA.
               </div>
             </div>
 
@@ -2447,9 +2449,9 @@
               <div class="analysis-subsection-icon">
                 <span class="ai-badge">IA</span>
               </div>
-              <div class="analysis-subsection-title">Analyse — Performance du gardien ({{ block.settings.team2_name }})</div>
+              <div class="analysis-subsection-title">Analyse — Performance du gardien (Équipe extérieur)</div>
               <div class="analysis-subsection-content">
-                Analyse du rendement du gardien projeté de {{ block.settings.team2_name }}, basée sur l'efficacité face aux tirs à haut danger, la qualité technique, la constance sous pression et les indicateurs avancés type GSAA.
+                Analyse du rendement du gardien projeté de l'équipe extérieur, basée sur l'efficacité face aux tirs à haut danger, la qualité technique, la constance sous pression et les indicateurs avancés type GSAA.
               </div>
             </div>
 
@@ -2457,9 +2459,9 @@
               <div class="analysis-subsection-icon">
                 <span class="ai-badge">IA</span>
               </div>
-              <div class="analysis-subsection-title">Analyse — Structure défensive ({{ block.settings.team1_name }})</div>
+              <div class="analysis-subsection-title">Analyse — Structure défensive (Équipe domicile)</div>
               <div class="analysis-subsection-content">
-                Analyse de la structure défensive de {{ block.settings.team1_name }}, incluant la protection du slot, la gestion des rebonds, la transition défensive et la limitation des occasions adverses de haute qualité.
+                Analyse de la structure défensive de l'équipe domicile, incluant la protection du slot, la gestion des rebonds, la transition défensive et la limitation des occasions adverses de haute qualité.
               </div>
             </div>
 
@@ -2467,9 +2469,9 @@
               <div class="analysis-subsection-icon">
                 <span class="ai-badge">IA</span>
               </div>
-              <div class="analysis-subsection-title">Analyse — Structure défensive ({{ block.settings.team2_name }})</div>
+              <div class="analysis-subsection-title">Analyse — Structure défensive (Équipe extérieur)</div>
               <div class="analysis-subsection-content">
-                Analyse de la structure défensive de {{ block.settings.team2_name }}, incluant la protection du slot, la gestion des rebonds, la transition défensive et la limitation des occasions adverses de haute qualité.
+                Analyse de la structure défensive de l'équipe extérieur, incluant la protection du slot, la gestion des rebonds, la transition défensive et la limitation des occasions adverses de haute qualité.
               </div>
             </div>
           </div>
@@ -2481,9 +2483,9 @@
               <div class="analysis-subsection-icon">
                 <span class="ai-badge">IA</span>
               </div>
-              <div class="analysis-subsection-title">Analyse — Expected Goals ({{ block.settings.team1_name }})</div>
+              <div class="analysis-subsection-title">Analyse — Expected Goals (Équipe domicile)</div>
               <div class="analysis-subsection-content">
-                Analyse de la production offensive de {{ block.settings.team1_name }}, basée sur la quantité et la qualité des tirs générés, les emplacements de tir et la probabilité attendue de convertir les occasions (xG).
+                Analyse de la production offensive de l'équipe domicile, basée sur la quantité et la qualité des tirs générés, les emplacements de tir et la probabilité attendue de convertir les occasions (xG).
               </div>
             </div>
 
@@ -2491,9 +2493,9 @@
               <div class="analysis-subsection-icon">
                 <span class="ai-badge">IA</span>
               </div>
-              <div class="analysis-subsection-title">Analyse — Expected Goals ({{ block.settings.team2_name }})</div>
+              <div class="analysis-subsection-title">Analyse — Expected Goals (Équipe extérieur)</div>
               <div class="analysis-subsection-content">
-                Analyse de la production offensive de {{ block.settings.team2_name }}, basée sur la quantité et la qualité des tirs générés, les emplacements de tir et la probabilité attendue de convertir les occasions (xG).
+                Analyse de la production offensive de l'équipe extérieur, basée sur la quantité et la qualité des tirs générés, les emplacements de tir et la probabilité attendue de convertir les occasions (xG).
               </div>
             </div>
 
@@ -2501,9 +2503,9 @@
               <div class="analysis-subsection-icon">
                 <span class="ai-badge">IA</span>
               </div>
-              <div class="analysis-subsection-title">Analyse — Possession (Corsi/Fenwick) ({{ block.settings.team1_name }})</div>
+              <div class="analysis-subsection-title">Analyse — Possession (Corsi/Fenwick) (Équipe domicile)</div>
               <div class="analysis-subsection-content">
-                Analyse du contrôle du palet de {{ block.settings.team1_name }}, à travers le volume de tirs tentés, la capacité à maintenir la zone offensive et la dictée du rythme de jeu.
+                Analyse du contrôle du palet de l'équipe domicile, à travers le volume de tirs tentés, la capacité à maintenir la zone offensive et la dictée du rythme de jeu.
               </div>
             </div>
 
@@ -2511,9 +2513,9 @@
               <div class="analysis-subsection-icon">
                 <span class="ai-badge">IA</span>
               </div>
-              <div class="analysis-subsection-title">Analyse — Possession (Corsi/Fenwick) ({{ block.settings.team2_name }})</div>
+              <div class="analysis-subsection-title">Analyse — Possession (Corsi/Fenwick) (Équipe extérieur)</div>
               <div class="analysis-subsection-content">
-                Analyse du contrôle du palet de {{ block.settings.team2_name }}, à travers le volume de tirs tentés, la capacité à maintenir la zone offensive et la dictée du rythme de jeu.
+                Analyse du contrôle du palet de l'équipe extérieur, à travers le volume de tirs tentés, la capacité à maintenir la zone offensive et la dictée du rythme de jeu.
               </div>
             </div>
           </div>
@@ -2525,9 +2527,9 @@
               <div class="analysis-subsection-icon">
                 <span class="ai-badge">IA</span>
               </div>
-              <div class="analysis-subsection-title">Analyse — Profondeur offensive ({{ block.settings.team1_name }})</div>
+              <div class="analysis-subsection-title">Analyse — Profondeur offensive (Équipe domicile)</div>
               <div class="analysis-subsection-content">
-                Analyse de la profondeur de {{ block.settings.team1_name }}, incluant la contribution du top-6, l'impact du bottom-6, la flexibilité tactique et la capacité à maintenir la pression offensive sur plusieurs trios.
+                Analyse de la profondeur de l'équipe domicile, incluant la contribution du top-6, l'impact du bottom-6, la flexibilité tactique et la capacité à maintenir la pression offensive sur plusieurs trios.
               </div>
             </div>
 
@@ -2535,9 +2537,9 @@
               <div class="analysis-subsection-icon">
                 <span class="ai-badge">IA</span>
               </div>
-              <div class="analysis-subsection-title">Analyse — Profondeur offensive ({{ block.settings.team2_name }})</div>
+              <div class="analysis-subsection-title">Analyse — Profondeur offensive (Équipe extérieur)</div>
               <div class="analysis-subsection-content">
-                Analyse de la profondeur de {{ block.settings.team2_name }}, incluant la contribution du top-6, l'impact du bottom-6, la flexibilité tactique et la capacité à maintenir la pression offensive sur plusieurs trios.
+                Analyse de la profondeur de l'équipe extérieur, incluant la contribution du top-6, l'impact du bottom-6, la flexibilité tactique et la capacité à maintenir la pression offensive sur plusieurs trios.
               </div>
             </div>
 
@@ -2545,9 +2547,9 @@
               <div class="analysis-subsection-icon">
                 <span class="ai-badge">IA</span>
               </div>
-              <div class="analysis-subsection-title">Analyse — Stabilité défensive ({{ block.settings.team1_name }})</div>
+              <div class="analysis-subsection-title">Analyse — Stabilité défensive (Équipe domicile)</div>
               <div class="analysis-subsection-content">
-                Analyse de la profondeur défensive de {{ block.settings.team1_name }}, basée sur la solidité du top-4, la mobilité en relance et la gestion des transitions adverses.
+                Analyse de la profondeur défensive de l'équipe domicile, basée sur la solidité du top-4, la mobilité en relance et la gestion des transitions adverses.
               </div>
             </div>
 
@@ -2555,9 +2557,9 @@
               <div class="analysis-subsection-icon">
                 <span class="ai-badge">IA</span>
               </div>
-              <div class="analysis-subsection-title">Analyse — Stabilité défensive ({{ block.settings.team2_name }})</div>
+              <div class="analysis-subsection-title">Analyse — Stabilité défensive (Équipe extérieur)</div>
               <div class="analysis-subsection-content">
-                Analyse de la profondeur défensive de {{ block.settings.team2_name }}, basée sur la solidité du top-4, la mobilité en relance et la gestion des transitions adverses.
+                Analyse de la profondeur défensive de l'équipe extérieur, basée sur la solidité du top-4, la mobilité en relance et la gestion des transitions adverses.
               </div>
             </div>
           </div>
@@ -2569,9 +2571,9 @@
               <div class="analysis-subsection-icon">
                 <span class="ai-badge">IA</span>
               </div>
-              <div class="analysis-subsection-title">Analyse — Cadence & calendrier ({{ block.settings.team1_name }})</div>
+              <div class="analysis-subsection-title">Analyse — Cadence & calendrier (Équipe domicile)</div>
               <div class="analysis-subsection-content">
-                Analyse du contexte physique de {{ block.settings.team1_name }}, incluant l'enchaînement des matchs, le repos disponible, la présence éventuelle d'un back-to-back et la charge de déplacement.
+                Analyse du contexte physique de l'équipe domicile, incluant l'enchaînement des matchs, le repos disponible, la présence éventuelle d'un back-to-back et la charge de déplacement.
               </div>
             </div>
 
@@ -2579,9 +2581,9 @@
               <div class="analysis-subsection-icon">
                 <span class="ai-badge">IA</span>
               </div>
-              <div class="analysis-subsection-title">Analyse — Cadence & calendrier ({{ block.settings.team2_name }})</div>
+              <div class="analysis-subsection-title">Analyse — Cadence & calendrier (Équipe extérieur)</div>
               <div class="analysis-subsection-content">
-                Analyse du contexte physique de {{ block.settings.team2_name }}, incluant l'enchaînement des matchs, le repos disponible, la présence éventuelle d'un back-to-back et la charge de déplacement.
+                Analyse du contexte physique de l'équipe extérieur, incluant l'enchaînement des matchs, le repos disponible, la présence éventuelle d'un back-to-back et la charge de déplacement.
               </div>
             </div>
 
@@ -2589,9 +2591,9 @@
               <div class="analysis-subsection-icon">
                 <span class="ai-badge">IA</span>
               </div>
-              <div class="analysis-subsection-title">Analyse — Avantage domicile / extérieur ({{ block.settings.team1_name }})</div>
+              <div class="analysis-subsection-title">Analyse — Avantage domicile / extérieur (Équipe domicile)</div>
               <div class="analysis-subsection-content">
-                Analyse de la performance contextuelle de {{ block.settings.team1_name }}, selon qu'elle évolue à domicile ou sur la route, et l'impact du dernier changement sur les matchups.
+                Analyse de la performance contextuelle de l'équipe domicile, selon qu'elle évolue à domicile ou sur la route, et l'impact du dernier changement sur les matchups.
               </div>
             </div>
 
@@ -2599,9 +2601,9 @@
               <div class="analysis-subsection-icon">
                 <span class="ai-badge">IA</span>
               </div>
-              <div class="analysis-subsection-title">Analyse — Avantage domicile / extérieur ({{ block.settings.team2_name }})</div>
+              <div class="analysis-subsection-title">Analyse — Avantage domicile / extérieur (Équipe extérieur)</div>
               <div class="analysis-subsection-content">
-                Analyse de la performance contextuelle de {{ block.settings.team2_name }}, selon qu'elle évolue à domicile ou sur la route, et l'impact du dernier changement sur les matchups.
+                Analyse de la performance contextuelle de l'équipe extérieur, selon qu'elle évolue à domicile ou sur la route, et l'impact du dernier changement sur les matchups.
               </div>
             </div>
           </div>
@@ -2619,6 +2621,22 @@
               </div>
             </div>
           </div>
+          <!-- ========== FIN TEMPLATE NHL ========== -->
+          {% else %}
+          <!-- ========== TEMPLATE NFL (À VENIR) ========== -->
+          <div class="analysis-section">
+            <div class="analysis-subsection">
+              <div class="analysis-subsection-icon">
+                <span class="ai-badge">IA</span>
+              </div>
+              <div class="analysis-subsection-title">Template NFL</div>
+              <div class="analysis-subsection-content">
+                Le template d'analyse NFL sera disponible prochainement.
+              </div>
+            </div>
+          </div>
+          <!-- ========== FIN TEMPLATE NFL ========== -->
+          {% endif %}
         </div>
       </div>
     </div>
@@ -2916,6 +2934,23 @@
       "type": "bet_card",
       "name": "Carte de Pari",
       "settings": [
+        {
+          "type": "select",
+          "id": "sport_type",
+          "label": "🏒🏈 Type de sport pour l'analyse IA",
+          "options": [
+            {
+              "value": "nhl",
+              "label": "🏒 NHL (Hockey)"
+            },
+            {
+              "value": "nfl",
+              "label": "🏈 NFL (Football américain)"
+            }
+          ],
+          "default": "nhl",
+          "info": "Sélectionnez le template d'analyse à afficher"
+        },
         {
           "type": "number",
           "id": "ai_data_count",
