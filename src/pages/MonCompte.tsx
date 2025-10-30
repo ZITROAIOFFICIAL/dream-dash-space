@@ -1,10 +1,5 @@
-import { useEffect } from "react";
-
 const MonCompte = () => {
-  useEffect(() => {
-    window.location.href = "https://winabet.ai/apps/memberships";
-  }, []);
-
+  window.location.replace("https://winabet.ai/apps/memberships");
   return null;
 };
 
