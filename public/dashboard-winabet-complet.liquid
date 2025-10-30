@@ -4003,7 +4003,308 @@
     {
       "type": "parlay_card",
       "name": "🎲 Carte Parlay Avancée",
-      "settings": []
+      "settings": [
+            {
+              "type": "select",
+              "id": "sport_type",
+              "label": "🏒🏈 Type de sport pour l'analyse IA",
+              "options": [
+                {
+                  "value": "nhl",
+                  "label": "🏒 NHL (Hockey)"
+                },
+                {
+                  "value": "nfl",
+                  "label": "🏈 NFL (Football américain)"
+                }
+              ],
+              "default": "nhl",
+              "info": "Sélectionnez le template d'analyse à afficher"
+            },
+            {
+              "type": "checkbox",
+              "id": "auto_increment_enabled",
+              "label": "🔄 Activer l'auto-incrémentation des données IA",
+              "default": false,
+              "info": "Les données IA analysées augmenteront automatiquement"
+            },
+            {
+              "type": "select",
+              "id": "auto_increment_interval",
+              "label": "⏱️ Intervalle d'incrémentation",
+              "options": [
+                {
+                  "value": "0.1",
+                  "label": "⚡ Test: Toutes les 6 secondes"
+                },
+                {
+                  "value": "0.5",
+                  "label": "⚡ Test: Toutes les 30 secondes"
+                },
+                {
+                  "value": "1",
+                  "label": "Toutes les 1 minute"
+                },
+                {
+                  "value": "2",
+                  "label": "Toutes les 2 minutes"
+                },
+                {
+                  "value": "5",
+                  "label": "Toutes les 5 minutes"
+                },
+                {
+                  "value": "10",
+                  "label": "Toutes les 10 minutes"
+                }
+              ],
+              "default": "5",
+              "info": "Fréquence d'ajout automatique de données"
+            },
+            {
+              "type": "select",
+              "id": "auto_increment_amount",
+              "label": "📊 Quantité à ajouter",
+              "options": [
+                {
+                  "value": "1",
+                  "label": "1 donnée"
+                },
+                {
+                  "value": "5",
+                  "label": "5 données"
+                },
+                {
+                  "value": "10",
+                  "label": "10 données"
+                },
+                {
+                  "value": "25",
+                  "label": "25 données"
+                },
+                {
+                  "value": "50",
+                  "label": "50 données"
+                }
+              ],
+              "default": "5",
+              "info": "Combien de données ajouter à chaque intervalle"
+            },
+        {
+          "type": "number",
+          "id": "ai_data_count",
+          "label": "Nombre de données IA analysées",
+          "default": 2857
+        },
+        {
+          "type": "select",
+          "id": "bet_type",
+          "label": "📊 Type de pari",
+          "options": [
+            {
+              "value": "moneyline",
+              "label": "💰 Moneyline"
+            },
+            {
+              "value": "spread",
+              "label": "📏 Spread"
+            },
+            {
+              "value": "over_under",
+              "label": "🔢 Over/Under"
+            }
+          ],
+          "default": "moneyline",
+          "info": "Sélectionnez le type de pari à afficher"
+        },
+        {
+          "type": "text",
+          "id": "spread_value",
+          "label": "📏 Valeur du Spread",
+          "default": "-3.5",
+          "info": "Ex: -3.5, +7.5, -10.5 (utilisé uniquement pour le type Spread)"
+        },
+        {
+          "type": "select",
+          "id": "spread_team",
+          "label": "🎯 Équipe avec le Spread",
+          "options": [
+            {
+              "value": "team1",
+              "label": "Équipe 1"
+            },
+            {
+              "value": "team2",
+              "label": "Équipe 2"
+            }
+          ],
+          "default": "team2",
+          "info": "Quelle équipe a le spread (utilisé uniquement pour le type Spread)"
+        },
+        {
+          "type": "select",
+          "id": "over_under_type",
+          "label": "🔼🔽 Over ou Under",
+          "options": [
+            {
+              "value": "over",
+              "label": "OVER"
+            },
+            {
+              "value": "under",
+              "label": "UNDER"
+            }
+          ],
+          "default": "over",
+          "info": "Sélectionnez OVER ou UNDER (utilisé uniquement pour le type Over/Under)"
+        },
+        {
+          "type": "text",
+          "id": "over_under_value",
+          "label": "🔢 Valeur Over/Under",
+          "default": "225.5",
+          "info": "Ex: 225.5, 45.5, 310.5 (utilisé uniquement pour le type Over/Under)"
+        },
+        {
+          "type": "text",
+          "id": "over_under_stat_type",
+          "label": "📊 Type de statistique (optionnel)",
+          "default": "points totaux",
+          "info": "Ex: 'points totaux', 'yards de Patrick Mahomes' (utilisé uniquement pour le type Over/Under)"
+        },
+        {
+          "type": "range",
+          "id": "win_percentage",
+          "label": "Pourcentage de chance de gagner (%)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 92
+        },
+        {
+          "type": "text",
+          "id": "team1_name",
+          "label": "Équipe 1 (à domicile)",
+          "default": "VEGAS"
+        },
+        {
+          "type": "image_picker",
+          "id": "team1_logo",
+          "label": "Logo Équipe 1"
+        },
+        {
+          "type": "text",
+          "id": "team1_bet_type",
+          "label": "Type de pari Équipe 1",
+          "default": "MONEYLINE",
+          "info": "Ex: MONEYLINE, SPREAD, TOTAL"
+        },
+        {
+          "type": "text",
+          "id": "team2_name",
+          "label": "Équipe 2 (à l'extérieur)",
+          "default": "TAMPA BAY"
+        },
+        {
+          "type": "image_picker",
+          "id": "team2_logo",
+          "label": "Logo Équipe 2"
+        },
+        {
+          "type": "text",
+          "id": "team2_bet_type",
+          "label": "Type de pari Équipe 2",
+          "default": "VICTOIRE",
+          "info": "Ex: VICTOIRE, SPREAD, TOTAL"
+        },
+        {
+          "type": "text",
+          "id": "bet_units",
+          "label": "Nombre d'unités",
+          "default": "1",
+          "info": "Nombre d'unités à parier"
+        },
+        {
+          "type": "text",
+          "id": "match_time",
+          "label": "Heure du match",
+          "default": "5:00 PM"
+        },
+        {
+          "type": "text",
+          "id": "match_date",
+          "label": "Date du match",
+          "default": "Aujourd'hui",
+          "info": "Ex: Aujourd'hui, Demain, 28 Octobre"
+        },
+        {
+          "type": "text",
+          "id": "multiplier",
+          "label": "Multiplicateur (cote)",
+          "default": "1.74",
+          "info": "Ex: 1.74, 2.50, 3.25"
+        },
+        {
+          "type": "number",
+          "id": "odds",
+          "label": "Cote principale",
+          "default": -136,
+          "info": "Format américain (ex: -136, +150)"
+        },
+        {
+          "type": "text",
+          "id": "best_bookmaker",
+          "label": "Meilleur bookmaker",
+          "default": "DRAFTKINGS"
+        },
+        {
+          "type": "number",
+          "id": "best_odds",
+          "label": "Meilleures cotes",
+          "default": -135,
+          "info": "Format américain"
+        },
+        {
+          "type": "textarea",
+          "id": "ai_explanation",
+          "label": "Explication de l'IA",
+          "default": "Notre IA a analysé plus de 2857 variables incluant les performances récentes, les statistiques head-to-head, les conditions de jeu, et les tendances du marché pour vous proposer ce pari avec une confiance élevée."
+        },
+        {
+          "type": "checkbox",
+          "id": "send_to_history",
+          "label": "📋 Envoyer à l'historique",
+          "default": false,
+          "info": "Cochez pour déplacer cette carte vers l'historique"
+        },
+        {
+          "type": "select",
+          "id": "result",
+          "label": "🎯 Résultat du pari",
+          "options": [
+            {
+              "value": "pending",
+              "label": "En attente"
+            },
+            {
+              "value": "win",
+              "label": "✅ Gagné (Win)"
+            },
+            {
+              "value": "loose",
+              "label": "❌ Perdu (Loose)"
+            }
+          ],
+          "default": "pending",
+          "info": "Sélectionnez le résultat du pari"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_card",
+          "label": "Afficher cette carte",
+          "default": true
+        }
+      ]
     }
   ],
   "max_blocks": 20,
