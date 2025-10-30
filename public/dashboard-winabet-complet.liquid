@@ -140,13 +140,18 @@
       top: 0;
       left: 0;
       width: 16rem;
-      height: 100vh;
+      min-height: 100vh;
+      min-height: 100dvh;
+      height: 100%;
       background: #000000;
       border-right: 1px solid rgba(255, 255, 255, 0.1);
       z-index: 50;
       display: flex;
       flex-direction: column;
       transition: transform 0.3s ease;
+      overflow-y: auto;
+      touch-action: pan-y;
+      -webkit-overflow-scrolling: touch;
     }
 
     @media (max-width: 768px) {
@@ -4467,9 +4472,11 @@
       if (isMobileSidebarOpen) {
         sidebar.classList.add('active');
         overlay.classList.add('active');
+        document.body.classList.add('body-no-scroll');
       } else {
         sidebar.classList.remove('active');
         overlay.classList.remove('active');
+        document.body.classList.remove('body-no-scroll');
       }
     }
 
