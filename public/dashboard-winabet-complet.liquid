@@ -2552,7 +2552,7 @@
                 <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">MONEYLINE</div>
                 <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
                   <div style="text-align: center; flex: 1;">
-                    <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
+                    <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem; {% if block.settings.result == 'win' %}border: 3px solid #22c55e;{% endif %}">
                       {% if block.settings.team1_logo %}
                         <img src="{{ block.settings.team1_logo | image_url: width: 300 }}" alt="{{ block.settings.team1_name }}" style="width: 100%; height: 100%; object-fit: contain;">
                       {% else %}
@@ -2567,7 +2567,7 @@
                   </div>
 
                   <div style="text-align: center; flex: 1;">
-                    <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
+                    <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem; {% if block.settings.result == 'win' %}border: 3px solid #22c55e;{% endif %}">
                       {% if block.settings.team2_logo %}
                         <img src="{{ block.settings.team2_logo | image_url: width: 300 }}" alt="{{ block.settings.team2_name }}" style="width: 100%; height: 100%; object-fit: contain;">
                       {% else %}
@@ -2575,9 +2575,7 @@
                       {% endif %}
                     </div>
                     <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.team2_name | default: 'TAMPA BAY' }}</div>
-                    {% if block.settings.result == 'win' %}
-                      <div style="font-size: 1rem; font-weight: 700; color: #22c55e; margin-top: 0.5rem;">VICTOIRE</div>
-                    {% endif %}
+                    <div style="font-size: 1rem; font-weight: 700; color: {{ units_color }}; margin-top: 0.5rem;">VICTOIRE</div>
                   </div>
                 </div>
 
@@ -2586,7 +2584,7 @@
                 <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">SPREAD</div>
                 <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
                   <div style="text-align: center; flex: 1;">
-                    <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
+                    <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem; {% if block.settings.result == 'win' and block.settings.spread_team == 'team1' %}border: 3px solid #22c55e;{% endif %}">
                       {% if block.settings.team1_logo %}
                         <img src="{{ block.settings.team1_logo | image_url: width: 300 }}" alt="{{ block.settings.team1_name }}" style="width: 100%; height: 100%; object-fit: contain;">
                       {% else %}
@@ -2594,8 +2592,8 @@
                       {% endif %}
                     </div>
                     <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.team1_name | default: 'VEGAS' }}</div>
-                    {% if block.settings.result == 'win' and block.settings.spread_team == 'team1' %}
-                      <div style="font-size: 1rem; font-weight: 700; color: #22c55e; margin-top: 0.5rem;">{{ block.settings.spread_value | default: '-3.5' }}</div>
+                    {% if block.settings.spread_team == 'team1' %}
+                      <div style="font-size: 1rem; font-weight: 700; color: {{ units_color }}; margin-top: 0.5rem;">{{ block.settings.spread_value | default: '-3.5' }}</div>
                     {% endif %}
                   </div>
 
@@ -2604,7 +2602,7 @@
                   </div>
 
                   <div style="text-align: center; flex: 1;">
-                    <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
+                    <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem; {% if block.settings.result == 'win' and block.settings.spread_team == 'team2' %}border: 3px solid #22c55e;{% endif %}">
                       {% if block.settings.team2_logo %}
                         <img src="{{ block.settings.team2_logo | image_url: width: 300 }}" alt="{{ block.settings.team2_name }}" style="width: 100%; height: 100%; object-fit: contain;">
                       {% else %}
@@ -2612,8 +2610,8 @@
                       {% endif %}
                     </div>
                     <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.team2_name | default: 'TAMPA BAY' }}</div>
-                    {% if block.settings.result == 'win' and block.settings.spread_team == 'team2' %}
-                      <div style="font-size: 1rem; font-weight: 700; color: #22c55e; margin-top: 0.5rem;">{{ block.settings.spread_value | default: '-3.5' }}</div>
+                    {% if block.settings.spread_team == 'team2' %}
+                      <div style="font-size: 1rem; font-weight: 700; color: {{ units_color }}; margin-top: 0.5rem;">{{ block.settings.spread_value | default: '-3.5' }}</div>
                     {% endif %}
                   </div>
                 </div>
@@ -2635,15 +2633,13 @@
 
                   <div style="text-align: center;">
                     <div style="font-size: 1.5rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
-                    {% if block.settings.result == 'win' %}
-                      <div style="margin-top: 0.75rem;">
-                        <div style="font-size: 1rem; font-weight: 700; color: #22c55e;">{{ block.settings.over_under_type | default: 'OVER' | upcase }}</div>
-                        <div style="font-size: 1.25rem; font-weight: 700; color: #22c55e; margin-top: 0.25rem;">{{ block.settings.over_under_value | default: '225.5' }}</div>
-                        {% if block.settings.over_under_stat_type != blank %}
-                          <div style="font-size: 0.75rem; color: #22c55e; margin-top: 0.25rem;">{{ block.settings.over_under_stat_type }}</div>
-                        {% endif %}
-                      </div>
-                    {% endif %}
+                    <div style="margin-top: 0.75rem;">
+                      <div style="font-size: 1rem; font-weight: 700; color: {{ units_color }};">{{ block.settings.over_under_type | default: 'OVER' | upcase }}</div>
+                      <div style="font-size: 1.25rem; font-weight: 700; color: {{ units_color }}; margin-top: 0.25rem;">{{ block.settings.over_under_value | default: '225.5' }}</div>
+                      {% if block.settings.over_under_stat_type != blank %}
+                        <div style="font-size: 0.75rem; color: {{ units_color }}; margin-top: 0.25rem;">{{ block.settings.over_under_stat_type }}</div>
+                      {% endif %}
+                    </div>
                   </div>
 
                   <div style="text-align: center; flex: 1;">
