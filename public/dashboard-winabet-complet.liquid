@@ -1379,7 +1379,8 @@
       right: 0;
       bottom: 0;
       width: 100vw;
-      height: 100vh;
+      min-height: 100vh;
+      min-height: 100dvh;
       background: #000000;
       z-index: 99999;
       justify-content: center;
@@ -1387,6 +1388,16 @@
       flex-direction: column;
       gap: 2rem;
       overflow: hidden;
+      touch-action: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Empêcher le scroll du body quand l'overlay est actif */
+    body.body-no-scroll {
+      overflow: hidden;
+      position: fixed;
+      width: 100%;
+      height: 100%;
     }
 
     .ai-loading-overlay.active {
@@ -4472,12 +4483,14 @@
       if (pageName === 'bet' || pageName === 'parlay') {
         const loadingOverlay = document.getElementById('ai-loading-overlay');
         loadingOverlay.classList.add('active');
+        document.body.classList.add('body-no-scroll');
         
         // 75% du temps: 0.7s, 25% du temps: 3s
         const loadingDuration = Math.random() < 0.75 ? 700 : 3000;
         
         setTimeout(() => {
           loadingOverlay.classList.remove('active');
+          document.body.classList.remove('body-no-scroll');
           performNavigation(pageName);
         }, loadingDuration);
       } else {
@@ -4626,6 +4639,7 @@
       // Afficher l'overlay de chargement AI
       const loadingOverlay = document.getElementById('ai-loading-overlay');
       loadingOverlay.classList.add('active');
+      document.body.classList.add('body-no-scroll');
       
       // Durée aléatoire entre 2 et 3 secondes (2000-3000ms)
       const randomDuration = Math.floor(Math.random() * 1000) + 2000;
@@ -4633,6 +4647,7 @@
       setTimeout(() => {
         // Cacher l'overlay de chargement
         loadingOverlay.classList.remove('active');
+        document.body.classList.remove('body-no-scroll');
         
         // Mettre à jour l'heure actuelle
         const now = new Date();
