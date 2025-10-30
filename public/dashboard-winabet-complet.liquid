@@ -798,6 +798,108 @@
 
     .cashout-box-large {
       background: rgba(22, 163, 74, 0.15);
+    }
+
+    /* Parlay Leg Styles */
+    .parlay-legs-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .parlay-leg-item {
+      background: rgba(22, 163, 74, 0.1);
+      border: 2px solid #16a34a;
+      border-radius: 0.75rem;
+      padding: 1rem 1.5rem;
+      position: relative;
+    }
+
+    .parlay-leg-header {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #16a34a;
+      margin-bottom: 0.75rem;
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+
+    .parlay-leg-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .parlay-leg-teams {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .parlay-leg-team {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .parlay-leg-logo {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+      object-fit: contain;
+      background: #ffffff;
+      padding: 0.25rem;
+      border: 2px solid transparent;
+    }
+
+    .parlay-leg-team-name {
+      font-weight: 700;
+      font-size: 1.125rem;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    .parlay-leg-vs {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: #ffffff;
+      background: #16a34a;
+      padding: 0.25rem 0.75rem;
+      border-radius: 0.375rem;
+    }
+
+    .parlay-leg-info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    .parlay-leg-time {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .parlay-leg-bet-type {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #16a34a;
+      background: rgba(22, 163, 74, 0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+    }
+
+    .parlay-leg-separator {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #16a34a, transparent);
+      margin: 0.5rem 0;
       border: 3px solid #16a34a;
       border-radius: 1rem;
       padding: 2.5rem 4rem;
@@ -1929,50 +2031,144 @@
         {% if parlay_cards.size > 0 %}
           {% for block in parlay_cards %}
             {% if block.settings.show_card and block.settings.send_to_history != true %}
-              <div class="parlay-card" {{ block.shopify_attributes }}>
-                <div class="parlay-header">
-                  <h2 class="parlay-title">{{ block.settings.parlay_title | default: 'Parlay Triple Gagnant' }}</h2>
+              
+              <!-- AI Counter Above -->
+              <div class="ai-counter-above">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 20h9"></path>
+                  <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                </svg>
+                <span><span>{{ block.settings.ai_data_count | default: 5214 }}</span> DONNÉES ANALYSÉES</span>
+              </div>
+
+              <div class="bet-card" {{ block.shopify_attributes }}>
+                <!-- Confidence Badge -->
+                <div class="confidence-badge">
+                  <div class="confidence-left">
+                    <span class="confidence-percentage">{{ block.settings.win_percentage | default: 78 }}%</span>
+                    <span class="confidence-text">CHANCE DE GAGNER</span>
+                  </div>
+                  <button 
+                    class="btn-analysis"
+                    data-sport-type="parlay"
+                    data-ai-data-count="{{ block.settings.ai_data_count | default: 5214 }}"
+                    data-win-percentage="{{ block.settings.win_percentage | default: 78 }}"
+                    data-team1="{{ block.settings.leg_1_team1_name | default: 'ÉQUIPE 1' }}"
+                    data-team2="{{ block.settings.leg_1_team2_name | default: 'ÉQUIPE 2' }}"
+                    data-auto-increment="{{ block.settings.auto_increment_enabled | default: false }}"
+                    data-increment-interval="{{ block.settings.auto_increment_interval | default: '5' }}"
+                    data-increment-amount="{{ block.settings.auto_increment_amount | default: '5' }}"
+                  >
+                    VOIR<br>ANALYSE IA
+                  </button>
                 </div>
-                <div class="parlay-stats">
-                  <div class="parlay-stat">
-                    <span class="parlay-stat-label">DONNÉES IA</span>
-                    <span class="parlay-stat-value">{{ block.settings.ai_data_count | default: 5214 }}</span>
+
+                <div class="bet-card-content">
+                  <!-- Multiplier Section -->
+                  <div class="multiplier-section-label">MULTIPLICATEUR</div>
+                  <button class="multiplier-button">x{{ block.settings.multiplier | default: '5.24' }}</button>
+
+                  <!-- Parlay Legs List -->
+                  <div class="bet-section-label" style="margin-top: 1.5rem;">LEGS DU PARLAY</div>
+                  <div class="parlay-legs-list">
+                    
+                    {% for i in (1..10) %}
+                      {% assign leg_enabled_key = 'leg_' | append: i | append: '_enabled' %}
+                      {% assign leg_enabled = block.settings[leg_enabled_key] %}
+                      
+                      {% if leg_enabled %}
+                        {% assign sport_key = 'leg_' | append: i | append: '_sport_type' %}
+                        {% assign team1_name_key = 'leg_' | append: i | append: '_team1_name' %}
+                        {% assign team1_logo_key = 'leg_' | append: i | append: '_team1_logo' %}
+                        {% assign team2_name_key = 'leg_' | append: i | append: '_team2_name' %}
+                        {% assign team2_logo_key = 'leg_' | append: i | append: '_team2_logo' %}
+                        {% assign match_time_key = 'leg_' | append: i | append: '_match_time' %}
+                        {% assign bet_type_key = 'leg_' | append: i | append: '_bet_type' %}
+                        {% assign spread_value_key = 'leg_' | append: i | append: '_spread_value' %}
+                        {% assign spread_team_key = 'leg_' | append: i | append: '_spread_team' %}
+                        {% assign ou_type_key = 'leg_' | append: i | append: '_over_under_type' %}
+                        {% assign ou_value_key = 'leg_' | append: i | append: '_over_under_value' %}
+                        {% assign ou_stat_key = 'leg_' | append: i | append: '_over_under_stat_type' %}
+                        
+                        <div class="parlay-leg-item">
+                          <div class="parlay-leg-header">LEG #{{ i }} - {% if block.settings[sport_key] == 'nhl' %}🏒 NHL{% else %}🏈 NFL{% endif %}</div>
+                          
+                          <div class="parlay-leg-content">
+                            <div class="parlay-leg-teams">
+                              <div class="parlay-leg-team">
+                                {% if block.settings[team1_logo_key] %}
+                                  <img src="{{ block.settings[team1_logo_key] | img_url: '200x200' }}" alt="{{ block.settings[team1_name_key] }}" class="parlay-leg-logo">
+                                {% endif %}
+                                <div class="parlay-leg-team-name">{{ block.settings[team1_name_key] | default: 'ÉQUIPE 1' }}</div>
+                              </div>
+                              
+                              <div class="parlay-leg-vs">VS</div>
+                              
+                              <div class="parlay-leg-team">
+                                {% if block.settings[team2_logo_key] %}
+                                  <img src="{{ block.settings[team2_logo_key] | img_url: '200x200' }}" alt="{{ block.settings[team2_name_key] }}" class="parlay-leg-logo">
+                                {% endif %}
+                                <div class="parlay-leg-team-name">{{ block.settings[team2_name_key] | default: 'ÉQUIPE 2' }}</div>
+                              </div>
+                            </div>
+                            
+                            <div class="parlay-leg-info">
+                              <div class="parlay-leg-time">⏰ {{ block.settings[match_time_key] | default: '7:00 PM' }}</div>
+                              
+                              {% if block.settings[bet_type_key] == 'moneyline' %}
+                                <div class="parlay-leg-bet-type">💰 MONEYLINE</div>
+                              {% elsif block.settings[bet_type_key] == 'spread' %}
+                                <div class="parlay-leg-bet-type">
+                                  📊 SPREAD {{ block.settings[spread_value_key] | default: '-3.5' }} 
+                                  ({% if block.settings[spread_team_key] == 'team1' %}{{ block.settings[team1_name_key] }}{% else %}{{ block.settings[team2_name_key] }}{% endif %})
+                                </div>
+                              {% elsif block.settings[bet_type_key] == 'over_under' %}
+                                <div class="parlay-leg-bet-type">
+                                  {% if block.settings[ou_type_key] == 'over' %}📈 OVER{% else %}📉 UNDER{% endif %} 
+                                  {{ block.settings[ou_value_key] | default: '225.5' }}
+                                  {% if block.settings[ou_stat_key] != blank %} {{ block.settings[ou_stat_key] }}{% endif %}
+                                </div>
+                              {% endif %}
+                            </div>
+                          </div>
+                          
+                          {% unless forloop.last %}
+                            <div class="parlay-leg-separator"></div>
+                          {% endunless %}
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                    
                   </div>
-                  <div class="parlay-stat">
-                    <span class="parlay-stat-label">CONFIANCE IA</span>
-                    <span class="parlay-stat-value">{{ block.settings.win_percentage | default: 78 }}%</span>
-                  </div>
-                  <div class="parlay-stat">
-                    <span class="parlay-stat-label">MULTIPLICATEUR</span>
-                    <span class="parlay-multiplier">x{{ block.settings.multiplier | default: '5.24' }}</span>
-                  </div>
-                  <div class="parlay-stat">
-                    <span class="parlay-stat-label">PARIS</span>
-                    <span class="parlay-stat-value">{{ block.settings.num_bets | default: 3 }}</span>
+
+                  <!-- Units Section -->
+                  <div class="bet-section-label">MISE</div>
+                  <button class="units-button">{{ block.settings.bet_units | default: 1 }} UNITS</button>
+
+                  <!-- Gain Section -->
+                  <div class="gain-section">
+                    <div class="gain-section-label">VOTRE GAIN</div>
+                    <div class="gain-grid">
+                      <div class="bet-modify-box">
+                        <button class="modify-btn" onclick="openModifyDialog(this, {{ block.settings.multiplier | default: 5.24 }})">MODIFIER</button>
+                        <div class="bet-amount-small">
+                          <div class="bet-amount-value-small">100$</div>
+                        </div>
+                      </div>
+                      <div class="cashout-box cashout-box-large">
+                        <div class="cashout-label">PAYOUT</div>
+                        <div class="cashout-amount">${{ 100 | times: block.settings.multiplier | default: 5.24 | round: 2 }}</div>
+                        <div class="cashout-profit">Profit: ${{ 100 | times: block.settings.multiplier | default: 5.24 | minus: 100 | round: 2 }}</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div class="parlay-content">
-                  <div class="parlay-bets-list">
-                    <div class="parlay-bet-item">
-                      <div class="parlay-bet-number">PARI #1</div>
-                      <div class="parlay-bet-details">{{ block.settings.bet1_details | default: 'VEGAS vs TAMPA BAY - VEGAS gagne (x1.74)' }}</div>
-                    </div>
-                    <div class="parlay-bet-item">
-                      <div class="parlay-bet-number">PARI #2</div>
-                      <div class="parlay-bet-details">{{ block.settings.bet2_details | default: 'LAKERS vs CELTICS - LAKERS gagne (x1.92)' }}</div>
-                    </div>
-                    <div class="parlay-bet-item">
-                      <div class="parlay-bet-number">PARI #3</div>
-                      <div class="parlay-bet-details">{{ block.settings.bet3_details | default: 'WARRIORS vs NETS - WARRIORS gagne (x1.56)' }}</div>
-                    </div>
-                  </div>
-                  <div class="parlay-explanation">
-                    {{ block.settings.ai_explanation | default: "Ce parlay combine 3 paris soigneusement sélectionnés par notre IA. Chaque pari a été analysé individuellement avec une haute confiance, et leur combinaison offre un excellent rapport risque/récompense." }}
-                  </div>
-                  <div class="parlay-gain-section">
-                    <div class="parlay-gain-label">GAIN POTENTIEL AVEC 100$</div>
-                    <div class="parlay-gain-value">${{ 100 | times: block.settings.multiplier | default: 5.24 | round: 2 }}</div>
-                  </div>
+
+                <!-- Best Odds Footer -->
+                <div class="best-odds-footer">
+                  <div class="best-odds-label">MEILLEUR ODDS</div>
+                  <div class="bookmaker-badge">{{ block.settings.best_bookmaker | default: 'DRAFTKINGS' }}</div>
+                  <div class="odds-value">+{{ block.settings.best_odds | default: '495' }}</div>
                 </div>
               </div>
             {% endif %}
@@ -3914,13 +4110,11 @@
     },
     {
       "type": "parlay_card",
-      "name": "🎲 Carte Parlay",
+      "name": "🎲 Carte Parlay Avancée",
       "settings": [
         {
-          "type": "text",
-          "id": "parlay_title",
-          "label": "Titre du Parlay",
-          "default": "Parlay Triple Gagnant"
+          "type": "header",
+          "content": "📊 Paramètres Généraux du Parlay"
         },
         {
           "type": "number",
@@ -3945,35 +4139,410 @@
           "info": "Cote totale du parlay (ex: 5.24)"
         },
         {
-          "type": "number",
-          "id": "num_bets",
-          "label": "Nombre de paris dans le parlay",
-          "default": 3,
-          "info": "Nombre de paris combinés (2, 3, 4, etc.)"
+          "type": "text",
+          "id": "bet_units",
+          "label": "Unités pariées",
+          "default": "1"
         },
         {
-          "type": "textarea",
-          "id": "bet1_details",
-          "label": "Détails Pari #1",
-          "default": "VEGAS vs TAMPA BAY - VEGAS gagne (x1.74)"
+          "type": "text",
+          "id": "best_bookmaker",
+          "label": "Meilleur bookmaker",
+          "default": "DRAFTKINGS"
         },
         {
-          "type": "textarea",
-          "id": "bet2_details",
-          "label": "Détails Pari #2",
-          "default": "LAKERS vs CELTICS - LAKERS gagne (x1.92)"
+          "type": "text",
+          "id": "best_odds",
+          "label": "Meilleures cotes",
+          "default": "495",
+          "info": "Sans le +, ex: 495"
         },
         {
-          "type": "textarea",
-          "id": "bet3_details",
-          "label": "Détails Pari #3",
-          "default": "WARRIORS vs NETS - WARRIORS gagne (x1.56)"
+          "type": "header",
+          "content": "🤖 Auto-Incrémentation IA"
         },
         {
-          "type": "textarea",
-          "id": "ai_explanation",
-          "label": "Explication de l'IA",
-          "default": "Ce parlay combine 3 paris soigneusement sélectionnés par notre IA. Chaque pari a été analysé individuellement avec une haute confiance, et leur combinaison offre un excellent rapport risque/récompense."
+          "type": "checkbox",
+          "id": "auto_increment_enabled",
+          "label": "✅ Activer l'auto-incrémentation",
+          "default": false,
+          "info": "Active l'incrémentation automatique du compteur de données"
+        },
+        {
+          "type": "select",
+          "id": "auto_increment_interval",
+          "label": "⏱️ Intervalle d'incrémentation",
+          "options": [
+            { "value": "0.1", "label": "⚡ 6 secondes" },
+            { "value": "0.5", "label": "🚀 30 secondes" },
+            { "value": "1", "label": "⏰ 1 minute" },
+            { "value": "2", "label": "🕐 2 minutes" },
+            { "value": "5", "label": "🕔 5 minutes" },
+            { "value": "10", "label": "🕙 10 minutes" }
+          ],
+          "default": "5",
+          "info": "Fréquence d'ajout des données (en minutes)"
+        },
+        {
+          "type": "select",
+          "id": "auto_increment_amount",
+          "label": "➕ Montant à ajouter",
+          "options": [
+            { "value": "1", "label": "+1 donnée" },
+            { "value": "5", "label": "+5 données" },
+            { "value": "10", "label": "+10 données" },
+            { "value": "25", "label": "+25 données" },
+            { "value": "50", "label": "+50 données" }
+          ],
+          "default": "5",
+          "info": "Nombre de données à ajouter à chaque intervalle"
+        },
+        {
+          "type": "header",
+          "content": "🎯 LEG #1"
+        },
+        {
+          "type": "checkbox",
+          "id": "leg_1_enabled",
+          "label": "Activer Leg #1",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "leg_1_sport_type",
+          "label": "Sport",
+          "options": [
+            { "value": "nhl", "label": "🏒 NHL" },
+            { "value": "nfl", "label": "🏈 NFL" }
+          ],
+          "default": "nhl"
+        },
+        {
+          "type": "text",
+          "id": "leg_1_team1_name",
+          "label": "Équipe 1",
+          "default": "VEGAS"
+        },
+        {
+          "type": "image_picker",
+          "id": "leg_1_team1_logo",
+          "label": "Logo Équipe 1"
+        },
+        {
+          "type": "text",
+          "id": "leg_1_team2_name",
+          "label": "Équipe 2",
+          "default": "TAMPA BAY"
+        },
+        {
+          "type": "image_picker",
+          "id": "leg_1_team2_logo",
+          "label": "Logo Équipe 2"
+        },
+        {
+          "type": "text",
+          "id": "leg_1_match_time",
+          "label": "Heure du match",
+          "default": "7:00 PM"
+        },
+        {
+          "type": "select",
+          "id": "leg_1_bet_type",
+          "label": "Type de pari",
+          "options": [
+            { "value": "moneyline", "label": "💰 Moneyline" },
+            { "value": "spread", "label": "📊 Spread" },
+            { "value": "over_under", "label": "📈📉 Over/Under" }
+          ],
+          "default": "moneyline"
+        },
+        {
+          "type": "text",
+          "id": "leg_1_spread_value",
+          "label": "Valeur Spread (si applicable)",
+          "default": "-3.5",
+          "info": "Ex: -3.5 ou +7.5"
+        },
+        {
+          "type": "select",
+          "id": "leg_1_spread_team",
+          "label": "Équipe avec Spread (si applicable)",
+          "options": [
+            { "value": "team1", "label": "Équipe 1" },
+            { "value": "team2", "label": "Équipe 2" }
+          ],
+          "default": "team1"
+        },
+        {
+          "type": "select",
+          "id": "leg_1_over_under_type",
+          "label": "Over/Under Type (si applicable)",
+          "options": [
+            { "value": "over", "label": "📈 OVER" },
+            { "value": "under", "label": "📉 UNDER" }
+          ],
+          "default": "over"
+        },
+        {
+          "type": "text",
+          "id": "leg_1_over_under_value",
+          "label": "Valeur Over/Under (si applicable)",
+          "default": "225.5"
+        },
+        {
+          "type": "text",
+          "id": "leg_1_over_under_stat_type",
+          "label": "Type de stat O/U (optionnel)",
+          "default": "points totaux",
+          "info": "Ex: points totaux, yards, buts, etc."
+        },
+        {
+          "type": "header",
+          "content": "🎯 LEG #2"
+        },
+        {
+          "type": "checkbox",
+          "id": "leg_2_enabled",
+          "label": "Activer Leg #2",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "leg_2_sport_type",
+          "label": "Sport",
+          "options": [
+            { "value": "nhl", "label": "🏒 NHL" },
+            { "value": "nfl", "label": "🏈 NFL" }
+          ],
+          "default": "nhl"
+        },
+        {
+          "type": "text",
+          "id": "leg_2_team1_name",
+          "label": "Équipe 1",
+          "default": "ST. LOUIS"
+        },
+        {
+          "type": "image_picker",
+          "id": "leg_2_team1_logo",
+          "label": "Logo Équipe 1"
+        },
+        {
+          "type": "text",
+          "id": "leg_2_team2_name",
+          "label": "Équipe 2",
+          "default": "PITTSBURGH"
+        },
+        {
+          "type": "image_picker",
+          "id": "leg_2_team2_logo",
+          "label": "Logo Équipe 2"
+        },
+        {
+          "type": "text",
+          "id": "leg_2_match_time",
+          "label": "Heure du match",
+          "default": "8:00 PM"
+        },
+        {
+          "type": "select",
+          "id": "leg_2_bet_type",
+          "label": "Type de pari",
+          "options": [
+            { "value": "moneyline", "label": "💰 Moneyline" },
+            { "value": "spread", "label": "📊 Spread" },
+            { "value": "over_under", "label": "📈📉 Over/Under" }
+          ],
+          "default": "spread"
+        },
+        {
+          "type": "text",
+          "id": "leg_2_spread_value",
+          "label": "Valeur Spread (si applicable)",
+          "default": "-3.5"
+        },
+        {
+          "type": "select",
+          "id": "leg_2_spread_team",
+          "label": "Équipe avec Spread (si applicable)",
+          "options": [
+            { "value": "team1", "label": "Équipe 1" },
+            { "value": "team2", "label": "Équipe 2" }
+          ],
+          "default": "team1"
+        },
+        {
+          "type": "select",
+          "id": "leg_2_over_under_type",
+          "label": "Over/Under Type (si applicable)",
+          "options": [
+            { "value": "over", "label": "📈 OVER" },
+            { "value": "under", "label": "📉 UNDER" }
+          ],
+          "default": "over"
+        },
+        {
+          "type": "text",
+          "id": "leg_2_over_under_value",
+          "label": "Valeur Over/Under (si applicable)",
+          "default": "225.5"
+        },
+        {
+          "type": "text",
+          "id": "leg_2_over_under_stat_type",
+          "label": "Type de stat O/U (optionnel)",
+          "default": "points totaux"
+        },
+        {
+          "type": "header",
+          "content": "🎯 LEG #3"
+        },
+        {
+          "type": "checkbox",
+          "id": "leg_3_enabled",
+          "label": "Activer Leg #3",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "leg_3_sport_type",
+          "label": "Sport",
+          "options": [
+            { "value": "nhl", "label": "🏒 NHL" },
+            { "value": "nfl", "label": "🏈 NFL" }
+          ],
+          "default": "nfl"
+        },
+        {
+          "type": "text",
+          "id": "leg_3_team1_name",
+          "label": "Équipe 1",
+          "default": "WASHINGTON"
+        },
+        {
+          "type": "image_picker",
+          "id": "leg_3_team1_logo",
+          "label": "Logo Équipe 1"
+        },
+        {
+          "type": "text",
+          "id": "leg_3_team2_name",
+          "label": "Équipe 2",
+          "default": "KANSAS CITY"
+        },
+        {
+          "type": "image_picker",
+          "id": "leg_3_team2_logo",
+          "label": "Logo Équipe 2"
+        },
+        {
+          "type": "text",
+          "id": "leg_3_match_time",
+          "label": "Heure du match",
+          "default": "9:00 PM"
+        },
+        {
+          "type": "select",
+          "id": "leg_3_bet_type",
+          "label": "Type de pari",
+          "options": [
+            { "value": "moneyline", "label": "💰 Moneyline" },
+            { "value": "spread", "label": "📊 Spread" },
+            { "value": "over_under", "label": "📈📉 Over/Under" }
+          ],
+          "default": "over_under"
+        },
+        {
+          "type": "text",
+          "id": "leg_3_spread_value",
+          "label": "Valeur Spread (si applicable)",
+          "default": "-3.5"
+        },
+        {
+          "type": "select",
+          "id": "leg_3_spread_team",
+          "label": "Équipe avec Spread (si applicable)",
+          "options": [
+            { "value": "team1", "label": "Équipe 1" },
+            { "value": "team2", "label": "Équipe 2" }
+          ],
+          "default": "team1"
+        },
+        {
+          "type": "select",
+          "id": "leg_3_over_under_type",
+          "label": "Over/Under Type (si applicable)",
+          "options": [
+            { "value": "over", "label": "📈 OVER" },
+            { "value": "under", "label": "📉 UNDER" }
+          ],
+          "default": "under"
+        },
+        {
+          "type": "text",
+          "id": "leg_3_over_under_value",
+          "label": "Valeur Over/Under (si applicable)",
+          "default": "225.5"
+        },
+        {
+          "type": "text",
+          "id": "leg_3_over_under_stat_type",
+          "label": "Type de stat O/U (optionnel)",
+          "default": "points totaux"
+        },
+        {
+          "type": "header",
+          "content": "🎯 LEG #4-10 (Répéter structure identique)"
+        },
+        {
+          "type": "paragraph",
+          "content": "Les legs 4 à 10 suivent la même structure que les legs 1-3. Activez-les selon vos besoins."
+        },
+        {
+          "type": "checkbox",
+          "id": "leg_4_enabled",
+          "label": "Activer Leg #4",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "leg_5_enabled",
+          "label": "Activer Leg #5",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "leg_6_enabled",
+          "label": "Activer Leg #6",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "leg_7_enabled",
+          "label": "Activer Leg #7",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "leg_8_enabled",
+          "label": "Activer Leg #8",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "leg_9_enabled",
+          "label": "Activer Leg #9",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "leg_10_enabled",
+          "label": "Activer Leg #10",
+          "default": false
+        },
+        {
+          "type": "header",
+          "content": "📋 Gestion"
         },
         {
           "type": "checkbox",
@@ -3987,21 +4556,11 @@
           "id": "result",
           "label": "🎯 Résultat du parlay",
           "options": [
-            {
-              "value": "pending",
-              "label": "En attente"
-            },
-            {
-              "value": "win",
-              "label": "✅ Gagné (Win)"
-            },
-            {
-              "value": "loose",
-              "label": "❌ Perdu (Loose)"
-            }
+            { "value": "pending", "label": "En attente" },
+            { "value": "win", "label": "✅ Gagné (Win)" },
+            { "value": "loose", "label": "❌ Perdu (Loose)" }
           ],
-          "default": "pending",
-          "info": "Sélectionnez le résultat du parlay"
+          "default": "pending"
         },
         {
           "type": "checkbox",
