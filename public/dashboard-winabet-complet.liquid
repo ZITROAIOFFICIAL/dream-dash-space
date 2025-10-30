@@ -4357,6 +4357,16 @@
         event.preventDefault();
       }
 
+      // Rediriger vers des URLs externes pour certaines pages
+      if (pageName === 'boutique') {
+        window.location.href = 'https://winabet.ai';
+        return;
+      }
+      if (pageName === 'account') {
+        window.location.href = 'https://winabet.ai/apps/memberships';
+        return;
+      }
+
       // Afficher le chargement AI pour les pages bet et parlay
       if (pageName === 'bet' || pageName === 'parlay') {
         const loadingOverlay = document.getElementById('ai-loading-overlay');
