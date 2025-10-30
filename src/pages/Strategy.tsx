@@ -1,8 +1,11 @@
 import DashboardLayout from "@/components/DashboardLayout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Target, TrendingUp, Shield, BarChart3 } from "lucide-react";
+import { Target, TrendingUp, Shield, BarChart3, BookOpen } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Strategy = () => {
+  const navigate = useNavigate();
+  
   const strategies = [
     {
       title: "Analyse des Statistiques",
@@ -35,6 +38,25 @@ const Strategy = () => {
             Découvrez notre méthodologie pour maximiser vos gains
           </p>
         </div>
+
+        <Card 
+          className="hover:shadow-lg transition-all cursor-pointer border-primary/20 bg-primary/5"
+          onClick={() => navigate('/guide-paris-sportifs')}
+        >
+          <CardHeader>
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-primary/10 rounded-lg">
+                <BookOpen className="h-6 w-6 text-primary" />
+              </div>
+              <CardTitle>Guide des paris sportifs</CardTitle>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <CardDescription className="text-base">
+              Comprends les bases du pari sportif — cotes, types de mises, logique du marché — et découvre comment Winabet.ai t'aide à parier plus intelligemment, sans effort.
+            </CardDescription>
+          </CardContent>
+        </Card>
 
         <div className="grid gap-6 md:grid-cols-2">
           {strategies.map((strategy, index) => {
