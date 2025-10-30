@@ -2039,8 +2039,7 @@
         {% if parlay_cards.size > 0 %}
           {% for block in parlay_cards %}
             {% if block.settings.show_card and block.settings.send_to_history != true %}
-              
-              <!-- AI Counter Above -->
+              <!-- AI Data Counter Above Card -->
               <div class="ai-counter-above">
                 <div class="ai-spinner">
                   <span class="ai-badge">IA</span>
@@ -2049,124 +2048,142 @@
               </div>
 
               <div class="bet-card" {{ block.shopify_attributes }}>
-                <!-- Confidence Badge -->
+                <!-- Confidence Badge - Bande verte 92% -->
                 <div class="confidence-badge">
-                  <div class="confidence-left">
-                    <span class="confidence-percentage">{{ block.settings.win_percentage | default: 78 }}%</span>
-                    <span class="confidence-text">CHANCE DE GAGNER</span>
-                  </div>
+                  <span class="confidence-percentage">{{ block.settings.win_percentage | default: 78 }}%</span>
+                  <span class="confidence-text">DE CHANCE DE GAGNER SELON NOTRE IA</span>
                   <button 
-                    class="btn-analysis"
+                    class="btn-analysis" 
                     onclick="openAnalysisDialog(this)"
-                    data-sport-type="parlay"
-                    data-ai-data-count="{{ block.settings.ai_data_count | default: 5214 }}"
                     data-win-percentage="{{ block.settings.win_percentage | default: 78 }}"
+                    data-ai-data-count="{{ block.settings.ai_data_count | default: 5214 }}"
+                    data-sport-type="parlay"
                     data-team1="{{ block.settings.leg_1_team1_name | default: 'ÉQUIPE 1' }}"
                     data-team2="{{ block.settings.leg_1_team2_name | default: 'ÉQUIPE 2' }}"
-                    data-auto-increment="{{ block.settings.auto_increment_enabled | default: false }}"
-                    data-increment-interval="{{ block.settings.auto_increment_interval | default: '5' }}"
-                    data-increment-amount="{{ block.settings.auto_increment_amount | default: '5' }}"
+                    data-auto-increment="{{ block.settings.auto_increment_enabled }}"
+                    data-increment-interval="{{ block.settings.auto_increment_interval | default: 5 }}"
+                    data-increment-amount="{{ block.settings.auto_increment_amount | default: 5 }}"
                   >
-                    VOIR<br>ANALYSE IA
+                    VOIR<br>ANALYSE<br>IA
                   </button>
                 </div>
 
                 <div class="bet-card-content">
-                  <!-- Multiplier Section -->
-                  <div class="multiplier-section-label">MULTIPLICATEUR</div>
+                  <!-- Multiplicateur de Mise -->
+                  <div class="multiplier-section-label">MULTIPLICATEUR DE MISE</div>
                   <button class="multiplier-button">x{{ block.settings.multiplier | default: '5.24' }}</button>
 
-                  <!-- Parlay Legs List -->
-                  <div class="bet-section-label" style="margin-top: 1.5rem;">LEGS DU PARLAY</div>
-                  <div class="parlay-legs-list">
+                  <!-- Parier Sur -->
+                  <div class="bet-section-label" style="margin-top: 1.5rem;">PARIER SUR</div>
+                  <div class="match-info-new">
+                    {% assign bet_type = block.settings.bet_type | default: 'moneyline' %}
                     
-                    {% for i in (1..10) %}
-                      {% assign leg_enabled_key = 'leg_' | append: i | append: '_enabled' %}
-                      {% assign leg_enabled = block.settings[leg_enabled_key] %}
-                      
-                      {% if leg_enabled %}
-                        {% assign sport_key = 'leg_' | append: i | append: '_sport_type' %}
-                        {% assign team1_name_key = 'leg_' | append: i | append: '_team1_name' %}
-                        {% assign team1_logo_key = 'leg_' | append: i | append: '_team1_logo' %}
-                        {% assign team2_name_key = 'leg_' | append: i | append: '_team2_name' %}
-                        {% assign team2_logo_key = 'leg_' | append: i | append: '_team2_logo' %}
-                        {% assign match_time_key = 'leg_' | append: i | append: '_match_time' %}
-                        {% assign bet_type_key = 'leg_' | append: i | append: '_bet_type' %}
-                        {% assign spread_value_key = 'leg_' | append: i | append: '_spread_value' %}
-                        {% assign spread_team_key = 'leg_' | append: i | append: '_spread_team' %}
-                        {% assign ou_type_key = 'leg_' | append: i | append: '_over_under_type' %}
-                        {% assign ou_value_key = 'leg_' | append: i | append: '_over_under_value' %}
-                        {% assign ou_stat_key = 'leg_' | append: i | append: '_over_under_stat_type' %}
-                        
-                        <div class="parlay-leg-item">
-                          <div class="parlay-leg-header">LEG #{{ i }} - {% if block.settings[sport_key] == 'nhl' %}🏒 NHL{% else %}🏈 NFL{% endif %}</div>
-                          
-                          <div class="parlay-leg-content">
-                            <div class="parlay-leg-teams">
-                              <div class="parlay-leg-team">
-                                {% if block.settings[team1_logo_key] %}
-                                  <img src="{{ block.settings[team1_logo_key] | img_url: '200x200' }}" alt="{{ block.settings[team1_name_key] }}" class="parlay-leg-logo">
-                                {% endif %}
-                                <div class="parlay-leg-team-name">{{ block.settings[team1_name_key] | default: 'ÉQUIPE 1' }}</div>
-                              </div>
-                              
-                              <div class="parlay-leg-vs">VS</div>
-                              
-                              <div class="parlay-leg-team">
-                                {% if block.settings[team2_logo_key] %}
-                                  <img src="{{ block.settings[team2_logo_key] | img_url: '200x200' }}" alt="{{ block.settings[team2_name_key] }}" class="parlay-leg-logo">
-                                {% endif %}
-                                <div class="parlay-leg-team-name">{{ block.settings[team2_name_key] | default: 'ÉQUIPE 2' }}</div>
-                              </div>
-                            </div>
-                            
-                            <div class="parlay-leg-info">
-                              <div class="parlay-leg-time">⏰ {{ block.settings[match_time_key] | default: '7:00 PM' }}</div>
-                              
-                              {% if block.settings[bet_type_key] == 'moneyline' %}
-                                <div class="parlay-leg-bet-type">💰 MONEYLINE</div>
-                              {% elsif block.settings[bet_type_key] == 'spread' %}
-                                <div class="parlay-leg-bet-type">
-                                  📊 SPREAD {{ block.settings[spread_value_key] | default: '-3.5' }} 
-                                  ({% if block.settings[spread_team_key] == 'team1' %}{{ block.settings[team1_name_key] }}{% else %}{{ block.settings[team2_name_key] }}{% endif %})
-                                </div>
-                              {% elsif block.settings[bet_type_key] == 'over_under' %}
-                                <div class="parlay-leg-bet-type">
-                                  {% if block.settings[ou_type_key] == 'over' %}📈 OVER{% else %}📉 UNDER{% endif %} 
-                                  {{ block.settings[ou_value_key] | default: '225.5' }}
-                                  {% if block.settings[ou_stat_key] != blank %} {{ block.settings[ou_stat_key] }}{% endif %}
-                                </div>
-                              {% endif %}
-                            </div>
-                          </div>
-                          
-                          {% unless forloop.last %}
-                            <div class="parlay-leg-separator"></div>
-                          {% endunless %}
+                    {% if bet_type == 'moneyline' %}
+                      <!-- MONEYLINE -->
+                      <div class="match-info-header">MONEYLINE</div>
+                      <div class="match-info-content">
+                        <div class="team-side">
+                          {% if block.settings.team1_logo %}
+                            <img src="{{ block.settings.team1_logo | image_url: width: 200 }}" alt="{{ block.settings.team1_name }}" class="team-logo">
+                          {% else %}
+                            <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ block.settings.team1_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.team1_name | default: 'ÉQUIPE 1' }}</div>
                         </div>
-                      {% endif %}
-                    {% endfor %}
-                    
-                  </div>
 
-                  <!-- Units Section -->
-                  <div class="bet-section-label">MISE</div>
-                  <button class="units-button">{{ block.settings.bet_units | default: 1 }} UNITS</button>
+                        <div class="match-center">
+                          <div class="match-vs-new">VS</div>
+                          <div class="match-time-new">⏰ {{ block.settings.match_time | default: '7:00 PM' }}</div>
+                        </div>
+
+                        <div class="team-side">
+                          {% if block.settings.team2_logo %}
+                            <img src="{{ block.settings.team2_logo | image_url: width: 200 }}" alt="{{ block.settings.team2_name }}" class="team-logo">
+                          {% else %}
+                            <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ block.settings.team2_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.team2_name | default: 'ÉQUIPE 2' }}</div>
+                        </div>
+                      </div>
+                    
+                    {% elsif bet_type == 'spread' %}
+                      <!-- SPREAD -->
+                      <div class="match-info-header">
+                        SPREAD {{ block.settings.spread_value | default: '-3.5' }} 
+                        ({% if block.settings.spread_team == 'team1' %}{{ block.settings.team1_name | default: 'ÉQUIPE 1' }}{% else %}{{ block.settings.team2_name | default: 'ÉQUIPE 2' }}{% endif %})
+                      </div>
+                      <div class="match-info-content">
+                        <div class="team-side">
+                          {% if block.settings.team1_logo %}
+                            <img src="{{ block.settings.team1_logo | image_url: width: 200 }}" alt="{{ block.settings.team1_name }}" class="team-logo">
+                          {% else %}
+                            <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ block.settings.team1_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.team1_name | default: 'ÉQUIPE 1' }}</div>
+                        </div>
+
+                        <div class="match-center">
+                          <div class="match-vs-new">VS</div>
+                          <div class="match-time-new">⏰ {{ block.settings.match_time | default: '7:00 PM' }}</div>
+                        </div>
+
+                        <div class="team-side">
+                          {% if block.settings.team2_logo %}
+                            <img src="{{ block.settings.team2_logo | image_url: width: 200 }}" alt="{{ block.settings.team2_name }}" class="team-logo">
+                          {% else %}
+                            <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ block.settings.team2_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.team2_name | default: 'ÉQUIPE 2' }}</div>
+                        </div>
+                      </div>
+                    
+                    {% elsif bet_type == 'over_under' %}
+                      <!-- OVER/UNDER -->
+                      <div class="match-info-header">
+                        {% if block.settings.over_under_type == 'over' %}OVER{% else %}UNDER{% endif %} 
+                        {{ block.settings.over_under_value | default: '225.5' }}
+                        {% if block.settings.over_under_stat_type != blank %} {{ block.settings.over_under_stat_type }}{% endif %}
+                      </div>
+                      <div class="match-info-content">
+                        <div class="team-side">
+                          {% if block.settings.team1_logo %}
+                            <img src="{{ block.settings.team1_logo | image_url: width: 200 }}" alt="{{ block.settings.team1_name }}" class="team-logo">
+                          {% else %}
+                            <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ block.settings.team1_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.team1_name | default: 'ÉQUIPE 1' }}</div>
+                        </div>
+
+                        <div class="match-center">
+                          <div class="match-vs-new">VS</div>
+                          <div class="match-time-new">⏰ {{ block.settings.match_time | default: '7:00 PM' }}</div>
+                        </div>
+
+                        <div class="team-side">
+                          {% if block.settings.team2_logo %}
+                            <img src="{{ block.settings.team2_logo | image_url: width: 200 }}" alt="{{ block.settings.team2_name }}" class="team-logo">
+                          {% else %}
+                            <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ block.settings.team2_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.team2_name | default: 'ÉQUIPE 2' }}</div>
+                        </div>
+                      </div>
+                    {% endif %}
+                  </div>
 
                   <!-- Gain Section -->
                   <div class="gain-section">
                     <div class="gain-section-label">VOTRE GAIN</div>
                     <div class="gain-grid">
                       <div class="bet-modify-box">
-                        <button class="modify-btn" onclick="openModifyDialog(this, {{ block.settings.multiplier | default: 5.24 }})">MODIFIER</button>
-                        <div class="bet-amount-small">
-                          <div class="bet-amount-value-small">100$</div>
-                        </div>
+                        <button class="modify-btn" onclick="openBetDialog(this)" data-multiplier="{{ block.settings.multiplier | default: '5.24' }}">Modifier</button>
+                        <div class="bet-amount-small">Votre mise</div>
+                        <div class="bet-amount-value-small">$100</div>
                       </div>
-                      <div class="cashout-box cashout-box-large">
-                        <div class="cashout-label">PAYOUT</div>
+                      <div class="cashout-box-large">
+                        <div class="cashout-label">CASHOUT</div>
                         <div class="cashout-amount">${{ 100 | times: block.settings.multiplier | default: 5.24 | round: 2 }}</div>
-                        <div class="cashout-profit">Profit: ${{ 100 | times: block.settings.multiplier | default: 5.24 | minus: 100 | round: 2 }}</div>
+                        <div class="cashout-profit">+${{ 100 | times: block.settings.multiplier | default: 5.24 | minus: 100 | round: 2 }} bénéfice</div>
                       </div>
                     </div>
                   </div>
