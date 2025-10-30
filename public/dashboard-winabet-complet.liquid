@@ -1395,7 +1395,7 @@
 
     .analysis-subsection {
       background: transparent;
-      border: 2px solid #16a34a;
+      border: none;
       border-radius: 0.75rem;
       padding: 1rem 1rem 1rem 3.5rem;
       margin-bottom: 1rem;
@@ -1409,18 +1409,29 @@
       width: 1.75rem;
       height: 1.75rem;
       background: transparent;
-      border: 2px solid #ffffff;
+      border: 3px solid transparent;
+      border-top-color: hsl(var(--primary));
+      border-right-color: hsl(var(--primary));
+      border-bottom-color: hsl(var(--primary));
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      animation: spin 1s linear infinite;
     }
 
     .analysis-subsection-icon svg {
-      width: 1rem;
-      height: 1rem;
-      color: #ffffff;
+      display: none;
+    }
+    
+    .analysis-subsection-icon .ai-badge {
+      position: relative;
+      color: hsl(var(--primary));
+      font-weight: 700;
+      font-size: 9px;
+      line-height: 1;
+      z-index: 10;
     }
 
     .analysis-subsection-title {
@@ -2267,9 +2278,7 @@
             
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
+                <span class="ai-badge">IA</span>
               </div>
               <div class="analysis-subsection-title">Analyse — Marché & pricing (St. Louis)</div>
               <div class="analysis-subsection-content">
@@ -2279,9 +2288,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
+                <span class="ai-badge">IA</span>
               </div>
               <div class="analysis-subsection-title">Analyse — Marché & pricing (St. Louis)</div>
               <div class="analysis-subsection-content">
@@ -2291,9 +2298,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
+                <span class="ai-badge">IA</span>
               </div>
               <div class="analysis-subsection-title">Analyse — Marché & pricing (St. Louis)</div>
               <div class="analysis-subsection-content">
@@ -2303,9 +2308,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
+                <span class="ai-badge">IA</span>
               </div>
               <div class="analysis-subsection-title">Analyse — Marché & pricing (St. Louis)</div>
               <div class="analysis-subsection-content">
@@ -2315,9 +2318,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
+                <span class="ai-badge">IA</span>
               </div>
               <div class="analysis-subsection-title">Analyse — Marché & pricing (Pittsburgh)</div>
               <div class="analysis-subsection-content">
@@ -2327,9 +2328,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
+                <span class="ai-badge">IA</span>
               </div>
               <div class="analysis-subsection-title">Analyse — Marché & pricing (Pittsburgh)</div>
               <div class="analysis-subsection-content">
@@ -2339,9 +2338,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
+                <span class="ai-badge">IA</span>
               </div>
               <div class="analysis-subsection-title">Analyse — Marché & pricing (Pittsburgh)</div>
               <div class="analysis-subsection-content">
@@ -2351,9 +2348,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
+                <span class="ai-badge">IA</span>
               </div>
               <div class="analysis-subsection-title">Analyse — Marché & pricing (Pittsburgh)</div>
               <div class="analysis-subsection-content">
@@ -2368,9 +2363,7 @@
             
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
+                <span class="ai-badge">IA</span>
               </div>
               <div class="analysis-subsection-title">Analyse — Historique des confrontations (H2H)</div>
               <div class="analysis-subsection-content">
@@ -2385,9 +2378,7 @@
             
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
+                <span class="ai-badge">IA</span>
               </div>
               <div class="analysis-subsection-title">Analyse — Alignement projeté du jour</div>
               <div class="analysis-subsection-content">
@@ -2414,33 +2405,13 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
+                <span class="ai-badge">IA</span>
               </div>
               <div class="analysis-subsection-title">Analyse — Power Play (Pittsburgh)</div>
-              <div class="analysis-subsection-content">
-                Analyse de l'efficacité du power play de Pittsburgh, incluant la structure tactique en zone offensive, la qualité des entrées de zone contrôlées, la création de chances dangereuses (HDCF) et l'exécution globale des séquences en supériorité numérique (xGoals/PP).
-              </div>
-            </div>
-
+...
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
-              </div>
-              <div class="analysis-subsection-title">Analyse — Discipline & Pénalités (St. Louis)</div>
-              <div class="analysis-subsection-content">
-                Analyse du niveau de discipline de St. Louis, basée sur la fréquence des pénalités concédées, le temps passé en infériorité numérique, l'impact sur le momentum et l'exposition défensive répétée en PK.
-              </div>
-            </div>
-
-            <div class="analysis-subsection">
-              <div class="analysis-subsection-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
+                <span class="ai-badge">IA</span>
               </div>
               <div class="analysis-subsection-title">Analyse — Discipline & Pénalités (Pittsburgh)</div>
               <div class="analysis-subsection-content">
@@ -2455,45 +2426,13 @@
             
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
+                <span class="ai-badge">IA</span>
               </div>
               <div class="analysis-subsection-title">Analyse — Performance du gardien (St. Louis)</div>
-              <div class="analysis-subsection-content">
-                Analyse du rendement du gardien projeté de St. Louis, basée sur l'efficacité face aux tirs à haut danger, la qualité technique, la constance sous pression et les indicateurs avancés type GSAA.
-              </div>
-            </div>
-
+...
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
-              </div>
-              <div class="analysis-subsection-title">Analyse — Performance du gardien (Pittsburgh)</div>
-              <div class="analysis-subsection-content">
-                Analyse du rendement du gardien projeté de Pittsburgh, basée sur l'efficacité face aux tirs à haut danger, la qualité technique, la constance sous pression et les indicateurs avancés type GSAA.
-              </div>
-            </div>
-
-            <div class="analysis-subsection">
-              <div class="analysis-subsection-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
-              </div>
-              <div class="analysis-subsection-title">Analyse — Structure défensive (St. Louis)</div>
-              <div class="analysis-subsection-content">
-                Analyse de la structure défensive de St. Louis, incluant la protection du slot, la gestion des rebonds, la transition défensive et la limitation des occasions adverses de haute qualité.
-              </div>
-            </div>
-
-            <div class="analysis-subsection">
-              <div class="analysis-subsection-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
+                <span class="ai-badge">IA</span>
               </div>
               <div class="analysis-subsection-title">Analyse — Structure défensive (Pittsburgh)</div>
               <div class="analysis-subsection-content">
@@ -2508,45 +2447,13 @@
             
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
+                <span class="ai-badge">IA</span>
               </div>
               <div class="analysis-subsection-title">Analyse — Expected Goals (St. Louis)</div>
-              <div class="analysis-subsection-content">
-                Analyse de la production offensive de St. Louis, basée sur la quantité et la qualité des tirs générés, les emplacements de tir et la probabilité attendue de convertir les occasions (xG).
-              </div>
-            </div>
-
+...
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
-              </div>
-              <div class="analysis-subsection-title">Analyse — Expected Goals (Pittsburgh)</div>
-              <div class="analysis-subsection-content">
-                Analyse de la production offensive de Pittsburgh, basée sur la quantité et la qualité des tirs générés, les emplacements de tir et la probabilité attendue de convertir les occasions (xG).
-              </div>
-            </div>
-
-            <div class="analysis-subsection">
-              <div class="analysis-subsection-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
-              </div>
-              <div class="analysis-subsection-title">Analyse — Possession (Corsi/Fenwick) (St. Louis)</div>
-              <div class="analysis-subsection-content">
-                Analyse du contrôle du palet de St. Louis, à travers le volume de tirs tentés, la capacité à maintenir la zone offensive et la dictée du rythme de jeu.
-              </div>
-            </div>
-
-            <div class="analysis-subsection">
-              <div class="analysis-subsection-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
+                <span class="ai-badge">IA</span>
               </div>
               <div class="analysis-subsection-title">Analyse — Possession (Corsi/Fenwick) (Pittsburgh)</div>
               <div class="analysis-subsection-content">
@@ -2638,9 +2545,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
+                <span class="ai-badge">IA</span>
               </div>
               <div class="analysis-subsection-title">Analyse — Avantage domicile / extérieur (St. Louis)</div>
               <div class="analysis-subsection-content">
@@ -2650,9 +2555,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
+                <span class="ai-badge">IA</span>
               </div>
               <div class="analysis-subsection-title">Analyse — Avantage domicile / extérieur (Pittsburgh)</div>
               <div class="analysis-subsection-content">
