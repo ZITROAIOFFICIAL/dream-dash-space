@@ -888,6 +888,37 @@
       margin-top: 2rem;
     }
 
+    /* Over/Under Display Styles */
+    .over-under-display {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.75rem 1.5rem;
+      background: rgba(22, 163, 74, 0.1);
+      border: 2px solid #16a34a;
+      border-radius: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .over-under-type {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #16a34a;
+    }
+
+    .over-under-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .over-under-stat {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.7);
+      text-align: center;
+    }
+
     /* Parlay Card */
     .parlay-card {
       background: #000000;
@@ -1745,32 +1776,106 @@
                   <!-- Parier Sur -->
                   <div class="bet-section-label" style="margin-top: 1.5rem;">PARIER SUR</div>
                   <div class="match-info-new">
-                    <div class="match-info-header">{{ block.settings.team1_bet_type | default: 'MONEYLINE' }}</div>
-                    <div class="match-info-content">
-                      <div class="team-side">
-                        {% if block.settings.team1_logo %}
-                          <img src="{{ block.settings.team1_logo | image_url: width: 200 }}" alt="{{ block.settings.team1_name }}" class="team-logo">
-                        {% else %}
-                          <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ block.settings.team1_name }}" class="team-logo">
-                        {% endif %}
-                        <div class="team-name-new">{{ block.settings.team1_name | default: 'ST. LOUIS' }}</div>
-                      </div>
+                    {% assign bet_type = block.settings.bet_type | default: 'moneyline' %}
+                    
+                    {% if bet_type == 'moneyline' %}
+                      <!-- MONEYLINE -->
+                      <div class="match-info-header">MONEYLINE</div>
+                      <div class="match-info-content">
+                        <div class="team-side">
+                          {% if block.settings.team1_logo %}
+                            <img src="{{ block.settings.team1_logo | image_url: width: 200 }}" alt="{{ block.settings.team1_name }}" class="team-logo">
+                          {% else %}
+                            <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ block.settings.team1_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.team1_name | default: 'ST. LOUIS' }}</div>
+                        </div>
 
-                      <div class="match-center">
-                        <div class="match-time-new">{{ block.settings.match_time | default: '7:00 PM' }}</div>
-                        <div class="match-vs-new">VS</div>
-                      </div>
+                        <div class="match-center">
+                          <div class="match-time-new">{{ block.settings.match_time | default: '7:00 PM' }}</div>
+                          <div class="match-vs-new">VS</div>
+                        </div>
 
-                      <div class="team-side selected">
-                        {% if block.settings.team2_logo %}
-                          <img src="{{ block.settings.team2_logo | image_url: width: 200 }}" alt="{{ block.settings.team2_name }}" class="team-logo">
-                        {% else %}
-                          <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ block.settings.team2_name }}" class="team-logo">
-                        {% endif %}
-                        <div class="team-name-new">{{ block.settings.team2_name | default: 'PITTSBURGH' }}</div>
-                        <div class="team-bet-type">{{ block.settings.team2_bet_type | default: 'VICTOIRE' }}</div>
+                        <div class="team-side selected">
+                          {% if block.settings.team2_logo %}
+                            <img src="{{ block.settings.team2_logo | image_url: width: 200 }}" alt="{{ block.settings.team2_name }}" class="team-logo">
+                          {% else %}
+                            <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ block.settings.team2_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.team2_name | default: 'PITTSBURGH' }}</div>
+                          <div class="team-bet-type">VICTOIRE</div>
+                        </div>
                       </div>
-                    </div>
+                    
+                    {% elsif bet_type == 'spread' %}
+                      <!-- SPREAD -->
+                      <div class="match-info-header">SPREAD</div>
+                      <div class="match-info-content">
+                        <div class="team-side {% if block.settings.spread_team == 'team1' %}selected{% endif %}">
+                          {% if block.settings.team1_logo %}
+                            <img src="{{ block.settings.team1_logo | image_url: width: 200 }}" alt="{{ block.settings.team1_name }}" class="team-logo">
+                          {% else %}
+                            <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ block.settings.team1_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.team1_name | default: 'ST. LOUIS' }}</div>
+                          {% if block.settings.spread_team == 'team1' %}
+                            <div class="team-bet-type">{{ block.settings.spread_value | default: '-3.5' }}</div>
+                          {% endif %}
+                        </div>
+
+                        <div class="match-center">
+                          <div class="match-time-new">{{ block.settings.match_time | default: '7:00 PM' }}</div>
+                          <div class="match-vs-new">VS</div>
+                        </div>
+
+                        <div class="team-side {% if block.settings.spread_team == 'team2' %}selected{% endif %}">
+                          {% if block.settings.team2_logo %}
+                            <img src="{{ block.settings.team2_logo | image_url: width: 200 }}" alt="{{ block.settings.team2_name }}" class="team-logo">
+                          {% else %}
+                            <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ block.settings.team2_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.team2_name | default: 'PITTSBURGH' }}</div>
+                          {% if block.settings.spread_team == 'team2' %}
+                            <div class="team-bet-type">{{ block.settings.spread_value | default: '-3.5' }}</div>
+                          {% endif %}
+                        </div>
+                      </div>
+                    
+                    {% elsif bet_type == 'over_under' %}
+                      <!-- OVER/UNDER -->
+                      <div class="match-info-header">{{ block.settings.over_under_type | default: 'OVER' | upcase }}</div>
+                      <div class="match-info-content">
+                        <div class="team-side">
+                          {% if block.settings.team1_logo %}
+                            <img src="{{ block.settings.team1_logo | image_url: width: 200 }}" alt="{{ block.settings.team1_name }}" class="team-logo">
+                          {% else %}
+                            <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ block.settings.team1_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.team1_name | default: 'ST. LOUIS' }}</div>
+                        </div>
+
+                        <div class="match-center">
+                          <div class="match-time-new">{{ block.settings.match_time | default: '7:00 PM' }}</div>
+                          <div class="match-vs-new">VS</div>
+                          <div class="over-under-display">
+                            <div class="over-under-type">{{ block.settings.over_under_type | default: 'OVER' | upcase }}</div>
+                            <div class="over-under-value">{{ block.settings.over_under_value | default: '225.5' }}</div>
+                            {% if block.settings.over_under_stat_type != blank %}
+                              <div class="over-under-stat">{{ block.settings.over_under_stat_type }}</div>
+                            {% endif %}
+                          </div>
+                        </div>
+
+                        <div class="team-side">
+                          {% if block.settings.team2_logo %}
+                            <img src="{{ block.settings.team2_logo | image_url: width: 200 }}" alt="{{ block.settings.team2_name }}" class="team-logo">
+                          {% else %}
+                            <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ block.settings.team2_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.team2_name | default: 'PITTSBURGH' }}</div>
+                        </div>
+                      </div>
+                    {% endif %}
                   </div>
 
                   <!-- Mise -->
@@ -3489,6 +3594,82 @@
           "id": "ai_data_count",
           "label": "Nombre de données IA analysées",
           "default": 2857
+        },
+        {
+          "type": "select",
+          "id": "bet_type",
+          "label": "📊 Type de pari",
+          "options": [
+            {
+              "value": "moneyline",
+              "label": "💰 Moneyline"
+            },
+            {
+              "value": "spread",
+              "label": "📏 Spread"
+            },
+            {
+              "value": "over_under",
+              "label": "🔢 Over/Under"
+            }
+          ],
+          "default": "moneyline",
+          "info": "Sélectionnez le type de pari à afficher"
+        },
+        {
+          "type": "text",
+          "id": "spread_value",
+          "label": "📏 Valeur du Spread",
+          "default": "-3.5",
+          "info": "Ex: -3.5, +7.5, -10.5 (utilisé uniquement pour le type Spread)"
+        },
+        {
+          "type": "select",
+          "id": "spread_team",
+          "label": "🎯 Équipe avec le Spread",
+          "options": [
+            {
+              "value": "team1",
+              "label": "Équipe 1"
+            },
+            {
+              "value": "team2",
+              "label": "Équipe 2"
+            }
+          ],
+          "default": "team2",
+          "info": "Quelle équipe a le spread (utilisé uniquement pour le type Spread)"
+        },
+        {
+          "type": "select",
+          "id": "over_under_type",
+          "label": "🔼🔽 Over ou Under",
+          "options": [
+            {
+              "value": "over",
+              "label": "OVER"
+            },
+            {
+              "value": "under",
+              "label": "UNDER"
+            }
+          ],
+          "default": "over",
+          "info": "Sélectionnez OVER ou UNDER (utilisé uniquement pour le type Over/Under)"
+        },
+        {
+          "type": "text",
+          "id": "over_under_value",
+          "label": "🔢 Valeur Over/Under",
+          "default": "225.5",
+          "info": "Ex: 225.5, 45.5, 310.5 (utilisé uniquement pour le type Over/Under)"
+        },
+        {
+          "type": "text",
+          "id": "over_under_stat_type",
+          "label": "📊 Type de statistique (optionnel)",
+          "default": "points totaux",
+          "info": "Ex: 'points totaux', 'yards de Patrick Mahomes' (utilisé uniquement pour le type Over/Under)"
         },
         {
           "type": "range",
