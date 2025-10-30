@@ -1704,7 +1704,12 @@
                 <div class="confidence-badge">
                   <span class="confidence-percentage">{{ block.settings.win_percentage | default: 92 }}%</span>
                   <span class="confidence-text">DE CHANCE DE GAGNER SELON NOTRE IA</span>
-                  <button class="btn-analysis" onclick="openAnalysisDialog()">
+                  <button 
+                    class="btn-analysis" 
+                    onclick="openAnalysisDialog(this)"
+                    data-win-percentage="{{ block.settings.win_percentage | default: 92 }}"
+                    data-ai-data-count="{{ block.settings.ai_data_count | default: 2843 }}"
+                  >
                     VOIR<br>ANALYSE<br>IA
                   </button>
                 </div>
@@ -2813,26 +2818,47 @@
     }
 
     // Open analysis dialog
-    function openAnalysisDialog() {
-      // Copier le nombre de données de la carte vers le dialog
-      const cardDataCount = document.querySelector('.ai-counter span span, .ai-counter-above span span');
-      const dialogDataCount = document.getElementById('dialog-data-count');
-      if (cardDataCount && dialogDataCount) {
-        dialogDataCount.textContent = cardDataCount.textContent;
-      }
-      
-      // Copier le pourcentage de chance de gagner de la carte vers le dialog
-      const cardWinPercentageElement = document.querySelector('.confidence-percentage span') || document.querySelector('.confidence-percentage');
+    function openAnalysisDialog(trigger) {
       const dialogWinPercentage = document.getElementById('dialog-win-percentage');
       const dialogProgressBar = document.getElementById('dialog-progress-bar');
-      
-      if (cardWinPercentageElement && dialogWinPercentage && dialogProgressBar) {
-        // Extraire le nombre du texte (enlever le % s'il existe)
-        let percentageText = cardWinPercentageElement.textContent.trim();
-        let percentage = percentageText.replace('%', '').trim();
-        
-        dialogWinPercentage.textContent = percentage;
-        dialogProgressBar.style.width = percentage + '%';
+      const dialogDataCount = document.getElementById('dialog-data-count');
+
+      // Récupérer les valeurs depuis le bouton cliqué
+      let pctRaw = trigger?.dataset?.winPercentage;
+      let dataCountRaw = trigger?.dataset?.aiDataCount;
+
+      // Fallback: chercher dans la carte parente si les data-attributes ne sont pas présents
+      if (!pctRaw && trigger) {
+        const card = trigger.closest('.bet-card');
+        const confidenceEl = card?.querySelector('.confidence-percentage');
+        if (confidenceEl) {
+          pctRaw = confidenceEl.textContent;
+        }
+      }
+
+      if (!dataCountRaw && trigger) {
+        const card = trigger.closest('.bet-card');
+        const counterAbove = card?.previousElementSibling;
+        if (counterAbove?.classList?.contains('ai-counter-above')) {
+          const countEl = counterAbove.querySelector('span span');
+          if (countEl) {
+            dataCountRaw = countEl.textContent;
+          }
+        }
+      }
+
+      // Normaliser et appliquer le pourcentage
+      if (dialogWinPercentage && dialogProgressBar && pctRaw) {
+        const pct = Math.max(0, Math.min(100, parseFloat(String(pctRaw).replace('%', '').replace(',', '.').trim())));
+        if (!Number.isNaN(pct)) {
+          dialogWinPercentage.textContent = String(pct).replace(/\.0+$/, '');
+          dialogProgressBar.style.width = pct + '%';
+        }
+      }
+
+      // Appliquer le data count
+      if (dialogDataCount && dataCountRaw) {
+        dialogDataCount.textContent = String(dataCountRaw).trim();
       }
       
       // Afficher l'overlay de chargement AI
