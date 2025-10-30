@@ -2822,11 +2822,15 @@
       }
       
       // Copier le pourcentage de chance de gagner de la carte vers le dialog
-      const cardWinPercentage = document.querySelector('.confidence-percentage span');
+      const cardWinPercentageElement = document.querySelector('.confidence-percentage span') || document.querySelector('.confidence-percentage');
       const dialogWinPercentage = document.getElementById('dialog-win-percentage');
       const dialogProgressBar = document.getElementById('dialog-progress-bar');
-      if (cardWinPercentage && dialogWinPercentage && dialogProgressBar) {
-        const percentage = cardWinPercentage.textContent;
+      
+      if (cardWinPercentageElement && dialogWinPercentage && dialogProgressBar) {
+        // Extraire le nombre du texte (enlever le % s'il existe)
+        let percentageText = cardWinPercentageElement.textContent.trim();
+        let percentage = percentageText.replace('%', '').trim();
+        
         dialogWinPercentage.textContent = percentage;
         dialogProgressBar.style.width = percentage + '%';
       }
