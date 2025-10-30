@@ -2075,108 +2075,393 @@
 
                   <!-- Parier Sur -->
                   <div class="bet-section-label" style="margin-top: 1.5rem;">PARIER SUR</div>
-                  <div class="match-info-new">
-                    {% assign bet_type = block.settings.bet_type | default: 'moneyline' %}
+                  
+                  <!-- LEG 1 -->
+                  {% if block.settings.leg1_team1_name != blank %}
+                  <div class="match-info-new" style="margin-bottom: 1rem;">
+                    {% assign leg_bet_type = block.settings.leg1_bet_type | default: 'moneyline' %}
                     
-                    {% if bet_type == 'moneyline' %}
-                      <!-- MONEYLINE -->
-                      <div class="match-info-header">MONEYLINE</div>
+                    {% if leg_bet_type == 'moneyline' %}
+                      <div class="match-info-header">LEG 1 - MONEYLINE</div>
                       <div class="match-info-content">
                         <div class="team-side">
-                          {% if block.settings.team1_logo %}
-                            <img src="{{ block.settings.team1_logo | image_url: width: 200 }}" alt="{{ block.settings.team1_name }}" class="team-logo">
+                          {% if block.settings.leg1_team1_logo %}
+                            <img src="{{ block.settings.leg1_team1_logo | image_url: width: 200 }}" alt="{{ block.settings.leg1_team1_name }}" class="team-logo">
                           {% else %}
-                            <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ block.settings.team1_name }}" class="team-logo">
+                            <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ block.settings.leg1_team1_name }}" class="team-logo">
                           {% endif %}
-                          <div class="team-name-new">{{ block.settings.team1_name | default: 'ST. LOUIS' }}</div>
+                          <div class="team-name-new">{{ block.settings.leg1_team1_name }}</div>
                         </div>
-
                         <div class="match-center">
-                          <div class="match-time-new">{{ block.settings.match_time | default: '7:00 PM' }}</div>
+                          <div class="match-time-new">{{ block.settings.leg1_match_time | default: '7:00 PM' }}</div>
                           <div class="match-vs-new">VS</div>
                         </div>
-
                         <div class="team-side selected">
-                          {% if block.settings.team2_logo %}
-                            <img src="{{ block.settings.team2_logo | image_url: width: 200 }}" alt="{{ block.settings.team2_name }}" class="team-logo">
+                          {% if block.settings.leg1_team2_logo %}
+                            <img src="{{ block.settings.leg1_team2_logo | image_url: width: 200 }}" alt="{{ block.settings.leg1_team2_name }}" class="team-logo">
                           {% else %}
-                            <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ block.settings.team2_name }}" class="team-logo">
+                            <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ block.settings.leg1_team2_name }}" class="team-logo">
                           {% endif %}
-                          <div class="team-name-new">{{ block.settings.team2_name | default: 'PITTSBURGH' }}</div>
+                          <div class="team-name-new">{{ block.settings.leg1_team2_name }}</div>
                           <div class="team-bet-type">VICTOIRE</div>
                         </div>
                       </div>
-                    
-                    {% elsif bet_type == 'spread' %}
-                      <!-- SPREAD -->
-                      <div class="match-info-header">SPREAD</div>
+                    {% elsif leg_bet_type == 'spread' %}
+                      <div class="match-info-header">LEG 1 - SPREAD</div>
                       <div class="match-info-content">
-                        <div class="team-side {% if block.settings.spread_team == 'team1' %}selected{% endif %}">
-                          {% if block.settings.team1_logo %}
-                            <img src="{{ block.settings.team1_logo | image_url: width: 200 }}" alt="{{ block.settings.team1_name }}" class="team-logo">
+                        <div class="team-side {% if block.settings.leg1_spread_team == 'team1' %}selected{% endif %}">
+                          {% if block.settings.leg1_team1_logo %}
+                            <img src="{{ block.settings.leg1_team1_logo | image_url: width: 200 }}" alt="{{ block.settings.leg1_team1_name }}" class="team-logo">
                           {% else %}
-                            <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ block.settings.team1_name }}" class="team-logo">
+                            <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ block.settings.leg1_team1_name }}" class="team-logo">
                           {% endif %}
-                          <div class="team-name-new">{{ block.settings.team1_name | default: 'ST. LOUIS' }}</div>
-                          {% if block.settings.spread_team == 'team1' %}
-                            <div class="team-bet-type">{{ block.settings.spread_value | default: '-3.5' }}</div>
+                          <div class="team-name-new">{{ block.settings.leg1_team1_name }}</div>
+                          {% if block.settings.leg1_spread_team == 'team1' %}
+                            <div class="team-bet-type">{{ block.settings.leg1_spread_value | default: '-3.5' }}</div>
                           {% endif %}
                         </div>
-
                         <div class="match-center">
-                          <div class="match-time-new">{{ block.settings.match_time | default: '7:00 PM' }}</div>
+                          <div class="match-time-new">{{ block.settings.leg1_match_time | default: '7:00 PM' }}</div>
                           <div class="match-vs-new">VS</div>
                         </div>
-
-                        <div class="team-side {% if block.settings.spread_team == 'team2' %}selected{% endif %}">
-                          {% if block.settings.team2_logo %}
-                            <img src="{{ block.settings.team2_logo | image_url: width: 200 }}" alt="{{ block.settings.team2_name }}" class="team-logo">
+                        <div class="team-side {% if block.settings.leg1_spread_team == 'team2' %}selected{% endif %}">
+                          {% if block.settings.leg1_team2_logo %}
+                            <img src="{{ block.settings.leg1_team2_logo | image_url: width: 200 }}" alt="{{ block.settings.leg1_team2_name }}" class="team-logo">
                           {% else %}
-                            <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ block.settings.team2_name }}" class="team-logo">
+                            <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ block.settings.leg1_team2_name }}" class="team-logo">
                           {% endif %}
-                          <div class="team-name-new">{{ block.settings.team2_name | default: 'PITTSBURGH' }}</div>
-                          {% if block.settings.spread_team == 'team2' %}
-                            <div class="team-bet-type">{{ block.settings.spread_value | default: '-3.5' }}</div>
+                          <div class="team-name-new">{{ block.settings.leg1_team2_name }}</div>
+                          {% if block.settings.leg1_spread_team == 'team2' %}
+                            <div class="team-bet-type">{{ block.settings.leg1_spread_value | default: '-3.5' }}</div>
                           {% endif %}
                         </div>
                       </div>
-                    
-                    {% elsif bet_type == 'over_under' %}
-                      <!-- OVER/UNDER -->
-                      <div class="match-info-header">{{ block.settings.over_under_type | default: 'OVER' | upcase }}</div>
+                    {% elsif leg_bet_type == 'over_under' %}
+                      <div class="match-info-header">LEG 1 - {{ block.settings.leg1_over_under_type | default: 'OVER' | upcase }}</div>
                       <div class="match-info-content">
                         <div class="team-side">
-                          {% if block.settings.team1_logo %}
-                            <img src="{{ block.settings.team1_logo | image_url: width: 200 }}" alt="{{ block.settings.team1_name }}" class="team-logo">
+                          {% if block.settings.leg1_team1_logo %}
+                            <img src="{{ block.settings.leg1_team1_logo | image_url: width: 200 }}" alt="{{ block.settings.leg1_team1_name }}" class="team-logo">
                           {% else %}
-                            <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ block.settings.team1_name }}" class="team-logo">
+                            <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ block.settings.leg1_team1_name }}" class="team-logo">
                           {% endif %}
-                          <div class="team-name-new">{{ block.settings.team1_name | default: 'ST. LOUIS' }}</div>
+                          <div class="team-name-new">{{ block.settings.leg1_team1_name }}</div>
                         </div>
-
                         <div class="match-center">
-                          <div class="match-time-new">{{ block.settings.match_time | default: '7:00 PM' }}</div>
+                          <div class="match-time-new">{{ block.settings.leg1_match_time | default: '7:00 PM' }}</div>
                           <div class="match-vs-new">VS</div>
                           <div class="over-under-display">
-                            <div class="over-under-type">{{ block.settings.over_under_type | default: 'OVER' | upcase }}</div>
-                            <div class="over-under-value">{{ block.settings.over_under_value | default: '225.5' }}</div>
-                            {% if block.settings.over_under_stat_type != blank %}
-                              <div class="over-under-stat">{{ block.settings.over_under_stat_type }}</div>
+                            <div class="over-under-type">{{ block.settings.leg1_over_under_type | default: 'OVER' | upcase }}</div>
+                            <div class="over-under-value">{{ block.settings.leg1_over_under_value | default: '225.5' }}</div>
+                            {% if block.settings.leg1_over_under_stat_type != blank %}
+                              <div class="over-under-stat">{{ block.settings.leg1_over_under_stat_type }}</div>
                             {% endif %}
                           </div>
                         </div>
-
                         <div class="team-side">
-                          {% if block.settings.team2_logo %}
-                            <img src="{{ block.settings.team2_logo | image_url: width: 200 }}" alt="{{ block.settings.team2_name }}" class="team-logo">
+                          {% if block.settings.leg1_team2_logo %}
+                            <img src="{{ block.settings.leg1_team2_logo | image_url: width: 200 }}" alt="{{ block.settings.leg1_team2_name }}" class="team-logo">
                           {% else %}
-                            <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ block.settings.team2_name }}" class="team-logo">
+                            <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ block.settings.leg1_team2_name }}" class="team-logo">
                           {% endif %}
-                          <div class="team-name-new">{{ block.settings.team2_name | default: 'PITTSBURGH' }}</div>
+                          <div class="team-name-new">{{ block.settings.leg1_team2_name }}</div>
                         </div>
                       </div>
                     {% endif %}
                   </div>
+                  {% endif %}
+
+                  <!-- LEG 2 -->
+                  {% if block.settings.leg2_team1_name != blank %}
+                  <div class="match-info-new" style="margin-bottom: 1rem;">
+                    {% assign leg_bet_type = block.settings.leg2_bet_type | default: 'moneyline' %}
+                    
+                    {% if leg_bet_type == 'moneyline' %}
+                      <div class="match-info-header">LEG 2 - MONEYLINE</div>
+                      <div class="match-info-content">
+                        <div class="team-side">
+                          {% if block.settings.leg2_team1_logo %}
+                            <img src="{{ block.settings.leg2_team1_logo | image_url: width: 200 }}" alt="{{ block.settings.leg2_team1_name }}" class="team-logo">
+                          {% else %}
+                            <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ block.settings.leg2_team1_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.leg2_team1_name }}</div>
+                        </div>
+                        <div class="match-center">
+                          <div class="match-time-new">{{ block.settings.leg2_match_time | default: '7:00 PM' }}</div>
+                          <div class="match-vs-new">VS</div>
+                        </div>
+                        <div class="team-side selected">
+                          {% if block.settings.leg2_team2_logo %}
+                            <img src="{{ block.settings.leg2_team2_logo | image_url: width: 200 }}" alt="{{ block.settings.leg2_team2_name }}" class="team-logo">
+                          {% else %}
+                            <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ block.settings.leg2_team2_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.leg2_team2_name }}</div>
+                          <div class="team-bet-type">VICTOIRE</div>
+                        </div>
+                      </div>
+                    {% elsif leg_bet_type == 'spread' %}
+                      <div class="match-info-header">LEG 2 - SPREAD</div>
+                      <div class="match-info-content">
+                        <div class="team-side {% if block.settings.leg2_spread_team == 'team1' %}selected{% endif %}">
+                          {% if block.settings.leg2_team1_logo %}
+                            <img src="{{ block.settings.leg2_team1_logo | image_url: width: 200 }}" alt="{{ block.settings.leg2_team1_name }}" class="team-logo">
+                          {% else %}
+                            <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ block.settings.leg2_team1_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.leg2_team1_name }}</div>
+                          {% if block.settings.leg2_spread_team == 'team1' %}
+                            <div class="team-bet-type">{{ block.settings.leg2_spread_value | default: '-3.5' }}</div>
+                          {% endif %}
+                        </div>
+                        <div class="match-center">
+                          <div class="match-time-new">{{ block.settings.leg2_match_time | default: '7:00 PM' }}</div>
+                          <div class="match-vs-new">VS</div>
+                        </div>
+                        <div class="team-side {% if block.settings.leg2_spread_team == 'team2' %}selected{% endif %}">
+                          {% if block.settings.leg2_team2_logo %}
+                            <img src="{{ block.settings.leg2_team2_logo | image_url: width: 200 }}" alt="{{ block.settings.leg2_team2_name }}" class="team-logo">
+                          {% else %}
+                            <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ block.settings.leg2_team2_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.leg2_team2_name }}</div>
+                          {% if block.settings.leg2_spread_team == 'team2' %}
+                            <div class="team-bet-type">{{ block.settings.leg2_spread_value | default: '-3.5' }}</div>
+                          {% endif %}
+                        </div>
+                      </div>
+                    {% elsif leg_bet_type == 'over_under' %}
+                      <div class="match-info-header">LEG 2 - {{ block.settings.leg2_over_under_type | default: 'OVER' | upcase }}</div>
+                      <div class="match-info-content">
+                        <div class="team-side">
+                          {% if block.settings.leg2_team1_logo %}
+                            <img src="{{ block.settings.leg2_team1_logo | image_url: width: 200 }}" alt="{{ block.settings.leg2_team1_name }}" class="team-logo">
+                          {% else %}
+                            <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ block.settings.leg2_team1_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.leg2_team1_name }}</div>
+                        </div>
+                        <div class="match-center">
+                          <div class="match-time-new">{{ block.settings.leg2_match_time | default: '7:00 PM' }}</div>
+                          <div class="match-vs-new">VS</div>
+                          <div class="over-under-display">
+                            <div class="over-under-type">{{ block.settings.leg2_over_under_type | default: 'OVER' | upcase }}</div>
+                            <div class="over-under-value">{{ block.settings.leg2_over_under_value | default: '225.5' }}</div>
+                            {% if block.settings.leg2_over_under_stat_type != blank %}
+                              <div class="over-under-stat">{{ block.settings.leg2_over_under_stat_type }}</div>
+                            {% endif %}
+                          </div>
+                        </div>
+                        <div class="team-side">
+                          {% if block.settings.leg2_team2_logo %}
+                            <img src="{{ block.settings.leg2_team2_logo | image_url: width: 200 }}" alt="{{ block.settings.leg2_team2_name }}" class="team-logo">
+                          {% else %}
+                            <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ block.settings.leg2_team2_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.leg2_team2_name }}</div>
+                        </div>
+                      </div>
+                    {% endif %}
+                  </div>
+                  {% endif %}
+
+                  <!-- LEG 3 à LEG 10: Structure similaire mais trop longue, je vais créer une approche compacte ci-dessous -->
+                  
+                  {% for i in (3..10) %}
+                    {% case i %}
+                      {% when 3 %}
+                        {% assign team1_name = block.settings.leg3_team1_name %}
+                        {% assign team1_logo = block.settings.leg3_team1_logo %}
+                        {% assign team2_name = block.settings.leg3_team2_name %}
+                        {% assign team2_logo = block.settings.leg3_team2_logo %}
+                        {% assign match_time = block.settings.leg3_match_time %}
+                        {% assign leg_bet_type = block.settings.leg3_bet_type %}
+                        {% assign spread_value = block.settings.leg3_spread_value %}
+                        {% assign spread_team = block.settings.leg3_spread_team %}
+                        {% assign over_under_type = block.settings.leg3_over_under_type %}
+                        {% assign over_under_value = block.settings.leg3_over_under_value %}
+                        {% assign over_under_stat_type = block.settings.leg3_over_under_stat_type %}
+                      {% when 4 %}
+                        {% assign team1_name = block.settings.leg4_team1_name %}
+                        {% assign team1_logo = block.settings.leg4_team1_logo %}
+                        {% assign team2_name = block.settings.leg4_team2_name %}
+                        {% assign team2_logo = block.settings.leg4_team2_logo %}
+                        {% assign match_time = block.settings.leg4_match_time %}
+                        {% assign leg_bet_type = block.settings.leg4_bet_type %}
+                        {% assign spread_value = block.settings.leg4_spread_value %}
+                        {% assign spread_team = block.settings.leg4_spread_team %}
+                        {% assign over_under_type = block.settings.leg4_over_under_type %}
+                        {% assign over_under_value = block.settings.leg4_over_under_value %}
+                        {% assign over_under_stat_type = block.settings.leg4_over_under_stat_type %}
+                      {% when 5 %}
+                        {% assign team1_name = block.settings.leg5_team1_name %}
+                        {% assign team1_logo = block.settings.leg5_team1_logo %}
+                        {% assign team2_name = block.settings.leg5_team2_name %}
+                        {% assign team2_logo = block.settings.leg5_team2_logo %}
+                        {% assign match_time = block.settings.leg5_match_time %}
+                        {% assign leg_bet_type = block.settings.leg5_bet_type %}
+                        {% assign spread_value = block.settings.leg5_spread_value %}
+                        {% assign spread_team = block.settings.leg5_spread_team %}
+                        {% assign over_under_type = block.settings.leg5_over_under_type %}
+                        {% assign over_under_value = block.settings.leg5_over_under_value %}
+                        {% assign over_under_stat_type = block.settings.leg5_over_under_stat_type %}
+                      {% when 6 %}
+                        {% assign team1_name = block.settings.leg6_team1_name %}
+                        {% assign team1_logo = block.settings.leg6_team1_logo %}
+                        {% assign team2_name = block.settings.leg6_team2_name %}
+                        {% assign team2_logo = block.settings.leg6_team2_logo %}
+                        {% assign match_time = block.settings.leg6_match_time %}
+                        {% assign leg_bet_type = block.settings.leg6_bet_type %}
+                        {% assign spread_value = block.settings.leg6_spread_value %}
+                        {% assign spread_team = block.settings.leg6_spread_team %}
+                        {% assign over_under_type = block.settings.leg6_over_under_type %}
+                        {% assign over_under_value = block.settings.leg6_over_under_value %}
+                        {% assign over_under_stat_type = block.settings.leg6_over_under_stat_type %}
+                      {% when 7 %}
+                        {% assign team1_name = block.settings.leg7_team1_name %}
+                        {% assign team1_logo = block.settings.leg7_team1_logo %}
+                        {% assign team2_name = block.settings.leg7_team2_name %}
+                        {% assign team2_logo = block.settings.leg7_team2_logo %}
+                        {% assign match_time = block.settings.leg7_match_time %}
+                        {% assign leg_bet_type = block.settings.leg7_bet_type %}
+                        {% assign spread_value = block.settings.leg7_spread_value %}
+                        {% assign spread_team = block.settings.leg7_spread_team %}
+                        {% assign over_under_type = block.settings.leg7_over_under_type %}
+                        {% assign over_under_value = block.settings.leg7_over_under_value %}
+                        {% assign over_under_stat_type = block.settings.leg7_over_under_stat_type %}
+                      {% when 8 %}
+                        {% assign team1_name = block.settings.leg8_team1_name %}
+                        {% assign team1_logo = block.settings.leg8_team1_logo %}
+                        {% assign team2_name = block.settings.leg8_team2_name %}
+                        {% assign team2_logo = block.settings.leg8_team2_logo %}
+                        {% assign match_time = block.settings.leg8_match_time %}
+                        {% assign leg_bet_type = block.settings.leg8_bet_type %}
+                        {% assign spread_value = block.settings.leg8_spread_value %}
+                        {% assign spread_team = block.settings.leg8_spread_team %}
+                        {% assign over_under_type = block.settings.leg8_over_under_type %}
+                        {% assign over_under_value = block.settings.leg8_over_under_value %}
+                        {% assign over_under_stat_type = block.settings.leg8_over_under_stat_type %}
+                      {% when 9 %}
+                        {% assign team1_name = block.settings.leg9_team1_name %}
+                        {% assign team1_logo = block.settings.leg9_team1_logo %}
+                        {% assign team2_name = block.settings.leg9_team2_name %}
+                        {% assign team2_logo = block.settings.leg9_team2_logo %}
+                        {% assign match_time = block.settings.leg9_match_time %}
+                        {% assign leg_bet_type = block.settings.leg9_bet_type %}
+                        {% assign spread_value = block.settings.leg9_spread_value %}
+                        {% assign spread_team = block.settings.leg9_spread_team %}
+                        {% assign over_under_type = block.settings.leg9_over_under_type %}
+                        {% assign over_under_value = block.settings.leg9_over_under_value %}
+                        {% assign over_under_stat_type = block.settings.leg9_over_under_stat_type %}
+                      {% when 10 %}
+                        {% assign team1_name = block.settings.leg10_team1_name %}
+                        {% assign team1_logo = block.settings.leg10_team1_logo %}
+                        {% assign team2_name = block.settings.leg10_team2_name %}
+                        {% assign team2_logo = block.settings.leg10_team2_logo %}
+                        {% assign match_time = block.settings.leg10_match_time %}
+                        {% assign leg_bet_type = block.settings.leg10_bet_type %}
+                        {% assign spread_value = block.settings.leg10_spread_value %}
+                        {% assign spread_team = block.settings.leg10_spread_team %}
+                        {% assign over_under_type = block.settings.leg10_over_under_type %}
+                        {% assign over_under_value = block.settings.leg10_over_under_value %}
+                        {% assign over_under_stat_type = block.settings.leg10_over_under_stat_type %}
+                    {% endcase %}
+                    
+                    {% if team1_name != blank %}
+                    <div class="match-info-new" style="margin-bottom: 1rem;">
+                      {% assign current_leg_bet_type = leg_bet_type | default: 'moneyline' %}
+                      
+                      {% if current_leg_bet_type == 'moneyline' %}
+                        <div class="match-info-header">LEG {{ i }} - MONEYLINE</div>
+                        <div class="match-info-content">
+                          <div class="team-side">
+                            {% if team1_logo %}
+                              <img src="{{ team1_logo | image_url: width: 200 }}" alt="{{ team1_name }}" class="team-logo">
+                            {% else %}
+                              <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ team1_name }}" class="team-logo">
+                            {% endif %}
+                            <div class="team-name-new">{{ team1_name }}</div>
+                          </div>
+                          <div class="match-center">
+                            <div class="match-time-new">{{ match_time | default: '7:00 PM' }}</div>
+                            <div class="match-vs-new">VS</div>
+                          </div>
+                          <div class="team-side selected">
+                            {% if team2_logo %}
+                              <img src="{{ team2_logo | image_url: width: 200 }}" alt="{{ team2_name }}" class="team-logo">
+                            {% else %}
+                              <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ team2_name }}" class="team-logo">
+                            {% endif %}
+                            <div class="team-name-new">{{ team2_name }}</div>
+                            <div class="team-bet-type">VICTOIRE</div>
+                          </div>
+                        </div>
+                      {% elsif current_leg_bet_type == 'spread' %}
+                        <div class="match-info-header">LEG {{ i }} - SPREAD</div>
+                        <div class="match-info-content">
+                          <div class="team-side {% if spread_team == 'team1' %}selected{% endif %}">
+                            {% if team1_logo %}
+                              <img src="{{ team1_logo | image_url: width: 200 }}" alt="{{ team1_name }}" class="team-logo">
+                            {% else %}
+                              <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ team1_name }}" class="team-logo">
+                            {% endif %}
+                            <div class="team-name-new">{{ team1_name }}</div>
+                            {% if spread_team == 'team1' %}
+                              <div class="team-bet-type">{{ spread_value | default: '-3.5' }}</div>
+                            {% endif %}
+                          </div>
+                          <div class="match-center">
+                            <div class="match-time-new">{{ match_time | default: '7:00 PM' }}</div>
+                            <div class="match-vs-new">VS</div>
+                          </div>
+                          <div class="team-side {% if spread_team == 'team2' %}selected{% endif %}">
+                            {% if team2_logo %}
+                              <img src="{{ team2_logo | image_url: width: 200 }}" alt="{{ team2_name }}" class="team-logo">
+                            {% else %}
+                              <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ team2_name }}" class="team-logo">
+                            {% endif %}
+                            <div class="team-name-new">{{ team2_name }}</div>
+                            {% if spread_team == 'team2' %}
+                              <div class="team-bet-type">{{ spread_value | default: '-3.5' }}</div>
+                            {% endif %}
+                          </div>
+                        </div>
+                      {% elsif current_leg_bet_type == 'over_under' %}
+                        <div class="match-info-header">LEG {{ i }} - {{ over_under_type | default: 'OVER' | upcase }}</div>
+                        <div class="match-info-content">
+                          <div class="team-side">
+                            {% if team1_logo %}
+                              <img src="{{ team1_logo | image_url: width: 200 }}" alt="{{ team1_name }}" class="team-logo">
+                            {% else %}
+                              <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ team1_name }}" class="team-logo">
+                            {% endif %}
+                            <div class="team-name-new">{{ team1_name }}</div>
+                          </div>
+                          <div class="match-center">
+                            <div class="match-time-new">{{ match_time | default: '7:00 PM' }}</div>
+                            <div class="match-vs-new">VS</div>
+                            <div class="over-under-display">
+                              <div class="over-under-type">{{ over_under_type | default: 'OVER' | upcase }}</div>
+                              <div class="over-under-value">{{ over_under_value | default: '225.5' }}</div>
+                              {% if over_under_stat_type != blank %}
+                                <div class="over-under-stat">{{ over_under_stat_type }}</div>
+                              {% endif %}
+                            </div>
+                          </div>
+                          <div class="team-side">
+                            {% if team2_logo %}
+                              <img src="{{ team2_logo | image_url: width: 200 }}" alt="{{ team2_name }}" class="team-logo">
+                            {% else %}
+                              <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ team2_name }}" class="team-logo">
+                            {% endif %}
+                            <div class="team-name-new">{{ team2_name }}</div>
+                          </div>
+                        </div>
+                      {% endif %}
+                    </div>
+                    {% endif %}
+                  {% endfor %}
 
                   <!-- Mise -->
                   <div class="bet-section-label">MISE</div>
@@ -4350,40 +4635,814 @@
           "default": 92
         },
         {
+          "type": "header",
+          "content": "🎯 LEG 1"
+        },
+        {
           "type": "text",
-          "id": "team1_name",
+          "id": "leg1_team1_name",
           "label": "Équipe 1 (à domicile)",
           "default": "VEGAS"
         },
         {
           "type": "image_picker",
-          "id": "team1_logo",
+          "id": "leg1_team1_logo",
           "label": "Logo Équipe 1"
         },
         {
           "type": "text",
-          "id": "team1_bet_type",
-          "label": "Type de pari Équipe 1",
-          "default": "MONEYLINE",
-          "info": "Ex: MONEYLINE, SPREAD, TOTAL"
-        },
-        {
-          "type": "text",
-          "id": "team2_name",
+          "id": "leg1_team2_name",
           "label": "Équipe 2 (à l'extérieur)",
           "default": "TAMPA BAY"
         },
         {
           "type": "image_picker",
-          "id": "team2_logo",
+          "id": "leg1_team2_logo",
           "label": "Logo Équipe 2"
         },
         {
           "type": "text",
-          "id": "team2_bet_type",
-          "label": "Type de pari Équipe 2",
-          "default": "VICTOIRE",
-          "info": "Ex: VICTOIRE, SPREAD, TOTAL"
+          "id": "leg1_match_time",
+          "label": "Heure du match",
+          "default": "7:00 PM"
+        },
+        {
+          "type": "select",
+          "id": "leg1_bet_type",
+          "label": "📊 Type de pari",
+          "options": [
+            {"value": "moneyline", "label": "💰 Moneyline"},
+            {"value": "spread", "label": "📏 Spread"},
+            {"value": "over_under", "label": "🔢 Over/Under"}
+          ],
+          "default": "moneyline"
+        },
+        {
+          "type": "text",
+          "id": "leg1_spread_value",
+          "label": "📏 Valeur du Spread",
+          "default": "-3.5"
+        },
+        {
+          "type": "select",
+          "id": "leg1_spread_team",
+          "label": "🎯 Équipe avec le Spread",
+          "options": [
+            {"value": "team1", "label": "Équipe 1"},
+            {"value": "team2", "label": "Équipe 2"}
+          ],
+          "default": "team1"
+        },
+        {
+          "type": "select",
+          "id": "leg1_over_under_type",
+          "label": "🔼🔽 Over ou Under",
+          "options": [
+            {"value": "over", "label": "OVER"},
+            {"value": "under", "label": "UNDER"}
+          ],
+          "default": "over"
+        },
+        {
+          "type": "text",
+          "id": "leg1_over_under_value",
+          "label": "🔢 Valeur Over/Under",
+          "default": "225.5"
+        },
+        {
+          "type": "text",
+          "id": "leg1_over_under_stat_type",
+          "label": "📊 Type de statistique (optionnel)",
+          "default": "points totaux"
+        },
+        {
+          "type": "header",
+          "content": "🎯 LEG 2"
+        },
+        {
+          "type": "text",
+          "id": "leg2_team1_name",
+          "label": "Équipe 1 (à domicile)",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "leg2_team1_logo",
+          "label": "Logo Équipe 1"
+        },
+        {
+          "type": "text",
+          "id": "leg2_team2_name",
+          "label": "Équipe 2 (à l'extérieur)",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "leg2_team2_logo",
+          "label": "Logo Équipe 2"
+        },
+        {
+          "type": "text",
+          "id": "leg2_match_time",
+          "label": "Heure du match",
+          "default": "7:00 PM"
+        },
+        {
+          "type": "select",
+          "id": "leg2_bet_type",
+          "label": "📊 Type de pari",
+          "options": [
+            {"value": "moneyline", "label": "💰 Moneyline"},
+            {"value": "spread", "label": "📏 Spread"},
+            {"value": "over_under", "label": "🔢 Over/Under"}
+          ],
+          "default": "moneyline"
+        },
+        {
+          "type": "text",
+          "id": "leg2_spread_value",
+          "label": "📏 Valeur du Spread",
+          "default": "-3.5"
+        },
+        {
+          "type": "select",
+          "id": "leg2_spread_team",
+          "label": "🎯 Équipe avec le Spread",
+          "options": [
+            {"value": "team1", "label": "Équipe 1"},
+            {"value": "team2", "label": "Équipe 2"}
+          ],
+          "default": "team1"
+        },
+        {
+          "type": "select",
+          "id": "leg2_over_under_type",
+          "label": "🔼🔽 Over ou Under",
+          "options": [
+            {"value": "over", "label": "OVER"},
+            {"value": "under", "label": "UNDER"}
+          ],
+          "default": "over"
+        },
+        {
+          "type": "text",
+          "id": "leg2_over_under_value",
+          "label": "🔢 Valeur Over/Under",
+          "default": "225.5"
+        },
+        {
+          "type": "text",
+          "id": "leg2_over_under_stat_type",
+          "label": "📊 Type de statistique (optionnel)",
+          "default": "points totaux"
+        },
+        {
+          "type": "header",
+          "content": "🎯 LEG 3"
+        },
+        {
+          "type": "text",
+          "id": "leg3_team1_name",
+          "label": "Équipe 1 (à domicile)",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "leg3_team1_logo",
+          "label": "Logo Équipe 1"
+        },
+        {
+          "type": "text",
+          "id": "leg3_team2_name",
+          "label": "Équipe 2 (à l'extérieur)",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "leg3_team2_logo",
+          "label": "Logo Équipe 2"
+        },
+        {
+          "type": "text",
+          "id": "leg3_match_time",
+          "label": "Heure du match",
+          "default": "7:00 PM"
+        },
+        {
+          "type": "select",
+          "id": "leg3_bet_type",
+          "label": "📊 Type de pari",
+          "options": [
+            {"value": "moneyline", "label": "💰 Moneyline"},
+            {"value": "spread", "label": "📏 Spread"},
+            {"value": "over_under", "label": "🔢 Over/Under"}
+          ],
+          "default": "moneyline"
+        },
+        {
+          "type": "text",
+          "id": "leg3_spread_value",
+          "label": "📏 Valeur du Spread",
+          "default": "-3.5"
+        },
+        {
+          "type": "select",
+          "id": "leg3_spread_team",
+          "label": "🎯 Équipe avec le Spread",
+          "options": [
+            {"value": "team1", "label": "Équipe 1"},
+            {"value": "team2", "label": "Équipe 2"}
+          ],
+          "default": "team1"
+        },
+        {
+          "type": "select",
+          "id": "leg3_over_under_type",
+          "label": "🔼🔽 Over ou Under",
+          "options": [
+            {"value": "over", "label": "OVER"},
+            {"value": "under", "label": "UNDER"}
+          ],
+          "default": "over"
+        },
+        {
+          "type": "text",
+          "id": "leg3_over_under_value",
+          "label": "🔢 Valeur Over/Under",
+          "default": "225.5"
+        },
+        {
+          "type": "text",
+          "id": "leg3_over_under_stat_type",
+          "label": "📊 Type de statistique (optionnel)",
+          "default": "points totaux"
+        },
+        {
+          "type": "header",
+          "content": "🎯 LEG 4"
+        },
+        {
+          "type": "text",
+          "id": "leg4_team1_name",
+          "label": "Équipe 1 (à domicile)",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "leg4_team1_logo",
+          "label": "Logo Équipe 1"
+        },
+        {
+          "type": "text",
+          "id": "leg4_team2_name",
+          "label": "Équipe 2 (à l'extérieur)",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "leg4_team2_logo",
+          "label": "Logo Équipe 2"
+        },
+        {
+          "type": "text",
+          "id": "leg4_match_time",
+          "label": "Heure du match",
+          "default": "7:00 PM"
+        },
+        {
+          "type": "select",
+          "id": "leg4_bet_type",
+          "label": "📊 Type de pari",
+          "options": [
+            {"value": "moneyline", "label": "💰 Moneyline"},
+            {"value": "spread", "label": "📏 Spread"},
+            {"value": "over_under", "label": "🔢 Over/Under"}
+          ],
+          "default": "moneyline"
+        },
+        {
+          "type": "text",
+          "id": "leg4_spread_value",
+          "label": "📏 Valeur du Spread",
+          "default": "-3.5"
+        },
+        {
+          "type": "select",
+          "id": "leg4_spread_team",
+          "label": "🎯 Équipe avec le Spread",
+          "options": [
+            {"value": "team1", "label": "Équipe 1"},
+            {"value": "team2", "label": "Équipe 2"}
+          ],
+          "default": "team1"
+        },
+        {
+          "type": "select",
+          "id": "leg4_over_under_type",
+          "label": "🔼🔽 Over ou Under",
+          "options": [
+            {"value": "over", "label": "OVER"},
+            {"value": "under", "label": "UNDER"}
+          ],
+          "default": "over"
+        },
+        {
+          "type": "text",
+          "id": "leg4_over_under_value",
+          "label": "🔢 Valeur Over/Under",
+          "default": "225.5"
+        },
+        {
+          "type": "text",
+          "id": "leg4_over_under_stat_type",
+          "label": "📊 Type de statistique (optionnel)",
+          "default": "points totaux"
+        },
+        {
+          "type": "header",
+          "content": "🎯 LEG 5"
+        },
+        {
+          "type": "text",
+          "id": "leg5_team1_name",
+          "label": "Équipe 1 (à domicile)",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "leg5_team1_logo",
+          "label": "Logo Équipe 1"
+        },
+        {
+          "type": "text",
+          "id": "leg5_team2_name",
+          "label": "Équipe 2 (à l'extérieur)",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "leg5_team2_logo",
+          "label": "Logo Équipe 2"
+        },
+        {
+          "type": "text",
+          "id": "leg5_match_time",
+          "label": "Heure du match",
+          "default": "7:00 PM"
+        },
+        {
+          "type": "select",
+          "id": "leg5_bet_type",
+          "label": "📊 Type de pari",
+          "options": [
+            {"value": "moneyline", "label": "💰 Moneyline"},
+            {"value": "spread", "label": "📏 Spread"},
+            {"value": "over_under", "label": "🔢 Over/Under"}
+          ],
+          "default": "moneyline"
+        },
+        {
+          "type": "text",
+          "id": "leg5_spread_value",
+          "label": "📏 Valeur du Spread",
+          "default": "-3.5"
+        },
+        {
+          "type": "select",
+          "id": "leg5_spread_team",
+          "label": "🎯 Équipe avec le Spread",
+          "options": [
+            {"value": "team1", "label": "Équipe 1"},
+            {"value": "team2", "label": "Équipe 2"}
+          ],
+          "default": "team1"
+        },
+        {
+          "type": "select",
+          "id": "leg5_over_under_type",
+          "label": "🔼🔽 Over ou Under",
+          "options": [
+            {"value": "over", "label": "OVER"},
+            {"value": "under", "label": "UNDER"}
+          ],
+          "default": "over"
+        },
+        {
+          "type": "text",
+          "id": "leg5_over_under_value",
+          "label": "🔢 Valeur Over/Under",
+          "default": "225.5"
+        },
+        {
+          "type": "text",
+          "id": "leg5_over_under_stat_type",
+          "label": "📊 Type de statistique (optionnel)",
+          "default": "points totaux"
+        },
+        {
+          "type": "header",
+          "content": "🎯 LEG 6"
+        },
+        {
+          "type": "text",
+          "id": "leg6_team1_name",
+          "label": "Équipe 1 (à domicile)",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "leg6_team1_logo",
+          "label": "Logo Équipe 1"
+        },
+        {
+          "type": "text",
+          "id": "leg6_team2_name",
+          "label": "Équipe 2 (à l'extérieur)",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "leg6_team2_logo",
+          "label": "Logo Équipe 2"
+        },
+        {
+          "type": "text",
+          "id": "leg6_match_time",
+          "label": "Heure du match",
+          "default": "7:00 PM"
+        },
+        {
+          "type": "select",
+          "id": "leg6_bet_type",
+          "label": "📊 Type de pari",
+          "options": [
+            {"value": "moneyline", "label": "💰 Moneyline"},
+            {"value": "spread", "label": "📏 Spread"},
+            {"value": "over_under", "label": "🔢 Over/Under"}
+          ],
+          "default": "moneyline"
+        },
+        {
+          "type": "text",
+          "id": "leg6_spread_value",
+          "label": "📏 Valeur du Spread",
+          "default": "-3.5"
+        },
+        {
+          "type": "select",
+          "id": "leg6_spread_team",
+          "label": "🎯 Équipe avec le Spread",
+          "options": [
+            {"value": "team1", "label": "Équipe 1"},
+            {"value": "team2", "label": "Équipe 2"}
+          ],
+          "default": "team1"
+        },
+        {
+          "type": "select",
+          "id": "leg6_over_under_type",
+          "label": "🔼🔽 Over ou Under",
+          "options": [
+            {"value": "over", "label": "OVER"},
+            {"value": "under", "label": "UNDER"}
+          ],
+          "default": "over"
+        },
+        {
+          "type": "text",
+          "id": "leg6_over_under_value",
+          "label": "🔢 Valeur Over/Under",
+          "default": "225.5"
+        },
+        {
+          "type": "text",
+          "id": "leg6_over_under_stat_type",
+          "label": "📊 Type de statistique (optionnel)",
+          "default": "points totaux"
+        },
+        {
+          "type": "header",
+          "content": "🎯 LEG 7"
+        },
+        {
+          "type": "text",
+          "id": "leg7_team1_name",
+          "label": "Équipe 1 (à domicile)",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "leg7_team1_logo",
+          "label": "Logo Équipe 1"
+        },
+        {
+          "type": "text",
+          "id": "leg7_team2_name",
+          "label": "Équipe 2 (à l'extérieur)",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "leg7_team2_logo",
+          "label": "Logo Équipe 2"
+        },
+        {
+          "type": "text",
+          "id": "leg7_match_time",
+          "label": "Heure du match",
+          "default": "7:00 PM"
+        },
+        {
+          "type": "select",
+          "id": "leg7_bet_type",
+          "label": "📊 Type de pari",
+          "options": [
+            {"value": "moneyline", "label": "💰 Moneyline"},
+            {"value": "spread", "label": "📏 Spread"},
+            {"value": "over_under", "label": "🔢 Over/Under"}
+          ],
+          "default": "moneyline"
+        },
+        {
+          "type": "text",
+          "id": "leg7_spread_value",
+          "label": "📏 Valeur du Spread",
+          "default": "-3.5"
+        },
+        {
+          "type": "select",
+          "id": "leg7_spread_team",
+          "label": "🎯 Équipe avec le Spread",
+          "options": [
+            {"value": "team1", "label": "Équipe 1"},
+            {"value": "team2", "label": "Équipe 2"}
+          ],
+          "default": "team1"
+        },
+        {
+          "type": "select",
+          "id": "leg7_over_under_type",
+          "label": "🔼🔽 Over ou Under",
+          "options": [
+            {"value": "over", "label": "OVER"},
+            {"value": "under", "label": "UNDER"}
+          ],
+          "default": "over"
+        },
+        {
+          "type": "text",
+          "id": "leg7_over_under_value",
+          "label": "🔢 Valeur Over/Under",
+          "default": "225.5"
+        },
+        {
+          "type": "text",
+          "id": "leg7_over_under_stat_type",
+          "label": "📊 Type de statistique (optionnel)",
+          "default": "points totaux"
+        },
+        {
+          "type": "header",
+          "content": "🎯 LEG 8"
+        },
+        {
+          "type": "text",
+          "id": "leg8_team1_name",
+          "label": "Équipe 1 (à domicile)",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "leg8_team1_logo",
+          "label": "Logo Équipe 1"
+        },
+        {
+          "type": "text",
+          "id": "leg8_team2_name",
+          "label": "Équipe 2 (à l'extérieur)",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "leg8_team2_logo",
+          "label": "Logo Équipe 2"
+        },
+        {
+          "type": "text",
+          "id": "leg8_match_time",
+          "label": "Heure du match",
+          "default": "7:00 PM"
+        },
+        {
+          "type": "select",
+          "id": "leg8_bet_type",
+          "label": "📊 Type de pari",
+          "options": [
+            {"value": "moneyline", "label": "💰 Moneyline"},
+            {"value": "spread", "label": "📏 Spread"},
+            {"value": "over_under", "label": "🔢 Over/Under"}
+          ],
+          "default": "moneyline"
+        },
+        {
+          "type": "text",
+          "id": "leg8_spread_value",
+          "label": "📏 Valeur du Spread",
+          "default": "-3.5"
+        },
+        {
+          "type": "select",
+          "id": "leg8_spread_team",
+          "label": "🎯 Équipe avec le Spread",
+          "options": [
+            {"value": "team1", "label": "Équipe 1"},
+            {"value": "team2", "label": "Équipe 2"}
+          ],
+          "default": "team1"
+        },
+        {
+          "type": "select",
+          "id": "leg8_over_under_type",
+          "label": "🔼🔽 Over ou Under",
+          "options": [
+            {"value": "over", "label": "OVER"},
+            {"value": "under", "label": "UNDER"}
+          ],
+          "default": "over"
+        },
+        {
+          "type": "text",
+          "id": "leg8_over_under_value",
+          "label": "🔢 Valeur Over/Under",
+          "default": "225.5"
+        },
+        {
+          "type": "text",
+          "id": "leg8_over_under_stat_type",
+          "label": "📊 Type de statistique (optionnel)",
+          "default": "points totaux"
+        },
+        {
+          "type": "header",
+          "content": "🎯 LEG 9"
+        },
+        {
+          "type": "text",
+          "id": "leg9_team1_name",
+          "label": "Équipe 1 (à domicile)",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "leg9_team1_logo",
+          "label": "Logo Équipe 1"
+        },
+        {
+          "type": "text",
+          "id": "leg9_team2_name",
+          "label": "Équipe 2 (à l'extérieur)",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "leg9_team2_logo",
+          "label": "Logo Équipe 2"
+        },
+        {
+          "type": "text",
+          "id": "leg9_match_time",
+          "label": "Heure du match",
+          "default": "7:00 PM"
+        },
+        {
+          "type": "select",
+          "id": "leg9_bet_type",
+          "label": "📊 Type de pari",
+          "options": [
+            {"value": "moneyline", "label": "💰 Moneyline"},
+            {"value": "spread", "label": "📏 Spread"},
+            {"value": "over_under", "label": "🔢 Over/Under"}
+          ],
+          "default": "moneyline"
+        },
+        {
+          "type": "text",
+          "id": "leg9_spread_value",
+          "label": "📏 Valeur du Spread",
+          "default": "-3.5"
+        },
+        {
+          "type": "select",
+          "id": "leg9_spread_team",
+          "label": "🎯 Équipe avec le Spread",
+          "options": [
+            {"value": "team1", "label": "Équipe 1"},
+            {"value": "team2", "label": "Équipe 2"}
+          ],
+          "default": "team1"
+        },
+        {
+          "type": "select",
+          "id": "leg9_over_under_type",
+          "label": "🔼🔽 Over ou Under",
+          "options": [
+            {"value": "over", "label": "OVER"},
+            {"value": "under", "label": "UNDER"}
+          ],
+          "default": "over"
+        },
+        {
+          "type": "text",
+          "id": "leg9_over_under_value",
+          "label": "🔢 Valeur Over/Under",
+          "default": "225.5"
+        },
+        {
+          "type": "text",
+          "id": "leg9_over_under_stat_type",
+          "label": "📊 Type de statistique (optionnel)",
+          "default": "points totaux"
+        },
+        {
+          "type": "header",
+          "content": "🎯 LEG 10"
+        },
+        {
+          "type": "text",
+          "id": "leg10_team1_name",
+          "label": "Équipe 1 (à domicile)",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "leg10_team1_logo",
+          "label": "Logo Équipe 1"
+        },
+        {
+          "type": "text",
+          "id": "leg10_team2_name",
+          "label": "Équipe 2 (à l'extérieur)",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "leg10_team2_logo",
+          "label": "Logo Équipe 2"
+        },
+        {
+          "type": "text",
+          "id": "leg10_match_time",
+          "label": "Heure du match",
+          "default": "7:00 PM"
+        },
+        {
+          "type": "select",
+          "id": "leg10_bet_type",
+          "label": "📊 Type de pari",
+          "options": [
+            {"value": "moneyline", "label": "💰 Moneyline"},
+            {"value": "spread", "label": "📏 Spread"},
+            {"value": "over_under", "label": "🔢 Over/Under"}
+          ],
+          "default": "moneyline"
+        },
+        {
+          "type": "text",
+          "id": "leg10_spread_value",
+          "label": "📏 Valeur du Spread",
+          "default": "-3.5"
+        },
+        {
+          "type": "select",
+          "id": "leg10_spread_team",
+          "label": "🎯 Équipe avec le Spread",
+          "options": [
+            {"value": "team1", "label": "Équipe 1"},
+            {"value": "team2", "label": "Équipe 2"}
+          ],
+          "default": "team1"
+        },
+        {
+          "type": "select",
+          "id": "leg10_over_under_type",
+          "label": "🔼🔽 Over ou Under",
+          "options": [
+            {"value": "over", "label": "OVER"},
+            {"value": "under", "label": "UNDER"}
+          ],
+          "default": "over"
+        },
+        {
+          "type": "text",
+          "id": "leg10_over_under_value",
+          "label": "🔢 Valeur Over/Under",
+          "default": "225.5"
+        },
+        {
+          "type": "text",
+          "id": "leg10_over_under_stat_type",
+          "label": "📊 Type de statistique (optionnel)",
+          "default": "points totaux"
         },
         {
           "type": "text",
