@@ -1777,7 +1777,7 @@
         </svg>
       </a>
 
-      <a class="nav-item" data-page="account" onclick="navigateTo(event, 'account')">
+      <a class="nav-item" href="https://winabet.ai/apps/memberships" target="_blank">
         <div class="nav-item-content">
           <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
@@ -1790,7 +1790,7 @@
         </svg>
       </a>
 
-      <a class="nav-item" data-page="boutique" onclick="navigateTo(event, 'boutique')">
+      <a class="nav-item" href="https://winabet.ai" target="_blank">
         <div class="nav-item-content">
           <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
@@ -4355,16 +4355,6 @@
     function navigateTo(event, pageName) {
       if (event) {
         event.preventDefault();
-      }
-
-      // Rediriger vers des URLs externes pour certaines pages
-      if (pageName === 'boutique') {
-        window.location.href = 'https://winabet.ai';
-        return;
-      }
-      if (pageName === 'account') {
-        window.location.href = 'https://winabet.ai/apps/memberships';
-        return;
       }
 
       // Afficher le chargement AI pour les pages bet et parlay
