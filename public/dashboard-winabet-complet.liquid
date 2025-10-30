@@ -2058,8 +2058,8 @@
                     data-win-percentage="{{ block.settings.win_percentage | default: 92 }}"
                     data-ai-data-count="{{ block.settings.ai_data_count | default: 2843 }}"
                     data-sport-type="{{ block.settings.sport_type | default: 'nhl' }}"
-                    data-team1="{{ block.settings.team1_name | default: 'ÉQUIPE DOMICILE' }}"
-                    data-team2="{{ block.settings.team2_name | default: 'ÉQUIPE EXTÉRIEUR' }}"
+                    data-team1="{{ block.settings.leg1_team1_name | default: 'ÉQUIPE DOMICILE' }}"
+                    data-team2="{{ block.settings.leg1_team2_name | default: 'ÉQUIPE EXTÉRIEUR' }}"
                     data-auto-increment="{{ block.settings.auto_increment_enabled }}"
                     data-increment-interval="{{ block.settings.auto_increment_interval | default: 5 }}"
                     data-increment-amount="{{ block.settings.auto_increment_amount | default: 5 }}"
@@ -5545,12 +5545,10 @@
           "settings": {
             "ai_data_count": 5214,
             "win_percentage": 78,
-            "team1_name": "VEGAS",
-            "team1_bet_type": "MONEYLINE",
-            "team2_name": "TAMPA BAY",
-            "team2_bet_type": "VICTOIRE",
-            "match_time": "7:00 PM",
-            "match_date": "Aujourd'hui",
+            "leg1_team1_name": "VEGAS",
+            "leg1_team2_name": "TAMPA BAY",
+            "leg1_bet_type": "moneyline",
+            "leg1_match_time": "7:00 PM",
             "multiplier": "5.24",
             "bet_units": "1",
             "odds": 495,
