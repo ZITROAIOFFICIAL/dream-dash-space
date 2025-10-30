@@ -2544,7 +2544,7 @@
               
               <!-- Date -->
               <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1rem; margin-bottom: 1.5rem;">
-                {{ block.settings.match_date | default: "10/30/2025" }}
+                {{ block.settings.match_date | default: "Aujourd'hui" }}
               </div>
 
               {% if bet_type == 'moneyline' %}
@@ -2552,28 +2552,25 @@
                 <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">MONEYLINE</div>
                 <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
                   <div style="text-align: center; flex: 1;">
-                    <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
-                      {% if block.settings.team1_logo %}
-                        <img src="{{ block.settings.team1_logo | image_url: width: 300 }}" alt="{{ block.settings.team1_name }}" style="width: 100%; height: 100%; object-fit: contain;">
-                      {% else %}
-                        <img src="{{ 'vegas-logo.png' | asset_url }}" alt="{{ block.settings.team1_name }}" style="width: 100%; height: 100%; object-fit: contain;">
-                      {% endif %}
-                    </div>
+                    {% if block.settings.team1_logo %}
+                      <img src="{{ block.settings.team1_logo | image_url: width: 300 }}" alt="{{ block.settings.team1_name }}" style="width: 5rem; height: 5rem; object-fit: contain; margin: 0 auto 0.5rem;">
+                    {% else %}
+                      <img src="{{ 'vegas-logo.png' | asset_url }}" alt="{{ block.settings.team1_name }}" style="width: 5rem; height: 5rem; object-fit: contain; margin: 0 auto 0.5rem;">
+                    {% endif %}
                     <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.team1_name | default: 'VEGAS' }}</div>
                   </div>
 
                   <div style="text-align: center;">
+                    <div style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.7); margin-bottom: 0.25rem;">{{ block.settings.match_time | default: '5:00 PM' }}</div>
                     <div style="font-size: 1.5rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
                   </div>
 
                   <div style="text-align: center; flex: 1;">
-                    <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
-                      {% if block.settings.team2_logo %}
-                        <img src="{{ block.settings.team2_logo | image_url: width: 300 }}" alt="{{ block.settings.team2_name }}" style="width: 100%; height: 100%; object-fit: contain;">
-                      {% else %}
-                        <img src="{{ 'tampa-logo.png' | asset_url }}" alt="{{ block.settings.team2_name }}" style="width: 100%; height: 100%; object-fit: contain;">
-                      {% endif %}
-                    </div>
+                    {% if block.settings.team2_logo %}
+                      <img src="{{ block.settings.team2_logo | image_url: width: 300 }}" alt="{{ block.settings.team2_name }}" style="width: 5rem; height: 5rem; object-fit: contain; margin: 0 auto 0.5rem;">
+                    {% else %}
+                      <img src="{{ 'tampa-logo.png' | asset_url }}" alt="{{ block.settings.team2_name }}" style="width: 5rem; height: 5rem; object-fit: contain; margin: 0 auto 0.5rem;">
+                    {% endif %}
                     <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.team2_name | default: 'TAMPA BAY' }}</div>
                     {% if block.settings.result == 'win' %}
                       <div style="font-size: 1rem; font-weight: 700; color: #22c55e; margin-top: 0.5rem;">VICTOIRE</div>
@@ -2586,13 +2583,11 @@
                 <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">SPREAD</div>
                 <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
                   <div style="text-align: center; flex: 1;">
-                    <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
-                      {% if block.settings.team1_logo %}
-                        <img src="{{ block.settings.team1_logo | image_url: width: 300 }}" alt="{{ block.settings.team1_name }}" style="width: 100%; height: 100%; object-fit: contain;">
-                      {% else %}
-                        <img src="{{ 'vegas-logo.png' | asset_url }}" alt="{{ block.settings.team1_name }}" style="width: 100%; height: 100%; object-fit: contain;">
-                      {% endif %}
-                    </div>
+                    {% if block.settings.team1_logo %}
+                      <img src="{{ block.settings.team1_logo | image_url: width: 300 }}" alt="{{ block.settings.team1_name }}" style="width: 5rem; height: 5rem; object-fit: contain; margin: 0 auto 0.5rem;">
+                    {% else %}
+                      <img src="{{ 'vegas-logo.png' | asset_url }}" alt="{{ block.settings.team1_name }}" style="width: 5rem; height: 5rem; object-fit: contain; margin: 0 auto 0.5rem;">
+                    {% endif %}
                     <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.team1_name | default: 'VEGAS' }}</div>
                     {% if block.settings.result == 'win' and block.settings.spread_team == 'team1' %}
                       <div style="font-size: 1rem; font-weight: 700; color: #22c55e; margin-top: 0.5rem;">{{ block.settings.spread_value | default: '-3.5' }}</div>
@@ -2600,17 +2595,16 @@
                   </div>
 
                   <div style="text-align: center;">
+                    <div style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.7); margin-bottom: 0.25rem;">{{ block.settings.match_time | default: '5:00 PM' }}</div>
                     <div style="font-size: 1.5rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
                   </div>
 
                   <div style="text-align: center; flex: 1;">
-                    <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
-                      {% if block.settings.team2_logo %}
-                        <img src="{{ block.settings.team2_logo | image_url: width: 300 }}" alt="{{ block.settings.team2_name }}" style="width: 100%; height: 100%; object-fit: contain;">
-                      {% else %}
-                        <img src="{{ 'tampa-logo.png' | asset_url }}" alt="{{ block.settings.team2_name }}" style="width: 100%; height: 100%; object-fit: contain;">
-                      {% endif %}
-                    </div>
+                    {% if block.settings.team2_logo %}
+                      <img src="{{ block.settings.team2_logo | image_url: width: 300 }}" alt="{{ block.settings.team2_name }}" style="width: 5rem; height: 5rem; object-fit: contain; margin: 0 auto 0.5rem;">
+                    {% else %}
+                      <img src="{{ 'tampa-logo.png' | asset_url }}" alt="{{ block.settings.team2_name }}" style="width: 5rem; height: 5rem; object-fit: contain; margin: 0 auto 0.5rem;">
+                    {% endif %}
                     <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.team2_name | default: 'TAMPA BAY' }}</div>
                     {% if block.settings.result == 'win' and block.settings.spread_team == 'team2' %}
                       <div style="font-size: 1rem; font-weight: 700; color: #22c55e; margin-top: 0.5rem;">{{ block.settings.spread_value | default: '-3.5' }}</div>
@@ -2623,17 +2617,16 @@
                 <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">{{ block.settings.over_under_type | default: 'OVER' | upcase }}</div>
                 <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
                   <div style="text-align: center; flex: 1;">
-                    <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
-                      {% if block.settings.team1_logo %}
-                        <img src="{{ block.settings.team1_logo | image_url: width: 300 }}" alt="{{ block.settings.team1_name }}" style="width: 100%; height: 100%; object-fit: contain;">
-                      {% else %}
-                        <img src="{{ 'vegas-logo.png' | asset_url }}" alt="{{ block.settings.team1_name }}" style="width: 100%; height: 100%; object-fit: contain;">
-                      {% endif %}
-                    </div>
+                    {% if block.settings.team1_logo %}
+                      <img src="{{ block.settings.team1_logo | image_url: width: 300 }}" alt="{{ block.settings.team1_name }}" style="width: 5rem; height: 5rem; object-fit: contain; margin: 0 auto 0.5rem;">
+                    {% else %}
+                      <img src="{{ 'vegas-logo.png' | asset_url }}" alt="{{ block.settings.team1_name }}" style="width: 5rem; height: 5rem; object-fit: contain; margin: 0 auto 0.5rem;">
+                    {% endif %}
                     <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.team1_name | default: 'VEGAS' }}</div>
                   </div>
 
                   <div style="text-align: center;">
+                    <div style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.7); margin-bottom: 0.25rem;">{{ block.settings.match_time | default: '5:00 PM' }}</div>
                     <div style="font-size: 1.5rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
                     {% if block.settings.result == 'win' %}
                       <div style="margin-top: 0.75rem;">
@@ -2647,13 +2640,11 @@
                   </div>
 
                   <div style="text-align: center; flex: 1;">
-                    <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
-                      {% if block.settings.team2_logo %}
-                        <img src="{{ block.settings.team2_logo | image_url: width: 300 }}" alt="{{ block.settings.team2_name }}" style="width: 100%; height: 100%; object-fit: contain;">
-                      {% else %}
-                        <img src="{{ 'tampa-logo.png' | asset_url }}" alt="{{ block.settings.team2_name }}" style="width: 100%; height: 100%; object-fit: contain;">
-                      {% endif %}
-                    </div>
+                    {% if block.settings.team2_logo %}
+                      <img src="{{ block.settings.team2_logo | image_url: width: 300 }}" alt="{{ block.settings.team2_name }}" style="width: 5rem; height: 5rem; object-fit: contain; margin: 0 auto 0.5rem;">
+                    {% else %}
+                      <img src="{{ 'tampa-logo.png' | asset_url }}" alt="{{ block.settings.team2_name }}" style="width: 5rem; height: 5rem; object-fit: contain; margin: 0 auto 0.5rem;">
+                    {% endif %}
                     <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">{{ block.settings.team2_name | default: 'TAMPA BAY' }}</div>
                   </div>
                 </div>
