@@ -3176,14 +3176,14 @@
       minUpdateInterval: {{ section.settings.min_update_interval_sec | default: 30 }},
       maxUpdateInterval: {{ section.settings.max_update_interval_sec | default: 90 }},
       transitionStep: {{ section.settings.transition_step | default: 3 }},
-      // Heures de pointe (multiplicateur)
+      // Heures de pointe
       peakStartHour: {{ section.settings.peak_start_hour | default: 18 }},
       peakEndHour: {{ section.settings.peak_end_hour | default: 23 }},
-      peakMultiplier: {{ section.settings.peak_multiplier | default: 2 }},
-      // Heures creuses (diviseur)
+      peakTarget: {{ section.settings.peak_target_members | default: 100 }},
+      // Heures creuses
       lowStartHour: {{ section.settings.low_start_hour | default: 2 }},
       lowEndHour: {{ section.settings.low_end_hour | default: 8 }},
-      lowDivider: {{ section.settings.low_divider | default: 2 }}
+      lowTarget: {{ section.settings.low_target_members | default: 25 }}
     };
 
     let currentMembers = membersConfig.base;
@@ -3238,11 +3238,11 @@
       let periodName = 'Normal';
       
       if (isPeakHours()) {
-        targetBase = Math.floor(membersConfig.base * membersConfig.peakMultiplier);
-        periodName = `Pointe (x${membersConfig.peakMultiplier})`;
+        targetBase = membersConfig.peakTarget;
+        periodName = `Pointe (${targetBase} membres)`;
       } else if (isLowHours()) {
-        targetBase = Math.floor(membersConfig.base / membersConfig.lowDivider);
-        periodName = `Creuse (÷${membersConfig.lowDivider})`;
+        targetBase = membersConfig.lowTarget;
+        periodName = `Creuse (${targetBase} membres)`;
       }
       
       console.log(`🎯 Période ${periodName} | Target base: ${targetBase}`);
@@ -3413,62 +3413,50 @@
       "content": "🔥 Heures de Pointe (Nombre Élevé)"
     },
     {
-      "type": "range",
+      "type": "number",
       "id": "peak_start_hour",
-      "min": 0,
-      "max": 23,
-      "step": 1,
       "label": "Heure de début",
       "default": 18,
-      "info": "Début des heures de pointe (format 24h)"
-    },
-    {
-      "type": "range",
-      "id": "peak_end_hour",
-      "min": 0,
-      "max": 23,
-      "step": 1,
-      "label": "Heure de fin",
-      "default": 23,
-      "info": "Fin des heures de pointe (format 24h)"
+      "info": "Début des heures de pointe (format 24h, entre 0 et 23)"
     },
     {
       "type": "number",
-      "id": "peak_multiplier",
-      "label": "Multiplicateur",
-      "default": 2,
-      "info": "Facteur de multiplication du nombre de base (ex: 2 = 2x plus, 3 = 3x plus)"
+      "id": "peak_end_hour",
+      "label": "Heure de fin",
+      "default": 23,
+      "info": "Fin des heures de pointe (format 24h, entre 0 et 23)"
+    },
+    {
+      "type": "number",
+      "id": "peak_target_members",
+      "label": "Nombre cible de membres",
+      "default": 100,
+      "info": "Nombre de membres connectés cible pendant les heures de pointe"
     },
     {
       "type": "header",
       "content": "💤 Heures Creuses (Nombre Bas)"
     },
     {
-      "type": "range",
+      "type": "number",
       "id": "low_start_hour",
-      "min": 0,
-      "max": 23,
-      "step": 1,
       "label": "Heure de début",
       "default": 2,
-      "info": "Début des heures creuses (format 24h)"
-    },
-    {
-      "type": "range",
-      "id": "low_end_hour",
-      "min": 0,
-      "max": 23,
-      "step": 1,
-      "label": "Heure de fin",
-      "default": 8,
-      "info": "Fin des heures creuses (format 24h)"
+      "info": "Début des heures creuses (format 24h, entre 0 et 23)"
     },
     {
       "type": "number",
-      "id": "low_divider",
-      "label": "Diviseur",
-      "default": 2,
-      "info": "Facteur de division du nombre de base (ex: 2 = 50% de moins)"
+      "id": "low_end_hour",
+      "label": "Heure de fin",
+      "default": 8,
+      "info": "Fin des heures creuses (format 24h, entre 0 et 23)"
+    },
+    {
+      "type": "number",
+      "id": "low_target_members",
+      "label": "Nombre cible de membres",
+      "default": 25,
+      "info": "Nombre de membres connectés cible pendant les heures creuses"
     },
     {
       "type": "textarea",
