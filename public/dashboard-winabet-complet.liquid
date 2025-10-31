@@ -207,18 +207,18 @@
         {% assign bet_cards = section.blocks | where: 'type', 'bet_card' %}
         {% if bet_cards.size > 0 %}
           {% for block in bet_cards %}
-            {% if block.settings.show_card %}
-              <!-- AI Data Counter Above Card -->
-              {% if block.settings.send_to_history != true %}
-                <div class="ai-counter-above">
-                  <div class="ai-spinner">
-                    <span class="ai-badge">IA</span>
-                  </div>
-                  <span><span>{{ block.settings.ai_data_count | default: 2843 }}</span> DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
+            <!-- Wrapper toujours présent même si show_card est false -->
+            <!-- AI Data Counter Above Card -->
+            {% if block.settings.show_card and block.settings.send_to_history != true %}
+              <div class="ai-counter-above">
+                <div class="ai-spinner">
+                  <span class="ai-badge">IA</span>
                 </div>
-              {% endif %}
+                <span><span>{{ block.settings.ai_data_count | default: 2843 }}</span> DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
+              </div>
+            {% endif %}
 
-              <div class="bet-card" style="{% if block.settings.send_to_history == true %}display:none{% endif %}" 
+            <div class="bet-card" style="{% if block.settings.send_to_history == true or block.settings.show_card != true %}display:none{% endif %}"
                    {{ block.shopify_attributes }}
                    data-block-type="bet_card"
                    data-block-id="{{ block.id }}"
@@ -245,6 +245,7 @@
                    data-over-under-value="{{ block.settings.over_under_value }}"
                    data-over-under-stat-type="{{ block.settings.over_under_stat_type }}"
               >
+                {% if block.settings.show_card and block.settings.send_to_history != true %}
                 <!-- Confidence Badge - Bande verte 92% -->
                 <div class="confidence-badge">
                   <span class="confidence-percentage">{{ block.settings.win_percentage | default: 92 }}%</span>
@@ -391,8 +392,8 @@
                   <div class="bookmaker-badge">{{ block.settings.best_bookmaker | default: 'DRAFTKINGS' }}</div>
                   <div class="odds-value">{{ block.settings.best_odds | default: '-105' }}</div>
                 </div>
+                {% endif %}
               </div>
-            {% endif %}
           {% endfor %}
         {% else %}
           <div class="card text-center" style="padding: 2rem;">
@@ -412,10 +413,12 @@
 
         {% assign has_parlay = false %}
         {% for block in section.blocks %}
-          {% if block.type == 'parlay_card' and block.settings.show_card %}
-            {% assign has_parlay = true %}
+          {% if block.type == 'parlay_card' %}
+            {% if block.settings.show_card %}
+              {% assign has_parlay = true %}
+            {% endif %}
               <!-- AI Data Counter Above Card -->
-              {% if block.settings.send_to_history != true %}
+              {% if block.settings.show_card and block.settings.send_to_history != true %}
                 <div class="ai-counter-above">
                   <div class="ai-spinner">
                     <span class="ai-badge">IA</span>
@@ -568,7 +571,7 @@
                 {% endfor %}
               ]{% endcapture %}
 
-              <div class="bet-card" style="{% if block.settings.send_to_history == true %}display:none{% endif %}" 
+              <div class="bet-card" style="{% if block.settings.send_to_history == true or block.settings.show_card != true %}display:none{% endif %}" 
                    {{ block.shopify_attributes }}
                    data-block-type="parlay_card"
                    data-block-id="{{ block.id }}"
@@ -586,6 +589,7 @@
                    data-send-to-history="{{ block.settings.send_to_history }}"
                    data-legs='{{ legs_json | strip_newlines | strip }}'
               >
+                {% if block.settings.show_card and block.settings.send_to_history != true %}
                 <!-- Confidence Badge - Bande verte 92% -->
                 <div class="confidence-badge">
                   <span class="confidence-percentage">{{ block.settings.win_percentage | default: 92 }}%</span>
@@ -993,6 +997,7 @@
                   <div class="bookmaker-badge">{{ block.settings.best_bookmaker | default: 'DRAFTKINGS' }}</div>
                   <div class="odds-value">{{ block.settings.best_odds | default: '-105' }}</div>
                 </div>
+                {% endif %}
               </div>
           {% endif %}
         {% endfor %}
