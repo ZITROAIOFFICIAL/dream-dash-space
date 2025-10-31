@@ -2562,50 +2562,14 @@
     });
 
     // ===== GESTION DES MEMBRES CONNECTÉS LIVE =====
-    const membersConfig = {
-      base: {{ section.settings.members_base | default: 50 }},
-      minIncrease: {{ section.settings.min_increase_per_change | default: 1 }},
-      maxIncrease: {{ section.settings.max_increase_per_change | default: 5 }},
-      minDecrease: {{ section.settings.min_decrease_per_change | default: 1 }},
-      maxDecrease: {{ section.settings.max_decrease_per_change | default: 5 }},
-      minUpdateInterval: {{ section.settings.min_update_interval_sec | default: 30 }},
-      maxUpdateInterval: {{ section.settings.max_update_interval_sec | default: 90 }},
-      transitionStep: {{ section.settings.transition_step | default: 3 }},
-      // Heures de pointe
-      peakStartHour: {{ section.settings.peak_start_hour | default: 18 }},
-      peakEndHour: {{ section.settings.peak_end_hour | default: 23 }},
-      peakTarget: {{ section.settings.peak_target_members | default: 100 }},
-      // Heures creuses
-      lowStartHour: {{ section.settings.low_start_hour | default: 2 }},
-      lowEndHour: {{ section.settings.low_end_hour | default: 8 }},
-      lowTarget: {{ section.settings.low_target_members | default: 25 }}
-    };
+    // Configuration Supabase
+    const SUPABASE_URL = 'https://ycvfyorgkhuxcosfrsxs.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InljdmZ5b3Jna2h1eGNvc2Zyc3hzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE4Njc0NTcsImV4cCI6MjA3NzQ0MzQ1N30.vQEzzlScCD6a52rM1CMfK2fFLKKqz-_WuZQ09YdTsdU';
 
-    let currentMembers = membersConfig.base;
-    let currentTarget = membersConfig.base; // Cible actuelle qui évolue graduellement
+    let currentMembers = {{ section.settings.members_base | default: 1000 }};
+    let memberCountChannel = null;
     
-    console.log('🎯 Membres Connectés Config:', membersConfig);
-    console.log('🎯 Nombre initial:', currentMembers);
-
-    function isInTimeRange(startHour, endHour) {
-      const now = new Date();
-      const currentHour = now.getHours();
-      
-      if (startHour <= endHour) {
-        return currentHour >= startHour && currentHour <= endHour;
-      } else {
-        // Cas où la période traverse minuit (ex: 22h à 2h)
-        return currentHour >= startHour || currentHour <= endHour;
-      }
-    }
-
-    function isPeakHours() {
-      return isInTimeRange(membersConfig.peakStartHour, membersConfig.peakEndHour);
-    }
-
-    function isLowHours() {
-      return isInTimeRange(membersConfig.lowStartHour, membersConfig.lowEndHour);
-    }
+    console.log('🎯 Initialisation du compteur de membres');
 
     function updateMemberCount(newCount) {
       const sidebarCount = document.getElementById('sidebar-member-count');
@@ -2627,83 +2591,79 @@
       });
     }
 
-    function calculateNewMemberCount() {
-      // Détermine la base cible selon l'heure
-      let targetBase = membersConfig.base;
-      let periodName = 'Normal';
-      
-      if (isPeakHours()) {
-        targetBase = membersConfig.peakTarget;
-        periodName = `Pointe (${targetBase} membres)`;
-      } else if (isLowHours()) {
-        targetBase = membersConfig.lowTarget;
-        periodName = `Creuse (${targetBase} membres)`;
+    // Fonction pour initialiser le compteur depuis Supabase
+    async function initMemberCounter() {
+      try {
+        console.log('🔄 Initialisation du compteur depuis Supabase...');
+        
+        // Vérifier que la bibliothèque Supabase est chargée
+        if (!window.supabase) {
+          console.error('❌ Bibliothèque Supabase non chargée');
+          return;
+        }
+
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        // 1. Charger le compteur actuel depuis Supabase
+        const { data, error } = await supabase
+          .from('live_member_count')
+          .select('current_count')
+          .single();
+        
+        if (error) {
+          console.error('❌ Erreur lors du chargement:', error);
+          return;
+        }
+        
+        if (data) {
+          console.log('✅ Compteur chargé:', data.current_count);
+          currentMembers = data.current_count;
+          updateMemberCount(currentMembers);
+        }
+        
+        // 2. S'abonner aux mises à jour en temps réel
+        memberCountChannel = supabase
+          .channel('member-count-changes')
+          .on(
+            'postgres_changes',
+            {
+              event: 'UPDATE',
+              schema: 'public',
+              table: 'live_member_count'
+            },
+            (payload) => {
+              console.log('🔄 Mise à jour reçue de Supabase:', payload.new.current_count);
+              currentMembers = payload.new.current_count;
+              updateMemberCount(currentMembers);
+            }
+          )
+          .subscribe((status) => {
+            console.log('📡 Statut de la souscription:', status);
+          });
+          
+      } catch (error) {
+        console.error('❌ Erreur d\'initialisation:', error);
       }
-      
-      console.log(`🎯 Période ${periodName} | Target base: ${targetBase}`);
-      
-      // Fait évoluer graduellement currentTarget vers targetBase
-      const targetDiff = targetBase - currentTarget;
-      if (Math.abs(targetDiff) > 0) {
-        const step = Math.min(membersConfig.transitionStep, Math.abs(targetDiff));
-        currentTarget += targetDiff > 0 ? step : -step;
-        console.log(`🎯 Transition: ${currentTarget} → ${targetBase} (step: ${step})`);
-      }
-      
-      // Décide aléatoirement si ça monte ou descend (50/50)
-      const goingUp = Math.random() > 0.5;
-      
-      let variation;
-      if (goingUp) {
-        // Monte entre minIncrease et maxIncrease
-        const range = membersConfig.maxIncrease - membersConfig.minIncrease;
-        variation = membersConfig.minIncrease + Math.floor(Math.random() * (range + 1));
-        console.log('⬆️ Montée de:', variation, `(entre ${membersConfig.minIncrease} et ${membersConfig.maxIncrease})`);
-      } else {
-        // Descend entre minDecrease et maxDecrease
-        const range = membersConfig.maxDecrease - membersConfig.minDecrease;
-        variation = -(membersConfig.minDecrease + Math.floor(Math.random() * (range + 1)));
-        console.log('⬇️ Descente de:', Math.abs(variation), `(entre ${membersConfig.minDecrease} et ${membersConfig.maxDecrease})`);
-      }
-      
-      let newCount = currentMembers + variation;
-      
-      // Garde le nombre proche de la cible actuelle avec une marge
-      const minCount = Math.max(10, currentTarget - membersConfig.maxDecrease * 10);
-      const maxCount = currentTarget + membersConfig.maxIncrease * 10;
-      
-      newCount = Math.max(minCount, Math.min(maxCount, newCount));
-      
-      return Math.floor(newCount);
     }
 
-    // Fonction pour obtenir un intervalle aléatoire
-    function getRandomInterval() {
-      const min = membersConfig.minUpdateInterval;
-      const max = membersConfig.maxUpdateInterval;
-      const interval = Math.floor(Math.random() * (max - min + 1) + min) * 1000;
-      console.log(`⏱️ Prochain changement dans ${interval / 1000} secondes`);
-      return interval;
-    }
-
-    let updateTimer;
-    
-    // Fonction pour démarrer le prochain update
-    function scheduleNextUpdate() {
-      const newCount = calculateNewMemberCount();
-      currentMembers = newCount;
-      updateMemberCount(newCount);
-      
-      // Programme le prochain update avec un intervalle aléatoire
-      const nextInterval = getRandomInterval();
-      updateTimer = setTimeout(scheduleNextUpdate, nextInterval);
-    }
-    
     // Initial display
     updateMemberCount(currentMembers);
     
-    // Démarrer le premier update après un intervalle aléatoire
-    updateTimer = setTimeout(scheduleNextUpdate, getRandomInterval());
+    // Charger la bibliothèque Supabase et initialiser
+    if (typeof window.supabase === 'undefined') {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.78.0/dist/umd/supabase.min.js';
+      script.onload = () => {
+        console.log('✅ Bibliothèque Supabase chargée');
+        initMemberCounter();
+      };
+      script.onerror = () => {
+        console.error('❌ Erreur de chargement de la bibliothèque Supabase');
+      };
+      document.head.appendChild(script);
+    } else {
+      initMemberCounter();
+    }
   </script>
 
   <!-- CSS pour l'animation flip -->

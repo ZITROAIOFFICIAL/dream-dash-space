@@ -11,3 +11,6 @@ verify_jwt = false
 
 [functions.get-parlay-history]
 verify_jwt = false
+
+[functions.update-member-count]
+verify_jwt = false
