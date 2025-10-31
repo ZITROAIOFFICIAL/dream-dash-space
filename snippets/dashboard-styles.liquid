@@ -1185,6 +1185,26 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
+    }
+
+    /* Augmentation de la taille des cartes sur desktop */
+    @media (min-width: 1024px) {
+      .bet-card {
+        max-width: 56rem;
+      }
+
+      .parlay-card {
+        max-width: 62rem;
+      }
+
+      .history-card {
+        max-width: 56rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    .history-card {
       gap: 1rem;
     }
 
