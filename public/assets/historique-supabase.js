@@ -490,6 +490,10 @@ function generateParlayCardHTML(parlay) {
 // ==================== FEEDBACK VISUEL ====================
 
 function showSuccessToast(message) {
+  // Ne montrer les toasts que dans l'éditeur Shopify
+  const isShopifyEditor = window.Shopify && window.Shopify.designMode;
+  if (!isShopifyEditor) return;
+  
   const toast = document.createElement('div');
   toast.textContent = '✅ ' + message;
   toast.style.cssText = 'position:fixed;top:20px;right:20px;background:#22c55e;color:#fff;padding:1rem 2rem;border-radius:0.5rem;font-weight:600;z-index:9999;box-shadow:0 4px 6px rgba(0,0,0,0.3);';
@@ -498,6 +502,10 @@ function showSuccessToast(message) {
 }
 
 function showErrorToast(message) {
+  // Ne montrer les toasts que dans l'éditeur Shopify
+  const isShopifyEditor = window.Shopify && window.Shopify.designMode;
+  if (!isShopifyEditor) return;
+  
   const toast = document.createElement('div');
   toast.textContent = '❌ ' + message;
   toast.style.cssText = 'position:fixed;top:20px;right:20px;background:#ef4444;color:#fff;padding:1rem 2rem;border-radius:0.5rem;font-weight:600;z-index:9999;box-shadow:0 4px 6px rgba(0,0,0,0.3);';
