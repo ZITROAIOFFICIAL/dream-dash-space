@@ -98,30 +98,6 @@ export type Database = {
         }
         Relationships: []
       }
-      live_member_count: {
-        Row: {
-          created_at: string | null
-          current_count: number
-          current_target: number
-          id: string
-          last_updated: string | null
-        }
-        Insert: {
-          created_at?: string | null
-          current_count?: number
-          current_target?: number
-          id?: string
-          last_updated?: string | null
-        }
-        Update: {
-          created_at?: string | null
-          current_count?: number
-          current_target?: number
-          id?: string
-          last_updated?: string | null
-        }
-        Relationships: []
-      }
       parlay_history: {
         Row: {
           ai_data_count: number | null
