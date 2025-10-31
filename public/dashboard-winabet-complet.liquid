@@ -3175,10 +3175,11 @@
       maxDecrease: {{ section.settings.max_decrease_per_change | default: 5 }},
       minUpdateInterval: {{ section.settings.min_update_interval_sec | default: 30 }},
       maxUpdateInterval: {{ section.settings.max_update_interval_sec | default: 90 }},
+      transitionStep: {{ section.settings.transition_step | default: 3 }},
       // Heures de pointe (multiplicateur)
       peakStartHour: {{ section.settings.peak_start_hour | default: 18 }},
       peakEndHour: {{ section.settings.peak_end_hour | default: 23 }},
-      peakMultiplier: {{ section.settings.peak_multiplier | default: 1.5 }},
+      peakMultiplier: {{ section.settings.peak_multiplier | default: 2 }},
       // Heures creuses (diviseur)
       lowStartHour: {{ section.settings.low_start_hour | default: 2 }},
       lowEndHour: {{ section.settings.low_end_hour | default: 8 }},
@@ -3186,6 +3187,7 @@
     };
 
     let currentMembers = membersConfig.base;
+    let currentTarget = membersConfig.base; // Cible actuelle qui évolue graduellement
     
     console.log('🎯 Membres Connectés Config:', membersConfig);
     console.log('🎯 Nombre initial:', currentMembers);
@@ -3231,6 +3233,28 @@
     }
 
     function calculateNewMemberCount() {
+      // Détermine la base cible selon l'heure
+      let targetBase = membersConfig.base;
+      let periodName = 'Normal';
+      
+      if (isPeakHours()) {
+        targetBase = Math.floor(membersConfig.base * membersConfig.peakMultiplier);
+        periodName = `Pointe (x${membersConfig.peakMultiplier})`;
+      } else if (isLowHours()) {
+        targetBase = Math.floor(membersConfig.base / membersConfig.lowDivider);
+        periodName = `Creuse (÷${membersConfig.lowDivider})`;
+      }
+      
+      console.log(`🎯 Période ${periodName} | Target base: ${targetBase}`);
+      
+      // Fait évoluer graduellement currentTarget vers targetBase
+      const targetDiff = targetBase - currentTarget;
+      if (Math.abs(targetDiff) > 0) {
+        const step = Math.min(membersConfig.transitionStep, Math.abs(targetDiff));
+        currentTarget += targetDiff > 0 ? step : -step;
+        console.log(`🎯 Transition: ${currentTarget} → ${targetBase} (step: ${step})`);
+      }
+      
       // Décide aléatoirement si ça monte ou descend (50/50)
       const goingUp = Math.random() > 0.5;
       
@@ -3249,23 +3273,9 @@
       
       let newCount = currentMembers + variation;
       
-      // Détermine la base cible selon l'heure
-      let targetBase = membersConfig.base;
-      let periodName = 'Normal';
-      
-      if (isPeakHours()) {
-        targetBase = membersConfig.base * membersConfig.peakMultiplier;
-        periodName = `Pointe (x${membersConfig.peakMultiplier})`;
-      } else if (isLowHours()) {
-        targetBase = membersConfig.base / membersConfig.lowDivider;
-        periodName = `Creuse (÷${membersConfig.lowDivider})`;
-      }
-      
-      console.log(`🎯 Période ${periodName} | Target base: ${Math.floor(targetBase)}`);
-      
-      // Garde le nombre proche de la base avec une marge
-      const minCount = Math.max(10, targetBase - membersConfig.maxDecrease * 10);
-      const maxCount = targetBase + membersConfig.maxIncrease * 10;
+      // Garde le nombre proche de la cible actuelle avec une marge
+      const minCount = Math.max(10, currentTarget - membersConfig.maxDecrease * 10);
+      const maxCount = currentTarget + membersConfig.maxIncrease * 10;
       
       newCount = Math.max(minCount, Math.min(maxCount, newCount));
       
@@ -3390,6 +3400,13 @@
       "label": "⏱️ Intervalle maximum entre changements (sec)",
       "default": 90,
       "info": "Temps maximum en secondes entre chaque changement de nombre (l'intervalle sera aléatoire entre min et max)"
+    },
+    {
+      "type": "number",
+      "id": "transition_step",
+      "label": "📊 Taille des tranches de transition",
+      "default": 3,
+      "info": "Nombre d'utilisateurs ajoutés/retirés par étape lors du passage d'une période à une autre (ex: 3 = transition graduelle par tranches de 3)"
     },
     {
       "type": "header",
