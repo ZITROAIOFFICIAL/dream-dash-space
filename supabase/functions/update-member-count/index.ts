@@ -112,15 +112,36 @@ Deno.serve(async (req) => {
     const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseKey);
 
-    // 1. Lire le compteur actuel
-    const { data: currentData, error: fetchError } = await supabase
+    // 1. Lire le compteur actuel (ou l'initialiser si vide)
+    let { data: currentData, error: fetchError } = await supabase
       .from("live_member_count")
       .select("id, current_count, current_target")
       .single();
 
-    if (fetchError) {
+    // Si la table est vide, initialiser avec COMPTEUR_INITIAL
+    if (fetchError && fetchError.code === 'PGRST116') {
+      console.log("🔧 Initialisation de la table avec COMPTEUR_INITIAL:", COMPTEUR_INITIAL);
+      const { data: insertedData, error: insertError } = await supabase
+        .from("live_member_count")
+        .insert({
+          current_count: COMPTEUR_INITIAL,
+          current_target: COMPTEUR_INITIAL,
+        })
+        .select("id, current_count, current_target")
+        .single();
+      
+      if (insertError) {
+        console.error("❌ Erreur initialisation:", insertError);
+        throw insertError;
+      }
+      
+      currentData = insertedData;
+      fetchError = null;
+    }
+
+    if (fetchError || !currentData) {
       console.error("❌ Erreur lecture:", fetchError);
-      throw fetchError;
+      throw new Error("Impossible de lire ou créer le compteur");
     }
 
     console.log(`📖 Valeur actuelle: ${currentData.current_count}, Target: ${currentData.current_target}`);
