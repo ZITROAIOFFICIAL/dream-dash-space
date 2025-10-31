@@ -3171,6 +3171,8 @@
       base: {{ section.settings.members_base | default: 50 }},
       maxIncrease: {{ section.settings.max_increase_per_min | default: 5 }},
       maxDecrease: {{ section.settings.max_decrease_per_min | default: 5 }},
+      minUpdateInterval: {{ section.settings.min_update_interval_sec | default: 30 }},
+      maxUpdateInterval: {{ section.settings.max_update_interval_sec | default: 90 }},
       peakStartHour: {{ section.settings.peak_start_hour | default: 18 }},
       peakEndHour: {{ section.settings.peak_end_hour | default: 23 }},
       peakMultiplier: {{ section.settings.peak_multiplier | default: 3 }}
@@ -3246,19 +3248,33 @@
       return Math.floor(newCount);
     }
 
-    // Update toutes les minutes
-    setInterval(() => {
-      currentMembers = calculateNewMemberCount();
-      updateMemberCount(currentMembers);
-      console.log('🔄 Update minute - Nouveau total:', currentMembers);
-    }, 60000); // 60000 ms = 1 minute
+    // Fonction pour obtenir un intervalle aléatoire
+    function getRandomInterval() {
+      const min = membersConfig.minUpdateInterval;
+      const max = membersConfig.maxUpdateInterval;
+      const interval = Math.floor(Math.random() * (max - min + 1) + min) * 1000;
+      console.log(`⏱️ Prochain changement dans ${interval / 1000} secondes`);
+      return interval;
+    }
+
+    let updateTimer;
     
-    // TEST: Update toutes les 5 secondes pour vérifier que ça fonctionne
-    console.log('🧪 Mode test activé - update toutes les 5 secondes');
-    setInterval(() => {
-      currentMembers = calculateNewMemberCount();
-      updateMemberCount(currentMembers);
-    }, 5000); // 5000 ms = 5 secondes (pour test)
+    // Fonction pour démarrer le prochain update
+    function scheduleNextUpdate() {
+      const newCount = calculateNewMemberCount();
+      currentMembers = newCount;
+      updateMemberCount(newCount);
+      
+      // Programme le prochain update avec un intervalle aléatoire
+      const nextInterval = getRandomInterval();
+      updateTimer = setTimeout(scheduleNextUpdate, nextInterval);
+    }
+    
+    // Initial display
+    updateMemberCount(currentMembers);
+    
+    // Démarrer le premier update après un intervalle aléatoire
+    updateTimer = setTimeout(scheduleNextUpdate, getRandomInterval());
   </script>
 
   <!-- CSS pour l'animation flip -->
@@ -3322,6 +3338,20 @@
       "label": "Descente max par minute",
       "default": 5,
       "info": "Maximum que le nombre peut descendre par minute (aléatoire entre 0 et cette valeur)"
+    },
+    {
+      "type": "number",
+      "id": "min_update_interval_sec",
+      "label": "⏱️ Intervalle minimum entre changements (sec)",
+      "default": 30,
+      "info": "Temps minimum en secondes entre chaque changement de nombre"
+    },
+    {
+      "type": "number",
+      "id": "max_update_interval_sec",
+      "label": "⏱️ Intervalle maximum entre changements (sec)",
+      "default": 90,
+      "info": "Temps maximum en secondes entre chaque changement de nombre (l'intervalle sera aléatoire entre min et max)"
     },
     {
       "type": "range",
