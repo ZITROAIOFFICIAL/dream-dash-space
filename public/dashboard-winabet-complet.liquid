@@ -2640,6 +2640,23 @@
           .subscribe((status) => {
             console.log('📡 Statut de la souscription:', status);
           });
+
+        // 3. Fallback polling toutes les 10s (si realtime indisponible)
+        setInterval(async () => {
+          try {
+            const { data: pollData, error: pollError } = await supabase
+              .from('live_member_count')
+              .select('current_count')
+              .single();
+            if (!pollError && pollData && pollData.current_count !== currentMembers) {
+              console.log('⏱️ Polling maj:', pollData.current_count);
+              currentMembers = pollData.current_count;
+              updateMemberCount(currentMembers);
+            }
+          } catch (e) {
+            console.warn('⚠️ Erreur polling compteur', e);
+          }
+        }, 10000);
           
       } catch (error) {
         console.error('❌ Erreur d\'initialisation:', error);

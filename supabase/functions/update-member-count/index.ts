@@ -88,7 +88,7 @@ function calculateNewMemberCount(currentCount: number, currentTarget: number): {
   }
 
   // Garder le nombre dans une plage raisonnable autour de currentTarget
-  const minBound = Math.max(targetBase - 200, 500);
+  const minBound = Math.max(targetBase - 200, 0);
   const maxBound = targetBase + 200;
 
   newCount = Math.max(minBound, Math.min(newCount, maxBound));
