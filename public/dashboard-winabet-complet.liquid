@@ -1012,6 +1012,14 @@
     <!-- PAGE 4: HISTORIQUE PARLAY DU JOUR -->
     {% render 'historique-parlay-page' %}
 
+    <style>
+      /* Override snippets to show logos in history */
+      #bet-history-container img,
+      #parlay-history-container img {
+        display: block !important;
+      }
+    </style>
+
     <!-- PAGE 5: NOTRE STRATÉGIE -->
     <div id="page-strategy" class="page">
       <div class="container" style="max-width: 1000px; margin: 0 auto;">

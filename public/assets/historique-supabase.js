@@ -24,13 +24,15 @@ function getFunctionsBase() {
   return SUPABASE_URL.replace('.supabase.co', '.functions.supabase.co');
 }
 
-// Sanitize des URLs de logos pour éviter les 404 (si chemin relatif ou vide)
+// Sanitize des URLs de logos pour éviter les 404 (gère // et erreurs Liquid)
 function sanitizeLogo(url) {
-  if (!url || !/^https?:\/\//.test(url)) {
-    // Pixel transparent 1x1 pour éviter toute requête réseau
-    return 'data:image/gif;base64,R0lGODlhAQABAAAAACw=';
-  }
-  return url;
+  const pixel = 'data:image/gif;base64,R0lGODlhAQABAAAAACw=';
+  if (!url) return pixel;
+  const u = String(url).trim();
+  if (/Liquid error/i.test(u)) return pixel;
+  if (u.startsWith('//')) return 'https:' + u;
+  if (/^https?:\/\//.test(u)) return u;
+  return pixel;
 }
 
 // ==================== EXTRACTION DE DONNÉES ====================
