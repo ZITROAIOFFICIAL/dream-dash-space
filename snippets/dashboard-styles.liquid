@@ -382,6 +382,19 @@
       }
     }
 
+    /* Centrer le contenu sur desktop uniquement */
+    @media (min-width: 769px) {
+      .main-content {
+        display: flex;
+        justify-content: center;
+      }
+      
+      .main-content .container {
+        max-width: 1200px;
+        width: 100%;
+      }
+    }
+
     .container {
       padding: 2rem;
     }
