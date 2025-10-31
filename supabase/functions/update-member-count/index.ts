@@ -11,7 +11,7 @@ const AUGMENTATION_MIN = 1; // 👈 Montée minimum
 const AUGMENTATION_MAX = 5; // 👈 Montée maximum
 const DIMINUTION_MIN = 1; // 👈 Descente minimum
 const DIMINUTION_MAX = 3; // 👈 Descente maximum
-const TRANSITION_STEP = 3; // 👈 Vitesse de transition entre périodes
+const TRANSITION_STEP = 500; // 👈 Vitesse de transition entre périodes
 
 // ============================================================
 
