@@ -16,8 +16,14 @@ function initSupabaseConfig() {
   }
 }
 
-// ==================== EXTRACTION DE DONNÉES ====================
+// Utils URL des fonctions
+function getFunctionsBase() {
+  if (!SUPABASE_URL) return '';
+  if (SUPABASE_URL.includes('.functions.supabase.co')) return SUPABASE_URL;
+  return SUPABASE_URL.replace('.supabase.co', '.functions.supabase.co');
+}
 
+// ==================== EXTRACTION DE DONNÉES ====================
 // Extraire toutes les données d'un bet_card
 function extractBetData(blockElement) {
   const blockId = blockElement.getAttribute('data-block-id') || blockElement.id;
@@ -94,7 +100,7 @@ async function saveBetToSupabase(blockElement) {
     
     const data = extractBetData(blockElement);
     
-    const response = await fetch(`${SUPABASE_URL}/functions/v1/save-bet-to-history`, {
+    const response = await fetch(`${getFunctionsBase()}/save-bet-to-history`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -124,7 +130,7 @@ async function saveParlayToSupabase(blockElement) {
     
     const data = extractParlayData(blockElement);
     
-    const response = await fetch(`${SUPABASE_URL}/functions/v1/save-parlay-to-history`, {
+    const response = await fetch(`${getFunctionsBase()}/save-parlay-to-history`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -153,7 +159,7 @@ async function saveParlayToSupabase(blockElement) {
 async function loadBetHistory() {
   try {
     console.log('📥 Chargement de l\'historique des bets...');
-    const url = `${SUPABASE_URL}/functions/v1/get-bet-history?shop_domain=${SHOP_DOMAIN}`;
+    const url = `${getFunctionsBase()}/get-bet-history?shop_domain=${SHOP_DOMAIN}`;
     console.log('↗️ Requête:', url);
     const response = await fetch(url);
     
@@ -177,7 +183,7 @@ async function loadBetHistory() {
 async function loadParlayHistory() {
   try {
     console.log('📥 Chargement de l\'historique des parlays...');
-    const url = `${SUPABASE_URL}/functions/v1/get-parlay-history?shop_domain=${SHOP_DOMAIN}`;
+    const url = `${getFunctionsBase()}/get-parlay-history?shop_domain=${SHOP_DOMAIN}`;
     console.log('↗️ Requête:', url);
     const response = await fetch(url);
     
@@ -500,6 +506,7 @@ function checkAndSaveBlocks() {
 document.addEventListener('DOMContentLoaded', function() {
   console.log('🚀 Initialisation du système d\'historique Supabase');
   initSupabaseConfig();
+  console.log('🔗 Functions base:', getFunctionsBase(), 'Shop domain:', SHOP_DOMAIN);
   checkAndSaveBlocks();
 });
 
