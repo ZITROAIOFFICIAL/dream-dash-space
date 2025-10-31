@@ -399,6 +399,7 @@ function generateBetCardHTML(bet) {
   }
   
   return `
+    <div class="card-wrapper">
     <!-- Badge UNITS -->
     <div style="max-width: 32rem; margin: 2rem auto 0.5rem; padding: 0 2rem;">
       <div style="background: ${unitsColor}; color: #ffffff; padding: 1rem 2rem; border-radius: 0.5rem; font-size: 1.5rem; font-weight: 700; text-align: center;">
@@ -407,11 +408,12 @@ function generateBetCardHTML(bet) {
     </div>
     
     <!-- Carte -->
-    <div style="background: #000000; border: 2px solid ${unitsColor}; border-radius: 1rem; padding: 2rem; margin: 0 auto 2rem; max-width: 32rem;">
+    <div class="history-card" style="background: #000000; border: 2px solid ${unitsColor}; border-radius: 1rem; padding: 2rem; margin: 0 auto 2rem; max-width: 100%;">
       <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1rem; margin-bottom: 1.5rem;">
         ${bet.match_date} - ${bet.match_time}
       </div>
       ${matchHTML}
+    </div>
     </div>
   `;
 }
@@ -516,6 +518,7 @@ function generateParlayCardHTML(parlay) {
   }).join('');
   
   return `
+    <div class="card-wrapper">
     <!-- Badge UNITS -->
     <div style="max-width: 32rem; margin: 2rem auto 0.5rem; padding: 0 2rem;">
       <div style="background: ${unitsColor}; color: #ffffff; padding: 1rem 2rem; border-radius: 0.5rem; font-size: 1.5rem; font-weight: 700; text-align: center;">
@@ -524,7 +527,7 @@ function generateParlayCardHTML(parlay) {
     </div>
     
     <!-- Carte -->
-    <div style="background: #000000; border: 2px solid ${unitsColor}; border-radius: 1rem; padding: 2rem; margin: 0 auto 2rem; max-width: 32rem;">
+    <div class="history-card" style="background: #000000; border: 2px solid ${unitsColor}; border-radius: 1rem; padding: 2rem; margin: 0 auto 2rem; max-width: 100%;">
       <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1rem; margin-bottom: 1.5rem;">
         ${parlay.match_date} - ${parlay.match_time}
       </div>
@@ -532,6 +535,7 @@ function generateParlayCardHTML(parlay) {
         PARLAY x${parlay.multiplier}
       </div>
       ${legsHTML}
+    </div>
     </div>
   `;
 }
