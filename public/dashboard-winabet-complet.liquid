@@ -3169,13 +3169,20 @@
     // ===== GESTION DES MEMBRES CONNECTÉS LIVE =====
     const membersConfig = {
       base: {{ section.settings.members_base | default: 50 }},
-      maxIncrease: {{ section.settings.max_increase_per_min | default: 5 }},
-      maxDecrease: {{ section.settings.max_decrease_per_min | default: 5 }},
+      minIncrease: {{ section.settings.min_increase_per_change | default: 1 }},
+      maxIncrease: {{ section.settings.max_increase_per_change | default: 5 }},
+      minDecrease: {{ section.settings.min_decrease_per_change | default: 1 }},
+      maxDecrease: {{ section.settings.max_decrease_per_change | default: 5 }},
       minUpdateInterval: {{ section.settings.min_update_interval_sec | default: 30 }},
       maxUpdateInterval: {{ section.settings.max_update_interval_sec | default: 90 }},
+      // Heures de pointe (multiplicateur)
       peakStartHour: {{ section.settings.peak_start_hour | default: 18 }},
       peakEndHour: {{ section.settings.peak_end_hour | default: 23 }},
-      peakMultiplier: {{ section.settings.peak_multiplier | default: 3 }}
+      peakMultiplier: {{ section.settings.peak_multiplier | default: 1.5 }},
+      // Heures creuses (diviseur)
+      lowStartHour: {{ section.settings.low_start_hour | default: 2 }},
+      lowEndHour: {{ section.settings.low_end_hour | default: 8 }},
+      lowDivider: {{ section.settings.low_divider | default: 2 }}
     };
 
     let currentMembers = membersConfig.base;
@@ -3183,16 +3190,24 @@
     console.log('🎯 Membres Connectés Config:', membersConfig);
     console.log('🎯 Nombre initial:', currentMembers);
 
-    function isPeakHours() {
+    function isInTimeRange(startHour, endHour) {
       const now = new Date();
       const currentHour = now.getHours();
       
-      if (membersConfig.peakStartHour <= membersConfig.peakEndHour) {
-        return currentHour >= membersConfig.peakStartHour && currentHour <= membersConfig.peakEndHour;
+      if (startHour <= endHour) {
+        return currentHour >= startHour && currentHour <= endHour;
       } else {
-        // Cas où peak traverse minuit (ex: 22h à 2h)
-        return currentHour >= membersConfig.peakStartHour || currentHour <= membersConfig.peakEndHour;
+        // Cas où la période traverse minuit (ex: 22h à 2h)
+        return currentHour >= startHour || currentHour <= endHour;
       }
+    }
+
+    function isPeakHours() {
+      return isInTimeRange(membersConfig.peakStartHour, membersConfig.peakEndHour);
+    }
+
+    function isLowHours() {
+      return isInTimeRange(membersConfig.lowStartHour, membersConfig.lowEndHour);
     }
 
     function updateMemberCount(newCount) {
@@ -3221,23 +3236,32 @@
       
       let variation;
       if (goingUp) {
-        // Monte entre 0 et maxIncrease
-        variation = Math.floor(Math.random() * (membersConfig.maxIncrease + 1));
-        console.log('⬆️ Montée de:', variation);
+        // Monte entre minIncrease et maxIncrease
+        const range = membersConfig.maxIncrease - membersConfig.minIncrease;
+        variation = membersConfig.minIncrease + Math.floor(Math.random() * (range + 1));
+        console.log('⬆️ Montée de:', variation, `(entre ${membersConfig.minIncrease} et ${membersConfig.maxIncrease})`);
       } else {
-        // Descend entre 0 et maxDecrease
-        variation = -Math.floor(Math.random() * (membersConfig.maxDecrease + 1));
-        console.log('⬇️ Descente de:', Math.abs(variation));
+        // Descend entre minDecrease et maxDecrease
+        const range = membersConfig.maxDecrease - membersConfig.minDecrease;
+        variation = -(membersConfig.minDecrease + Math.floor(Math.random() * (range + 1)));
+        console.log('⬇️ Descente de:', Math.abs(variation), `(entre ${membersConfig.minDecrease} et ${membersConfig.maxDecrease})`);
       }
       
       let newCount = currentMembers + variation;
       
-      // Applique le multiplicateur pendant les heures de pointe
-      const targetBase = isPeakHours() 
-        ? membersConfig.base * membersConfig.peakMultiplier 
-        : membersConfig.base;
+      // Détermine la base cible selon l'heure
+      let targetBase = membersConfig.base;
+      let periodName = 'Normal';
       
-      console.log('🎯 Target base:', targetBase, '| Peak hours:', isPeakHours());
+      if (isPeakHours()) {
+        targetBase = membersConfig.base * membersConfig.peakMultiplier;
+        periodName = `Pointe (x${membersConfig.peakMultiplier})`;
+      } else if (isLowHours()) {
+        targetBase = membersConfig.base / membersConfig.lowDivider;
+        periodName = `Creuse (÷${membersConfig.lowDivider})`;
+      }
+      
+      console.log(`🎯 Période ${periodName} | Target base: ${Math.floor(targetBase)}`);
       
       // Garde le nombre proche de la base avec une marge
       const minCount = Math.max(10, targetBase - membersConfig.maxDecrease * 10);
@@ -3327,17 +3351,31 @@
     },
     {
       "type": "number",
-      "id": "max_increase_per_min",
-      "label": "Montée max par minute",
-      "default": 5,
-      "info": "Maximum que le nombre peut monter par minute (aléatoire entre 0 et cette valeur)"
+      "id": "min_increase_per_change",
+      "label": "⬆️ Montée minimum par changement",
+      "default": 1,
+      "info": "Minimum que le nombre peut monter à chaque fois"
     },
     {
       "type": "number",
-      "id": "max_decrease_per_min",
-      "label": "Descente max par minute",
+      "id": "max_increase_per_change",
+      "label": "⬆️ Montée maximum par changement",
       "default": 5,
-      "info": "Maximum que le nombre peut descendre par minute (aléatoire entre 0 et cette valeur)"
+      "info": "Maximum que le nombre peut monter à chaque fois (aléatoire entre min et max)"
+    },
+    {
+      "type": "number",
+      "id": "min_decrease_per_change",
+      "label": "⬇️ Descente minimum par changement",
+      "default": 1,
+      "info": "Minimum que le nombre peut descendre à chaque fois"
+    },
+    {
+      "type": "number",
+      "id": "max_decrease_per_change",
+      "label": "⬇️ Descente maximum par changement",
+      "default": 5,
+      "info": "Maximum que le nombre peut descendre à chaque fois (aléatoire entre min et max)"
     },
     {
       "type": "number",
@@ -3354,14 +3392,18 @@
       "info": "Temps maximum en secondes entre chaque changement de nombre (l'intervalle sera aléatoire entre min et max)"
     },
     {
+      "type": "header",
+      "content": "🔥 Heures de Pointe (Nombre Élevé)"
+    },
+    {
       "type": "range",
       "id": "peak_start_hour",
       "min": 0,
       "max": 23,
       "step": 1,
-      "label": "Heure de début d'affluence",
+      "label": "Heure de début",
       "default": 18,
-      "info": "Début des heures de forte affluence (format 24h)"
+      "info": "Début des heures de pointe (format 24h)"
     },
     {
       "type": "range",
@@ -3369,16 +3411,47 @@
       "min": 0,
       "max": 23,
       "step": 1,
-      "label": "Heure de fin d'affluence",
+      "label": "Heure de fin",
       "default": 23,
-      "info": "Fin des heures de forte affluence (format 24h)"
+      "info": "Fin des heures de pointe (format 24h)"
     },
     {
       "type": "number",
       "id": "peak_multiplier",
-      "label": "Multiplicateur heures de pointe",
-      "default": 3,
-      "info": "Facteur de multiplication du nombre de membres pendant les heures de pointe"
+      "label": "Multiplicateur",
+      "default": 1.5,
+      "info": "Facteur de multiplication du nombre de base (ex: 1.5 = 50% de plus)"
+    },
+    {
+      "type": "header",
+      "content": "💤 Heures Creuses (Nombre Bas)"
+    },
+    {
+      "type": "range",
+      "id": "low_start_hour",
+      "min": 0,
+      "max": 23,
+      "step": 1,
+      "label": "Heure de début",
+      "default": 2,
+      "info": "Début des heures creuses (format 24h)"
+    },
+    {
+      "type": "range",
+      "id": "low_end_hour",
+      "min": 0,
+      "max": 23,
+      "step": 1,
+      "label": "Heure de fin",
+      "default": 8,
+      "info": "Fin des heures creuses (format 24h)"
+    },
+    {
+      "type": "number",
+      "id": "low_divider",
+      "label": "Diviseur",
+      "default": 2,
+      "info": "Facteur de division du nombre de base (ex: 2 = 50% de moins)"
     },
     {
       "type": "textarea",
