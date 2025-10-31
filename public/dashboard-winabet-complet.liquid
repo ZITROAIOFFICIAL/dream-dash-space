@@ -2282,6 +2282,11 @@
         event.preventDefault();
       }
 
+      // Sauvegarder les cartes marquées avant de naviguer
+      if (typeof window.checkAndSaveBlocks === 'function') {
+        window.checkAndSaveBlocks();
+      }
+
       // Afficher le chargement AI pour les pages bet et parlay
       if (pageName === 'bet' || pageName === 'parlay') {
         const loadingOverlay = document.getElementById('ai-loading-overlay');
