@@ -2326,14 +2326,11 @@
       // Persist current page for editor reloads
       try { localStorage.setItem('dashboard_current_page', pageName); } catch {}
 
-      // Charger l'historique Supabase si on navigue vers ces pages (hors éditeur Shopify)
-      const inEditor = !!(window.Shopify && Shopify.designMode);
-      if (!inEditor) {
-        if (pageName === 'historique-bet' && typeof window.loadBetHistory === 'function') {
-          window.loadBetHistory();
-        } else if (pageName === 'historique-parlay' && typeof window.loadParlayHistory === 'function') {
-          window.loadParlayHistory();
-        }
+      // Charger l'historique Supabase si on navigue vers ces pages
+      if (pageName === 'historique-bet' && typeof window.loadBetHistory === 'function') {
+        window.loadBetHistory();
+      } else if (pageName === 'historique-parlay' && typeof window.loadParlayHistory === 'function') {
+        window.loadParlayHistory();
       }
 
       // Update URL hash
