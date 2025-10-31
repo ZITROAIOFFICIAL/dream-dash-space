@@ -545,6 +545,43 @@ document.addEventListener('DOMContentLoaded', function() {
   initSupabaseConfig();
   console.log('🔗 Functions base:', getFunctionsBase(), 'Shop domain:', SHOP_DOMAIN);
   checkAndSaveBlocks();
+
+  // Observer les changements sur les cartes (édition Shopify, toggles, ajouts dynamiques)
+  try {
+    const observer = new MutationObserver((mutations) => {
+      let scheduled = false;
+      mutations.forEach((m) => {
+        if (m.type === 'attributes' && m.attributeName === 'data-send-to-history') {
+          const el = m.target;
+          const flag = el.getAttribute('data-send-to-history');
+          const type = el.getAttribute('data-block-type');
+          console.log('🛰️ Changement data-send-to-history détecté:', {
+            blockId: el.getAttribute('data-block-id'), flag, type
+          });
+          if (flag === 'true') {
+            if (type === 'bet_card') saveBetToSupabase(el);
+            if (type === 'parlay_card') saveParlayToSupabase(el);
+          }
+        }
+        if (m.type === 'childList' && !scheduled) {
+          scheduled = true;
+          setTimeout(() => {
+            console.log('🔁 Nouveaux nœuds détectés, rescannage des cartes...');
+            checkAndSaveBlocks();
+          }, 50);
+        }
+      });
+    });
+    observer.observe(document.body, {
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['data-send-to-history'],
+      childList: true
+    });
+    console.log('👀 MutationObserver initialisé');
+  } catch (e) {
+    console.warn('⚠️ Impossible d\'initialiser MutationObserver', e);
+  }
 });
 
 // Exposer les fonctions globalement pour pouvoir les appeler depuis le code Liquid
@@ -552,3 +589,4 @@ window.loadBetHistory = loadBetHistory;
 window.loadParlayHistory = loadParlayHistory;
 window.saveBetToSupabase = saveBetToSupabase;
 window.saveParlayToSupabase = saveParlayToSupabase;
+window.checkAndSaveBlocks = checkAndSaveBlocks;
