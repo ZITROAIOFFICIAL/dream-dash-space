@@ -49,7 +49,8 @@
   <main class="main-content">
     <!-- Content for the landing page will be added here -->
     <div class="container">
-      <h1 style="color: #ffffff; text-align: center; margin-top: 2rem;">Page d'Accueil</h1>
+      <h1 style="color: #ffffff; text-align: center; margin-top: 2rem;">{{ section.settings.page_title }}</h1>
+      <p style="color: rgba(255, 255, 255, 0.7); text-align: center; margin-top: 1rem;">{{ section.settings.page_subtitle }}</p>
     </div>
   </main>
 
@@ -104,10 +105,27 @@
   "name": "Page d'Accueil",
   "settings": [
     {
+      "type": "text",
+      "id": "page_title",
+      "label": "Titre de la page",
+      "default": "Bienvenue sur WINABET.AI"
+    },
+    {
+      "type": "text",
+      "id": "page_subtitle",
+      "label": "Sous-titre de la page",
+      "default": "Votre plateforme de paris sportifs intelligents"
+    },
+    {
       "type": "number",
       "id": "members_base",
       "label": "Nombre de membres de base",
       "default": 50
+    }
+  ],
+  "presets": [
+    {
+      "name": "Page d'Accueil"
     }
   ]
 }
