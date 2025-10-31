@@ -3169,13 +3169,17 @@
     // ===== GESTION DES MEMBRES CONNECTÉS LIVE =====
     const membersConfig = {
       base: {{ section.settings.members_base | default: 50 }},
-      variationPerMin: {{ section.settings.members_variation_per_min | default: 2 }},
+      maxIncrease: {{ section.settings.max_increase_per_min | default: 5 }},
+      maxDecrease: {{ section.settings.max_decrease_per_min | default: 5 }},
       peakStartHour: {{ section.settings.peak_start_hour | default: 18 }},
       peakEndHour: {{ section.settings.peak_end_hour | default: 23 }},
       peakMultiplier: {{ section.settings.peak_multiplier | default: 3 }}
     };
 
     let currentMembers = membersConfig.base;
+    
+    console.log('🎯 Membres Connectés Config:', membersConfig);
+    console.log('🎯 Nombre initial:', currentMembers);
 
     function isPeakHours() {
       const now = new Date();
@@ -3193,6 +3197,8 @@
       const sidebarCount = document.getElementById('sidebar-member-count');
       const headerCount = document.getElementById('header-member-count');
       
+      console.log('📊 Mise à jour membres:', currentMembers, '→', newCount);
+      
       // Animation flip
       [sidebarCount, headerCount].forEach(element => {
         if (element) {
@@ -3201,13 +3207,27 @@
           setTimeout(() => {
             element.textContent = newCount;
             element.style.animation = '';
+            console.log('✅ Animation terminée pour:', element.id);
           }, 300);
         }
       });
     }
 
     function calculateNewMemberCount() {
-      const variation = Math.floor(Math.random() * membersConfig.variationPerMin * 2) - membersConfig.variationPerMin;
+      // Décide aléatoirement si ça monte ou descend (50/50)
+      const goingUp = Math.random() > 0.5;
+      
+      let variation;
+      if (goingUp) {
+        // Monte entre 0 et maxIncrease
+        variation = Math.floor(Math.random() * (membersConfig.maxIncrease + 1));
+        console.log('⬆️ Montée de:', variation);
+      } else {
+        // Descend entre 0 et maxDecrease
+        variation = -Math.floor(Math.random() * (membersConfig.maxDecrease + 1));
+        console.log('⬇️ Descente de:', Math.abs(variation));
+      }
+      
       let newCount = currentMembers + variation;
       
       // Applique le multiplicateur pendant les heures de pointe
@@ -3215,9 +3235,11 @@
         ? membersConfig.base * membersConfig.peakMultiplier 
         : membersConfig.base;
       
+      console.log('🎯 Target base:', targetBase, '| Peak hours:', isPeakHours());
+      
       // Garde le nombre proche de la base avec une marge
-      const minCount = Math.max(10, targetBase - membersConfig.variationPerMin * 5);
-      const maxCount = targetBase + membersConfig.variationPerMin * 5;
+      const minCount = Math.max(10, targetBase - membersConfig.maxDecrease * 10);
+      const maxCount = targetBase + membersConfig.maxIncrease * 10;
       
       newCount = Math.max(minCount, Math.min(maxCount, newCount));
       
@@ -3228,7 +3250,15 @@
     setInterval(() => {
       currentMembers = calculateNewMemberCount();
       updateMemberCount(currentMembers);
+      console.log('🔄 Update minute - Nouveau total:', currentMembers);
     }, 60000); // 60000 ms = 1 minute
+    
+    // TEST: Update toutes les 5 secondes pour vérifier que ça fonctionne
+    console.log('🧪 Mode test activé - update toutes les 5 secondes');
+    setInterval(() => {
+      currentMembers = calculateNewMemberCount();
+      updateMemberCount(currentMembers);
+    }, 5000); // 5000 ms = 5 secondes (pour test)
   </script>
 
   <!-- CSS pour l'animation flip -->
@@ -3281,10 +3311,17 @@
     },
     {
       "type": "number",
-      "id": "members_variation_per_min",
-      "label": "Variation par minute",
-      "default": 2,
-      "info": "Combien le nombre monte/descend par minute"
+      "id": "max_increase_per_min",
+      "label": "Montée max par minute",
+      "default": 5,
+      "info": "Maximum que le nombre peut monter par minute (aléatoire entre 0 et cette valeur)"
+    },
+    {
+      "type": "number",
+      "id": "max_decrease_per_min",
+      "label": "Descente max par minute",
+      "default": 5,
+      "info": "Maximum que le nombre peut descendre par minute (aléatoire entre 0 et cette valeur)"
     },
     {
       "type": "range",
