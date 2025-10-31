@@ -408,7 +408,7 @@ function generateBetCardHTML(bet) {
     </div>
     
     <!-- Carte -->
-    <div class="history-card" style="background: #000000; border: 2px solid ${unitsColor}; border-radius: 1rem; padding: 2rem; margin: 0 auto 2rem; max-width: 100%;">
+    <div class="history-card" style="background: #000000; border: 2px solid ${unitsColor}; border-radius: 1rem; padding: 2rem; margin: 0 auto 2rem; max-width: 36rem; width: 100%; display: flex; flex-direction: column; align-items: center;">
       <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1rem; margin-bottom: 1.5rem;">
         ${bet.match_date} - ${bet.match_time}
       </div>
@@ -527,7 +527,7 @@ function generateParlayCardHTML(parlay) {
     </div>
     
     <!-- Carte -->
-    <div class="history-card" style="background: #000000; border: 2px solid ${unitsColor}; border-radius: 1rem; padding: 2rem; margin: 0 auto 2rem; max-width: 100%;">
+    <div class="history-card" style="background: #000000; border: 2px solid ${unitsColor}; border-radius: 1rem; padding: 2rem; margin: 0 auto 2rem; max-width: 36rem; width: 100%; display: flex; flex-direction: column; align-items: center;">
       <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1rem; margin-bottom: 1.5rem;">
         ${parlay.match_date} - ${parlay.match_time}
       </div>
@@ -535,6 +535,7 @@ function generateParlayCardHTML(parlay) {
         PARLAY x${parlay.multiplier}
       </div>
       ${legsHTML}
+    </div>
     </div>
     </div>
   `;
