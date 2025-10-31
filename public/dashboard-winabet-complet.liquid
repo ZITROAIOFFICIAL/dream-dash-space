@@ -207,16 +207,18 @@
         {% assign bet_cards = section.blocks | where: 'type', 'bet_card' %}
         {% if bet_cards.size > 0 %}
           {% for block in bet_cards %}
-            {% if block.settings.show_card and block.settings.send_to_history != true %}
+            {% if block.settings.show_card %}
               <!-- AI Data Counter Above Card -->
-              <div class="ai-counter-above">
-                <div class="ai-spinner">
-                  <span class="ai-badge">IA</span>
+              {% if block.settings.send_to_history != true %}
+                <div class="ai-counter-above">
+                  <div class="ai-spinner">
+                    <span class="ai-badge">IA</span>
+                  </div>
+                  <span><span>{{ block.settings.ai_data_count | default: 2843 }}</span> DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
                 </div>
-                <span><span>{{ block.settings.ai_data_count | default: 2843 }}</span> DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
-              </div>
+              {% endif %}
 
-              <div class="bet-card" 
+              <div class="bet-card" style="{% if block.settings.send_to_history == true %}display:none{% endif %}" 
                    {{ block.shopify_attributes }}
                    data-block-type="bet_card"
                    data-block-id="{{ block.id }}"
@@ -410,15 +412,17 @@
 
         {% assign has_parlay = false %}
         {% for block in section.blocks %}
-          {% if block.type == 'parlay_card' and block.settings.show_card and block.settings.send_to_history != true %}
+          {% if block.type == 'parlay_card' and block.settings.show_card %}
             {% assign has_parlay = true %}
               <!-- AI Data Counter Above Card -->
-              <div class="ai-counter-above">
-                <div class="ai-spinner">
-                  <span class="ai-badge">IA</span>
+              {% if block.settings.send_to_history != true %}
+                <div class="ai-counter-above">
+                  <div class="ai-spinner">
+                    <span class="ai-badge">IA</span>
+                  </div>
+                  <span><span>{{ block.settings.ai_data_count | default: 2843 }}</span> DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
                 </div>
-                <span><span>{{ block.settings.ai_data_count | default: 2843 }}</span> DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
-              </div>
+              {% endif %}
 
               {% capture legs_json %}[
                 {% for i in (1..10) %}
@@ -564,7 +568,7 @@
                 {% endfor %}
               ]{% endcapture %}
 
-              <div class="bet-card" 
+              <div class="bet-card" style="{% if block.settings.send_to_history == true %}display:none{% endif %}" 
                    {{ block.shopify_attributes }}
                    data-block-type="parlay_card"
                    data-block-id="{{ block.id }}"

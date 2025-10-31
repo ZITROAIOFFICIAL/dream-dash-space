@@ -499,6 +499,9 @@ function showErrorToast(message) {
 
 // Détecter les blocks avec send_to_history = true au chargement
 function checkAndSaveBlocks() {
+  // Ne pas sauvegarder dans l'éditeur Shopify pour éviter les erreurs d'iframe
+  const inEditor = !!(window.Shopify && Shopify.designMode);
+  if (inEditor) return;
   // Vérifier tous les bet_card
   document.querySelectorAll('[data-block-type="bet_card"]').forEach(card => {
     const sendToHistory = card.getAttribute('data-send-to-history');
