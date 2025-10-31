@@ -2589,13 +2589,30 @@
       const savedMembers = localStorage.getItem('winabet_current_members');
       const savedTarget = localStorage.getItem('winabet_current_target');
       
-      if (savedMembers !== null && savedTarget !== null) {
+      // Restauration indépendante de chaque valeur
+      if (savedMembers !== null) {
         currentMembers = parseInt(savedMembers, 10);
-        currentTarget = parseInt(savedTarget, 10);
         console.log('🔄 Compteur restauré:', currentMembers);
       } else {
         console.log('🎯 Nombre initial:', currentMembers);
       }
+      
+      if (savedTarget !== null) {
+        currentTarget = parseInt(savedTarget, 10);
+      } else {
+        currentTarget = currentMembers; // Si pas de cible sauvegardée, utiliser le compteur actuel
+      }
+      
+      // Écrire immédiatement les deux valeurs pour garantir leur présence
+      localStorage.setItem('winabet_current_members', currentMembers.toString());
+      localStorage.setItem('winabet_current_target', currentTarget.toString());
+      
+      // Mise à jour immédiate de l'affichage pour éviter le flash à 50
+      const sidebarCount = document.getElementById('sidebar-member-count');
+      const headerCount = document.getElementById('header-member-count');
+      if (sidebarCount) sidebarCount.textContent = currentMembers;
+      if (headerCount) headerCount.textContent = currentMembers;
+      
     } catch (e) {
       console.log('⚠️ Impossible de restaurer le compteur:', e);
     }
