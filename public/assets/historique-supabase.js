@@ -30,9 +30,9 @@ function extractBetData(blockElement) {
     win_percentage: parseInt(blockElement.getAttribute('data-win-percentage')) || 0,
     bet_type: blockElement.getAttribute('data-bet-type'),
     team1_name: blockElement.getAttribute('data-team1-name'),
-    team1_logo: blockElement.getAttribute('data-team1-logo'),
+    team1_logo: blockElement.getAttribute('data-team1-logo') || '',
     team2_name: blockElement.getAttribute('data-team2-name'),
-    team2_logo: blockElement.getAttribute('data-team2-logo'),
+    team2_logo: blockElement.getAttribute('data-team2-logo') || '',
     match_time: blockElement.getAttribute('data-match-time'),
     match_date: blockElement.getAttribute('data-match-date'),
     multiplier: parseFloat(blockElement.getAttribute('data-multiplier')) || 0,
@@ -48,6 +48,7 @@ function extractBetData(blockElement) {
     over_under_stat_type: blockElement.getAttribute('data-over-under-stat-type')
   };
   
+  console.log('📤 Données bet extraites:', data);
   return data;
 }
 
@@ -276,6 +277,7 @@ function displayParlayHistory(data) {
 
 // Générer le HTML d'une carte de bet
 function generateBetCardHTML(bet) {
+  console.log('🖼️ Génération bet card, logos:', { team1_logo: bet.team1_logo, team2_logo: bet.team2_logo });
   // Calculer les units et la couleur selon le résultat
   let unitsText, unitsColor;
   if (bet.result === 'win') {
