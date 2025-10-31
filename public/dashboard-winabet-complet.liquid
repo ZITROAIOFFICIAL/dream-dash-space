@@ -206,8 +206,10 @@
 
         {% assign bet_cards = section.blocks | where: 'type', 'bet_card' %}
         {% if bet_cards.size > 0 %}
+          <div class="cards-grid">
           {% for block in bet_cards %}
             {% if block.settings.show_card %}
+              <div class="card-wrapper">
               <!-- AI Data Counter Above Card -->
               {% if block.settings.send_to_history != true %}
                 <div class="ai-counter-above">
@@ -392,8 +394,10 @@
                   <div class="odds-value">{{ block.settings.best_odds | default: '-105' }}</div>
                 </div>
               </div>
+              </div> <!-- card-wrapper -->
             {% endif %}
           {% endfor %}
+          </div> <!-- cards-grid -->
         {% else %}
           <div class="card text-center" style="padding: 2rem;">
             <p style="color: rgba(255, 255, 255, 0.6);">
@@ -411,9 +415,11 @@
         <p class="subtitle">Les parlay avec la meilleur probabilité de réussite aujourd'hui. Nous affichons tous les parlay avec minimum de 60% de chance de gagner selon notre IA.</p>
 
         {% assign has_parlay = false %}
+        <div class="cards-grid">
         {% for block in section.blocks %}
           {% if block.type == 'parlay_card' and block.settings.show_card %}
             {% assign has_parlay = true %}
+              <div class="card-wrapper">
               <!-- AI Data Counter Above Card -->
               {% if block.settings.send_to_history != true %}
                 <div class="ai-counter-above">
@@ -994,8 +1000,10 @@
                   <div class="odds-value">{{ block.settings.best_odds | default: '-105' }}</div>
                 </div>
               </div>
+              </div> <!-- card-wrapper -->
           {% endif %}
         {% endfor %}
+        </div> <!-- cards-grid -->
         {% if has_parlay == false %}
           <div class="card text-center" style="padding: 2rem;">
             <p style="color: rgba(255, 255, 255, 0.6);">

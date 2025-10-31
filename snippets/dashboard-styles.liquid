@@ -1693,12 +1693,40 @@
       text-align: center;
     }
 
+    /* Cards Grid - 2 colonnes sur desktop */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      width: 100%;
+    }
+
+    .card-wrapper {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
     /* Desktop - Agrandissement manuel des cartes (20% plus grand) */
     @media (min-width: 1024px) {
+      /* Cards Grid - 2 colonnes */
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        max-width: 95%;
+        margin: 0 auto;
+      }
+
+      /* Si une seule carte, centrer */
+      .cards-grid:has(.card-wrapper:only-child) {
+        grid-template-columns: 1fr;
+        max-width: 43.2rem;
+      }
+
       /* Bet Card & Parlay Card */
       .bet-card,
       .parlay-card {
-        max-width: 43.2rem; /* 36rem * 1.2 */
+        max-width: 100%; /* Prend toute la largeur de la colonne */
         margin-bottom: 1.8rem; /* 1.5rem * 1.2 */
       }
 
