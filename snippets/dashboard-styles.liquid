@@ -1187,20 +1187,32 @@
       flex-wrap: wrap;
     }
 
-    /* Augmentation de la taille des cartes sur desktop */
+    /* Augmentation de la taille globale des cartes sur desktop */
     @media (min-width: 1024px) {
       .bet-card {
-        max-width: 56rem;
+        transform: scale(1.25);
+        transform-origin: center top;
+        margin-bottom: 3rem;
       }
 
       .parlay-card {
-        max-width: 62rem;
+        transform: scale(1.25);
+        transform-origin: center top;
+        margin-bottom: 3rem;
       }
 
       .history-card {
-        max-width: 56rem;
+        transform: scale(1.25);
+        transform-origin: center top;
+        margin-bottom: 2.5rem;
         margin-left: auto;
         margin-right: auto;
+      }
+
+      .ai-counter-above {
+        transform: scale(1.25);
+        transform-origin: center top;
+        margin-bottom: 1.5rem;
       }
     }
 
