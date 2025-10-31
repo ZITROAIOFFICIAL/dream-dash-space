@@ -499,12 +499,15 @@ function showErrorToast(message) {
 
 // Détecter les blocks avec send_to_history = true au chargement
 function checkAndSaveBlocks() {
-  // Ne pas sauvegarder dans l'éditeur Shopify pour éviter les erreurs d'iframe
-  const inEditor = !!(window.Shopify && Shopify.designMode);
-  if (inEditor) return;
+  console.log('🔍 Recherche des cartes à sauvegarder...');
   // Vérifier tous les bet_card
   document.querySelectorAll('[data-block-type="bet_card"]').forEach(card => {
     const sendToHistory = card.getAttribute('data-send-to-history');
+    console.log('🔎 Bet card trouvé:', {
+      blockId: card.getAttribute('data-block-id'),
+      sendToHistory: sendToHistory,
+      visible: card.style.display !== 'none'
+    });
     if (sendToHistory === 'true') {
       console.log('📋 Détection bet à sauvegarder:', card.getAttribute('data-block-id'));
       saveBetToSupabase(card);
@@ -514,6 +517,11 @@ function checkAndSaveBlocks() {
   // Vérifier tous les parlay_card
   document.querySelectorAll('[data-block-type="parlay_card"]').forEach(card => {
     const sendToHistory = card.getAttribute('data-send-to-history');
+    console.log('🔎 Parlay card trouvé:', {
+      blockId: card.getAttribute('data-block-id'),
+      sendToHistory: sendToHistory,
+      visible: card.style.display !== 'none'
+    });
     if (sendToHistory === 'true') {
       console.log('📋 Détection parlay à sauvegarder:', card.getAttribute('data-block-id'));
       saveParlayToSupabase(card);
