@@ -2079,12 +2079,47 @@
     let isMobileSidebarOpen = false;
 
     // ===========================
-    // SYSTÈME D'AUTO-INCRÉMENTATION
+    // SYSTÈME D'AUTO-INCRÉMENTATION AVEC LOCALSTORAGE
     // ===========================
     let autoIncrementInterval = null;
     let activeCardCounterEl = null;
+    let currentDialogKey = null; // Clé localStorage pour le dialog actif
     
-    function startAutoIncrement(initialCount, intervalMinutes, amount) {
+    // Sauvegarde dans localStorage
+    function saveCountToStorage(key, count) {
+      try {
+        localStorage.setItem(key, JSON.stringify({
+          count: count,
+          timestamp: Date.now()
+        }));
+      } catch (e) {
+        console.warn('Erreur sauvegarde localStorage:', e);
+      }
+    }
+    
+    // Charge depuis localStorage avec calcul du temps écoulé
+    function loadCountFromStorage(key, initialCount, intervalMinutes, amount) {
+      try {
+        const stored = localStorage.getItem(key);
+        if (!stored) return initialCount;
+        
+        const data = JSON.parse(stored);
+        const timeElapsed = Date.now() - data.timestamp;
+        const minutesElapsed = timeElapsed / (60 * 1000);
+        const incrementsSinceLastSave = Math.floor(minutesElapsed / intervalMinutes);
+        const additionalCount = incrementsSinceLastSave * amount;
+        
+        const newCount = data.count + additionalCount;
+        console.log(`📦 Chargé depuis localStorage: ${data.count} + ${additionalCount} (${incrementsSinceLastSave} incréments) = ${newCount}`);
+        
+        return newCount;
+      } catch (e) {
+        console.warn('Erreur chargement localStorage:', e);
+        return initialCount;
+      }
+    }
+    
+    function startAutoIncrement(initialCount, intervalMinutes, amount, storageKey) {
       // Arrêter l'intervalle précédent s'il existe
       if (autoIncrementInterval) {
         clearInterval(autoIncrementInterval);
@@ -2092,9 +2127,16 @@
       
       // Nettoyer la valeur : enlever tous les espaces et caractères non numériques sauf les chiffres
       const cleanedCount = String(initialCount).replace(/\s/g, '').replace(/[^\d]/g, '');
-      let currentCount = parseInt(cleanedCount) || 2843;
+      const baseCount = parseInt(cleanedCount) || 2843;
       
-      console.log(`🚀 Auto-incrémentation démarrée: ${currentCount} données de base, +${amount} toutes les ${intervalMinutes} min`);
+      // Charger la valeur depuis localStorage si disponible
+      currentDialogKey = storageKey;
+      let currentCount = loadCountFromStorage(storageKey, baseCount, intervalMinutes, amount);
+      
+      // Mettre à jour immédiatement l'affichage
+      updateDataCount(currentCount);
+      
+      console.log(`🚀 Auto-incrémentation démarrée: ${currentCount} données (base: ${baseCount}), +${amount} toutes les ${intervalMinutes} min`);
       
       // Démarrer l'incrémentation automatique
       const intervalMs = intervalMinutes * 60 * 1000; // Convertir minutes en millisecondes
@@ -2103,6 +2145,7 @@
       autoIncrementInterval = setInterval(() => {
         currentCount += parseInt(amount);
         updateDataCount(currentCount);
+        saveCountToStorage(storageKey, currentCount);
         console.log(`✅ Auto-incrémentation: ${currentCount} données IA (+${amount})`);
       }, intervalMs);
     }
@@ -2146,7 +2189,7 @@
       el.textContent = Number(count).toLocaleString('fr-FR');
     }
 
-    function startCardCounterAutoIncrement(counterEl, initialCount, intervalMinutes, amount) {
+    function startCardCounterAutoIncrement(counterEl, initialCount, intervalMinutes, amount, storageKey) {
       if (!counterEl) return;
 
       // Stopper interval précédent pour cet élément
@@ -2155,10 +2198,13 @@
 
       // Nettoyage + parsing de la valeur initiale
       const cleaned = String(initialCount).replace(/\s/g, '').replace(/[^\d]/g, '');
-      let current = parseInt(cleaned) || 2843;
+      const baseCount = parseInt(cleaned) || 2843;
       const step = parseInt(String(amount)) || 5;
 
-      // Mettre à jour immédiatement l'affichage (optionnel, rend visible tout de suite)
+      // Charger la valeur depuis localStorage si disponible
+      let current = loadCountFromStorage(storageKey, baseCount, intervalMinutes, step);
+
+      // Mettre à jour immédiatement l'affichage
       updateCounterElement(counterEl, current);
 
       const intervalMs = Number(intervalMinutes) * 60 * 1000;
@@ -2168,6 +2214,7 @@
       const id = setInterval(() => {
         current += step;
         updateCounterElement(counterEl, current);
+        saveCountToStorage(storageKey, current);
         console.log('↗️ Compteur carte mis à jour', { current, step });
       }, intervalMs);
 
@@ -2177,7 +2224,7 @@
     function initGlobalAutoIncrementCounters() {
       // Pour chaque carte, lire les paramètres sur le bouton "Voir analyse IA"
       const buttons = document.querySelectorAll('.bet-card .btn-analysis');
-      buttons.forEach((btn) => {
+      buttons.forEach((btn, index) => {
         try {
           const card = btn.closest('.bet-card');
           if (!card) return;
@@ -2201,7 +2248,11 @@
           // Valeur initiale
           const initial = countEl.textContent || btn.dataset.aiDataCount || '2843';
 
-          startCardCounterAutoIncrement(countEl, initial, interval, amount);
+          // Créer une clé unique pour cette carte
+          const blockId = card.dataset.blockId || `bet-card-${index}`;
+          const storageKey = `ai-counter-${blockId}`;
+
+          startCardCounterAutoIncrement(countEl, initial, interval, amount, storageKey);
         } catch (e) {
           console.warn('❗Erreur init auto-incrément carte', e);
         }
@@ -2495,7 +2546,13 @@
             initialCount: dataCountRaw,
             cleanedCount: String(dataCountRaw).replace(/\s/g, '')
           });
-          startAutoIncrement(dataCountRaw, incrementInterval, incrementAmount);
+          
+          // Créer une clé unique pour cette carte
+          const card = trigger?.closest('.bet-card');
+          const blockId = card?.dataset?.blockId || `dialog-${dataCountRaw}`;
+          const storageKey = `ai-dialog-${blockId}`;
+          
+          startAutoIncrement(dataCountRaw, incrementInterval, incrementAmount, storageKey);
         } else {
           console.log('⚠️ Auto-incrémentation désactivée');
         }
