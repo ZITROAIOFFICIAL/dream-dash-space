@@ -1,0 +1,505 @@
+// Configuration Supabase (sera initialisée depuis window.SUPABASE_CONFIG)
+let SUPABASE_URL = '';
+let SHOP_DOMAIN = '';
+
+// Initialisation
+function initSupabaseConfig() {
+  if (window.SUPABASE_CONFIG) {
+    SUPABASE_URL = window.SUPABASE_CONFIG.url;
+    SHOP_DOMAIN = window.SUPABASE_CONFIG.shopDomain;
+    console.log('✅ Configuration Supabase initialisée');
+  } else {
+    console.error('❌ Configuration Supabase manquante');
+  }
+}
+
+// ==================== EXTRACTION DE DONNÉES ====================
+
+// Extraire toutes les données d'un bet_card
+function extractBetData(blockElement) {
+  const blockId = blockElement.getAttribute('data-block-id') || blockElement.id;
+  
+  const data = {
+    shop_domain: SHOP_DOMAIN,
+    block_id: blockId,
+    sport_type: blockElement.getAttribute('data-sport-type'),
+    ai_data_count: parseInt(blockElement.getAttribute('data-ai-data-count')) || 0,
+    win_percentage: parseInt(blockElement.getAttribute('data-win-percentage')) || 0,
+    bet_type: blockElement.getAttribute('data-bet-type'),
+    team1_name: blockElement.getAttribute('data-team1-name'),
+    team1_logo: blockElement.getAttribute('data-team1-logo'),
+    team2_name: blockElement.getAttribute('data-team2-name'),
+    team2_logo: blockElement.getAttribute('data-team2-logo'),
+    match_time: blockElement.getAttribute('data-match-time'),
+    match_date: blockElement.getAttribute('data-match-date'),
+    multiplier: parseFloat(blockElement.getAttribute('data-multiplier')) || 0,
+    bet_units: blockElement.getAttribute('data-bet-units'),
+    odds: parseInt(blockElement.getAttribute('data-odds')) || 0,
+    best_bookmaker: blockElement.getAttribute('data-best-bookmaker'),
+    best_odds: parseInt(blockElement.getAttribute('data-best-odds')) || 0,
+    result: blockElement.getAttribute('data-result') || 'pending',
+    spread_value: blockElement.getAttribute('data-spread-value'),
+    spread_team: blockElement.getAttribute('data-spread-team'),
+    over_under_type: blockElement.getAttribute('data-over-under-type'),
+    over_under_value: blockElement.getAttribute('data-over-under-value'),
+    over_under_stat_type: blockElement.getAttribute('data-over-under-stat-type')
+  };
+  
+  return data;
+}
+
+// Extraire toutes les données d'un parlay_card
+function extractParlayData(blockElement) {
+  const blockId = blockElement.getAttribute('data-block-id') || blockElement.id;
+  
+  const data = {
+    shop_domain: SHOP_DOMAIN,
+    block_id: blockId,
+    sport_type: blockElement.getAttribute('data-sport-type'),
+    ai_data_count: parseInt(blockElement.getAttribute('data-ai-data-count')) || 0,
+    win_percentage: parseInt(blockElement.getAttribute('data-win-percentage')) || 0,
+    multiplier: parseFloat(blockElement.getAttribute('data-multiplier')) || 0,
+    bet_units: blockElement.getAttribute('data-bet-units'),
+    odds: parseInt(blockElement.getAttribute('data-odds')) || 0,
+    best_bookmaker: blockElement.getAttribute('data-best-bookmaker'),
+    best_odds: parseInt(blockElement.getAttribute('data-best-odds')) || 0,
+    match_date: blockElement.getAttribute('data-match-date'),
+    match_time: blockElement.getAttribute('data-match-time'),
+    result: blockElement.getAttribute('data-result') || 'pending',
+    legs: []
+  };
+  
+  // Extraire les legs depuis les attributs data-legs (JSON)
+  const legsJson = blockElement.getAttribute('data-legs');
+  if (legsJson) {
+    try {
+      data.legs = JSON.parse(legsJson);
+    } catch (e) {
+      console.error('Erreur parsing legs:', e);
+      data.legs = [];
+    }
+  }
+  
+  return data;
+}
+
+// ==================== SAUVEGARDE DANS SUPABASE ====================
+
+// Sauvegarder un bet dans Supabase
+async function saveBetToSupabase(blockElement) {
+  try {
+    console.log('💾 Sauvegarde du bet dans Supabase...');
+    
+    const data = extractBetData(blockElement);
+    
+    const response = await fetch(`${SUPABASE_URL}/functions/v1/save-bet-to-history`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Erreur ${response.status}: ${response.statusText}`);
+    }
+    
+    const result = await response.json();
+    console.log('✅ Bet sauvegardé:', result);
+    
+    showSuccessToast('Bet sauvegardé dans l\'historique !');
+    
+  } catch (error) {
+    console.error('❌ Erreur lors de la sauvegarde:', error);
+    showErrorToast('Erreur lors de la sauvegarde. Vérifiez la console.');
+  }
+}
+
+// Sauvegarder un parlay dans Supabase
+async function saveParlayToSupabase(blockElement) {
+  try {
+    console.log('💾 Sauvegarde du parlay dans Supabase...');
+    
+    const data = extractParlayData(blockElement);
+    
+    const response = await fetch(`${SUPABASE_URL}/functions/v1/save-parlay-to-history`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Erreur ${response.status}: ${response.statusText}`);
+    }
+    
+    const result = await response.json();
+    console.log('✅ Parlay sauvegardé:', result);
+    
+    showSuccessToast('Parlay sauvegardé dans l\'historique !');
+    
+  } catch (error) {
+    console.error('❌ Erreur lors de la sauvegarde:', error);
+    showErrorToast('Erreur lors de la sauvegarde. Vérifiez la console.');
+  }
+}
+
+// ==================== CHARGEMENT DE L'HISTORIQUE ====================
+
+// Charger l'historique des bets depuis Supabase
+async function loadBetHistory() {
+  try {
+    console.log('📥 Chargement de l\'historique des bets...');
+    
+    const response = await fetch(`${SUPABASE_URL}/functions/v1/get-bet-history?shop_domain=${SHOP_DOMAIN}`);
+    
+    if (!response.ok) {
+      throw new Error(`Erreur ${response.status}`);
+    }
+    
+    const data = await response.json();
+    console.log('✅ Historique chargé:', data);
+    
+    displayBetHistory(data);
+    
+  } catch (error) {
+    console.error('❌ Erreur chargement historique:', error);
+    const emptyState = document.getElementById('bet-empty-state');
+    if (emptyState) emptyState.style.display = 'block';
+  }
+}
+
+// Charger l'historique des parlays depuis Supabase
+async function loadParlayHistory() {
+  try {
+    console.log('📥 Chargement de l\'historique des parlays...');
+    
+    const response = await fetch(`${SUPABASE_URL}/functions/v1/get-parlay-history?shop_domain=${SHOP_DOMAIN}`);
+    
+    if (!response.ok) {
+      throw new Error(`Erreur ${response.status}`);
+    }
+    
+    const data = await response.json();
+    console.log('✅ Historique chargé:', data);
+    
+    displayParlayHistory(data);
+    
+  } catch (error) {
+    console.error('❌ Erreur chargement historique:', error);
+    const emptyState = document.getElementById('parlay-empty-state');
+    if (emptyState) emptyState.style.display = 'block';
+  }
+}
+
+// ==================== AFFICHAGE DE L'HISTORIQUE ====================
+
+// Afficher l'historique des bets
+function displayBetHistory(data) {
+  const container = document.getElementById('bet-history-container');
+  const statsContainer = document.getElementById('bet-stats');
+  const emptyState = document.getElementById('bet-empty-state');
+  
+  if (!container || !statsContainer) return;
+  
+  // Si aucun bet
+  if (!data.bets || data.bets.length === 0) {
+    if (emptyState) emptyState.style.display = 'block';
+    return;
+  }
+  
+  if (emptyState) emptyState.style.display = 'none';
+  
+  // Afficher les statistiques
+  statsContainer.innerHTML = `
+    <div style="background: #000000; border: 2px solid #22c55e; border-radius: 0.5rem; padding: 1rem; text-align: center;">
+      <div style="color: #22c55e; font-weight: 700; font-size: 2rem;">
+        ${data.total_wins - data.total_losses >= 0 ? '+' : ''}${data.total_wins - data.total_losses}
+      </div>
+      <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem; margin-top: 0.25rem; font-weight: 600;">PARIS EN +</div>
+    </div>
+    <div style="background: #000000; border: 2px solid #22c55e; border-radius: 0.5rem; padding: 1rem; text-align: center;">
+      <div style="color: #22c55e; font-weight: 700; font-size: 2rem;">
+        ${data.total_units >= 0 ? '+' : ''}${data.total_units.toFixed(2)}
+      </div>
+      <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem; margin-top: 0.25rem; font-weight: 600;">UNITS EN +</div>
+    </div>
+  `;
+  
+  // Afficher chaque bet
+  container.innerHTML = data.bets.map(bet => generateBetCardHTML(bet)).join('');
+}
+
+// Afficher l'historique des parlays
+function displayParlayHistory(data) {
+  const container = document.getElementById('parlay-history-container');
+  const statsContainer = document.getElementById('parlay-stats');
+  const emptyState = document.getElementById('parlay-empty-state');
+  
+  if (!container || !statsContainer) return;
+  
+  // Si aucun parlay
+  if (!data.parlays || data.parlays.length === 0) {
+    if (emptyState) emptyState.style.display = 'block';
+    return;
+  }
+  
+  if (emptyState) emptyState.style.display = 'none';
+  
+  // Afficher les statistiques
+  statsContainer.innerHTML = `
+    <div style="background: #000000; border: 2px solid #22c55e; border-radius: 0.5rem; padding: 1rem; text-align: center;">
+      <div style="color: #22c55e; font-weight: 700; font-size: 2rem;">
+        ${data.total_wins - data.total_losses >= 0 ? '+' : ''}${data.total_wins - data.total_losses}
+      </div>
+      <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem; margin-top: 0.25rem; font-weight: 600;">PARLAYS EN +</div>
+    </div>
+    <div style="background: #000000; border: 2px solid #22c55e; border-radius: 0.5rem; padding: 1rem; text-align: center;">
+      <div style="color: #22c55e; font-weight: 700; font-size: 2rem;">
+        ${data.total_units >= 0 ? '+' : ''}${data.total_units.toFixed(2)}
+      </div>
+      <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem; margin-top: 0.25rem; font-weight: 600;">UNITS EN +</div>
+    </div>
+  `;
+  
+  // Afficher chaque parlay
+  container.innerHTML = data.parlays.map(parlay => generateParlayCardHTML(parlay)).join('');
+}
+
+// ==================== GÉNÉRATION HTML ====================
+
+// Générer le HTML d'une carte de bet
+function generateBetCardHTML(bet) {
+  // Calculer les units et la couleur selon le résultat
+  let unitsText, unitsColor;
+  if (bet.result === 'win') {
+    const unitsValue = (bet.multiplier - 1).toFixed(2);
+    unitsText = `+${unitsValue} UNITS`;
+    unitsColor = '#22c55e';
+  } else if (bet.result === 'loose') {
+    unitsText = '-1.00 UNITS';
+    unitsColor = '#ef4444';
+  } else {
+    unitsText = 'EN ATTENTE';
+    unitsColor = '#f59e0b';
+  }
+  
+  // Générer le HTML selon le type de bet
+  let matchHTML = '';
+  
+  if (bet.bet_type === 'moneyline') {
+    matchHTML = `
+      <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">MONEYLINE</div>
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+        <div style="text-align: center; flex: 1;">
+          <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
+            <img src="${bet.team1_logo}" alt="${bet.team1_name}" style="width: 100%; height: 100%; object-fit: contain;">
+          </div>
+          <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">${bet.team1_name}</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 1.5rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
+        </div>
+        <div style="text-align: center; flex: 1;">
+          <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem; ${bet.result === 'win' ? 'border: 3px solid #22c55e;' : ''}">
+            <img src="${bet.team2_logo}" alt="${bet.team2_name}" style="width: 100%; height: 100%; object-fit: contain;">
+          </div>
+          <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">${bet.team2_name}</div>
+          ${bet.result === 'win' ? '<div style="font-size: 1rem; font-weight: 700; color: #22c55e; margin-top: 0.5rem;">VICTOIRE</div>' : ''}
+        </div>
+      </div>
+    `;
+  } else if (bet.bet_type === 'spread') {
+    const selectedTeam = bet.spread_team === 'team1' ? bet.team1_name : bet.team2_name;
+    matchHTML = `
+      <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">SPREAD ${bet.spread_value}</div>
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+        <div style="text-align: center; flex: 1;">
+          <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem; ${bet.spread_team === 'team1' && bet.result === 'win' ? 'border: 3px solid #22c55e;' : ''}">
+            <img src="${bet.team1_logo}" alt="${bet.team1_name}" style="width: 100%; height: 100%; object-fit: contain;">
+          </div>
+          <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">${bet.team1_name}</div>
+          ${bet.spread_team === 'team1' && bet.result === 'win' ? '<div style="font-size: 1rem; font-weight: 700; color: #22c55e; margin-top: 0.5rem;">COUVRE</div>' : ''}
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 1.5rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
+        </div>
+        <div style="text-align: center; flex: 1;">
+          <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem; ${bet.spread_team === 'team2' && bet.result === 'win' ? 'border: 3px solid #22c55e;' : ''}">
+            <img src="${bet.team2_logo}" alt="${bet.team2_name}" style="width: 100%; height: 100%; object-fit: contain;">
+          </div>
+          <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">${bet.team2_name}</div>
+          ${bet.spread_team === 'team2' && bet.result === 'win' ? '<div style="font-size: 1rem; font-weight: 700; color: #22c55e; margin-top: 0.5rem;">COUVRE</div>' : ''}
+        </div>
+      </div>
+    `;
+  } else if (bet.bet_type === 'over_under') {
+    matchHTML = `
+      <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">${bet.over_under_type?.toUpperCase()} ${bet.over_under_value}</div>
+      <div style="text-align: center; margin-bottom: 1rem;">
+        <div style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.6);">${bet.over_under_stat_type}</div>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+        <div style="text-align: center; flex: 1;">
+          <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
+            <img src="${bet.team1_logo}" alt="${bet.team1_name}" style="width: 100%; height: 100%; object-fit: contain;">
+          </div>
+          <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">${bet.team1_name}</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 1.5rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
+        </div>
+        <div style="text-align: center; flex: 1;">
+          <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
+            <img src="${bet.team2_logo}" alt="${bet.team2_name}" style="width: 100%; height: 100%; object-fit: contain;">
+          </div>
+          <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">${bet.team2_name}</div>
+        </div>
+      </div>
+    `;
+  }
+  
+  return `
+    <!-- Badge UNITS -->
+    <div style="max-width: 32rem; margin: 2rem auto 0.5rem; padding: 0 2rem;">
+      <div style="background: ${unitsColor}; color: #ffffff; padding: 1rem 2rem; border-radius: 0.5rem; font-size: 1.5rem; font-weight: 700; text-align: center;">
+        ${unitsText}
+      </div>
+    </div>
+    
+    <!-- Carte -->
+    <div style="background: #000000; border: 2px solid ${unitsColor}; border-radius: 1rem; padding: 2rem; margin: 0 auto 2rem; max-width: 32rem;">
+      <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1rem; margin-bottom: 1.5rem;">
+        ${bet.match_date} - ${bet.match_time}
+      </div>
+      ${matchHTML}
+    </div>
+  `;
+}
+
+// Générer le HTML d'une carte de parlay
+function generateParlayCardHTML(parlay) {
+  // Calculer les units et la couleur selon le résultat
+  let unitsText, unitsColor;
+  if (parlay.result === 'win') {
+    const unitsValue = (parlay.multiplier - 1).toFixed(2);
+    unitsText = `+${unitsValue} UNITS`;
+    unitsColor = '#22c55e';
+  } else if (parlay.result === 'loose') {
+    unitsText = '-1.00 UNITS';
+    unitsColor = '#ef4444';
+  } else {
+    unitsText = 'EN ATTENTE';
+    unitsColor = '#f59e0b';
+  }
+  
+  // Générer le HTML des legs
+  const legsHTML = parlay.legs.map((leg, index) => {
+    let legTypeText = '';
+    if (leg.bet_type === 'moneyline') {
+      legTypeText = 'MONEYLINE';
+    } else if (leg.bet_type === 'spread') {
+      legTypeText = `SPREAD ${leg.spread_value}`;
+    } else if (leg.bet_type === 'over_under') {
+      legTypeText = `${leg.over_under_type?.toUpperCase()} ${leg.over_under_value}`;
+    }
+    
+    return `
+      <div style="background: rgba(255, 255, 255, 0.05); border-radius: 0.5rem; padding: 1rem; margin-bottom: ${index < parlay.legs.length - 1 ? '0.75rem' : '0'};">
+        <div style="text-align: center; color: rgba(255, 255, 255, 0.6); font-size: 0.875rem; margin-bottom: 0.5rem;">${legTypeText}</div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;">
+          <div style="text-align: center; flex: 1;">
+            <div style="width: 3rem; height: 3rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.25rem; padding: 0.5rem;">
+              <img src="${leg.team1_logo}" alt="${leg.team1_name}" style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+            <div style="font-size: 0.75rem; font-weight: 600; color: #ffffff;">${leg.team1_name}</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-size: 1rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
+          </div>
+          <div style="text-align: center; flex: 1;">
+            <div style="width: 3rem; height: 3rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.25rem; padding: 0.5rem;">
+              <img src="${leg.team2_logo}" alt="${leg.team2_name}" style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+            <div style="font-size: 0.75rem; font-weight: 600; color: #ffffff;">${leg.team2_name}</div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+  
+  return `
+    <!-- Badge UNITS -->
+    <div style="max-width: 32rem; margin: 2rem auto 0.5rem; padding: 0 2rem;">
+      <div style="background: ${unitsColor}; color: #ffffff; padding: 1rem 2rem; border-radius: 0.5rem; font-size: 1.5rem; font-weight: 700; text-align: center;">
+        ${unitsText}
+      </div>
+    </div>
+    
+    <!-- Carte -->
+    <div style="background: #000000; border: 2px solid ${unitsColor}; border-radius: 1rem; padding: 2rem; margin: 0 auto 2rem; max-width: 32rem;">
+      <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1rem; margin-bottom: 1.5rem;">
+        ${parlay.match_date} - ${parlay.match_time}
+      </div>
+      <div style="text-align: center; color: #22c55e; font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">
+        PARLAY x${parlay.multiplier}
+      </div>
+      ${legsHTML}
+    </div>
+  `;
+}
+
+// ==================== FEEDBACK VISUEL ====================
+
+function showSuccessToast(message) {
+  const toast = document.createElement('div');
+  toast.textContent = '✅ ' + message;
+  toast.style.cssText = 'position:fixed;top:20px;right:20px;background:#22c55e;color:#fff;padding:1rem 2rem;border-radius:0.5rem;font-weight:600;z-index:9999;box-shadow:0 4px 6px rgba(0,0,0,0.3);';
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
+}
+
+function showErrorToast(message) {
+  const toast = document.createElement('div');
+  toast.textContent = '❌ ' + message;
+  toast.style.cssText = 'position:fixed;top:20px;right:20px;background:#ef4444;color:#fff;padding:1rem 2rem;border-radius:0.5rem;font-weight:600;z-index:9999;box-shadow:0 4px 6px rgba(0,0,0,0.3);';
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
+}
+
+// ==================== EVENT LISTENERS ====================
+
+// Détecter les blocks avec send_to_history = true au chargement
+function checkAndSaveBlocks() {
+  // Vérifier tous les bet_card
+  document.querySelectorAll('[data-block-type="bet_card"]').forEach(card => {
+    const sendToHistory = card.getAttribute('data-send-to-history');
+    if (sendToHistory === 'true') {
+      console.log('📋 Détection bet à sauvegarder:', card.getAttribute('data-block-id'));
+      saveBetToSupabase(card);
+    }
+  });
+  
+  // Vérifier tous les parlay_card
+  document.querySelectorAll('[data-block-type="parlay_card"]').forEach(card => {
+    const sendToHistory = card.getAttribute('data-send-to-history');
+    if (sendToHistory === 'true') {
+      console.log('📋 Détection parlay à sauvegarder:', card.getAttribute('data-block-id'));
+      saveParlayToSupabase(card);
+    }
+  });
+}
+
+// Initialisation au chargement de la page
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('🚀 Initialisation du système d\'historique Supabase');
+  initSupabaseConfig();
+  checkAndSaveBlocks();
+});
+
+// Exposer les fonctions globalement pour pouvoir les appeler depuis le code Liquid
+window.loadBetHistory = loadBetHistory;
+window.loadParlayHistory = loadParlayHistory;
+window.saveBetToSupabase = saveBetToSupabase;
+window.saveParlayToSupabase = saveParlayToSupabase;
