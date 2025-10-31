@@ -2581,11 +2581,26 @@
       lowTarget: {{ section.settings.low_target_members | default: 25 }}
     };
 
+    // Récupération des valeurs sauvegardées ou initialisation
     let currentMembers = membersConfig.base;
-    let currentTarget = membersConfig.base; // Cible actuelle qui évolue graduellement
+    let currentTarget = membersConfig.base;
+    
+    try {
+      const savedMembers = localStorage.getItem('winabet_current_members');
+      const savedTarget = localStorage.getItem('winabet_current_target');
+      
+      if (savedMembers !== null && savedTarget !== null) {
+        currentMembers = parseInt(savedMembers, 10);
+        currentTarget = parseInt(savedTarget, 10);
+        console.log('🔄 Compteur restauré:', currentMembers);
+      } else {
+        console.log('🎯 Nombre initial:', currentMembers);
+      }
+    } catch (e) {
+      console.log('⚠️ Impossible de restaurer le compteur:', e);
+    }
     
     console.log('🎯 Membres Connectés Config:', membersConfig);
-    console.log('🎯 Nombre initial:', currentMembers);
 
     function isInTimeRange(startHour, endHour) {
       const now = new Date();
@@ -2612,6 +2627,13 @@
       const headerCount = document.getElementById('header-member-count');
       
       console.log('📊 Mise à jour membres:', currentMembers, '→', newCount);
+      
+      // Sauvegarder dans localStorage
+      try {
+        localStorage.setItem('winabet_current_members', newCount.toString());
+      } catch (e) {
+        console.log('⚠️ Impossible de sauvegarder le compteur:', e);
+      }
       
       // Animation flip
       [sidebarCount, headerCount].forEach(element => {
@@ -2648,6 +2670,13 @@
         const step = Math.min(membersConfig.transitionStep, Math.abs(targetDiff));
         currentTarget += targetDiff > 0 ? step : -step;
         console.log(`🎯 Transition: ${currentTarget} → ${targetBase} (step: ${step})`);
+        
+        // Sauvegarder la nouvelle cible
+        try {
+          localStorage.setItem('winabet_current_target', currentTarget.toString());
+        } catch (e) {
+          console.log('⚠️ Impossible de sauvegarder la cible:', e);
+        }
       }
       
       // Décide aléatoirement si ça monte ou descend (50/50)
