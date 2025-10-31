@@ -35,7 +35,7 @@
       <!-- Séparateur visible via bordure -->
       <!-- Membre connecté -->
       <div style="display: flex; align-items: center; gap: 0.5rem; border-left: 2px solid #16a34a; padding-left: 0.75rem; margin-left: 0.75rem;">
-        <span style="color: rgba(255, 255, 255, 0.95); font-size: 0.75rem; font-weight: 600;">Membre connecté live : 50</span>
+        <span style="color: rgba(255, 255, 255, 0.95); font-size: 0.75rem; font-weight: 600;">Membre connecté live : <span id="sidebar-member-count" class="member-count">{{ section.settings.members_base | default: 50 }}</span></span>
         <div style="width: 8px; height: 8px; min-width: 8px; min-height: 8px; border-radius: 50%; background-color: #16a34a; flex-shrink: 0; display: block; box-shadow: 0 0 4px rgba(22,163,74,0.8);"></div>
       </div>
     </div>
@@ -190,7 +190,7 @@
       <!-- Séparateur visible via bordure -->
       <!-- Membre connecté -->
       <div style="display: flex; align-items: center; gap: 0.5rem; border-left: 2px solid #16a34a; padding-left: 0.75rem; margin-left: 0.75rem;">
-        <span style="color: rgba(255, 255, 255, 0.95); font-size: 0.75rem; font-weight: 600;">Membre connecté live : 50</span>
+        <span style="color: rgba(255, 255, 255, 0.95); font-size: 0.75rem; font-weight: 600;">Membre connecté live : <span id="header-member-count" class="member-count">{{ section.settings.members_base | default: 50 }}</span></span>
         <div style="width: 8px; height: 8px; min-width: 8px; min-height: 8px; border-radius: 50%; background-color: #16a34a; flex-shrink: 0; display: block; box-shadow: 0 0 4px rgba(22,163,74,0.8);"></div>
       </div>
     </div>
@@ -3165,7 +3165,96 @@
         navigateTo(null, hash);
       }
     });
+
+    // ===== GESTION DES MEMBRES CONNECTÉS LIVE =====
+    const membersConfig = {
+      base: {{ section.settings.members_base | default: 50 }},
+      variationPerMin: {{ section.settings.members_variation_per_min | default: 2 }},
+      peakStartHour: {{ section.settings.peak_start_hour | default: 18 }},
+      peakEndHour: {{ section.settings.peak_end_hour | default: 23 }},
+      peakMultiplier: {{ section.settings.peak_multiplier | default: 3 }}
+    };
+
+    let currentMembers = membersConfig.base;
+
+    function isPeakHours() {
+      const now = new Date();
+      const currentHour = now.getHours();
+      
+      if (membersConfig.peakStartHour <= membersConfig.peakEndHour) {
+        return currentHour >= membersConfig.peakStartHour && currentHour <= membersConfig.peakEndHour;
+      } else {
+        // Cas où peak traverse minuit (ex: 22h à 2h)
+        return currentHour >= membersConfig.peakStartHour || currentHour <= membersConfig.peakEndHour;
+      }
+    }
+
+    function updateMemberCount(newCount) {
+      const sidebarCount = document.getElementById('sidebar-member-count');
+      const headerCount = document.getElementById('header-member-count');
+      
+      // Animation flip
+      [sidebarCount, headerCount].forEach(element => {
+        if (element) {
+          element.style.animation = 'flip 0.6s ease-in-out';
+          
+          setTimeout(() => {
+            element.textContent = newCount;
+            element.style.animation = '';
+          }, 300);
+        }
+      });
+    }
+
+    function calculateNewMemberCount() {
+      const variation = Math.floor(Math.random() * membersConfig.variationPerMin * 2) - membersConfig.variationPerMin;
+      let newCount = currentMembers + variation;
+      
+      // Applique le multiplicateur pendant les heures de pointe
+      const targetBase = isPeakHours() 
+        ? membersConfig.base * membersConfig.peakMultiplier 
+        : membersConfig.base;
+      
+      // Garde le nombre proche de la base avec une marge
+      const minCount = Math.max(10, targetBase - membersConfig.variationPerMin * 5);
+      const maxCount = targetBase + membersConfig.variationPerMin * 5;
+      
+      newCount = Math.max(minCount, Math.min(maxCount, newCount));
+      
+      return Math.floor(newCount);
+    }
+
+    // Update toutes les minutes
+    setInterval(() => {
+      currentMembers = calculateNewMemberCount();
+      updateMemberCount(currentMembers);
+    }, 60000); // 60000 ms = 1 minute
   </script>
+
+  <!-- CSS pour l'animation flip -->
+  <style>
+    @keyframes flip {
+      0% {
+        transform: rotateX(0deg);
+        opacity: 1;
+      }
+      50% {
+        transform: rotateX(90deg);
+        opacity: 0;
+      }
+      100% {
+        transform: rotateX(0deg);
+        opacity: 1;
+      }
+    }
+
+    .member-count {
+      display: inline-block;
+      min-width: 2ch;
+      text-align: center;
+    }
+  </style>
+
 </body>
 </html>
 
@@ -3178,6 +3267,51 @@
       "id": "title",
       "label": "Titre du Dashboard",
       "default": "WINABET.AI"
+    },
+    {
+      "type": "header",
+      "content": "👥 Membres Connectés Live"
+    },
+    {
+      "type": "number",
+      "id": "members_base",
+      "label": "Nombre de base de membres",
+      "default": 50,
+      "info": "Nombre initial de membres connectés"
+    },
+    {
+      "type": "number",
+      "id": "members_variation_per_min",
+      "label": "Variation par minute",
+      "default": 2,
+      "info": "Combien le nombre monte/descend par minute"
+    },
+    {
+      "type": "range",
+      "id": "peak_start_hour",
+      "min": 0,
+      "max": 23,
+      "step": 1,
+      "label": "Heure de début d'affluence",
+      "default": 18,
+      "info": "Début des heures de forte affluence (format 24h)"
+    },
+    {
+      "type": "range",
+      "id": "peak_end_hour",
+      "min": 0,
+      "max": 23,
+      "step": 1,
+      "label": "Heure de fin d'affluence",
+      "default": 23,
+      "info": "Fin des heures de forte affluence (format 24h)"
+    },
+    {
+      "type": "number",
+      "id": "peak_multiplier",
+      "label": "Multiplicateur heures de pointe",
+      "default": 3,
+      "info": "Facteur de multiplication du nombre de membres pendant les heures de pointe"
     },
     {
       "type": "textarea",
