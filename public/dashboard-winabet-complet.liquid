@@ -280,8 +280,6 @@
                         <div class="team-side">
                           {% if block.settings.team1_logo %}
                             <img src="{{ block.settings.team1_logo | image_url: width: 200 }}" alt="{{ block.settings.team1_name }}" class="team-logo">
-                          {% else %}
-                            <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ block.settings.team1_name }}" class="team-logo">
                           {% endif %}
                           <div class="team-name-new">{{ block.settings.team1_name | default: 'ST. LOUIS' }}</div>
                         </div>
@@ -294,8 +292,6 @@
                         <div class="team-side selected">
                           {% if block.settings.team2_logo %}
                             <img src="{{ block.settings.team2_logo | image_url: width: 200 }}" alt="{{ block.settings.team2_name }}" class="team-logo">
-                          {% else %}
-                            <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ block.settings.team2_name }}" class="team-logo">
                           {% endif %}
                           <div class="team-name-new">{{ block.settings.team2_name | default: 'PITTSBURGH' }}</div>
                           <div class="team-bet-type">VICTOIRE</div>
@@ -309,8 +305,6 @@
                         <div class="team-side {% if block.settings.spread_team == 'team1' %}selected{% endif %}">
                           {% if block.settings.team1_logo %}
                             <img src="{{ block.settings.team1_logo | image_url: width: 200 }}" alt="{{ block.settings.team1_name }}" class="team-logo">
-                          {% else %}
-                            <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ block.settings.team1_name }}" class="team-logo">
                           {% endif %}
                           <div class="team-name-new">{{ block.settings.team1_name | default: 'ST. LOUIS' }}</div>
                           {% if block.settings.spread_team == 'team1' %}
@@ -326,8 +320,6 @@
                         <div class="team-side {% if block.settings.spread_team == 'team2' %}selected{% endif %}">
                           {% if block.settings.team2_logo %}
                             <img src="{{ block.settings.team2_logo | image_url: width: 200 }}" alt="{{ block.settings.team2_name }}" class="team-logo">
-                          {% else %}
-                            <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ block.settings.team2_name }}" class="team-logo">
                           {% endif %}
                           <div class="team-name-new">{{ block.settings.team2_name | default: 'PITTSBURGH' }}</div>
                           {% if block.settings.spread_team == 'team2' %}
@@ -343,8 +335,6 @@
                         <div class="team-side">
                           {% if block.settings.team1_logo %}
                             <img src="{{ block.settings.team1_logo | image_url: width: 200 }}" alt="{{ block.settings.team1_name }}" class="team-logo">
-                          {% else %}
-                            <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ block.settings.team1_name }}" class="team-logo">
                           {% endif %}
                           <div class="team-name-new">{{ block.settings.team1_name | default: 'ST. LOUIS' }}</div>
                         </div>
@@ -364,8 +354,6 @@
                         <div class="team-side">
                           {% if block.settings.team2_logo %}
                             <img src="{{ block.settings.team2_logo | image_url: width: 200 }}" alt="{{ block.settings.team2_name }}" class="team-logo">
-                          {% else %}
-                            <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ block.settings.team2_name }}" class="team-logo">
                           {% endif %}
                           <div class="team-name-new">{{ block.settings.team2_name | default: 'PITTSBURGH' }}</div>
                         </div>
@@ -633,8 +621,6 @@
                         <div class="team-side">
                           {% if block.settings.leg1_team1_logo %}
                             <img src="{{ block.settings.leg1_team1_logo | image_url: width: 200 }}" alt="{{ block.settings.leg1_team1_name }}" class="team-logo">
-                          {% else %}
-                            <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ block.settings.leg1_team1_name }}" class="team-logo">
                           {% endif %}
                           <div class="team-name-new">{{ block.settings.leg1_team1_name }}</div>
                         </div>
@@ -645,8 +631,6 @@
                         <div class="team-side selected">
                           {% if block.settings.leg1_team2_logo %}
                             <img src="{{ block.settings.leg1_team2_logo | image_url: width: 200 }}" alt="{{ block.settings.leg1_team2_name }}" class="team-logo">
-                          {% else %}
-                            <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ block.settings.leg1_team2_name }}" class="team-logo">
                           {% endif %}
                           <div class="team-name-new">{{ block.settings.leg1_team2_name }}</div>
                           <div class="team-bet-type">VICTOIRE</div>
@@ -658,8 +642,6 @@
                         <div class="team-side {% if block.settings.leg1_spread_team == 'team1' %}selected{% endif %}">
                           {% if block.settings.leg1_team1_logo %}
                             <img src="{{ block.settings.leg1_team1_logo | image_url: width: 200 }}" alt="{{ block.settings.leg1_team1_name }}" class="team-logo">
-                          {% else %}
-                            <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ block.settings.leg1_team1_name }}" class="team-logo">
                           {% endif %}
                           <div class="team-name-new">{{ block.settings.leg1_team1_name }}</div>
                           {% if block.settings.leg1_spread_team == 'team1' %}
@@ -673,8 +655,6 @@
                         <div class="team-side {% if block.settings.leg1_spread_team == 'team2' %}selected{% endif %}">
                           {% if block.settings.leg1_team2_logo %}
                             <img src="{{ block.settings.leg1_team2_logo | image_url: width: 200 }}" alt="{{ block.settings.leg1_team2_name }}" class="team-logo">
-                          {% else %}
-                            <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ block.settings.leg1_team2_name }}" class="team-logo">
                           {% endif %}
                           <div class="team-name-new">{{ block.settings.leg1_team2_name }}</div>
                           {% if block.settings.leg1_spread_team == 'team2' %}
@@ -688,8 +668,6 @@
                         <div class="team-side">
                           {% if block.settings.leg1_team1_logo %}
                             <img src="{{ block.settings.leg1_team1_logo | image_url: width: 200 }}" alt="{{ block.settings.leg1_team1_name }}" class="team-logo">
-                          {% else %}
-                            <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ block.settings.leg1_team1_name }}" class="team-logo">
                           {% endif %}
                           <div class="team-name-new">{{ block.settings.leg1_team1_name }}</div>
                         </div>
@@ -707,8 +685,6 @@
                         <div class="team-side">
                           {% if block.settings.leg1_team2_logo %}
                             <img src="{{ block.settings.leg1_team2_logo | image_url: width: 200 }}" alt="{{ block.settings.leg1_team2_name }}" class="team-logo">
-                          {% else %}
-                            <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ block.settings.leg1_team2_name }}" class="team-logo">
                           {% endif %}
                           <div class="team-name-new">{{ block.settings.leg1_team2_name }}</div>
                         </div>
@@ -728,8 +704,6 @@
                         <div class="team-side">
                           {% if block.settings.leg2_team1_logo %}
                             <img src="{{ block.settings.leg2_team1_logo | image_url: width: 200 }}" alt="{{ block.settings.leg2_team1_name }}" class="team-logo">
-                          {% else %}
-                            <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ block.settings.leg2_team1_name }}" class="team-logo">
                           {% endif %}
                           <div class="team-name-new">{{ block.settings.leg2_team1_name }}</div>
                         </div>
@@ -740,8 +714,6 @@
                         <div class="team-side selected">
                           {% if block.settings.leg2_team2_logo %}
                             <img src="{{ block.settings.leg2_team2_logo | image_url: width: 200 }}" alt="{{ block.settings.leg2_team2_name }}" class="team-logo">
-                          {% else %}
-                            <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ block.settings.leg2_team2_name }}" class="team-logo">
                           {% endif %}
                           <div class="team-name-new">{{ block.settings.leg2_team2_name }}</div>
                           <div class="team-bet-type">VICTOIRE</div>
@@ -753,8 +725,6 @@
                         <div class="team-side {% if block.settings.leg2_spread_team == 'team1' %}selected{% endif %}">
                           {% if block.settings.leg2_team1_logo %}
                             <img src="{{ block.settings.leg2_team1_logo | image_url: width: 200 }}" alt="{{ block.settings.leg2_team1_name }}" class="team-logo">
-                          {% else %}
-                            <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ block.settings.leg2_team1_name }}" class="team-logo">
                           {% endif %}
                           <div class="team-name-new">{{ block.settings.leg2_team1_name }}</div>
                           {% if block.settings.leg2_spread_team == 'team1' %}
@@ -768,8 +738,6 @@
                         <div class="team-side {% if block.settings.leg2_spread_team == 'team2' %}selected{% endif %}">
                           {% if block.settings.leg2_team2_logo %}
                             <img src="{{ block.settings.leg2_team2_logo | image_url: width: 200 }}" alt="{{ block.settings.leg2_team2_name }}" class="team-logo">
-                          {% else %}
-                            <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ block.settings.leg2_team2_name }}" class="team-logo">
                           {% endif %}
                           <div class="team-name-new">{{ block.settings.leg2_team2_name }}</div>
                           {% if block.settings.leg2_spread_team == 'team2' %}
@@ -783,8 +751,6 @@
                         <div class="team-side">
                           {% if block.settings.leg2_team1_logo %}
                             <img src="{{ block.settings.leg2_team1_logo | image_url: width: 200 }}" alt="{{ block.settings.leg2_team1_name }}" class="team-logo">
-                          {% else %}
-                            <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ block.settings.leg2_team1_name }}" class="team-logo">
                           {% endif %}
                           <div class="team-name-new">{{ block.settings.leg2_team1_name }}</div>
                         </div>
@@ -802,8 +768,6 @@
                         <div class="team-side">
                           {% if block.settings.leg2_team2_logo %}
                             <img src="{{ block.settings.leg2_team2_logo | image_url: width: 200 }}" alt="{{ block.settings.leg2_team2_name }}" class="team-logo">
-                          {% else %}
-                            <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ block.settings.leg2_team2_name }}" class="team-logo">
                           {% endif %}
                           <div class="team-name-new">{{ block.settings.leg2_team2_name }}</div>
                         </div>
@@ -924,8 +888,6 @@
                           <div class="team-side">
                             {% if team1_logo %}
                               <img src="{{ team1_logo | image_url: width: 200 }}" alt="{{ team1_name }}" class="team-logo">
-                            {% else %}
-                              <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ team1_name }}" class="team-logo">
                             {% endif %}
                             <div class="team-name-new">{{ team1_name }}</div>
                           </div>
@@ -936,8 +898,6 @@
                           <div class="team-side selected">
                             {% if team2_logo %}
                               <img src="{{ team2_logo | image_url: width: 200 }}" alt="{{ team2_name }}" class="team-logo">
-                            {% else %}
-                              <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ team2_name }}" class="team-logo">
                             {% endif %}
                             <div class="team-name-new">{{ team2_name }}</div>
                             <div class="team-bet-type">VICTOIRE</div>
@@ -949,8 +909,6 @@
                           <div class="team-side {% if spread_team == 'team1' %}selected{% endif %}">
                             {% if team1_logo %}
                               <img src="{{ team1_logo | image_url: width: 200 }}" alt="{{ team1_name }}" class="team-logo">
-                            {% else %}
-                              <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ team1_name }}" class="team-logo">
                             {% endif %}
                             <div class="team-name-new">{{ team1_name }}</div>
                             {% if spread_team == 'team1' %}
@@ -964,8 +922,6 @@
                           <div class="team-side {% if spread_team == 'team2' %}selected{% endif %}">
                             {% if team2_logo %}
                               <img src="{{ team2_logo | image_url: width: 200 }}" alt="{{ team2_name }}" class="team-logo">
-                            {% else %}
-                              <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ team2_name }}" class="team-logo">
                             {% endif %}
                             <div class="team-name-new">{{ team2_name }}</div>
                             {% if spread_team == 'team2' %}
@@ -979,8 +935,6 @@
                           <div class="team-side">
                             {% if team1_logo %}
                               <img src="{{ team1_logo | image_url: width: 200 }}" alt="{{ team1_name }}" class="team-logo">
-                            {% else %}
-                              <img src="{{ 'stlouis-logo.png' | asset_url }}" alt="{{ team1_name }}" class="team-logo">
                             {% endif %}
                             <div class="team-name-new">{{ team1_name }}</div>
                           </div>
@@ -998,8 +952,6 @@
                           <div class="team-side">
                             {% if team2_logo %}
                               <img src="{{ team2_logo | image_url: width: 200 }}" alt="{{ team2_name }}" class="team-logo">
-                            {% else %}
-                              <img src="{{ 'pittsburgh-logo.png' | asset_url }}" alt="{{ team2_name }}" class="team-logo">
                             {% endif %}
                             <div class="team-name-new">{{ team2_name }}</div>
                           </div>
@@ -2769,13 +2721,13 @@
   <!-- Configuration Supabase -->
   <script>
     window.SUPABASE_CONFIG = {
-      url: 'https://ycvfyorgkhuxcosfrsxs.supabase.co',
+      url: 'https://ycvfyorgkhuxcosfrsxs.functions.supabase.co',
       shopDomain: '{{ shop.permanent_domain }}'
     };
   </script>
 
   <!-- Inclure le fichier JS d'historique Supabase -->
-  <script src="{{ 'historique-supabase.js' | asset_url }}" defer></script>
+  <script src="{{ 'historique-supabase.js' | asset_url | append: '?v=' | append: 'now' | date: '%s' }}" defer></script>
 
 </body>
 </html>
