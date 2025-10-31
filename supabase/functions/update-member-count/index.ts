@@ -3,8 +3,8 @@
 const COMPTEUR_INITIAL = 100; // 👈 Nombre de départ
 const HEURES_POINTE_MIN = 18; // 👈 Début heures de pointe (18h)
 const HEURES_POINTE_MAX = 22; // 👈 Fin heures de pointe (22h)
-const CIBLE_HEURES_POINTE = 2500; // 👈 Cible pendant heures de pointe
-const CIBLE_HEURES_CREUSES = 100; // 👈 Cible pendant heures creuses
+const CIBLE_HEURES_POINTE = 150; // 👈 Cible pendant heures de pointe
+const CIBLE_HEURES_CREUSES = 10; // 👈 Cible pendant heures creuses
 const HEURES_CREUSES_MIN = 2; // 👈 Début heures creuses (2h)
 const HEURES_CREUSES_MAX = 8; // 👈 Fin heures creuses (8h)
 const AUGMENTATION_MIN = 1; // 👈 Montée minimum
