@@ -45,6 +45,28 @@
     </nav>
   </aside>
 
+  <!-- Header -->
+  <header class="header" style="border-bottom: 1px solid #16a34a; align-items: stretch;">
+    <div class="header-logo">
+      <div class="logo">
+        <span class="text-foreground">WIN</span><span class="text-primary">A</span><span class="text-foreground">BET</span><span class="text-primary text-sm">.AI</span>
+      </div>
+    </div>
+    <div class="header-ai-update" style="display: flex; width: 100%; justify-content: center; align-items: center; padding: 0.5rem 0; margin: 0; text-align: center; gap: 1rem;">
+      <div class="ai-spinner">
+        <span class="ai-badge">IA</span>
+      </div>
+      <span class="ai-update-text" style="color: #ffffff; font-weight: 600; font-size: 0.75rem;">Dernière mise à jour IA : <span id="header-time">17:34</span></span>
+      
+      <!-- Séparateur visible via bordure -->
+      <!-- Membre connecté -->
+      <div style="display: flex; align-items: center; gap: 0.5rem; border-left: 2px solid #16a34a; padding-left: 0.75rem; margin-left: 0.75rem;">
+        <span style="color: rgba(255, 255, 255, 0.95); font-size: 0.75rem; font-weight: 600;">Membre connecté live : <span id="header-member-count" class="member-count">{{ section.settings.members_base | default: 50 }}</span></span>
+        <div style="width: 8px; height: 8px; min-width: 8px; min-height: 8px; border-radius: 50%; background-color: #16a34a; flex-shrink: 0; display: block; box-shadow: 0 0 4px rgba(22,163,74,0.8);"></div>
+      </div>
+    </div>
+  </header>
+
   <!-- Main Content -->
   <main class="main-content">
     <!-- Content for the landing page will be added here -->
@@ -74,19 +96,32 @@
       const timeString = `${hours}:${minutes}`;
       
       const sidebarTime = document.getElementById('sidebar-time');
+      const headerTime = document.getElementById('header-time');
       if (sidebarTime) {
         sidebarTime.textContent = timeString;
+      }
+      if (headerTime) {
+        headerTime.textContent = timeString;
       }
     }
 
     // Update member count with animation
     function updateMemberCount() {
-      const memberCountElement = document.getElementById('sidebar-member-count');
-      if (memberCountElement) {
-        const baseCount = parseInt(memberCountElement.textContent) || 50;
+      const sidebarMemberCount = document.getElementById('sidebar-member-count');
+      const headerMemberCount = document.getElementById('header-member-count');
+      
+      if (sidebarMemberCount) {
+        const baseCount = parseInt(sidebarMemberCount.textContent) || 50;
         const variation = Math.floor(Math.random() * 11) - 5; // -5 to +5
         const newCount = Math.max(30, baseCount + variation);
-        memberCountElement.textContent = newCount;
+        sidebarMemberCount.textContent = newCount;
+      }
+      
+      if (headerMemberCount) {
+        const baseCount = parseInt(headerMemberCount.textContent) || 50;
+        const variation = Math.floor(Math.random() * 11) - 5; // -5 to +5
+        const newCount = Math.max(30, baseCount + variation);
+        headerMemberCount.textContent = newCount;
       }
     }
 
