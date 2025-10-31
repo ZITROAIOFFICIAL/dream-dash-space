@@ -1,13 +1,16 @@
 // Configuration Supabase (sera initialisée depuis window.SUPABASE_CONFIG)
-let SUPABASE_URL = '';
-let SHOP_DOMAIN = '';
+var SUPABASE_URL = window.SUPABASE_URL || '';
+var SHOP_DOMAIN = window.SHOP_DOMAIN || '';
 
 // Initialisation
 function initSupabaseConfig() {
   if (window.SUPABASE_CONFIG) {
     SUPABASE_URL = window.SUPABASE_CONFIG.url;
     SHOP_DOMAIN = window.SUPABASE_CONFIG.shopDomain;
-    console.log('✅ Configuration Supabase initialisée');
+    // Mémoriser sur window pour éviter redéclaration et réutiliser
+    window.SUPABASE_URL = SUPABASE_URL;
+    window.SHOP_DOMAIN = SHOP_DOMAIN;
+    console.log('✅ Configuration Supabase initialisée', { SUPABASE_URL, SHOP_DOMAIN });
   } else {
     console.error('❌ Configuration Supabase manquante');
   }
@@ -151,8 +154,9 @@ async function saveParlayToSupabase(blockElement) {
 async function loadBetHistory() {
   try {
     console.log('📥 Chargement de l\'historique des bets...');
-    
-    const response = await fetch(`${SUPABASE_URL}/functions/v1/get-bet-history?shop_domain=${SHOP_DOMAIN}`);
+    const url = `${SUPABASE_URL}/functions/v1/get-bet-history?shop_domain=${SHOP_DOMAIN}`;
+    console.log('↗️ Requête:', url);
+    const response = await fetch(url);
     
     if (!response.ok) {
       throw new Error(`Erreur ${response.status}`);
@@ -174,8 +178,9 @@ async function loadBetHistory() {
 async function loadParlayHistory() {
   try {
     console.log('📥 Chargement de l\'historique des parlays...');
-    
-    const response = await fetch(`${SUPABASE_URL}/functions/v1/get-parlay-history?shop_domain=${SHOP_DOMAIN}`);
+    const url = `${SUPABASE_URL}/functions/v1/get-parlay-history?shop_domain=${SHOP_DOMAIN}`;
+    console.log('↗️ Requête:', url);
+    const response = await fetch(url);
     
     if (!response.ok) {
       throw new Error(`Erreur ${response.status}`);
