@@ -131,6 +131,9 @@ async function saveBetToSupabase(blockElement) {
     
     showSuccessToast('Bet sauvegardé dans l\'historique !');
     
+    // Rafraîchir l'historique automatiquement après la sauvegarde
+    await loadBetHistory();
+    
   } catch (error) {
     console.error('❌ Erreur lors de la sauvegarde:', error);
     showErrorToast('Erreur lors de la sauvegarde. Vérifiez la console.');
@@ -160,6 +163,9 @@ async function saveParlayToSupabase(blockElement) {
     console.log('✅ Parlay sauvegardé:', result);
     
     showSuccessToast('Parlay sauvegardé dans l\'historique !');
+    
+    // Rafraîchir l'historique automatiquement après la sauvegarde
+    await loadParlayHistory();
     
   } catch (error) {
     console.error('❌ Erreur lors de la sauvegarde:', error);
