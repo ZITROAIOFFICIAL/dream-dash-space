@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WINABET.AI - Page d'Accueil</title>
+  {% render 'dashboard-styles' %}
+</head>
+<body>
+  <!-- Mobile Toggle Button -->
+  <button class="mobile-toggle" onclick="toggleSidebar()" aria-label="Toggle menu">
+    <svg class="mobile-toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
+    </svg>
+  </button>
+
+  <!-- Overlay -->
+  <div class="overlay" onclick="toggleSidebar()"></div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <span class="text-foreground">WIN</span><span class="text-primary">A</span><span class="text-foreground">BET</span><span class="text-primary text-sm">.AI</span>
+      </div>
+    </div>
+
+    <!-- AI Update Indicator in Sidebar -->
+    <div class="header-ai-update" style="display: flex; width: 100%; justify-content: flex-start; align-items: center; padding: 0.5rem 0 0.5rem 1rem; margin: 0; text-align: left; gap: 1rem; border-bottom: 1px solid #16a34a;">
+      <div class="ai-spinner">
+        <span class="ai-badge">IA</span>
+      </div>
+      <span class="ai-update-text" style="color: #ffffff; font-weight: 600; font-size: 0.75rem;">Dernière mise à jour IA : <span id="sidebar-time">17:34</span></span>
+      
+      <!-- Séparateur visible via bordure -->
+      <!-- Membre connecté -->
+      <div style="display: flex; align-items: center; gap: 0.5rem; border-left: 2px solid #16a34a; padding-left: 0.75rem; margin-left: 0.75rem;">
+        <span style="color: rgba(255, 255, 255, 0.95); font-size: 0.75rem; font-weight: 600;">Membre connecté live : <span id="sidebar-member-count" class="member-count">{{ section.settings.members_base | default: 50 }}</span></span>
+        <div style="width: 8px; height: 8px; min-width: 8px; min-height: 8px; border-radius: 50%; background-color: #16a34a; flex-shrink: 0; display: block; box-shadow: 0 0 4px rgba(22,163,74,0.8);"></div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <!-- Navigation items will be added here -->
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Content for the landing page will be added here -->
+    <div class="container">
+      <h1 style="color: #ffffff; text-align: center; margin-top: 2rem;">Page d'Accueil</h1>
+    </div>
+  </main>
+
+  <script>
+    // Toggle Sidebar
+    function toggleSidebar() {
+      const sidebar = document.querySelector('.sidebar');
+      const overlay = document.querySelector('.overlay');
+      const body = document.body;
+      
+      sidebar.classList.toggle('active');
+      overlay.classList.toggle('active');
+      body.classList.toggle('sidebar-open');
+    }
+
+    // Update time
+    function updateTime() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const timeString = `${hours}:${minutes}`;
+      
+      const sidebarTime = document.getElementById('sidebar-time');
+      if (sidebarTime) {
+        sidebarTime.textContent = timeString;
+      }
+    }
+
+    // Update member count with animation
+    function updateMemberCount() {
+      const memberCountElement = document.getElementById('sidebar-member-count');
+      if (memberCountElement) {
+        const baseCount = parseInt(memberCountElement.textContent) || 50;
+        const variation = Math.floor(Math.random() * 11) - 5; // -5 to +5
+        const newCount = Math.max(30, baseCount + variation);
+        memberCountElement.textContent = newCount;
+      }
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      updateTime();
+      setInterval(updateTime, 60000); // Update every minute
+      setInterval(updateMemberCount, 30000); // Update member count every 30 seconds
+    });
+  </script>
+</body>
+</html>
+
+{% schema %}
+{
+  "name": "Page d'Accueil",
+  "settings": [
+    {
+      "type": "number",
+      "id": "members_base",
+      "label": "Nombre de membres de base",
+      "default": 50
+    }
+  ]
+}
+{% endschema %}
