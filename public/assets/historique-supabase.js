@@ -348,35 +348,31 @@ function generateBetCardHTML(bet) {
       </div>
     `;
   } else if (bet.bet_type === 'spread') {
-    const selectedTeam = bet.spread_team === 'team1' ? bet.team1_name : bet.team2_name;
     matchHTML = `
-      <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">SPREAD ${bet.spread_value}</div>
+      <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">SPREAD</div>
       <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
         <div style="text-align: center; flex: 1;">
-          <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem; ${bet.spread_team === 'team1' && bet.result === 'win' ? 'border: 3px solid #22c55e;' : ''}">
+          <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem; ${bet.spread_team === 'team1' ? 'border: 3px solid #22c55e;' : ''}">
             <img src="${sanitizeLogo(bet.team1_logo)}" alt="${bet.team1_name}" style="width: 100%; height: 100%; object-fit: contain;">
           </div>
           <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">${bet.team1_name}</div>
-          ${bet.spread_team === 'team1' && bet.result === 'win' ? '<div style="font-size: 1rem; font-weight: 700; color: #22c55e; margin-top: 0.5rem;">COUVRE</div>' : ''}
+          ${bet.spread_team === 'team1' ? `<div style="font-size: 0.875rem; font-weight: 700; color: #22c55e; margin-top: 0.5rem;">${bet.spread_value}</div>` : ''}
         </div>
         <div style="text-align: center;">
           <div style="font-size: 1.5rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
         </div>
         <div style="text-align: center; flex: 1;">
-          <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem; ${bet.spread_team === 'team2' && bet.result === 'win' ? 'border: 3px solid #22c55e;' : ''}">
+          <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem; ${bet.spread_team === 'team2' ? 'border: 3px solid #22c55e;' : ''}">
             <img src="${sanitizeLogo(bet.team2_logo)}" alt="${bet.team2_name}" style="width: 100%; height: 100%; object-fit: contain;">
           </div>
           <div style="font-size: 0.875rem; font-weight: 600; color: #ffffff;">${bet.team2_name}</div>
-          ${bet.spread_team === 'team2' && bet.result === 'win' ? '<div style="font-size: 1rem; font-weight: 700; color: #22c55e; margin-top: 0.5rem;">COUVRE</div>' : ''}
+          ${bet.spread_team === 'team2' ? `<div style="font-size: 0.875rem; font-weight: 700; color: #22c55e; margin-top: 0.5rem;">${bet.spread_value}</div>` : ''}
         </div>
       </div>
     `;
   } else if (bet.bet_type === 'over_under') {
     matchHTML = `
-      <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">${bet.over_under_type?.toUpperCase()} ${bet.over_under_value}</div>
-      <div style="text-align: center; margin-bottom: 1rem;">
-        <div style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.6);">${bet.over_under_stat_type}</div>
-      </div>
+      <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">${bet.over_under_type?.toUpperCase()}</div>
       <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
         <div style="text-align: center; flex: 1;">
           <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
@@ -386,6 +382,11 @@ function generateBetCardHTML(bet) {
         </div>
         <div style="text-align: center;">
           <div style="font-size: 1.5rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
+          <div style="background: rgba(34, 197, 94, 0.1); border: 2px solid #22c55e; border-radius: 0.5rem; padding: 0.5rem 1rem; margin-top: 0.5rem;">
+            <div style="font-size: 0.875rem; font-weight: 700; color: #22c55e;">${bet.over_under_type?.toUpperCase()}</div>
+            <div style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-top: 0.25rem;">${bet.over_under_value}</div>
+            ${bet.over_under_stat_type ? `<div style="font-size: 0.75rem; color: rgba(255, 255, 255, 0.6); margin-top: 0.25rem;">${bet.over_under_stat_type}</div>` : ''}
+          </div>
         </div>
         <div style="text-align: center; flex: 1;">
           <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; padding: 0.75rem;">
@@ -433,18 +434,11 @@ function generateParlayCardHTML(parlay) {
   
   // Générer le HTML des legs
   const legsHTML = parlay.legs.map((leg, index) => {
-    let legTypeText = '';
-    if (leg.bet_type === 'moneyline') {
-      legTypeText = 'MONEYLINE';
-    } else if (leg.bet_type === 'spread') {
-      legTypeText = `SPREAD ${leg.spread_value}`;
-    } else if (leg.bet_type === 'over_under') {
-      legTypeText = `${leg.over_under_type?.toUpperCase()} ${leg.over_under_value}`;
-    }
+    let legHTML = '';
     
-    return `
-      <div style="background: rgba(255, 255, 255, 0.05); border-radius: 0.5rem; padding: 1rem; margin-bottom: ${index < parlay.legs.length - 1 ? '0.75rem' : '0'};">
-        <div style="text-align: center; color: rgba(255, 255, 255, 0.6); font-size: 0.875rem; margin-bottom: 0.5rem;">${legTypeText}</div>
+    if (leg.bet_type === 'moneyline') {
+      legHTML = `
+        <div style="text-align: center; color: rgba(255, 255, 255, 0.6); font-size: 0.875rem; margin-bottom: 0.5rem;">MONEYLINE</div>
         <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;">
           <div style="text-align: center; flex: 1;">
             <div style="width: 3rem; height: 3rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.25rem; padding: 0.5rem;">
@@ -456,12 +450,67 @@ function generateParlayCardHTML(parlay) {
             <div style="font-size: 1rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
           </div>
           <div style="text-align: center; flex: 1;">
+            <div style="width: 3rem; height: 3rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.25rem; padding: 0.5rem; border: 2px solid #22c55e;">
+              <img src="${sanitizeLogo(leg.team2_logo)}" alt="${leg.team2_name}" style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+            <div style="font-size: 0.75rem; font-weight: 600; color: #ffffff;">${leg.team2_name}</div>
+          </div>
+        </div>
+      `;
+    } else if (leg.bet_type === 'spread') {
+      legHTML = `
+        <div style="text-align: center; color: rgba(255, 255, 255, 0.6); font-size: 0.875rem; margin-bottom: 0.5rem;">SPREAD</div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;">
+          <div style="text-align: center; flex: 1;">
+            <div style="width: 3rem; height: 3rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.25rem; padding: 0.5rem; ${leg.spread_team === 'team1' ? 'border: 2px solid #22c55e;' : ''}">
+              <img src="${sanitizeLogo(leg.team1_logo)}" alt="${leg.team1_name}" style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+            <div style="font-size: 0.75rem; font-weight: 600; color: #ffffff;">${leg.team1_name}</div>
+            ${leg.spread_team === 'team1' ? `<div style="font-size: 0.75rem; font-weight: 700; color: #22c55e; margin-top: 0.25rem;">${leg.spread_value}</div>` : ''}
+          </div>
+          <div style="text-align: center;">
+            <div style="font-size: 1rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
+          </div>
+          <div style="text-align: center; flex: 1;">
+            <div style="width: 3rem; height: 3rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.25rem; padding: 0.5rem; ${leg.spread_team === 'team2' ? 'border: 2px solid #22c55e;' : ''}">
+              <img src="${sanitizeLogo(leg.team2_logo)}" alt="${leg.team2_name}" style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+            <div style="font-size: 0.75rem; font-weight: 600; color: #ffffff;">${leg.team2_name}</div>
+            ${leg.spread_team === 'team2' ? `<div style="font-size: 0.75rem; font-weight: 700; color: #22c55e; margin-top: 0.25rem;">${leg.spread_value}</div>` : ''}
+          </div>
+        </div>
+      `;
+    } else if (leg.bet_type === 'over_under') {
+      legHTML = `
+        <div style="text-align: center; color: rgba(255, 255, 255, 0.6); font-size: 0.875rem; margin-bottom: 0.5rem;">${leg.over_under_type?.toUpperCase()}</div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;">
+          <div style="text-align: center; flex: 1;">
+            <div style="width: 3rem; height: 3rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.25rem; padding: 0.5rem;">
+              <img src="${sanitizeLogo(leg.team1_logo)}" alt="${leg.team1_name}" style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+            <div style="font-size: 0.75rem; font-weight: 600; color: #ffffff;">${leg.team1_name}</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-size: 1rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
+            <div style="background: rgba(34, 197, 94, 0.1); border: 1px solid #22c55e; border-radius: 0.375rem; padding: 0.25rem 0.5rem; margin-top: 0.25rem;">
+              <div style="font-size: 0.625rem; font-weight: 700; color: #22c55e;">${leg.over_under_type?.toUpperCase()}</div>
+              <div style="font-size: 0.875rem; font-weight: 700; color: #ffffff;">${leg.over_under_value}</div>
+              ${leg.over_under_stat_type ? `<div style="font-size: 0.625rem; color: rgba(255, 255, 255, 0.6);">${leg.over_under_stat_type}</div>` : ''}
+            </div>
+          </div>
+          <div style="text-align: center; flex: 1;">
             <div style="width: 3rem; height: 3rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.25rem; padding: 0.5rem;">
               <img src="${sanitizeLogo(leg.team2_logo)}" alt="${leg.team2_name}" style="width: 100%; height: 100%; object-fit: contain;">
             </div>
             <div style="font-size: 0.75rem; font-weight: 600; color: #ffffff;">${leg.team2_name}</div>
           </div>
         </div>
+      `;
+    }
+    
+    return `
+      <div style="background: rgba(255, 255, 255, 0.05); border-radius: 0.5rem; padding: 1rem; margin-bottom: ${index < parlay.legs.length - 1 ? '0.75rem' : '0'};">
+        ${legHTML}
       </div>
     `;
   }).join('');
