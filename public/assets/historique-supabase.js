@@ -168,6 +168,9 @@ async function saveParlayToSupabase(blockElement) {
 // Charger l'historique des bets depuis Supabase
 async function loadBetHistory() {
   try {
+    // S'assurer que la config est initialisée
+    if (!SHOP_DOMAIN) initSupabaseConfig();
+    
     console.log('📥 Chargement de l\'historique des bets...');
     const url = `${getFunctionsBase()}/get-bet-history?shop_domain=${SHOP_DOMAIN}`;
     console.log('↗️ Requête:', url);
@@ -192,6 +195,9 @@ async function loadBetHistory() {
 // Charger l'historique des parlays depuis Supabase
 async function loadParlayHistory() {
   try {
+    // S'assurer que la config est initialisée
+    if (!SHOP_DOMAIN) initSupabaseConfig();
+    
     console.log('📥 Chargement de l\'historique des parlays...');
     const url = `${getFunctionsBase()}/get-parlay-history?shop_domain=${SHOP_DOMAIN}`;
     console.log('↗️ Requête:', url);
