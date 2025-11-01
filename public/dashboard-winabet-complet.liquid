@@ -2102,13 +2102,15 @@
           return totalNeeded > containerWidth;
         };
         
-        // Réduire progressivement la taille du texte
+        // Permettre l'empilement vertical du texte
         elements.forEach(element => {
-          // Empêcher la coupure de mots
-          element.style.wordBreak = 'keep-all';
-          element.style.overflowWrap = 'normal';
+          // Activer le word wrap pour empiler le texte verticalement
+          element.style.wordBreak = 'break-word';
+          element.style.overflowWrap = 'break-word';
           element.style.hyphens = 'none';
           element.style.whiteSpace = 'normal';
+          element.style.textAlign = 'center';
+          element.style.lineHeight = '1.2';
           
           // Partir de la taille calculée actuelle
           const computed = getComputedStyle(element);
@@ -2118,8 +2120,8 @@
           // Forcer un recalcul initial
           container.offsetHeight;
           
-          // Réduire tant que ça déborde
-          while (checkOverflow() && fontSize > 6 && attempts < 50) {
+          // Réduire seulement un peu si nécessaire (on privilégie l'empilement)
+          while (checkOverflow() && fontSize > 10 && attempts < 20) {
             fontSize -= 0.5;
             element.style.fontSize = fontSize + 'px';
             // Forcer le navigateur à recalculer le layout

@@ -391,10 +391,10 @@ function generateBetCardHTML(bet) {
         </div>
         <div style="text-align: center;">
           <div style="font-size: 3rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
-          <div style="background: rgba(34, 197, 94, 0.1); border: 2px solid #22c55e; border-radius: 0.5rem; padding: 1.25rem 1.75rem; margin-top: 1.25rem;">
-            <div style="font-size: 1.5rem; font-weight: 700; color: #22c55e;">${bet.over_under_type?.toUpperCase()}</div>
+          <div style="background: rgba(34, 197, 94, 0.1); border: 2px solid #22c55e; border-radius: 0.5rem; padding: 1.25rem 1.75rem; margin-top: 1.25rem; max-width: 200px;">
+            <div style="font-size: 1.5rem; font-weight: 700; color: #22c55e; word-break: break-word; overflow-wrap: break-word; white-space: normal; line-height: 1.2;">${bet.over_under_type?.toUpperCase()}</div>
             <div style="font-size: 2.25rem; font-weight: 700; color: #ffffff; margin-top: 0.75rem;">${bet.over_under_value}</div>
-            ${bet.over_under_stat_type ? `<div style="font-size: 1.125rem; color: rgba(255, 255, 255, 0.6); margin-top: 0.75rem;">${bet.over_under_stat_type}</div>` : ''}
+            ${bet.over_under_stat_type ? `<div style="font-size: 1.125rem; color: rgba(255, 255, 255, 0.6); margin-top: 0.75rem; word-break: break-word; overflow-wrap: break-word; white-space: normal; line-height: 1.2;">${bet.over_under_stat_type}</div>` : ''}
           </div>
         </div>
         <div style="text-align: center; flex: 1;">
@@ -512,10 +512,10 @@ function generateParlayCardHTML(parlay) {
           </div>
           <div style="text-align: center;">
             <div style="font-size: 2rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
-            <div style="background: rgba(34, 197, 94, 0.1); border: 2px solid #22c55e; border-radius: 0.5rem; padding: 1rem 1.25rem; margin-top: 1rem;">
-              <div style="font-size: 1.125rem; font-weight: 700; color: #22c55e;">${leg.over_under_type?.toUpperCase()}</div>
+            <div style="background: rgba(34, 197, 94, 0.1); border: 2px solid #22c55e; border-radius: 0.5rem; padding: 1rem 1.25rem; margin-top: 1rem; max-width: 150px;">
+              <div style="font-size: 1.125rem; font-weight: 700; color: #22c55e; word-break: break-word; overflow-wrap: break-word; white-space: normal; line-height: 1.2;">${leg.over_under_type?.toUpperCase()}</div>
               <div style="font-size: 1.75rem; font-weight: 700; color: #ffffff; margin-top: 0.5rem;">${leg.over_under_value}</div>
-              ${leg.over_under_stat_type ? `<div style="font-size: 1rem; color: rgba(255, 255, 255, 0.6); margin-top: 0.5rem;">${leg.over_under_stat_type}</div>` : ''}
+              ${leg.over_under_stat_type ? `<div style="font-size: 1rem; color: rgba(255, 255, 255, 0.6); margin-top: 0.5rem; word-break: break-word; overflow-wrap: break-word; white-space: normal; line-height: 1.2;">${leg.over_under_stat_type}</div>` : ''}
             </div>
           </div>
           <div style="text-align: center; flex: 1;">
