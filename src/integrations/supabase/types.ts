@@ -26,6 +26,7 @@ export type Database = {
           id: string
           match_date: string | null
           match_time: string | null
+          moneyline_team: string | null
           multiplier: number | null
           odds: number | null
           over_under_stat_type: string | null
@@ -53,6 +54,7 @@ export type Database = {
           id?: string
           match_date?: string | null
           match_time?: string | null
+          moneyline_team?: string | null
           multiplier?: number | null
           odds?: number | null
           over_under_stat_type?: string | null
@@ -80,6 +82,7 @@ export type Database = {
           id?: string
           match_date?: string | null
           match_time?: string | null
+          moneyline_team?: string | null
           multiplier?: number | null
           odds?: number | null
           over_under_stat_type?: string | null
@@ -95,6 +98,30 @@ export type Database = {
           team2_logo?: string | null
           team2_name?: string
           win_percentage?: number | null
+        }
+        Relationships: []
+      }
+      live_member_count: {
+        Row: {
+          created_at: string | null
+          current_count: number
+          current_target: number
+          id: string
+          last_updated: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          current_count?: number
+          current_target?: number
+          id?: string
+          last_updated?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          current_count?: number
+          current_target?: number
+          id?: string
+          last_updated?: string | null
         }
         Relationships: []
       }
