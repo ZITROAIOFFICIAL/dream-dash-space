@@ -266,6 +266,56 @@ function displayBetHistory(data) {
   
   // Afficher chaque bet
   container.innerHTML = data.bets.map(bet => generateBetCardHTML(bet)).join('');
+  // Ratisser automatiquement le texte Over/Under pour faire tenir avec les logos
+  try {
+    const shrinkHistoryText = (root) => {
+      const boxes = root.querySelectorAll('.history-over-under-display');
+      boxes.forEach((box) => {
+        // Trouver le conteneur flex (ligne) qui contient les 3 colonnes
+        let row = box.parentElement;
+        while (row && getComputedStyle(row).display !== 'flex') row = row.parentElement;
+        if (!row) return;
+        const leftCol = row.children[0];
+        const midCol = row.children[1];
+        const rightCol = row.children[row.children.length - 1];
+        const elements = box.querySelectorAll('.history-over-under-type, .history-over-under-value, .history-over-under-stat');
+        elements.forEach((el) => {
+          el.style.wordBreak = 'break-word';
+          el.style.overflowWrap = 'break-word';
+          el.style.whiteSpace = 'normal';
+          el.style.hyphens = 'none';
+          el.style.textAlign = 'center';
+          el.style.lineHeight = '1.2';
+        });
+        const sizes = Array.from(elements).map((el) => parseFloat(getComputedStyle(el).fontSize) || 12);
+        const getGapTotal = () => {
+          const cs = getComputedStyle(row);
+          const g = parseFloat(cs.gap || cs.columnGap || '0') || 0;
+          return g * (row.children.length - 1);
+        };
+        const fits = () => {
+          const totalNeeded = leftCol.offsetWidth + midCol.offsetWidth + rightCol.offsetWidth + getGapTotal();
+          return totalNeeded <= row.clientWidth;
+        };
+        let attempts = 0;
+        while (!fits() && attempts < 80) {
+          let changed = false;
+          for (let i = 0; i < elements.length; i++) {
+            if (sizes[i] > 10) {
+              sizes[i] -= 0.5;
+              elements[i].style.fontSize = sizes[i] + 'px';
+              changed = true;
+            }
+          }
+          row.offsetHeight; // forcer reflow
+          if (!changed) break;
+          attempts++;
+        }
+      });
+    };
+    shrinkHistoryText(container);
+    window.addEventListener('resize', () => shrinkHistoryText(container));
+  } catch (e) { console.warn('shrinkHistoryText error', e); }
 }
 
 // Afficher l'historique des parlays
@@ -302,6 +352,55 @@ function displayParlayHistory(data) {
   
   // Afficher chaque parlay
   container.innerHTML = data.parlays.map(parlay => generateParlayCardHTML(parlay)).join('');
+  // Ratisser automatiquement le texte Over/Under dans l'historique des parlays
+  try {
+    const shrinkHistoryText = (root) => {
+      const boxes = root.querySelectorAll('.history-over-under-display');
+      boxes.forEach((box) => {
+        let row = box.parentElement;
+        while (row && getComputedStyle(row).display !== 'flex') row = row.parentElement;
+        if (!row) return;
+        const leftCol = row.children[0];
+        const midCol = row.children[1];
+        const rightCol = row.children[row.children.length - 1];
+        const elements = box.querySelectorAll('.history-over-under-type, .history-over-under-value, .history-over-under-stat');
+        elements.forEach((el) => {
+          el.style.wordBreak = 'break-word';
+          el.style.overflowWrap = 'break-word';
+          el.style.whiteSpace = 'normal';
+          el.style.hyphens = 'none';
+          el.style.textAlign = 'center';
+          el.style.lineHeight = '1.2';
+        });
+        const sizes = Array.from(elements).map((el) => parseFloat(getComputedStyle(el).fontSize) || 12);
+        const getGapTotal = () => {
+          const cs = getComputedStyle(row);
+          const g = parseFloat(cs.gap || cs.columnGap || '0') || 0;
+          return g * (row.children.length - 1);
+        };
+        const fits = () => {
+          const totalNeeded = leftCol.offsetWidth + midCol.offsetWidth + rightCol.offsetWidth + getGapTotal();
+          return totalNeeded <= row.clientWidth;
+        };
+        let attempts = 0;
+        while (!fits() && attempts < 80) {
+          let changed = false;
+          for (let i = 0; i < elements.length; i++) {
+            if (sizes[i] > 10) {
+              sizes[i] -= 0.5;
+              elements[i].style.fontSize = sizes[i] + 'px';
+              changed = true;
+            }
+          }
+          row.offsetHeight;
+          if (!changed) break;
+          attempts++;
+        }
+      });
+    };
+    shrinkHistoryText(container);
+    window.addEventListener('resize', () => shrinkHistoryText(container));
+  } catch (e) { console.warn('shrinkHistoryText error', e); }
 }
 
 // ==================== GÉNÉRATION HTML ====================
@@ -391,10 +490,10 @@ function generateBetCardHTML(bet) {
         </div>
         <div style="text-align: center;">
           <div style="font-size: 3rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
-          <div style="background: rgba(34, 197, 94, 0.1); border: 2px solid #22c55e; border-radius: 0.5rem; padding: 1.25rem 1.75rem; margin-top: 1.25rem; max-width: 200px;">
-            <div style="font-size: 1.5rem; font-weight: 700; color: #22c55e; word-break: break-word; overflow-wrap: break-word; white-space: normal; line-height: 1.2;">${bet.over_under_type?.toUpperCase()}</div>
-            <div style="font-size: 2.25rem; font-weight: 700; color: #ffffff; margin-top: 0.75rem;">${bet.over_under_value}</div>
-            ${bet.over_under_stat_type ? `<div style="font-size: 1.125rem; color: rgba(255, 255, 255, 0.6); margin-top: 0.75rem; word-break: break-word; overflow-wrap: break-word; white-space: normal; line-height: 1.2;">${bet.over_under_stat_type}</div>` : ''}
+          <div class="history-over-under-display" style="background: rgba(34, 197, 94, 0.1); border: 2px solid #22c55e; border-radius: 0.5rem; padding: 1.25rem 1.75rem; margin-top: 1.25rem; max-width: 200px;">
+            <div class="history-over-under-type" style="font-size: 1.5rem; font-weight: 700; color: #22c55e; word-break: break-word; overflow-wrap: break-word; white-space: normal; line-height: 1.2;">${bet.over_under_type?.toUpperCase()}</div>
+            <div class="history-over-under-value" style="font-size: 2.25rem; font-weight: 700; color: #ffffff; margin-top: 0.75rem;">${bet.over_under_value}</div>
+            ${bet.over_under_stat_type ? `<div class="history-over-under-stat" style="font-size: 1.125rem; color: rgba(255, 255, 255, 0.6); margin-top: 0.75rem; word-break: break-word; overflow-wrap: break-word; white-space: normal; line-height: 1.2;">${bet.over_under_stat_type}</div>` : ''}
           </div>
         </div>
         <div style="text-align: center; flex: 1;">
@@ -512,10 +611,10 @@ function generateParlayCardHTML(parlay) {
           </div>
           <div style="text-align: center;">
             <div style="font-size: 2rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
-            <div style="background: rgba(34, 197, 94, 0.1); border: 2px solid #22c55e; border-radius: 0.5rem; padding: 1rem 1.25rem; margin-top: 1rem; max-width: 150px;">
-              <div style="font-size: 1.125rem; font-weight: 700; color: #22c55e; word-break: break-word; overflow-wrap: break-word; white-space: normal; line-height: 1.2;">${leg.over_under_type?.toUpperCase()}</div>
-              <div style="font-size: 1.75rem; font-weight: 700; color: #ffffff; margin-top: 0.5rem;">${leg.over_under_value}</div>
-              ${leg.over_under_stat_type ? `<div style="font-size: 1rem; color: rgba(255, 255, 255, 0.6); margin-top: 0.5rem; word-break: break-word; overflow-wrap: break-word; white-space: normal; line-height: 1.2;">${leg.over_under_stat_type}</div>` : ''}
+            <div class="history-over-under-display" style="background: rgba(34, 197, 94, 0.1); border: 2px solid #22c55e; border-radius: 0.5rem; padding: 1rem 1.25rem; margin-top: 1rem; max-width: 150px;">
+              <div class="history-over-under-type" style="font-size: 1.125rem; font-weight: 700; color: #22c55e; word-break: break-word; overflow-wrap: break-word; white-space: normal; line-height: 1.2;">${leg.over_under_type?.toUpperCase()}</div>
+              <div class="history-over-under-value" style="font-size: 1.75rem; font-weight: 700; color: #ffffff; margin-top: 0.5rem;">${leg.over_under_value}</div>
+              ${leg.over_under_stat_type ? `<div class="history-over-under-stat" style="font-size: 1rem; color: rgba(255, 255, 255, 0.6); margin-top: 0.5rem; word-break: break-word; overflow-wrap: break-word; white-space: normal; line-height: 1.2;">${leg.over_under_stat_type}</div>` : ''}
             </div>
           </div>
           <div style="text-align: center; flex: 1;">
