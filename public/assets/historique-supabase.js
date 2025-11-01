@@ -392,9 +392,9 @@ function generateBetCardHTML(bet) {
         <div style="text-align: center;">
           <div style="font-size: 3rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
           <div class="history-over-under-display" style="background: rgba(34, 197, 94, 0.1); border: 2px solid #22c55e; border-radius: 0.5rem; padding: 1rem 1.25rem; margin-top: 1.25rem; max-width: 150px; margin-left: auto; margin-right: auto;">
-            <div class="history-over-under-type" style="font-size: 0.75rem; font-weight: 700; color: #22c55e; text-align: center; word-spacing: 9999px; line-height: 1.3;">${bet.over_under_type?.toUpperCase()}</div>
-            <div class="history-over-under-value" style="font-size: 1.125rem; font-weight: 700; color: #ffffff; margin-top: 0.5rem; text-align: center;">${bet.over_under_value}</div>
-            ${bet.over_under_stat_type ? `<div class="history-over-under-stat" style="font-size: 0.7rem; color: rgba(255, 255, 255, 0.6); margin-top: 0.5rem; text-align: center; word-spacing: 9999px; line-height: 1.3;">${bet.over_under_stat_type}</div>` : ''}
+            <div class="history-over-under-type" style="font-size: 1rem; font-weight: 700; color: #22c55e; text-align: center; word-spacing: 9999px; line-height: 1.3;">${bet.over_under_type?.toUpperCase()}</div>
+            <div class="history-over-under-value" style="font-size: 1.5rem; font-weight: 700; color: #ffffff; margin-top: 0.5rem; text-align: center;">${bet.over_under_value}</div>
+            ${bet.over_under_stat_type ? `<div class="history-over-under-stat" style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.6); margin-top: 0.5rem; text-align: center; word-spacing: 9999px; line-height: 1.3;">${bet.over_under_stat_type}</div>` : ''}
           </div>
         </div>
         <div style="text-align: center; flex: 1;">
