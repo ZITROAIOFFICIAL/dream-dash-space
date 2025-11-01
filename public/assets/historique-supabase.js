@@ -64,6 +64,7 @@ function extractBetData(blockElement) {
     over_under_type: blockElement.getAttribute("data-over-under-type"),
     over_under_value: blockElement.getAttribute("data-over-under-value"),
     over_under_stat_type: blockElement.getAttribute("data-over-under-stat-type"),
+    over_under_text_custom: blockElement.getAttribute("data-over-under-text-custom"),
     moneyline_team: blockElement.getAttribute("data-moneyline-team"),
   };
 
@@ -376,8 +377,9 @@ function generateBetCardHTML(bet) {
       </div>
     `;
   } else if (bet.bet_type === "over_under") {
+    const displayText = bet.over_under_text_custom || bet.over_under_type;
     matchHTML = `
-      <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 2rem; font-weight: 600; margin-bottom: 2rem;">${bet.over_under_type?.toUpperCase()}</div>
+      <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 2rem; font-weight: 600; margin-bottom: 2rem;">${displayText?.toUpperCase()}</div>
       <div style="display: flex; align-items: center; justify-content: center; gap: 1.5rem;">
         <div style="text-align: center; flex: 1;">
           <div style="width: 7rem; height: 7rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem;">
@@ -388,7 +390,7 @@ function generateBetCardHTML(bet) {
         <div style="text-align: center;">
           <div style="font-size: 3rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
           <div class="history-over-under-display" style="background: rgba(34, 197, 94, 0.1); border: 2px solid #22c55e; border-radius: 0.5rem; padding: 1rem 1.25rem; margin-top: 1.25rem; max-width: 150px; margin-left: auto; margin-right: auto;">
-            <div class="history-over-under-type" style="font-size: 1.5rem; font-weight: 700; color: #22c55e; text-align: center; word-spacing: 9999px; line-height: 1.3;">${bet.over_under_type?.toUpperCase()}</div>
+            <div class="history-over-under-type" style="font-size: 1.5rem; font-weight: 700; color: #22c55e; text-align: center; word-spacing: 9999px; line-height: 1.3;">${displayText?.toUpperCase()}</div>
             <div class="history-over-under-value" style="font-size: 2rem; font-weight: 700; color: #ffffff; margin-top: 0.5rem; text-align: center;">${bet.over_under_value}</div>
             ${bet.over_under_stat_type ? `<div class="history-over-under-stat" style="font-size: 1.5rem; color: rgba(255, 255, 255, 0.6); margin-top: 0.5rem; text-align: center; word-spacing: 9999px; line-height: 1.3;">${bet.over_under_stat_type}</div>` : ""}
           </div>
@@ -498,8 +500,9 @@ function generateParlayCardHTML(parlay) {
         </div>
       `;
       } else if (leg.bet_type === "over_under") {
+        const displayText = leg.over_under_text_custom || leg.over_under_type;
         legHTML = `
-        <div style="text-align: center; color: rgba(255, 255, 255, 0.6); font-size: 1.5rem; margin-bottom: 1.25rem;">${leg.over_under_type?.toUpperCase()}</div>
+        <div style="text-align: center; color: rgba(255, 255, 255, 0.6); font-size: 1.5rem; margin-bottom: 1.25rem;">${displayText?.toUpperCase()}</div>
         <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
           <div style="text-align: center; flex: 1;">
             <div style="width: 4.5rem; height: 4.5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; padding: 0.75rem;">
@@ -510,7 +513,7 @@ function generateParlayCardHTML(parlay) {
           <div style="text-align: center;">
             <div style="font-size: 2rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
             <div class="history-over-under-display" style="background: rgba(34, 197, 94, 0.1); border: 2px solid #22c55e; border-radius: 0.5rem; padding: 0.75rem 1rem; margin-top: 1rem; max-width: 120px; margin-left: auto; margin-right: auto;">
-              <div class="history-over-under-type" style="font-size: 0.5625rem; font-weight: 700; color: #22c55e; text-align: center; word-spacing: 9999px; line-height: 1.3;">${leg.over_under_type?.toUpperCase()}</div>
+              <div class="history-over-under-type" style="font-size: 0.5625rem; font-weight: 700; color: #22c55e; text-align: center; word-spacing: 9999px; line-height: 1.3;">${displayText?.toUpperCase()}</div>
               <div class="history-over-under-value" style="font-size: 0.875rem; font-weight: 700; color: #ffffff; margin-top: 0.4rem; text-align: center;">${leg.over_under_value}</div>
               ${leg.over_under_stat_type ? `<div class="history-over-under-stat" style="font-size: 0.65rem; color: rgba(255, 255, 255, 0.6); margin-top: 0.4rem; text-align: center; word-spacing: 9999px; line-height: 1.3;">${leg.over_under_stat_type}</div>` : ""}
             </div>

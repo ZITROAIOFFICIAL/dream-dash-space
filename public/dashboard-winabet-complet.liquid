@@ -246,6 +246,7 @@
                    data-over-under-type="{{ block.settings.over_under_type }}"
                    data-over-under-value="{{ block.settings.over_under_value }}"
                    data-over-under-stat-type="{{ block.settings.over_under_stat_type }}"
+                   data-over-under-text-custom="{{ block.settings.over_under_text_custom }}"
                    data-moneyline-team="{{ block.settings.moneyline_team | default: 'team2' }}"
               >
                 <!-- Confidence Badge - Bande verte 92% -->
@@ -461,6 +462,7 @@
                       {% assign leg_over_under_type = block.settings.leg1_over_under_type %}
                       {% assign leg_over_under_value = block.settings.leg1_over_under_value %}
                       {% assign leg_over_under_stat_type = block.settings.leg1_over_under_stat_type %}
+                      {% assign leg_over_under_text_custom = block.settings.leg1_over_under_text_custom %}
                       {% assign leg_moneyline_team = block.settings.leg1_moneyline_team %}
                     {% when 2 %}
                       {% assign leg_team1_name = block.settings.leg2_team1_name %}
@@ -474,6 +476,7 @@
                       {% assign leg_over_under_type = block.settings.leg2_over_under_type %}
                       {% assign leg_over_under_value = block.settings.leg2_over_under_value %}
                       {% assign leg_over_under_stat_type = block.settings.leg2_over_under_stat_type %}
+                      {% assign leg_over_under_text_custom = block.settings.leg2_over_under_text_custom %}
                     {% when 3 %}
                       {% assign leg_team1_name = block.settings.leg3_team1_name %}
                       {% assign leg_team1_logo = block.settings.leg3_team1_logo %}
@@ -486,6 +489,7 @@
                       {% assign leg_over_under_type = block.settings.leg3_over_under_type %}
                       {% assign leg_over_under_value = block.settings.leg3_over_under_value %}
                       {% assign leg_over_under_stat_type = block.settings.leg3_over_under_stat_type %}
+                      {% assign leg_over_under_text_custom = block.settings.leg3_over_under_text_custom %}
                     {% when 4 %}
                       {% assign leg_team1_name = block.settings.leg4_team1_name %}
                       {% assign leg_team1_logo = block.settings.leg4_team1_logo %}
@@ -498,6 +502,7 @@
                       {% assign leg_over_under_type = block.settings.leg4_over_under_type %}
                       {% assign leg_over_under_value = block.settings.leg4_over_under_value %}
                       {% assign leg_over_under_stat_type = block.settings.leg4_over_under_stat_type %}
+                      {% assign leg_over_under_text_custom = block.settings.leg4_over_under_text_custom %}
                     {% when 5 %}
                       {% assign leg_team1_name = block.settings.leg5_team1_name %}
                       {% assign leg_team1_logo = block.settings.leg5_team1_logo %}
@@ -510,6 +515,7 @@
                       {% assign leg_over_under_type = block.settings.leg5_over_under_type %}
                       {% assign leg_over_under_value = block.settings.leg5_over_under_value %}
                       {% assign leg_over_under_stat_type = block.settings.leg5_over_under_stat_type %}
+                      {% assign leg_over_under_text_custom = block.settings.leg5_over_under_text_custom %}
                     {% when 6 %}
                       {% assign leg_team1_name = block.settings.leg6_team1_name %}
                       {% assign leg_team1_logo = block.settings.leg6_team1_logo %}
@@ -522,6 +528,7 @@
                       {% assign leg_over_under_type = block.settings.leg6_over_under_type %}
                       {% assign leg_over_under_value = block.settings.leg6_over_under_value %}
                       {% assign leg_over_under_stat_type = block.settings.leg6_over_under_stat_type %}
+                      {% assign leg_over_under_text_custom = block.settings.leg6_over_under_text_custom %}
                     {% when 7 %}
                       {% assign leg_team1_name = block.settings.leg7_team1_name %}
                       {% assign leg_team1_logo = block.settings.leg7_team1_logo %}
@@ -534,6 +541,7 @@
                       {% assign leg_over_under_type = block.settings.leg7_over_under_type %}
                       {% assign leg_over_under_value = block.settings.leg7_over_under_value %}
                       {% assign leg_over_under_stat_type = block.settings.leg7_over_under_stat_type %}
+                      {% assign leg_over_under_text_custom = block.settings.leg7_over_under_text_custom %}
                     {% when 8 %}
                       {% assign leg_team1_name = block.settings.leg8_team1_name %}
                       {% assign leg_team1_logo = block.settings.leg8_team1_logo %}
@@ -546,6 +554,7 @@
                       {% assign leg_over_under_type = block.settings.leg8_over_under_type %}
                       {% assign leg_over_under_value = block.settings.leg8_over_under_value %}
                       {% assign leg_over_under_stat_type = block.settings.leg8_over_under_stat_type %}
+                      {% assign leg_over_under_text_custom = block.settings.leg8_over_under_text_custom %}
                     {% when 9 %}
                       {% assign leg_team1_name = block.settings.leg9_team1_name %}
                       {% assign leg_team1_logo = block.settings.leg9_team1_logo %}
@@ -558,6 +567,7 @@
                       {% assign leg_over_under_type = block.settings.leg9_over_under_type %}
                       {% assign leg_over_under_value = block.settings.leg9_over_under_value %}
                       {% assign leg_over_under_stat_type = block.settings.leg9_over_under_stat_type %}
+                      {% assign leg_over_under_text_custom = block.settings.leg9_over_under_text_custom %}
                     {% when 10 %}
                       {% assign leg_team1_name = block.settings.leg10_team1_name %}
                       {% assign leg_team1_logo = block.settings.leg10_team1_logo %}
@@ -570,6 +580,7 @@
                       {% assign leg_over_under_type = block.settings.leg10_over_under_type %}
                       {% assign leg_over_under_value = block.settings.leg10_over_under_value %}
                       {% assign leg_over_under_stat_type = block.settings.leg10_over_under_stat_type %}
+                      {% assign leg_over_under_text_custom = block.settings.leg10_over_under_text_custom %}
                   {% endcase %}
                   
                   {% if leg_team1_name != blank %}
@@ -586,6 +597,7 @@
                       "over_under_type": "{{ leg_over_under_type }}",
                       "over_under_value": "{{ leg_over_under_value }}",
                       "over_under_stat_type": "{{ leg_over_under_stat_type }}",
+                      "over_under_text_custom": "{{ leg_over_under_text_custom }}",
                       "moneyline_team": "{{ leg_moneyline_team | default: 'team2' }}"
                     }
                   {% endif %}
