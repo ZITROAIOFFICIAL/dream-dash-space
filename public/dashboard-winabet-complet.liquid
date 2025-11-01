@@ -2077,34 +2077,53 @@
     // AUTO-RESIZE OVER/UNDER TEXT
     // ===========================
     function autoResizeOverUnderText() {
-      // Sélectionner toutes les cartes avec over/under
-      document.querySelectorAll('.match-info-content, .bet-card').forEach(card => {
-        const overUnderDisplay = card.querySelector('.over-under-display');
+      // Sélectionner toutes les cartes qui ont un over/under
+      document.querySelectorAll('.match-info-content').forEach(container => {
+        const overUnderDisplay = container.querySelector('.over-under-display');
         if (!overUnderDisplay) return;
+        
+        const teamSides = container.querySelectorAll('.team-side');
+        const matchCenter = container.querySelector('.match-center');
+        if (!matchCenter || teamSides.length !== 2) return;
         
         const elements = overUnderDisplay.querySelectorAll('.over-under-type, .over-under-value, .over-under-stat');
         
+        // Fonction pour calculer si le contenu déborde
+        const checkOverflow = () => {
+          const containerWidth = container.offsetWidth;
+          const gap = 16; // 1rem = 16px (le gap CSS entre les éléments)
+          
+          // Calculer la largeur totale nécessaire
+          const team1Width = teamSides[0].offsetWidth;
+          const team2Width = teamSides[1].offsetWidth;
+          const centerWidth = matchCenter.offsetWidth;
+          const totalNeeded = team1Width + centerWidth + team2Width + (gap * 2);
+          
+          return totalNeeded > containerWidth;
+        };
+        
+        // Réduire progressivement la taille du texte
         elements.forEach(element => {
-          // Ne jamais agrandir: partir de la taille calculée actuelle
-          const computed = getComputedStyle(element);
-          let fontSize = parseFloat(computed.fontSize) || 12;
           // Empêcher la coupure de mots
           element.style.wordBreak = 'keep-all';
           element.style.overflowWrap = 'normal';
           element.style.hyphens = 'none';
           element.style.whiteSpace = 'normal';
           
-          // Réduire progressivement si la carte déborde ou le texte déborde
+          // Partir de la taille calculée actuelle
+          const computed = getComputedStyle(element);
+          let fontSize = parseFloat(computed.fontSize) || 12;
           let attempts = 0;
-          while (attempts < 30 && fontSize > 6) {
-            // Vérifier si la carte parent déborde
-            const cardOverflows = card.scrollWidth > card.clientWidth;
-            const textOverflows = element.scrollWidth > element.clientWidth || element.scrollHeight > element.clientHeight;
-            
-            if (!cardOverflows && !textOverflows) break;
-            
+          
+          // Forcer un recalcul initial
+          container.offsetHeight;
+          
+          // Réduire tant que ça déborde
+          while (checkOverflow() && fontSize > 6 && attempts < 50) {
             fontSize -= 0.5;
             element.style.fontSize = fontSize + 'px';
+            // Forcer le navigateur à recalculer le layout
+            container.offsetHeight;
             attempts++;
           }
         });
