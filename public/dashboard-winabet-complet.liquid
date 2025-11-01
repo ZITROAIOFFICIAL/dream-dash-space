@@ -341,8 +341,7 @@
                     
                     {% elsif bet_type == 'over_under' %}
                       <!-- OVER/UNDER -->
-                      {% assign ou_type = block.settings.over_under_type | default: 'OVER' | upcase %}
-                      <div class="match-info-header">{{ ou_type }}</div>
+                      <div class="match-info-header">{{ block.settings.over_under_type | default: 'OVER' | upcase }}</div>
                       <div class="match-info-content">
                         <div class="team-side">
                           {% if block.settings.team1_logo %}
@@ -355,7 +354,7 @@
                           <div class="match-time-new">{{ block.settings.match_time | default: '7:00 PM' }}</div>
                           <div class="match-vs-new">VS</div>
                           <div class="over-under-display">
-                            <div class="over-under-type" {% if ou_type == 'OVER' %}contenteditable="true" style="cursor: text; outline: 1px dashed rgba(255,255,255,0.3); padding: 2px 4px;"{% endif %}>{{ ou_type }}</div>
+                            <div class="over-under-type">{{ block.settings.over_under_type | default: 'OVER' | upcase }}</div>
                             <div class="over-under-value">{{ block.settings.over_under_value | default: '225.5' }}</div>
                             {% if block.settings.over_under_stat_type != blank %}
                               <div class="over-under-stat">{{ block.settings.over_under_stat_type }}</div>
@@ -689,8 +688,7 @@
                         </div>
                       </div>
                     {% elsif leg_bet_type == 'over_under' %}
-                      {% assign leg1_ou_type = block.settings.leg1_over_under_type | default: 'OVER' | upcase %}
-                      <div class="match-info-header">LEG 1 - {{ leg1_ou_type }}</div>
+                      <div class="match-info-header">LEG 1 - {{ block.settings.leg1_over_under_type | default: 'OVER' | upcase }}</div>
                       <div class="match-info-content">
                         <div class="team-side">
                           {% if block.settings.leg1_team1_logo %}
@@ -702,7 +700,7 @@
                           <div class="match-time-new">{{ block.settings.leg1_match_time | default: '7:00 PM' }}</div>
                           <div class="match-vs-new">VS</div>
                           <div class="over-under-display">
-                            <div class="over-under-type" {% if leg1_ou_type == 'OVER' %}contenteditable="true" style="cursor: text; outline: 1px dashed rgba(255,255,255,0.3); padding: 2px 4px;"{% endif %}>{{ leg1_ou_type }}</div>
+                            <div class="over-under-type">{{ block.settings.leg1_over_under_type | default: 'OVER' | upcase }}</div>
                             <div class="over-under-value">{{ block.settings.leg1_over_under_value | default: '225.5' }}</div>
                             {% if block.settings.leg1_over_under_stat_type != blank %}
                               <div class="over-under-stat">{{ block.settings.leg1_over_under_stat_type }}</div>
@@ -773,8 +771,7 @@
                         </div>
                       </div>
                     {% elsif leg_bet_type == 'over_under' %}
-                      {% assign leg2_ou_type = block.settings.leg2_over_under_type | default: 'OVER' | upcase %}
-                      <div class="match-info-header">LEG 2 - {{ leg2_ou_type }}</div>
+                      <div class="match-info-header">LEG 2 - {{ block.settings.leg2_over_under_type | default: 'OVER' | upcase }}</div>
                       <div class="match-info-content">
                         <div class="team-side">
                           {% if block.settings.leg2_team1_logo %}
@@ -786,7 +783,7 @@
                           <div class="match-time-new">{{ block.settings.leg2_match_time | default: '7:00 PM' }}</div>
                           <div class="match-vs-new">VS</div>
                           <div class="over-under-display">
-                            <div class="over-under-type" {% if leg2_ou_type == 'OVER' %}contenteditable="true" style="cursor: text; outline: 1px dashed rgba(255,255,255,0.3); padding: 2px 4px;"{% endif %}>{{ leg2_ou_type }}</div>
+                            <div class="over-under-type">{{ block.settings.leg2_over_under_type | default: 'OVER' | upcase }}</div>
                             <div class="over-under-value">{{ block.settings.leg2_over_under_value | default: '225.5' }}</div>
                             {% if block.settings.leg2_over_under_stat_type != blank %}
                               <div class="over-under-stat">{{ block.settings.leg2_over_under_stat_type }}</div>
@@ -958,8 +955,7 @@
                           </div>
                         </div>
                       {% elsif current_leg_bet_type == 'over_under' %}
-                        {% assign loop_ou_type = over_under_type | default: 'OVER' | upcase %}
-                        <div class="match-info-header">LEG {{ i }} - {{ loop_ou_type }}</div>
+                        <div class="match-info-header">LEG {{ i }} - {{ over_under_type | default: 'OVER' | upcase }}</div>
                         <div class="match-info-content">
                           <div class="team-side">
                             {% if team1_logo %}
@@ -971,7 +967,7 @@
                             <div class="match-time-new">{{ match_time | default: '7:00 PM' }}</div>
                             <div class="match-vs-new">VS</div>
                             <div class="over-under-display">
-                              <div class="over-under-type" {% if loop_ou_type == 'OVER' %}contenteditable="true" style="cursor: text; outline: 1px dashed rgba(255,255,255,0.3); padding: 2px 4px;"{% endif %}>{{ loop_ou_type }}</div>
+                              <div class="over-under-type">{{ over_under_type | default: 'OVER' | upcase }}</div>
                               <div class="over-under-value">{{ over_under_value | default: '225.5' }}</div>
                               {% if over_under_stat_type != blank %}
                                 <div class="over-under-stat">{{ over_under_stat_type }}</div>
