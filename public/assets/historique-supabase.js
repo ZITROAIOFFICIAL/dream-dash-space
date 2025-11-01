@@ -329,26 +329,30 @@ function generateBetCardHTML(bet) {
   if (bet.bet_type === 'moneyline') {
     const showTeam1Win = bet.moneyline_team === 'team1' && bet.result === 'win';
     const showTeam2Win = bet.moneyline_team === 'team2' && bet.result === 'win';
+    const showTeam1Loss = bet.moneyline_team === 'team1' && bet.result === 'loose';
+    const showTeam2Loss = bet.moneyline_team === 'team2' && bet.result === 'loose';
     
     matchHTML = `
       <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 2rem; font-weight: 600; margin-bottom: 2rem;">MONEYLINE</div>
       <div style="display: flex; align-items: center; justify-content: space-between; gap: 2.5rem;">
         <div style="text-align: center; flex: 1;">
-          <div style="width: 10rem; height: 10rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1.25rem; ${showTeam1Win ? 'border: 5px solid #22c55e;' : ''}">
+          <div style="width: 10rem; height: 10rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1.25rem; ${showTeam1Win ? 'border: 5px solid #22c55e;' : ''} ${showTeam1Loss ? 'border: 5px solid #ef4444;' : ''}">
             <img src="${sanitizeLogo(bet.team1_logo)}" alt="${bet.team1_name}" style="width: 100%; height: 100%; object-fit: contain;">
           </div>
           <div style="font-size: 1.75rem; font-weight: 600; color: #ffffff;">${bet.team1_name}</div>
           ${showTeam1Win ? '<div style="font-size: 1.75rem; font-weight: 700; color: #22c55e; margin-top: 1rem;">VICTOIRE</div>' : ''}
+          ${showTeam1Loss ? '<div style="font-size: 1.75rem; font-weight: 700; color: #ef4444; margin-top: 1rem;">DÉFAITE</div>' : ''}
         </div>
         <div style="text-align: center;">
           <div style="font-size: 3rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
         </div>
         <div style="text-align: center; flex: 1;">
-          <div style="width: 10rem; height: 10rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1.25rem; ${showTeam2Win ? 'border: 5px solid #22c55e;' : ''}">
+          <div style="width: 10rem; height: 10rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1.25rem; ${showTeam2Win ? 'border: 5px solid #22c55e;' : ''} ${showTeam2Loss ? 'border: 5px solid #ef4444;' : ''}">
             <img src="${sanitizeLogo(bet.team2_logo)}" alt="${bet.team2_name}" style="width: 100%; height: 100%; object-fit: contain;">
           </div>
           <div style="font-size: 1.75rem; font-weight: 600; color: #ffffff;">${bet.team2_name}</div>
           ${showTeam2Win ? '<div style="font-size: 1.75rem; font-weight: 700; color: #22c55e; margin-top: 1rem;">VICTOIRE</div>' : ''}
+          ${showTeam2Loss ? '<div style="font-size: 1.75rem; font-weight: 700; color: #ef4444; margin-top: 1rem;">DÉFAITE</div>' : ''}
         </div>
       </div>
     `;
@@ -444,23 +448,32 @@ function generateParlayCardHTML(parlay) {
     let legHTML = '';
     
     if (leg.bet_type === 'moneyline') {
+      const showTeam1Win = leg.moneyline_team === 'team1' && parlay.result === 'win';
+      const showTeam2Win = leg.moneyline_team === 'team2' && parlay.result === 'win';
+      const showTeam1Loss = leg.moneyline_team === 'team1' && parlay.result === 'loose';
+      const showTeam2Loss = leg.moneyline_team === 'team2' && parlay.result === 'loose';
+      
       legHTML = `
         <div style="text-align: center; color: rgba(255, 255, 255, 0.6); font-size: 1.5rem; margin-bottom: 1.25rem;">MONEYLINE</div>
         <div style="display: flex; align-items: center; justify-content: space-between; gap: 2rem;">
           <div style="text-align: center; flex: 1;">
-            <div style="width: 6rem; height: 6rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; padding: 1rem; ${leg.moneyline_team === 'team1' ? 'border: 4px solid #22c55e;' : ''}">
+            <div style="width: 6rem; height: 6rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; padding: 1rem; ${showTeam1Win ? 'border: 4px solid #22c55e;' : ''} ${showTeam1Loss ? 'border: 4px solid #ef4444;' : ''}">
               <img src="${sanitizeLogo(leg.team1_logo)}" alt="${leg.team1_name}" style="width: 100%; height: 100%; object-fit: contain;">
             </div>
             <div style="font-size: 1.25rem; font-weight: 600; color: #ffffff;">${leg.team1_name}</div>
+            ${showTeam1Win ? '<div style="font-size: 1.125rem; font-weight: 700; color: #22c55e; margin-top: 0.5rem;">VICTOIRE</div>' : ''}
+            ${showTeam1Loss ? '<div style="font-size: 1.125rem; font-weight: 700; color: #ef4444; margin-top: 0.5rem;">DÉFAITE</div>' : ''}
           </div>
           <div style="text-align: center;">
             <div style="font-size: 2rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
           </div>
           <div style="text-align: center; flex: 1;">
-            <div style="width: 6rem; height: 6rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; padding: 1rem; ${leg.moneyline_team === 'team2' ? 'border: 4px solid #22c55e;' : ''}">
+            <div style="width: 6rem; height: 6rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; padding: 1rem; ${showTeam2Win ? 'border: 4px solid #22c55e;' : ''} ${showTeam2Loss ? 'border: 4px solid #ef4444;' : ''}">
               <img src="${sanitizeLogo(leg.team2_logo)}" alt="${leg.team2_name}" style="width: 100%; height: 100%; object-fit: contain;">
             </div>
             <div style="font-size: 1.25rem; font-weight: 600; color: #ffffff;">${leg.team2_name}</div>
+            ${showTeam2Win ? '<div style="font-size: 1.125rem; font-weight: 700; color: #22c55e; margin-top: 0.5rem;">VICTOIRE</div>' : ''}
+            ${showTeam2Loss ? '<div style="font-size: 1.125rem; font-weight: 700; color: #ef4444; margin-top: 0.5rem;">DÉFAITE</div>' : ''}
           </div>
         </div>
       `;
