@@ -2132,6 +2132,54 @@
       });
     }
 
+    // ===========================
+    // AUTO-SHRINK TEAM LOGOS
+    // ===========================
+    function autoShrinkTeamLogos() {
+      // Sélectionner toutes les cartes avec des logos d'équipe
+      document.querySelectorAll('.match-info-content').forEach(container => {
+        const teamSides = container.querySelectorAll('.team-side');
+        const matchCenter = container.querySelector('.match-center');
+        if (!matchCenter || teamSides.length !== 2) return;
+        
+        // Fonction pour calculer si le contenu déborde
+        const checkOverflow = () => {
+          const containerWidth = container.offsetWidth;
+          const gap = 16; // 1rem = 16px
+          
+          const team1Width = teamSides[0].offsetWidth;
+          const team2Width = teamSides[1].offsetWidth;
+          const centerWidth = matchCenter.offsetWidth;
+          const totalNeeded = team1Width + centerWidth + team2Width + (gap * 2);
+          
+          return totalNeeded > containerWidth;
+        };
+        
+        // Trouver tous les logos
+        const logos = container.querySelectorAll('.team-logo');
+        if (logos.length === 0) return;
+        
+        // Obtenir la taille initiale des logos
+        let logoSize = parseFloat(getComputedStyle(logos[0]).width) || 80;
+        let attempts = 0;
+        
+        // Forcer un recalcul initial
+        container.offsetHeight;
+        
+        // Réduire la taille des logos tant que ça déborde
+        while (checkOverflow() && logoSize > 40 && attempts < 50) {
+          logoSize -= 2;
+          logos.forEach(logo => {
+            logo.style.width = logoSize + 'px';
+            logo.style.height = logoSize + 'px';
+          });
+          // Forcer le navigateur à recalculer le layout
+          container.offsetHeight;
+          attempts++;
+        }
+      });
+    }
+
     // Observer pour détecter les changements de contenu
     function observeOverUnderChanges() {
       const observer = new MutationObserver(() => {
@@ -2151,6 +2199,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         autoResizeOverUnderText();
+        autoShrinkTeamLogos();
         observeOverUnderChanges();
         // Ajuster aussi les cartes d'historique (vert) qui n'ont pas de classes
         const resizeHistory = () => {
@@ -2189,7 +2238,10 @@
 
     // Redimensionner lors du redimensionnement de la fenêtre
     window.addEventListener('resize', () => {
-      setTimeout(autoResizeOverUnderText, 100);
+      setTimeout(() => {
+        autoResizeOverUnderText();
+        autoShrinkTeamLogos();
+      }, 100);
       // Redimensionner aussi l'historique
       const event = new Event('DOMContentLoaded');
       document.dispatchEvent(event);
