@@ -30,6 +30,7 @@ export type Database = {
           multiplier: number | null
           odds: number | null
           over_under_stat_type: string | null
+          over_under_text_custom: string | null
           over_under_type: string | null
           over_under_value: string | null
           result: string | null
@@ -58,6 +59,7 @@ export type Database = {
           multiplier?: number | null
           odds?: number | null
           over_under_stat_type?: string | null
+          over_under_text_custom?: string | null
           over_under_type?: string | null
           over_under_value?: string | null
           result?: string | null
@@ -86,6 +88,7 @@ export type Database = {
           multiplier?: number | null
           odds?: number | null
           over_under_stat_type?: string | null
+          over_under_text_custom?: string | null
           over_under_type?: string | null
           over_under_value?: string | null
           result?: string | null
