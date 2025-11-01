@@ -2084,22 +2084,21 @@
         const parent = element.closest('.over-under-display');
         if (!parent) return;
         
-        // Réinitialiser la taille de police
-        let fontSize = element.classList.contains('over-under-type') ? 14 : 
-                      element.classList.contains('over-under-value') ? 16 : 12;
-        element.style.fontSize = fontSize + 'px';
+        // Ne jamais agrandir: partir de la taille calculée actuelle
+        const computed = getComputedStyle(element);
+        let fontSize = parseFloat(computed.fontSize) || 12;
+        // Empêcher la coupure de mots
+        element.style.wordBreak = 'keep-all';
+        element.style.overflowWrap = 'normal';
+        element.style.hyphens = 'none';
+        element.style.whiteSpace = 'normal';
         
-        // Vérifier si le texte déborde et réduire si nécessaire
+        // Réduire progressivement jusqu'à ce que ça tienne
         let attempts = 0;
-        while (element.scrollWidth > element.clientWidth && attempts < 10) {
+        while ((element.scrollWidth > element.clientWidth || element.scrollHeight > element.clientHeight) && fontSize > 8 && attempts < 20) {
           fontSize -= 1;
           element.style.fontSize = fontSize + 'px';
           attempts++;
-        }
-        
-        // Si toujours trop grand, forcer la taille minimale
-        if (fontSize < 8) {
-          element.style.fontSize = '8px';
         }
       });
     }
@@ -2135,17 +2134,13 @@
               el.style.overflowWrap = 'normal';
               el.style.hyphens = 'none';
               el.style.whiteSpace = 'normal';
-              // Définir une base de police selon la ligne (type / valeur / stat)
-              let base = idx === 0 ? 24 : idx === 1 ? 36 : 18; // px (approx styles inline)
-              // Si l'inline style définit une taille, l'utiliser
-              const match = /font-size:\s*([0-9.]+)rem/i.exec(el.getAttribute('style') || '');
-              if (match) {
-                // Convertir rem approximativement en px (16px)
-                base = parseFloat(match[1]) * 16;
-              }
+
+              // Partir de la taille calculée actuelle (ne jamais agrandir)
+              const computed = getComputedStyle(el);
+              let base = parseFloat(computed.fontSize) || 16;
               el.style.fontSize = base + 'px';
               let tries = 0;
-              while (el.scrollWidth > box.clientWidth && base > 8 && tries < 20) {
+              while ((el.scrollWidth > box.clientWidth || el.scrollHeight > box.clientHeight) && base > 8 && tries < 30) {
                 base -= 1;
                 el.style.fontSize = base + 'px';
                 tries++;
