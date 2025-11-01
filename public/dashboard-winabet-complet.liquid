@@ -339,9 +339,14 @@
                         </div>
                       </div>
                     
-                    {% elsif bet_type == 'over_under' %}
+                     {% elsif bet_type == 'over_under' %}
                       <!-- OVER/UNDER -->
-                      <div class="match-info-header">{{ block.settings.over_under_type | default: 'OVER' | upcase }}</div>
+                      {% assign custom_text = block.settings.over_under_text_custom | default: '' %}
+                      {% if custom_text != blank %}
+                        <div class="match-info-header">{{ custom_text | upcase }}</div>
+                      {% else %}
+                        <div class="match-info-header">{{ block.settings.over_under_type | default: 'OVER' | upcase }}</div>
+                      {% endif %}
                       <div class="match-info-content">
                         <div class="team-side">
                           {% if block.settings.team1_logo %}
@@ -354,7 +359,11 @@
                           <div class="match-time-new">{{ block.settings.match_time | default: '7:00 PM' }}</div>
                           <div class="match-vs-new">VS</div>
                           <div class="over-under-display">
-                            <div class="over-under-type">{{ block.settings.over_under_type | default: 'OVER' | upcase }}</div>
+                            {% if custom_text != blank %}
+                              <div class="over-under-type">{{ custom_text | upcase }}</div>
+                            {% else %}
+                              <div class="over-under-type">{{ block.settings.over_under_type | default: 'OVER' | upcase }}</div>
+                            {% endif %}
                             <div class="over-under-value">{{ block.settings.over_under_value | default: '225.5' }}</div>
                             {% if block.settings.over_under_stat_type != blank %}
                               <div class="over-under-stat">{{ block.settings.over_under_stat_type }}</div>
@@ -688,7 +697,12 @@
                         </div>
                       </div>
                     {% elsif leg_bet_type == 'over_under' %}
-                      <div class="match-info-header">LEG 1 - {{ block.settings.leg1_over_under_type | default: 'OVER' | upcase }}</div>
+                      {% assign custom_text = block.settings.leg1_over_under_text_custom | default: '' %}
+                      {% if custom_text != blank %}
+                        <div class="match-info-header">LEG 1 - {{ custom_text | upcase }}</div>
+                      {% else %}
+                        <div class="match-info-header">LEG 1 - {{ block.settings.leg1_over_under_type | default: 'OVER' | upcase }}</div>
+                      {% endif %}
                       <div class="match-info-content">
                         <div class="team-side">
                           {% if block.settings.leg1_team1_logo %}
@@ -700,7 +714,11 @@
                           <div class="match-time-new">{{ block.settings.leg1_match_time | default: '7:00 PM' }}</div>
                           <div class="match-vs-new">VS</div>
                           <div class="over-under-display">
-                            <div class="over-under-type">{{ block.settings.leg1_over_under_type | default: 'OVER' | upcase }}</div>
+                            {% if custom_text != blank %}
+                              <div class="over-under-type">{{ custom_text | upcase }}</div>
+                            {% else %}
+                              <div class="over-under-type">{{ block.settings.leg1_over_under_type | default: 'OVER' | upcase }}</div>
+                            {% endif %}
                             <div class="over-under-value">{{ block.settings.leg1_over_under_value | default: '225.5' }}</div>
                             {% if block.settings.leg1_over_under_stat_type != blank %}
                               <div class="over-under-stat">{{ block.settings.leg1_over_under_stat_type }}</div>
@@ -771,7 +789,12 @@
                         </div>
                       </div>
                     {% elsif leg_bet_type == 'over_under' %}
-                      <div class="match-info-header">LEG 2 - {{ block.settings.leg2_over_under_type | default: 'OVER' | upcase }}</div>
+                      {% assign custom_text = block.settings.leg2_over_under_text_custom | default: '' %}
+                      {% if custom_text != blank %}
+                        <div class="match-info-header">LEG 2 - {{ custom_text | upcase }}</div>
+                      {% else %}
+                        <div class="match-info-header">LEG 2 - {{ block.settings.leg2_over_under_type | default: 'OVER' | upcase }}</div>
+                      {% endif %}
                       <div class="match-info-content">
                         <div class="team-side">
                           {% if block.settings.leg2_team1_logo %}
@@ -783,7 +806,11 @@
                           <div class="match-time-new">{{ block.settings.leg2_match_time | default: '7:00 PM' }}</div>
                           <div class="match-vs-new">VS</div>
                           <div class="over-under-display">
-                            <div class="over-under-type">{{ block.settings.leg2_over_under_type | default: 'OVER' | upcase }}</div>
+                            {% if custom_text != blank %}
+                              <div class="over-under-type">{{ custom_text | upcase }}</div>
+                            {% else %}
+                              <div class="over-under-type">{{ block.settings.leg2_over_under_type | default: 'OVER' | upcase }}</div>
+                            {% endif %}
                             <div class="over-under-value">{{ block.settings.leg2_over_under_value | default: '225.5' }}</div>
                             {% if block.settings.leg2_over_under_stat_type != blank %}
                               <div class="over-under-stat">{{ block.settings.leg2_over_under_stat_type }}</div>
@@ -817,6 +844,7 @@
                         {% assign over_under_type = block.settings.leg3_over_under_type %}
                         {% assign over_under_value = block.settings.leg3_over_under_value %}
                         {% assign over_under_stat_type = block.settings.leg3_over_under_stat_type %}
+                        {% assign over_under_text_custom = block.settings.leg3_over_under_text_custom | default: '' %}
                       {% when 4 %}
                         {% assign team1_name = block.settings.leg4_team1_name %}
                         {% assign team1_logo = block.settings.leg4_team1_logo %}
@@ -829,6 +857,7 @@
                         {% assign over_under_type = block.settings.leg4_over_under_type %}
                         {% assign over_under_value = block.settings.leg4_over_under_value %}
                         {% assign over_under_stat_type = block.settings.leg4_over_under_stat_type %}
+                        {% assign over_under_text_custom = block.settings.leg4_over_under_text_custom | default: '' %}
                       {% when 5 %}
                         {% assign team1_name = block.settings.leg5_team1_name %}
                         {% assign team1_logo = block.settings.leg5_team1_logo %}
@@ -841,6 +870,7 @@
                         {% assign over_under_type = block.settings.leg5_over_under_type %}
                         {% assign over_under_value = block.settings.leg5_over_under_value %}
                         {% assign over_under_stat_type = block.settings.leg5_over_under_stat_type %}
+                        {% assign over_under_text_custom = block.settings.leg5_over_under_text_custom | default: '' %}
                       {% when 6 %}
                         {% assign team1_name = block.settings.leg6_team1_name %}
                         {% assign team1_logo = block.settings.leg6_team1_logo %}
@@ -853,6 +883,7 @@
                         {% assign over_under_type = block.settings.leg6_over_under_type %}
                         {% assign over_under_value = block.settings.leg6_over_under_value %}
                         {% assign over_under_stat_type = block.settings.leg6_over_under_stat_type %}
+                        {% assign over_under_text_custom = block.settings.leg6_over_under_text_custom | default: '' %}
                       {% when 7 %}
                         {% assign team1_name = block.settings.leg7_team1_name %}
                         {% assign team1_logo = block.settings.leg7_team1_logo %}
@@ -865,6 +896,7 @@
                         {% assign over_under_type = block.settings.leg7_over_under_type %}
                         {% assign over_under_value = block.settings.leg7_over_under_value %}
                         {% assign over_under_stat_type = block.settings.leg7_over_under_stat_type %}
+                        {% assign over_under_text_custom = block.settings.leg7_over_under_text_custom | default: '' %}
                       {% when 8 %}
                         {% assign team1_name = block.settings.leg8_team1_name %}
                         {% assign team1_logo = block.settings.leg8_team1_logo %}
@@ -877,6 +909,7 @@
                         {% assign over_under_type = block.settings.leg8_over_under_type %}
                         {% assign over_under_value = block.settings.leg8_over_under_value %}
                         {% assign over_under_stat_type = block.settings.leg8_over_under_stat_type %}
+                        {% assign over_under_text_custom = block.settings.leg8_over_under_text_custom | default: '' %}
                       {% when 9 %}
                         {% assign team1_name = block.settings.leg9_team1_name %}
                         {% assign team1_logo = block.settings.leg9_team1_logo %}
@@ -889,6 +922,7 @@
                         {% assign over_under_type = block.settings.leg9_over_under_type %}
                         {% assign over_under_value = block.settings.leg9_over_under_value %}
                         {% assign over_under_stat_type = block.settings.leg9_over_under_stat_type %}
+                        {% assign over_under_text_custom = block.settings.leg9_over_under_text_custom | default: '' %}
                       {% when 10 %}
                         {% assign team1_name = block.settings.leg10_team1_name %}
                         {% assign team1_logo = block.settings.leg10_team1_logo %}
@@ -901,6 +935,7 @@
                         {% assign over_under_type = block.settings.leg10_over_under_type %}
                         {% assign over_under_value = block.settings.leg10_over_under_value %}
                         {% assign over_under_stat_type = block.settings.leg10_over_under_stat_type %}
+                        {% assign over_under_text_custom = block.settings.leg10_over_under_text_custom | default: '' %}
                     {% endcase %}
                     
                     {% if team1_name != blank %}
@@ -955,7 +990,11 @@
                           </div>
                         </div>
                       {% elsif current_leg_bet_type == 'over_under' %}
-                        <div class="match-info-header">LEG {{ i }} - {{ over_under_type | default: 'OVER' | upcase }}</div>
+                        {% if over_under_text_custom != blank %}
+                          <div class="match-info-header">LEG {{ i }} - {{ over_under_text_custom | upcase }}</div>
+                        {% else %}
+                          <div class="match-info-header">LEG {{ i }} - {{ over_under_type | default: 'OVER' | upcase }}</div>
+                        {% endif %}
                         <div class="match-info-content">
                           <div class="team-side">
                             {% if team1_logo %}
@@ -967,7 +1006,11 @@
                             <div class="match-time-new">{{ match_time | default: '7:00 PM' }}</div>
                             <div class="match-vs-new">VS</div>
                             <div class="over-under-display">
-                              <div class="over-under-type">{{ over_under_type | default: 'OVER' | upcase }}</div>
+                              {% if over_under_text_custom != blank %}
+                                <div class="over-under-type">{{ over_under_text_custom | upcase }}</div>
+                              {% else %}
+                                <div class="over-under-type">{{ over_under_type | default: 'OVER' | upcase }}</div>
+                              {% endif %}
                               <div class="over-under-value">{{ over_under_value | default: '225.5' }}</div>
                               {% if over_under_stat_type != blank %}
                                 <div class="over-under-stat">{{ over_under_stat_type }}</div>
@@ -3312,6 +3355,13 @@
         },
         {
           "type": "text",
+          "id": "over_under_text_custom",
+          "label": "✏️ Texte personnalisé Over/Under",
+          "default": "",
+          "info": "Personnalisez le texte affiché (laissez vide pour utiliser OVER/UNDER par défaut)"
+        },
+        {
+          "type": "text",
           "id": "over_under_value",
           "label": "🔢 Valeur Over/Under",
           "default": "225.5",
@@ -3710,6 +3760,13 @@
         },
         {
           "type": "text",
+          "id": "leg1_over_under_text_custom",
+          "label": "✏️ Texte personnalisé Over/Under",
+          "default": "",
+          "info": "Personnalisez le texte (laissez vide pour OVER/UNDER par défaut)"
+        },
+        {
+          "type": "text",
           "id": "leg1_over_under_value",
           "label": "🔢 Valeur Over/Under",
           "default": "225.5"
@@ -3786,6 +3843,13 @@
             {"value": "under", "label": "UNDER"}
           ],
           "default": "over"
+        },
+        {
+          "type": "text",
+          "id": "leg2_over_under_text_custom",
+          "label": "✏️ Texte personnalisé Over/Under",
+          "default": "",
+          "info": "Personnalisez le texte (laissez vide pour OVER/UNDER par défaut)"
         },
         {
           "type": "text",
@@ -3868,6 +3932,13 @@
         },
         {
           "type": "text",
+          "id": "leg3_over_under_text_custom",
+          "label": "✏️ Texte personnalisé Over/Under",
+          "default": "",
+          "info": "Personnalisez le texte (laissez vide pour OVER/UNDER par défaut)"
+        },
+        {
+          "type": "text",
           "id": "leg3_over_under_value",
           "label": "🔢 Valeur Over/Under",
           "default": "225.5"
@@ -3944,6 +4015,13 @@
             {"value": "under", "label": "UNDER"}
           ],
           "default": "over"
+        },
+        {
+          "type": "text",
+          "id": "leg4_over_under_text_custom",
+          "label": "✏️ Texte personnalisé Over/Under",
+          "default": "",
+          "info": "Personnalisez le texte (laissez vide pour OVER/UNDER par défaut)"
         },
         {
           "type": "text",
@@ -4026,6 +4104,13 @@
         },
         {
           "type": "text",
+          "id": "leg5_over_under_text_custom",
+          "label": "✏️ Texte personnalisé Over/Under",
+          "default": "",
+          "info": "Personnalisez le texte (laissez vide pour OVER/UNDER par défaut)"
+        },
+        {
+          "type": "text",
           "id": "leg5_over_under_value",
           "label": "🔢 Valeur Over/Under",
           "default": "225.5"
@@ -4102,6 +4187,13 @@
             {"value": "under", "label": "UNDER"}
           ],
           "default": "over"
+        },
+        {
+          "type": "text",
+          "id": "leg6_over_under_text_custom",
+          "label": "✏️ Texte personnalisé Over/Under",
+          "default": "",
+          "info": "Personnalisez le texte (laissez vide pour OVER/UNDER par défaut)"
         },
         {
           "type": "text",
@@ -4184,6 +4276,13 @@
         },
         {
           "type": "text",
+          "id": "leg7_over_under_text_custom",
+          "label": "✏️ Texte personnalisé Over/Under",
+          "default": "",
+          "info": "Personnalisez le texte (laissez vide pour OVER/UNDER par défaut)"
+        },
+        {
+          "type": "text",
           "id": "leg7_over_under_value",
           "label": "🔢 Valeur Over/Under",
           "default": "225.5"
@@ -4260,6 +4359,13 @@
             {"value": "under", "label": "UNDER"}
           ],
           "default": "over"
+        },
+        {
+          "type": "text",
+          "id": "leg8_over_under_text_custom",
+          "label": "✏️ Texte personnalisé Over/Under",
+          "default": "",
+          "info": "Personnalisez le texte (laissez vide pour OVER/UNDER par défaut)"
         },
         {
           "type": "text",
@@ -4342,6 +4448,13 @@
         },
         {
           "type": "text",
+          "id": "leg9_over_under_text_custom",
+          "label": "✏️ Texte personnalisé Over/Under",
+          "default": "",
+          "info": "Personnalisez le texte (laissez vide pour OVER/UNDER par défaut)"
+        },
+        {
+          "type": "text",
           "id": "leg9_over_under_value",
           "label": "🔢 Valeur Over/Under",
           "default": "225.5"
@@ -4418,6 +4531,13 @@
             {"value": "under", "label": "UNDER"}
           ],
           "default": "over"
+        },
+        {
+          "type": "text",
+          "id": "leg10_over_under_text_custom",
+          "label": "✏️ Texte personnalisé Over/Under",
+          "default": "",
+          "info": "Personnalisez le texte (laissez vide pour OVER/UNDER par défaut)"
         },
         {
           "type": "text",
