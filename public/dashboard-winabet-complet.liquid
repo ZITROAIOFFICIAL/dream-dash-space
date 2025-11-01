@@ -2074,6 +2074,104 @@
     let isMobileSidebarOpen = false;
 
     // ===========================
+    // AUTO-RESIZE OVER/UNDER TEXT
+    // ===========================
+    function autoResizeOverUnderText() {
+      // Sélectionner tous les éléments over-under-type, over-under-value, over-under-stat
+      const overUnderElements = document.querySelectorAll('.over-under-type, .over-under-value, .over-under-stat');
+      
+      overUnderElements.forEach(element => {
+        const parent = element.closest('.over-under-display');
+        if (!parent) return;
+        
+        // Réinitialiser la taille de police
+        let fontSize = element.classList.contains('over-under-type') ? 14 : 
+                      element.classList.contains('over-under-value') ? 16 : 12;
+        element.style.fontSize = fontSize + 'px';
+        
+        // Vérifier si le texte déborde et réduire si nécessaire
+        let attempts = 0;
+        while (element.scrollWidth > element.clientWidth && attempts < 10) {
+          fontSize -= 1;
+          element.style.fontSize = fontSize + 'px';
+          attempts++;
+        }
+        
+        // Si toujours trop grand, forcer la taille minimale
+        if (fontSize < 8) {
+          element.style.fontSize = '8px';
+        }
+      });
+    }
+
+    // Observer pour détecter les changements de contenu
+    function observeOverUnderChanges() {
+      const observer = new MutationObserver(() => {
+        setTimeout(autoResizeOverUnderText, 100);
+      });
+      
+      document.querySelectorAll('.over-under-display').forEach(display => {
+        observer.observe(display, { 
+          childList: true, 
+          subtree: true, 
+          characterData: true 
+        });
+      });
+    }
+
+    // Démarrer l'auto-resize quand la page est chargée
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        autoResizeOverUnderText();
+        observeOverUnderChanges();
+        // Ajuster aussi les cartes d'historique (vert) qui n'ont pas de classes
+        const resizeHistory = () => {
+          const boxes = document.querySelectorAll('.history-card div[style*="border: 2px solid"][style*="#22c55e"]');
+          boxes.forEach(box => {
+            const parts = Array.from(box.children);
+            parts.forEach((el, idx) => {
+              // Empêcher la coupure de mots
+              el.style.wordBreak = 'keep-all';
+              el.style.overflowWrap = 'normal';
+              el.style.hyphens = 'none';
+              el.style.whiteSpace = 'normal';
+              // Définir une base de police selon la ligne (type / valeur / stat)
+              let base = idx === 0 ? 24 : idx === 1 ? 36 : 18; // px (approx styles inline)
+              // Si l'inline style définit une taille, l'utiliser
+              const match = /font-size:\s*([0-9.]+)rem/i.exec(el.getAttribute('style') || '');
+              if (match) {
+                // Convertir rem approximativement en px (16px)
+                base = parseFloat(match[1]) * 16;
+              }
+              el.style.fontSize = base + 'px';
+              let tries = 0;
+              while (el.scrollWidth > box.clientWidth && base > 8 && tries < 20) {
+                base -= 1;
+                el.style.fontSize = base + 'px';
+                tries++;
+              }
+            });
+          });
+        };
+        resizeHistory();
+        // Observer l'arrivée de nouvelles cartes historiques
+        const historyObserver = new MutationObserver(() => setTimeout(resizeHistory, 50));
+        const betHist = document.getElementById('bet-history-container');
+        const parlayHist = document.getElementById('parlay-history-container');
+        if (betHist) historyObserver.observe(betHist, { childList: true, subtree: true });
+        if (parlayHist) historyObserver.observe(parlayHist, { childList: true, subtree: true });
+      }, 500);
+    });
+
+    // Redimensionner lors du redimensionnement de la fenêtre
+    window.addEventListener('resize', () => {
+      setTimeout(autoResizeOverUnderText, 100);
+      // Redimensionner aussi l'historique
+      const event = new Event('DOMContentLoaded');
+      document.dispatchEvent(event);
+    });
+
+    // ===========================
     // SYSTÈME D'AUTO-INCRÉMENTATION AVEC LOCALSTORAGE
     // ===========================
     let autoIncrementInterval = null;
