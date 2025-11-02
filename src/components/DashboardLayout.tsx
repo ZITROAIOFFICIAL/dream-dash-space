@@ -11,7 +11,7 @@ const DashboardLayout = ({
       <Sidebar />
       
       {/* Header with logo and AI indicator */}
-      <header className="fixed top-0 left-0 right-0 bg-background z-30 md:left-64">
+      <header className="fixed top-0 left-0 right-0 bg-background/90 backdrop-blur-sm z-30 md:left-64 rounded-lg">
         <div className="flex items-center justify-center py-5">
           <h1 className="text-2xl font-bold leading-none">
             <span className="text-foreground">WIN</span>
@@ -20,7 +20,7 @@ const DashboardLayout = ({
             <span className="text-sm text-green-600">.AI</span>
           </h1>
         </div>
-        <div className="bg-black py-2 px-6 flex items-center justify-center">
+        <div className="bg-muted/50 py-2 px-6 flex items-center justify-center rounded-md">
           <AtomIcon className="w-16 h-16 text-foreground" ariaLabel="Icône atomique animée" />
         </div>
       </header>
