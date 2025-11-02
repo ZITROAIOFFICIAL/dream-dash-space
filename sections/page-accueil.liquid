@@ -22,6 +22,14 @@
 
   <!-- Sidebar -->
   <aside class="sidebar">
+    <!-- Close Button (Mobile only) -->
+    <button class="sidebar-close" onclick="toggleSidebar()" aria-label="Fermer le menu">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    
     <div style="background: #000000; padding: 0.65rem 2rem; display: flex; align-items: center; justify-content: center; position: relative;">
       <!-- Online à gauche, centré entre hamburger et logo -->
       <div style="position: absolute; left: 23%; top: 1.85rem; transform: translateX(-50%);">
@@ -99,15 +107,20 @@
     </div>
 
     <nav class="sidebar-nav">
+      <!-- Auth Buttons -->
+      <div style="padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
+        <a href="#" style="width: 100%; padding: 0.875rem 1.5rem; background: transparent; border: 1.5px solid rgba(255, 255, 255, 0.2); border-radius: 12px; color: rgba(255, 255, 255, 0.9); font-weight: 500; font-size: 0.9375rem; text-align: center; text-decoration: none; transition: all 0.3s; display: block;">
+          Se connecter
+        </a>
+        <a href="#" style="width: 100%; padding: 0.875rem 1.5rem; background: #ffffff; border: none; border-radius: 12px; color: #000000; font-weight: 600; font-size: 0.9375rem; text-align: center; text-decoration: none; transition: all 0.3s; display: block;">
+          Commencer gratuitement
+        </a>
+      </div>
+
+      <!-- Navigation Links -->
       <a class="nav-item active" href="https://winabet.ai/collections/all#bet">
         <div class="nav-item-content">
-          <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="7" height="7"></rect>
-            <rect x="14" y="3" width="7" height="7"></rect>
-            <rect x="14" y="14" width="7" height="7"></rect>
-            <rect x="3" y="14" width="7" height="7"></rect>
-          </svg>
-          <span>DASHBOARD</span>
+          <span style="color: rgba(255, 255, 255, 0.7); font-weight: 400; font-size: 0.9375rem;">Dashboard</span>
         </div>
         <svg class="chevron-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="9 18 15 12 9 6"></polyline>
