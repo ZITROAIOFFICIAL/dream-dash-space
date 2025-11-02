@@ -142,11 +142,19 @@
       stroke: rgba(255, 255, 255, 0.95);
     }
     
-    .sidebar.active ~ .mobile-toggle.active {
-      z-index: 65;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-      padding: 4px;
+    /* Ensure header toggle sits above overlay/sidebar when open */
+    body.sidebar-open .header {
+      z-index: 80;
+      pointer-events: none;
+    }
+    body.sidebar-open .header .mobile-toggle {
+      z-index: 90;
+      pointer-events: auto;
+    }
+    /* Make the X icon thicker and bright */
+    .mobile-toggle.active .close-icon path {
+      stroke: rgba(255, 255, 255, 0.95);
+      stroke-width: 2;
     }
 
     @media (max-width: 768px) {
