@@ -152,16 +152,13 @@
       visibility: hidden;
     }
     
-    /* Ensure header is above overlay and sidebar */
+    /* Hide header content when sidebar is open */
     body.sidebar-open .header {
       z-index: 100;
-      visibility: hidden;
     }
     
-    /* Hide all header content except mobile toggle */
     body.sidebar-open .header > *:not(.mobile-toggle) {
-      opacity: 0 !important;
-      pointer-events: none !important;
+      visibility: hidden !important;
     }
     
     /* Ensure mobile toggle (X) is visible and clickable above everything */
