@@ -93,7 +93,6 @@
       border: none;
       cursor: pointer;
       display: none;
-      transition: all 0.3s;
       width: 32px;
       height: 32px;
       padding: 0;
@@ -115,28 +114,24 @@
     .mobile-toggle .hamburger-icon {
       opacity: 1;
       visibility: visible;
-      transform: rotate(0deg);
       pointer-events: auto;
     }
 
     .mobile-toggle .close-icon {
       opacity: 0;
       visibility: hidden;
-      transform: rotate(90deg);
       pointer-events: none;
     }
 
     .mobile-toggle.active .hamburger-icon {
       opacity: 0;
       visibility: hidden;
-      transform: rotate(-90deg);
       pointer-events: none;
     }
 
     .mobile-toggle.active .close-icon {
       opacity: 1;
       visibility: visible;
-      transform: rotate(0deg);
       pointer-events: auto;
       color: rgba(255, 255, 255, 0.95);
       stroke: rgba(255, 255, 255, 0.95);
@@ -145,9 +140,6 @@
     /* Prevent body scroll when sidebar is open */
     body.sidebar-open {
       overflow: hidden;
-      position: fixed;
-      width: 100%;
-      height: 100%;
     }
     
     /* Ensure header is above overlay and sidebar */
@@ -171,10 +163,10 @@
       z-index: 110 !important;
     }
     
-    /* Make the X icon thicker and bright white */
+    /* Make the X icon visible */
     .mobile-toggle.active .close-icon path {
       stroke: rgba(255, 255, 255, 0.95) !important;
-      stroke-width: 2.5 !important;
+      stroke-width: 1.5 !important;
     }
 
     @media (max-width: 768px) {
