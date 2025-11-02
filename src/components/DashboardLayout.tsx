@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import Sidebar from "./Sidebar";
-import AIUpdateIndicator from "./AIUpdateIndicator";
+import AtomIcon from "./AtomIcon";
 interface DashboardLayoutProps {
   children: ReactNode;
 }
@@ -21,7 +21,7 @@ const DashboardLayout = ({
           </h1>
         </div>
         <div className="bg-black py-2 px-6 flex items-center justify-center">
-          <AIUpdateIndicator />
+          <AtomIcon className="w-16 h-16 text-foreground" ariaLabel="Icône atomique animée" />
         </div>
       </header>
       
