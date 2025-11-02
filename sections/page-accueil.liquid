@@ -12,8 +12,11 @@
 <body>
   <!-- Mobile Toggle Button -->
   <button class="mobile-toggle" onclick="toggleSidebar()" aria-label="Toggle menu">
-    <svg class="mobile-toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg class="mobile-toggle-icon hamburger-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
+    </svg>
+    <svg class="mobile-toggle-icon close-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
     </svg>
   </button>
 
@@ -22,14 +25,6 @@
 
   <!-- Sidebar -->
   <aside class="sidebar">
-    <!-- Close Button (Mobile only) -->
-    <button class="sidebar-close" onclick="toggleSidebar()" aria-label="Fermer le menu">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="18" y1="6" x2="6" y2="18"></line>
-        <line x1="6" y1="6" x2="18" y2="18"></line>
-      </svg>
-    </button>
-    
     <div style="background: #000000; padding: 0.65rem 2rem; display: flex; align-items: center; justify-content: center; position: relative;">
       <!-- Online à gauche, centré entre hamburger et logo -->
       <div style="position: absolute; left: 23%; top: 1.85rem; transform: translateX(-50%);">
@@ -629,10 +624,12 @@
     function toggleSidebar() {
       const sidebar = document.querySelector('.sidebar');
       const overlay = document.querySelector('.overlay');
+      const mobileToggle = document.querySelector('.mobile-toggle');
       const body = document.body;
       
       sidebar.classList.toggle('active');
       overlay.classList.toggle('active');
+      mobileToggle.classList.toggle('active');
       body.classList.toggle('sidebar-open');
     }
 
