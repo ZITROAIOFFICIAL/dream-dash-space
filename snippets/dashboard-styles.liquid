@@ -412,6 +412,31 @@
       display: flex;
       flex-direction: column;
       will-change: auto;
+      transition: all 0.3s ease;
+    }
+
+    /* Header scrolled state */
+    .header.scrolled {
+      background: rgba(30, 30, 30, 0.8) !important;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.4rem 2rem !important;
+    }
+
+    .header.scrolled #online-badge {
+      left: 30% !important;
+      transition: left 0.3s ease;
+    }
+
+    .header.scrolled #maj-badge {
+      left: 76% !important;
+      transition: left 0.3s ease;
+    }
+
+    .header.scrolled .logo {
+      font-size: 3rem !important;
+      transition: font-size 0.3s ease;
     }
 
     .header-logo {

@@ -670,11 +670,25 @@
       }
     }
 
+    // Scroll detection for header effect
+    function handleScroll() {
+      const header = document.querySelector('.header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    }
+
     // Initialize on page load
     document.addEventListener('DOMContentLoaded', function() {
       updateTime();
       setInterval(updateTime, 60000); // Update every minute
       setInterval(updateMemberCount, 30000); // Update member count every 30 seconds
+      
+      // Add scroll listener
+      window.addEventListener('scroll', handleScroll);
+      handleScroll(); // Check initial state
     });
 
     // Crash Simulation Script
