@@ -45,9 +45,9 @@ const Sidebar = () => {
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed left-0 top-0 z-40 h-screen bg-black text-white transition-transform duration-300 ease-in-out",
-          "md:w-64 md:border-r md:border-white/10 md:translate-x-0",
-          isOpen ? "w-full md:w-64 translate-x-0" : "w-full md:w-64 -translate-x-full"
+          "fixed left-0 top-0 z-40 h-screen bg-black text-white",
+          "md:w-64 md:border-r md:border-white/10",
+          isOpen ? "w-full md:w-64" : "w-full md:w-64 hidden md:block"
         )}
       >
         <div className="flex flex-col h-full">
