@@ -38,6 +38,14 @@
       to { transform: rotate(360deg); }
     }
 
+    @keyframes spinVariable {
+      0% { transform: rotate(0deg); }
+      25% { transform: rotate(720deg); } /* 2 tours rapides */
+      50% { transform: rotate(900deg); } /* ralentissement */
+      75% { transform: rotate(1620deg); } /* 2 tours rapides */
+      100% { transform: rotate(1800deg); } /* fin */
+    }
+
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
@@ -46,11 +54,6 @@
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
     }
 
     @keyframes slideIn {
@@ -302,7 +305,7 @@
       border-top-color: #16a34a;
       border-right-color: #16a34a;
       border-bottom-color: #16a34a;
-      animation: spin 1s linear infinite;
+      animation: spinVariable 5s linear infinite;
     }
 
     .ai-badge {
