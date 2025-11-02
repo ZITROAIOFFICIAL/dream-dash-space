@@ -473,8 +473,29 @@
       <div class="hero-bg-gradient hero-bg-gradient-2"></div>
 
       <div class="hero-container">
-        <!-- AI Analysis Card - En haut -->
-        <div style="grid-column: 1 / -1; margin-bottom: 1.5rem; margin-top: 3rem;">
+        <!-- Hero Content -->
+        <div class="hero-content" style="grid-column: 1 / -1;">
+          <h1 class="hero-title">
+            {{ section.settings.hero_title_1 }}<br>
+            <span class="hero-title-highlight">{{ section.settings.hero_title_highlight }}</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            {{ section.settings.hero_subtitle }}
+          </p>
+
+          <div class="hero-cta">
+            <a href="{{ section.settings.cta_primary_link }}" class="btn-primary">
+              {{ section.settings.cta_primary_text }}
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M7 13l5-5m0 0l-5-5m5 5H3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- AI Analysis Card - En dessous du texte -->
+        <div style="grid-column: 1 / -1; margin-top: 3rem;">
           <div class="ai-analysis-card">
             <!-- Icône IA avec pourcentage -->
             <div class="ai-icon-container">
@@ -540,34 +561,6 @@
               <div class="progress-bar-fill" id="progressBarCard"></div>
             </div>
           </div>
-        </div>
-          </div>
-        </div>
-
-        <!-- Left: Hero Content -->
-        <div class="hero-content">
-          <h1 class="hero-title">
-            {{ section.settings.hero_title_1 }}<br>
-            <span class="hero-title-highlight">{{ section.settings.hero_title_highlight }}</span>
-          </h1>
-
-          <p class="hero-subtitle">
-            {{ section.settings.hero_subtitle }}
-          </p>
-
-          <div class="hero-cta">
-            <a href="{{ section.settings.cta_primary_link }}" class="btn-primary">
-              {{ section.settings.cta_primary_text }}
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M7 13l5-5m0 0l-5-5m5 5H3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Right: Placeholder or additional content -->
-        <div class="hero-content">
-          <!-- Espace réservé pour du contenu additionnel si nécessaire -->
         </div>
       </div>
     </section>
