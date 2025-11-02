@@ -186,6 +186,15 @@
         top: 1.25rem; /* Hauteur du menu hamburger */
         left: 1.5rem; /* Position gauche/droite du menu hamburger */
       }
+      
+      /* Fond grisé transparent au scroll sur mobile */
+      .header.scrolled {
+        background: rgba(25, 25, 25, 0.45) !important;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      }
+      
       #online-badge {
         top: 1.75rem !important; /* Hauteur du badge 50 online */
       }
@@ -253,8 +262,8 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: 90%;
-        max-width: 1400px;
+        width: 90% !important;
+        max-width: none;
         min-width: 620px;
         margin: 0 auto;
         padding: 0 1.25rem;
