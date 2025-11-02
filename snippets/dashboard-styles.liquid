@@ -142,9 +142,33 @@
       stroke: rgba(255, 255, 255, 0.95);
     }
     
-    /* Ensure mobile toggle is visible when sidebar is open */
-    body.sidebar-open .mobile-toggle {
-      z-index: 90;
+    /* Prevent body scroll when sidebar is open */
+    body.sidebar-open {
+      overflow: hidden;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+    }
+    
+    /* Ensure header is above overlay and sidebar */
+    body.sidebar-open .header {
+      z-index: 100;
+    }
+    
+    /* Hide header background effect when menu is open */
+    body.sidebar-open .header::before {
+      opacity: 0 !important;
+    }
+    
+    /* Hide all header content except mobile toggle */
+    body.sidebar-open .header > *:not(.mobile-toggle) {
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+    
+    /* Ensure mobile toggle (X) is visible and clickable above everything */
+    body.sidebar-open .header .mobile-toggle {
+      z-index: 110 !important;
     }
     
     /* Make the X icon thicker and bright white */
