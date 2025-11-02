@@ -253,11 +253,17 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: 55%;
-        max-width: 55%;
+        width: 40%;
+        max-width: 780px;
+        min-width: 620px;
         margin: 0 auto;
-        padding: 0 2rem;
+        padding: 0 1.25rem;
         height: 100%;
+        background: rgba(25, 25, 25, 0.85);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 12px;
       }
 
       .mobile-only {
@@ -610,9 +616,7 @@
       top: 0;
       left: 0;
       right: 0;
-      background: rgba(20, 20, 20, 0.75);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background: transparent !important;
       z-index: 30;
       display: flex;
       flex-direction: column;
@@ -623,28 +627,13 @@
 
     /* Header background effect */
     .header::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) translateZ(0);
-      width: 0;
-      height: 0;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-radius: 8px;
-      opacity: 0;
-      transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
-      pointer-events: none;
-      z-index: -1;
-      backface-visibility: hidden;
+      content: none !important;
+      display: none !important;
     }
 
     .header.scrolled::before {
-      width: calc(100% - 3rem);
-      height: 70%;
-      opacity: 1;
+      content: none !important;
+      display: none !important;
     }
 
     /* Transitions for elements */
