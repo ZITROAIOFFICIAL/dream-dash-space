@@ -411,8 +411,9 @@
       z-index: 30;
       display: flex;
       flex-direction: column;
-      will-change: auto;
-      transition: all 0.3s ease;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
     }
 
     /* Header background effect */
@@ -421,7 +422,7 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%) translateZ(0);
       width: 0;
       height: 0;
       background: rgba(30, 30, 30, 0.75);
@@ -429,9 +430,10 @@
       -webkit-backdrop-filter: blur(10px);
       border-radius: 20px;
       opacity: 0;
-      transition: all 0.3s ease;
+      transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
       pointer-events: none;
       z-index: -1;
+      backface-visibility: hidden;
     }
 
     .header.scrolled::before {
@@ -444,7 +446,9 @@
     #online-badge,
     #maj-badge,
     .mobile-toggle {
-      transition: left 0.3s ease, transform 0.3s ease;
+      transition: left 0.2s ease;
+      transform: translateZ(0);
+      backface-visibility: hidden;
     }
 
     /* Scrolled state - move elements closer to center */
