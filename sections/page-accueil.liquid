@@ -91,6 +91,191 @@
 
   <!-- Main Content -->
   <main class="main-content">
+    <!-- AI Crash Analysis Section -->
+    <style>
+      .ai-crash-section {
+        background-color: {{ section.settings.background_color }};
+        padding: 2rem 1rem;
+        color: #ffffff;
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+
+      .ai-crash-container {
+        max-width: 1280px;
+        margin: 0 auto;
+      }
+
+      .ai-crash-content {
+        max-width: 80rem;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      /* AI Analysis Header */
+      .ai-analysis-header {
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+      }
+
+      .ai-analysis-text {
+        text-align: center;
+      }
+
+      .ai-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #ffffff;
+      }
+
+      .ai-highlight {
+        color: {{ section.settings.primary_color }};
+      }
+
+      .ai-percentage {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #ffffff;
+      }
+
+      .ai-percentage-value {
+        color: {{ section.settings.primary_color }};
+      }
+
+      /* Crash Simulation */
+      .crash-simulation {
+        width: 100%;
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 1rem 0;
+      }
+
+      .multiplier-display {
+        margin: 0.5rem 0;
+      }
+
+      .multiplier-value {
+        font-weight: 900;
+        line-height: 1;
+        letter-spacing: -0.025em;
+        font-size: clamp(24px, 6vw, 48px);
+        text-align: center;
+        transition: color 0.3s;
+        color: #ffffff;
+        text-shadow: 0 0 24px rgba(16, 185, 129, 0.15);
+      }
+
+      .multiplier-value.winning {
+        color: {{ section.settings.primary_color }};
+      }
+
+      .progress-bar-container {
+        position: relative;
+        height: 4px;
+        border-radius: 9999px;
+        background-color: #151a26;
+        overflow: hidden;
+        margin-top: 0.5rem;
+        max-width: 320px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .progress-bar-fill {
+        position: absolute;
+        inset: 0;
+        background-color: {{ section.settings.primary_color }};
+        transition: width 0.075s;
+        box-shadow: 0 0 16px rgba(16, 185, 129, 0.35);
+      }
+
+      .info-chips {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 0.625rem;
+      }
+
+      .chip {
+        padding: 0.25rem 0.625rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        border: 1px solid;
+      }
+
+      .chip-stake {
+        background-color: #000000;
+        border-color: #ffffff;
+        color: #ffffff;
+      }
+
+      .chip-result {
+        background-color: #0e1322;
+        border-color: #2b334f;
+        color: #ffffff;
+      }
+
+      .chip-result.winning {
+        background-color: {{ section.settings.primary_color }};
+        border-color: {{ section.settings.primary_color }};
+        color: #000000;
+        font-weight: 600;
+      }
+
+      @media (min-width: 768px) {
+        .ai-title,
+        .ai-percentage {
+          font-size: 1.875rem;
+        }
+      }
+    </style>
+
+    <section class="ai-crash-section">
+      <div class="ai-crash-container">
+        <div class="ai-crash-content">
+          <!-- AI Win Percentage -->
+          <div class="ai-analysis-header">
+            <div class="ai-analysis-text">
+              <div class="ai-title">
+                {{ section.settings.title_fr }} <span class="ai-highlight">{{ section.settings.title_highlight }}</span>
+              </div>
+              <div class="ai-percentage">
+                <span class="ai-percentage-value" id="aiChanceDisplay">...</span>% {{ section.settings.subtitle_fr }}
+              </div>
+            </div>
+          </div>
+
+          <!-- Crash Simulation -->
+          <div class="crash-simulation">
+            <!-- Multiplier -->
+            <div class="multiplier-display">
+              <div class="multiplier-value" id="multiplierDisplay">
+                x1.00
+              </div>
+              
+              <!-- Progress bar -->
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progressBar" style="width: 0%"></div>
+              </div>
+            </div>
+
+            <!-- Info Chips -->
+            <div class="info-chips">
+              <div class="chip chip-stake">
+                Paris sportif : <b id="stakeDisplay">–</b>
+              </div>
+              <div class="chip chip-result" id="resultChip" style="display: none;">
+                <span id="resultText"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Content for the landing page will be added here -->
     <div class="container">
       <h1 style="color: #ffffff; text-align: center; margin-top: 2rem;">{{ section.settings.page_title }}</h1>
@@ -153,6 +338,112 @@
       setInterval(updateTime, 60000); // Update every minute
       setInterval(updateMemberCount, 30000); // Update member count every 30 seconds
     });
+
+    // Crash Simulation Script
+    (function() {
+      const MAX_X_DISPLAY = 3;
+      const DUR_MIN = 4500;
+      const DUR_MAX = 6000;
+
+      let currentX = 1.0;
+      let animationId = null;
+      let scenario = null;
+
+      const multiplierDisplay = document.getElementById('multiplierDisplay');
+      const progressBar = document.getElementById('progressBar');
+      const aiChanceDisplay = document.getElementById('aiChanceDisplay');
+      const stakeDisplay = document.getElementById('stakeDisplay');
+      const resultChip = document.getElementById('resultChip');
+      const resultText = document.getElementById('resultText');
+
+      function money(n) {
+        return new Intl.NumberFormat('fr-CA', {
+          style: 'currency',
+          currency: 'CAD'
+        }).format(n);
+      }
+
+      function rand(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      function randInt(min, max) {
+        return Math.floor(rand(min, max + 1));
+      }
+
+      function newScenario() {
+        const chance = rand(60, 90);
+        const stake = randInt(15, 120);
+        const target = Number(rand(1.2, 2.5).toFixed(2));
+        const bust = target + rand(0.2, 1.5);
+        const willWin = true;
+
+        return { chance, stake, target, bust, willWin };
+      }
+
+      function runOnce() {
+        multiplierDisplay.classList.remove('winning');
+        resultChip.style.display = 'none';
+        
+        scenario = newScenario();
+        aiChanceDisplay.textContent = Math.round(scenario.chance);
+        stakeDisplay.textContent = money(scenario.stake);
+
+        const duration = rand(DUR_MIN, DUR_MAX);
+        const start = performance.now();
+
+        return new Promise((resolve) => {
+          function tick(t) {
+            const k = Math.min(1, (t - start) / duration);
+            const x = 1 + Math.pow(k, 1.4) * (scenario.bust - 1);
+            currentX = x;
+            
+            multiplierDisplay.textContent = 'x' + x.toFixed(2);
+            
+            const prog = Math.min(100, (x / MAX_X_DISPLAY) * 100);
+            progressBar.style.width = prog + '%';
+
+            if (x >= scenario.target) {
+              const win = scenario.stake * scenario.target;
+              multiplierDisplay.classList.add('winning');
+              resultChip.classList.add('winning');
+              resultChip.classList.remove('chip-result');
+              resultText.textContent = `Cashout x${scenario.target.toFixed(2)} → ${money(win)}`;
+              resultChip.style.display = 'block';
+              resolve();
+              return;
+            }
+            
+            if (x >= scenario.bust) {
+              resultChip.classList.remove('winning');
+              resultChip.classList.add('chip-result');
+              resultText.textContent = `Bust à x${scenario.bust.toFixed(2)}`;
+              resultChip.style.display = 'block';
+              resolve();
+              return;
+            }
+            
+            animationId = requestAnimationFrame(tick);
+          }
+          
+          animationId = requestAnimationFrame(tick);
+        });
+      }
+
+      async function loop() {
+        while (true) {
+          await runOnce();
+          await new Promise(r => setTimeout(r, 2500));
+        }
+      }
+
+      // Start the simulation when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loop);
+      } else {
+        loop();
+      }
+    })();
   </script>
 </body>
 </html>
@@ -178,6 +469,36 @@
       "id": "members_base",
       "label": "Nombre de membres de base",
       "default": 50
+    },
+    {
+      "type": "text",
+      "id": "title_fr",
+      "label": "Titre Analyse IA (FR)",
+      "default": "Analyse de notre"
+    },
+    {
+      "type": "text",
+      "id": "title_highlight",
+      "label": "Texte surligné Analyse IA",
+      "default": "IA"
+    },
+    {
+      "type": "text",
+      "id": "subtitle_fr",
+      "label": "Sous-titre Analyse IA (FR)",
+      "default": "de chance de gagner"
+    },
+    {
+      "type": "color",
+      "id": "primary_color",
+      "label": "Couleur principale",
+      "default": "#10b981"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Couleur de fond",
+      "default": "#000000"
     }
   ],
   "presets": [
