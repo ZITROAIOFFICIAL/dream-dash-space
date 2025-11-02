@@ -2565,6 +2565,11 @@
         event.preventDefault();
       }
 
+      // Ne rien faire si on est déjà sur cette page
+      if (currentPage === pageName) {
+        return;
+      }
+
       // Afficher le chargement AI pour les pages bet et parlay
       if (pageName === 'bet' || pageName === 'parlay') {
         const loadingOverlay = document.getElementById('ai-loading-overlay');
