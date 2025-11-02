@@ -147,9 +147,17 @@
       left: 0;
     }
     
-    /* Hide main content when sidebar is open */
-    body.sidebar-open main {
-      visibility: hidden;
+    /* Add black overlay above header when sidebar is open */
+    body.sidebar-open::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      z-index: 35;
+      pointer-events: none;
     }
     
     /* Hide header content when sidebar is open */
