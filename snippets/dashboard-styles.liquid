@@ -407,7 +407,7 @@
       top: 0;
       left: 0;
       right: 0;
-      background: #000000;
+      background: transparent;
       z-index: 30;
       display: flex;
       flex-direction: column;
@@ -415,28 +415,51 @@
       transition: all 0.3s ease;
     }
 
-    /* Header scrolled state */
-    .header.scrolled {
-      background: rgba(30, 30, 30, 0.8) !important;
+    /* Header background effect */
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 0;
+      height: 0;
+      background: rgba(30, 30, 30, 0.75);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 0.4rem 2rem !important;
+      border-radius: 20px;
+      opacity: 0;
+      transition: all 0.3s ease;
+      pointer-events: none;
+      z-index: -1;
     }
 
-    .header.scrolled #online-badge {
-      left: 30% !important;
-      transition: left 0.3s ease;
+    .header.scrolled::before {
+      width: calc(100% - 3rem);
+      height: 90%;
+      opacity: 1;
     }
 
-    .header.scrolled #maj-badge {
-      left: 76% !important;
-      transition: left 0.3s ease;
+    /* Transitions for elements */
+    #online-badge,
+    #maj-badge,
+    .mobile-toggle {
+      transition: left 0.3s ease, transform 0.3s ease;
     }
 
-    .header.scrolled .logo {
-      font-size: 3rem !important;
-      transition: font-size 0.3s ease;
+    /* Scrolled state - move elements closer to center */
+    @media (max-width: 768px) {
+      .header.scrolled .mobile-toggle {
+        left: 2.5rem !important;
+      }
+
+      .header.scrolled #online-badge {
+        left: 28% !important;
+      }
+
+      .header.scrolled #maj-badge {
+        left: 77% !important;
+      }
     }
 
     .header-logo {
