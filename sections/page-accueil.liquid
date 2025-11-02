@@ -93,13 +93,21 @@
   <main class="main-content">
     <style>
       .hero-section {
-        min-height: 85vh;
+        min-height: auto;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         background: linear-gradient(to bottom, #000000 0%, #0a0a0a 100%);
         position: relative;
         overflow: hidden;
-        padding: 0 1.5rem 2rem;
+        padding: 0 1rem 2rem;
+      }
+
+      @media (min-width: 768px) {
+        .hero-section {
+          min-height: 85vh;
+          align-items: center;
+          padding: 0 1.5rem 2rem;
+        }
       }
 
       .hero-container {
@@ -108,7 +116,7 @@
         width: 100%;
         display: grid;
         grid-template-columns: 1fr;
-        gap: 3rem;
+        gap: 2rem;
         align-items: center;
       }
 
@@ -384,7 +392,7 @@
 
       <div class="hero-container">
         <!-- AI Analysis Card - En haut -->
-        <div style="grid-column: 1 / -1; margin-bottom: 2rem; margin-top: 0;">
+        <div style="grid-column: 1 / -1; margin-bottom: 1.5rem; margin-top: 0;">
           <div class="ai-analysis-card">
             <div class="ai-badge-large">IA</div>
             
