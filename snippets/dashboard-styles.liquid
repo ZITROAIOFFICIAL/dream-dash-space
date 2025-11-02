@@ -225,13 +225,12 @@
       background: #000000;
       border-right: 1px solid rgba(255, 255, 255, 0.1);
       z-index: 50;
-      display: flex;
+      display: none; /* Hidden on desktop */
       flex-direction: column;
       overflow-y: auto;
       touch-action: pan-y;
       -webkit-overflow-scrolling: touch;
     }
-
 
     @media (max-width: 768px) {
       .sidebar {
@@ -242,6 +241,115 @@
       .sidebar.active {
         display: flex;
       }
+    }
+
+    /* Desktop Menu */
+    .desktop-menu {
+      display: none;
+    }
+
+    @media (min-width: 769px) {
+      .desktop-menu {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        height: 100%;
+      }
+
+      .mobile-only {
+        display: none !important;
+      }
+
+      .mobile-toggle {
+        display: none !important;
+      }
+    }
+
+    .desktop-left {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .desktop-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .desktop-logo {
+      font-family: 'Inter', sans-serif;
+      font-size: 4.5rem;
+      letter-spacing: -0.02em;
+      font-weight: 300;
+      display: inline-flex;
+      align-items: baseline;
+    }
+
+    .desktop-badge-online,
+    .desktop-badge-ia {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.35rem 0.55rem;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 9999px;
+      z-index: 2;
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-left: 1rem;
+    }
+
+    .desktop-nav-item {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 400;
+      transition: color 0.2s;
+    }
+
+    .desktop-nav-item:hover {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .desktop-auth-link {
+      color: rgba(161, 161, 170, 1);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 400;
+      transition: color 0.2s;
+    }
+
+    .desktop-auth-link:hover {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .desktop-auth-btn {
+      padding: 0.75rem 1.5rem;
+      background: #ffffff;
+      border: none;
+      border-radius: 6px;
+      color: #000000;
+      font-weight: 600;
+      font-size: 1rem;
+      text-align: center;
+      text-decoration: none;
+      transition: all 0.3s;
+      display: block;
+    }
+
+    .desktop-auth-btn:hover {
+      background: rgba(255, 255, 255, 0.95);
     }
 
     .sidebar-header {

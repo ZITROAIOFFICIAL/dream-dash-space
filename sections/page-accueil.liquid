@@ -118,7 +118,7 @@
     </nav>
   </aside>
 
-  <header class="header" style="background: transparent; padding: 0; display: flex; align-items: center; justify-content: center; position: fixed; height: 80px;">
+  <header class="header" style="background: transparent; position: fixed; height: 80px; width: 100%;">
     <!-- Mobile Toggle Button -->
     <button class="mobile-toggle" onclick="toggleSidebar()" aria-label="Toggle menu">
       <svg class="mobile-toggle-icon hamburger-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -129,8 +129,8 @@
       </svg>
     </button>
     
-    <!-- Online à gauche, centré entre hamburger et logo -->
-    <div id="online-badge-container" style="position: absolute; left: 23%; top: 0.15rem; transform: translateX(-50%);">
+    <!-- Mobile: Online Badge -->
+    <div id="online-badge-container" class="mobile-only" style="position: absolute; left: 23%; top: 0.15rem; transform: translateX(-50%);">
       <div id="online-badge" style="position: relative; display: flex; align-items: center; gap: 0.25rem; padding: 0.25rem 0.4rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; z-index: 2;">
         <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 4px); height: calc(100% + 4px); pointer-events: none; z-index: -1;">
           <defs>
@@ -151,13 +151,13 @@
       </div>
     </div>
     
-    <!-- Logo centré -->
-    <div class="logo" style="font-family: 'Inter', sans-serif; font-size: 3.5rem; letter-spacing: -0.02em; font-weight: 300; display: inline-flex; align-items: baseline; position: relative; top: -1.5rem;">
+    <!-- Mobile: Logo centré -->
+    <div class="logo mobile-only" style="font-family: 'Inter', sans-serif; font-size: 3.5rem; letter-spacing: -0.02em; font-weight: 300; display: inline-flex; align-items: baseline; position: relative; top: -1.5rem;">
       <span style="color: #ffffff;">wina</span><span style="color: rgba(255, 255, 255, 0.35);">bet</span>
     </div>
     
-    <!-- Badge IA à droite, centré entre logo et bord -->
-    <div id="maj-badge-container" style="position: absolute; left: 83%; top: 1.25rem; transform: translateX(-50%);">
+    <!-- Mobile: Badge IA -->
+    <div id="maj-badge-container" class="mobile-only" style="position: absolute; left: 83%; top: 1.25rem; transform: translateX(-50%);">
       <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 86px; height: 32px; pointer-events: none; z-index: 1;">
         <defs>
           <filter id="badgeGlowHeader" x="-50%" y="-50%" width="200%" height="200%">
@@ -200,6 +200,96 @@
           <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
         </svg>
         <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 0.75rem; white-space: nowrap;">MAJ <span id="header-time" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">17:34</span></span>
+      </div>
+    </div>
+
+    <!-- Desktop Menu -->
+    <div class="desktop-menu">
+      <!-- Left: Logo + Badges + Menu Items -->
+      <div class="desktop-left">
+        <!-- Online Badge -->
+        <div class="desktop-badge-online">
+          <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 4px); height: calc(100% + 4px); pointer-events: none; z-index: -1;">
+            <defs>
+              <filter id="onlineGlowDesktop" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="2" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <rect x="2" y="2" width="calc(100% - 4px)" height="calc(100% - 4px)" rx="14" ry="14" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+            <rect x="2" y="2" width="calc(100% - 4px)" height="calc(100% - 4px)" rx="14" ry="14" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="30 510" stroke-linecap="round" filter="url(#onlineGlowDesktop)" opacity="0.9">
+              <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+            </rect>
+          </svg>
+          <svg width="8" height="8" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+            <circle cx="10" cy="10" r="4" fill="rgba(255, 255, 255, 0.7)"/>
+          </svg>
+          <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 0.875rem; white-space: nowrap;"><span id="desktop-member-count" class="member-count" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">{{ section.settings.members_base | default: 50 }}</span> online</span>
+        </div>
+
+        <!-- Logo -->
+        <div class="desktop-logo">
+          <span style="color: #ffffff;">wina</span><span style="color: rgba(255, 255, 255, 0.35);">bet</span>
+        </div>
+
+        <!-- IA Badge -->
+        <div class="desktop-badge-ia">
+          <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 106px; height: 42px; pointer-events: none; z-index: 1;">
+            <defs>
+              <filter id="badgeGlowDesktop" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="2" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+             <rect x="2" y="2" width="102" height="38" rx="19" ry="19" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+             <rect x="2" y="2" width="102" height="38" rx="19" ry="19" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="50 600" stroke-linecap="round" filter="url(#badgeGlowDesktop)" opacity="0.9">
+               <animate attributeName="stroke-dashoffset" values="0;-650" dur="8s" repeatCount="indefinite"/>
+             </rect>
+          </svg>
+          <div style="position: relative; display: flex; align-items: center; gap: 0.4rem; padding: 0.35rem 0.65rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; min-width: 100px; z-index: 2;">
+            <svg width="26" height="26" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+              <defs>
+                <filter id="softGlowDesktop" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="1.2" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <path id="orbit0Desktop" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                <path id="orbit1Desktop" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                <path id="orbit2Desktop" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+              </defs>
+              <g stroke="#68859e" stroke-width="2" fill="none">
+                <use href="#orbit0Desktop"/>
+                <use href="#orbit1Desktop"/>
+                <use href="#orbit2Desktop"/>
+              </g>
+              <g stroke-linecap="round" filter="url(#softGlowDesktop)">
+                <use href="#orbit0Desktop" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                  <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                </use>
+                <use href="#orbit1Desktop" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                  <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                </use>
+                <use href="#orbit2Desktop" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                  <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                </use>
+              </g>
+              <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
+            </svg>
+            <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 0.875rem; white-space: nowrap;">MAJ <span id="desktop-time" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">17:34</span></span>
+          </div>
+        </div>
+
+        <!-- Menu Items -->
+        <nav class="desktop-nav">
+          <a href="https://winabet.ai/collections/all#bet" class="desktop-nav-item">Accéder au Dashboard</a>
+          <a href="#" class="desktop-nav-item">Abonnement</a>
+        </nav>
+      </div>
+
+      <!-- Right: Auth Buttons -->
+      <div class="desktop-right">
+        <a href="#" class="desktop-auth-link">Se Connecter</a>
+        <a href="#" class="desktop-auth-btn">Commencer Gratuitement</a>
       </div>
     </div>
   </header>
@@ -661,11 +751,16 @@
       
       const sidebarTime = document.getElementById('sidebar-time');
       const headerTime = document.getElementById('header-time');
+      const desktopTime = document.getElementById('desktop-time');
+      
       if (sidebarTime) {
         sidebarTime.textContent = timeString;
       }
       if (headerTime) {
         headerTime.textContent = timeString;
+      }
+      if (desktopTime) {
+        desktopTime.textContent = timeString;
       }
     }
 
@@ -673,6 +768,7 @@
     function updateMemberCount() {
       const sidebarMemberCount = document.getElementById('sidebar-member-count');
       const headerMemberCount = document.getElementById('header-member-count');
+      const desktopMemberCount = document.getElementById('desktop-member-count');
       
       if (sidebarMemberCount) {
         const baseCount = parseInt(sidebarMemberCount.textContent) || 50;
@@ -686,6 +782,13 @@
         const variation = Math.floor(Math.random() * 11) - 5; // -5 to +5
         const newCount = Math.max(30, baseCount + variation);
         headerMemberCount.textContent = newCount;
+      }
+      
+      if (desktopMemberCount) {
+        const baseCount = parseInt(desktopMemberCount.textContent) || 50;
+        const variation = Math.floor(Math.random() * 11) - 5; // -5 to +5
+        const newCount = Math.max(30, baseCount + variation);
+        desktopMemberCount.textContent = newCount;
       }
     }
 
