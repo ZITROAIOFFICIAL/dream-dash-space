@@ -236,11 +236,16 @@
         backdrop-filter: blur(10px);
         position: relative;
         overflow: hidden;
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
         align-items: center;
-        gap: 2rem;
-        flex-wrap: wrap;
-        min-height: auto;
+      }
+
+      @media (min-width: 768px) {
+        .ai-analysis-card {
+          grid-template-columns: auto 1fr auto;
+        }
       }
 
       .ai-analysis-card::before {
@@ -253,26 +258,14 @@
         background: linear-gradient(90deg, transparent, {{ section.settings.primary_color }}, transparent);
       }
 
-      .ai-badge-large {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        background: {{ section.settings.primary_color }};
-        color: #000000;
-        font-weight: 700;
-        font-size: 0.875rem;
-        border-radius: 0.5rem;
-        flex-shrink: 0;
-      }
-
       .ai-stat {
         display: flex;
         align-items: center;
+        justify-content: center;
         gap: 1rem;
         flex: 1;
         min-width: 200px;
+        text-align: center;
       }
 
       .ai-stat-value {
@@ -291,26 +284,23 @@
 
       /* Crash Simulation */
       .crash-display {
-        background: rgba(0, 0, 0, 0.4);
-        border-radius: 0.75rem;
-        padding: 1rem 1.5rem;
         flex: 1;
         min-width: 200px;
         display: flex;
         align-items: center;
-        gap: 1rem;
+        justify-content: center;
+        padding: 1rem 1.5rem;
       }
 
       .multiplier-value {
         font-weight: 900;
         line-height: 1;
         letter-spacing: -0.025em;
-        font-size: clamp(1.5rem, 3vw, 2rem);
+        font-size: clamp(2.5rem, 5vw, 4rem);
         transition: color 0.3s;
         color: #ffffff;
         text-shadow: 0 0 24px rgba(16, 185, 129, 0.3);
         white-space: nowrap;
-        flex-shrink: 0;
       }
 
       .multiplier-value.winning {
@@ -340,7 +330,8 @@
         flex-wrap: wrap;
         gap: 0.75rem;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
+        width: 100%;
       }
 
       .chip {
@@ -369,6 +360,7 @@
         color: #000000;
         font-weight: 600;
         display: block !important;
+        margin-left: auto;
       }
 
       /* Decorative elements */
@@ -402,15 +394,13 @@
         <!-- AI Analysis Card - En haut -->
         <div style="grid-column: 1 / -1; margin-bottom: 1.5rem; margin-top: 0;">
           <div class="ai-analysis-card">
-            <div class="ai-badge-large">IA</div>
-            
             <!-- AI Stat -->
             <div class="ai-stat">
               <div>
                 <div class="ai-stat-value">
                   <span id="aiChanceDisplay">...</span>%
                 </div>
-                <div class="ai-stat-label">{{ section.settings.ai_stat_label }}</div>
+                <div class="ai-stat-label">de confiance de notre IA</div>
               </div>
             </div>
 
