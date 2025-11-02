@@ -446,7 +446,7 @@
     #online-badge,
     #maj-badge,
     .mobile-toggle {
-      transition: left 0.2s ease;
+      transition: left 0.2s ease, top 0.2s ease;
       transform: translateZ(0);
       backface-visibility: hidden;
     }
@@ -455,17 +455,17 @@
     @media (max-width: 768px) {
       .header.scrolled .mobile-toggle {
         left: 3.5rem !important;
-        top: 1.65rem !important;
+        top: 1.25rem !important;
       }
 
       .header.scrolled #online-badge {
         left: 30% !important;
-        top: 0.6rem !important;
+        top: 1.25rem !important;
       }
 
       .header.scrolled #maj-badge {
         left: 75% !important;
-        top: 1.65rem !important;
+        top: 1.25rem !important;
       }
       
       .header.scrolled .logo {
