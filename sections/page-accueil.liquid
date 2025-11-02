@@ -96,7 +96,7 @@
         min-height: auto;
         display: flex;
         align-items: flex-start;
-        background: linear-gradient(to bottom, #000000 0%, #0a0a0a 100%);
+        background: #000000;
         position: relative;
         overflow: hidden;
         padding: 0 1rem 2rem;
@@ -419,10 +419,6 @@
               <div class="multiplier-value" id="multiplierDisplay">
                 x1.00
               </div>
-              
-              <div class="progress-bar-container">
-                <div class="progress-bar-fill" id="progressBar" style="width: 0%"></div>
-              </div>
             </div>
 
             <!-- Info Chips -->
@@ -582,9 +578,6 @@
             currentX = x;
             
             multiplierDisplay.textContent = 'x' + x.toFixed(2);
-            
-            const prog = Math.min(100, (x / MAX_X_DISPLAY) * 100);
-            progressBar.style.width = prog + '%';
 
             if (x >= scenario.target) {
               const win = scenario.stake * scenario.target;
