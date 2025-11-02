@@ -47,7 +47,7 @@ const Parlay = () => {
     }, randomDelay);
 
     return () => clearTimeout(timer);
-  }, [location.pathname]);
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
