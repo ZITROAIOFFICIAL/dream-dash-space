@@ -138,6 +138,15 @@
       visibility: visible;
       transform: rotate(0deg);
       pointer-events: auto;
+      color: rgba(255, 255, 255, 0.95);
+      stroke: rgba(255, 255, 255, 0.95);
+    }
+    
+    .sidebar.active ~ .mobile-toggle.active {
+      z-index: 65;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 4px;
     }
 
     @media (max-width: 768px) {
