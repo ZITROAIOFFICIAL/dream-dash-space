@@ -1,858 +1,2247 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WINABET.AI - Page d'Accueil</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  {% render 'dashboard-styles' %}
-</head>
-<body>
-  <!-- Mobile Toggle Button -->
-  <button class="mobile-toggle" onclick="toggleSidebar()" aria-label="Toggle menu">
-    <svg class="mobile-toggle-icon hamburger-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 6h16M4 12h16M4 18h16"/>
-    </svg>
-    <svg class="mobile-toggle-icon close-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M6 18L18 6M6 6l12 12"/>
-    </svg>
-  </button>
+{% style %}
+/* Hide Shopify default header */
+    #shopify-section-header {
+      display: none !important;
+    }
 
-  <!-- Overlay -->
-  <div class="overlay" onclick="toggleSidebar()"></div>
+    /* CSS Variables */
+    :root {
+      --background: 0 0% 0%;
+      --foreground: 0 0% 100%;
+      --primary: 120 100% 45%;
+      --primary-foreground: 0 0% 100%;
+      --secondary: 220 25% 18%;
+      --muted: 220 25% 18%;
+      --muted-foreground: 220 15% 65%;
+      --border: 220 25% 20%;
+      --radius: 0.75rem;
+    }
 
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <div style="background: #000000; padding: 0.65rem 2rem; display: flex; align-items: center; justify-content: center; position: relative;">
-      <!-- Online à gauche, centré entre hamburger et logo -->
-      <div style="position: absolute; left: 23%; top: 1.85rem; transform: translateX(-50%);">
-        <div id="online-badge-sidebar" style="position: relative; display: flex; align-items: center; gap: 0.25rem; padding: 0.25rem 0.4rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; z-index: 2;">
-          <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 4px); height: calc(100% + 4px); pointer-events: none; z-index: -1;">
-            <defs>
-              <filter id="onlineGlowSidebar" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="2" result="b"/>
-                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-            </defs>
-            <rect x="2" y="2" width="calc(100% - 4px)" height="calc(100% - 4px)" rx="10" ry="10" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
-            <rect x="2" y="2" width="calc(100% - 4px)" height="calc(100% - 4px)" rx="10" ry="10" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="30 510" stroke-linecap="round" filter="url(#onlineGlowSidebar)" opacity="0.9">
-              <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
-            </rect>
-          </svg>
-          <svg width="6" height="6" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
-            <circle cx="10" cy="10" r="4" fill="rgba(255, 255, 255, 0.7)"/>
-          </svg>
-          <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 0.75rem; white-space: nowrap;"><span id="sidebar-member-count" class="member-count" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">{{ section.settings.members_base | default: 50 }}</span> online</span>
-        </div>
-      </div>
-      
-      <!-- Logo centré -->
-      <div class="logo" style="font-family: 'Inter', sans-serif; font-size: 3.5rem; letter-spacing: -0.02em; font-weight: 300; display: inline-flex; align-items: baseline;">
-        <span style="color: #ffffff;">wina</span><span style="color: rgba(255, 255, 255, 0.35);">bet</span>
-      </div>
-      
-      <!-- Badge IA à droite, centré entre logo et bord -->
-      <div style="position: absolute; left: 83%; top: 1.25rem; transform: translateX(-50%);">
-        <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 86px; height: 32px; pointer-events: none; z-index: 1;">
-          <defs>
-            <filter id="badgeGlowSidebar" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="2" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
-           <rect x="2" y="2" width="82" height="28" rx="14" ry="14" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
-           <rect x="2" y="2" width="82" height="28" rx="14" ry="14" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="40 500" stroke-linecap="round" filter="url(#badgeGlowSidebar)" opacity="0.9">
-             <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
-           </rect>
-        </svg>
-        <div style="position: relative; display: flex; align-items: center; gap: 0.3rem; padding: 0.25rem 0.5rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; min-width: 80px; z-index: 2;">
-          <svg id="atom-sidebar" width="20" height="20" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
-            <defs>
-              <filter id="softGlowSidebar" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="1.2" result="b"/>
-                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-              <path id="orbit0Sidebar" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
-              <path id="orbit1Sidebar" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
-              <path id="orbit2Sidebar" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
-            </defs>
-            <g stroke="#68859e" stroke-width="2" fill="none">
-              <use href="#orbit0Sidebar"/>
-              <use href="#orbit1Sidebar"/>
-              <use href="#orbit2Sidebar"/>
-            </g>
-            <g stroke-linecap="round" filter="url(#softGlowSidebar)">
-              <use href="#orbit0Sidebar" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
-              </use>
-              <use href="#orbit1Sidebar" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
-              </use>
-              <use href="#orbit2Sidebar" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
-              </use>
-            </g>
-            <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
-          </svg>
-          <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 0.75rem; white-space: nowrap;">MAJ <span id="sidebar-time" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">17:34</span></span>
-        </div>
-      </div>
-    </div>
+    /* Reset & Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    <nav class="sidebar-nav">
-      <!-- Auth Buttons -->
-      <div style="padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
-        <a href="#" style="width: 100%; padding: 0.875rem 1.5rem; background: transparent; border: 1.5px solid rgba(255, 255, 255, 0.2); border-radius: 12px; color: rgba(255, 255, 255, 0.9); font-weight: 500; font-size: 0.9375rem; text-align: center; text-decoration: none; transition: all 0.3s; display: block;">
-          Se connecter
-        </a>
-        <a href="#" style="width: 100%; padding: 0.875rem 1.5rem; background: #ffffff; border: none; border-radius: 12px; color: #000000; font-weight: 600; font-size: 0.9375rem; text-align: center; text-decoration: none; transition: all 0.3s; display: block;">
-          Commencer gratuitement
-        </a>
-      </div>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+      background: #000000;
+      color: #ffffff;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
 
-      <!-- Navigation Links -->
-      <a class="nav-item active" href="https://winabet.ai/collections/all#bet">
-        <div class="nav-item-content">
-          <span style="color: rgba(255, 255, 255, 0.7); font-weight: 400; font-size: 0.9375rem;">Dashboard</span>
-        </div>
-        <svg class="chevron-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
-      </a>
-    </nav>
-  </aside>
+    /* Animations */
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
 
-  <header class="header" style="background: #000000; padding: 0.65rem 2rem; display: flex; align-items: center; justify-content: center; position: relative;">
-    <!-- Online à gauche, centré entre hamburger et logo -->
-    <div style="position: absolute; left: 23%; top: 0.15rem; transform: translateX(-50%);">
-      <div id="online-badge" style="position: relative; display: flex; align-items: center; gap: 0.25rem; padding: 0.25rem 0.4rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; z-index: 2;">
-        <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 4px); height: calc(100% + 4px); pointer-events: none; z-index: -1;">
-          <defs>
-            <filter id="onlineGlowHeader" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="2" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
-          <rect x="2" y="2" width="calc(100% - 4px)" height="calc(100% - 4px)" rx="10" ry="10" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
-          <rect x="2" y="2" width="calc(100% - 4px)" height="calc(100% - 4px)" rx="10" ry="10" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="30 510" stroke-linecap="round" filter="url(#onlineGlowHeader)" opacity="0.9">
-            <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
-          </rect>
-        </svg>
-        <svg width="6" height="6" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
-          <circle cx="10" cy="10" r="4" fill="rgba(255, 255, 255, 0.7)"/>
-        </svg>
-        <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 0.75rem; white-space: nowrap;"><span id="header-member-count" class="member-count" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">{{ section.settings.members_base | default: 50 }}</span> online</span>
-      </div>
-    </div>
-    
-    <!-- Logo centré -->
-    <div class="logo" style="font-family: 'Inter', sans-serif; font-size: 3.5rem; letter-spacing: -0.02em; font-weight: 300; display: inline-flex; align-items: baseline;">
-      <span style="color: #ffffff;">wina</span><span style="color: rgba(255, 255, 255, 0.35);">bet</span>
-    </div>
-    
-    <!-- Badge IA à droite, centré entre logo et bord -->
-    <div style="position: absolute; left: 83%; top: 1.25rem; transform: translateX(-50%);">
-      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 86px; height: 32px; pointer-events: none; z-index: 1;">
-        <defs>
-          <filter id="badgeGlowHeader" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="2" result="b"/>
-            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-        </defs>
-         <rect x="2" y="2" width="82" height="28" rx="14" ry="14" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
-         <rect x="2" y="2" width="82" height="28" rx="14" ry="14" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="40 500" stroke-linecap="round" filter="url(#badgeGlowHeader)" opacity="0.9">
-           <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
-         </rect>
-      </svg>
-      <div style="position: relative; display: flex; align-items: center; gap: 0.3rem; padding: 0.25rem 0.5rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; min-width: 80px; z-index: 2;">
-        <svg id="atom-header" width="20" height="20" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
-          <defs>
-            <filter id="softGlowHeader" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="1.2" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-            <path id="orbit0Header" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
-            <path id="orbit1Header" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
-            <path id="orbit2Header" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
-          </defs>
-          <g stroke="#68859e" stroke-width="2" fill="none">
-            <use href="#orbit0Header"/>
-            <use href="#orbit1Header"/>
-            <use href="#orbit2Header"/>
-          </g>
-          <g stroke-linecap="round" filter="url(#softGlowHeader)">
-            <use href="#orbit0Header" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-              <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
-            </use>
-            <use href="#orbit1Header" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-              <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
-            </use>
-            <use href="#orbit2Header" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-              <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
-            </use>
-          </g>
-          <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
-        </svg>
-        <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 0.75rem; white-space: nowrap;">MAJ <span id="header-time" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">17:34</span></span>
-      </div>
-    </div>
-  </header>
+    @keyframes spinVariable {
+      0% { transform: rotate(0deg); }
+      25% { transform: rotate(180deg); }
+      50% { transform: rotate(360deg); }
+      75% { transform: rotate(540deg); }
+      100% { transform: rotate(720deg); }
+    }
 
-  <!-- Main Content -->
-  <main class="main-content">
-    <style>
-      .hero-section {
-        min-height: auto;
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .animate-spin {
+      animation: spin 1s linear infinite;
+    }
+
+    .animate-bounce {
+      animation: bounce 1s ease-in-out infinite;
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .animate-pulse {
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    /* Mobile Toggle Button */
+    .mobile-toggle {
+      position: fixed;
+      top: 1.5rem;
+      left: 1.5rem;
+      z-index: 60;
+      background: transparent;
+      color: #ffffff;
+      border: none;
+      cursor: pointer;
+      display: none;
+      transition: all 0.3s;
+      width: 32px;
+      height: 32px;
+      padding: 0;
+    }
+
+    .mobile-toggle:hover {
+      background: transparent;
+      color: #ffffff;
+    }
+
+    .mobile-toggle-icon {
+      width: 32px;
+      height: 32px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .mobile-toggle .hamburger-icon {
+      opacity: 1;
+      visibility: visible;
+      transform: rotate(0deg);
+      pointer-events: auto;
+    }
+
+    .mobile-toggle .close-icon {
+      opacity: 0;
+      visibility: hidden;
+      transform: rotate(90deg);
+      pointer-events: none;
+    }
+
+    .mobile-toggle.active .hamburger-icon {
+      opacity: 0;
+      visibility: hidden;
+      transform: rotate(-90deg);
+      pointer-events: none;
+    }
+
+    .mobile-toggle.active .close-icon {
+      opacity: 1;
+      visibility: visible;
+      transform: rotate(0deg);
+      pointer-events: auto;
+    }
+
+    @media (max-width: 768px) {
+      .mobile-toggle {
+        display: block;
+        top: 1.25rem; /* Hauteur du menu hamburger */
+        left: 1.5rem; /* Position gauche/droite du menu hamburger */
+      }
+      #online-badge {
+        top: 1.75rem !important; /* Hauteur du badge 50 online */
+      }
+      #maj-badge {
+        top: 1.75rem !important; /* Hauteur du badge MAJ IA */
+      }
+      .logo {
+        font-size: 2rem; /* Taille du logo sur mobile */
+      }
+    }
+
+    /* Overlay */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 40;
+    }
+
+    .overlay.active {
+      display: block;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 50rem;
+      min-height: 100vh;
+      min-height: 100dvh;
+      height: 100%;
+      background: #000000;
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      touch-action: pan-y;
+      -webkit-overflow-scrolling: touch;
+    }
+
+
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        display: none;
+      }
+
+      .sidebar.active {
         display: flex;
-        align-items: flex-start;
+      }
+    }
+
+    .sidebar-header {
+      padding: 1.5rem 1rem 1rem;
+    }
+
+    .logo {
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1;
+    }
+
+    .logo .text-foreground {
+      color: #ffffff;
+    }
+
+    .logo .text-primary {
+      color: #16a34a;
+    }
+
+    .logo .text-sm {
+      font-size: 0.875rem;
+    }
+
+    .sidebar-nav {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem 0;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding: 1.25rem 1.5rem;
+      margin: 0.5rem 1rem;
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      border-radius: 0.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.2s;
+      cursor: pointer !important;
+      font-size: 0.9375rem;
+      font-weight: 400;
+    }
+
+    .nav-item *, .nav-item *:hover {
+      cursor: pointer !important;
+    }
+
+    .nav-item-content {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex: 1;
+    }
+
+    .nav-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .nav-item.active {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .nav-icon {
+      width: 1.75rem;
+      height: 1.75rem;
+      flex-shrink: 0;
+    }
+
+    .nav-icon-small {
+      width: 1.5rem;
+      height: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .chevron-icon {
+      width: 1.25rem;
+      height: 1.25rem;
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+
+    .sidebar-footer {
+      padding: 1.5rem 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Ajustement hauteur ligne verte sidebar (desktop only) */
+    @media (min-width: 769px) {
+      .sidebar .header-ai-update {
+        padding: 0.75rem 0 0.75rem 1rem !important;
+      }
+      
+      /* Augmenter taille texte sidebar sur desktop uniquement */
+      .sidebar .header-ai-update .ai-update-text,
+      .sidebar .header-ai-update span {
+        font-size: 1.25rem !important;
+      }
+    }
+
+    /* AI Update Indicator */
+    .ai-update-indicator {
+      background: #000000;
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .ai-update-indicator svg {
+      color: #16a34a !important;
+      stroke: #16a34a !important;
+    }
+
+    .ai-spinner {
+      position: relative;
+      width: 2.4rem;
+      height: 2.4rem;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ai-spinner::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: #16a34a;
+      border-right-color: #16a34a;
+      border-bottom-color: #16a34a;
+      animation: spinVariable 3s linear infinite;
+    }
+
+    .ai-badge {
+      position: relative;
+      color: #16a34a;
+      font-weight: 700;
+      font-size: 10px;
+      line-height: 1;
+      z-index: 10;
+    }
+
+    .ai-update-text {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.875rem;
+    }
+
+    /* Badge MAJ avec animation de lumière */
+    .maj-badge-animated {
+      position: relative;
+      overflow: visible !important;
+    }
+
+    .maj-badge-animated::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 9999px;
+      padding: 2px;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        transparent 270deg,
+        rgba(255, 255, 255, 0.8) 300deg,
+        rgba(255, 255, 255, 1) 330deg,
+        rgba(255, 255, 255, 0.8) 360deg,
+        transparent 360deg
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: rotateBorder 4s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes rotateBorder {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #000000;
+      z-index: 30;
+      display: flex;
+      flex-direction: column;
+      will-change: auto;
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem 0;
+      background: #000000;
+    }
+
+    .header-ai-update {
+      background: #000000;
+      padding: 0.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0.5rem;
+    }
+
+    .header-ai-update svg {
+      color: #177546 !important;
+      stroke: #177546 !important;
+    }
+
+    @media (min-width: 768px) {
+      .header {
+        left: 50rem;
+      }
+    }
+
+    /* Augmenter taille texte header sur desktop uniquement */
+    @media (min-width: 769px) {
+      .header-ai-update .ai-update-text,
+      .header-ai-update span {
+        font-size: 1.25rem !important;
+      }
+    }
+
+    /* Main Content */
+      .main-content {
+        margin-left: 50rem;
+        min-height: 100vh;
+        padding-top: 110px;
         background: #000000;
-        position: relative;
-        overflow: hidden;
-        padding: 1rem 1rem 2rem;
       }
 
-      @media (min-width: 768px) {
-        .hero-section {
-          min-height: auto;
-          align-items: center;
-          padding: 1rem 1.5rem 2rem;
-        }
+    @media (max-width: 768px) {
+      .main-content {
+        margin-left: 0;
       }
+    }
 
-      .hero-container {
-        max-width: 1400px;
-        margin: 0 auto;
-        width: 100%;
-        display: grid;
-        grid-template-columns: 1fr;
+
+    .container {
+      padding: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem;
+      }
+    }
+
+    /* Page */
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    /* Typography */
+    h1 {
+      font-size: 4.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #ffffff;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: #ffffff;
+      margin-bottom: 2rem;
+      text-align: center;
+      font-size: 1.5rem;
+      max-width: 95%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Card */
+    .card {
+      background: #000000;
+      border: 3px solid #16a34a;
+      border-radius: 0.125rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      max-width: 28rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Bet Card */
+    .bet-card {
+      background: #000000;
+      border: 3px solid #16a34a;
+      border-radius: 1rem;
+      padding: 0;
+      margin-bottom: 1.5rem;
+      max-width: 36rem;
+      margin-left: auto;
+      margin-right: auto;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    @media (max-width: 768px) {
+      .bet-card {
+        max-width: 95%;
+      }
+    }
+
+    .bet-card-header {
+      padding: 0;
+    }
+
+    /* AI Counter Section - Above Card */
+    .ai-counter-above {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 0.5rem 1.5rem;
+      margin-bottom: 0.5rem;
+      background: transparent;
+    }
+
+    .ai-counter-above .ai-spinner {
+      position: relative;
+      width: 2.4rem;
+      height: 2.4rem;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ai-counter-above .ai-spinner::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: #ffffff;
+      border-right-color: #ffffff;
+      border-bottom-color: #ffffff;
+      animation: spin 1s linear infinite;
+    }
+
+    .ai-counter-above .ai-badge {
+      position: relative;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 10px;
+      line-height: 1;
+      z-index: 10;
+    }
+
+    .ai-counter-above span {
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 10px;
+      letter-spacing: 0.025em;
+    }
+
+    /* AI Counter Section */
+    .ai-counter {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1.5rem;
+      background: #16a34a;
+    }
+
+    .ai-counter span {
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 10px;
+      letter-spacing: 0.025em;
+    }
+
+    /* Confidence Badge - Bande verte 92% */
+    .confidence-badge {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      background: #16a34a;
+    }
+
+    .confidence-left {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex: 1;
+    }
+
+    .confidence-badge span {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .confidence-percentage {
+      font-size: 3.2rem;
+      line-height: 1;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .confidence-text {
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.5;
+      text-align: center;
+      flex: 1;
+      padding: 0rem;
+    }
+
+    /* Bouton Voir Analyse IA */
+    .btn-analysis {
+      padding: 0.5rem 1rem;
+      background: #000000;
+      border: 2px solid #000000;
+      border-radius: 0.25rem;
+      color: #4ade80;
+      font-weight: 700;
+      font-size: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      white-space: nowrap;
+      min-width: 40px;
+      text-align: center;
+      line-height: 1.3;
+      flex-shrink: 0;
+    }
+
+    .btn-analysis:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    /* New Bet Card Design */
+    .multiplier-section-label {
+      text-align: center;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+
+    .multiplier-button {
+      background: #16a34a;
+      color: #ffffff;
+      border: none;
+      border-radius: 0.75rem;
+      padding: 1rem 2rem;
+      font-size: 3rem;
+      font-weight: 700;
+      width: 100%;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .multiplier-button:hover {
+      background: #15803d;
+    }
+
+    .bet-card-content {
+      padding: 1.5rem;
+    }
+
+    .bet-section-label {
+      text-align: center;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .match-info-new {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: stretch;
+      gap: 0.25rem;
+      padding: 0.25rem 1.5rem 0.75rem;
+      border: 2px solid #16a34a;
+      border-radius: 0.75rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .match-info-header {
+      text-align: center;
+      font-size: 1.75rem;
+      color: #ffffff;
+      font-weight: 600;
+      margin-bottom: 0;
+      padding-top: 1rem;
+    }
+
+    .match-info-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .team-side {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      min-width: 0;
+      max-width: 27.5%;
+    }
+
+    .team-logo {
+      width: 6rem;
+      height: 6rem;
+      border-radius: 50%;
+      object-fit: contain;
+      background: #ffffff;
+      padding: 0.25rem;
+      border: 3px solid transparent;
+    }
+
+    .team-side.selected .team-logo {
+      border: 3px solid #16a34a;
+      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
+    }
+
+    .team-name-new {
+      font-weight: 700;
+      font-size: 1.5rem;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .team-bet-type {
+      font-size: 1.5rem;
+      color: #16a34a;
+      font-weight: 600;
+    }
+
+    .match-center .team-bet-type {
+      color: #ffffff;
+    }
+
+    .match-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      max-width: 45%;
+      flex-shrink: 1;
+      min-width: 0;
+    }
+
+    .match-time-new {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .match-vs-new {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: #ffffff;
+      background: #16a34a;
+      padding: 0.375rem 1rem;
+      border-radius: 0.375rem;
+    }
+
+    .units-button {
+      background: #16a34a;
+      color: #ffffff;
+      border: none;
+      border-radius: 0.75rem;
+      padding: 1.25rem 2rem;
+      font-size: 2.75rem;
+      font-weight: 700;
+      width: 100%;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-bottom: 1.5rem;
+    }
+
+    .units-button:hover {
+      background: #15803d;
+    }
+
+    .gain-section {
+      margin-bottom: 0.5rem;
+    }
+
+    .gain-section-label {
+      text-align: center;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .gain-grid {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 0 1rem;
+    }
+
+    .bet-modify-box {
+      background: transparent;
+      border-radius: 0.5rem;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .modify-btn {
+      background: #16a34a;
+      color: #ffffff;
+      border: none;
+      border-radius: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1.125rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+      width: 100%;
+    }
+
+    .modify-btn:hover {
+      background: #15803d;
+    }
+
+    .bet-amount-small {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 0.5rem;
+    }
+
+    .bet-amount-value-small {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #16a34a;
+    }
+
+    .cashout-box {
+      background: transparent;
+      border: 3px solid #16a34a;
+      border-radius: 1rem;
+      padding: 1.5rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .cashout-box-large {
+      background: rgba(22, 163, 74, 0.15);
+      border: 3px solid #16a34a;
+      border-radius: 1rem;
+      padding: 1.5rem 2.5rem;
+    }
+
+    /* Parlay Leg Styles */
+    .parlay-legs-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .parlay-leg-item {
+      background: rgba(22, 163, 74, 0.1);
+      border: 2px solid #16a34a;
+      border-radius: 0.75rem;
+      padding: 1rem 1.5rem;
+      position: relative;
+    }
+
+    .parlay-leg-header {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #16a34a;
+      margin-bottom: 0.75rem;
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+
+    .parlay-leg-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .parlay-leg-teams {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .parlay-leg-team {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .parlay-leg-logo {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+      object-fit: contain;
+      background: #ffffff;
+      padding: 0.25rem;
+      border: 2px solid transparent;
+    }
+
+    .parlay-leg-team-name {
+      font-weight: 700;
+      font-size: 1.125rem;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    .parlay-leg-vs {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: #ffffff;
+      background: #16a34a;
+      padding: 0.25rem 0.75rem;
+      border-radius: 0.375rem;
+    }
+
+    .parlay-leg-info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    .parlay-leg-time {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .parlay-leg-bet-type {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #16a34a;
+      background: rgba(22, 163, 74, 0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+    }
+
+    .parlay-leg-separator {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #16a34a, transparent);
+      margin: 0.5rem 0;
+      border: 3px solid #16a34a;
+      border-radius: 1rem;
+      padding: 2.5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      min-width: 22rem;
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+
+    .cashout-box-large .cashout-label {
+      font-size: 1.125rem;
+      color: #ffffff;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .cashout-box-large .cashout-amount {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #16a34a;
+      line-height: 1;
+    }
+
+    .cashout-box-large .cashout-profit {
+      font-size: 1.125rem;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .cashout-label {
+      font-size: 1rem;
+      color: #ffffff;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .cashout-amount {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #16a34a;
+      line-height: 1;
+      text-align: center;
+    }
+
+    .cashout-profit {
+      font-size: 0.875rem;
+      color: #16a34a;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .best-odds-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #16a34a;
+      padding: 1rem 1.5rem;
+      gap: 0.5rem;
+    }
+
+    .best-odds-label {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1.125rem;
+    }
+
+    .bookmaker-badge {
+      background: transparent;
+      color: #ffffff;
+      padding: 0;
+      border-radius: 0;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-left: auto;
+    }
+
+    .odds-value {
+      background: #ffffff;
+      color: #000000;
+      padding: 0.5rem 1rem;
+      border-radius: 0.375rem;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    .bet-card + .bet-card {
+      margin-top: 2rem;
+    }
+
+    /* Over/Under Display Styles */
+    .over-under-display {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25rem;
+      padding: 0.75rem 1rem;
+      background: rgba(22, 163, 74, 0.1);
+      border: 2px solid #16a34a;
+      border-radius: 0.5rem;
+      margin-top: 0.5rem;
+      text-align: center;
+      max-width: 100%;
+      flex-shrink: 1;
+      overflow: hidden;
+    }
+
+    .over-under-type {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #16a34a;
+      text-align: center;
+      width: 100%;
+      overflow-wrap: normal;
+      word-break: keep-all;
+      hyphens: none;
+      white-space: normal;
+      text-wrap: pretty;
+    }
+
+    .over-under-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #ffffff;
+      text-align: center;
+      width: 100%;
+      overflow-wrap: normal;
+      word-break: keep-all;
+      hyphens: none;
+      white-space: normal;
+      text-wrap: pretty;
+    }
+
+    .over-under-stat {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.7);
+      text-align: center;
+      width: 100%;
+      overflow-wrap: normal;
+      word-break: keep-all;
+      hyphens: none;
+      white-space: normal;
+      line-height: 1.2;
+      text-wrap: pretty;
+    }
+
+    /* Over/Under texte plus gros sur desktop */
+    @media (min-width: 769px) {
+      .over-under-type {
+        font-size: 2.5rem;
+      }
+      
+      .over-under-value {
+        font-size: 3.5rem;
+      }
+      
+      .over-under-stat {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* Parlay Card */
+    .parlay-card {
+      background: #000000;
+      border: 3px solid #3b82f6;
+      border-radius: 0.125rem;
+      max-width: 42rem;
+      margin: 0 auto;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    .parlay-card + .parlay-card {
+      margin-top: 2rem;
+    }
+
+    .parlay-header {
+      background: #3b82f6;
+      padding: 1rem 1.5rem;
+      text-align: center;
+    }
+
+    .parlay-title {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin: 0;
+    }
+
+    .parlay-stats {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1.5rem;
+      background: rgba(59, 130, 246, 0.2);
+      border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .parlay-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .parlay-stat-label {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .parlay-stat-value {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1.125rem;
+    }
+
+    .parlay-multiplier {
+      color: #3b82f6;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .parlay-content {
+      padding: 1.5rem;
+    }
+
+    .parlay-bets-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .parlay-bet-item {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0.375rem;
+      padding: 1rem;
+    }
+
+    .parlay-bet-number {
+      color: #3b82f6;
+      font-weight: 700;
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .parlay-bet-details {
+      color: #ffffff;
+      font-size: 0.9375rem;
+      line-height: 1.5;
+    }
+
+    .parlay-explanation {
+      background: rgba(59, 130, 246, 0.1);
+      border-left: 3px solid #3b82f6;
+      padding: 1rem;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.875rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .parlay-gain-section {
+      background: rgba(59, 130, 246, 0.1);
+      border: 2px solid #3b82f6;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .parlay-gain-label {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .parlay-gain-value {
+      color: #3b82f6;
+      font-size: 2.25rem;
+      font-weight: 700;
+    }
+
+    /* History Card */
+    .history-card {
+      background: #000000;
+      border: 3px solid #16a34a;
+      border-radius: 0.375rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .history-match {
+      font-weight: 600;
+    }
+
+    .history-date {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.875rem;
+    }
+
+    .badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 0.375rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .badge-success {
+      background: rgba(22, 163, 74, 0.2);
+      color: #16a34a;
+    }
+
+    .badge-danger {
+      background: rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+    }
+
+    .badge-warning {
+      background: rgba(234, 179, 8, 0.2);
+      color: #eab308;
+    }
+
+    /* Strategy Cards */
+    .strategy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .strategy-card {
+      background: #000000;
+      border: 3px solid #16a34a;
+      border-radius: 0.375rem;
+      padding: 1.5rem;
+      transition: all 0.3s;
+    }
+
+    .strategy-card:hover {
+      border-color: #4ade80;
+      transform: translateY(-4px);
+    }
+
+    .strategy-icon {
+      width: 3rem;
+      height: 3rem;
+      color: #16a34a;
+      margin-bottom: 1rem;
+    }
+
+    .strategy-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .strategy-description {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.875rem;
+    }
+
+    .principles-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .principles-list li {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .principles-list li:last-child {
+      border-bottom: none;
+    }
+
+    .check-icon {
+      color: #16a34a;
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    /* Dialog/Modal */
+    .dialog-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .dialog-overlay.active {
+      display: flex;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .dialog {
+      background: #000000;
+      border: 3px solid #16a34a;
+      border-radius: 1.5rem;
+      max-width: 672px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .dialog-large {
+      max-width: 900px;
+    }
+
+    .dialog-header {
+      padding: 1.5rem;
+      border-bottom: 2px solid #16a34a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .dialog-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .dialog-close {
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 0.375rem;
+      transition: all 0.2s;
+    }
+
+    .dialog-close:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+
+    .dialog-content {
+      padding: 1.5rem;
+    }
+
+    .bet-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .bet-button {
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid #16a34a;
+      border-radius: 0.375rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: #ffffff;
+    }
+
+    .bet-button:hover {
+      border-color: #4ade80;
+      background: rgba(22, 163, 74, 0.1);
+    }
+
+    /* Analysis Dialog */
+    .analysis-header {
+      background: rgba(22, 163, 74, 0.1);
+      padding: 1.5rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .analysis-header .ai-spinner::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: #ffffff;
+      border-right-color: #ffffff;
+      border-bottom-color: #ffffff;
+      animation: spin 1s linear infinite;
+    }
+
+    /* AI Loading Overlay */
+    .ai-loading-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100vw;
+      min-height: 100vh;
+      min-height: 100dvh;
+      background: #000000;
+      z-index: 99999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 2rem;
+      overflow: hidden;
+      touch-action: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Empêcher le scroll du body quand l'overlay est actif */
+    body.body-no-scroll {
+      overflow: hidden;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+    }
+
+    .ai-loading-overlay.active {
+      display: flex;
+    }
+
+    .ai-loading-spinner {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ai-loading-spinner::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 8px solid transparent;
+      border-top-color: #ffffff;
+      border-right-color: #ffffff;
+      border-bottom-color: #ffffff;
+      animation: spin 1.5s linear infinite;
+    }
+
+    .ai-loading-spinner-text {
+      position: relative;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 3rem;
+      z-index: 10;
+    }
+
+    .ai-loading-logo {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1;
+      text-align: center;
+    }
+
+    .ai-loading-message {
+      color: #ffffff;
+      font-size: 1.125rem;
+      font-weight: 600;
+      text-align: center;
+      max-width: 80%;
+      line-height: 1.5;
+    }
+
+    .analysis-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .loading-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding: 2rem;
+    }
+
+    .loading-dots {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .loading-dot {
+      width: 0.75rem;
+      height: 0.75rem;
+      background: #16a34a;
+      border-radius: 50%;
+      animation: bounce 1s ease-in-out infinite;
+    }
+
+    .loading-dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .loading-dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    .confidence-section {
+      background: transparent;
+      border: 3px solid #16a34a;
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .confidence-label {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .confidence-value {
+      font-size: 4rem;
+      font-weight: 700;
+      color: #16a34a;
+      margin-bottom: 0.5rem;
+      line-height: 1;
+    }
+
+    .confidence-subtitle {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+
+    .confidence-progress {
+      width: 100%;
+      height: 1rem;
+      background: rgba(22, 163, 74, 0.2);
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+
+    .confidence-progress-bar {
+      height: 100%;
+      background: hsl(var(--primary));
+      border-radius: 9999px;
+      transition: width 0.8s ease-out;
+    }
+
+    .analysis-section {
+      margin-bottom: 2rem;
+    }
+
+    .analysis-section-title {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #ffffff;
+    }
+
+    .analysis-subsection {
+      background: transparent;
+      border: 2px solid hsl(var(--primary));
+      border-radius: 0.75rem;
+      padding: 1rem 1rem 1rem 3.5rem;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .analysis-subsection-icon {
+      position: absolute;
+      left: 1rem;
+      top: 1.25rem;
+      width: 2.4rem;
+      height: 2.4rem;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .analysis-subsection-icon::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: #ffffff;
+      border-right-color: #ffffff;
+      border-bottom-color: #ffffff;
+      animation: spin 1s linear infinite;
+    }
+
+    .analysis-subsection-icon svg {
+      display: none;
+    }
+    
+    .analysis-subsection-icon .ai-badge {
+      position: relative;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 10px;
+      line-height: 1;
+      z-index: 10;
+    }
+
+    .analysis-subsection-title {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #ffffff;
+      font-size: 0.875rem;
+    }
+
+    .analysis-subsection-content {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.875rem;
+      line-height: 1.6;
+    }
+
+    .analysis-footer {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1rem;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.6);
+      text-align: center;
+    }
+
+    /* AI Spinner Animation (cards only) */
+    .ai-counter .ai-spinner {
+      position: relative;
+      width: 1.5rem;
+      height: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .ai-counter .ai-spinner svg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      color: #ffffff;
+    }
+
+    .ai-counter .ai-badge {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #16a34a;
+      font-weight: 700;
+      font-size: 10px;
+    }
+
+    .confidence-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    /* Utilities */
+    .flex {
+      display: flex;
+    }
+
+    .items-center {
+      align-items: center;
+    }
+
+    .justify-between {
+      justify-content: space-between;
+    }
+
+    .gap-2 {
+      gap: 0.5rem;
+    }
+
+    .mb-4 {
+      margin-bottom: 1rem;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    /* Cards Grid - 2 colonnes sur desktop */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      width: 100%;
+    }
+
+    .card-wrapper {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .card-wrapper > * {
+      max-width: 36rem;
+      width: 100%;
+    }
+
+    /* Desktop - Agrandissement manuel des cartes (20% plus grand) */
+    @media (min-width: 1024px) {
+      /* Cards Grid - 2 colonnes */
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
         gap: 2rem;
-        align-items: center;
-      }
-
-      @media (min-width: 1024px) {
-        .hero-container {
-          grid-template-columns: 1fr 1fr;
-          gap: 6rem;
-        }
-      }
-
-      .hero-content {
-        z-index: 10;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .hero-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem 1rem;
-        background: rgba(16, 185, 129, 0.1);
-        border: 1px solid rgba(16, 185, 129, 0.3);
-        border-radius: 9999px;
-        color: {{ section.settings.primary_color }};
-        font-size: 0.875rem;
-        font-weight: 500;
-        margin-bottom: 2rem;
-        transition: all 0.3s;
-      }
-
-      .hero-badge:hover {
-        background: rgba(16, 185, 129, 0.15);
-        border-color: rgba(16, 185, 129, 0.5);
-      }
-
-      .hero-title {
-        font-size: clamp(2.5rem, 8vw, 5rem);
-        font-weight: 700;
-        line-height: 1.1;
-        letter-spacing: -0.02em;
-        color: #ffffff;
-        margin-bottom: 1.5rem;
-      }
-
-      .hero-title-highlight {
-        color: {{ section.settings.primary_color }};
-        display: inline-block;
-      }
-
-      .hero-subtitle {
-        font-size: clamp(1rem, 2vw, 1.25rem);
-        line-height: 1.6;
-        color: rgba(255, 255, 255, 0.7);
-        margin-bottom: 2.5rem;
-        max-width: 600px;
-        text-align: center;
-      }
-
-      .hero-cta {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        justify-content: center;
-      }
-
-      .btn-primary {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 1rem 2rem;
-        background: {{ section.settings.primary_color }};
-        color: #000000;
-        font-weight: 600;
-        font-size: 1rem;
-        border-radius: 0.5rem;
-        border: none;
-        cursor: pointer;
-        transition: all 0.3s;
-        text-decoration: none;
-      }
-
-      .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
-      }
-
-      .btn-secondary {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 1rem 2rem;
-        background: transparent;
-        color: #ffffff;
-        font-weight: 600;
-        font-size: 1rem;
-        border-radius: 0.5rem;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        cursor: pointer;
-        transition: all 0.3s;
-        text-decoration: none;
-      }
-
-      .btn-secondary:hover {
-        background: rgba(255, 255, 255, 0.05);
-        border-color: rgba(255, 255, 255, 0.4);
-      }
-
-      /* AI Analysis Card */
-      .ai-analysis-card {
-        background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
-        border: 2px solid rgba(16, 185, 129, 0.3);
-        border-radius: 0.5rem;
-        padding: 2rem;
-        backdrop-filter: blur(10px);
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1.5rem;
-        max-width: 400px;
+        max-width: 95%;
         margin: 0 auto;
       }
 
-      .ai-icon-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
+      /* Si une seule carte, centrer */
+      .cards-grid:has(.card-wrapper:only-child) {
+        grid-template-columns: 1fr;
+        max-width: 43.2rem;
       }
 
-      .ai-analysis-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, {{ section.settings.primary_color }}, transparent);
+      /* Bet Card & Parlay Card */
+      .bet-card,
+      .parlay-card {
+        max-width: 100%; /* Prend toute la largeur de la colonne */
+        margin-bottom: 1.8rem; /* 1.5rem * 1.2 */
       }
 
-      .ai-info-text {
-        text-align: center;
-        width: 100%;
+      .bet-card-content {
+        padding: 1.8rem; /* 1.5rem * 1.2 */
       }
 
-      .ai-info-label {
-        font-size: 0.875rem;
-        color: rgba(255, 255, 255, 0.6);
-        font-weight: 500;
-        margin-bottom: 0.5rem;
+      /* AI Counter Above Card */
+      .ai-counter-above {
+        gap: 0.9rem; /* 0.75rem * 1.2 */
+        padding: 0.6rem 1.8rem; /* 0.5rem * 1.2, 1.5rem * 1.2 */
+        margin-bottom: 0.6rem; /* 0.5rem * 1.2 */
       }
 
-      .ai-info-value {
-        font-size: 1.125rem;
-        font-weight: 600;
-        color: rgba(255, 255, 255, 0.95);
+      .ai-counter-above .ai-spinner {
+        width: 2.88rem; /* 2.4rem * 1.2 */
+        height: 2.88rem;
       }
 
-      .bet-info {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        padding-top: 1rem;
-        border-top: 1px solid rgba(16, 185, 129, 0.2);
+      .ai-counter-above span {
+        font-size: 12px; /* 10px * 1.2 */
       }
 
-      .bet-info-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+      /* Confidence Badge */
+      .confidence-badge {
+        padding: 1.2rem 1.8rem; /* 1rem * 1.2, 1.5rem * 1.2 */
+        gap: 1.2rem; /* 1rem * 1.2 */
       }
 
-      .bet-label {
-        font-size: 0.875rem;
-        color: rgba(255, 255, 255, 0.6);
-        font-weight: 500;
+      .confidence-percentage {
+        font-size: 3.84rem; /* 3.2rem * 1.2 */
       }
 
-      .bet-value {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: {{ section.settings.primary_color }};
+      .confidence-text {
+        font-size: 15.6px; /* 13px * 1.2 */
       }
 
-      .cashout-container {
-        width: 100%;
-        padding: 1rem;
-        background: rgba(16, 185, 129, 0.15);
-        border: 1px solid rgba(16, 185, 129, 0.3);
-        border-radius: 0.5rem;
-        text-align: center;
-        display: none;
+      .btn-analysis {
+        padding: 0.6rem 1.2rem; /* 0.5rem * 1.2, 1rem * 1.2 */
+        font-size: 9.6px; /* 8px * 1.2 */
+        min-width: 48px; /* 40px * 1.2 */
       }
 
-      .cashout-container.active {
-        display: block;
+      /* Multiplicateur */
+      .multiplier-section-label {
+        font-size: 1.8rem; /* 1.5rem * 1.2 */
+        margin-bottom: 0.9rem; /* 0.75rem * 1.2 */
+      }
+
+      .multiplier-button {
+        padding: 1.2rem 2.4rem; /* 1rem * 1.2, 2rem * 1.2 */
+        font-size: 3.6rem; /* 3rem * 1.2 */
+        border-radius: 0.9rem; /* 0.75rem * 1.2 */
+      }
+
+      /* Bet Section */
+      .bet-section-label {
+        font-size: 1.8rem; /* 1.5rem * 1.2 */
+        margin-bottom: 1.2rem; /* 1rem * 1.2 */
+      }
+
+      .match-info-new {
+        gap: 0.3rem; /* 0.25rem * 1.2 */
+        padding: 0.3rem 1.8rem 0.9rem; /* 0.25rem * 1.2, 1.5rem * 1.2, 0.75rem * 1.2 */
+        border-radius: 0.9rem; /* 0.75rem * 1.2 */
+        margin-bottom: 1.8rem; /* 1.5rem * 1.2 */
+      }
+
+      .match-info-header {
+        font-size: 2.1rem; /* 1.75rem * 1.2 */
+        padding-top: 1.2rem; /* 1rem * 1.2 */
+      }
+
+      .match-info-content {
+        gap: 1.2rem; /* 1rem * 1.2 */
+      }
+
+      .team-side {
+        gap: 0.6rem; /* 0.5rem * 1.2 */
+      }
+
+      .team-logo {
+        width: 7.2rem; /* 6rem * 1.2 */
+        height: 7.2rem;
+        padding: 0.3rem; /* 0.25rem * 1.2 */
+      }
+
+      .team-name-new {
+        font-size: 1.8rem; /* 1.5rem * 1.2 */
+      }
+
+      .team-bet-type {
+        font-size: 1.8rem; /* 1.5rem * 1.2 */
+      }
+
+      .match-center {
+        gap: 0.3rem; /* 0.25rem * 1.2 */
+      }
+
+      .match-time-new {
+        font-size: 1.5rem; /* 1.25rem * 1.2 */
+      }
+
+      .match-vs-new {
+        font-size: 1.05rem; /* 0.875rem * 1.2 */
+        padding: 0.45rem 1.2rem; /* 0.375rem * 1.2, 1rem * 1.2 */
+        border-radius: 0.45rem; /* 0.375rem * 1.2 */
+      }
+
+      /* Units Button */
+      .units-button {
+        padding: 1.5rem 2.4rem; /* 1.25rem * 1.2, 2rem * 1.2 */
+        font-size: 3.3rem; /* 2.75rem * 1.2 */
+        border-radius: 0.9rem; /* 0.75rem * 1.2 */
+        margin-bottom: 1.8rem; /* 1.5rem * 1.2 */
+      }
+
+      /* Gain Section */
+      .gain-section-label {
+        font-size: 1.8rem; /* 1.5rem * 1.2 */
+        margin-bottom: 1.2rem; /* 1rem * 1.2 */
+      }
+
+      .gain-grid {
+        gap: 1.2rem; /* 1rem * 1.2 */
+        padding: 0 1.2rem; /* 0 1rem * 1.2 */
+      }
+
+      .bet-modify-box {
+        gap: 0.6rem; /* 0.5rem * 1.2 */
+      }
+
+      .modify-btn {
+        padding: 0.9rem 1.8rem; /* 0.75rem * 1.2, 1.5rem * 1.2 */
+        font-size: 1.35rem; /* 1.125rem * 1.2 */
+        border-radius: 0.6rem; /* 0.5rem * 1.2 */
+      }
+
+      .bet-amount-small {
+        font-size: 1.2rem; /* 1rem * 1.2 */
+        margin-top: 0.6rem; /* 0.5rem * 1.2 */
+      }
+
+      .bet-amount-value-small {
+        font-size: 2.1rem; /* 1.75rem * 1.2 */
+      }
+
+      .cashout-box {
+        padding: 1.8rem 3rem; /* 1.5rem * 1.2, 2.5rem * 1.2 */
+        border-radius: 1.2rem; /* 1rem * 1.2 */
+        gap: 0.6rem; /* 0.5rem * 1.2 */
+      }
+
+      .cashout-box-large {
+        padding: 1.8rem 3rem; /* 1.5rem * 1.2, 2.5rem * 1.2 */
+        border-radius: 1.2rem; /* 1rem * 1.2 */
+        padding: 3rem 4.8rem; /* 2.5rem * 1.2, 4rem * 1.2 */
+        min-width: 26.4rem; /* 22rem * 1.2 */
+      }
+
+      .cashout-box-large .cashout-label {
+        font-size: 1.35rem; /* 1.125rem * 1.2 */
+      }
+
+      .cashout-box-large .cashout-amount {
+        font-size: 4.2rem; /* 3.5rem * 1.2 */
+      }
+
+      .cashout-box-large .cashout-profit {
+        font-size: 1.35rem; /* 1.125rem * 1.2 */
       }
 
       .cashout-label {
-        font-size: 0.875rem;
-        color: rgba(255, 255, 255, 0.7);
-        margin-bottom: 0.5rem;
+        font-size: 1.2rem; /* 1rem * 1.2 */
       }
 
-      .cashout-value {
-        font-size: 2rem;
-        font-weight: 900;
-        color: {{ section.settings.primary_color }};
+      .cashout-amount {
+        font-size: 2.1rem; /* 1.75rem * 1.2 */
       }
 
-      .bet-label {
-        font-size: 0.875rem;
-        color: rgba(255, 255, 255, 0.6);
-        font-weight: 500;
+      .cashout-profit {
+        font-size: 1.05rem; /* 0.875rem * 1.2 */
       }
 
-      .bet-value {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: {{ section.settings.primary_color }};
+      /* Best Odds Footer */
+      .best-odds-footer {
+        padding: 1.2rem 1.8rem; /* 1rem * 1.2, 1.5rem * 1.2 */
+        gap: 0.6rem; /* 0.5rem * 1.2 */
       }
 
-      .cashout-container {
-        width: 100%;
-        padding: 1rem;
-        background: rgba(16, 185, 129, 0.15);
-        border: 1px solid rgba(16, 185, 129, 0.3);
-        border-radius: 0.5rem;
-        text-align: center;
-        display: none;
+      .best-odds-label {
+        font-size: 1.35rem; /* 1.125rem * 1.2 */
       }
 
-      .cashout-container.active {
-        display: block;
+      .bookmaker-badge {
+        padding: 0.6rem 1.2rem; /* 0.5rem * 1.2, 1rem * 1.2 */
+        font-size: 1.2rem; /* 1rem * 1.2 */
+        border-radius: 0.6rem; /* 0.5rem * 1.2 */
       }
 
-      .cashout-label {
-        font-size: 0.875rem;
-        color: rgba(255, 255, 255, 0.7);
-        margin-bottom: 0.5rem;
+      /* Parlay Legs */
+      .parlay-legs-list {
+        gap: 1.2rem; /* 1rem * 1.2 */
+        margin-bottom: 1.8rem; /* 1.5rem * 1.2 */
       }
 
-      .cashout-value {
-        font-size: 2rem;
-        font-weight: 900;
-        color: {{ section.settings.primary_color }};
+      .parlay-leg-item {
+        padding: 1.2rem 1.8rem; /* 1rem * 1.2, 1.5rem * 1.2 */
+        border-radius: 0.9rem; /* 0.75rem * 1.2 */
       }
 
-      .progress-bar-container {
-        position: relative;
-        height: 4px;
-        border-radius: 9999px;
-        background-color: rgba(255, 255, 255, 0.1);
-        overflow: hidden;
-        width: 100%;
+      .parlay-leg-header {
+        font-size: 1.2rem; /* 1rem * 1.2 */
+        margin-bottom: 0.9rem; /* 0.75rem * 1.2 */
       }
 
-      .progress-bar-fill {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(90deg, {{ section.settings.primary_color }}, #14f195);
-        transition: width 0.075s;
-        box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+      .parlay-leg-content {
+        gap: 0.6rem; /* 0.5rem * 1.2 */
       }
 
-      /* Decorative elements */
-      .hero-bg-gradient {
-        position: absolute;
-        width: 600px;
-        height: 600px;
-        background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
-        border-radius: 50%;
-        filter: blur(80px);
-        pointer-events: none;
+      .parlay-leg-teams {
+        gap: 1.2rem; /* 1rem * 1.2 */
       }
 
-      .hero-bg-gradient-1 {
-        top: -200px;
-        right: -200px;
+      .parlay-leg-team {
+        gap: 0.6rem; /* 0.5rem * 1.2 */
       }
 
-      .hero-bg-gradient-2 {
-        bottom: -200px;
-        left: -200px;
+      .parlay-leg-logo {
+        width: 4.8rem; /* 4rem * 1.2 */
+        height: 4.8rem;
+        padding: 0.3rem; /* 0.25rem * 1.2 */
       }
-    </style>
 
-    <section class="hero-section">
-      <!-- Background gradients -->
-      <div class="hero-bg-gradient hero-bg-gradient-1"></div>
-      <div class="hero-bg-gradient hero-bg-gradient-2"></div>
-
-      <div class="hero-container">
-        <!-- Hero Content -->
-        <div class="hero-content" style="grid-column: 1 / -1;">
-          <h1 class="hero-title">
-            {{ section.settings.hero_title_1 }}<br>
-            <span class="hero-title-highlight">{{ section.settings.hero_title_highlight }}</span>
-          </h1>
-
-          <p class="hero-subtitle">
-            {{ section.settings.hero_subtitle }}
-          </p>
-
-          <div class="hero-cta">
-            <a href="{{ section.settings.cta_primary_link }}" class="btn-primary">
-              {{ section.settings.cta_primary_text }}
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M7 13l5-5m0 0l-5-5m5 5H3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- AI Analysis Card - En dessous du texte -->
-        <div style="grid-column: 1 / -1; margin-top: 3rem;">
-          <div class="ai-analysis-card">
-            <!-- Icône IA avec pourcentage -->
-            <div class="ai-icon-container">
-              <svg id="atom-card" width="120" height="120" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <filter id="softGlowCard" x="-50%" y="-50%" width="200%" height="200%">
-                    <feGaussianBlur stdDeviation="1.2" result="b"/>
-                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                  </filter>
-                  <path id="orbit0Card" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
-                  <path id="orbit1Card" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
-                  <path id="orbit2Card" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
-                </defs>
-                <g stroke="#68859e" stroke-width="2" fill="none">
-                  <use href="#orbit0Card"/>
-                  <use href="#orbit1Card"/>
-                  <use href="#orbit2Card"/>
-                </g>
-                <g stroke-linecap="round" filter="url(#softGlowCard)">
-                  <use href="#orbit0Card" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                    <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
-                  </use>
-                  <use href="#orbit1Card" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                    <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
-                  </use>
-                  <use href="#orbit2Card" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                    <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
-                  </use>
-                </g>
-                <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#16a34a" font-weight="900" font-size="38" id="aiChanceDisplayCard">...</text>
-                <text x="100" y="125" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="600" font-size="20">%</text>
-              </svg>
-            </div>
-
-            <!-- Texte d'information -->
-            <div class="ai-info-text">
-              <div class="ai-info-label">Chances de Gains (IA)</div>
-              <div class="ai-info-value">Analyse en temps réel</div>
-            </div>
-
-            <!-- Multiplicateur -->
-            <div class="bet-info-row" style="width: 100%;">
-              <span class="bet-label">Multiplicateur</span>
-              <span class="bet-value" id="multiplierDisplayCard">
-                <span id="multiplierValueCard">1.00</span>x
-              </span>
-            </div>
-
-            <!-- Mise du pari -->
-            <div class="bet-info-row" style="width: 100%;">
-              <span class="bet-label">Mise du pari</span>
-              <span class="bet-value" id="betStakeCard">100€</span>
-            </div>
-
-            <!-- Cashout (affiché quand le bet est fini) -->
-            <div class="cashout-container" id="cashoutContainerCard">
-              <div class="cashout-label">CASHOUT</div>
-              <div class="cashout-value" id="cashoutValueCard">0€</div>
-            </div>
-
-            <!-- Progress Bar -->
-            <div class="progress-bar-container" style="width: 100%;">
-              <div class="progress-bar-fill" id="progressBarCard"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <script>
-    // Toggle Sidebar
-    function toggleSidebar() {
-      const sidebar = document.querySelector('.sidebar');
-      const overlay = document.querySelector('.overlay');
-      const mobileToggle = document.querySelector('.mobile-toggle');
-      const body = document.body;
-      
-      sidebar.classList.toggle('active');
-      overlay.classList.toggle('active');
-      mobileToggle.classList.toggle('active');
-      body.classList.toggle('sidebar-open');
-    }
-
-    // Update time
-    function updateTime() {
-      const now = new Date();
-      const hours = String(now.getHours()).padStart(2, '0');
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const timeString = `${hours}:${minutes}`;
-      
-      const sidebarTime = document.getElementById('sidebar-time');
-      const headerTime = document.getElementById('header-time');
-      if (sidebarTime) {
-        sidebarTime.textContent = timeString;
+      .parlay-leg-team-name {
+        font-size: 1.35rem; /* 1.125rem * 1.2 */
       }
-      if (headerTime) {
-        headerTime.textContent = timeString;
+
+      .parlay-leg-vs {
+        font-size: 1.05rem; /* 0.875rem * 1.2 */
+        padding: 0.3rem 0.9rem; /* 0.25rem * 1.2, 0.75rem * 1.2 */
+        border-radius: 0.45rem; /* 0.375rem * 1.2 */
+      }
+
+      .parlay-leg-info {
+        gap: 1.2rem; /* 1rem * 1.2 */
+        margin-top: 0.6rem; /* 0.5rem * 1.2 */
+      }
+
+      .parlay-leg-time {
+        font-size: 1.2rem; /* 1rem * 1.2 */
+      }
+
+      .parlay-leg-bet-type {
+        font-size: 1.35rem; /* 1.125rem * 1.2 */
+        padding: 0.6rem 1.2rem; /* 0.5rem * 1.2, 1rem * 1.2 */
+        border-radius: 0.6rem; /* 0.5rem * 1.2 */
+      }
+
+      .parlay-leg-separator {
+        margin: 0.6rem 0; /* 0.5rem * 1.2 */
+        border-radius: 1.2rem; /* 1rem * 1.2 */
+        padding: 3rem 4.8rem; /* 2.5rem * 1.2, 4rem * 1.2 */
+      }
+
+      /* AI Counter (inside card) */
+      .ai-counter {
+        gap: 0.9rem; /* 0.75rem * 1.2 */
+        padding: 0.9rem 1.8rem; /* 0.75rem * 1.2, 1.5rem * 1.2 */
+      }
+
+      .ai-counter span {
+        font-size: 12px; /* 10px * 1.2 */
+      }
+
+      /* History Cards - Agrandissement 20% */
+      .history-card {
+        font-size: 1.2rem; /* Agrandir le texte de base */
+      }
+
+      .history-card > div {
+        font-size: 1.2em; /* Multiplier par rapport à la base */
+      }
+
+      /* Dialog d'analyse IA - Agrandissement pour desktop */
+      .dialog {
+        max-width: 1100px; /* 900px agrandi */
+        border-width: 4px;
+      }
+
+      .dialog-header {
+        padding: 2.5rem; /* 1.5rem * 1.67 */
+      }
+
+      .dialog-title {
+        font-size: 2.25rem; /* 1.5rem * 1.5 */
+      }
+
+      .dialog-content {
+        padding: 2.5rem; /* 1.5rem * 1.67 */
+      }
+
+      /* Confidence Section */
+      .confidence-section {
+        padding: 3rem; /* 2rem * 1.5 */
+        margin-bottom: 3rem; /* 2rem * 1.5 */
+        border-width: 4px;
+        border-radius: 1.5rem; /* 1rem * 1.5 */
+      }
+
+      .confidence-label {
+        font-size: 1.5rem; /* 1rem * 1.5 */
+        margin-bottom: 1.5rem; /* 1rem * 1.5 */
+      }
+
+      .confidence-value {
+        font-size: 6rem; /* 4rem * 1.5 */
+      }
+
+      .confidence-subtitle {
+        font-size: 1.125rem; /* 0.75rem * 1.5 */
+        margin-bottom: 1.5rem; /* 1rem * 1.5 */
+      }
+
+      .confidence-progress {
+        height: 1.5rem; /* 1rem * 1.5 */
+      }
+
+      /* Analysis Sections */
+      .analysis-section {
+        margin-bottom: 3rem; /* 2rem * 1.5 */
+      }
+
+      .analysis-section-title {
+        font-size: 1.7rem; /* 1.125rem * 1.5 */
+        margin-bottom: 1.5rem; /* 1rem * 1.5 */
+      }
+
+      .analysis-subsection {
+        padding: 1.5rem 1.5rem 1.5rem 5.25rem; /* 1rem * 1.5, padding left pour icon */
+        margin-bottom: 1.5rem; /* 1rem * 1.5 */
+        border-width: 3px;
+        border-radius: 1.125rem; /* 0.75rem * 1.5 */
+      }
+
+      .analysis-subsection-icon {
+        left: 1.5rem; /* 1rem * 1.5 */
+        top: 1.875rem; /* 1.25rem * 1.5 */
+        width: 3.6rem; /* 2.4rem * 1.5 */
+        height: 3.6rem;
+      }
+
+      .analysis-subsection-icon::before {
+        border-width: 4px;
+      }
+
+      .analysis-subsection-icon .ai-badge {
+        font-size: 15px; /* 10px * 1.5 */
+      }
+
+      .analysis-subsection-title {
+        font-size: 1.3rem; /* 0.875rem * 1.5 */
+        margin-bottom: 0.75rem; /* 0.5rem * 1.5 */
+      }
+
+      .analysis-subsection-content {
+        font-size: 1.3rem; /* 0.875rem * 1.5 */
+        line-height: 1.7;
+      }
+
+      .analysis-footer {
+        padding: 1.5rem; /* 1rem * 1.5 */
+        font-size: 1.3rem; /* 0.875rem * 1.5 */
+        border-radius: 0.6rem; /* 0.375rem * 1.6 */
+      }
+
+      /* Analysis Title */
+      .analysis-title {
+        font-size: 2.6rem; /* 1.75rem * 1.5 */
+        margin-bottom: 1.5rem; /* 1rem * 1.5 */
       }
     }
-
-    // Update member count with animation
-    function updateMemberCount() {
-      const sidebarMemberCount = document.getElementById('sidebar-member-count');
-      const headerMemberCount = document.getElementById('header-member-count');
-      
-      if (sidebarMemberCount) {
-        const baseCount = parseInt(sidebarMemberCount.textContent) || 50;
-        const variation = Math.floor(Math.random() * 11) - 5; // -5 to +5
-        const newCount = Math.max(30, baseCount + variation);
-        sidebarMemberCount.textContent = newCount;
-      }
-      
-      if (headerMemberCount) {
-        const baseCount = parseInt(headerMemberCount.textContent) || 50;
-        const variation = Math.floor(Math.random() * 11) - 5; // -5 to +5
-        const newCount = Math.max(30, baseCount + variation);
-        headerMemberCount.textContent = newCount;
-      }
-    }
-
-    // Initialize on page load
-    document.addEventListener('DOMContentLoaded', function() {
-      updateTime();
-      setInterval(updateTime, 60000); // Update every minute
-      setInterval(updateMemberCount, 30000); // Update member count every 30 seconds
-    });
-
-    // Crash Simulation Script
-    (function() {
-      const MAX_X_DISPLAY = 3;
-      const DUR_MIN = 4500;
-      const DUR_MAX = 6000;
-
-      let currentX = 1.0;
-      let animationId = null;
-      let scenario = null;
-
-      const multiplierDisplayCard = document.getElementById('multiplierDisplayCard');
-      const multiplierValueCard = document.getElementById('multiplierValueCard');
-      const progressBarCard = document.getElementById('progressBarCard');
-      const aiChanceDisplayCard = document.getElementById('aiChanceDisplayCard');
-      const betStakeCard = document.getElementById('betStakeCard');
-      const cashoutContainerCard = document.getElementById('cashoutContainerCard');
-      const cashoutValueCard = document.getElementById('cashoutValueCard');
-
-      function money(n) {
-        return new Intl.NumberFormat('fr-FR', {
-          style: 'currency',
-          currency: 'EUR'
-        }).format(n);
-      }
-
-      function rand(min, max) {
-        return Math.random() * (max - min) + min;
-      }
-
-      function randInt(min, max) {
-        return Math.floor(rand(min, max + 1));
-      }
-
-      function newScenario() {
-        const chance = rand(60, 90);
-        const stake = randInt(15, 120);
-        const target = Number(rand(1.2, 2.5).toFixed(2));
-        const bust = target + rand(0.2, 1.5);
-        const willWin = true;
-
-        return { chance, stake, target, bust, willWin };
-      }
-
-      function runOnce() {
-        cashoutContainerCard.classList.remove('active');
-        
-        scenario = newScenario();
-        aiChanceDisplayCard.textContent = Math.round(scenario.chance);
-        betStakeCard.textContent = money(scenario.stake);
-
-        const duration = rand(DUR_MIN, DUR_MAX);
-        const start = performance.now();
-
-        return new Promise((resolve) => {
-          function tick(t) {
-            const k = Math.min(1, (t - start) / duration);
-            const x = 1 + Math.pow(k, 1.4) * (scenario.bust - 1);
-            currentX = x;
-            
-            multiplierValueCard.textContent = x.toFixed(2);
-            progressBarCard.style.width = (k * 100) + '%';
-
-            if (x >= scenario.target) {
-              const win = scenario.stake * scenario.target;
-              cashoutValueCard.textContent = money(win);
-              cashoutContainerCard.classList.add('active');
-              resolve();
-              return;
-            }
-            
-            if (x >= scenario.bust) {
-              cashoutValueCard.textContent = money(0);
-              cashoutContainerCard.classList.add('active');
-              resolve();
-              return;
-            }
-            
-            animationId = requestAnimationFrame(tick);
-          }
-          
-          animationId = requestAnimationFrame(tick);
-        });
-      }
-
-      async function loop() {
-        while (true) {
-          await runOnce();
-          await new Promise(r => setTimeout(r, 2500));
-        }
-      }
-
-      // Start the simulation when DOM is ready
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', loop);
-      } else {
-        loop();
-      }
-    })();
-  </script>
-</body>
-</html>
-
-{% schema %}
-{
-  "name": "Page d'Accueil",
-  "settings": [
-    {
-      "type": "header",
-      "content": "Hero Section"
-    },
-    {
-      "type": "text",
-      "id": "hero_title_1",
-      "label": "Titre Hero (ligne 1)",
-      "default": "Paris sportifs"
-    },
-    {
-      "type": "text",
-      "id": "hero_title_highlight",
-      "label": "Titre Hero (highlight)",
-      "default": "propulsés par l'IA"
-    },
-    {
-      "type": "textarea",
-      "id": "hero_subtitle",
-      "label": "Sous-titre Hero",
-      "default": "La première plateforme de paris sportifs qui utilise l'intelligence artificielle pour maximiser vos chances de gains. Analyses en temps réel, prédictions précises."
-    },
-    {
-      "type": "text",
-      "id": "cta_primary_text",
-      "label": "Texte CTA Principal",
-      "default": "Commencer gratuitement"
-    },
-    {
-      "type": "url",
-      "id": "cta_primary_link",
-      "label": "Lien CTA Principal"
-    },
-    {
-      "type": "header",
-      "content": "AI Analysis Card"
-    },
-    {
-      "type": "text",
-      "id": "ai_stat_label",
-      "label": "Label statistique IA",
-      "default": "de chance de gagner"
-    },
-    {
-      "type": "header",
-      "content": "General Settings"
-    },
-    {
-      "type": "number",
-      "id": "members_base",
-      "label": "Nombre de membres de base",
-      "default": 50
-    },
-    {
-      "type": "color",
-      "id": "primary_color",
-      "label": "Couleur principale",
-      "default": "#10b981"
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Couleur de fond",
-      "default": "#000000"
-    }
-  ],
-  "presets": [
-    {
-      "name": "Page d'Accueil"
-    }
-  ]
-}
-{% endschema %}
+{% endstyle %}
