@@ -253,12 +253,27 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: 40%;
-        max-width: 780px;
+        width: 70%;
+        max-width: 1200px;
         min-width: 620px;
         margin: 0 auto;
         padding: 0 1.25rem;
         height: 100%;
+        
+        /* État initial : noir complet */
+        background: #000000;
+        border: 1px solid transparent;
+        border-radius: 0;
+        
+        /* Transition fluide */
+        transition: margin-top 0.3s ease, background 0.3s ease, 
+                    border-radius 0.3s ease, border 0.3s ease,
+                    backdrop-filter 0.3s ease;
+      }
+      
+      /* État scrollé : gris avec espace et effet */
+      .header.scrolled .desktop-menu {
+        margin-top: 1rem;
         background: rgba(25, 25, 25, 0.85);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
