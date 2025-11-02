@@ -142,19 +142,15 @@
       stroke: rgba(255, 255, 255, 0.95);
     }
     
-    /* Ensure header toggle sits above overlay/sidebar when open */
-    body.sidebar-open .header {
-      z-index: 80;
-      pointer-events: none;
-    }
-    body.sidebar-open .header .mobile-toggle {
+    /* Ensure mobile toggle is visible when sidebar is open */
+    body.sidebar-open .mobile-toggle {
       z-index: 90;
-      pointer-events: auto;
     }
-    /* Make the X icon thicker and bright */
+    
+    /* Make the X icon thicker and bright white */
     .mobile-toggle.active .close-icon path {
-      stroke: rgba(255, 255, 255, 0.95);
-      stroke-width: 2;
+      stroke: rgba(255, 255, 255, 0.95) !important;
+      stroke-width: 2.5 !important;
     }
 
     @media (max-width: 768px) {
