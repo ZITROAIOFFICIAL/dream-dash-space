@@ -186,49 +186,6 @@
         top: 1.25rem; /* Hauteur du menu hamburger */
         left: 1.5rem; /* Position gauche/droite du menu hamburger */
       }
-      
-      /* Header mobile : transitions fluides */
-      .header {
-        transition: padding-top 0.3s ease, background 0.3s ease;
-        position: relative;
-        z-index: 1000;
-      }
-      
-      /* Rectangle centré au scroll sur mobile */
-      .header.scrolled {
-        padding-top: 1rem;
-        background: transparent !important;
-      }
-      
-      /* Fond rectangulaire avec pseudo-élément */
-      .header.scrolled::before {
-        content: '';
-        position: absolute;
-        top: 1rem;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 85%;
-        max-width: 500px;
-        height: calc(100% - 1rem);
-        background: rgba(50, 50, 50, 0.92);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border-radius: 12px;
-        z-index: 0;
-        transition: all 0.3s ease;
-      }
-      
-      /* Remonter les éléments internes quand scrolled */
-      .header.scrolled .mobile-toggle,
-      .header.scrolled .logo,
-      .header.scrolled #online-badge-container,
-      .header.scrolled #ia-badge-container {
-        transform: translateY(-0.5rem);
-        transition: transform 0.3s ease;
-        position: relative;
-        z-index: 1;
-      }
-      
       #online-badge {
         top: 1.75rem !important; /* Hauteur du badge 50 online */
       }
@@ -296,30 +253,11 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: 90% !important;
-        max-width: none;
-        min-width: 620px;
+        width: 100%;
+        max-width: 1400px;
         margin: 0 auto;
-        padding: 0 1.25rem;
+        padding: 0 2rem;
         height: 100%;
-        
-        /* État initial : noir complet */
-        background: #000000;
-        border-radius: 0;
-        
-        /* Transition fluide */
-        transition: margin-top 0.3s ease, background 0.3s ease, 
-                    border-radius 0.3s ease, border 0.3s ease,
-                    backdrop-filter 0.3s ease;
-      }
-      
-      /* État scrollé : gris transparent avec effet */
-      .header.scrolled .desktop-menu {
-        margin-top: 1rem;
-        background: rgba(25, 25, 25, 0.45);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border-radius: 12px;
       }
 
       .mobile-only {
@@ -337,24 +275,15 @@
       gap: 2rem;
     }
 
-    .desktop-center {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
     .desktop-right {
       display: flex;
       align-items: center;
-      gap: 2rem;
+      gap: 1.5rem;
     }
 
     .desktop-logo {
       font-family: 'Inter', sans-serif;
-      font-size: 5rem;
+      font-size: 4.5rem;
       letter-spacing: -0.02em;
       font-weight: 300;
       display: inline-flex;
@@ -366,8 +295,8 @@
       position: relative;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 0.75rem;
+      gap: 0.35rem;
+      padding: 0.35rem 0.55rem;
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid rgba(255, 255, 255, 0.35);
       border-radius: 9999px;
@@ -377,17 +306,16 @@
     .desktop-nav {
       display: flex;
       align-items: center;
-      gap: 2.5rem;
-      margin-left: 2rem;
+      gap: 2rem;
+      margin-left: 1rem;
     }
 
     .desktop-nav-item {
       color: #ffffff;
       text-decoration: none;
-      font-size: 1.125rem;
-      font-weight: 500;
+      font-size: 1rem;
+      font-weight: 400;
       transition: color 0.2s;
-      white-space: nowrap;
     }
 
     .desktop-nav-item:hover {
@@ -397,10 +325,9 @@
     .desktop-auth-link {
       color: rgba(161, 161, 170, 1);
       text-decoration: none;
-      font-size: 1.125rem;
-      font-weight: 500;
+      font-size: 1rem;
+      font-weight: 400;
       transition: color 0.2s;
-      white-space: nowrap;
     }
 
     .desktop-auth-link:hover {
@@ -408,18 +335,17 @@
     }
 
     .desktop-auth-btn {
-      padding: 0.875rem 1.75rem;
+      padding: 0.75rem 1.5rem;
       background: #ffffff;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
       color: #000000;
       font-weight: 600;
-      font-size: 1.125rem;
+      font-size: 1rem;
       text-align: center;
       text-decoration: none;
       transition: all 0.3s;
       display: block;
-      white-space: nowrap;
     }
 
     .desktop-auth-btn:hover {
@@ -672,7 +598,7 @@
       top: 0;
       left: 0;
       right: 0;
-      background: transparent !important;
+      background: transparent;
       z-index: 30;
       display: flex;
       flex-direction: column;
@@ -683,13 +609,28 @@
 
     /* Header background effect */
     .header::before {
-      content: none !important;
-      display: none !important;
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) translateZ(0);
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 8px;
+      opacity: 0;
+      transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+      pointer-events: none;
+      z-index: -1;
+      backface-visibility: hidden;
     }
 
     .header.scrolled::before {
-      content: none !important;
-      display: none !important;
+      width: calc(100% - 3rem);
+      height: 70%;
+      opacity: 1;
     }
 
     /* Transitions for elements */
@@ -745,6 +686,11 @@
       stroke: #177546 !important;
     }
 
+    @media (min-width: 768px) {
+      .header {
+        left: 50rem;
+      }
+    }
 
     /* Augmenter taille texte header sur desktop uniquement */
     @media (min-width: 769px) {
@@ -756,7 +702,7 @@
 
     /* Main Content */
       .main-content {
-        margin-left: 0;
+        margin-left: 50rem;
         min-height: 100vh;
         padding-top: 110px;
         background: #000000;

@@ -124,7 +124,7 @@
     </nav>
   </aside>
 
-  <header class="header" style="position: fixed; height: 80px; width: 100%;">
+  <header class="header" style="background: transparent; position: fixed; height: 80px; width: 100%;">
     <!-- Mobile Toggle Button -->
     <button class="mobile-toggle" onclick="toggleSidebar()" aria-label="Toggle menu">
       <svg class="mobile-toggle-icon hamburger-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -211,18 +211,8 @@
 
     <!-- Desktop Menu -->
     <div class="desktop-menu">
-      <!-- Left: Menu Items -->
+      <!-- Left: Logo + Badges + Menu Items -->
       <div class="desktop-left">
-        <!-- Menu Items -->
-        <nav class="desktop-nav">
-          <a href="https://winabet.ai/collections/all#bet" class="desktop-nav-item">Accéder au Dashboard</a>
-          <a href="#" class="desktop-nav-item">Abonnement</a>
-          <a href="#" class="desktop-nav-item">Support</a>
-        </nav>
-      </div>
-
-      <!-- Center: Logo + Badges -->
-      <div class="desktop-center">
         <!-- Online Badge -->
         <div class="desktop-badge-online">
           <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 4px); height: calc(100% + 4px); pointer-events: none; z-index: -1;">
@@ -294,6 +284,13 @@
             <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 0.875rem; white-space: nowrap;">MAJ <span id="desktop-time" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">17:34</span></span>
           </div>
         </div>
+
+        <!-- Menu Items -->
+        <nav class="desktop-nav">
+          <a href="https://winabet.ai/collections/all#bet" class="desktop-nav-item">Accéder au Dashboard</a>
+          <a href="#" class="desktop-nav-item">Abonnement</a>
+          <a href="#" class="desktop-nav-item">Support</a>
+        </nav>
       </div>
 
       <!-- Right: Auth Buttons -->
@@ -305,7 +302,7 @@
   </header>
 
   <!-- Main Content -->
-  <main class="main-content" style="padding-top: 100px; padding-bottom: 150vh;">
+  <main class="main-content" style="padding-top: 80px; padding-bottom: 150vh;">
     <style>
       .hero-section {
         min-height: auto;
