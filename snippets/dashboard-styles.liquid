@@ -778,3 +778,81 @@
   </script>
 </body>
 </html>
+
+{% schema %}
+{
+  "name": "Page d'Accueil",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Section"
+    },
+    {
+      "type": "text",
+      "id": "hero_title_1",
+      "label": "Titre Hero (ligne 1)",
+      "default": "Paris sportifs"
+    },
+    {
+      "type": "text",
+      "id": "hero_title_highlight",
+      "label": "Titre Hero (highlight)",
+      "default": "propulsés par l'IA"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_subtitle",
+      "label": "Sous-titre Hero",
+      "default": "La première plateforme de paris sportifs qui utilise l'intelligence artificielle pour maximiser vos chances de gains. Analyses en temps réel, prédictions précises."
+    },
+    {
+      "type": "text",
+      "id": "cta_primary_text",
+      "label": "Texte CTA Principal",
+      "default": "Commencer gratuitement"
+    },
+    {
+      "type": "url",
+      "id": "cta_primary_link",
+      "label": "Lien CTA Principal"
+    },
+    {
+      "type": "header",
+      "content": "AI Analysis Card"
+    },
+    {
+      "type": "text",
+      "id": "ai_stat_label",
+      "label": "Label statistique IA",
+      "default": "de chance de gagner"
+    },
+    {
+      "type": "header",
+      "content": "General Settings"
+    },
+    {
+      "type": "number",
+      "id": "members_base",
+      "label": "Nombre de membres de base",
+      "default": 50
+    },
+    {
+      "type": "color",
+      "id": "primary_color",
+      "label": "Couleur principale",
+      "default": "#10b981"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Couleur de fond",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Page d'Accueil"
+    }
+  ]
+}
+{% endschema %}
