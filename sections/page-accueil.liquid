@@ -38,6 +38,18 @@
               <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
             </rect>
           </svg>
+          <svg width="6" height="6" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+            <defs>
+              <filter id="greyDotGlowSidebar" x="-100%" y="-100%" width="300%" height="300%">
+                <feGaussianBlur stdDeviation="1.5" result="blur"/>
+                <feMerge>
+                  <feMergeNode in="blur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+            <circle cx="10" cy="10" r="6" fill="#9ca3af" filter="url(#greyDotGlowSidebar)"/>
+          </svg>
           <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 0.75rem; white-space: nowrap;"><span id="sidebar-member-count" class="member-count" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">{{ section.settings.members_base | default: 50 }}</span> online</span>
         </div>
       </div>
@@ -128,6 +140,18 @@
           <rect x="2" y="2" width="calc(100% - 4px)" height="calc(100% - 4px)" rx="10" ry="10" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="30 510" stroke-linecap="round" filter="url(#onlineGlowHeader)" opacity="0.9">
             <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
           </rect>
+        </svg>
+        <svg width="6" height="6" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+          <defs>
+            <filter id="greyDotGlowHeader" x="-100%" y="-100%" width="300%" height="300%">
+              <feGaussianBlur stdDeviation="1.5" result="blur"/>
+              <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+          <circle cx="10" cy="10" r="6" fill="#9ca3af" filter="url(#greyDotGlowHeader)"/>
         </svg>
         <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 0.75rem; white-space: nowrap;"><span id="header-member-count" class="member-count" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">{{ section.settings.members_base | default: 50 }}</span> online</span>
       </div>
