@@ -116,22 +116,30 @@
 
     .mobile-toggle .hamburger-icon {
       opacity: 1;
+      visibility: visible;
       transform: rotate(0deg);
+      pointer-events: auto;
     }
 
     .mobile-toggle .close-icon {
       opacity: 0;
+      visibility: hidden;
       transform: rotate(90deg);
+      pointer-events: none;
     }
 
     .mobile-toggle.active .hamburger-icon {
       opacity: 0;
+      visibility: hidden;
       transform: rotate(-90deg);
+      pointer-events: none;
     }
 
     .mobile-toggle.active .close-icon {
       opacity: 1;
+      visibility: visible;
       transform: rotate(0deg);
+      pointer-events: auto;
     }
 
     @media (max-width: 768px) {
