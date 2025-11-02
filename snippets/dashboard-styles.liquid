@@ -40,10 +40,10 @@
 
     @keyframes spinVariable {
       0% { transform: rotate(0deg); }
-      25% { transform: rotate(720deg); } /* 2 tours rapides */
-      50% { transform: rotate(900deg); } /* ralentissement */
-      75% { transform: rotate(1620deg); } /* 2 tours rapides */
-      100% { transform: rotate(1800deg); } /* fin */
+      25% { transform: rotate(180deg); }
+      50% { transform: rotate(360deg); }
+      75% { transform: rotate(540deg); }
+      100% { transform: rotate(720deg); }
     }
 
     @keyframes bounce {
@@ -305,7 +305,7 @@
       border-top-color: #16a34a;
       border-right-color: #16a34a;
       border-bottom-color: #16a34a;
-      animation: spinVariable 5s linear infinite;
+      animation: spinVariable 3s linear infinite;
     }
 
     .ai-badge {
