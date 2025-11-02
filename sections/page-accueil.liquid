@@ -91,80 +91,200 @@
 
   <!-- Main Content -->
   <main class="main-content">
-    <!-- AI Crash Analysis Section -->
     <style>
-      .ai-crash-section {
-        background-color: {{ section.settings.background_color }};
-        padding: 2rem 1rem;
-        color: #ffffff;
-        font-family: system-ui, -apple-system, sans-serif;
-      }
-
-      .ai-crash-container {
-        max-width: 1280px;
-        margin: 0 auto;
-      }
-
-      .ai-crash-content {
-        max-width: 80rem;
-        margin: 0 auto;
+      .hero-section {
+        min-height: 85vh;
         display: flex;
-        flex-direction: column;
+        align-items: center;
+        background: linear-gradient(to bottom, #000000 0%, #0a0a0a 100%);
+        position: relative;
+        overflow: hidden;
+        padding: 4rem 1.5rem 2rem;
+      }
+
+      .hero-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        align-items: center;
+      }
+
+      @media (min-width: 1024px) {
+        .hero-container {
+          grid-template-columns: 1fr 1fr;
+          gap: 6rem;
+        }
+      }
+
+      .hero-content {
+        z-index: 10;
+      }
+
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: rgba(16, 185, 129, 0.1);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        border-radius: 9999px;
+        color: {{ section.settings.primary_color }};
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin-bottom: 2rem;
+        transition: all 0.3s;
+      }
+
+      .hero-badge:hover {
+        background: rgba(16, 185, 129, 0.15);
+        border-color: rgba(16, 185, 129, 0.5);
+      }
+
+      .hero-title {
+        font-size: clamp(2.5rem, 8vw, 5rem);
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        color: #ffffff;
+        margin-bottom: 1.5rem;
+      }
+
+      .hero-title-highlight {
+        color: {{ section.settings.primary_color }};
+        display: inline-block;
+      }
+
+      .hero-subtitle {
+        font-size: clamp(1rem, 2vw, 1.25rem);
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 2.5rem;
+        max-width: 600px;
+      }
+
+      .hero-cta {
+        display: flex;
+        flex-wrap: wrap;
         gap: 1rem;
       }
 
-      /* AI Analysis Header */
-      .ai-analysis-header {
-        display: flex;
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1rem 2rem;
+        background: {{ section.settings.primary_color }};
+        color: #000000;
+        font-weight: 600;
+        font-size: 1rem;
+        border-radius: 0.5rem;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-decoration: none;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+      }
+
+      .btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1rem 2rem;
+        background: transparent;
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 1rem;
+        border-radius: 0.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        cursor: pointer;
+        transition: all 0.3s;
+        text-decoration: none;
+      }
+
+      .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.4);
+      }
+
+      /* AI Analysis Card */
+      .ai-analysis-card {
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+        border: 1px solid rgba(16, 185, 129, 0.2);
+        border-radius: 1.5rem;
+        padding: 2.5rem;
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .ai-analysis-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, {{ section.settings.primary_color }}, transparent);
+      }
+
+      .ai-badge-large {
+        display: inline-flex;
+        align-items: center;
         justify-content: center;
-        margin-top: 2rem;
+        width: 48px;
+        height: 48px;
+        background: {{ section.settings.primary_color }};
+        color: #000000;
+        font-weight: 700;
+        font-size: 1rem;
+        border-radius: 0.75rem;
+        margin-bottom: 1.5rem;
       }
 
-      .ai-analysis-text {
+      .ai-stat {
         text-align: center;
+        margin-bottom: 2rem;
       }
 
-      .ai-title {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: #ffffff;
-      }
-
-      .ai-highlight {
+      .ai-stat-value {
+        font-size: clamp(3rem, 6vw, 4rem);
+        font-weight: 900;
         color: {{ section.settings.primary_color }};
+        line-height: 1;
+        margin-bottom: 0.5rem;
       }
 
-      .ai-percentage {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: #ffffff;
-      }
-
-      .ai-percentage-value {
-        color: {{ section.settings.primary_color }};
+      .ai-stat-label {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.7);
+        font-weight: 500;
       }
 
       /* Crash Simulation */
-      .crash-simulation {
-        width: 100%;
-        max-width: 720px;
-        margin: 0 auto;
-        padding: 1rem 0;
-      }
-
-      .multiplier-display {
-        margin: 0.5rem 0;
+      .crash-display {
+        background: rgba(0, 0, 0, 0.4);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
       }
 
       .multiplier-value {
         font-weight: 900;
         line-height: 1;
         letter-spacing: -0.025em;
-        font-size: clamp(24px, 6vw, 48px);
+        font-size: clamp(2rem, 5vw, 3rem);
         text-align: center;
         transition: color 0.3s;
         color: #ffffff;
-        text-shadow: 0 0 24px rgba(16, 185, 129, 0.15);
+        text-shadow: 0 0 24px rgba(16, 185, 129, 0.3);
+        margin-bottom: 1rem;
       }
 
       .multiplier-value.winning {
@@ -173,48 +293,45 @@
 
       .progress-bar-container {
         position: relative;
-        height: 4px;
+        height: 6px;
         border-radius: 9999px;
-        background-color: #151a26;
+        background-color: rgba(255, 255, 255, 0.1);
         overflow: hidden;
-        margin-top: 0.5rem;
-        max-width: 320px;
-        margin-left: auto;
-        margin-right: auto;
       }
 
       .progress-bar-fill {
         position: absolute;
         inset: 0;
-        background-color: {{ section.settings.primary_color }};
+        background: linear-gradient(90deg, {{ section.settings.primary_color }}, #14f195);
         transition: width 0.075s;
-        box-shadow: 0 0 16px rgba(16, 185, 129, 0.35);
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
       }
 
       .info-chips {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 0.5rem;
-        margin-top: 0.625rem;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
       }
 
       .chip {
-        padding: 0.25rem 0.625rem;
+        padding: 0.5rem 1rem;
         border-radius: 9999px;
-        font-size: 0.75rem;
+        font-size: 0.875rem;
         border: 1px solid;
+        font-weight: 500;
       }
 
       .chip-stake {
-        background-color: #000000;
-        border-color: #ffffff;
+        background-color: rgba(0, 0, 0, 0.6);
+        border-color: rgba(255, 255, 255, 0.2);
         color: #ffffff;
       }
 
       .chip-result {
-        background-color: #0e1322;
-        border-color: #2b334f;
+        background-color: rgba(14, 19, 34, 0.8);
+        border-color: rgba(43, 51, 79, 0.5);
         color: #ffffff;
       }
 
@@ -225,38 +342,85 @@
         font-weight: 600;
       }
 
-      @media (min-width: 768px) {
-        .ai-title,
-        .ai-percentage {
-          font-size: 1.875rem;
-        }
+      /* Decorative elements */
+      .hero-bg-gradient {
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
+        border-radius: 50%;
+        filter: blur(80px);
+        pointer-events: none;
+      }
+
+      .hero-bg-gradient-1 {
+        top: -200px;
+        right: -200px;
+      }
+
+      .hero-bg-gradient-2 {
+        bottom: -200px;
+        left: -200px;
       }
     </style>
 
-    <section class="ai-crash-section">
-      <div class="ai-crash-container">
-        <div class="ai-crash-content">
-          <!-- AI Win Percentage -->
-          <div class="ai-analysis-header">
-            <div class="ai-analysis-text">
-              <div class="ai-title">
-                {{ section.settings.title_fr }} <span class="ai-highlight">{{ section.settings.title_highlight }}</span>
-              </div>
-              <div class="ai-percentage">
-                <span class="ai-percentage-value" id="aiChanceDisplay">...</span>% {{ section.settings.subtitle_fr }}
-              </div>
-            </div>
+    <section class="hero-section">
+      <!-- Background gradients -->
+      <div class="hero-bg-gradient hero-bg-gradient-1"></div>
+      <div class="hero-bg-gradient hero-bg-gradient-2"></div>
+
+      <div class="hero-container">
+        <!-- Left: Hero Content -->
+        <div class="hero-content">
+          <div class="hero-badge">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="2"/>
+              <path d="M8 4v4l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            IA mise à jour en temps réel
           </div>
 
-          <!-- Crash Simulation -->
-          <div class="crash-simulation">
-            <!-- Multiplier -->
-            <div class="multiplier-display">
+          <h1 class="hero-title">
+            {{ section.settings.hero_title_1 }}<br>
+            <span class="hero-title-highlight">{{ section.settings.hero_title_highlight }}</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            {{ section.settings.hero_subtitle }}
+          </p>
+
+          <div class="hero-cta">
+            <a href="{{ section.settings.cta_primary_link }}" class="btn-primary">
+              {{ section.settings.cta_primary_text }}
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M7 13l5-5m0 0l-5-5m5 5H3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </a>
+            <a href="{{ section.settings.cta_secondary_link }}" class="btn-secondary">
+              {{ section.settings.cta_secondary_text }}
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: AI Analysis Card -->
+        <div class="hero-content">
+          <div class="ai-analysis-card">
+            <div class="ai-badge-large">IA</div>
+            
+            <!-- AI Stat -->
+            <div class="ai-stat">
+              <div class="ai-stat-value">
+                <span id="aiChanceDisplay">...</span>%
+              </div>
+              <div class="ai-stat-label">{{ section.settings.ai_stat_label }}</div>
+            </div>
+
+            <!-- Crash Display -->
+            <div class="crash-display">
               <div class="multiplier-value" id="multiplierDisplay">
                 x1.00
               </div>
               
-              <!-- Progress bar -->
               <div class="progress-bar-container">
                 <div class="progress-bar-fill" id="progressBar" style="width: 0%"></div>
               </div>
@@ -265,7 +429,7 @@
             <!-- Info Chips -->
             <div class="info-chips">
               <div class="chip chip-stake">
-                Paris sportif : <b id="stakeDisplay">–</b>
+                Paris : <b id="stakeDisplay">–</b>
               </div>
               <div class="chip chip-result" id="resultChip" style="display: none;">
                 <span id="resultText"></span>
@@ -275,12 +439,6 @@
         </div>
       </div>
     </section>
-
-    <!-- Content for the landing page will be added here -->
-    <div class="container">
-      <h1 style="color: #ffffff; text-align: center; margin-top: 2rem;">{{ section.settings.page_title }}</h1>
-      <p style="color: rgba(255, 255, 255, 0.7); text-align: center; margin-top: 1rem;">{{ section.settings.page_subtitle }}</p>
-    </div>
   </main>
 
   <script>
@@ -453,40 +611,70 @@
   "name": "Page d'Accueil",
   "settings": [
     {
-      "type": "text",
-      "id": "page_title",
-      "label": "Titre de la page",
-      "default": "Bienvenue sur WINABET.AI"
+      "type": "header",
+      "content": "Hero Section"
     },
     {
       "type": "text",
-      "id": "page_subtitle",
-      "label": "Sous-titre de la page",
-      "default": "Votre plateforme de paris sportifs intelligents"
+      "id": "hero_title_1",
+      "label": "Titre Hero (ligne 1)",
+      "default": "Paris sportifs"
+    },
+    {
+      "type": "text",
+      "id": "hero_title_highlight",
+      "label": "Titre Hero (highlight)",
+      "default": "propulsés par l'IA"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_subtitle",
+      "label": "Sous-titre Hero",
+      "default": "La première plateforme de paris sportifs qui utilise l'intelligence artificielle pour maximiser vos chances de gains. Analyses en temps réel, prédictions précises."
+    },
+    {
+      "type": "text",
+      "id": "cta_primary_text",
+      "label": "Texte CTA Principal",
+      "default": "Commencer maintenant"
+    },
+    {
+      "type": "url",
+      "id": "cta_primary_link",
+      "label": "Lien CTA Principal",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "cta_secondary_text",
+      "label": "Texte CTA Secondaire",
+      "default": "En savoir plus"
+    },
+    {
+      "type": "url",
+      "id": "cta_secondary_link",
+      "label": "Lien CTA Secondaire",
+      "default": "/pages/about"
+    },
+    {
+      "type": "header",
+      "content": "AI Analysis Card"
+    },
+    {
+      "type": "text",
+      "id": "ai_stat_label",
+      "label": "Label statistique IA",
+      "default": "de chance de gagner"
+    },
+    {
+      "type": "header",
+      "content": "General Settings"
     },
     {
       "type": "number",
       "id": "members_base",
       "label": "Nombre de membres de base",
       "default": 50
-    },
-    {
-      "type": "text",
-      "id": "title_fr",
-      "label": "Titre Analyse IA (FR)",
-      "default": "Analyse de notre"
-    },
-    {
-      "type": "text",
-      "id": "title_highlight",
-      "label": "Texte surligné Analyse IA",
-      "default": "IA"
-    },
-    {
-      "type": "text",
-      "id": "subtitle_fr",
-      "label": "Sous-titre Analyse IA (FR)",
-      "default": "de chance de gagner"
     },
     {
       "type": "color",
