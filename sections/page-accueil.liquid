@@ -288,22 +288,25 @@
       /* AI Analysis Card */
       .ai-analysis-card {
         background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
-        border: 1px solid rgba(16, 185, 129, 0.2);
-        border-radius: 1rem;
-        padding: 1.5rem 2rem;
+        border: 2px solid rgba(16, 185, 129, 0.3);
+        border-radius: 0.5rem;
+        padding: 2rem;
         backdrop-filter: blur(10px);
         position: relative;
         overflow: hidden;
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+        display: flex;
+        flex-direction: column;
         align-items: center;
+        gap: 1.5rem;
+        max-width: 400px;
+        margin: 0 auto;
       }
 
-      @media (min-width: 768px) {
-        .ai-analysis-card {
-          grid-template-columns: auto 1fr auto;
-        }
+      .ai-icon-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
       }
 
       .ai-analysis-card::before {
@@ -316,52 +319,112 @@
         background: linear-gradient(90deg, transparent, {{ section.settings.primary_color }}, transparent);
       }
 
-      .ai-stat {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 1rem;
-        flex: 1;
-        min-width: 200px;
+      .ai-info-text {
         text-align: center;
+        width: 100%;
       }
 
-      .ai-stat-value {
-        font-size: clamp(2rem, 4vw, 3rem);
-        font-weight: 900;
-        color: {{ section.settings.primary_color }};
-        line-height: 1;
-        white-space: nowrap;
-      }
-
-      .ai-stat-label {
+      .ai-info-label {
         font-size: 0.875rem;
-        color: rgba(255, 255, 255, 0.7);
+        color: rgba(255, 255, 255, 0.6);
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+      }
+
+      .ai-info-value {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.95);
+      }
+
+      .bet-info {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(16, 185, 129, 0.2);
+      }
+
+      .bet-info-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .bet-label {
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.6);
         font-weight: 500;
       }
 
-      /* Crash Simulation */
-      .crash-display {
-        flex: 1;
-        min-width: 200px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 1rem 1.5rem;
+      .bet-value {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: {{ section.settings.primary_color }};
       }
 
-      .multiplier-value {
+      .cashout-container {
+        width: 100%;
+        padding: 1rem;
+        background: rgba(16, 185, 129, 0.15);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        border-radius: 0.5rem;
+        text-align: center;
+        display: none;
+      }
+
+      .cashout-container.active {
+        display: block;
+      }
+
+      .cashout-label {
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 0.5rem;
+      }
+
+      .cashout-value {
+        font-size: 2rem;
         font-weight: 900;
-        line-height: 1;
-        letter-spacing: -0.025em;
-        font-size: clamp(2.5rem, 5vw, 4rem);
-        transition: color 0.3s;
-        color: #ffffff;
-        text-shadow: 0 0 24px rgba(16, 185, 129, 0.3);
-        white-space: nowrap;
+        color: {{ section.settings.primary_color }};
       }
 
-      .multiplier-value.winning {
+      .bet-label {
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.6);
+        font-weight: 500;
+      }
+
+      .bet-value {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: {{ section.settings.primary_color }};
+      }
+
+      .cashout-container {
+        width: 100%;
+        padding: 1rem;
+        background: rgba(16, 185, 129, 0.15);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        border-radius: 0.5rem;
+        text-align: center;
+        display: none;
+      }
+
+      .cashout-container.active {
+        display: block;
+      }
+
+      .cashout-label {
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 0.5rem;
+      }
+
+      .cashout-value {
+        font-size: 2rem;
+        font-weight: 900;
         color: {{ section.settings.primary_color }};
       }
 
@@ -371,8 +434,7 @@
         border-radius: 9999px;
         background-color: rgba(255, 255, 255, 0.1);
         overflow: hidden;
-        flex: 1;
-        min-width: 80px;
+        width: 100%;
       }
 
       .progress-bar-fill {
@@ -381,44 +443,6 @@
         background: linear-gradient(90deg, {{ section.settings.primary_color }}, #14f195);
         transition: width 0.075s;
         box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
-      }
-
-      .info-chips {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.75rem;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-      }
-
-      .chip {
-        padding: 0.5rem 1rem;
-        border-radius: 9999px;
-        font-size: 0.875rem;
-        border: 1px solid;
-        font-weight: 500;
-      }
-
-      .chip-stake {
-        background-color: rgba(0, 0, 0, 0.6);
-        border-color: rgba(255, 255, 255, 0.2);
-        color: #ffffff;
-      }
-
-      .chip-result {
-        background-color: rgba(14, 19, 34, 0.8);
-        border-color: rgba(43, 51, 79, 0.5);
-        color: #ffffff;
-      }
-
-      .chip-result.winning {
-        background-color: {{ section.settings.primary_color }};
-        border-color: {{ section.settings.primary_color }};
-        color: #000000;
-        font-weight: 600;
-        display: block !important;
-        margin-left: auto;
       }
 
       /* Decorative elements */
@@ -452,32 +476,71 @@
         <!-- AI Analysis Card - En haut -->
         <div style="grid-column: 1 / -1; margin-bottom: 1.5rem; margin-top: 3rem;">
           <div class="ai-analysis-card">
-            <!-- AI Stat -->
-            <div class="ai-stat">
-              <div>
-                <div class="ai-stat-value">
-                  <span id="aiChanceDisplay">...</span>%
-                </div>
-                <div class="ai-stat-label">de confiance de notre IA</div>
-              </div>
+            <!-- Icône IA avec pourcentage -->
+            <div class="ai-icon-container">
+              <svg id="atom-card" width="120" height="120" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <filter id="softGlowCard" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="1.2" result="b"/>
+                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                  <path id="orbit0Card" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                  <path id="orbit1Card" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                  <path id="orbit2Card" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+                </defs>
+                <g stroke="#68859e" stroke-width="2" fill="none">
+                  <use href="#orbit0Card"/>
+                  <use href="#orbit1Card"/>
+                  <use href="#orbit2Card"/>
+                </g>
+                <g stroke-linecap="round" filter="url(#softGlowCard)">
+                  <use href="#orbit0Card" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                  <use href="#orbit1Card" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                  <use href="#orbit2Card" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                </g>
+                <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#16a34a" font-weight="900" font-size="38" id="aiChanceDisplayCard">...</text>
+                <text x="100" y="125" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="600" font-size="20">%</text>
+              </svg>
             </div>
 
-            <!-- Crash Display -->
-            <div class="crash-display">
-              <div class="multiplier-value" id="multiplierDisplay">
-                x1.00
-              </div>
+            <!-- Texte d'information -->
+            <div class="ai-info-text">
+              <div class="ai-info-label">Chances de Gains (IA)</div>
+              <div class="ai-info-value">Analyse en temps réel</div>
             </div>
 
-            <!-- Info Chips -->
-            <div class="info-chips">
-              <div class="chip chip-stake">
-                Paris : <b id="stakeDisplay">–</b>
-              </div>
-              <div class="chip chip-result" id="resultChip" style="display: none;">
-                <span id="resultText"></span>
-              </div>
+            <!-- Multiplicateur -->
+            <div class="bet-info-row" style="width: 100%;">
+              <span class="bet-label">Multiplicateur</span>
+              <span class="bet-value" id="multiplierDisplayCard">
+                <span id="multiplierValueCard">1.00</span>x
+              </span>
             </div>
+
+            <!-- Mise du pari -->
+            <div class="bet-info-row" style="width: 100%;">
+              <span class="bet-label">Mise du pari</span>
+              <span class="bet-value" id="betStakeCard">100€</span>
+            </div>
+
+            <!-- Cashout (affiché quand le bet est fini) -->
+            <div class="cashout-container" id="cashoutContainerCard">
+              <div class="cashout-label">CASHOUT</div>
+              <div class="cashout-value" id="cashoutValueCard">0€</div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar-container" style="width: 100%;">
+              <div class="progress-bar-fill" id="progressBarCard"></div>
+            </div>
+          </div>
+        </div>
           </div>
         </div>
 
@@ -576,17 +639,18 @@
       let animationId = null;
       let scenario = null;
 
-      const multiplierDisplay = document.getElementById('multiplierDisplay');
-      const progressBar = document.getElementById('progressBar');
-      const aiChanceDisplay = document.getElementById('aiChanceDisplay');
-      const stakeDisplay = document.getElementById('stakeDisplay');
-      const resultChip = document.getElementById('resultChip');
-      const resultText = document.getElementById('resultText');
+      const multiplierDisplayCard = document.getElementById('multiplierDisplayCard');
+      const multiplierValueCard = document.getElementById('multiplierValueCard');
+      const progressBarCard = document.getElementById('progressBarCard');
+      const aiChanceDisplayCard = document.getElementById('aiChanceDisplayCard');
+      const betStakeCard = document.getElementById('betStakeCard');
+      const cashoutContainerCard = document.getElementById('cashoutContainerCard');
+      const cashoutValueCard = document.getElementById('cashoutValueCard');
 
       function money(n) {
-        return new Intl.NumberFormat('fr-CA', {
+        return new Intl.NumberFormat('fr-FR', {
           style: 'currency',
-          currency: 'CAD'
+          currency: 'EUR'
         }).format(n);
       }
 
@@ -609,12 +673,11 @@
       }
 
       function runOnce() {
-        multiplierDisplay.classList.remove('winning');
-        resultChip.style.display = 'none';
+        cashoutContainerCard.classList.remove('active');
         
         scenario = newScenario();
-        aiChanceDisplay.textContent = Math.round(scenario.chance);
-        stakeDisplay.textContent = money(scenario.stake);
+        aiChanceDisplayCard.textContent = Math.round(scenario.chance);
+        betStakeCard.textContent = money(scenario.stake);
 
         const duration = rand(DUR_MIN, DUR_MAX);
         const start = performance.now();
@@ -625,24 +688,20 @@
             const x = 1 + Math.pow(k, 1.4) * (scenario.bust - 1);
             currentX = x;
             
-            multiplierDisplay.textContent = 'x' + x.toFixed(2);
+            multiplierValueCard.textContent = x.toFixed(2);
+            progressBarCard.style.width = (k * 100) + '%';
 
             if (x >= scenario.target) {
               const win = scenario.stake * scenario.target;
-              multiplierDisplay.classList.add('winning');
-              resultChip.classList.add('winning');
-              resultChip.classList.remove('chip-result');
-              resultText.textContent = `Cashout x${scenario.target.toFixed(2)} → ${money(win)}`;
-              resultChip.style.display = 'block';
+              cashoutValueCard.textContent = money(win);
+              cashoutContainerCard.classList.add('active');
               resolve();
               return;
             }
             
             if (x >= scenario.bust) {
-              resultChip.classList.remove('winning');
-              resultChip.classList.add('chip-result');
-              resultText.textContent = `Bust à x${scenario.bust.toFixed(2)}`;
-              resultChip.style.display = 'block';
+              cashoutValueCard.textContent = money(0);
+              cashoutContainerCard.classList.add('active');
               resolve();
               return;
             }
