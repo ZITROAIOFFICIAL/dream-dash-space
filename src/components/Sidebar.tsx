@@ -51,27 +51,26 @@ const Sidebar = () => {
         )}
       >
         <div className="flex flex-col h-full">
-          {/* Header - Première ligne: Logo centré avec badge en ligne */}
-          <div className="py-4 px-4 flex items-center justify-center relative">
-            <h1 className="text-4xl font-bold leading-none tracking-tight">
-              <span className="text-white">WIN</span>
-              <span className="text-white">A</span>
-              <span className="text-sidebar-primary">BET</span>
-            </h1>
-            
-            {/* Badge en ligne - masqué sur mobile, visible sur desktop */}
-            <div className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 items-center gap-2 px-3 py-1.5 bg-white/[0.02] border border-white/[0.08] rounded-full">
+          {/* Header - Une seule ligne avec tous les éléments */}
+          <div className="py-4 px-4 flex items-center justify-between gap-3 border-b border-green-600/30">
+            {/* Badge "en ligne" à gauche (masqué sur mobile) */}
+            <div className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-white/[0.02] border border-white/[0.08] rounded-full">
               <div className="w-1 h-1 rounded-full bg-green-600 shadow-[0_0_4px_rgba(22,163,74,0.8)]"></div>
               <span className="text-white/70 font-medium text-xs whitespace-nowrap">
                 <span className="text-white/95 font-semibold">50</span> en ligne
               </span>
             </div>
-          </div>
 
-          {/* Deuxième ligne: Mise à jour IA centré */}
-          <div className="px-4 pb-3 flex justify-center border-b border-green-600/30">
-            <div className="flex items-center gap-3 px-3 py-2 bg-green-600/5 border border-green-600/15 rounded-full">
-              <svg width="32" height="32" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0">
+            {/* Logo centré */}
+            <h1 className="text-2xl md:text-3xl font-bold leading-none tracking-tight flex-shrink-0">
+              <span className="text-white">WIN</span>
+              <span className="text-white">A</span>
+              <span className="text-sidebar-primary">BET</span>
+            </h1>
+            
+            {/* Mise à jour IA à droite */}
+            <div className="flex items-center gap-2 px-2 md:px-3 py-1.5 bg-green-600/5 border border-green-600/15 rounded-full">
+              <svg width="24" height="24" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0">
                 <defs>
                   <filter id="softGlowSidebar" x="-50%" y="-50%" width="200%" height="200%">
                     <feGaussianBlur stdDeviation="1.2" result="b"/>
@@ -99,9 +98,7 @@ const Sidebar = () => {
                 </g>
                 <text x="100" y="100" textAnchor="middle" dominantBaseline="middle" fill="#ffffff" fontWeight="700" fontSize="46">IA</text>
               </svg>
-              <span className="text-white/70 font-medium text-xs whitespace-nowrap">
-                Mise à jour <span className="text-white/95 font-semibold">17:34</span>
-              </span>
+              <span className="hidden sm:inline text-white/95 font-semibold text-xs whitespace-nowrap">17:34</span>
             </div>
           </div>
 
