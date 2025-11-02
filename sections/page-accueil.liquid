@@ -69,13 +69,13 @@
 
   <!-- Header -->
   <header class="header" style="backdrop-filter: blur(12px); background: rgba(0, 0, 0, 0.6); padding: 1rem 2rem; display: flex; flex-direction: column; gap: 1rem;">
-    <!-- Première ligne: Logo à gauche, En ligne à droite -->
-    <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+    <!-- Première ligne: Logo centré, En ligne à droite -->
+    <div style="display: flex; align-items: center; justify-content: center; width: 100%; position: relative;">
       <div class="logo" style="font-size: 1.125rem; letter-spacing: -0.02em;">
         <span class="text-foreground" style="color: rgba(255, 255, 255, 0.95);">WIN</span><span class="text-primary" style="color: #10b981;">A</span><span class="text-foreground" style="color: rgba(255, 255, 255, 0.95);">BET</span><span class="text-primary text-sm" style="color: #10b981; font-size: 0.75rem;">.AI</span>
       </div>
       
-      <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 1rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 9999px;">
+      <div style="position: absolute; right: 0; display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 1rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 9999px;">
         <div style="width: 6px; height: 6px; border-radius: 50%; background-color: #10b981; box-shadow: 0 0 8px rgba(16, 185, 129, 0.8);"></div>
         <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 0.875rem; white-space: nowrap;"><span id="header-member-count" class="member-count" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">{{ section.settings.members_base | default: 50 }}</span> en ligne</span>
       </div>
