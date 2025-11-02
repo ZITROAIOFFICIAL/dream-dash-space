@@ -39,16 +39,7 @@
             </rect>
           </svg>
           <svg width="6" height="6" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
-            <defs>
-              <filter id="greyDotGlowSidebar" x="-100%" y="-100%" width="300%" height="300%">
-                <feGaussianBlur stdDeviation="1.5" result="blur"/>
-                <feMerge>
-                  <feMergeNode in="blur"/>
-                  <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-              </filter>
-            </defs>
-            <circle cx="10" cy="10" r="6" fill="#9ca3af" filter="url(#greyDotGlowSidebar)"/>
+            <circle cx="10" cy="10" r="6" fill="rgba(255, 255, 255, 0.7)"/>
           </svg>
           <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 0.75rem; white-space: nowrap;"><span id="sidebar-member-count" class="member-count" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">{{ section.settings.members_base | default: 50 }}</span> online</span>
         </div>
@@ -142,16 +133,7 @@
           </rect>
         </svg>
         <svg width="6" height="6" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
-          <defs>
-            <filter id="greyDotGlowHeader" x="-100%" y="-100%" width="300%" height="300%">
-              <feGaussianBlur stdDeviation="1.5" result="blur"/>
-              <feMerge>
-                <feMergeNode in="blur"/>
-                <feMergeNode in="SourceGraphic"/>
-              </feMerge>
-            </filter>
-          </defs>
-          <circle cx="10" cy="10" r="6" fill="#9ca3af" filter="url(#greyDotGlowHeader)"/>
+          <circle cx="10" cy="10" r="6" fill="rgba(255, 255, 255, 0.7)"/>
         </svg>
         <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 0.75rem; white-space: nowrap;"><span id="header-member-count" class="member-count" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">{{ section.settings.members_base | default: 50 }}</span> online</span>
       </div>
