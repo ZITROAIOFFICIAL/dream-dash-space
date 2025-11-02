@@ -187,12 +187,34 @@
         left: 1.5rem; /* Position gauche/droite du menu hamburger */
       }
       
-      /* Fond grisé transparent au scroll sur mobile */
+      /* Header mobile : transitions fluides */
+      .header {
+        transition: padding-top 0.3s ease, background 0.3s ease;
+        position: relative;
+      }
+      
+      /* Rectangle centré au scroll sur mobile */
       .header.scrolled {
-        background: rgba(25, 25, 25, 0.45) !important;
+        padding-top: 1rem;
+        background: transparent !important;
+      }
+      
+      /* Fond rectangulaire avec pseudo-élément */
+      .header.scrolled::before {
+        content: '';
+        position: absolute;
+        top: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 85%;
+        max-width: 500px;
+        height: calc(100% - 1rem);
+        background: rgba(25, 25, 25, 0.45);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 12px;
+        z-index: -1;
+        transition: all 0.3s ease;
       }
       
       #online-badge {
@@ -271,7 +293,6 @@
         
         /* État initial : noir complet */
         background: #000000;
-        border: 1px solid transparent;
         border-radius: 0;
         
         /* Transition fluide */
@@ -286,7 +307,6 @@
         background: rgba(25, 25, 25, 0.45);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.12);
         border-radius: 12px;
       }
 
