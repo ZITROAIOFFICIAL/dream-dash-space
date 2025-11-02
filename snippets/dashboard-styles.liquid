@@ -140,16 +140,22 @@
     /* Prevent body scroll when sidebar is open */
     body.sidebar-open {
       overflow: hidden;
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      top: 0;
+      left: 0;
+    }
+    
+    /* Hide main content when sidebar is open */
+    body.sidebar-open main {
+      visibility: hidden;
     }
     
     /* Ensure header is above overlay and sidebar */
     body.sidebar-open .header {
       z-index: 100;
-    }
-    
-    /* Hide header background effect when menu is open */
-    body.sidebar-open .header::before {
-      opacity: 0 !important;
+      visibility: hidden;
     }
     
     /* Hide all header content except mobile toggle */
