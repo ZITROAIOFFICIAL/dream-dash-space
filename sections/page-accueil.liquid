@@ -39,18 +39,6 @@
             </rect>
           </svg>
           <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 0.75rem; white-space: nowrap;"><span id="sidebar-member-count" class="member-count" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">{{ section.settings.members_base | default: 50 }}</span> online</span>
-          <svg width="4" height="4" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <filter id="whiteDotGlow" x="-100%" y="-100%" width="300%" height="300%">
-                <feGaussianBlur stdDeviation="2" result="blur"/>
-                <feMerge>
-                  <feMergeNode in="blur"/>
-                  <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-              </filter>
-            </defs>
-            <circle cx="10" cy="10" r="8" fill="#ffffff" filter="url(#whiteDotGlow)"/>
-          </svg>
         </div>
       </div>
       
@@ -142,18 +130,6 @@
           </rect>
         </svg>
         <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 0.75rem; white-space: nowrap;"><span id="header-member-count" class="member-count" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">{{ section.settings.members_base | default: 50 }}</span> online</span>
-        <svg width="4" height="4" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <filter id="whiteDotGlowHeader" x="-100%" y="-100%" width="300%" height="300%">
-              <feGaussianBlur stdDeviation="2" result="blur"/>
-              <feMerge>
-                <feMergeNode in="blur"/>
-                <feMergeNode in="SourceGraphic"/>
-              </feMerge>
-            </filter>
-          </defs>
-          <circle cx="10" cy="10" r="8" fill="#ffffff" filter="url(#whiteDotGlowHeader)"/>
-        </svg>
       </div>
     </div>
     
