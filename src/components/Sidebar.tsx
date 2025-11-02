@@ -52,7 +52,7 @@ const Sidebar = () => {
       >
         <div className="flex flex-col h-full">
           {/* Header with logo */}
-          <div className="py-4 flex items-center justify-center">
+          <div className="py-2 flex items-center justify-center">
             <h1 className="text-2xl font-bold leading-none">
               <span className="text-white">WIN</span>
               <span className="text-sidebar-primary">A</span>
