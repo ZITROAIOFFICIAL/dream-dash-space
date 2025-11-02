@@ -23,21 +23,8 @@
   <!-- Sidebar -->
   <aside class="sidebar">
     <div style="background: #000000; padding: 0.5rem 2rem; display: flex; align-items: center; justify-content: center; position: relative;">
-      <!-- 50 en ligne à gauche -->
-      <div id="online-badge-sidebar" style="position: absolute; left: 1rem; display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 1rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px;">
-        <svg width="4" height="4" viewBox="0 0 4 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="2" cy="2" r="2" fill="#16a34a"/>
-        </svg>
-        <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 0.875rem; white-space: nowrap;"><span id="sidebar-member-count" class="member-count" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">{{ section.settings.members_base | default: 50 }}</span> actifs</span>
-      </div>
-      
-      <!-- Logo centré -->
-      <div class="logo" style="font-family: 'Inter', sans-serif; font-size: 3.5rem; letter-spacing: -0.02em; font-weight: 300; display: inline-flex; align-items: baseline;">
-        <span style="color: #ffffff;">wina</span><span style="color: rgba(255, 255, 255, 0.35);">bet</span>
-      </div>
-      
-      <!-- Mise à jour IA à droite -->
-      <div style="position: absolute; right: 1rem; display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.8rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px;">
+      <!-- Badge IA à gauche -->
+      <div style="position: absolute; left: 1rem; display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.8rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; min-width: 120px;">
         <svg id="atom-sidebar" width="20" height="20" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
           <defs>
             <filter id="softGlowSidebar" x="-50%" y="-50%" width="200%" height="200%">
@@ -68,6 +55,19 @@
         </svg>
         <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 0.75rem; white-space: nowrap;">MAJ <span id="sidebar-time" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">17:34</span></span>
       </div>
+      
+      <!-- Logo centré -->
+      <div class="logo" style="font-family: 'Inter', sans-serif; font-size: 3.5rem; letter-spacing: -0.02em; font-weight: 300; display: inline-flex; align-items: baseline;">
+        <span style="color: #ffffff;">wina</span><span style="color: rgba(255, 255, 255, 0.35);">bet</span>
+      </div>
+      
+      <!-- Online à droite -->
+      <div id="online-badge-sidebar" style="position: absolute; right: 1rem; display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.8rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; min-width: 120px;">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="10" cy="10" r="8" fill="#16a34a"/>
+        </svg>
+        <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 0.75rem; white-space: nowrap;"><span id="sidebar-member-count" class="member-count" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">{{ section.settings.members_base | default: 50 }}</span> online</span>
+      </div>
     </div>
 
     <nav class="sidebar-nav">
@@ -89,21 +89,8 @@
   </aside>
 
   <header class="header" style="background: #000000; padding: 0.5rem 2rem; display: flex; align-items: center; justify-content: center; position: relative;">
-    <!-- 50 en ligne à gauche -->
-    <div id="online-badge" style="position: absolute; left: 1rem; display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 1rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px;">
-      <svg width="4" height="4" viewBox="0 0 4 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="2" cy="2" r="2" fill="#16a34a"/>
-      </svg>
-      <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 0.875rem; white-space: nowrap;"><span id="header-member-count" class="member-count" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">{{ section.settings.members_base | default: 50 }}</span> actifs</span>
-    </div>
-    
-    <!-- Logo centré -->
-    <div class="logo" style="font-family: 'Inter', sans-serif; font-size: 3.5rem; letter-spacing: -0.02em; font-weight: 300; display: inline-flex; align-items: baseline;">
-      <span style="color: #ffffff;">wina</span><span style="color: rgba(255, 255, 255, 0.35);">bet</span>
-    </div>
-    
-    <!-- Mise à jour IA à droite -->
-    <div style="position: absolute; right: 1rem; display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.8rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px;">
+    <!-- Badge IA à gauche -->
+    <div style="position: absolute; left: 1rem; display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.8rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; min-width: 120px;">
       <svg id="atom-header" width="20" height="20" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
         <defs>
           <filter id="softGlowHeader" x="-50%" y="-50%" width="200%" height="200%">
@@ -133,6 +120,19 @@
         <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
       </svg>
       <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 0.75rem; white-space: nowrap;">MAJ <span id="header-time" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">17:34</span></span>
+    </div>
+    
+    <!-- Logo centré -->
+    <div class="logo" style="font-family: 'Inter', sans-serif; font-size: 3.5rem; letter-spacing: -0.02em; font-weight: 300; display: inline-flex; align-items: baseline;">
+      <span style="color: #ffffff;">wina</span><span style="color: rgba(255, 255, 255, 0.35);">bet</span>
+    </div>
+    
+    <!-- Online à droite -->
+    <div id="online-badge" style="position: absolute; right: 1rem; display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.8rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; min-width: 120px;">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10" cy="10" r="8" fill="#16a34a"/>
+      </svg>
+      <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 0.75rem; white-space: nowrap;"><span id="header-member-count" class="member-count" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">{{ section.settings.members_base | default: 50 }}</span> online</span>
     </div>
   </header>
 
