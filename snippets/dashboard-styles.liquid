@@ -451,18 +451,25 @@
       backface-visibility: hidden;
     }
 
-    /* Scrolled state - move elements closer to center */
+    /* Scrolled state - move elements closer to center and adjust vertical position */
     @media (max-width: 768px) {
       .header.scrolled .mobile-toggle {
         left: 3.5rem !important;
+        top: 1.65rem !important;
       }
 
       .header.scrolled #online-badge {
         left: 30% !important;
+        top: 0.6rem !important;
       }
 
       .header.scrolled #maj-badge {
         left: 75% !important;
+        top: 1.65rem !important;
+      }
+      
+      .header.scrolled .logo {
+        top: 0 !important;
       }
     }
 
