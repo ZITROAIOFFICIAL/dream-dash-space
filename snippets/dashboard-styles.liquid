@@ -156,7 +156,6 @@
       z-index: 50;
       display: flex;
       flex-direction: column;
-      transition: transform 0.3s ease;
       overflow-y: auto;
       touch-action: pan-y;
       -webkit-overflow-scrolling: touch;
@@ -165,11 +164,11 @@
     @media (max-width: 768px) {
       .sidebar {
         width: 100%;
-        transform: translateX(-100%);
+        display: none;
       }
 
       .sidebar.active {
-        transform: translateX(0);
+        display: flex;
       }
     }
 
