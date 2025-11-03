@@ -123,8 +123,8 @@
       
       /* Groupe gauche - ajuster position */
       .desktop-left {
-        margin-left: 2rem;
-        gap: -2rem;
+        gap: 1.5rem;
+        transform: translateX(0rem); /* Ajustez cette valeur pour déplacer logo/badges */
       }
       
       /* Groupe droite - ajuster position */
@@ -144,6 +144,13 @@
       .desktop-nav-item {
         white-space: nowrap;
         font-size: 1.25rem;
+      }
+      
+      /* Garder les positions identiques au scroll */
+      .header.scrolled .desktop-left,
+      .header.scrolled .desktop-right,
+      .header.scrolled .desktop-nav {
+        padding-top: 0 !important;
       }
     }
 
