@@ -672,6 +672,7 @@
         defaultMuted
         controlslist="nodownload nofullscreen noplaybackrate"
         disablepictureinpicture
+        poster="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/frame_0s.png?v=1762209709"
       >
         <source src="https://cdn.shopify.com/videos/c/o/v/408f93f1121146cca3615aa9af2aa45e.mp4" type="video/mp4">
       </video>
@@ -681,7 +682,7 @@
       
       <script>
         (function() {
-          var video, heroSection, playbackConfirmed = false, fallbackTimer;
+          var video, heroSection, playbackConfirmed = false, fallbackTimer, batterySaverMode = false;
           
           function attemptPlay() {
             if (!video || playbackConfirmed) return;
@@ -698,8 +699,47 @@
               if (playPromise && typeof playPromise.then === 'function') {
                 playPromise.then(function() {
                   // Play réussi - ne rien faire, attendre 'playing'
+                }).catch(function(error) {
+                  // Autoplay échoué - mode économiseur d'énergie probable
+                  batterySaverMode = true;
+                  setupBatterySaverMode();
+                });
+              }
+            } catch (e) {
+              // Erreur - mode économiseur d'énergie probable
+              batterySaverMode = true;
+              setupBatterySaverMode();
+            }
+          }
+
+          function setupBatterySaverMode() {
+            // En mode économiseur, afficher le poster et attendre un mouvement
+            if (video) {
+              video.load(); // Recharger pour afficher le poster
+            }
+            // Écouter les mouvements pour lancer la vidéo
+            var userGestureEvents = ['touchstart', 'touchmove', 'scroll', 'click', 'mousemove', 'pointerdown'];
+            userGestureEvents.forEach(function(evt) {
+              document.addEventListener(evt, onBatterySaverGesture, { once: true, passive: true });
+            });
+          }
+
+          function onBatterySaverGesture() {
+            if (!batterySaverMode || playbackConfirmed) return;
+            // Mouvement détecté - lancer la vidéo
+            attemptPlayAfterGesture();
+          }
+
+          function attemptPlayAfterGesture() {
+            if (!video || playbackConfirmed) return;
+            try {
+              video.removeAttribute('controls');
+              var playPromise = video.play();
+              if (playPromise && typeof playPromise.then === 'function') {
+                playPromise.then(function() {
+                  // Lecture lancée avec succès
                 }).catch(function() {
-                  // Play échoué silencieusement
+                  // Échec silencieux
                 });
               }
             } catch (e) {
@@ -727,8 +767,9 @@
           }
 
           function cleanup() {
-            ['click','touchstart','touchend','pointerdown','scroll','keydown','mousemove','visibilitychange','orientationchange'].forEach(function(evt){
+            ['click','touchstart','touchend','pointerdown','scroll','keydown','mousemove','visibilitychange','orientationchange','touchmove'].forEach(function(evt){
               document.removeEventListener(evt, onUserGesture);
+              document.removeEventListener(evt, onBatterySaverGesture);
             });
             if (video) {
               video.removeEventListener('playing', onPlaying);
@@ -742,6 +783,27 @@
             heroSection = document.querySelector('.hero-section');
             if (!video || !heroSection) return;
 
+            // Détecter le mode économiseur d'énergie via Battery API (si disponible)
+            if (navigator.getBattery) {
+              navigator.getBattery().then(function(battery) {
+                if (battery.charging === false && battery.level < 0.5) {
+                  batterySaverMode = true;
+                  setupBatterySaverMode();
+                  return;
+                }
+                // Sinon, tenter l'autoplay normal
+                startNormalMode();
+              }).catch(function() {
+                // API non disponible, tenter autoplay normal
+                startNormalMode();
+              });
+            } else {
+              // API non disponible, tenter autoplay normal
+              startNormalMode();
+            }
+          });
+
+          function startNormalMode() {
             // Lancer timer fallback
             fallbackTimer = setTimeout(activateFallback, 1500);
 
@@ -758,7 +820,7 @@
             ['click','touchstart','touchend','pointerdown','scroll','keydown','mousemove','visibilitychange','orientationchange'].forEach(function(evt){
               document.addEventListener(evt, onUserGesture, { once: true, passive: true });
             });
-          });
+          }
         })();
       </script>
       
