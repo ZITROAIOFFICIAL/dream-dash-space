@@ -252,6 +252,7 @@
     /* Desktop Menu */
     .desktop-menu {
       display: none;
+      transition: all 0.3s ease; /* Transition fluide pour le scroll */
     }
 
     @media (min-width: 769px) {
@@ -264,6 +265,11 @@
         margin: 0 auto;
         padding: 2rem 2rem 0 2rem;
         height: 100%;
+      }
+
+      /* Header en mode scroll - tout descend ensemble */
+      .desktop-menu.scrolled {
+        padding-top: 3.5rem; /* Augmente le padding pour descendre tout le contenu */
       }
 
       .mobile-only {
@@ -280,12 +286,28 @@
       align-items: center;
       gap: 2rem;
       margin-left: -35rem;
+      transition: all 0.3s ease; /* Transition fluide */
     }
 
     .desktop-right {
       display: flex;
       align-items: center;
       gap: 1.5rem;
+      transition: all 0.3s ease; /* Transition fluide */
+    }
+
+    /* État scrolled - tout le header descend */
+    .header.scrolled .desktop-menu {
+      padding-top: 3.5rem;
+    }
+
+    .header.scrolled .desktop-nav {
+      padding-top: 2rem; /* Navigation descend plus */
+    }
+
+    .header.scrolled .desktop-left,
+    .header.scrolled .desktop-right {
+      padding-top: 1.5rem; /* Logo et badges descendent aussi */
     }
 
     .desktop-logo {

@@ -3098,6 +3098,23 @@
     
     // Démarrer le premier update après un intervalle aléatoire
     updateTimer = setTimeout(scheduleNextUpdate, getRandomInterval());
+
+    // Système de scroll pour le header
+    let lastScrollTop = 0;
+    const header = document.querySelector('.header');
+    
+    window.addEventListener('scroll', function() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      
+      // Ajoute la classe 'scrolled' quand on scroll vers le bas (plus de 50px)
+      if (scrollTop > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+      
+      lastScrollTop = scrollTop;
+    });
   </script>
 
   <!-- CSS pour l'animation flip -->
