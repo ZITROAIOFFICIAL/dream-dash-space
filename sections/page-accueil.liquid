@@ -48,6 +48,77 @@
         top: 100%;                /* Position verticale du rectangle gris */
       }
     }
+    
+    /* ==================== LAPTOP BREAKPOINT (769px - 1440px) ==================== */
+    @media (min-width: 769px) and (max-width: 1440px) {
+      
+      /* Rectangle gris plus large pour laptop */
+      .header.scrolled::before {
+        width: calc(85% - 3rem) !important;  /* Plus large sur laptop */
+        height: 90%;
+        top: 100%;
+      }
+      
+      /* Badge Online */
+      .desktop-badge-online {
+        left: 0;
+        transform: scale(0.9);
+      }
+      
+      /* Logo */
+      .desktop-logo {
+        font-size: 2.8rem !important;
+        left: 0;
+      }
+      
+      /* Badge MAJ IA */
+      .desktop-badge-ia {
+        left: 0;
+        transform: scale(0.9);
+      }
+      
+      /* Espacement global - Groupe gauche */
+      .desktop-left {
+        gap: 1rem !important;
+        margin-left: -5rem;
+      }
+      
+      /* Espacement global - Groupe droite */
+      .desktop-right {
+        gap: 1rem;
+        transform: translateX(5rem);
+      }
+      
+      /* Nav Links */
+      .desktop-nav {
+        gap: 1.5rem;
+      }
+      
+      .desktop-nav-item {
+        font-size: 1.2rem;
+      }
+      
+      /* Auth Buttons */
+      .desktop-auth-link {
+        font-size: 1.2rem;
+        margin-right: 0.5rem;
+      }
+      
+      .desktop-auth-btn {
+        padding: 0.95rem 1.4rem;
+        font-size: 1.1rem;
+      }
+      
+      /* Header scrolled adjustments */
+      .desktop-menu.scrolled {
+        padding-top: 3rem;
+      }
+      
+      .header.scrolled .desktop-left,
+      .header.scrolled .desktop-right {
+        padding-top: 3.5rem;
+      }
+    }
   </style>
 </head>
 <body>
