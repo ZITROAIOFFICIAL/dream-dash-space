@@ -76,13 +76,13 @@
       /* Espacement global - Groupe gauche */
       .desktop-left {
         gap: 1rem !important;
-        margin-left: -5rem;
+        margin-left: 0rem;  /* Centré pour laptop */
       }
       
       /* Espacement global - Groupe droite */
       .desktop-right {
         gap: 1rem;
-        transform: translateX(5rem);
+        transform: translateX(0rem);  /* Centré pour laptop */
       }
       
       /* Nav Links */
@@ -116,12 +116,29 @@
       }
     }
 
-    /* Laptop étendu (1441px - 1800px) - Rectangle gris bord à bord */
+    /* Laptop étendu (1441px - 1800px) - Rectangle gris bord à bord + éléments centrés */
     @media (min-width: 1441px) and (max-width: 1800px) {
       .header.scrolled::before {
         width: calc(100% - 2rem) !important;
         height: 90%;
         top: 100%;
+      }
+      
+      /* Groupe gauche - centrer */
+      .desktop-left {
+        margin-left: 0rem;
+        gap: 1.25rem;
+      }
+      
+      /* Groupe droite - centrer */
+      .desktop-right {
+        transform: translateX(0rem);
+        gap: 1.25rem;
+      }
+      
+      /* Réduire légèrement les espacements */
+      .desktop-nav {
+        gap: 1.75rem;
       }
     }
 
