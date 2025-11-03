@@ -146,38 +146,6 @@
         height: 90%;
         top: 100%;
       }
-      
-      /* Écarter légèrement les éléments sur très grands écrans */
-      .desktop-left {
-        margin-left: -10rem !important;  /* Légèrement à gauche */
-      }
-      
-      .desktop-right {
-        transform: translateX(10rem) !important;  /* Légèrement à droite */
-      }
-      
-      .desktop-nav {
-        gap: 2.5rem;  /* Plus d'espace entre nav items */
-      }
-    }
-
-    /* ==================== CORRECTIONS GLOBALES - HEADER VISIBLE ==================== */
-    /* Override des CSS variables problématiques pour rendre le header visible */
-    :root {
-      --desktop-left-offset: 0rem !important;
-      --desktop-right-offset: 0rem !important;
-      --nav-scroll-offset: -0.35rem;
-    }
-
-    /* Force la bonne position pour tous les écrans desktop/laptop */
-    @media (min-width: 769px) {
-      .desktop-left {
-        margin-left: 0 !important;
-      }
-      
-      .desktop-right {
-        transform: translateX(0) !important;
-      }
     }
   </style>
 </head>
