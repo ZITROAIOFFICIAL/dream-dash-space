@@ -538,6 +538,14 @@
       flex-shrink: 0;
       margin-left: auto;
     }
+    
+    /* Cacher le chevron au survol sur desktop et laptop */
+    @media (min-width: 769px) {
+      .nav-item:hover .chevron-icon {
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+    }
 
     .sidebar-footer {
       padding: 1.5rem 1rem;

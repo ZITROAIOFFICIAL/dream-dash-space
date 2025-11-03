@@ -116,26 +116,33 @@
     /* Laptop étendu (1441px - 1800px) - Rectangle gris bord à bord + éléments centrés */
     @media (min-width: 1441px) and (max-width: 1800px) {
       .header.scrolled::before {
-        width: calc(100% - 20rem) !important;
+        width: calc(100% - 15rem) !important;
         height: 90%;
         top: 100%;
       }
       
-      /* Groupe gauche - centrer */
+      /* Groupe gauche - ajuster position */
       .desktop-left {
-        margin-left: 0rem;
-        gap: 1.25rem;
+        margin-left: 2rem;
+        gap: 1.5rem;
       }
       
-      /* Groupe droite - centrer */
+      /* Groupe droite - ajuster position */
       .desktop-right {
-        transform: translateX(0rem);
-        gap: 1.25rem;
+        transform: translateX(-2rem);
+        gap: 1.5rem;
       }
       
-      /* Réduire légèrement les espacements */
+      /* Réduire espacement nav links */
       .desktop-nav {
-        gap: 1.75rem;
+        gap: 1.5rem;
+        margin-right: 2rem;
+      }
+      
+      /* Assurer que le texte reste sur une ligne */
+      .desktop-nav-item {
+        white-space: nowrap;
+        font-size: 1.25rem;
       }
     }
 
