@@ -15,6 +15,8 @@
       --muted-foreground: 220 15% 65%;
       --border: 220 25% 20%;
       --radius: 0.75rem;
+      /* Contrôle du déplacement des nav links en scroll - modifiez cette valeur */
+      --nav-scroll-offset: 2rem;
     }
 
     /* Reset & Base */
@@ -302,7 +304,8 @@
     }
 
     .header.scrolled .desktop-nav {
-      padding-top: 2rem; /* Navigation descend (parfait selon l'utilisateur) */
+      /* Variable contrôlable pour le déplacement des nav links - ajustez cette valeur */
+      padding-top: var(--nav-scroll-offset, 2rem);
     }
 
     .header.scrolled .desktop-left,
