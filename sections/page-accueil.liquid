@@ -616,6 +616,35 @@
         height: auto;
         z-index: 0;
         opacity: 0.6;
+        pointer-events: none;
+        object-fit: cover;
+      }
+
+      /* Masquer les contrôles natifs iOS */
+      .hero-video::-webkit-media-controls,
+      .hero-video::-webkit-media-controls-enclosure,
+      .hero-video::-webkit-media-controls-start-playback-button {
+        display: none !important;
+        -webkit-appearance: none;
+        overflow: hidden;
+      }
+
+      /* Fallback en cas d'échec autoplay */
+      .hero-video-fallback {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background: radial-gradient(ellipse at center, rgba(16, 185, 129, 0.15) 0%, transparent 70%),
+                    linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%);
+        display: none;
+      }
+
+      .no-autoplay .hero-video {
+        display: none !important;
+      }
+
+      .no-autoplay .hero-video-fallback {
+        display: block;
       }
 
       @media (min-width: 768px) {
@@ -641,15 +670,21 @@
         webkit-playsinline
         preload="auto"
         defaultMuted
+        controlslist="nodownload nofullscreen noplaybackrate"
+        disablepictureinpicture
       >
         <source src="https://cdn.shopify.com/videos/c/o/v/408f93f1121146cca3615aa9af2aa45e.mp4" type="video/mp4">
       </video>
       
+      <!-- Fallback visuel si autoplay échoue -->
+      <div class="hero-video-fallback" aria-hidden="true"></div>
+      
       <script>
         (function() {
-          var video;
+          var video, heroSection, playbackConfirmed = false, fallbackTimer;
+          
           function attemptPlay() {
-            if (!video) return;
+            if (!video || playbackConfirmed) return;
             try {
               video.muted = true;
               video.defaultMuted = true;
@@ -658,40 +693,71 @@
               video.setAttribute('playsinline', '');
               video.setAttribute('webkit-playsinline', '');
               video.removeAttribute('controls');
-              if (video.readyState < 2) video.load();
-              var p = video.play();
-              if (p && typeof p.then === 'function') {
-                p.then(cleanup).catch(function() {/* wait for user gesture */});
+              
+              var playPromise = video.play();
+              if (playPromise && typeof playPromise.then === 'function') {
+                playPromise.then(function() {
+                  // Play réussi - ne rien faire, attendre 'playing'
+                }).catch(function() {
+                  // Play échoué silencieusement
+                });
               }
-            } catch (e) {/* noop */}
+            } catch (e) {
+              // Erreur silencieuse
+            }
+          }
+
+          function onPlaying() {
+            if (playbackConfirmed) return;
+            playbackConfirmed = true;
+            clearTimeout(fallbackTimer);
+            cleanup();
+          }
+
+          function activateFallback() {
+            if (playbackConfirmed) return;
+            if (heroSection) {
+              heroSection.classList.add('no-autoplay');
+            }
+            cleanup();
           }
 
           function onUserGesture() {
             attemptPlay();
           }
 
-          function onPause() {
-            if (!video.ended) attemptPlay();
-          }
-
           function cleanup() {
-            ['click','touchstart','pointerdown','scroll','keydown','mousemove','visibilitychange','orientationchange'].forEach(function(evt){
+            ['click','touchstart','touchend','pointerdown','scroll','keydown','mousemove','visibilitychange','orientationchange'].forEach(function(evt){
               document.removeEventListener(evt, onUserGesture);
             });
-            if (video) video.removeEventListener('pause', onPause);
+            if (video) {
+              video.removeEventListener('playing', onPlaying);
+              video.removeEventListener('canplay', attemptPlay);
+              video.removeEventListener('loadeddata', attemptPlay);
+            }
           }
 
           document.addEventListener('DOMContentLoaded', function() {
             video = document.getElementById('heroVideo');
-            if (!video) return;
+            heroSection = document.querySelector('.hero-section');
+            if (!video || !heroSection) return;
+
+            // Lancer timer fallback
+            fallbackTimer = setTimeout(activateFallback, 1500);
+
+            // Écouter 'playing' pour confirmer lecture
+            video.addEventListener('playing', onPlaying, { once: true });
+
+            // Tentatives de lecture
             attemptPlay();
-            ['click','touchstart','pointerdown','scroll','keydown','mousemove','visibilitychange','orientationchange'].forEach(function(evt){
-              document.addEventListener(evt, onUserGesture, { once: true, passive: true });
-            });
             video.addEventListener('canplay', attemptPlay, { once: true });
             video.addEventListener('loadeddata', attemptPlay, { once: true });
-            video.addEventListener('pause', onPause);
             window.addEventListener('load', attemptPlay, { once: true });
+
+            // Écouter gestes utilisateur passifs
+            ['click','touchstart','touchend','pointerdown','scroll','keydown','mousemove','visibilitychange','orientationchange'].forEach(function(evt){
+              document.addEventListener(evt, onUserGesture, { once: true, passive: true });
+            });
           });
         })();
       </script>
