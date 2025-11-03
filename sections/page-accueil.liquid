@@ -514,22 +514,19 @@
 
       .hero-title {
         font-size: clamp(2.5rem, 8vw, 5rem);
-        font-weight: 700;
+        font-family: 'Outfit', sans-serif;
+        font-weight: 300;
         line-height: 1.1;
         letter-spacing: -0.02em;
         color: #ffffff;
         margin-bottom: 1.5rem;
-      }
-
-      .hero-title-highlight {
-        color: {{ section.settings.primary_color }};
-        display: inline-block;
+        text-transform: capitalize;
       }
 
       .hero-subtitle {
         font-size: clamp(1rem, 2vw, 1.25rem);
         line-height: 1.6;
-        color: rgba(255, 255, 255, 0.7);
+        color: rgba(255, 255, 255, 0.35);
         margin-bottom: 2.5rem;
         max-width: 600px;
         text-align: center;
@@ -547,7 +544,7 @@
         align-items: center;
         gap: 0.5rem;
         padding: 1rem 2rem;
-        background: {{ section.settings.primary_color }};
+        background: #ffffff;
         color: #000000;
         font-weight: 600;
         font-size: 1rem;
@@ -560,7 +557,7 @@
 
       .btn-primary:hover {
         transform: translateY(-2px);
-        box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
       }
 
       .btn-secondary {
@@ -584,165 +581,6 @@
         border-color: rgba(255, 255, 255, 0.4);
       }
 
-      /* AI Analysis Card */
-      .ai-analysis-card {
-        background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
-        border: 2px solid rgba(16, 185, 129, 0.3);
-        border-radius: 0.5rem;
-        padding: 2rem;
-        backdrop-filter: blur(10px);
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1.5rem;
-        max-width: 400px;
-        margin: 0 auto;
-      }
-
-      .ai-icon-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-      }
-
-      .ai-analysis-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, {{ section.settings.primary_color }}, transparent);
-      }
-
-      .ai-info-text {
-        text-align: center;
-        width: 100%;
-      }
-
-      .ai-info-label {
-        font-size: 0.875rem;
-        color: rgba(255, 255, 255, 0.6);
-        font-weight: 500;
-        margin-bottom: 0.5rem;
-      }
-
-      .ai-info-value {
-        font-size: 1.125rem;
-        font-weight: 600;
-        color: rgba(255, 255, 255, 0.95);
-      }
-
-      .bet-info {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        padding-top: 1rem;
-        border-top: 1px solid rgba(16, 185, 129, 0.2);
-      }
-
-      .bet-info-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .bet-label {
-        font-size: 0.875rem;
-        color: rgba(255, 255, 255, 0.6);
-        font-weight: 500;
-      }
-
-      .bet-value {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: {{ section.settings.primary_color }};
-      }
-
-      .cashout-container {
-        width: 100%;
-        padding: 1rem;
-        background: rgba(16, 185, 129, 0.15);
-        border: 1px solid rgba(16, 185, 129, 0.3);
-        border-radius: 0.5rem;
-        text-align: center;
-        display: none;
-      }
-
-      .cashout-container.active {
-        display: block;
-      }
-
-      .cashout-label {
-        font-size: 0.875rem;
-        color: rgba(255, 255, 255, 0.7);
-        margin-bottom: 0.5rem;
-      }
-
-      .cashout-value {
-        font-size: 2rem;
-        font-weight: 900;
-        color: {{ section.settings.primary_color }};
-      }
-
-      .bet-label {
-        font-size: 0.875rem;
-        color: rgba(255, 255, 255, 0.6);
-        font-weight: 500;
-      }
-
-      .bet-value {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: {{ section.settings.primary_color }};
-      }
-
-      .cashout-container {
-        width: 100%;
-        padding: 1rem;
-        background: rgba(16, 185, 129, 0.15);
-        border: 1px solid rgba(16, 185, 129, 0.3);
-        border-radius: 0.5rem;
-        text-align: center;
-        display: none;
-      }
-
-      .cashout-container.active {
-        display: block;
-      }
-
-      .cashout-label {
-        font-size: 0.875rem;
-        color: rgba(255, 255, 255, 0.7);
-        margin-bottom: 0.5rem;
-      }
-
-      .cashout-value {
-        font-size: 2rem;
-        font-weight: 900;
-        color: {{ section.settings.primary_color }};
-      }
-
-      .progress-bar-container {
-        position: relative;
-        height: 4px;
-        border-radius: 9999px;
-        background-color: rgba(255, 255, 255, 0.1);
-        overflow: hidden;
-        width: 100%;
-      }
-
-      .progress-bar-fill {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(90deg, {{ section.settings.primary_color }}, #14f195);
-        transition: width 0.075s;
-        box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
-      }
 
       /* Decorative elements */
       .hero-bg-gradient {
@@ -775,8 +613,7 @@
         <!-- Hero Content -->
         <div class="hero-content" style="grid-column: 1 / -1;">
           <h1 class="hero-title">
-            {{ section.settings.hero_title_1 }}<br>
-            <span class="hero-title-highlight">{{ section.settings.hero_title_highlight }}</span>
+            {{ section.settings.hero_title_1 }} {{ section.settings.hero_title_highlight }}
           </h1>
 
           <p class="hero-subtitle">
@@ -793,74 +630,6 @@
           </div>
         </div>
 
-        <!-- AI Analysis Card - En dessous du texte -->
-        <div style="grid-column: 1 / -1; margin-top: 3rem;">
-          <div class="ai-analysis-card">
-            <!-- Icône IA avec pourcentage -->
-            <div class="ai-icon-container">
-              <svg id="atom-card" width="120" height="120" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <filter id="softGlowCard" x="-50%" y="-50%" width="200%" height="200%">
-                    <feGaussianBlur stdDeviation="1.2" result="b"/>
-                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                  </filter>
-                  <path id="orbit0Card" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
-                  <path id="orbit1Card" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
-                  <path id="orbit2Card" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
-                </defs>
-                <g stroke="#68859e" stroke-width="2" fill="none">
-                  <use href="#orbit0Card"/>
-                  <use href="#orbit1Card"/>
-                  <use href="#orbit2Card"/>
-                </g>
-                <g stroke-linecap="round" filter="url(#softGlowCard)">
-                  <use href="#orbit0Card" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                    <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
-                  </use>
-                  <use href="#orbit1Card" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                    <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
-                  </use>
-                  <use href="#orbit2Card" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                    <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
-                  </use>
-                </g>
-                <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#16a34a" font-weight="900" font-size="38" id="aiChanceDisplayCard">...</text>
-                <text x="100" y="125" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="600" font-size="20">%</text>
-              </svg>
-            </div>
-
-            <!-- Texte d'information -->
-            <div class="ai-info-text">
-              <div class="ai-info-label">Chances de Gains (IA)</div>
-              <div class="ai-info-value">Analyse en temps réel</div>
-            </div>
-
-            <!-- Multiplicateur -->
-            <div class="bet-info-row" style="width: 100%;">
-              <span class="bet-label">Multiplicateur</span>
-              <span class="bet-value" id="multiplierDisplayCard">
-                <span id="multiplierValueCard">1.00</span>x
-              </span>
-            </div>
-
-            <!-- Mise du pari -->
-            <div class="bet-info-row" style="width: 100%;">
-              <span class="bet-label">Mise du pari</span>
-              <span class="bet-value" id="betStakeCard">100€</span>
-            </div>
-
-            <!-- Cashout (affiché quand le bet est fini) -->
-            <div class="cashout-container" id="cashoutContainerCard">
-              <div class="cashout-label">CASHOUT</div>
-              <div class="cashout-value" id="cashoutValueCard">0€</div>
-            </div>
-
-            <!-- Progress Bar -->
-            <div class="progress-bar-container" style="width: 100%;">
-              <div class="progress-bar-fill" id="progressBarCard"></div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   </main>
@@ -964,105 +733,6 @@
       window.addEventListener('scroll', handleScroll);
       handleScroll(); // Check initial state
     });
-
-    // Crash Simulation Script
-    (function() {
-      const MAX_X_DISPLAY = 3;
-      const DUR_MIN = 4500;
-      const DUR_MAX = 6000;
-
-      let currentX = 1.0;
-      let animationId = null;
-      let scenario = null;
-
-      const multiplierDisplayCard = document.getElementById('multiplierDisplayCard');
-      const multiplierValueCard = document.getElementById('multiplierValueCard');
-      const progressBarCard = document.getElementById('progressBarCard');
-      const aiChanceDisplayCard = document.getElementById('aiChanceDisplayCard');
-      const betStakeCard = document.getElementById('betStakeCard');
-      const cashoutContainerCard = document.getElementById('cashoutContainerCard');
-      const cashoutValueCard = document.getElementById('cashoutValueCard');
-
-      function money(n) {
-        return new Intl.NumberFormat('fr-FR', {
-          style: 'currency',
-          currency: 'EUR'
-        }).format(n);
-      }
-
-      function rand(min, max) {
-        return Math.random() * (max - min) + min;
-      }
-
-      function randInt(min, max) {
-        return Math.floor(rand(min, max + 1));
-      }
-
-      function newScenario() {
-        const chance = rand(60, 90);
-        const stake = randInt(15, 120);
-        const target = Number(rand(1.2, 2.5).toFixed(2));
-        const bust = target + rand(0.2, 1.5);
-        const willWin = true;
-
-        return { chance, stake, target, bust, willWin };
-      }
-
-      function runOnce() {
-        cashoutContainerCard.classList.remove('active');
-        
-        scenario = newScenario();
-        aiChanceDisplayCard.textContent = Math.round(scenario.chance);
-        betStakeCard.textContent = money(scenario.stake);
-
-        const duration = rand(DUR_MIN, DUR_MAX);
-        const start = performance.now();
-
-        return new Promise((resolve) => {
-          function tick(t) {
-            const k = Math.min(1, (t - start) / duration);
-            const x = 1 + Math.pow(k, 1.4) * (scenario.bust - 1);
-            currentX = x;
-            
-            multiplierValueCard.textContent = x.toFixed(2);
-            progressBarCard.style.width = (k * 100) + '%';
-
-            if (x >= scenario.target) {
-              const win = scenario.stake * scenario.target;
-              cashoutValueCard.textContent = money(win);
-              cashoutContainerCard.classList.add('active');
-              resolve();
-              return;
-            }
-            
-            if (x >= scenario.bust) {
-              cashoutValueCard.textContent = money(0);
-              cashoutContainerCard.classList.add('active');
-              resolve();
-              return;
-            }
-            
-            animationId = requestAnimationFrame(tick);
-          }
-          
-          animationId = requestAnimationFrame(tick);
-        });
-      }
-
-      async function loop() {
-        while (true) {
-          await runOnce();
-          await new Promise(r => setTimeout(r, 2500));
-        }
-      }
-
-      // Start the simulation when DOM is ready
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', loop);
-      } else {
-        loop();
-      }
-    })();
   </script>
 </body>
 </html>
