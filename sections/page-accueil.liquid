@@ -646,20 +646,54 @@
       </video>
       
       <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          var video = document.getElementById('heroVideo');
-          if (video) {
-            video.muted = true;
-            video.play().catch(function(error) {
-              console.log('Autoplay was prevented:', error);
-              // Force play on user interaction
-              document.addEventListener('click', function playVideo() {
-                video.play();
-                document.removeEventListener('click', playVideo);
-              }, { once: true });
-            });
+        (function() {
+          var video;
+          function attemptPlay() {
+            if (!video) return;
+            try {
+              video.muted = true;
+              video.defaultMuted = true;
+              video.playsInline = true;
+              video.setAttribute('muted', '');
+              video.setAttribute('playsinline', '');
+              video.setAttribute('webkit-playsinline', '');
+              video.removeAttribute('controls');
+              if (video.readyState < 2) video.load();
+              var p = video.play();
+              if (p && typeof p.then === 'function') {
+                p.then(cleanup).catch(function() {/* wait for user gesture */});
+              }
+            } catch (e) {/* noop */}
           }
-        });
+
+          function onUserGesture() {
+            attemptPlay();
+          }
+
+          function onPause() {
+            if (!video.ended) attemptPlay();
+          }
+
+          function cleanup() {
+            ['click','touchstart','pointerdown','scroll','keydown','mousemove','visibilitychange','orientationchange'].forEach(function(evt){
+              document.removeEventListener(evt, onUserGesture);
+            });
+            if (video) video.removeEventListener('pause', onPause);
+          }
+
+          document.addEventListener('DOMContentLoaded', function() {
+            video = document.getElementById('heroVideo');
+            if (!video) return;
+            attemptPlay();
+            ['click','touchstart','pointerdown','scroll','keydown','mousemove','visibilitychange','orientationchange'].forEach(function(evt){
+              document.addEventListener(evt, onUserGesture, { once: true, passive: true });
+            });
+            video.addEventListener('canplay', attemptPlay, { once: true });
+            video.addEventListener('loadeddata', attemptPlay, { once: true });
+            video.addEventListener('pause', onPause);
+            window.addEventListener('load', attemptPlay, { once: true });
+          });
+        })();
       </script>
       
       <!-- Background gradients -->
