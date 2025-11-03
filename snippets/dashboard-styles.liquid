@@ -2556,36 +2556,50 @@
         backface-visibility: hidden;
       }
 
-      /* Positions par défaut des badges sur desktop - avant scroll */
-      .header #online-badge-container {
+      /* Positions par défaut des badges sur desktop - avant scroll - grossis x2 */
+      .header #online-badge {
         left: 44% !important;
         top: 1.5rem !important;
+        padding: 0.8rem 1.6rem !important;
+        min-width: 240px !important;
       }
       
-      .header #online-badge-container .badge {
-        padding: 1rem 3rem !important;
-        font-size: 3rem !important;
+      .header #online-badge span {
+        font-size: 1.5rem !important;
+      }
+      
+      .header #online-badge svg {
+        width: 40px !important;
+        height: 40px !important;
       }
 
-      .header #maj-badge-container {
+      .header .maj-badge-animated {
         left: 56% !important;
         top: 1.25rem !important;
+        padding: 0.8rem 1.6rem !important;
+        min-width: 240px !important;
       }
       
-      .header #maj-badge-container .badge {
-        padding: 1rem 3rem !important;
-        font-size: 3rem !important;
+      .header .maj-badge-animated span {
+        font-size: 1.5rem !important;
+      }
+      
+      .header .maj-badge-animated svg {
+        width: 40px !important;
+        height: 40px !important;
       }
 
-      /* Positions au scroll - identique au mobile */
-      .header.scrolled #online-badge-container {
+      /* Positions au scroll - badges gardent la même taille */
+      .header.scrolled #online-badge {
         left: 44% !important;
         top: 3rem !important;
+        padding: 0.8rem 1.6rem !important;
       }
 
-      .header.scrolled #maj-badge-container {
+      .header.scrolled .maj-badge-animated {
         left: 56% !important;
         top: 2.50rem !important;
+        padding: 0.8rem 1.6rem !important;
       }
       
       .header.scrolled .logo {
