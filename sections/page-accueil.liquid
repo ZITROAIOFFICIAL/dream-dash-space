@@ -615,8 +615,8 @@
         width: 100%;
         height: auto;
         z-index: 0;
-        opacity: 1;
-        visibility: visible;
+        opacity: 0;
+        visibility: hidden;
         transition: opacity 0.6s ease-in-out;
         pointer-events: none;
         object-fit: cover;
@@ -624,6 +624,28 @@
 
       .hero-video.is-playing {
         opacity: 0.6;
+        visibility: visible;
+      }
+
+      /* Image de couverture - affichée avant que la vidéo démarre */
+      .hero-video-cover {
+        position: absolute;
+        left: 50%;
+        top: 130%;
+        transform: translate(-50%, -50%) scale(3);
+        width: 100%;
+        height: auto;
+        z-index: 1;
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.6s ease-in-out, visibility 0.6s;
+        pointer-events: none;
+        object-fit: cover;
+      }
+
+      .hero-video.is-playing ~ .hero-video-cover {
+        opacity: 0;
+        visibility: hidden;
       }
 
       /* Masquer les contrôles natifs iOS */
@@ -645,6 +667,14 @@
           width: 100%;
           height: auto;
         }
+        
+        .hero-video-cover {
+          top: 100px;
+          left: 0;
+          transform: none;
+          width: 100%;
+          height: auto;
+        }
       }
     </style>
 
@@ -660,12 +690,19 @@
         webkit-playsinline
         preload="auto"
         defaultMuted
-        poster="/assets/hero-cover.jpg"
         aria-hidden="true"
         tabindex="-1"
       >
         <source src="https://cdn.shopify.com/videos/c/o/v/408f93f1121146cca3615aa9af2aa45e.mp4" type="video/mp4">
       </video>
+      
+      <!-- Image de couverture affichée avant le démarrage de la vidéo -->
+      <img 
+        src="/assets/hero-cover.svg" 
+        alt="" 
+        class="hero-video-cover"
+        aria-hidden="true"
+      />
       
       <script>
         (function() {
