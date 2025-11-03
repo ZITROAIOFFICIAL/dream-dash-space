@@ -2557,24 +2557,25 @@
       }
 
       /* Badge Online - Desktop - Grossi 1.4x depuis mobile */
-      .header #desktop-online-badge {
-        position: relative;
-        overflow: visible !important;
-        padding: 0.25rem 0.4rem !important;
-        min-width: 0 !important;
-        gap: 0.25rem !important;
-        left: 44% !important;
-        top: 1.5rem !important;
-      }
+.header #desktop-online-badge {
+  position: relative;
+  overflow: visible !important;
+  padding: 0.4rem 0.65rem !important;
+  min-width: 0 !important;
+  gap: 0.4rem !important;
+  left: 44% !important;
+  top: 1.5rem !important;
+}
 
-      .header #desktop-online-badge svg {
-        width: 6px !important;
-        height: 6px !important;
-      }
+/* Agrandir uniquement le point (2e SVG), laisser le cadre utiliser sa taille inline */
+.header #desktop-online-badge > svg:nth-of-type(2) {
+  width: 10px !important;
+  height: 10px !important;
+}
 
-      .header #desktop-online-badge span {
-        font-size: 0.75rem !important;
-      }
+.header #desktop-online-badge span {
+  font-size: 1.2rem !important;
+}
 
       /* Badge MAJ IA - Desktop - Grossi 1.4x depuis mobile */
       .header .maj-badge-animated {
