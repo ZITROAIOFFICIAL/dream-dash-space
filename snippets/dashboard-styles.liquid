@@ -643,7 +643,7 @@
     /* Header */
     .header {
       position: fixed;
-      top: 0;
+      top: var(--vv-top, 0);
       left: 0;
       right: 0;
       background: transparent;
@@ -652,7 +652,6 @@
       flex-direction: column;
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
-      -webkit-position: fixed;
     }
 
     /* Header background effect */

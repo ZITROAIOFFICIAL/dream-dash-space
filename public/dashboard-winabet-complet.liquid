@@ -3383,6 +3383,33 @@
       
       lastScrollTop = scrollTop;
     });
+
+    // Fix header on Chrome Android under URL bar
+    (function() {
+      const root = document.documentElement;
+
+      function updateVvTop() {
+        try {
+          if (window.visualViewport) {
+            const offset = Math.max(0, Math.floor(window.visualViewport.offsetTop || 0));
+            root.style.setProperty('--vv-top', offset + 'px');
+          } else {
+            root.style.setProperty('--vv-top', '0px');
+          }
+        } catch (e) {
+          root.style.setProperty('--vv-top', '0px');
+        }
+      }
+
+      updateVvTop();
+
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', updateVvTop, { passive: true });
+        window.visualViewport.addEventListener('scroll', updateVvTop, { passive: true });
+      }
+      window.addEventListener('orientationchange', updateVvTop, { passive: true });
+      window.addEventListener('pageshow', updateVvTop, { passive: true });
+    })();
   </script>
 
   <!-- CSS pour l'animation flip -->
