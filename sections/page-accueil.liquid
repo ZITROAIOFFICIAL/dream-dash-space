@@ -14,38 +14,34 @@
       
       /* ===== SANS SCROLL - Positions et tailles initiales ===== */
       
-      /* Badge Online - Position gauche/droite + hauteur */
+      /* Badge Online - Position gauche/droite */
       .desktop-badge-online {
-        position: relative;
-        left: 0rem;  /* ← Ajustez gauche/droite (négatif = gauche, positif = droite) */
-        top: 0rem;   /* ← Ajustez hauteur (négatif = haut, positif = bas) */
+        margin-left: 0rem;  /* Ajustez cette valeur (négatif = plus à gauche, positif = plus à droite) */
       }
       
       /* Logo - Taille et position */
       .desktop-logo {
-        position: relative;
-        font-size: 4.5rem !important;  /* ← Ajustez taille du logo */
-        left: 0rem;  /* ← Ajustez gauche/droite (négatif = gauche, positif = droite) */
-        top: 0rem;   /* ← Ajustez hauteur (négatif = haut, positif = bas) */
+        font-size: 4.5rem !important;  /* Taille du logo */
+        margin-left: 0rem;  /* Position gauche/droite (négatif = gauche, positif = droite) */
+        margin-top: 0rem;   /* Hauteur verticale (négatif = haut, positif = bas) */
       }
       
-      /* Badge IA - Position gauche/droite + hauteur */
+      /* Badge IA - Position gauche/droite */
       .desktop-badge-ia {
-        position: relative;
-        left: 0rem;  /* ← Ajustez gauche/droite (négatif = gauche, positif = droite) */
-        top: 0rem;   /* ← Ajustez hauteur (négatif = haut, positif = bas) */
+        margin-left: 0rem;  /* Ajustez cette valeur (négatif = plus à gauche, positif = plus à droite) */
+        margin-top: 0rem;   /* Hauteur verticale (négatif = haut, positif = bas) */
       }
       
       /* Espacement global entre les éléments */
       .desktop-left {
-        gap: 2rem !important;  /* ← Ajustez l'espacement entre badge online, logo et badge IA */
+        gap: 2rem !important;  /* Espacement entre badge online, logo et badge IA */
       }
       
       /* ===== AVEC SCROLL - Rectangle gris ===== */
       .header.scrolled::before {
-        width: calc(65% - 6rem);  /* ← Largeur gauche-droite du rectangle gris */
-        height: 90%;              /* ← Hauteur du rectangle gris */
-        top: 100%;                /* ← Position verticale du rectangle gris */
+        width: calc(65% - 6rem);  /* Largeur gauche-droite du rectangle gris */
+        height: 90%;              /* Hauteur du rectangle gris */
+        top: 100%;                /* Position verticale du rectangle gris */
       }
     }
   </style>
