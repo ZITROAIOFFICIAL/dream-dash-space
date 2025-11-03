@@ -462,7 +462,7 @@
         align-items: flex-start;
         background: #000000;
         position: relative;
-        overflow: hidden;
+        overflow-y: visible;
         overflow-x: hidden;
         max-width: 100vw;
         padding: 0.5rem 2.5rem 2rem;
@@ -685,6 +685,20 @@
         pointer-events: none !important;
       }
 
+      /* Forcer l'opacité 0 sur TOUS les pseudo-éléments de contrôle */
+      .hero-video::before,
+      .hero-video::after {
+        display: none !important;
+      }
+
+      /* Règle globale pour masquer tout contrôle média */
+      video::-webkit-media-controls,
+      video::-webkit-media-controls-enclosure,
+      video::-webkit-media-controls-panel {
+        opacity: 0 !important;
+        display: none !important;
+      }
+
       /* Fallback gradient supprimé - le poster de la vidéo s'affiche désormais */
 
       @media (min-width: 768px) {
@@ -711,6 +725,7 @@
       <video 
         id="heroVideo"
         class="hero-video"
+        style="opacity: 0 !important;"
         autoplay 
         loop 
         muted 
@@ -754,6 +769,7 @@
             video.setAttribute('playsinline', '');
             video.setAttribute('webkit-playsinline', '');
             video.removeAttribute('controls');
+            video.style.opacity = '0';
           }
           
           // Marquer la vidéo comme démarrée
