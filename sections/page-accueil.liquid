@@ -663,7 +663,8 @@
         height: auto;
         z-index: 0;
         opacity: 0.6;
-        pointer-events: none;
+        pointer-events: auto;
+        cursor: pointer;
         object-fit: cover;
         display: block;
       }
@@ -731,6 +732,21 @@
                 // Autoplay échoué (mode économie d'énergie) - garder l'image visible
                 video.style.display = 'none';
                 fallbackImage.style.display = 'block';
+                
+                // Ajouter un écouteur pour démarrer la vidéo au clic/touch
+                function startVideo() {
+                  video.style.display = 'block';
+                  fallbackImage.style.display = 'none';
+                  video.play().catch(function(err) {
+                    console.log('Erreur lecture vidéo:', err);
+                  });
+                  // Retirer l'écouteur après le premier clic
+                  fallbackImage.removeEventListener('click', startVideo);
+                  fallbackImage.removeEventListener('touchstart', startVideo);
+                }
+                
+                fallbackImage.addEventListener('click', startVideo);
+                fallbackImage.addEventListener('touchstart', startVideo);
               });
             }
           });
