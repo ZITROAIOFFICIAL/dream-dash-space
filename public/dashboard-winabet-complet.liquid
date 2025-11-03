@@ -102,14 +102,27 @@
         font-size: 1.1rem;
       }
       
-      /* Header scrolled adjustments */
-      .desktop-menu.scrolled {
-        padding-top: 3rem;
+      /* Positions indépendantes + drop vertical 2px au scroll */
+      .desktop-badge-online,
+      .desktop-logo,
+      .desktop-badge-ia {
+        --left-shift: 0rem;
+        --scroll-shift: 0px;
+        /* Conserver l'échelle si définie ailleurs */
+        transform: scale(0.9) translateX(var(--left-shift)) translateY(var(--scroll-shift));
       }
       
-      .header.scrolled .desktop-left,
-      .header.scrolled .desktop-right {
-        padding-top: 3.5rem;
+      .desktop-nav {
+        --nav-shift: 0rem;
+        --scroll-shift: 0px;
+        transform: translateX(var(--nav-shift)) translateY(var(--scroll-shift));
+      }
+      
+      .header.scrolled .desktop-badge-online,
+      .header.scrolled .desktop-logo,
+      .header.scrolled .desktop-badge-ia,
+      .header.scrolled .desktop-nav {
+        --scroll-shift: 2px;
       }
     }
 
@@ -121,10 +134,18 @@
         top: 100%;
       }
       
-      /* Groupe gauche - ajuster position */
+      /* Groupe gauche - ajuster position (ne pas déplacer le conteneur parent) */
       .desktop-left {
         gap: 1.5rem;
-        transform: translateX(0rem); /* Ajustez cette valeur pour déplacer logo/badges */
+      }
+      
+      /* Déplacer UNIQUEMENT les éléments de gauche (indépendamment du nav) */
+      .desktop-badge-online,
+      .desktop-logo,
+      .desktop-badge-ia {
+        --left-shift: 0rem; /* Ajustez cette valeur pour déplacer logo/badges */
+        --scroll-shift: 0px;
+        transform: translateX(var(--left-shift)) translateY(var(--scroll-shift));
       }
       
       /* Groupe droite - ajuster position */
@@ -133,11 +154,13 @@
         gap: 1.5rem;
       }
       
-      /* Réduire espacement nav links et permettre déplacement horizontal */
+      /* Nav links - position indépendante à droite */
       .desktop-nav {
         gap: 1.5rem;
         margin-right: 2rem;
-        transform: translateX(-14rem); /* Ajustez cette valeur pour déplacer vers la droite */
+        --nav-shift: -14rem; /* Ajustez cette valeur pour déplacer vers la droite */
+        --scroll-shift: 0px;
+        transform: translateX(var(--nav-shift)) translateY(var(--scroll-shift));
       }
       
       /* Assurer que le texte reste sur une ligne */
@@ -146,11 +169,12 @@
         font-size: 1.25rem;
       }
       
-      /* Garder les positions identiques au scroll */
-      .header.scrolled .desktop-left,
-      .header.scrolled .desktop-right,
+      /* Garder les positions identiques au scroll: descendre de 2px seulement */
+      .header.scrolled .desktop-badge-online,
+      .header.scrolled .desktop-logo,
+      .header.scrolled .desktop-badge-ia,
       .header.scrolled .desktop-nav {
-        padding-top: 0 !important;
+        --scroll-shift: 2px;
       }
     }
 
