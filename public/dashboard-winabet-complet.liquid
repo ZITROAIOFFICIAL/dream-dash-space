@@ -334,79 +334,51 @@
 
   <!-- Sidebar -->
   <aside class="sidebar">
-    <div style="background: #000000; padding: 0.65rem 2rem; display: flex; align-items: center; justify-content: center; position: relative;">
-      <!-- Online à gauche, centré entre hamburger et logo -->
-      <div style="position: absolute; left: 23%; top: 1.85rem; transform: translateX(-50%);">
-        <div id="online-badge-sidebar" style="position: relative; display: flex; align-items: center; gap: 0.25rem; padding: 0.25rem 0.4rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; z-index: 2;">
-          <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 4px); height: calc(100% + 4px); pointer-events: none; z-index: -1;">
-            <defs>
-              <filter id="onlineGlowSidebar" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="2" result="b"/>
-                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-            </defs>
-            <rect x="2" y="2" width="calc(100% - 4px)" height="calc(100% - 4px)" rx="10" ry="10" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
-            <rect x="2" y="2" width="calc(100% - 4px)" height="calc(100% - 4px)" rx="10" ry="10" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="30 510" stroke-linecap="round" filter="url(#onlineGlowSidebar)" opacity="0.9">
-              <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
-            </rect>
-          </svg>
-          <svg width="6" height="6" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
-            <circle cx="10" cy="10" r="4" fill="rgba(255, 255, 255, 0.7)"/>
-          </svg>
-          <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 0.75rem; white-space: nowrap;"><span id="sidebar-member-count" class="member-count" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">{{ section.settings.members_base | default: 50 }}</span> online</span>
-        </div>
+    <div style="background: #000000; padding: 0.5rem 2rem; display: flex; align-items: center; justify-content: center; position: relative;">
+      <!-- Badge IA à gauche -->
+      <div class="maj-badge-animated" style="position: absolute; left: 1rem; display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.8rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; min-width: 120px;">
+        <svg id="atom-sidebar" width="20" height="20" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+          <defs>
+            <filter id="softGlowSidebar" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="1.2" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <path id="orbit0Sidebar" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+            <path id="orbit1Sidebar" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+            <path id="orbit2Sidebar" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+          </defs>
+          <g stroke="#68859e" stroke-width="2" fill="none">
+            <use href="#orbit0Sidebar"/>
+            <use href="#orbit1Sidebar"/>
+            <use href="#orbit2Sidebar"/>
+          </g>
+          <g stroke-linecap="round" filter="url(#softGlowSidebar)">
+            <use href="#orbit0Sidebar" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+              <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+            </use>
+            <use href="#orbit1Sidebar" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+              <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+            </use>
+            <use href="#orbit2Sidebar" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+              <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+            </use>
+          </g>
+          <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
+        </svg>
+        <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 0.75rem; white-space: nowrap;">MAJ <span id="sidebar-time" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">17:34</span></span>
       </div>
       
       <!-- Logo centré -->
-      <div class="logo" style="font-family: 'Outfit', sans-serif; font-size: 3.5rem; letter-spacing: -0.02em; font-weight: 300; display: inline-flex; align-items: baseline;">
+      <div class="logo" style="font-family: 'Inter', sans-serif; font-size: 3.5rem; letter-spacing: -0.02em; font-weight: 300; display: inline-flex; align-items: baseline;">
         <span style="color: #ffffff;">wina</span><span style="color: rgba(255, 255, 255, 0.35);">bet</span>
       </div>
       
-      <!-- Badge IA à droite, centré entre logo et bord -->
-      <div style="position: absolute; left: 83%; top: 1.25rem; transform: translateX(-50%);">
-        <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 86px; height: 32px; pointer-events: none; z-index: 1;">
-          <defs>
-            <filter id="badgeGlowSidebar" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="2" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
-           <rect x="2" y="2" width="82" height="28" rx="14" ry="14" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
-           <rect x="2" y="2" width="82" height="28" rx="14" ry="14" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="40 500" stroke-linecap="round" filter="url(#badgeGlowSidebar)" opacity="0.9">
-             <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
-           </rect>
+      <!-- Online à droite -->
+      <div id="online-badge-sidebar" style="position: absolute; right: 1rem; display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.8rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; min-width: 120px;">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="10" cy="10" r="8" fill="#16a34a"/>
         </svg>
-        <div style="position: relative; display: flex; align-items: center; gap: 0.3rem; padding: 0.25rem 0.5rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; min-width: 80px; z-index: 2;">
-          <svg id="atom-sidebar" width="20" height="20" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
-            <defs>
-              <filter id="softGlowSidebar" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="1.2" result="b"/>
-                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-              <path id="orbit0Sidebar" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
-              <path id="orbit1Sidebar" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
-              <path id="orbit2Sidebar" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
-            </defs>
-            <g stroke="#68859e" stroke-width="2" fill="none">
-              <use href="#orbit0Sidebar"/>
-              <use href="#orbit1Sidebar"/>
-              <use href="#orbit2Sidebar"/>
-            </g>
-            <g stroke-linecap="round" filter="url(#softGlowSidebar)">
-              <use href="#orbit0Sidebar" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
-              </use>
-              <use href="#orbit1Sidebar" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
-              </use>
-              <use href="#orbit2Sidebar" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
-              </use>
-            </g>
-            <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
-          </svg>
-          <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 0.75rem; white-space: nowrap;">MAJ <span id="sidebar-time" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">17:34</span></span>
-        </div>
+        <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 0.75rem; white-space: nowrap;"><span id="sidebar-member-count" class="member-count" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">{{ section.settings.members_base | default: 50 }}</span> online</span>
       </div>
     </div>
 
@@ -544,54 +516,7 @@
     </div>
   </aside>
 
-  <!-- Header -->
-  <header class="header" style="background: #000000; padding: 0.5rem 2rem; display: flex; align-items: center; justify-content: center; position: relative;">
-    <!-- Badge IA à gauche -->
-    <div class="maj-badge-animated" style="position: absolute; left: 1rem; display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.8rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; min-width: 120px;">
-      <svg id="atom-header" width="20" height="20" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
-        <defs>
-          <filter id="softGlowHeader" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="1.2" result="b"/>
-            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-          <path id="orbit0Header" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
-          <path id="orbit1Header" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
-          <path id="orbit2Header" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
-        </defs>
-        <g stroke="#68859e" stroke-width="2" fill="none">
-          <use href="#orbit0Header"/>
-          <use href="#orbit1Header"/>
-          <use href="#orbit2Header"/>
-        </g>
-        <g stroke-linecap="round" filter="url(#softGlowHeader)">
-          <use href="#orbit0Header" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
-          </use>
-          <use href="#orbit1Header" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
-          </use>
-          <use href="#orbit2Header" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
-          </use>
-        </g>
-        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
-      </svg>
-      <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 0.75rem; white-space: nowrap;">MAJ <span id="header-time" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">17:34</span></span>
-    </div>
-    
-    <!-- Logo centré -->
-    <div class="logo" style="font-family: 'Inter', sans-serif; font-size: 3.5rem; letter-spacing: -0.02em; font-weight: 300; display: inline-flex; align-items: baseline;">
-      <span style="color: #ffffff;">wina</span><span style="color: rgba(255, 255, 255, 0.35);">bet</span>
-    </div>
-    
-    <!-- Online à droite -->
-    <div id="online-badge" style="position: absolute; right: 1rem; display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.8rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; min-width: 120px;">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="10" cy="10" r="8" fill="#16a34a"/>
-      </svg>
-      <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 0.75rem; white-space: nowrap;"><span id="header-member-count" class="member-count" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">{{ section.settings.members_base | default: 50 }}</span> online</span>
-    </div>
-  </header>
+  
 
   <!-- Main Content -->
   <main class="main-content">
@@ -2949,12 +2874,10 @@
         sidebar.classList.add('active');
         overlay.classList.add('active');
         document.body.classList.add('body-no-scroll');
-        document.body.classList.add('sidebar-open');
       } else {
         sidebar.classList.remove('active');
         overlay.classList.remove('active');
         document.body.classList.remove('body-no-scroll');
-        document.body.classList.remove('sidebar-open');
       }
     }
 
