@@ -91,7 +91,7 @@
     /* Mobile Toggle Button */
     .mobile-toggle {
       position: fixed;
-      top: 1.5rem;
+      top: calc(var(--vv-top, 0px) + 1.5rem);
       left: 1.5rem;
       z-index: 60;
       background: transparent;
@@ -189,7 +189,7 @@
     @media (max-width: 768px) {
       .mobile-toggle {
         display: block;
-        top: 1.25rem; /* Hauteur du menu hamburger */
+        top: calc(var(--vv-top, 0px) + 1.25rem); /* Hauteur du menu hamburger */
         left: 1.5rem; /* Position gauche/droite du menu hamburger */
       }
       #online-badge {
@@ -721,7 +721,7 @@
     @media (max-width: 768px) {
       .header.scrolled .mobile-toggle {
         left: 2rem !important;
-        top: 2.50rem !important;
+        top: calc(var(--vv-top, 0px) + 2.50rem) !important;
       }
 
       .header.scrolled #online-badge-container {
