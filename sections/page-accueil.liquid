@@ -725,7 +725,6 @@
       <video 
         id="heroVideo"
         class="hero-video"
-        style="opacity: 0 !important;"
         autoplay 
         loop 
         muted 
@@ -777,6 +776,9 @@
             if (playbackStarted) return;
             playbackStarted = true;
             video.classList.add('is-playing');
+            // Rendre la vidéo visible une fois la lecture confirmée
+            try { video.style.removeProperty('opacity'); } catch (e) { video.style.opacity = '0.6'; }
+            video.style.visibility = 'visible';
             removeUserGestureListeners();
           }
           
