@@ -88,7 +88,7 @@
       }
       
       .desktop-nav-item {
-        font-size: 1.2rem;
+        font-size: 1.35rem;
         cursor: pointer !important;
       }
       
@@ -172,7 +172,7 @@
       /* Assurer que le texte reste sur une ligne */
       .desktop-nav-item {
         white-space: nowrap;
-        font-size: 1.25rem;
+        font-size: 1.4rem;
         cursor: pointer !important;
       }
       
@@ -3193,9 +3193,11 @@
       
       const sidebarTime = document.getElementById('sidebar-time');
       const headerTime = document.getElementById('header-time');
+      const desktopTime = document.getElementById('desktop-time');
       
       if (sidebarTime) sidebarTime.textContent = timeString;
       if (headerTime) headerTime.textContent = timeString;
+      if (desktopTime) desktopTime.textContent = timeString;
     }
 
     // Handle browser back/forward
