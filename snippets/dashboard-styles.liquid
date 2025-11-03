@@ -300,6 +300,7 @@
       align-items: center;
       gap: 1.5rem;
       transition: all 0.3s ease; /* Transition fluide */
+      transform: translateX(var(--desktop-right-offset, -70rem));
     }
 
     /* État scrolled - tout le header descend */
@@ -386,7 +387,6 @@
       text-decoration: none;
       transition: all 0.3s;
       display: block;
-      transform: translateX(var(--desktop-right-offset, -70rem));
     }
 
     .desktop-auth-btn:hover {
