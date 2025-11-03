@@ -183,9 +183,10 @@
         --scroll-shift: 2px;
       }
       
-      /* Nav: descendre de 2px, ne pas bouger horizontalement */
+      /* Nav: remonter un peu pour rester plus haut */
     .header.scrolled .desktop-nav {
-      --scroll-shift: 0px;
+      --scroll-shift: -1rem;
+      --nav-scroll-offset: -1rem;
       transform: translateX(calc(-50% + var(--nav-shift))) translateY(var(--scroll-shift)) !important;
     }
     }
