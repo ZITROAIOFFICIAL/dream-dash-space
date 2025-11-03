@@ -3367,61 +3367,66 @@
     // Démarrer le premier update après un intervalle aléatoire
     updateTimer = setTimeout(scheduleNextUpdate, getRandomInterval());
 
-    // Système de scroll pour le header
-    let lastScrollTop = 0;
-    const header = document.querySelector('.header');
-    
-    window.addEventListener('scroll', function() {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      
-      // Ajoute la classe 'scrolled' quand on scroll vers le bas (plus de 50px)
-      if (scrollTop > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-      
-      lastScrollTop = scrollTop;
-    });
-
-    // Fix header on Chrome Android under URL bar (RAF pattern)
+    // Unified scroll handler with RAF (iOS-safe)
     (function() {
       const root = document.documentElement;
+      const header = document.querySelector('.header');
       let pendingUpdate = false;
+      let lastScrollTop = 0;
+      
+      // Detect iOS (visualViewport.offsetTop buggy on iOS 26+)
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
-      function updateVvTop() {
+      function unifiedScrollUpdate() {
         if (pendingUpdate) return;
         pendingUpdate = true;
 
         requestAnimationFrame(() => {
           pendingUpdate = false;
-          try {
-            if (window.visualViewport) {
-              const offset = Math.max(0, Math.floor(window.visualViewport.offsetTop || 0));
-              root.style.setProperty('--vv-top', offset + 'px');
-            } else {
+          
+          // 1. Update scroll class for header background
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          if (scrollTop > 50) {
+            header.classList.add('scrolled');
+          } else {
+            header.classList.remove('scrolled');
+          }
+          lastScrollTop = scrollTop;
+          
+          // 2. Update viewport offset (Chrome Android only)
+          if (!isIOS) {
+            try {
+              if (window.visualViewport) {
+                const offset = Math.max(0, Math.floor(window.visualViewport.offsetTop || 0));
+                root.style.setProperty('--vv-top', offset + 'px');
+              }
+            } catch (e) {
               root.style.setProperty('--vv-top', '0px');
             }
-          } catch (e) {
+          } else {
+            // iOS: always 0
             root.style.setProperty('--vv-top', '0px');
           }
         });
       }
 
-      // Initial update
-      updateVvTop();
+      // Initial setup
+      unifiedScrollUpdate();
 
-      // Listen to ALL viewport events (MDN recommended)
-      if (window.visualViewport) {
-        window.visualViewport.addEventListener('resize', updateVvTop, { passive: true });
-        window.visualViewport.addEventListener('scroll', updateVvTop, { passive: true });
+      // Single scroll listener (no conflicts)
+      window.addEventListener('scroll', unifiedScrollUpdate, { passive: true });
+      
+      // Viewport events (Chrome Android only)
+      if (!isIOS && window.visualViewport) {
+        window.visualViewport.addEventListener('resize', unifiedScrollUpdate, { passive: true });
+        window.visualViewport.addEventListener('scroll', unifiedScrollUpdate, { passive: true });
       }
       
-      // Also listen to window events (catches cases visualViewport misses)
-      window.addEventListener('resize', updateVvTop, { passive: true });
-      window.addEventListener('scroll', updateVvTop, { passive: true });
-      window.addEventListener('orientationchange', updateVvTop, { passive: true });
-      window.addEventListener('pageshow', updateVvTop, { passive: true });
+      // Universal events
+      window.addEventListener('resize', unifiedScrollUpdate, { passive: true });
+      window.addEventListener('orientationchange', unifiedScrollUpdate, { passive: true });
+      window.addEventListener('pageshow', unifiedScrollUpdate, { passive: true });
     })();
   </script>
 

@@ -709,12 +709,23 @@
 
     /* Transitions for elements */
     #online-badge-container,
-    #maj-badge-container,
-    .mobile-toggle {
+    #maj-badge-container {
       transition: left 0.2s cubic-bezier(0.4, 0, 0.2, 1), top 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       transform: translateZ(0);
       backface-visibility: hidden;
       will-change: left, top;
+    }
+
+    /* Mobile toggle: NO transition for viewport-driven position changes */
+    .mobile-toggle {
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      /* Pas de transition pour éviter glitches avec --vv-top */
+    }
+
+    /* Only transition when .scrolled state changes (user-driven) */
+    .header.scrolled .mobile-toggle {
+      transition: left 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     /* Scrolled state - move elements closer to center and adjust vertical position */
