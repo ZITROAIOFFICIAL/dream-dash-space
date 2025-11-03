@@ -450,13 +450,21 @@
   <!-- Main Content -->
   <main class="main-content" style="padding-top: 80px; padding-bottom: 150vh;">
     <style>
+      /* Empêcher le scroll horizontal causé par le scale de la vidéo */
+      body, html {
+        overflow-x: hidden;
+        max-width: 100vw;
+      }
+
       .hero-section {
         min-height: auto;
         display: flex;
         align-items: flex-start;
         background: #000000;
         position: relative;
-        overflow: visible;
+        overflow: hidden;
+        overflow-x: hidden;
+        max-width: 100vw;
         padding: 0.5rem 2.5rem 2rem;
       }
 
@@ -662,13 +670,19 @@
         visibility: hidden;
       }
 
-      /* Masquer les contrôles natifs iOS */
+      /* Masquer COMPLÈTEMENT les contrôles natifs - transparents dès le début */
       .hero-video::-webkit-media-controls,
       .hero-video::-webkit-media-controls-enclosure,
+      .hero-video::-webkit-media-controls-panel,
+      .hero-video::-webkit-media-controls-play-button,
       .hero-video::-webkit-media-controls-start-playback-button {
+        opacity: 0 !important;
+        visibility: hidden !important;
         display: none !important;
-        -webkit-appearance: none;
-        overflow: hidden;
+        -webkit-appearance: none !important;
+        appearance: none !important;
+        overflow: hidden !important;
+        pointer-events: none !important;
       }
 
       /* Fallback gradient supprimé - le poster de la vidéo s'affiche désormais */
