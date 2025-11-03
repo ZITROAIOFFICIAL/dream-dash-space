@@ -10,14 +10,14 @@ const Sidebar = () => {
   const location = useLocation();
 
   const menuItems = [
-    { label: "BET DU JOUR", path: "/", icon: Trophy },
-    { label: "PARLAY DU JOUR", path: "/parlay", icon: Layers },
-    { label: "HISTORIQUE BET DU JOUR", path: "/historique", icon: History, secondIcon: Trophy },
-    { label: "HISTORIQUE PARLAY DU JOUR", path: "/historique-parlay", icon: Clock, secondIcon: Layers },
-    { label: "NOTRE STRATÉGIE", path: "/strategie", icon: Trophy },
-    { label: "MON COMPTE", path: "/mon-compte", icon: User },
-    { label: "BOUTIQUE", path: "/boutique", icon: ShoppingBag },
-    { label: "SUPPORT", path: "/support", icon: MessageCircle },
+    { label: "Bet du jour", path: "/", icon: Trophy },
+    { label: "Parlay du jour", path: "/parlay", icon: Layers },
+    { label: "Historique Bet du jour", path: "/historique", icon: History, secondIcon: Trophy },
+    { label: "Historique Parlay du jour", path: "/historique-parlay", icon: Clock, secondIcon: Layers },
+    { label: "Notre stratégie", path: "/strategie", icon: Trophy },
+    { label: "Mon compte", path: "/mon-compte", icon: User },
+    { label: "Boutique", path: "/boutique", icon: ShoppingBag },
+    { label: "Support", path: "/support", icon: MessageCircle },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -79,9 +79,9 @@ const Sidebar = () => {
                   to={item.path}
                   onClick={() => setIsOpen(false)}
                   className={cn(
-                    "flex items-center justify-between px-4 py-3 rounded-lg transition-all duration-200 text-sm",
+                    "flex items-center justify-between px-4 py-3 rounded-lg transition-all duration-200 text-lg font-bold",
                     active 
-                      ? "bg-green-600/20 border-2 border-green-600 font-semibold text-green-500" 
+                      ? "bg-green-600/20 border-2 border-green-600 font-bold text-green-500" 
                       : "bg-transparent border-2 border-transparent text-white hover:bg-green-600/10"
                   )}
                 >
