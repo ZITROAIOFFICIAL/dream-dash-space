@@ -653,7 +653,6 @@
       transform: translateZ(0);
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
-      will-change: transform;
     }
 
     /* Header background effect */
@@ -666,29 +665,14 @@
       width: 0;
       height: 0;
       background: rgba(255, 255, 255, 0.10);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-radius: 8px;
       opacity: 0;
-      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
       pointer-events: none;
       z-index: -1;
       backface-visibility: hidden;
-      will-change: width, height, opacity;
-    }
-    
-    /* Backdrop blur uniquement sur desktop pour performances */
-    @media (min-width: 769px) {
-      .header::before {
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-      }
-    }
-    
-    /* Sur mobile, blur léger pour performance */
-    @media (max-width: 768px) {
-      .header::before {
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-      }
     }
 
     .header.scrolled::before {
@@ -715,51 +699,34 @@
       }
     }
 
-    /* Transitions for elements - optimisées pour mobile */
+    /* Transitions for elements */
     #online-badge-container,
     #maj-badge-container,
     .mobile-toggle {
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: left 0.2s ease, top 0.2s ease;
       transform: translateZ(0);
       backface-visibility: hidden;
-      will-change: transform;
     }
 
-    /* Scrolled state - utiliser transform au lieu de left/top pour performances */
+    /* Scrolled state - move elements closer to center and adjust vertical position */
     @media (max-width: 768px) {
-      .mobile-toggle {
-        left: 1.5rem;
-        top: 2.5rem;
-      }
-      
-      #online-badge-container {
-        left: 19%;
-        top: 1.45rem;
-      }
-      
-      #maj-badge-container {
-        left: 87%;
-        top: 2.70rem;
-      }
-      
-      .logo {
-        top: 2rem;
-      }
-      
       .header.scrolled .mobile-toggle {
-        transform: translate(0.5rem, 0) translateZ(0);
+        left: 2rem !important;
+        top: 2.50rem !important;
       }
 
       .header.scrolled #online-badge-container {
-        transform: translate(4%, 0) translateZ(0);
+        left: 23% !important;
+        top: 1.45rem !important;
       }
 
       .header.scrolled #maj-badge-container {
-        transform: translate(-4%, 0) translateZ(0);
+        left: 83% !important;
+        top: 2.70rem !important;
       }
       
       .header.scrolled .logo {
-        transform: translateY(0) translateZ(0);
+        top: 2rem !important;
       }
     }
 

@@ -3367,35 +3367,22 @@
     // Démarrer le premier update après un intervalle aléatoire
     updateTimer = setTimeout(scheduleNextUpdate, getRandomInterval());
 
-    // Système de scroll pour le header avec throttle pour performances mobiles
+    // Système de scroll pour le header
     let lastScrollTop = 0;
-    let ticking = false;
     const header = document.querySelector('.header');
     
-    function updateHeaderOnScroll() {
+    window.addEventListener('scroll', function() {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       
       // Ajoute la classe 'scrolled' quand on scroll vers le bas (plus de 50px)
       if (scrollTop > 50) {
-        if (!header.classList.contains('scrolled')) {
-          header.classList.add('scrolled');
-        }
+        header.classList.add('scrolled');
       } else {
-        if (header.classList.contains('scrolled')) {
-          header.classList.remove('scrolled');
-        }
+        header.classList.remove('scrolled');
       }
       
-      ticking = false;
-    }
-    
-    window.addEventListener('scroll', function() {
-      if (!ticking) {
-        window.requestAnimationFrame(updateHeaderOnScroll);
-        ticking = true;
-      }
-    }, { passive: true });
-  
+      lastScrollTop = scrollTop;
+    });
   </script>
 
   <!-- CSS pour l'animation flip -->
