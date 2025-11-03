@@ -5,14 +5,329 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WINABET.AI - Dashboard Paris Sportifs</title>
   {% render 'dashboard-styles' %}
+  <style>
+    /* ==================== DESKTOP UNIQUEMENT - AJUSTEMENTS FACILES ==================== */
+    @media (min-width: 769px) {
+      
+      /* ===== SANS SCROLL - Positions et tailles initiales ===== */
+      
+      /* Badge Online - Position gauche/droite + hauteur */
+      .desktop-badge-online {
+        position: relative;
+        left: 0rem;
+        top: 0rem;
+      }
+      
+      /* Logo - Taille et position */
+      .desktop-logo {
+        font-size: 3.6rem !important;
+        position: relative;
+        left: 0rem;
+        top: 0.5rem;
+      }
+      
+      /* Badge IA - Position gauche/droite + hauteur */
+      .desktop-badge-ia {
+        position: relative;
+        left: 0rem;
+        top: 0rem;
+      }
+      
+      /* Espacement global entre les éléments */
+      .desktop-left {
+        gap: 2rem !important;
+      }
+      
+      /* ===== AVEC SCROLL - Rectangle gris ===== */
+      /* Déplacé dans des media queries dédiées plus bas pour laptop et grands écrans */
+    }
+    
+    /* ==================== LAPTOP BREAKPOINT (769px - 1440px) ==================== */
+    @media (min-width: 769px) and (max-width: 1440px) {
+      
+      /* Rectangle gris plus large pour laptop */
+      .header.scrolled::before {
+        width: calc(100% - 2rem) !important;
+        height: 90%;
+        top: 100%;
+      }
+      
+      /* Badge Online */
+      .desktop-badge-online {
+        left: 0;
+        transform: scale(0.9);
+      }
+      
+      /* Logo */
+      .desktop-logo {
+        font-size: 2.8rem !important;
+        left: 0;
+      }
+      
+      /* Badge MAJ IA */
+      .desktop-badge-ia {
+        left: 0;
+        transform: scale(0.9);
+      }
+      
+      /* Espacement global - Groupe gauche */
+      .desktop-left {
+        gap: 1rem !important;
+        margin-left: 0rem;
+      }
+      
+      /* Espacement global - Groupe droite */
+      .desktop-right {
+        gap: 1rem;
+        transform: translateX(0rem);
+      }
+      
+      /* Nav Links */
+      .desktop-nav {
+        gap: 1.5rem;
+      }
+      
+      .desktop-nav-item {
+        font-size: 1.2rem;
+      }
+      
+      /* Auth Buttons */
+      .desktop-auth-link {
+        font-size: 1.2rem;
+        margin-right: 0.5rem;
+      }
+      
+      .desktop-auth-btn {
+        padding: 0.95rem 1.4rem;
+        font-size: 1.1rem;
+      }
+      
+      /* Header scrolled adjustments */
+      .desktop-menu.scrolled {
+        padding-top: 3rem;
+      }
+      
+      .header.scrolled .desktop-left,
+      .header.scrolled .desktop-right {
+        padding-top: 3.5rem;
+      }
+    }
+
+    /* Laptop étendu (1441px - 1800px) - Rectangle gris bord à bord + éléments centrés */
+    @media (min-width: 1441px) and (max-width: 1800px) {
+      .header.scrolled::before {
+        width: calc(100% - 20rem) !important;
+        height: 90%;
+        top: 100%;
+      }
+      
+      /* Groupe gauche - centrer */
+      .desktop-left {
+        margin-left: 0rem;
+        gap: 1.25rem;
+      }
+      
+      /* Groupe droite - centrer */
+      .desktop-right {
+        transform: translateX(0rem);
+        gap: 1.25rem;
+      }
+      
+      /* Réduire légèrement les espacements */
+      .desktop-nav {
+        gap: 1.75rem;
+      }
+    }
+
+    /* Très grands écrans (>= 1801px) - largeur originale */
+    @media (min-width: 1801px) {
+      .header.scrolled::before {
+        width: calc(65% - 6rem);
+        height: 90%;
+        top: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- Mobile Toggle Button -->
-  <button class="mobile-toggle" onclick="toggleSidebar()" aria-label="Toggle menu">
-    <svg class="mobile-toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
-    </svg>
-  </button>
+  <header class="header" style="background: transparent; position: fixed; height: 80px; width: 100%;">
+    <!-- Mobile Toggle Button -->
+    <button class="mobile-toggle" onclick="toggleSidebar()" aria-label="Toggle menu">
+      <svg class="mobile-toggle-icon hamburger-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+      <svg class="mobile-toggle-icon close-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+    
+    <!-- Mobile: Online Badge -->
+    <div id="online-badge-container" class="mobile-only" style="position: absolute; left: 23%; top: 0.15rem; transform: translateX(-50%);">
+      <div id="online-badge" style="position: relative; display: flex; align-items: center; gap: 0.25rem; padding: 0.25rem 0.4rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; z-index: 2;">
+        <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 4px); height: calc(100% + 4px); pointer-events: none; z-index: -1;">
+          <defs>
+            <filter id="onlineGlowHeader" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="2" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <rect x="2" y="2" width="calc(100% - 4px)" height="calc(100% - 4px)" rx="10" ry="10" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+          <rect x="2" y="2" width="calc(100% - 4px)" height="calc(100% - 4px)" rx="10" ry="10" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="30 510" stroke-linecap="round" filter="url(#onlineGlowHeader)" opacity="0.9">
+            <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+          </rect>
+        </svg>
+        <svg width="6" height="6" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+          <circle cx="10" cy="10" r="4" fill="rgba(255, 255, 255, 0.7)"/>
+        </svg>
+        <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 0.75rem; white-space: nowrap;"><span id="header-member-count" class="member-count" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">{{ section.settings.members_base | default: 50 }}</span> online</span>
+      </div>
+    </div>
+    
+    <!-- Mobile: Logo centré -->
+    <div class="logo mobile-only" style="font-family: 'Outfit', sans-serif; font-size: 3.5rem; letter-spacing: -0.02em; font-weight: 300; display: inline-flex; align-items: baseline; position: relative; top: 1rem;">
+      <span style="color: #ffffff;">wina</span><span style="color: rgba(255, 255, 255, 0.35);">bet</span>
+    </div>
+    
+    <!-- Mobile: Badge IA -->
+    <div id="maj-badge-container" class="mobile-only" style="position: absolute; left: 83%; top: 1.25rem; transform: translateX(-50%);">
+      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 86px; height: 32px; pointer-events: none; z-index: 1;">
+        <defs>
+          <filter id="badgeGlowHeader" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="2" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+         <rect x="2" y="2" width="82" height="28" rx="14" ry="14" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+         <rect x="2" y="2" width="82" height="28" rx="14" ry="14" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="40 500" stroke-linecap="round" filter="url(#badgeGlowHeader)" opacity="0.9">
+           <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+         </rect>
+      </svg>
+      <div style="position: relative; display: flex; align-items: center; gap: 0.3rem; padding: 0.25rem 0.5rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; min-width: 80px; z-index: 2;">
+        <svg id="atom-header" width="20" height="20" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+          <defs>
+            <filter id="softGlowHeader" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="1.2" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <path id="orbit0Header" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+            <path id="orbit1Header" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+            <path id="orbit2Header" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+          </defs>
+          <g stroke="#68859e" stroke-width="2" fill="none">
+            <use href="#orbit0Header"/>
+            <use href="#orbit1Header"/>
+            <use href="#orbit2Header"/>
+          </g>
+          <g stroke-linecap="round" filter="url(#softGlowHeader)">
+            <use href="#orbit0Header" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+              <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+            </use>
+            <use href="#orbit1Header" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+              <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+            </use>
+            <use href="#orbit2Header" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+              <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+            </use>
+          </g>
+          <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
+        </svg>
+        <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 0.75rem; white-space: nowrap;">MAJ <span id="header-time" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">17:34</span></span>
+      </div>
+    </div>
+
+    <!-- Desktop Menu -->
+    <div class="desktop-menu">
+      <!-- Left: Logo + Badges + Menu Items -->
+      <div class="desktop-left">
+        <!-- Online Badge -->
+        <div class="desktop-badge-online">
+          <div id="desktop-online-badge" style="position: relative; display: flex; align-items: center; gap: 0.64rem; padding: 0.6rem 0.92rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; z-index: 2;">
+            <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+              <defs>
+                <filter id="onlineGlowDesktopClone" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="2" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+              <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="16" ry="16" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+              <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="16" ry="16" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#onlineGlowDesktopClone)" opacity="0.9">
+                <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+              </rect>
+            </svg>
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+              <circle cx="10" cy="10" r="4" fill="rgba(255, 255, 255, 0.7)"/>
+            </svg>
+            <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.48rem; white-space: nowrap;"><span id="desktop-member-count" class="member-count" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">{{ section.settings.members_base | default: 50 }}</span> online</span>
+          </div>
+        </div>
+
+        <!-- Logo -->
+        <div class="desktop-logo">
+          <span style="color: #ffffff;">wina</span><span style="color: rgba(255, 255, 255, 0.35);">bet</span>
+        </div>
+
+        <!-- IA Badge -->
+        <div class="desktop-badge-ia">
+          <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+            <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+              <defs>
+                <filter id="iaGlowDesktop" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="2" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+              <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+              <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowDesktop)" opacity="0.9">
+                <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+              </rect>
+            </svg>
+            <svg id="atom-desktop" width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+              <defs>
+                <filter id="softGlowDesktopClone" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="1.2" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <path id="orbit0DesktopClone" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                <path id="orbit1DesktopClone" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                <path id="orbit2DesktopClone" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+              </defs>
+              <g stroke="#68859e" stroke-width="2" fill="none">
+                <use href="#orbit0DesktopClone"/>
+                <use href="#orbit1DesktopClone"/>
+                <use href="#orbit2DesktopClone"/>
+              </g>
+              <g stroke-linecap="round" filter="url(#softGlowDesktopClone)">
+                <use href="#orbit0DesktopClone" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                  <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                </use>
+                <use href="#orbit1DesktopClone" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                  <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                </use>
+                <use href="#orbit2DesktopClone" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                  <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                </use>
+              </g>
+              <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+            </svg>
+            <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span id="desktop-time" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">17:34</span></span>
+          </div>
+        </div>
+
+        <!-- Menu Items -->
+        <nav class="desktop-nav">
+          <a href="https://winabet.ai/collections/all#bet" class="desktop-nav-item">Accéder au Dashboard</a>
+          <a href="#" class="desktop-nav-item">Abonnement</a>
+          <a href="#" class="desktop-nav-item">Support</a>
+        </nav>
+      </div>
+
+      <!-- Right: Auth Buttons -->
+      <div class="desktop-right">
+        <a href="#" class="desktop-auth-link">Se Connecter</a>
+        <a href="#" class="desktop-auth-btn">Commencer Gratuitement</a>
+      </div>
+    </div>
+  </header>
 
   <!-- Overlay -->
   <div class="overlay" onclick="toggleSidebar()"></div>
@@ -202,182 +517,51 @@
   </aside>
 
   <!-- Header -->
-  <header class="header" style="background: transparent; position: fixed; height: 80px; width: 100%;">
-    <!-- Mobile Toggle Button -->
-    <button class="mobile-toggle" onclick="toggleSidebar()" aria-label="Toggle menu">
-      <svg class="mobile-toggle-icon hamburger-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 6h16M4 12h16M4 18h16"/>
+  <header class="header" style="background: #000000; padding: 0.5rem 2rem; display: flex; align-items: center; justify-content: center; position: relative;">
+    <!-- Badge IA à gauche -->
+    <div class="maj-badge-animated" style="position: absolute; left: 1rem; display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.8rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; min-width: 120px;">
+      <svg id="atom-header" width="20" height="20" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+        <defs>
+          <filter id="softGlowHeader" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="1.2" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <path id="orbit0Header" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+          <path id="orbit1Header" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+          <path id="orbit2Header" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+        </defs>
+        <g stroke="#68859e" stroke-width="2" fill="none">
+          <use href="#orbit0Header"/>
+          <use href="#orbit1Header"/>
+          <use href="#orbit2Header"/>
+        </g>
+        <g stroke-linecap="round" filter="url(#softGlowHeader)">
+          <use href="#orbit0Header" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+          </use>
+          <use href="#orbit1Header" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+          </use>
+          <use href="#orbit2Header" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+          </use>
+        </g>
+        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
       </svg>
-      <svg class="mobile-toggle-icon close-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M6 18L18 6M6 6l12 12"/>
-      </svg>
-    </button>
-    
-    <!-- Mobile: Online Badge -->
-    <div id="online-badge-container" class="mobile-only" style="position: absolute; left: 23%; top: 0.15rem; transform: translateX(-50%);">
-      <div id="online-badge" style="position: relative; display: flex; align-items: center; gap: 0.25rem; padding: 0.25rem 0.4rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; z-index: 2;">
-        <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 4px); height: calc(100% + 4px); pointer-events: none; z-index: -1;">
-          <defs>
-            <filter id="onlineGlowHeader" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="2" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
-          <rect x="2" y="2" width="calc(100% - 4px)" height="calc(100% - 4px)" rx="10" ry="10" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
-          <rect x="2" y="2" width="calc(100% - 4px)" height="calc(100% - 4px)" rx="10" ry="10" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="30 510" stroke-linecap="round" filter="url(#onlineGlowHeader)" opacity="0.9">
-            <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
-          </rect>
-        </svg>
-        <svg width="6" height="6" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
-          <circle cx="10" cy="10" r="4" fill="rgba(255, 255, 255, 0.7)"/>
-        </svg>
-        <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 0.75rem; white-space: nowrap;"><span id="header-member-count" class="member-count" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">{{ section.settings.members_base | default: 50 }}</span> online</span>
-      </div>
+      <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 0.75rem; white-space: nowrap;">MAJ <span id="header-time" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">17:34</span></span>
     </div>
     
-    <!-- Mobile: Logo centré -->
-    <div class="logo mobile-only" style="font-family: 'Outfit', sans-serif; font-size: 3.5rem; letter-spacing: -0.02em; font-weight: 300; display: inline-flex; align-items: baseline; position: relative; top: 1rem;">
+    <!-- Logo centré -->
+    <div class="logo" style="font-family: 'Inter', sans-serif; font-size: 3.5rem; letter-spacing: -0.02em; font-weight: 300; display: inline-flex; align-items: baseline;">
       <span style="color: #ffffff;">wina</span><span style="color: rgba(255, 255, 255, 0.35);">bet</span>
     </div>
     
-    <!-- Mobile: Badge IA -->
-    <div id="maj-badge-container" class="mobile-only" style="position: absolute; left: 83%; top: 1.25rem; transform: translateX(-50%);">
-      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 86px; height: 32px; pointer-events: none; z-index: 1;">
-        <defs>
-          <filter id="badgeGlowHeader" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="2" result="b"/>
-            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-        </defs>
-         <rect x="2" y="2" width="82" height="28" rx="14" ry="14" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
-         <rect x="2" y="2" width="82" height="28" rx="14" ry="14" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="40 500" stroke-linecap="round" filter="url(#badgeGlowHeader)" opacity="0.9">
-           <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
-         </rect>
+    <!-- Online à droite -->
+    <div id="online-badge" style="position: absolute; right: 1rem; display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.8rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; min-width: 120px;">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10" cy="10" r="8" fill="#16a34a"/>
       </svg>
-      <div style="position: relative; display: flex; align-items: center; gap: 0.3rem; padding: 0.25rem 0.5rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; min-width: 80px; z-index: 2;">
-        <svg id="atom-header" width="20" height="20" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
-          <defs>
-            <filter id="softGlowHeader" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="1.2" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-            <path id="orbit0Header" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
-            <path id="orbit1Header" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
-            <path id="orbit2Header" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
-          </defs>
-          <g stroke="#68859e" stroke-width="2" fill="none">
-            <use href="#orbit0Header"/>
-            <use href="#orbit1Header"/>
-            <use href="#orbit2Header"/>
-          </g>
-          <g stroke-linecap="round" filter="url(#softGlowHeader)">
-            <use href="#orbit0Header" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-              <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
-            </use>
-            <use href="#orbit1Header" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-              <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
-            </use>
-            <use href="#orbit2Header" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-              <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
-            </use>
-          </g>
-          <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
-        </svg>
-        <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 0.75rem; white-space: nowrap;">MAJ <span id="header-time" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">17:34</span></span>
-      </div>
-    </div>
-
-    <!-- Desktop Menu -->
-    <div class="desktop-menu">
-      <!-- Left: Logo + Badges + Menu Items -->
-      <div class="desktop-left">
-        <!-- Online Badge -->
-        <div class="desktop-badge-online">
-          <div id="desktop-online-badge" style="position: relative; display: flex; align-items: center; gap: 0.64rem; padding: 0.6rem 0.92rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; z-index: 2;">
-            <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
-              <defs>
-                <filter id="onlineGlowDesktopClone" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="2" result="b"/>
-                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
-              </defs>
-              <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="16" ry="16" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
-              <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="16" ry="16" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#onlineGlowDesktopClone)" opacity="0.9">
-                <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
-              </rect>
-            </svg>
-            <svg width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
-              <circle cx="10" cy="10" r="4" fill="rgba(255, 255, 255, 0.7)"/>
-            </svg>
-            <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.48rem; white-space: nowrap;"><span id="desktop-member-count" class="member-count" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">{{ section.settings.members_base | default: 50 }}</span> online</span>
-          </div>
-        </div>
-
-        <!-- Logo -->
-        <div class="desktop-logo">
-          <span style="color: #ffffff;">wina</span><span style="color: rgba(255, 255, 255, 0.35);">bet</span>
-        </div>
-
-        <!-- IA Badge -->
-        <div class="desktop-badge-ia">
-          <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
-            <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
-              <defs>
-                <filter id="iaGlowDesktop" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="2" result="b"/>
-                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
-              </defs>
-              <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
-              <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowDesktop)" opacity="0.9">
-                <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
-              </rect>
-            </svg>
-            <svg id="atom-desktop" width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
-              <defs>
-                <filter id="softGlowDesktopClone" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="1.2" result="b"/>
-                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
-                <path id="orbit0DesktopClone" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
-                <path id="orbit1DesktopClone" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
-                <path id="orbit2DesktopClone" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
-              </defs>
-              <g stroke="#68859e" stroke-width="2" fill="none">
-                <use href="#orbit0DesktopClone"/>
-                <use href="#orbit1DesktopClone"/>
-                <use href="#orbit2DesktopClone"/>
-              </g>
-              <g stroke-linecap="round" filter="url(#softGlowDesktopClone)">
-                <use href="#orbit0DesktopClone" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                  <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
-                </use>
-                <use href="#orbit1DesktopClone" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                  <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
-                </use>
-                <use href="#orbit2DesktopClone" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                  <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
-                </use>
-              </g>
-              <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
-            </svg>
-            <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span id="desktop-time" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">17:34</span></span>
-          </div>
-        </div>
-
-        <!-- Menu Items -->
-        <nav class="desktop-nav">
-          <a href="https://winabet.ai/collections/all#bet" class="desktop-nav-item">Accéder au Dashboard</a>
-          <a href="#" class="desktop-nav-item">Abonnement</a>
-          <a href="#" class="desktop-nav-item">Support</a>
-        </nav>
-      </div>
-
-      <!-- Right: Auth Buttons -->
-      <div class="desktop-right">
-        <a href="#" class="desktop-auth-link">Se Connecter</a>
-        <a href="#" class="desktop-auth-btn">Commencer Gratuitement</a>
-      </div>
+      <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 0.75rem; white-space: nowrap;"><span id="header-member-count" class="member-count" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">{{ section.settings.members_base | default: 50 }}</span> online</span>
     </div>
   </header>
 
@@ -2731,21 +2915,16 @@
     function toggleSidebar() {
       const sidebar = document.querySelector('.sidebar');
       const overlay = document.querySelector('.overlay');
-      const toggle = document.querySelector('.mobile-toggle');
       isMobileSidebarOpen = !isMobileSidebarOpen;
       
       if (isMobileSidebarOpen) {
         sidebar.classList.add('active');
         overlay.classList.add('active');
         document.body.classList.add('body-no-scroll');
-        document.body.classList.add('sidebar-open');
-        if (toggle) toggle.classList.add('active');
       } else {
         sidebar.classList.remove('active');
         overlay.classList.remove('active');
         document.body.classList.remove('body-no-scroll');
-        document.body.classList.remove('sidebar-open');
-        if (toggle) toggle.classList.remove('active');
       }
     }
 
