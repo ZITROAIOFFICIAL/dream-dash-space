@@ -673,6 +673,15 @@
       pointer-events: none;
       z-index: -1;
       backface-visibility: hidden;
+      will-change: width, height, opacity;
+    }
+
+    /* Optimisation mobile - réduire le blur */
+    @media (max-width: 768px) {
+      .header::before {
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
     }
 
     .header.scrolled::before {
@@ -703,9 +712,10 @@
     #online-badge-container,
     #maj-badge-container,
     .mobile-toggle {
-      transition: left 0.2s ease, top 0.2s ease;
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       transform: translateZ(0);
       backface-visibility: hidden;
+      will-change: transform;
     }
 
     /* Scrolled state - move elements closer to center and adjust vertical position */
