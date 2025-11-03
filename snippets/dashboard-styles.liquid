@@ -681,8 +681,17 @@
       opacity: 1;
     }
 
-    /* Desktop only - adjust header background when scrolled */
-    @media (min-width: 769px) {
+    /* Laptop only (769px - 1440px) - Rectangle gris très large */
+    @media (min-width: 769px) and (max-width: 1440px) {
+      .header.scrolled::before {
+        width: calc(100% - 2rem) !important;  /* Presque toute la largeur */
+        height: 55%;
+        top: 58%;
+      }
+    }
+
+    /* Desktop large écran only (>1440px) - Rectangle gris normal */
+    @media (min-width: 1441px) {
       .header.scrolled::before {
         width: calc(100% - 10rem);
         height: 55%;
