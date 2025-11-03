@@ -594,6 +594,7 @@
         border-radius: 50%;
         filter: blur(80px);
         pointer-events: none;
+        z-index: 1;
       }
 
       .hero-bg-gradient-1 {
@@ -608,6 +609,17 @@
     </style>
 
     <section class="hero-section">
+      <!-- Background video -->
+      <video 
+        autoplay 
+        loop 
+        muted 
+        playsinline
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.6;"
+      >
+        <source src="https://cdn.shopify.com/videos/c/o/v/408f93f1121146cca3615aa9af2aa45e.mp4" type="video/mp4">
+      </video>
+      
       <!-- Background gradients -->
       <div class="hero-bg-gradient hero-bg-gradient-1"></div>
       <div class="hero-bg-gradient hero-bg-gradient-2"></div>
