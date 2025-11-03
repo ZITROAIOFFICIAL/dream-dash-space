@@ -2576,29 +2576,6 @@
         font-size: 1.05rem !important;
       }
 
-      /* Effet de lumière du badge Online - Desktop - Grossi 1.4x */
-      .header #online-badge::before {
-        content: '';
-        position: absolute;
-        inset: -3px !important;
-        border-radius: 9999px;
-        padding: 3px !important;
-        background: conic-gradient(
-          from 0deg,
-          transparent 0deg,
-          transparent 270deg,
-          rgba(255, 255, 255, 0.8) 300deg,
-          rgba(255, 255, 255, 1) 330deg,
-          rgba(255, 255, 255, 0.8) 360deg,
-          transparent 360deg
-        );
-        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-        animation: rotateBorder 4s linear infinite;
-        pointer-events: none;
-      }
-
       /* Badge MAJ IA - Desktop - Grossi 1.4x depuis mobile */
       .header .maj-badge-animated {
         position: relative;
@@ -2617,12 +2594,6 @@
 
       .header .maj-badge-animated span {
         font-size: 1.05rem !important;
-      }
-
-      /* Effet de lumière du badge MAJ IA - Desktop - Grossi 1.4x */
-      .header .maj-badge-animated::before {
-        inset: -3px !important;
-        padding: 3px !important;
       }
 
       /* Positions après scroll */

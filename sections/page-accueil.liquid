@@ -240,20 +240,20 @@
 
         <!-- IA Badge -->
         <div class="desktop-badge-ia">
-          <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 106px; height: 42px; pointer-events: none; z-index: 1;">
+          <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 5.6px); height: calc(100% + 5.6px); pointer-events: none; z-index: 1;">
             <defs>
               <filter id="badgeGlowDesktop" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur stdDeviation="2" result="b"/>
                 <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
               </filter>
             </defs>
-             <rect x="2" y="2" width="102" height="38" rx="19" ry="19" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
-             <rect x="2" y="2" width="102" height="38" rx="19" ry="19" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="50 600" stroke-linecap="round" filter="url(#badgeGlowDesktop)" opacity="0.9">
-               <animate attributeName="stroke-dashoffset" values="0;-650" dur="8s" repeatCount="indefinite"/>
+             <rect x="2.8" y="2.8" width="calc(100% - 5.6px)" height="calc(100% - 5.6px)" rx="19" ry="19" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+             <rect x="2.8" y="2.8" width="calc(100% - 5.6px)" height="calc(100% - 5.6px)" rx="19" ry="19" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="56 700" stroke-linecap="round" filter="url(#badgeGlowDesktop)" opacity="0.9">
+               <animate attributeName="stroke-dashoffset" values="0;-756" dur="8s" repeatCount="indefinite"/>
              </rect>
           </svg>
-          <div style="position: relative; display: flex; align-items: center; gap: 0.4rem; padding: 0.35rem 0.65rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; min-width: 100px; z-index: 2;">
-            <svg width="26" height="26" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+          <div style="position: relative; display: flex; align-items: center; gap: 0.42rem; padding: 0.35rem 0.7rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; min-width: 112px; z-index: 2;">
+            <svg width="28" height="28" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
               <defs>
                 <filter id="softGlowDesktop" x="-50%" y="-50%" width="200%" height="200%">
                   <feGaussianBlur stdDeviation="1.2" result="b"/>
@@ -281,7 +281,7 @@
               </g>
               <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
             </svg>
-            <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 0.875rem; white-space: nowrap;">MAJ <span id="desktop-time" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">17:34</span></span>
+            <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 1.05rem; white-space: nowrap;">MAJ <span id="desktop-time" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">17:34</span></span>
           </div>
         </div>
 
