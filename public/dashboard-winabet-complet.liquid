@@ -1678,13 +1678,38 @@
 
   <!-- AI Loading Overlay -->
   <div id="ai-loading-overlay" class="ai-loading-overlay">
-    <div class="ai-loading-spinner">
-      <span class="ai-loading-spinner-text">IA</span>
-    </div>
+    <svg class="ai-loading-spinner" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="softGlowLoading" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="1.5"/>
+          <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1.2 0"/>
+        </filter>
+        <ellipse id="orbit0Loading" cx="100" cy="100" rx="42" ry="16" transform="rotate(0 100 100)"/>
+        <ellipse id="orbit1Loading" cx="100" cy="100" rx="42" ry="16" transform="rotate(60 100 100)"/>
+        <ellipse id="orbit2Loading" cx="100" cy="100" rx="42" ry="16" transform="rotate(120 100 100)"/>
+      </defs>
+      <g stroke="#68859e" stroke-width="2" fill="none">
+        <use href="#orbit0Loading"/>
+        <use href="#orbit1Loading"/>
+        <use href="#orbit2Loading"/>
+      </g>
+      <g stroke-linecap="round" filter="url(#softGlowLoading)">
+        <use href="#orbit0Loading" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+          <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+        </use>
+        <use href="#orbit1Loading" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+          <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+        </use>
+        <use href="#orbit2Loading" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+          <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+        </use>
+      </g>
+      <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="300" font-size="54" font-family="'Outfit', sans-serif">IA</text>
+    </svg>
     <div class="ai-loading-logo">
-      <span style="color: #ffffff;">WIN</span><span style="color: #16a34a;">A</span><span style="color: #ffffff;">BET</span><span style="color: #16a34a; font-size: 0.6em;">.AI</span>
+      <span style="color: #ffffff; font-family: 'Outfit', sans-serif; font-weight: 300;">WIN</span><span style="color: #16a34a; font-family: 'Outfit', sans-serif; font-weight: 300;">A</span><span style="color: #ffffff; font-family: 'Outfit', sans-serif; font-weight: 300;">BET</span><span style="color: #ffffff; font-size: 0.6em; font-family: 'Outfit', sans-serif; font-weight: 300;">.AI</span>
     </div>
-    <p class="ai-loading-message">CHARGEMENT DE NOTRE IA ET DES DONNÉES<br>LES PLUS RÉCENTES…</p>
+    <p class="ai-loading-message">Chargement de notre IA</p>
   </div>
 
   <!-- Dialog: Modifier la mise -->
