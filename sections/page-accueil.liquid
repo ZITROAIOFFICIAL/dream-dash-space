@@ -733,22 +733,20 @@
                 video.style.display = 'none';
                 fallbackImage.style.display = 'block';
                 
-                // Ajouter un écouteur pour démarrer la vidéo au clic/touch/scroll
+                // Ajouter un écouteur pour démarrer la vidéo au clic/touch
                 function startVideo() {
                   video.style.display = 'block';
                   fallbackImage.style.display = 'none';
                   video.play().catch(function(err) {
                     console.log('Erreur lecture vidéo:', err);
                   });
-                  // Retirer tous les écouteurs après le premier déclenchement
+                  // Retirer l'écouteur après le premier clic
                   fallbackImage.removeEventListener('click', startVideo);
                   fallbackImage.removeEventListener('touchstart', startVideo);
-                  window.removeEventListener('scroll', startVideo);
                 }
                 
                 fallbackImage.addEventListener('click', startVideo);
                 fallbackImage.addEventListener('touchstart', startVideo);
-                window.addEventListener('scroll', startVideo);
               });
             }
           });
