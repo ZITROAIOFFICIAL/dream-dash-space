@@ -629,26 +629,24 @@
         overflow: hidden;
       }
 
-      /* Fallback en cas d'échec autoplay */
-      .hero-video-fallback {
+      /* Fallback image en cas d'échec autoplay (mode économie d'énergie) */
+      .hero-fallback-image {
         position: absolute;
-        inset: 0;
+        left: 50%;
+        top: 130%;
+        transform: translate(-50%, -50%) scale(3);
+        width: 100%;
+        height: auto;
         z-index: 0;
-        background: radial-gradient(ellipse at center, rgba(16, 185, 129, 0.15) 0%, transparent 70%),
-                    linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%);
+        opacity: 0.6;
+        pointer-events: none;
+        object-fit: cover;
         display: none;
       }
 
-      .no-autoplay .hero-video {
-        display: none !important;
-      }
-
-      .no-autoplay .hero-video-fallback {
-        display: block;
-      }
-
       @media (min-width: 768px) {
-        .hero-video {
+        .hero-video,
+        .hero-fallback-image {
           top: 100px;
           left: 0;
           transform: none;
@@ -661,7 +659,7 @@
     <section class="hero-section">
       <!-- Background video -->
       <video 
-        id="heroVideo"
+        id="hero-video"
         class="hero-video"
         autoplay 
         loop 
@@ -672,155 +670,43 @@
         defaultMuted
         controlslist="nodownload nofullscreen noplaybackrate"
         disablepictureinpicture
-        poster="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/frame_0s.png?v=1762209709"
       >
         <source src="https://cdn.shopify.com/videos/c/o/v/408f93f1121146cca3615aa9af2aa45e.mp4" type="video/mp4">
       </video>
       
-      <!-- Fallback visuel si autoplay échoue -->
-      <div class="hero-video-fallback" aria-hidden="true"></div>
+      <!-- Fallback image si autoplay échoue (mode économie d'énergie) -->
+      <img
+        id="hero-fallback-image"
+        class="hero-fallback-image"
+        src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/frame_0s.png?v=1762209709"
+        alt="Hero background"
+        style="display: none;"
+      />
       
       <script>
         (function() {
-          var video, heroSection, playbackConfirmed = false, fallbackTimer, batterySaverMode = false;
+          var video, fallbackImage;
           
-          function attemptPlay() {
-            if (!video || playbackConfirmed) return;
-            try {
-              video.muted = true;
-              video.defaultMuted = true;
-              video.playsInline = true;
-              video.setAttribute('muted', '');
-              video.setAttribute('playsinline', '');
-              video.setAttribute('webkit-playsinline', '');
-              video.removeAttribute('controls');
-              
-              var playPromise = video.play();
-              if (playPromise && typeof playPromise.then === 'function') {
-                playPromise.then(function() {
-                  // Play réussi - ne rien faire, attendre 'playing'
-                }).catch(function(error) {
-                  // Autoplay échoué - mode économiseur d'énergie probable
-                  batterySaverMode = true;
-                  setupBatterySaverMode();
-                });
-              }
-            } catch (e) {
-              // Erreur - mode économiseur d'énergie probable
-              batterySaverMode = true;
-              setupBatterySaverMode();
-            }
-          }
-
-          function setupBatterySaverMode() {
-            // En mode économiseur, afficher le poster et attendre un mouvement
-            if (video) {
-              video.load(); // Recharger pour afficher le poster
-            }
-            // Écouter les mouvements pour lancer la vidéo
-            var userGestureEvents = ['touchstart', 'touchmove', 'scroll', 'click', 'mousemove', 'pointerdown'];
-            userGestureEvents.forEach(function(evt) {
-              document.addEventListener(evt, onBatterySaverGesture, { once: true, passive: true });
-            });
-          }
-
-          function onBatterySaverGesture() {
-            if (!batterySaverMode || playbackConfirmed) return;
-            // Mouvement détecté - lancer la vidéo
-            attemptPlayAfterGesture();
-          }
-
-          function attemptPlayAfterGesture() {
-            if (!video || playbackConfirmed) return;
-            try {
-              video.removeAttribute('controls');
-              var playPromise = video.play();
-              if (playPromise && typeof playPromise.then === 'function') {
-                playPromise.then(function() {
-                  // Lecture lancée avec succès
-                }).catch(function() {
-                  // Échec silencieux
-                });
-              }
-            } catch (e) {
-              // Erreur silencieuse
-            }
-          }
-
-          function onPlaying() {
-            if (playbackConfirmed) return;
-            playbackConfirmed = true;
-            clearTimeout(fallbackTimer);
-            cleanup();
-          }
-
-          function activateFallback() {
-            if (playbackConfirmed) return;
-            if (heroSection) {
-              heroSection.classList.add('no-autoplay');
-            }
-            cleanup();
-          }
-
-          function onUserGesture() {
-            attemptPlay();
-          }
-
-          function cleanup() {
-            ['click','touchstart','touchend','pointerdown','scroll','keydown','mousemove','visibilitychange','orientationchange','touchmove'].forEach(function(evt){
-              document.removeEventListener(evt, onUserGesture);
-              document.removeEventListener(evt, onBatterySaverGesture);
-            });
-            if (video) {
-              video.removeEventListener('playing', onPlaying);
-              video.removeEventListener('canplay', attemptPlay);
-              video.removeEventListener('loadeddata', attemptPlay);
-            }
-          }
-
           document.addEventListener('DOMContentLoaded', function() {
-            video = document.getElementById('heroVideo');
-            heroSection = document.querySelector('.hero-section');
-            if (!video || !heroSection) return;
-
-            // Détecter le mode économiseur d'énergie via Battery API (si disponible)
-            if (navigator.getBattery) {
-              navigator.getBattery().then(function(battery) {
-                if (battery.charging === false && battery.level < 0.5) {
-                  batterySaverMode = true;
-                  setupBatterySaverMode();
-                  return;
-                }
-                // Sinon, tenter l'autoplay normal
-                startNormalMode();
-              }).catch(function() {
-                // API non disponible, tenter autoplay normal
-                startNormalMode();
+            video = document.getElementById('hero-video');
+            fallbackImage = document.getElementById('hero-fallback-image');
+            
+            if (!video || !fallbackImage) return;
+            
+            // Masquer les contrôles
+            video.removeAttribute('controls');
+            
+            // Tenter l'autoplay
+            var playPromise = video.play();
+            
+            if (playPromise !== undefined) {
+              playPromise.catch(function(error) {
+                // Autoplay échoué (mode économie d'énergie) - afficher l'image statique
+                video.style.display = 'none';
+                fallbackImage.style.display = 'block';
               });
-            } else {
-              // API non disponible, tenter autoplay normal
-              startNormalMode();
             }
           });
-
-          function startNormalMode() {
-            // Lancer timer fallback
-            fallbackTimer = setTimeout(activateFallback, 1500);
-
-            // Écouter 'playing' pour confirmer lecture
-            video.addEventListener('playing', onPlaying, { once: true });
-
-            // Tentatives de lecture
-            attemptPlay();
-            video.addEventListener('canplay', attemptPlay, { once: true });
-            video.addEventListener('loadeddata', attemptPlay, { once: true });
-            window.addEventListener('load', attemptPlay, { once: true });
-
-            // Écouter gestes utilisateur passifs
-            ['click','touchstart','touchend','pointerdown','scroll','keydown','mousemove','visibilitychange','orientationchange'].forEach(function(evt){
-              document.addEventListener(evt, onUserGesture, { once: true, passive: true });
-            });
-          }
         })();
       </script>
       
