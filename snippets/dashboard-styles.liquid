@@ -2556,50 +2556,51 @@
         backface-visibility: hidden;
       }
 
-      /* Positions par défaut des badges sur desktop - avant scroll - grossis x2 */
+      /* Badge Online - Desktop - Grossi 1.8x depuis mobile */
       .header #online-badge {
+        padding: 0.75rem 1.5rem !important;
+        min-width: 220px !important;
+        gap: 0.9rem !important;
         left: 44% !important;
         top: 1.5rem !important;
-        padding: 0.8rem 1.6rem !important;
-        min-width: 240px !important;
-      }
-      
-      .header #online-badge span {
-        font-size: 1.5rem !important;
-      }
-      
-      .header #online-badge svg {
-        width: 40px !important;
-        height: 40px !important;
       }
 
+      .header #online-badge svg {
+        width: 36px !important;
+        height: 36px !important;
+      }
+
+      .header #online-badge span {
+        font-size: 1.35rem !important;
+      }
+
+      /* Badge MAJ IA - Desktop - Grossi 1.8x depuis mobile */
       .header .maj-badge-animated {
+        padding: 0.75rem 1.5rem !important;
+        min-width: 220px !important;
+        gap: 0.9rem !important;
         left: 56% !important;
         top: 1.25rem !important;
-        padding: 0.8rem 1.6rem !important;
-        min-width: 240px !important;
-      }
-      
-      .header .maj-badge-animated span {
-        font-size: 1.5rem !important;
-      }
-      
-      .header .maj-badge-animated svg {
-        width: 40px !important;
-        height: 40px !important;
       }
 
-      /* Positions au scroll - badges gardent la même taille */
+      .header .maj-badge-animated svg {
+        width: 36px !important;
+        height: 36px !important;
+      }
+
+      .header .maj-badge-animated span {
+        font-size: 1.35rem !important;
+      }
+
+      /* Positions après scroll */
       .header.scrolled #online-badge {
         left: 44% !important;
         top: 3rem !important;
-        padding: 0.8rem 1.6rem !important;
       }
 
       .header.scrolled .maj-badge-animated {
         left: 56% !important;
         top: 2.50rem !important;
-        padding: 0.8rem 1.6rem !important;
       }
       
       .header.scrolled .logo {
