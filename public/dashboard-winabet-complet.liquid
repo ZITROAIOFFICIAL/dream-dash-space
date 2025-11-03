@@ -314,17 +314,16 @@
         </div>
 
         <!-- Menu Items -->
-        <nav class="desktop-nav">
-          <a href="https://winabet.ai/collections/all#bet" class="desktop-nav-item">Accéder au Dashboard</a>
-          <a href="#" class="desktop-nav-item">Abonnement</a>
-          <a href="#" class="desktop-nav-item">Support</a>
+        <nav class="desktop-nav" style="margin-right: 3rem;">
+          <a class="desktop-nav-item" data-page="bet" onclick="navigateTo(event, 'bet')">Bet du jour</a>
+          <a class="desktop-nav-item" data-page="parlay" onclick="navigateTo(event, 'parlay')">Parlay du jour</a>
+          <a class="desktop-nav-item" data-page="historique-bet" onclick="navigateTo(event, 'historique-bet')">Historique bet du jour</a>
+          <a class="desktop-nav-item" data-page="historique-parlay" onclick="navigateTo(event, 'historique-parlay')">Historique Parlay du jour</a>
+          <a class="desktop-nav-item" data-page="strategy" onclick="navigateTo(event, 'strategy')">Notre stratégie</a>
+          <a class="desktop-nav-item" href="https://shopify.com/78184907003/account/pages/5176fb69-acd0-47d9-a29c-3ad5668cf59d">Mon compte</a>
+          <a class="desktop-nav-item" href="https://winabet.ai">Boutique</a>
+          <a class="desktop-nav-item" data-page="support" onclick="navigateTo(event, 'support')">Support</a>
         </nav>
-      </div>
-
-      <!-- Right: Auth Buttons -->
-      <div class="desktop-right">
-        <a href="#" class="desktop-auth-link">Se Connecter</a>
-        <a href="#" class="desktop-auth-btn">Commencer Gratuitement</a>
       </div>
     </div>
   </header>
