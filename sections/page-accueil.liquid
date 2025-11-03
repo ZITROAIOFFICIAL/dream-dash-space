@@ -42,11 +42,7 @@
       }
       
       /* ===== AVEC SCROLL - Rectangle gris ===== */
-      .header.scrolled::before {
-        width: calc(65% - 6rem);  /* Largeur gauche-droite du rectangle gris */
-        height: 90%;              /* Hauteur du rectangle gris */
-        top: 100%;                /* Position verticale du rectangle gris */
-      }
+      /* Déplacé dans des media queries dédiées plus bas pour laptop et grands écrans */
     }
     
     /* ==================== LAPTOP BREAKPOINT (769px - 1440px) ==================== */
@@ -54,7 +50,7 @@
       
       /* Rectangle gris plus large pour laptop */
       .header.scrolled::before {
-        width: calc(85% - 3rem) !important;  /* Plus large sur laptop */
+        width: calc(100% - 2rem) !important;  /* Quasi pleine largeur sur laptop */
         height: 90%;
         top: 100%;
       }
@@ -117,6 +113,24 @@
       .header.scrolled .desktop-left,
       .header.scrolled .desktop-right {
         padding-top: 3.5rem;
+      }
+    }
+
+    /* Laptop étendu (1441px - 1800px) - Rectangle gris bord à bord */
+    @media (min-width: 1441px) and (max-width: 1800px) {
+      .header.scrolled::before {
+        width: calc(100% - 2rem) !important;
+        height: 90%;
+        top: 100%;
+      }
+    }
+
+    /* Très grands écrans (>= 1801px) - largeur originale */
+    @media (min-width: 1801px) {
+      .header.scrolled::before {
+        width: calc(65% - 6rem);
+        height: 90%;
+        top: 100%;
       }
     }
   </style>
