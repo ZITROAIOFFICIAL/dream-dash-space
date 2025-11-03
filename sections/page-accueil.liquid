@@ -637,12 +637,19 @@
       }
 
       /* Fallback en cas d'échec autoplay */
+      @keyframes fallbackGradient {
+        0% { background-position: 0% 0%, 50% 0%; opacity: 0.9; }
+        50% { background-position: 50% 50%, 50% 50%; opacity: 0.8; }
+        100% { background-position: 100% 100%, 50% 100%; opacity: 0.9; }
+      }
       .hero-video-fallback {
         position: absolute;
         inset: 0;
         z-index: 0;
         background: radial-gradient(ellipse at center, rgba(16, 185, 129, 0.15) 0%, transparent 70%),
                     linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%);
+        background-size: 200% 200%, 100% 100%;
+        animation: fallbackGradient 14s ease-in-out infinite alternate;
         display: block;
       }
 
@@ -715,9 +722,27 @@
           // Tenter de lancer la vidéo
           function attemptPlay() {
             if (!video || playbackStarted) return;
-            
+
             configureVideo();
-            
+
+            // Forcer l'assignation du src sur l'élément <video> (Safari est parfois plus permissif ainsi)
+            try {
+              var existingSrc = video.getAttribute('src');
+              if (!existingSrc) {
+                var childSource = video.querySelector('source');
+                var resolved = childSource ? (childSource.src || childSource.getAttribute('src')) : (video.currentSrc || '');
+                if (resolved) {
+                  video.src = resolved;
+                }
+              }
+              // S'assurer que la vidéo est prête
+              if (typeof video.load === 'function') {
+                video.load();
+              }
+            } catch (e) {
+              console.log('Erreur assignation src:', e);
+            }
+
             var playPromise = video.play();
             if (playPromise && typeof playPromise.then === 'function') {
               playPromise
