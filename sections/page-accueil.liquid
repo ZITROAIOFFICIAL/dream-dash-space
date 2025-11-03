@@ -6,7 +6,6 @@
   <title>WINABET.AI - Page d'Accueil</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://cdn.shopify.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   {% render 'dashboard-styles' %}
   <style>
@@ -448,24 +447,16 @@
   </header>
 
   <!-- Main Content -->
-  <main class="main-content" style="padding-top: 80px;">
+  <main class="main-content" style="padding-top: 80px; padding-bottom: 150vh;">
     <style>
-      /* Empêcher le scroll horizontal causé par le scale de la vidéo */
-      body, html {
-        overflow-x: hidden;
-        max-width: 100vw;
-      }
-
       .hero-section {
         min-height: auto;
         display: flex;
         align-items: flex-start;
         background: #000000;
         position: relative;
-        overflow-y: visible;
-        overflow-x: hidden;
-        max-width: 100vw;
-        padding: 0.5rem 2.5rem 150vh;
+        overflow: visible;
+        padding: 0.5rem 2.5rem 2rem;
       }
 
       @media (min-width: 768px) {
@@ -619,98 +610,45 @@
       .hero-video {
         position: absolute;
         left: 50%;
-        top: 100%;
+        top: 130%;
         transform: translate(-50%, -50%) scale(3);
         width: 100%;
         height: auto;
         z-index: 0;
         opacity: 0.6;
-        visibility: visible;
-        transition: opacity 0.6s ease-in-out;
         pointer-events: none;
         object-fit: cover;
       }
 
-      /* En mode économie de batterie, cacher la vidéo initialement */
-      .hero-video.battery-saver {
-        opacity: 0;
-        visibility: hidden;
-      }
-
-      .hero-video.battery-saver.is-playing {
-        opacity: 0.6;
-        visibility: visible;
-      }
-
-      /* Image de couverture - visible SEULEMENT en mode économie de batterie */
-      .hero-video-cover {
-        position: absolute;
-        left: 50%;
-        top: 100%;
-        transform: translate(-50%, -50%) scale(3);
-        width: 100%;
-        height: auto;
-        z-index: 1;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.6s ease-in-out, visibility 0.6s;
-        pointer-events: none;
-        object-fit: cover;
-      }
-
-      /* Montrer l'image seulement en mode économie de batterie */
-      .hero-video.battery-saver ~ .hero-video-cover {
-        opacity: 1;
-        visibility: visible;
-      }
-
-      /* Cacher l'image quand la vidéo démarre */
-      .hero-video.battery-saver.is-playing ~ .hero-video-cover {
-        opacity: 0;
-        visibility: hidden;
-      }
-
-      /* Masquer COMPLÈTEMENT les contrôles natifs - transparents dès le début */
+      /* Masquer les contrôles natifs iOS */
       .hero-video::-webkit-media-controls,
       .hero-video::-webkit-media-controls-enclosure,
-      .hero-video::-webkit-media-controls-panel,
-      .hero-video::-webkit-media-controls-play-button,
       .hero-video::-webkit-media-controls-start-playback-button {
-        opacity: 0 !important;
-        visibility: hidden !important;
         display: none !important;
-        -webkit-appearance: none !important;
-        appearance: none !important;
-        overflow: hidden !important;
-        pointer-events: none !important;
+        -webkit-appearance: none;
+        overflow: hidden;
       }
 
-      /* Forcer l'opacité 0 sur TOUS les pseudo-éléments de contrôle */
-      .hero-video::before,
-      .hero-video::after {
-        display: none !important;
+      /* Fallback en cas d'échec autoplay */
+      .hero-video-fallback {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background: radial-gradient(ellipse at center, rgba(16, 185, 129, 0.15) 0%, transparent 70%),
+                    linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%);
+        display: none;
       }
 
-      /* Règle globale pour masquer tout contrôle média */
-      video::-webkit-media-controls,
-      video::-webkit-media-controls-enclosure,
-      video::-webkit-media-controls-panel {
-        opacity: 0 !important;
+      .no-autoplay .hero-video {
         display: none !important;
       }
 
-      /* Fallback gradient supprimé - le poster de la vidéo s'affiche désormais */
+      .no-autoplay .hero-video-fallback {
+        display: block;
+      }
 
       @media (min-width: 768px) {
         .hero-video {
-          top: 100px;
-          left: 0;
-          transform: none;
-          width: 100%;
-          height: auto;
-        }
-        
-        .hero-video-cover {
           top: 100px;
           left: 0;
           transform: none;
@@ -732,167 +670,94 @@
         webkit-playsinline
         preload="auto"
         defaultMuted
-        aria-hidden="true"
-        tabindex="-1"
+        controlslist="nodownload nofullscreen noplaybackrate"
+        disablepictureinpicture
       >
         <source src="https://cdn.shopify.com/videos/c/o/v/408f93f1121146cca3615aa9af2aa45e.mp4" type="video/mp4">
       </video>
       
-      <!-- Image de couverture affichée avant le démarrage de la vidéo en mode économie de batterie -->
-      <img 
-        src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/frame_0s.png?v=1762209709" 
-        alt="" 
-        class="hero-video-cover"
-        aria-hidden="true"
-        decoding="async"
-        loading="eager"
-        fetchpriority="high"
-        onerror="this.style.display='none'"
-      />
+      <!-- Fallback visuel si autoplay échoue -->
+      <div class="hero-video-fallback" aria-hidden="true"></div>
       
       <script>
         (function() {
-          var video = document.getElementById('heroVideo');
-          var heroSection = document.querySelector('.hero-section');
-          var playbackStarted = false;
-          var userGestureListenersAttached = false;
+          var video, heroSection, playbackConfirmed = false, fallbackTimer;
           
-          // Configuration vidéo pour maximiser chances d'autoplay
-          function configureVideo() {
-            if (!video) return;
-            video.muted = true;
-            video.defaultMuted = true;
-            video.volume = 0;
-            video.playsInline = true;
-            video.setAttribute('muted', '');
-            video.setAttribute('playsinline', '');
-            video.setAttribute('webkit-playsinline', '');
-            video.removeAttribute('controls');
-          }
-          
-          // Marquer la vidéo comme démarrée
-          function onPlaybackStart() {
-            if (playbackStarted) return;
-            playbackStarted = true;
-            video.classList.add('is-playing');
-            // Rendre la vidéo visible une fois la lecture confirmée
-            try { video.style.removeProperty('opacity'); } catch (e) { video.style.opacity = '0.6'; }
-            video.style.visibility = 'visible';
-            removeUserGestureListeners();
-          }
-          
-          // Tenter de lancer la vidéo
           function attemptPlay() {
-            if (!video || playbackStarted) return;
-
-            configureVideo();
-
-            // Forcer l'assignation du src sur l'élément <video> (Safari est parfois plus permissif ainsi)
+            if (!video || playbackConfirmed) return;
             try {
-              var existingSrc = video.getAttribute('src');
-              if (!existingSrc) {
-                var childSource = video.querySelector('source');
-                var resolved = childSource ? (childSource.src || childSource.getAttribute('src')) : (video.currentSrc || '');
-                if (resolved) {
-                  video.src = resolved;
-                }
-              }
-              // S'assurer que la vidéo est prête
-              if (typeof video.load === 'function') {
-                video.load();
+              video.muted = true;
+              video.defaultMuted = true;
+              video.playsInline = true;
+              video.setAttribute('muted', '');
+              video.setAttribute('playsinline', '');
+              video.setAttribute('webkit-playsinline', '');
+              video.removeAttribute('controls');
+              
+              var playPromise = video.play();
+              if (playPromise && typeof playPromise.then === 'function') {
+                playPromise.then(function() {
+                  // Play réussi - ne rien faire, attendre 'playing'
+                }).catch(function() {
+                  // Play échoué silencieusement
+                });
               }
             } catch (e) {
-              console.log('Erreur assignation src:', e);
+              // Erreur silencieuse
             }
+          }
 
-            var playPromise = video.play();
-            if (playPromise && typeof playPromise.then === 'function') {
-              playPromise
-                .then(function() {
-                  console.log('Autoplay réussi');
-                })
-                .catch(function(error) {
-                  console.log('Autoplay bloqué, attente geste utilisateur:', error);
-                  attachUserGestureListeners();
-                });
-            }
+          function onPlaying() {
+            if (playbackConfirmed) return;
+            playbackConfirmed = true;
+            clearTimeout(fallbackTimer);
+            cleanup();
           }
-          
-          // SOLUTION PRINCIPALE: lancer vidéo au premier geste utilisateur
+
+          function activateFallback() {
+            if (playbackConfirmed) return;
+            if (heroSection) {
+              heroSection.classList.add('no-autoplay');
+            }
+            cleanup();
+          }
+
           function onUserGesture() {
-            if (playbackStarted || !video) return;
-            
-            console.log('Geste utilisateur détecté, lancement vidéo');
-            configureVideo();
-            
-            var playPromise = video.play();
-            if (playPromise && typeof playPromise.then === 'function') {
-              playPromise.catch(function(e) {
-                console.log('Échec lecture sur geste:', e);
-              });
-            }
-          }
-          
-          // Attacher listeners pour gestes utilisateur
-          function attachUserGestureListeners() {
-            if (userGestureListenersAttached) return;
-            userGestureListenersAttached = true;
-            
-            // Activer le mode économie de batterie (afficher l'image de couverture)
-            console.log('Mode économie de batterie activé');
-            video.classList.add('battery-saver');
-            
-            var events = ['touchstart', 'touchmove', 'scroll', 'mousemove', 'click'];
-            events.forEach(function(eventName) {
-              document.addEventListener(eventName, onUserGesture, { 
-                once: true, 
-                passive: true 
-              });
-            });
-            
-            // Backup: après 5s, si toujours pas de geste, on arrête d'essayer
-            setTimeout(function() {
-              if (!playbackStarted) {
-                console.log('Aucun geste après 5s, abandon autoplay');
-                removeUserGestureListeners();
-              }
-            }, 5000);
-          }
-          
-          // Nettoyer les listeners
-          function removeUserGestureListeners() {
-            if (!userGestureListenersAttached) return;
-            
-            var events = ['touchstart', 'touchmove', 'scroll', 'mousemove', 'click'];
-            events.forEach(function(eventName) {
-              document.removeEventListener(eventName, onUserGesture);
-            });
-          }
-          
-          // Écouter l'événement 'playing' (confirmation que vidéo joue)
-          if (video) {
-            video.addEventListener('playing', onPlaybackStart);
-          }
-          
-          // Tentatives d'autoplay à différents moments
-          if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', attemptPlay);
-          } else {
             attemptPlay();
           }
-          
-          if (video) {
+
+          function cleanup() {
+            ['click','touchstart','touchend','pointerdown','scroll','keydown','mousemove','visibilitychange','orientationchange'].forEach(function(evt){
+              document.removeEventListener(evt, onUserGesture);
+            });
+            if (video) {
+              video.removeEventListener('playing', onPlaying);
+              video.removeEventListener('canplay', attemptPlay);
+              video.removeEventListener('loadeddata', attemptPlay);
+            }
+          }
+
+          document.addEventListener('DOMContentLoaded', function() {
+            video = document.getElementById('heroVideo');
+            heroSection = document.querySelector('.hero-section');
+            if (!video || !heroSection) return;
+
+            // Lancer timer fallback
+            fallbackTimer = setTimeout(activateFallback, 1500);
+
+            // Écouter 'playing' pour confirmer lecture
+            video.addEventListener('playing', onPlaying, { once: true });
+
+            // Tentatives de lecture
+            attemptPlay();
             video.addEventListener('canplay', attemptPlay, { once: true });
             video.addEventListener('loadeddata', attemptPlay, { once: true });
-          }
-          
-          window.addEventListener('load', attemptPlay);
-          
-          // Re-tenter si page redevient visible
-          document.addEventListener('visibilitychange', function() {
-            if (!document.hidden && !playbackStarted) {
-              attemptPlay();
-            }
+            window.addEventListener('load', attemptPlay, { once: true });
+
+            // Écouter gestes utilisateur passifs
+            ['click','touchstart','touchend','pointerdown','scroll','keydown','mousemove','visibilitychange','orientationchange'].forEach(function(evt){
+              document.addEventListener(evt, onUserGesture, { once: true, passive: true });
+            });
           });
         })();
       </script>
