@@ -9,12 +9,39 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   {% render 'dashboard-styles' %}
   <style>
-    /* Desktop uniquement - override header gris au scroll (droite plus étroit, moins haut, plus bas) */
+    /* ==================== DESKTOP UNIQUEMENT - AJUSTEMENTS FACILES ==================== */
     @media (min-width: 769px) {
+      
+      /* ===== SANS SCROLL - Positions et tailles initiales ===== */
+      
+      /* Badge Online - Position gauche/droite */
+      .desktop-badge-online {
+        margin-left: 0rem;  /* Ajustez cette valeur (négatif = plus à gauche, positif = plus à droite) */
+      }
+      
+      /* Logo - Taille et position */
+      .desktop-logo {
+        font-size: 4.5rem !important;  /* Taille du logo */
+        margin-left: 0rem;  /* Position gauche/droite (négatif = gauche, positif = droite) */
+        margin-top: 0rem;   /* Hauteur verticale (négatif = haut, positif = bas) */
+      }
+      
+      /* Badge IA - Position gauche/droite */
+      .desktop-badge-ia {
+        margin-left: 0rem;  /* Ajustez cette valeur (négatif = plus à gauche, positif = plus à droite) */
+        margin-top: 0rem;   /* Hauteur verticale (négatif = haut, positif = bas) */
+      }
+      
+      /* Espacement global entre les éléments */
+      .desktop-left {
+        gap: 2rem !important;  /* Espacement entre badge online, logo et badge IA */
+      }
+      
+      /* ===== AVEC SCROLL - Rectangle gris ===== */
       .header.scrolled::before {
-        width: calc(65% - 6rem);
-        height: 90%;
-        top: 100%;
+        width: calc(65% - 6rem);  /* Largeur gauche-droite du rectangle gris */
+        height: 90%;              /* Hauteur du rectangle gris */
+        top: 100%;                /* Position verticale du rectangle gris */
       }
     }
   </style>
