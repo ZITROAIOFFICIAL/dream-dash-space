@@ -513,20 +513,20 @@
       }
 
       .hero-title {
-        font-size: clamp(2.5rem, 8vw, 5rem);
+        font-size: clamp(3.5rem, 10vw, 7rem);
         font-family: 'Outfit', sans-serif;
         font-weight: 300;
         line-height: 1.1;
         letter-spacing: -0.02em;
         color: #ffffff;
         margin-bottom: 1.5rem;
-        text-transform: capitalize;
       }
 
       .hero-subtitle {
         font-size: clamp(1rem, 2vw, 1.25rem);
         line-height: 1.6;
         color: rgba(255, 255, 255, 0.35);
+        font-weight: 700;
         margin-bottom: 2.5rem;
         max-width: 600px;
         text-align: center;
@@ -542,13 +542,14 @@
       .btn-primary {
         display: inline-flex;
         align-items: center;
+        justify-content: center;
         gap: 0.5rem;
         padding: 1rem 2rem;
         background: #ffffff;
         color: #000000;
         font-weight: 600;
         font-size: 1rem;
-        border-radius: 0.5rem;
+        border-radius: 9999px;
         border: none;
         cursor: pointer;
         transition: all 0.3s;
@@ -613,7 +614,7 @@
         <!-- Hero Content -->
         <div class="hero-content" style="grid-column: 1 / -1;">
           <h1 class="hero-title">
-            {{ section.settings.hero_title_1 }} {{ section.settings.hero_title_highlight }}
+            Gagne tes paris grace à notre ia
           </h1>
 
           <p class="hero-subtitle">
@@ -623,9 +624,6 @@
           <div class="hero-cta">
             <a href="{{ section.settings.cta_primary_link }}" class="btn-primary">
               {{ section.settings.cta_primary_text }}
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M7 13l5-5m0 0l-5-5m5 5H3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
             </a>
           </div>
         </div>
