@@ -626,16 +626,33 @@
         object-fit: cover;
       }
 
-      /* Masquer les contrôles natifs iOS */
-      .hero-video::-webkit-media-controls,
-      .hero-video::-webkit-media-controls-enclosure,
+      /* Masquer complètement tous les contrôles natifs y compris l'icône de play */
+      .hero-video::-webkit-media-controls {
+        display: none !important;
+      }
+      .hero-video::-webkit-media-controls-enclosure {
+        display: none !important;
+      }
+      .hero-video::-webkit-media-controls-panel {
+        display: none !important;
+      }
+      .hero-video::-webkit-media-controls-play-button {
+        display: none !important;
+      }
       .hero-video::-webkit-media-controls-start-playback-button {
         display: none !important;
         -webkit-appearance: none;
-        overflow: hidden;
+      }
+      .hero-video::-webkit-media-controls-overlay-play-button {
+        display: none !important;
+      }
+      
+      /* Cacher la vidéo par défaut pour éviter l'affichage de l'icône play */
+      .hero-video {
+        display: none;
       }
 
-      /* Fallback image en cas d'échec autoplay (mode économie d'énergie) */
+      /* Fallback image affichée par défaut */
       .hero-fallback-image {
         position: absolute;
         left: 50%;
@@ -648,7 +665,7 @@
         opacity: 0.6;
         pointer-events: none;
         object-fit: cover;
-        display: none;
+        display: block;
       }
 
       @media (min-width: 768px) {
@@ -681,13 +698,12 @@
         <source src="https://cdn.shopify.com/videos/c/o/v/408f93f1121146cca3615aa9af2aa45e.mp4" type="video/mp4">
       </video>
       
-      <!-- Fallback image si autoplay échoue (mode économie d'énergie) -->
+      <!-- Fallback image affichée par défaut -->
       <img
         id="hero-fallback-image"
         class="hero-fallback-image"
         src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/frame_0s.png?v=1762209709"
         alt="Hero background"
-        style="display: none;"
       />
       
       <script>
@@ -707,8 +723,12 @@
             var playPromise = video.play();
             
             if (playPromise !== undefined) {
-              playPromise.catch(function(error) {
-                // Autoplay échoué (mode économie d'énergie) - afficher l'image statique
+              playPromise.then(function() {
+                // Autoplay réussi - afficher la vidéo, cacher l'image
+                video.style.display = 'block';
+                fallbackImage.style.display = 'none';
+              }).catch(function(error) {
+                // Autoplay échoué (mode économie d'énergie) - garder l'image visible
                 video.style.display = 'none';
                 fallbackImage.style.display = 'block';
               });
