@@ -115,7 +115,7 @@
       .desktop-nav {
         --nav-shift: 0rem;
         --scroll-shift: 0px;
-        transform: translateX(var(--nav-shift)) translateY(var(--scroll-shift));
+        transform: translateX(calc(-50% + var(--nav-shift))) translateY(var(--scroll-shift)) !important;
       }
       
       .header.scrolled .desktop-badge-online,
@@ -127,10 +127,7 @@
       /* Nav: descendre de 2px, ne pas bouger horizontalement */
       .header.scrolled .desktop-nav {
         --scroll-shift: 2px;
-        position: relative;
-        left: 0 !important;
-        right: auto !important;
-        transform: translateX(var(--nav-shift)) translateY(var(--scroll-shift)) !important;
+        transform: translateX(calc(-50% + var(--nav-shift))) translateY(var(--scroll-shift)) !important;
       }
     }
 
@@ -168,7 +165,7 @@
         margin-right: 2rem;
         --nav-shift: -14rem; /* Ajustez cette valeur pour déplacer vers la droite */
         --scroll-shift: 0px;
-        transform: translateX(var(--nav-shift)) translateY(var(--scroll-shift));
+        transform: translateX(calc(-50% + var(--nav-shift))) translateY(var(--scroll-shift)) !important;
       }
       
       /* Assurer que le texte reste sur une ligne */
@@ -187,10 +184,7 @@
       /* Nav: descendre de 2px, ne pas bouger horizontalement */
       .header.scrolled .desktop-nav {
         --scroll-shift: 2px;
-        position: relative;
-        left: 0 !important;
-        right: auto !important;
-        transform: translateX(var(--nav-shift)) translateY(var(--scroll-shift)) !important;
+        transform: translateX(calc(-50% + var(--nav-shift))) translateY(var(--scroll-shift)) !important;
       }
     }
 
