@@ -632,14 +632,35 @@
     <section class="hero-section">
       <!-- Background video -->
       <video 
+        id="heroVideo"
         class="hero-video"
         autoplay 
         loop 
         muted 
         playsinline
+        webkit-playsinline
+        preload="auto"
+        defaultMuted
       >
         <source src="https://cdn.shopify.com/videos/c/o/v/408f93f1121146cca3615aa9af2aa45e.mp4" type="video/mp4">
       </video>
+      
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          var video = document.getElementById('heroVideo');
+          if (video) {
+            video.muted = true;
+            video.play().catch(function(error) {
+              console.log('Autoplay was prevented:', error);
+              // Force play on user interaction
+              document.addEventListener('click', function playVideo() {
+                video.play();
+                document.removeEventListener('click', playVideo);
+              }, { once: true });
+            });
+          }
+        });
+      </script>
       
       <!-- Background gradients -->
       <div class="hero-bg-gradient hero-bg-gradient-1"></div>
