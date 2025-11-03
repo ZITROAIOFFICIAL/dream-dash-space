@@ -124,9 +124,13 @@
         --scroll-shift: 2px;
       }
       
-      /* Forcer le nav à ne pas bouger au scroll */
+      /* Nav: descendre de 2px, ne pas bouger horizontalement */
       .header.scrolled .desktop-nav {
-        --scroll-shift: 0px;
+        --scroll-shift: 2px;
+        position: relative;
+        left: 0 !important;
+        right: auto !important;
+        transform: translateX(var(--nav-shift)) translateY(var(--scroll-shift)) !important;
       }
     }
 
@@ -180,9 +184,13 @@
         --scroll-shift: 2px;
       }
       
-      /* Forcer le nav à ne pas bouger au scroll */
+      /* Nav: descendre de 2px, ne pas bouger horizontalement */
       .header.scrolled .desktop-nav {
-        --scroll-shift: 0px;
+        --scroll-shift: 2px;
+        position: relative;
+        left: 0 !important;
+        right: auto !important;
+        transform: translateX(var(--nav-shift)) translateY(var(--scroll-shift)) !important;
       }
     }
 
