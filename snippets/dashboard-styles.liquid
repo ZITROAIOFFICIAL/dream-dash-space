@@ -639,6 +639,15 @@
       opacity: 1;
     }
 
+    /* Desktop only - adjust header background when scrolled */
+    @media (min-width: 769px) {
+      .header.scrolled::before {
+        width: calc(100% - 10rem);
+        height: 55%;
+        top: 58%;
+      }
+    }
+
     /* Transitions for elements */
     #online-badge-container,
     #maj-badge-container,
