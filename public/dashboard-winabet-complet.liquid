@@ -5,6 +5,149 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WINABET.AI - Dashboard Paris Sportifs</title>
   {% render 'dashboard-styles' %}
+  <style>
+    /* ==================== DESKTOP UNIQUEMENT - AJUSTEMENTS FACILES ==================== */
+    @media (min-width: 769px) {
+      
+      /* ===== SANS SCROLL - Positions et tailles initiales ===== */
+      
+      /* Badge Online - Position gauche/droite + hauteur */
+      .desktop-badge-online {
+        position: relative;
+        left: 0rem;
+        top: 0rem;
+      }
+      
+      /* Logo - Taille et position */
+      .desktop-logo {
+        font-size: 3.6rem !important;
+        position: relative;
+        left: 0rem;
+        top: 0.5rem;
+      }
+      
+      /* Badge IA - Position gauche/droite + hauteur */
+      .desktop-badge-ia {
+        position: relative;
+        left: 0rem;
+        top: 0rem;
+      }
+      
+      /* Espacement global entre les éléments */
+      .desktop-left {
+        gap: 2rem !important;
+      }
+      
+      /* ===== AVEC SCROLL - Rectangle gris ===== */
+      /* Déplacé dans des media queries dédiées plus bas pour laptop et grands écrans */
+    }
+    
+    /* ==================== LAPTOP BREAKPOINT (769px - 1440px) ==================== */
+    @media (min-width: 769px) and (max-width: 1440px) {
+      
+      /* Rectangle gris plus large pour laptop */
+      .header.scrolled::before {
+        width: calc(100% - 2rem) !important;
+        height: 90%;
+        top: 100%;
+      }
+      
+      /* Badge Online */
+      .desktop-badge-online {
+        left: 0;
+        transform: scale(0.9);
+      }
+      
+      /* Logo */
+      .desktop-logo {
+        font-size: 2.8rem !important;
+        left: 0;
+      }
+      
+      /* Badge MAJ IA */
+      .desktop-badge-ia {
+        left: 0;
+        transform: scale(0.9);
+      }
+      
+      /* Espacement global - Groupe gauche */
+      .desktop-left {
+        gap: 1rem !important;
+        margin-left: 0rem;
+      }
+      
+      /* Espacement global - Groupe droite */
+      .desktop-right {
+        gap: 1rem;
+        transform: translateX(0rem);
+      }
+      
+      /* Nav Links */
+      .desktop-nav {
+        gap: 1.5rem;
+      }
+      
+      .desktop-nav-item {
+        font-size: 1.2rem;
+      }
+      
+      /* Auth Buttons */
+      .desktop-auth-link {
+        font-size: 1.2rem;
+        margin-right: 0.5rem;
+      }
+      
+      .desktop-auth-btn {
+        padding: 0.95rem 1.4rem;
+        font-size: 1.1rem;
+      }
+      
+      /* Header scrolled adjustments */
+      .desktop-menu.scrolled {
+        padding-top: 3rem;
+      }
+      
+      .header.scrolled .desktop-left,
+      .header.scrolled .desktop-right {
+        padding-top: 3.5rem;
+      }
+    }
+
+    /* Laptop étendu (1441px - 1800px) - Rectangle gris bord à bord + éléments centrés */
+    @media (min-width: 1441px) and (max-width: 1800px) {
+      .header.scrolled::before {
+        width: calc(100% - 20rem) !important;
+        height: 90%;
+        top: 100%;
+      }
+      
+      /* Groupe gauche - centrer */
+      .desktop-left {
+        margin-left: 0rem;
+        gap: 1.25rem;
+      }
+      
+      /* Groupe droite - centrer */
+      .desktop-right {
+        transform: translateX(0rem);
+        gap: 1.25rem;
+      }
+      
+      /* Réduire légèrement les espacements */
+      .desktop-nav {
+        gap: 1.75rem;
+      }
+    }
+
+    /* Très grands écrans (>= 1801px) - largeur originale */
+    @media (min-width: 1801px) {
+      .header.scrolled::before {
+        width: calc(65% - 6rem);
+        height: 90%;
+        top: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- Mobile Toggle Button -->
