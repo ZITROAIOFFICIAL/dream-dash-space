@@ -134,7 +134,7 @@
     /* Laptop étendu (1441px - 1800px) - Rectangle gris bord à bord + éléments centrés */
     @media (min-width: 1441px) and (max-width: 1800px) {
       .header.scrolled::before {
-        width: calc(100% - 0rem) !important; /* Ajustez la valeur après le - pour réduire la largeur */
+        width: calc(100% - 35rem) !important; /* Ajustez la valeur après le - pour réduire la largeur */
         height: 90%;
         top: 100%;
       }
@@ -148,7 +148,7 @@
       .desktop-badge-online,
       .desktop-logo,
       .desktop-badge-ia {
-        --left-shift: 0rem; /* Ajustez cette valeur pour déplacer logo/badges */
+        --left-shift: 40rem; /* Ajustez cette valeur pour déplacer logo/badges */
         --scroll-shift: 0px;
         transform: translateX(var(--left-shift)) translateY(var(--scroll-shift));
       }
@@ -163,7 +163,7 @@
       .desktop-nav {
         gap: 1.5rem;
         margin-right: 2rem;
-        --nav-shift: -14rem; /* Ajustez cette valeur pour déplacer vers la droite */
+        --nav-shift: 23rem; /* Ajustez cette valeur pour déplacer vers la droite */
         --scroll-shift: 0px;
         transform: translateX(calc(-50% + var(--nav-shift))) translateY(var(--scroll-shift)) !important;
       }
