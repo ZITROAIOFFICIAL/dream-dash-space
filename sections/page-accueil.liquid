@@ -283,7 +283,19 @@
 
         <!-- IA Badge -->
         <div class="desktop-badge-ia">
-          <div class="maj-badge-animated" style="position: relative; display: flex; align-items: center; gap: 0.3rem; padding: 0.25rem 0.5rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; min-width: 80px; z-index: 2;">
+          <div style="position: relative; display: flex; align-items: center; gap: 0.3rem; padding: 0.25rem 0.5rem; background: rgba(16, 185, 129, 0.05); border-radius: 9999px; min-width: 80px; z-index: 2;">
+            <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 6px); height: calc(100% + 6px); pointer-events: none; z-index: -1;">
+              <defs>
+                <filter id="iaGlowDesktop" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="2" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+              <rect x="3" y="3" width="calc(100% - 6px)" height="calc(100% - 6px)" rx="10" ry="10" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+              <rect x="3" y="3" width="calc(100% - 6px)" height="calc(100% - 6px)" rx="10" ry="10" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="48 816" stroke-linecap="round" filter="url(#iaGlowDesktop)" opacity="0.9">
+                <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+              </rect>
+            </svg>
             <svg id="atom-desktop" width="20" height="20" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
               <defs>
                 <filter id="softGlowDesktopClone" x="-50%" y="-50%" width="200%" height="200%">
