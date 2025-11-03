@@ -120,16 +120,20 @@
       
       .header.scrolled .desktop-badge-online,
       .header.scrolled .desktop-logo,
-      .header.scrolled .desktop-badge-ia,
-      .header.scrolled .desktop-nav {
+      .header.scrolled .desktop-badge-ia {
         --scroll-shift: 2px;
+      }
+      
+      /* Forcer le nav à ne pas bouger au scroll */
+      .header.scrolled .desktop-nav {
+        --scroll-shift: 0px;
       }
     }
 
     /* Laptop étendu (1441px - 1800px) - Rectangle gris bord à bord + éléments centrés */
     @media (min-width: 1441px) and (max-width: 1800px) {
       .header.scrolled::before {
-        width: calc(100% - 15rem) !important;
+        width: calc(100% - 0rem) !important; /* Ajustez la valeur après le - pour réduire la largeur */
         height: 90%;
         top: 100%;
       }
@@ -172,9 +176,13 @@
       /* Garder les positions identiques au scroll: descendre de 2px seulement */
       .header.scrolled .desktop-badge-online,
       .header.scrolled .desktop-logo,
-      .header.scrolled .desktop-badge-ia,
-      .header.scrolled .desktop-nav {
+      .header.scrolled .desktop-badge-ia {
         --scroll-shift: 2px;
+      }
+      
+      /* Forcer le nav à ne pas bouger au scroll */
+      .header.scrolled .desktop-nav {
+        --scroll-shift: 0px;
       }
     }
 
