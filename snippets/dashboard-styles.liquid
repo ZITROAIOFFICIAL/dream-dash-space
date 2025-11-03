@@ -18,9 +18,9 @@
       /* Contrôle du déplacement des nav links en scroll - valeurs négatives = monte, positives = descend */
       --nav-scroll-offset: -0.35rem;
       /* Contrôle de la position du logo/badges (valeurs négatives = vers la gauche, positives = vers la droite) */
-      --desktop-left-offset: -40rem;
-      /* Contrôle de la position des boutons auth (valeurs négatives = vers la gauche, positives = vers la droite) */
-      --desktop-right-offset: 39.5rem;
+      --desktop-left-offset: -50rem;
+      /* Contrôle du déplacement horizontal des nav items (valeurs positives = vers la droite, négatives = vers la gauche) */
+      --desktop-nav-horizontal-offset: 8rem;
     }
 
     /* Reset & Base */
@@ -310,7 +310,7 @@
 
     .header.scrolled .desktop-nav {
       /* Contrôle du déplacement des nav links en scroll - valeurs négatives = monte, positives = descend */
-      transform: translateX(-50%) translateY(var(--nav-scroll-offset, 2rem));
+      transform: translateX(calc(-50% + var(--desktop-nav-horizontal-offset, 0rem))) translateY(var(--nav-scroll-offset, 2rem));
     }
 
     .header.scrolled .desktop-left,
@@ -343,20 +343,22 @@
     .desktop-nav {
       position: absolute;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translateX(calc(-50% + var(--desktop-nav-horizontal-offset, 0rem)));
       display: flex;
       align-items: center;
-      gap: 2rem;
+      gap: 1.2rem;
+      white-space: nowrap;
     }
 
     .desktop-nav-item {
       color: #ffffff;
       text-decoration: none;
       font-family: 'Outfit', sans-serif;
-      font-size: 1.35rem; /* Réduit de 1.6rem */
+      font-size: 1.1rem;
       font-weight: 400;
       transition: color 0.2s;
       padding-top: 1rem;
+      white-space: nowrap;
     }
 
     .desktop-nav-item:hover {
