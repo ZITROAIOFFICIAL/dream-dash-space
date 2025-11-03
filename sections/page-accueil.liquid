@@ -6,6 +6,7 @@
   <title>WINABET.AI - Page d'Accueil</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.shopify.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   {% render 'dashboard-styles' %}
   <style>
@@ -711,10 +712,14 @@
       
       <!-- Image de couverture affichée avant le démarrage de la vidéo en mode économie de batterie -->
       <img 
-        src="/assets/hero-cover.png" 
+        src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Untitled_design-48_8f75d86f-d9dd-4f7d-a45e-a0d7efde6fc3.png?v=1762208930" 
         alt="" 
         class="hero-video-cover"
         aria-hidden="true"
+        decoding="async"
+        loading="eager"
+        fetchpriority="high"
+        onerror="this.style.display='none'"
       />
       
       <script>
