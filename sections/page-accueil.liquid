@@ -8,6 +8,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   {% render 'dashboard-styles' %}
+  <style>
+    /* Desktop uniquement - override header gris au scroll (droite plus étroit, moins haut, plus bas) */
+    @media (min-width: 769px) {
+      .header.scrolled::before {
+        width: calc(100% - 10rem);
+        height: 55%;
+        top: 58%;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- Overlay -->
