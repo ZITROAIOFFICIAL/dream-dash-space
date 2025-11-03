@@ -606,16 +606,37 @@
         bottom: -200px;
         left: -200px;
       }
+
+      .hero-video {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) scale(1.5);
+        width: 100%;
+        height: auto;
+        z-index: 0;
+        opacity: 0.6;
+      }
+
+      @media (min-width: 768px) {
+        .hero-video {
+          top: 100px;
+          left: 0;
+          transform: none;
+          width: 100%;
+          height: auto;
+        }
+      }
     </style>
 
     <section class="hero-section">
       <!-- Background video -->
       <video 
+        class="hero-video"
         autoplay 
         loop 
         muted 
         playsinline
-        style="position: absolute; top: 180px; left: 0; width: 100%; height: auto; z-index: 0; opacity: 0.6;"
       >
         <source src="https://cdn.shopify.com/videos/c/o/v/408f93f1121146cca3615aa9af2aa45e.mp4" type="video/mp4">
       </video>
