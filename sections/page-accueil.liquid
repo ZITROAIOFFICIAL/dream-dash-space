@@ -23,7 +23,7 @@
       
       /* Logo - Taille et position */
       .desktop-logo {
-        font-size: 4.5rem !important;  /* Taille du logo */
+        font-size: 3.6rem !important;  /* Taille du logo réduite de 20% */
         position: relative;
         left: 0rem;  /* Position gauche/droite (négatif = gauche, positif = droite) */
         top: 0.5rem;   /* Hauteur verticale (négatif = haut, positif = bas) */
@@ -256,7 +256,7 @@
       <div class="desktop-left">
         <!-- Online Badge -->
         <div class="desktop-badge-online">
-          <div id="desktop-online-badge" style="position: relative; display: flex; align-items: center; gap: 0.8rem; padding: 0.75rem 1.15rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; z-index: 2;">
+          <div id="desktop-online-badge" style="position: relative; display: flex; align-items: center; gap: 0.64rem; padding: 0.6rem 0.92rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; z-index: 2;">
             <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
               <defs>
                 <filter id="onlineGlowDesktopClone" x="-50%" y="-50%" width="200%" height="200%">
@@ -269,10 +269,10 @@
                 <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
               </rect>
             </svg>
-            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
               <circle cx="10" cy="10" r="4" fill="rgba(255, 255, 255, 0.7)"/>
             </svg>
-            <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 1.85rem; white-space: nowrap;"><span id="desktop-member-count" class="member-count" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">{{ section.settings.members_base | default: 50 }}</span> online</span>
+            <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 1.48rem; white-space: nowrap;"><span id="desktop-member-count" class="member-count" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">{{ section.settings.members_base | default: 50 }}</span> online</span>
           </div>
         </div>
 
@@ -283,7 +283,7 @@
 
         <!-- IA Badge -->
         <div class="desktop-badge-ia">
-          <div style="position: relative; display: flex; align-items: center; gap: 0.65rem; padding: 0.55rem 0.9rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+          <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
             <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
               <defs>
                 <filter id="iaGlowDesktop" x="-50%" y="-50%" width="200%" height="200%">
@@ -296,7 +296,7 @@
                 <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
               </rect>
             </svg>
-            <svg id="atom-desktop" width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+            <svg id="atom-desktop" width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
               <defs>
                 <filter id="softGlowDesktopClone" x="-50%" y="-50%" width="200%" height="200%">
                   <feGaussianBlur stdDeviation="1.2" result="b"/>
@@ -322,9 +322,9 @@
                   <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
                 </use>
               </g>
-              <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
+              <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
             </svg>
-            <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 1.3rem; white-space: nowrap;">MAJ <span id="desktop-time" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">17:34</span></span>
+            <span style="color: rgba(255, 255, 255, 0.7); font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span id="desktop-time" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">17:34</span></span>
           </div>
         </div>
 
