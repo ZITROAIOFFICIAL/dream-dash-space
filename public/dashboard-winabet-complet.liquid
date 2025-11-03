@@ -334,6 +334,13 @@
 
   <!-- Sidebar -->
   <aside class="sidebar">
+    <!-- Mobile Toggle X Button (inside sidebar) -->
+    <button class="mobile-toggle active" onclick="toggleSidebar()" aria-label="Toggle menu" style="position: absolute; top: 1.25rem; left: 1.5rem; z-index: 100;">
+      <svg class="mobile-toggle-icon close-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+    
     <div id="online-badge-container" class="mobile-only" style="position: absolute; left: 23%; top: 0.15rem; transform: translateX(-50%);">
       <div id="online-badge" style="position: relative; display: flex; align-items: center; gap: 0.25rem; padding: 0.25rem 0.4rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 9999px; z-index: 2;">
         <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 4px); height: calc(100% + 4px); pointer-events: none; z-index: -1;">
