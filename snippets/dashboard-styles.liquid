@@ -2650,14 +2650,14 @@
         font-size: 5rem !important;
       }
 
-      /* Afficher les éléments mobile sur desktop */
+      /* Afficher les éléments desktop sur desktop (corrigé) */
       .mobile-only {
-        display: block !important;
+        display: none !important;
       }
 
-      /* Cacher les éléments desktop-menu */
+      /* Afficher le vrai menu desktop */
       .desktop-menu {
-        display: none !important;
+        display: flex !important;
       }
     }
 {% endstyle %}
