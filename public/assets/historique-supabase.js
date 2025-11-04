@@ -307,14 +307,13 @@ function displayParlayHistory(data) {
 function generateBetCardHTML(bet) {
   console.log("🖼️ Génération bet card, logos:", { team1_logo: bet.team1_logo, team2_logo: bet.team2_logo });
   // Calculer les units et la couleur selon le résultat
-  const betUnits = parseFloat(bet.bet_units || "1");
   let unitsText, unitsColor;
   if (bet.result === "win") {
-    const unitsValue = (betUnits * (bet.multiplier - 1)).toFixed(2);
+    const unitsValue = (bet.multiplier - 1).toFixed(2);
     unitsText = `+${unitsValue} UNITS`;
     unitsColor = "#22c55e";
   } else if (bet.result === "loose") {
-    unitsText = `-${betUnits.toFixed(2)} UNITS`;
+    unitsText = "-1.00 UNITS";
     unitsColor = "#ef4444";
   } else {
     unitsText = "EN ATTENTE";
@@ -429,14 +428,13 @@ function generateBetCardHTML(bet) {
 // Générer le HTML d'une carte de parlay
 function generateParlayCardHTML(parlay) {
   // Calculer les units et la couleur selon le résultat
-  const betUnits = parseFloat(parlay.bet_units || "1");
   let unitsText, unitsColor;
   if (parlay.result === "win") {
-    const unitsValue = (betUnits * (parlay.multiplier - 1)).toFixed(2);
+    const unitsValue = (parlay.multiplier - 1).toFixed(2);
     unitsText = `+${unitsValue} UNITS`;
     unitsColor = "#22c55e";
   } else if (parlay.result === "loose") {
-    unitsText = `-${betUnits.toFixed(2)} UNITS`;
+    unitsText = "-1.00 UNITS";
     unitsColor = "#ef4444";
   } else {
     unitsText = "EN ATTENTE";
@@ -446,15 +444,6 @@ function generateParlayCardHTML(parlay) {
   // Générer le HTML des legs
   const legsHTML = parlay.legs
     .map((leg, index) => {
-      // Statut de la leg individuelle
-      const legStatus = parlay.leg_results?.[`leg_${index}`] || "pending";
-      const legBorderColor = legStatus === "win" ? "#22c55e" : legStatus === "loss" ? "#ef4444" : "rgba(255, 255, 255, 0.2)";
-      const legBorderWidth = legStatus === "pending" ? "1px" : "4px";
-      const legOpacity = legStatus === "loss" ? "0.6" : "1";
-      const statusBadge = legStatus === "win" ? '<div style="position:absolute;top:0.5rem;right:0.5rem;background:#22c55e;color:#fff;border-radius:50%;width:2rem;height:2rem;display:flex;align-items:center;justify-content:center;font-size:1.25rem;font-weight:700;">✓</div>' 
-                        : legStatus === "loss" ? '<div style="position:absolute;top:0.5rem;right:0.5rem;background:#ef4444;color:#fff;border-radius:50%;width:2rem;height:2rem;display:flex;align-items:center;justify-content:center;font-size:1.25rem;font-weight:700;">✗</div>'
-                        : "";
-      
       let legHTML = "";
 
       if (leg.bet_type === "moneyline") {
@@ -540,8 +529,7 @@ function generateParlayCardHTML(parlay) {
       }
 
       return `
-      <div style="position:relative;background: #000000; border: ${legBorderWidth} solid ${legBorderColor}; border-radius: 1rem; padding: 2rem; margin-bottom: ${index < parlay.legs.length - 1 ? "1.5rem" : "0"}; opacity: ${legOpacity};">
-        ${statusBadge}
+      <div style="background: #000000; border-radius: 1rem; padding: 2rem; margin-bottom: ${index < parlay.legs.length - 1 ? "1.5rem" : "0"};">
         ${legHTML}
       </div>
     `;

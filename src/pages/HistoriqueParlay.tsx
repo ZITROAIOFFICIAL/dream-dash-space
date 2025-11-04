@@ -14,7 +14,6 @@ interface ParlayLeg {
   teamHomeLogo: string;
   teamAwayLogo: string;
   matchTime?: string;
-  result?: "win" | "loss" | "pending";
 }
 
 interface ParlayBet {
@@ -22,11 +21,9 @@ interface ParlayBet {
   legs: ParlayLeg[];
   multiplier: number;
   betAmount: number;
-  betUnits?: string;
   result: "won" | "lost" | "pending";
   date: string;
   odds: number;
-  legResults?: { [key: string]: "win" | "loss" | "pending" };
 }
 
 const HistoriqueParlay = () => {
@@ -64,11 +61,9 @@ const HistoriqueParlay = () => {
       ],
       multiplier: 8.45,
       betAmount: 100,
-      betUnits: "2",
       result: "won",
       date: "10/25/2025",
-      odds: 745,
-      legResults: { leg_0: "win", leg_1: "win", leg_2: "win" }
+      odds: 745
     },
     {
       id: 2,
@@ -94,28 +89,25 @@ const HistoriqueParlay = () => {
       ],
       multiplier: 4.25,
       betAmount: 100,
-      betUnits: "0.5",
-      result: "lost",
+      result: "won",
       date: "10/22/2025",
-      odds: 325,
-      legResults: { leg_0: "win", leg_1: "loss" }
+      odds: 325
     }
   ];
 
   // Calculate totals
   const totalWins = parlayHistory.filter(h => h.result === "won").length;
   const totalLosses = parlayHistory.filter(h => h.result === "lost").length;
-  const totalUnitsWon = parlayHistory.filter(h => h.result === "won").reduce((sum, h) => sum + (parseFloat(h.betUnits || "1") * (h.multiplier - 1)), 0);
-  const totalUnitsLost = parlayHistory.filter(h => h.result === "lost").reduce((sum, h) => sum + parseFloat(h.betUnits || "1"), 0);
+  const totalUnitsWon = parlayHistory.filter(h => h.result === "won").reduce((sum, h) => sum + (h.multiplier - 1), 0);
+  const totalUnitsLost = parlayHistory.filter(h => h.result === "lost").length;
 
-  const getUnitsBadge = (result: string, multiplier: number, betUnits: string) => {
-    const units = parseFloat(betUnits) || 1;
-    const calculatedUnits = result === "won" ? units * (multiplier - 1) : result === "lost" ? -units : 0;
+  const getUnitsBadge = (result: string, multiplier: number) => {
+    const units = result === "won" ? multiplier - 1 : result === "lost" ? -1 : 0;
     if (result === "won") {
       return (
         <div className="bg-green-600 rounded-lg px-6 py-3 text-center">
           <div className="text-xl font-bold text-white">
-            +{calculatedUnits.toFixed(2)} UNITS
+            +{units.toFixed(2)} UNITS
           </div>
         </div>
       );
@@ -123,7 +115,7 @@ const HistoriqueParlay = () => {
       return (
         <div className="bg-red-600 rounded-lg px-6 py-3 text-center">
           <div className="text-xl font-bold text-white">
-            {calculatedUnits.toFixed(2)} UNITS
+            -1.00 UNITS
           </div>
         </div>
       );
@@ -181,11 +173,11 @@ const HistoriqueParlay = () => {
             <div key={parlay.id} className="w-full max-w-md mx-auto">
               {/* Units Result Badge - Top */}
               <div className="mb-4">
-                {getUnitsBadge(parlay.result, parlay.multiplier, parlay.betUnits || "1")}
+                {getUnitsBadge(parlay.result, parlay.multiplier)}
               </div>
 
               {/* Parlay Card with Multiple Legs */}
-              <div className={`border-2 ${parlay.result === "won" ? "border-green-600" : parlay.result === "lost" ? "border-red-600" : "border-gray-600"} rounded-lg bg-black p-6 space-y-6`}>
+              <div className="border-2 border-green-600 rounded-lg bg-black p-6 space-y-6">
                 {/* Date centered at top */}
                 <div className="text-center">
                   <span className="text-white text-base font-bold">
@@ -196,30 +188,13 @@ const HistoriqueParlay = () => {
                 {/* All Legs */}
                 {parlay.legs.map((leg, index) => {
                   const selectedTeam = getSelectedTeam(leg.betType, leg.prediction, leg.teamHome);
-                  const legStatus = parlay.legResults?.[`leg_${index}`] || "pending";
-                  const legBorderColor = legStatus === "win" ? "border-green-600" : legStatus === "loss" ? "border-red-600" : "border-white/20";
-                  const legOpacity = legStatus === "loss" ? "opacity-60" : "";
                   
                   return (
-                    <div key={index} className="relative">
+                    <div key={index}>
                       {/* Separator between legs (not before first leg) */}
                       {index > 0 && (
                         <div className="border-t border-green-600/30 my-6"></div>
                       )}
-
-                      {/* Leg Container with Status Border */}
-                      <div className={`relative border-2 ${legBorderColor} rounded-lg p-4 ${legOpacity}`}>
-                        {/* Status Badge */}
-                        {legStatus === "win" && (
-                          <div className="absolute top-2 right-2 bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-lg font-bold">
-                            ✓
-                          </div>
-                        )}
-                        {legStatus === "loss" && (
-                          <div className="absolute top-2 right-2 bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-lg font-bold">
-                            ✗
-                          </div>
-                        )}
 
                       {/* Teams with VS in center */}
                       <div className="flex items-center justify-center gap-6 mb-4">
@@ -275,7 +250,6 @@ const HistoriqueParlay = () => {
                             {leg.prediction}
                           </div>
                         )}
-                      </div>
                       </div>
                     </div>
                   );

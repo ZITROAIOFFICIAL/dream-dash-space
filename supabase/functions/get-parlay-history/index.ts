@@ -42,13 +42,12 @@ Deno.serve(async (req) => {
     let totalUnits = 0;
 
     parlays.forEach((parlay) => {
-      const betUnits = parseFloat(parlay.bet_units || "1");
       if (parlay.result === 'win') {
         totalWins++;
-        totalUnits += betUnits * (parseFloat(parlay.multiplier) - 1);
+        totalUnits += (parseFloat(parlay.multiplier) - 1);
       } else if (parlay.result === 'loose') {
         totalLosses++;
-        totalUnits -= betUnits;
+        totalUnits -= 1;
       }
     });
 

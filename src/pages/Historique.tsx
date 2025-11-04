@@ -18,7 +18,6 @@ const Historique = () => {
     prediction: "VICTOIRE",
     odds: -105,
     betAmount: 100,
-    betUnits: "1",
     result: "won",
     date: "10/25/2025",
     time: "7:00 PM",
@@ -35,7 +34,6 @@ const Historique = () => {
     prediction: "UNDER 47.5",
     odds: 488,
     betAmount: 100,
-    betUnits: "2",
     result: "won",
     date: "10/22/2025",
     time: "1:00 PM",
@@ -52,7 +50,6 @@ const Historique = () => {
     prediction: "VEGAS -1.5",
     odds: -136,
     betAmount: 100,
-    betUnits: "0.5",
     result: "lost",
     date: "10/20/2025",
     time: "9:00 PM",
@@ -69,7 +66,6 @@ const Historique = () => {
     prediction: "VICTOIRE",
     odds: -120,
     betAmount: 100,
-    betUnits: "1",
     result: "won",
     date: "10/18/2025",
     time: "7:30 PM",
@@ -86,7 +82,6 @@ const Historique = () => {
     prediction: "KANSAS CITY -3.5",
     odds: -110,
     betAmount: 100,
-    betUnits: "2",
     result: "won",
     date: "10/28/2025",
     time: "4:00 PM",
@@ -97,12 +92,11 @@ const Historique = () => {
   }];
 
   // Calculate units won/lost
-  const calculateUnits = (result: string, multiplier: number, betUnits: string) => {
-    const units = parseFloat(betUnits) || 1;
+  const calculateUnits = (result: string, multiplier: number) => {
     if (result === "won") {
-      return units * (multiplier - 1);
+      return multiplier - 1; // Ex: x1.95 → +0.95 units
     } else if (result === "lost") {
-      return -units;
+      return -1; // Always -1 unit
     }
     return 0; // Pending
   };
@@ -110,12 +104,12 @@ const Historique = () => {
   // Calculate totals
   const totalWins = history.filter(h => h.result === "won").length;
   const totalLosses = history.filter(h => h.result === "lost").length;
-  const totalUnitsWon = history.filter(h => h.result === "won").reduce((sum, h) => sum + (parseFloat(h.betUnits) * (h.multiplier - 1)), 0);
-  const totalUnitsLost = history.filter(h => h.result === "lost").reduce((sum, h) => sum + parseFloat(h.betUnits), 0);
+  const totalUnitsWon = history.filter(h => h.result === "won").reduce((sum, h) => sum + (h.multiplier - 1), 0);
+  const totalUnitsLost = history.filter(h => h.result === "lost").length; // Each loss = -1 unit
 
   // Get units badge for each bet
-  const getUnitsBadge = (result: string, multiplier: number, betUnits: string) => {
-    const units = calculateUnits(result, multiplier, betUnits);
+  const getUnitsBadge = (result: string, multiplier: number) => {
+    const units = calculateUnits(result, multiplier);
     if (result === "won") {
       return (
         <div className="bg-[#22c55e] rounded-lg px-8 py-4 text-center">
@@ -128,7 +122,7 @@ const Historique = () => {
       return (
         <div className="bg-red-600 rounded-lg px-8 py-4 text-center">
           <div className="text-2xl font-bold text-white">
-            {units.toFixed(2)} UNITS
+            -1.00 UNITS
           </div>
         </div>
       );
@@ -215,7 +209,7 @@ const Historique = () => {
             <div key={item.id} className="w-full max-w-lg mx-auto">
               {/* Units Result Badge - Top */}
               <div className="mb-3">
-                {getUnitsBadge(item.result, item.multiplier, item.betUnits)}
+                {getUnitsBadge(item.result, item.multiplier)}
               </div>
 
               {/* Match Card */}
