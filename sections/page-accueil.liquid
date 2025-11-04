@@ -777,13 +777,24 @@
       }
 
       /* Conteneur englobant avec fond glassmorphism */
+      /* Variables pour dimensions de l'encadré - Modifiez ces valeurs pour ajuster la taille */
+      :root {
+        --stats-container-width: 100%;
+        --stats-container-max-width: 1400px;
+        --stats-container-min-height: 500px;
+        --stats-container-padding: 2.5rem 3rem;
+      }
+
       .stats-container {
         background: rgba(30, 30, 40, 0.3);
         backdrop-filter: blur(20px);
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 2rem;
-        padding: 2.5rem 3rem;
-        min-height: 500px;
+        padding: var(--stats-container-padding);
+        min-height: var(--stats-container-min-height);
+        width: var(--stats-container-width);
+        max-width: var(--stats-container-max-width);
+        margin: 0 auto;
         position: relative;
       }
 
