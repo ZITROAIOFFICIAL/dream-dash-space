@@ -700,7 +700,7 @@
       .hero-video {
         position: absolute;
         left: 50%;
-        top: 30%;
+        top: 130%;
         transform: translate(-50%, -50%) scale(3);
         width: 100%;
         max-width: 100vw;
@@ -741,7 +741,7 @@
       .hero-fallback-image {
         position: absolute;
         left: 50%;
-        top: 30%;
+        top: 130%;
         transform: translate(-50%, -50%) scale(3);
         width: 100%;
         max-width: 100vw;
@@ -750,22 +750,6 @@
         opacity: 0.6;
         pointer-events: auto;
         cursor: pointer;
-        object-fit: cover;
-        display: block;
-      }
-
-      /* Mobile background image - visible only on mobile */
-      .hero-mobile-background {
-        position: absolute;
-        left: 50%;
-        top: 30%;
-        transform: translate(-50%, -50%) scale(3);
-        width: 100%;
-        max-width: 100vw;
-        height: auto;
-        z-index: 1;
-        opacity: 1;
-        pointer-events: none;
         object-fit: cover;
         display: block;
       }
@@ -779,22 +763,10 @@
           width: 100%;
           height: auto;
         }
-        
-        /* Hide mobile background on desktop */
-        .hero-mobile-background {
-          display: none;
-        }
       }
     </style>
 
     <section class="hero-section">
-      <!-- Mobile background image -->
-      <img
-        class="hero-mobile-background"
-        src="{{ 'hero-mobile-background.jpeg' | asset_url }}"
-        alt="Background mobile"
-      />
-      
       <!-- Background video -->
       <video 
         id="hero-video"
