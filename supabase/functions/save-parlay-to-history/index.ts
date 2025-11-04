@@ -18,6 +18,7 @@ Deno.serve(async (req) => {
     const parlayData = await req.json();
     
     console.log('💾 Sauvegarde parlay:', parlayData.block_id);
+    console.log('📊 Leg results:', parlayData.leg_results);
 
     // Upsert: insert ou update si block_id existe déjà
     const { data, error } = await supabase
