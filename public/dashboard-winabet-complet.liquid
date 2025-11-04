@@ -820,6 +820,7 @@
                       {% assign leg_over_under_stat_type = block.settings.leg1_over_under_stat_type %}
                       {% assign leg_over_under_text_custom = block.settings.leg1_over_under_text_custom %}
                       {% assign leg_moneyline_team = block.settings.leg1_moneyline_team %}
+                      {% assign leg_result = block.settings.leg1_result | default: 'pending' %}
                     {% when 2 %}
                       {% assign leg_team1_name = block.settings.leg2_team1_name %}
                       {% assign leg_team1_logo = block.settings.leg2_team1_logo %}
@@ -833,6 +834,7 @@
                       {% assign leg_over_under_value = block.settings.leg2_over_under_value %}
                       {% assign leg_over_under_stat_type = block.settings.leg2_over_under_stat_type %}
                       {% assign leg_over_under_text_custom = block.settings.leg2_over_under_text_custom %}
+                      {% assign leg_result = block.settings.leg2_result | default: 'pending' %}
                     {% when 3 %}
                       {% assign leg_team1_name = block.settings.leg3_team1_name %}
                       {% assign leg_team1_logo = block.settings.leg3_team1_logo %}
@@ -846,6 +848,7 @@
                       {% assign leg_over_under_value = block.settings.leg3_over_under_value %}
                       {% assign leg_over_under_stat_type = block.settings.leg3_over_under_stat_type %}
                       {% assign leg_over_under_text_custom = block.settings.leg3_over_under_text_custom %}
+                      {% assign leg_result = block.settings.leg3_result | default: 'pending' %}
                     {% when 4 %}
                       {% assign leg_team1_name = block.settings.leg4_team1_name %}
                       {% assign leg_team1_logo = block.settings.leg4_team1_logo %}
@@ -859,6 +862,7 @@
                       {% assign leg_over_under_value = block.settings.leg4_over_under_value %}
                       {% assign leg_over_under_stat_type = block.settings.leg4_over_under_stat_type %}
                       {% assign leg_over_under_text_custom = block.settings.leg4_over_under_text_custom %}
+                      {% assign leg_result = block.settings.leg4_result | default: 'pending' %}
                     {% when 5 %}
                       {% assign leg_team1_name = block.settings.leg5_team1_name %}
                       {% assign leg_team1_logo = block.settings.leg5_team1_logo %}
@@ -872,6 +876,7 @@
                       {% assign leg_over_under_value = block.settings.leg5_over_under_value %}
                       {% assign leg_over_under_stat_type = block.settings.leg5_over_under_stat_type %}
                       {% assign leg_over_under_text_custom = block.settings.leg5_over_under_text_custom %}
+                      {% assign leg_result = block.settings.leg5_result | default: 'pending' %}
                     {% when 6 %}
                       {% assign leg_team1_name = block.settings.leg6_team1_name %}
                       {% assign leg_team1_logo = block.settings.leg6_team1_logo %}
@@ -885,6 +890,7 @@
                       {% assign leg_over_under_value = block.settings.leg6_over_under_value %}
                       {% assign leg_over_under_stat_type = block.settings.leg6_over_under_stat_type %}
                       {% assign leg_over_under_text_custom = block.settings.leg6_over_under_text_custom %}
+                      {% assign leg_result = block.settings.leg6_result | default: 'pending' %}
                     {% when 7 %}
                       {% assign leg_team1_name = block.settings.leg7_team1_name %}
                       {% assign leg_team1_logo = block.settings.leg7_team1_logo %}
@@ -898,6 +904,7 @@
                       {% assign leg_over_under_value = block.settings.leg7_over_under_value %}
                       {% assign leg_over_under_stat_type = block.settings.leg7_over_under_stat_type %}
                       {% assign leg_over_under_text_custom = block.settings.leg7_over_under_text_custom %}
+                      {% assign leg_result = block.settings.leg7_result | default: 'pending' %}
                     {% when 8 %}
                       {% assign leg_team1_name = block.settings.leg8_team1_name %}
                       {% assign leg_team1_logo = block.settings.leg8_team1_logo %}
@@ -911,6 +918,7 @@
                       {% assign leg_over_under_value = block.settings.leg8_over_under_value %}
                       {% assign leg_over_under_stat_type = block.settings.leg8_over_under_stat_type %}
                       {% assign leg_over_under_text_custom = block.settings.leg8_over_under_text_custom %}
+                      {% assign leg_result = block.settings.leg8_result | default: 'pending' %}
                     {% when 9 %}
                       {% assign leg_team1_name = block.settings.leg9_team1_name %}
                       {% assign leg_team1_logo = block.settings.leg9_team1_logo %}
@@ -924,6 +932,7 @@
                       {% assign leg_over_under_value = block.settings.leg9_over_under_value %}
                       {% assign leg_over_under_stat_type = block.settings.leg9_over_under_stat_type %}
                       {% assign leg_over_under_text_custom = block.settings.leg9_over_under_text_custom %}
+                      {% assign leg_result = block.settings.leg9_result | default: 'pending' %}
                     {% when 10 %}
                       {% assign leg_team1_name = block.settings.leg10_team1_name %}
                       {% assign leg_team1_logo = block.settings.leg10_team1_logo %}
@@ -937,6 +946,7 @@
                       {% assign leg_over_under_value = block.settings.leg10_over_under_value %}
                       {% assign leg_over_under_stat_type = block.settings.leg10_over_under_stat_type %}
                       {% assign leg_over_under_text_custom = block.settings.leg10_over_under_text_custom %}
+                      {% assign leg_result = block.settings.leg10_result | default: 'pending' %}
                   {% endcase %}
                   
                   {% if leg_team1_name != blank %}
@@ -951,11 +961,12 @@
                       "spread_value": "{{ leg_spread_value }}",
                       "spread_team": "{{ leg_spread_team }}",
                       "over_under_type": "{{ leg_over_under_type }}",
-                      "over_under_value": "{{ leg_over_under_value }}",
-                      "over_under_stat_type": "{{ leg_over_under_stat_type }}",
-                      "over_under_text_custom": "{{ leg_over_under_text_custom }}",
-                      "moneyline_team": "{{ leg_moneyline_team | default: 'team2' }}"
-                    }
+                       "over_under_value": "{{ leg_over_under_value }}",
+                       "over_under_stat_type": "{{ leg_over_under_stat_type }}",
+                       "over_under_text_custom": "{{ leg_over_under_text_custom }}",
+                       "moneyline_team": "{{ leg_moneyline_team | default: 'team2' }}",
+                       "result": "{{ leg_result | default: 'pending' }}"
+                     }
                   {% endif %}
                 {% endfor %}
               ]{% endcapture %}
@@ -1008,7 +1019,24 @@
                   
                   <!-- LEG 1 -->
                   {% if block.settings.leg1_team1_name != blank %}
-                  <div class="match-info-new" style="margin-bottom: 1rem;">
+                    {% assign leg1_result = block.settings.leg1_result | default: 'pending' %}
+                    {% assign leg_border_color = '#ffffff' %}
+                    {% assign leg_border_width = '1px' %}
+                    {% assign leg_badge = '' %}
+                    
+                    {% if leg1_result == 'win' %}
+                      {% assign leg_border_color = '#16a34a' %}
+                      {% assign leg_border_width = '4px' %}
+                      {% assign leg_badge = '<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: #16a34a; color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; z-index: 10;">✓ GAGNÉ</div>' %}
+                    {% elsif leg1_result == 'loose' %}
+                      {% assign leg_border_color = '#ef4444' %}
+                      {% assign leg_border_width = '4px' %}
+                      {% assign leg_badge = '<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: #ef4444; color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; z-index: 10;">✗ PERDU</div>' %}
+                    {% endif %}
+                    
+                  <div style="position: relative; border: {{ leg_border_width }} solid {{ leg_border_color }}; border-radius: 1rem; padding: 1.5rem; margin-bottom: 1rem; background: rgba(0, 0, 0, 0.3);">
+                    {{ leg_badge }}
+                  <div class="match-info-new">
                     {% assign leg_bet_type = block.settings.leg1_bet_type | default: 'moneyline' %}
                     
                     {% if leg_bet_type == 'moneyline' %}
@@ -1102,11 +1130,29 @@
                       </div>
                     {% endif %}
                   </div>
+                  </div>
                   {% endif %}
 
                   <!-- LEG 2 -->
                   {% if block.settings.leg2_team1_name != blank %}
-                  <div class="match-info-new" style="margin-bottom: 1rem;">
+                    {% assign leg2_result = block.settings.leg2_result | default: 'pending' %}
+                    {% assign leg_border_color = '#ffffff' %}
+                    {% assign leg_border_width = '1px' %}
+                    {% assign leg_badge = '' %}
+                    
+                    {% if leg2_result == 'win' %}
+                      {% assign leg_border_color = '#16a34a' %}
+                      {% assign leg_border_width = '4px' %}
+                      {% assign leg_badge = '<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: #16a34a; color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; z-index: 10;">✓ GAGNÉ</div>' %}
+                    {% elsif leg2_result == 'loose' %}
+                      {% assign leg_border_color = '#ef4444' %}
+                      {% assign leg_border_width = '4px' %}
+                      {% assign leg_badge = '<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: #ef4444; color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; z-index: 10;">✗ PERDU</div>' %}
+                    {% endif %}
+                    
+                  <div style="position: relative; border: {{ leg_border_width }} solid {{ leg_border_color }}; border-radius: 1rem; padding: 1.5rem; margin-bottom: 1rem; background: rgba(0, 0, 0, 0.3);">
+                    {{ leg_badge }}
+                  <div class="match-info-new">
                     {% assign leg_bet_type = block.settings.leg2_bet_type | default: 'moneyline' %}
                     
                     {% if leg_bet_type == 'moneyline' %}
@@ -1194,6 +1240,7 @@
                       </div>
                     {% endif %}
                   </div>
+                  </div>
                   {% endif %}
 
                   <!-- LEG 3 à LEG 10: Structure similaire mais trop longue, je vais créer une approche compacte ci-dessous -->
@@ -1213,6 +1260,7 @@
                         {% assign over_under_value = block.settings.leg3_over_under_value %}
                         {% assign over_under_stat_type = block.settings.leg3_over_under_stat_type %}
                         {% assign over_under_text_custom = block.settings.leg3_over_under_text_custom | default: '' %}
+                        {% assign leg_result = block.settings.leg3_result | default: 'pending' %}
                       {% when 4 %}
                         {% assign team1_name = block.settings.leg4_team1_name %}
                         {% assign team1_logo = block.settings.leg4_team1_logo %}
@@ -1226,6 +1274,7 @@
                         {% assign over_under_value = block.settings.leg4_over_under_value %}
                         {% assign over_under_stat_type = block.settings.leg4_over_under_stat_type %}
                         {% assign over_under_text_custom = block.settings.leg4_over_under_text_custom | default: '' %}
+                        {% assign leg_result = block.settings.leg4_result | default: 'pending' %}
                       {% when 5 %}
                         {% assign team1_name = block.settings.leg5_team1_name %}
                         {% assign team1_logo = block.settings.leg5_team1_logo %}
@@ -1239,6 +1288,7 @@
                         {% assign over_under_value = block.settings.leg5_over_under_value %}
                         {% assign over_under_stat_type = block.settings.leg5_over_under_stat_type %}
                         {% assign over_under_text_custom = block.settings.leg5_over_under_text_custom | default: '' %}
+                        {% assign leg_result = block.settings.leg5_result | default: 'pending' %}
                       {% when 6 %}
                         {% assign team1_name = block.settings.leg6_team1_name %}
                         {% assign team1_logo = block.settings.leg6_team1_logo %}
@@ -1252,6 +1302,7 @@
                         {% assign over_under_value = block.settings.leg6_over_under_value %}
                         {% assign over_under_stat_type = block.settings.leg6_over_under_stat_type %}
                         {% assign over_under_text_custom = block.settings.leg6_over_under_text_custom | default: '' %}
+                        {% assign leg_result = block.settings.leg6_result | default: 'pending' %}
                       {% when 7 %}
                         {% assign team1_name = block.settings.leg7_team1_name %}
                         {% assign team1_logo = block.settings.leg7_team1_logo %}
@@ -1265,6 +1316,7 @@
                         {% assign over_under_value = block.settings.leg7_over_under_value %}
                         {% assign over_under_stat_type = block.settings.leg7_over_under_stat_type %}
                         {% assign over_under_text_custom = block.settings.leg7_over_under_text_custom | default: '' %}
+                        {% assign leg_result = block.settings.leg7_result | default: 'pending' %}
                       {% when 8 %}
                         {% assign team1_name = block.settings.leg8_team1_name %}
                         {% assign team1_logo = block.settings.leg8_team1_logo %}
@@ -1278,6 +1330,7 @@
                         {% assign over_under_value = block.settings.leg8_over_under_value %}
                         {% assign over_under_stat_type = block.settings.leg8_over_under_stat_type %}
                         {% assign over_under_text_custom = block.settings.leg8_over_under_text_custom | default: '' %}
+                        {% assign leg_result = block.settings.leg8_result | default: 'pending' %}
                       {% when 9 %}
                         {% assign team1_name = block.settings.leg9_team1_name %}
                         {% assign team1_logo = block.settings.leg9_team1_logo %}
@@ -1291,6 +1344,7 @@
                         {% assign over_under_value = block.settings.leg9_over_under_value %}
                         {% assign over_under_stat_type = block.settings.leg9_over_under_stat_type %}
                         {% assign over_under_text_custom = block.settings.leg9_over_under_text_custom | default: '' %}
+                        {% assign leg_result = block.settings.leg9_result | default: 'pending' %}
                       {% when 10 %}
                         {% assign team1_name = block.settings.leg10_team1_name %}
                         {% assign team1_logo = block.settings.leg10_team1_logo %}
@@ -1304,10 +1358,27 @@
                         {% assign over_under_value = block.settings.leg10_over_under_value %}
                         {% assign over_under_stat_type = block.settings.leg10_over_under_stat_type %}
                         {% assign over_under_text_custom = block.settings.leg10_over_under_text_custom | default: '' %}
+                        {% assign leg_result = block.settings.leg10_result | default: 'pending' %}
                     {% endcase %}
                     
                     {% if team1_name != blank %}
-                    <div class="match-info-new" style="margin-bottom: 1rem;">
+                      {% assign leg_border_color = '#ffffff' %}
+                      {% assign leg_border_width = '1px' %}
+                      {% assign leg_badge = '' %}
+                      
+                      {% if leg_result == 'win' %}
+                        {% assign leg_border_color = '#16a34a' %}
+                        {% assign leg_border_width = '4px' %}
+                        {% assign leg_badge = '<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: #16a34a; color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; z-index: 10;">✓ GAGNÉ</div>' %}
+                      {% elsif leg_result == 'loose' %}
+                        {% assign leg_border_color = '#ef4444' %}
+                        {% assign leg_border_width = '4px' %}
+                        {% assign leg_badge = '<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: #ef4444; color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; z-index: 10;">✗ PERDU</div>' %}
+                      {% endif %}
+                      
+                    <div style="position: relative; border: {{ leg_border_width }} solid {{ leg_border_color }}; border-radius: 1rem; padding: 1.5rem; margin-bottom: 1rem; background: rgba(0, 0, 0, 0.3);">
+                      {{ leg_badge }}
+                    <div class="match-info-new">
                       {% assign current_leg_bet_type = leg_bet_type | default: 'moneyline' %}
                       
                       {% if current_leg_bet_type == 'moneyline' %}
@@ -1392,9 +1463,10 @@
                             <div class="team-name-new">{{ team2_name }}</div>
                           </div>
                         </div>
-                      {% endif %}
-                    </div>
                     {% endif %}
+                  </div>
+                  </div>
+                  {% endif %}
                   {% endfor %}
 
                   <!-- Mise -->
@@ -4193,6 +4265,27 @@
           "default": "points totaux"
         },
         {
+          "type": "select",
+          "id": "leg1_result",
+          "label": "✅❌ Résultat de la Leg 1",
+          "options": [
+            {
+              "value": "pending",
+              "label": "⏳ En attente"
+            },
+            {
+              "value": "win",
+              "label": "✅ Gagné (Win)"
+            },
+            {
+              "value": "loose",
+              "label": "❌ Perdu (Loose)"
+            }
+          ],
+          "default": "pending",
+          "info": "Sélectionnez le résultat de cette leg"
+        },
+        {
           "type": "header",
           "content": "🎯 LEG 2"
         },
@@ -4276,6 +4369,27 @@
           "id": "leg2_over_under_stat_type",
           "label": "📊 Type de statistique (optionnel)",
           "default": "points totaux"
+        },
+        {
+          "type": "select",
+          "id": "leg2_result",
+          "label": "✅❌ Résultat de la Leg 2",
+          "options": [
+            {
+              "value": "pending",
+              "label": "⏳ En attente"
+            },
+            {
+              "value": "win",
+              "label": "✅ Gagné (Win)"
+            },
+            {
+              "value": "loose",
+              "label": "❌ Perdu (Loose)"
+            }
+          ],
+          "default": "pending",
+          "info": "Sélectionnez le résultat de cette leg"
         },
         {
           "type": "header",
@@ -4363,6 +4477,27 @@
           "default": "points totaux"
         },
         {
+          "type": "select",
+          "id": "leg3_result",
+          "label": "✅❌ Résultat de la Leg 3",
+          "options": [
+            {
+              "value": "pending",
+              "label": "⏳ En attente"
+            },
+            {
+              "value": "win",
+              "label": "✅ Gagné (Win)"
+            },
+            {
+              "value": "loose",
+              "label": "❌ Perdu (Loose)"
+            }
+          ],
+          "default": "pending",
+          "info": "Sélectionnez le résultat de cette leg"
+        },
+        {
           "type": "header",
           "content": "🎯 LEG 4"
         },
@@ -4446,6 +4581,27 @@
           "id": "leg4_over_under_stat_type",
           "label": "📊 Type de statistique (optionnel)",
           "default": "points totaux"
+        },
+        {
+          "type": "select",
+          "id": "leg4_result",
+          "label": "✅❌ Résultat de la Leg 4",
+          "options": [
+            {
+              "value": "pending",
+              "label": "⏳ En attente"
+            },
+            {
+              "value": "win",
+              "label": "✅ Gagné (Win)"
+            },
+            {
+              "value": "loose",
+              "label": "❌ Perdu (Loose)"
+            }
+          ],
+          "default": "pending",
+          "info": "Sélectionnez le résultat de cette leg"
         },
         {
           "type": "header",
@@ -4533,6 +4689,27 @@
           "default": "points totaux"
         },
         {
+          "type": "select",
+          "id": "leg5_result",
+          "label": "✅❌ Résultat de la Leg 5",
+          "options": [
+            {
+              "value": "pending",
+              "label": "⏳ En attente"
+            },
+            {
+              "value": "win",
+              "label": "✅ Gagné (Win)"
+            },
+            {
+              "value": "loose",
+              "label": "❌ Perdu (Loose)"
+            }
+          ],
+          "default": "pending",
+          "info": "Sélectionnez le résultat de cette leg"
+        },
+        {
           "type": "header",
           "content": "🎯 LEG 6"
         },
@@ -4616,6 +4793,27 @@
           "id": "leg6_over_under_stat_type",
           "label": "📊 Type de statistique (optionnel)",
           "default": "points totaux"
+        },
+        {
+          "type": "select",
+          "id": "leg6_result",
+          "label": "✅❌ Résultat de la Leg 6",
+          "options": [
+            {
+              "value": "pending",
+              "label": "⏳ En attente"
+            },
+            {
+              "value": "win",
+              "label": "✅ Gagné (Win)"
+            },
+            {
+              "value": "loose",
+              "label": "❌ Perdu (Loose)"
+            }
+          ],
+          "default": "pending",
+          "info": "Sélectionnez le résultat de cette leg"
         },
         {
           "type": "header",
@@ -4703,6 +4901,27 @@
           "default": "points totaux"
         },
         {
+          "type": "select",
+          "id": "leg7_result",
+          "label": "✅❌ Résultat de la Leg 7",
+          "options": [
+            {
+              "value": "pending",
+              "label": "⏳ En attente"
+            },
+            {
+              "value": "win",
+              "label": "✅ Gagné (Win)"
+            },
+            {
+              "value": "loose",
+              "label": "❌ Perdu (Loose)"
+            }
+          ],
+          "default": "pending",
+          "info": "Sélectionnez le résultat de cette leg"
+        },
+        {
           "type": "header",
           "content": "🎯 LEG 8"
         },
@@ -4786,6 +5005,27 @@
           "id": "leg8_over_under_stat_type",
           "label": "📊 Type de statistique (optionnel)",
           "default": "points totaux"
+        },
+        {
+          "type": "select",
+          "id": "leg8_result",
+          "label": "✅❌ Résultat de la Leg 8",
+          "options": [
+            {
+              "value": "pending",
+              "label": "⏳ En attente"
+            },
+            {
+              "value": "win",
+              "label": "✅ Gagné (Win)"
+            },
+            {
+              "value": "loose",
+              "label": "❌ Perdu (Loose)"
+            }
+          ],
+          "default": "pending",
+          "info": "Sélectionnez le résultat de cette leg"
         },
         {
           "type": "header",
@@ -4873,6 +5113,27 @@
           "default": "points totaux"
         },
         {
+          "type": "select",
+          "id": "leg9_result",
+          "label": "✅❌ Résultat de la Leg 9",
+          "options": [
+            {
+              "value": "pending",
+              "label": "⏳ En attente"
+            },
+            {
+              "value": "win",
+              "label": "✅ Gagné (Win)"
+            },
+            {
+              "value": "loose",
+              "label": "❌ Perdu (Loose)"
+            }
+          ],
+          "default": "pending",
+          "info": "Sélectionnez le résultat de cette leg"
+        },
+        {
           "type": "header",
           "content": "🎯 LEG 10"
         },
@@ -4956,6 +5217,27 @@
           "id": "leg10_over_under_stat_type",
           "label": "📊 Type de statistique (optionnel)",
           "default": "points totaux"
+        },
+        {
+          "type": "select",
+          "id": "leg10_result",
+          "label": "✅❌ Résultat de la Leg 10",
+          "options": [
+            {
+              "value": "pending",
+              "label": "⏳ En attente"
+            },
+            {
+              "value": "win",
+              "label": "✅ Gagné (Win)"
+            },
+            {
+              "value": "loose",
+              "label": "❌ Perdu (Loose)"
+            }
+          ],
+          "default": "pending",
+          "info": "Sélectionnez le résultat de cette leg"
         },
         {
           "type": "text",
