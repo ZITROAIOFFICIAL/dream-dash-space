@@ -769,7 +769,7 @@
       .stats-section {
         position: relative;
         z-index: 3;
-        margin-top: 8rem;
+        margin-top: -1.5rem;
         max-width: 1200px;
         margin-left: auto;
         margin-right: auto;
@@ -815,6 +815,7 @@
         flex-direction: column;
         gap: 0.75rem;
         grid-column: span 1;
+        min-height: 120px;
       }
 
       .stat-label {
@@ -837,13 +838,13 @@
         font-weight: 500;
       }
 
-      /* Cartes graphiques - 2 en bas, remplissent toute la largeur */
+      /* Cartes graphiques - 2 en bas, côte à côte sur toute la largeur */
       .chart-card {
-        grid-column: span 3;
+        grid-column: span 1.5;
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
-        min-height: 180px;
+        min-height: 220px;
       }
 
       .chart-title {
