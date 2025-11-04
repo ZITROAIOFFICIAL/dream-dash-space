@@ -308,12 +308,15 @@ function generateBetCardHTML(bet) {
   console.log("🖼️ Génération bet card, logos:", { team1_logo: bet.team1_logo, team2_logo: bet.team2_logo });
   // Calculer les units et la couleur selon le résultat
   let unitsText, unitsColor;
+  const betUnits = parseFloat(bet.bet_units || "1");
+
   if (bet.result === "win") {
-    const unitsValue = (bet.multiplier - 1).toFixed(2);
+    const unitsValue = (betUnits * (bet.multiplier - 1)).toFixed(2);
     unitsText = `+${unitsValue} UNITS`;
     unitsColor = "#22c55e";
   } else if (bet.result === "loose") {
-    unitsText = "-1.00 UNITS";
+    const unitsValue = betUnits.toFixed(2);
+    unitsText = `-${unitsValue} UNITS`;
     unitsColor = "#ef4444";
   } else {
     unitsText = "EN ATTENTE";
@@ -429,12 +432,15 @@ function generateBetCardHTML(bet) {
 function generateParlayCardHTML(parlay) {
   // Calculer les units et la couleur selon le résultat
   let unitsText, unitsColor;
+  const betUnits = parseFloat(parlay.bet_units || "1");
+
   if (parlay.result === "win") {
-    const unitsValue = (parlay.multiplier - 1).toFixed(2);
+    const unitsValue = (betUnits * (parlay.multiplier - 1)).toFixed(2);
     unitsText = `+${unitsValue} UNITS`;
     unitsColor = "#22c55e";
   } else if (parlay.result === "loose") {
-    unitsText = "-1.00 UNITS";
+    const unitsValue = betUnits.toFixed(2);
+    unitsText = `-${unitsValue} UNITS`;
     unitsColor = "#ef4444";
   } else {
     unitsText = "EN ATTENTE";
