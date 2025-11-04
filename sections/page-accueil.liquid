@@ -764,6 +764,156 @@
           height: auto;
         }
       }
+
+      /* ==================== STATS SECTION ==================== */
+      .stats-section {
+        position: relative;
+        z-index: 3;
+        margin-top: 8rem;
+        max-width: 1400px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 2rem;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+      }
+
+      /* Glassmorphism pour toutes les cartes */
+      .stat-card, .chart-card, .special-card {
+        background: rgba(30, 30, 40, 0.4);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 1.5rem;
+        padding: 2rem;
+        transition: all 0.3s ease;
+      }
+
+      .stat-card:hover, .chart-card:hover, .special-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Cartes statistiques */
+      .stat-card {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .stat-label {
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.6);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 500;
+      }
+
+      .stat-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #ffffff;
+      }
+
+      .stat-change {
+        font-size: 0.875rem;
+        color: #22c55e;
+        font-weight: 500;
+      }
+
+      /* Cartes graphiques */
+      .chart-card {
+        grid-column: span 1.5;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .chart-title {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 600;
+      }
+
+      .chart-svg {
+        width: 100%;
+        height: 100px;
+        margin-top: auto;
+      }
+
+      /* Cartes spéciales */
+      .special-card {
+        grid-column: span 1.5;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .card-title {
+        font-size: 1.125rem;
+        color: #ffffff;
+        font-weight: 600;
+      }
+
+      /* Credit Card Styling */
+      .credit-card {
+        background: rgba(50, 50, 60, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 1rem;
+        padding: 1.5rem;
+      }
+
+      /* Payment Buttons */
+      .payment-buttons {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .apple-pay, .google-pay {
+        flex: 1;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.75rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(50, 50, 60, 0.5);
+        color: #ffffff;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .apple-pay:hover, .google-pay:hover {
+        background: rgba(70, 70, 80, 0.6);
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+
+      /* Flags Grid */
+      .flags-grid {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 1rem;
+        padding: 1rem 0;
+      }
+
+      .flag-emoji {
+        font-size: 2rem;
+        text-align: center;
+        transition: transform 0.2s ease;
+      }
+
+      .flag-emoji:hover {
+        transform: scale(1.2);
+      }
+
+      /* Responsive - Desktop uniquement pour l'instant */
+      @media (max-width: 1024px) {
+        .stats-section {
+          display: none; /* Masquer sur mobile pour l'instant */
+        }
+      }
     </style>
 
     <section class="hero-section">
@@ -858,6 +1008,77 @@
             <a href="{{ section.settings.cta_primary_link }}" class="btn-primary">
               {{ section.settings.cta_primary_text }}
             </a>
+          </div>
+
+          <!-- Stats Section -->
+          <div class="stats-section">
+            <div class="stats-grid">
+              
+              <!-- Rangée 1: 3 cartes statistiques -->
+              <div class="stat-card">
+                <div class="stat-label">Revenue</div>
+                <div class="stat-value">$ 48,700.21</div>
+                <div class="stat-change">+21% since last month</div>
+              </div>
+              
+              <div class="stat-card">
+                <div class="stat-label">Sales</div>
+                <div class="stat-value">3,260</div>
+                <div class="stat-change">+12% since last month</div>
+              </div>
+              
+              <div class="stat-card">
+                <div class="stat-label">New Customers</div>
+                <div class="stat-value">963</div>
+                <div class="stat-change">+8% since last month</div>
+              </div>
+              
+              <!-- Rangée 2: 2 graphiques Revenue Overview -->
+              <div class="chart-card">
+                <div class="chart-title">Revenue Overview</div>
+                <svg class="chart-svg" viewBox="0 0 300 120" preserveAspectRatio="none">
+                  <path d="M0,80 Q75,20 150,60 T300,40" stroke="rgba(255, 255, 255, 0.8)" stroke-width="2" fill="none"/>
+                </svg>
+              </div>
+              
+              <div class="chart-card">
+                <div class="chart-title">Revenue Overview</div>
+                <svg class="chart-svg" viewBox="0 0 300 120" preserveAspectRatio="none">
+                  <path d="M0,90 Q75,40 150,70 T300,30" stroke="#22c55e" stroke-width="2" fill="none"/>
+                </svg>
+              </div>
+              
+              <!-- Rangée 3: 2 cartes spéciales -->
+              <div class="special-card card-providers">
+                <div class="card-title">20+ Card Providers</div>
+                <div class="credit-card">
+                  <div style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.6); margin-bottom: 0.5rem;">Credit Card</div>
+                  <div style="font-size: 1.125rem; font-weight: 500; color: #ffffff;">•••• •••• •••• 4321</div>
+                </div>
+                <div class="payment-buttons">
+                  <button class="apple-pay">Apple Pay</button>
+                  <button class="google-pay">Google Pay</button>
+                </div>
+              </div>
+              
+              <div class="special-card countries-card">
+                <div class="card-title">160+ Countries Supported</div>
+                <div class="flags-grid">
+                  <span class="flag-emoji">🇺🇸</span>
+                  <span class="flag-emoji">🇬🇧</span>
+                  <span class="flag-emoji">🇨🇦</span>
+                  <span class="flag-emoji">🇩🇪</span>
+                  <span class="flag-emoji">🇫🇷</span>
+                  <span class="flag-emoji">🇪🇸</span>
+                  <span class="flag-emoji">🇮🇹</span>
+                  <span class="flag-emoji">🇯🇵</span>
+                  <span class="flag-emoji">🇦🇺</span>
+                  <span class="flag-emoji">🇧🇷</span>
+                  <span class="flag-emoji">🇲🇽</span>
+                  <span class="flag-emoji">🇮🇳</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
