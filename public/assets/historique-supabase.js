@@ -312,11 +312,11 @@ function generateBetCardHTML(bet) {
 
   if (bet.result === "win") {
     const unitsValue = (betUnits * (bet.multiplier - 1)).toFixed(2);
-    unitsText = `+${unitsValue} UNITS`;
+    unitsText = `Win +${unitsValue} UNITS`;
     unitsColor = "#22c55e";
   } else if (bet.result === "loose") {
     const unitsValue = betUnits.toFixed(2);
-    unitsText = `-${unitsValue} UNITS`;
+    unitsText = `Lose -${unitsValue} UNITS`;
     unitsColor = "#ef4444";
   } else {
     unitsText = "EN ATTENTE";
@@ -419,6 +419,12 @@ function generateBetCardHTML(bet) {
     
     <!-- Carte -->
     <div class="history-card" style="background: #000000; border: 2px solid ${unitsColor}; border-radius: 1rem; padding: 4rem; margin: 0 auto 2rem; max-width: 36rem; width: 100%; display: flex; flex-direction: column; align-items: center;">
+      <!-- Cote en haut -->
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <div style="font-size: 1rem; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">COTE</div>
+        <div style="font-size: 2.5rem; font-weight: 700; color: #8B5CF6;">${bet.multiplier}</div>
+      </div>
+      
       <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.5rem; margin-bottom: 2.5rem;">
         ${bet.match_date} - ${bet.match_time}
       </div>
@@ -436,11 +442,11 @@ function generateParlayCardHTML(parlay) {
 
   if (parlay.result === "win") {
     const unitsValue = (betUnits * (parlay.multiplier - 1)).toFixed(2);
-    unitsText = `+${unitsValue} UNITS`;
+    unitsText = `Win +${unitsValue} UNITS`;
     unitsColor = "#22c55e";
   } else if (parlay.result === "loose") {
     const unitsValue = betUnits.toFixed(2);
-    unitsText = `-${unitsValue} UNITS`;
+    unitsText = `Lose -${unitsValue} UNITS`;
     unitsColor = "#ef4444";
   } else {
     unitsText = "EN ATTENTE";
@@ -571,6 +577,12 @@ function generateParlayCardHTML(parlay) {
     
     <!-- Carte -->
     <div class="history-card" style="background: #000000; border: 2px solid ${unitsColor}; border-radius: 1rem; padding: 4rem; margin: 0 auto 2rem; max-width: 36rem; width: 100%; display: flex; flex-direction: column; align-items: center;">
+      <!-- Cote en haut -->
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <div style="font-size: 1rem; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">COTE</div>
+        <div style="font-size: 2.5rem; font-weight: 700; color: #8B5CF6;">${parlay.multiplier}</div>
+      </div>
+      
       <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.5rem; margin-bottom: 2.5rem;">
         ${parlay.match_date} - ${parlay.match_time}
       </div>
