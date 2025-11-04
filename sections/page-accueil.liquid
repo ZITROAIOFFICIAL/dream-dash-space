@@ -842,8 +842,6 @@
       .stat-label {
         font-size: 0.875rem;
         color: rgba(255, 255, 255, 0.6);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
         font-weight: 500;
       }
 
@@ -854,9 +852,22 @@
       }
 
       .stat-change {
-        font-size: 0.875rem;
-        color: #22c55e;
-        font-weight: 500;
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.6);
+        font-weight: 400;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .stat-change .percentage {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.25rem 0.5rem;
+        background: #22c55e;
+        color: #ffffff;
+        border-radius: 0.375rem;
+        font-weight: 600;
       }
 
       /* Cartes graphiques - 2 en bas, côte à côte sur toute la largeur */
@@ -1084,19 +1095,28 @@
                 <div class="stat-card">
                   <div class="stat-label">Revenue</div>
                   <div class="stat-value">$ 48,700.21</div>
-                  <div class="stat-change">+21% since last month</div>
+                  <div class="stat-change">
+                    <span class="percentage">+21%</span>
+                    <span>since last month</span>
+                  </div>
                 </div>
                 
                 <div class="stat-card">
                   <div class="stat-label">Sales</div>
                   <div class="stat-value">3,260</div>
-                  <div class="stat-change">+12% since last month</div>
+                  <div class="stat-change">
+                    <span class="percentage">+12%</span>
+                    <span>since last month</span>
+                  </div>
                 </div>
                 
                 <div class="stat-card">
                   <div class="stat-label">New Customers</div>
                   <div class="stat-value">963</div>
-                  <div class="stat-change">+8% since last month</div>
+                  <div class="stat-change">
+                    <span class="percentage">+8%</span>
+                    <span>since last month</span>
+                  </div>
                 </div>
                 
                 <!-- 2 graphiques Revenue Overview en bas -->
