@@ -17,7 +17,7 @@ const DashboardLayout = ({
             <span className="text-foreground">WIN</span>
             <span className="text-green-600">A</span>
             <span className="text-foreground">BET</span>
-            <span className="text-sm text-green-600">.AI</span>
+            <span className="text-sm text-green-600" style={{ marginLeft: '-0.15em' }}>.AI</span>
           </h1>
         </div>
         <div className="bg-muted/50 py-2 px-6 flex items-center justify-center rounded-md">

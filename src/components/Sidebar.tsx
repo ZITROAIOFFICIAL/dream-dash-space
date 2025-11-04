@@ -57,7 +57,7 @@ const Sidebar = () => {
               <span className="text-white">WIN</span>
               <span className="text-sidebar-primary">A</span>
               <span className="text-white">BET</span>
-              <span className="text-white text-sm">.AI</span>
+              <span className="text-white text-sm" style={{ marginLeft: '-0.15em' }}>.AI</span>
             </h1>
           </div>
 
