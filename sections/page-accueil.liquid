@@ -1126,14 +1126,102 @@
                 
                 <!-- 2 graphiques Revenue Overview en bas -->
                 <div class="chart-card">
-                  <div class="chart-title">Revenue Overview</div>
+                  <div class="chart-title">
+                    <svg width="16" height="16" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 0.4rem;">
+                      <defs>
+                        <filter id="softGlowChart1" x="-50%" y="-50%" width="200%" height="200%">
+                          <feGaussianBlur stdDeviation="1.2" result="b"/>
+                          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                        </filter>
+                        <path id="orbit0Chart1" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                        <path id="orbit1Chart1" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                        <path id="orbit2Chart1" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+                      </defs>
+                      <g stroke="#68859e" stroke-width="2" fill="none">
+                        <use href="#orbit0Chart1"/>
+                        <use href="#orbit1Chart1"/>
+                        <use href="#orbit2Chart1"/>
+                      </g>
+                      <g stroke-linecap="round" filter="url(#softGlowChart1)">
+                        <use href="#orbit0Chart1" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="26 974">
+                          <animate attributeName="stroke-dashoffset" values="26;-974" dur="16s" repeatCount="indefinite" begin="0s"/>
+                        </use>
+                        <circle r="3" fill="#ffffff">
+                          <animateMotion dur="16s" repeatCount="indefinite" rotate="auto" begin="0s">
+                            <mpath href="#orbit0Chart1"/>
+                          </animateMotion>
+                        </circle>
+                        <use href="#orbit1Chart1" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="26 974">
+                          <animate attributeName="stroke-dashoffset" values="26;-974" dur="16s" repeatCount="indefinite" begin="5s"/>
+                        </use>
+                        <circle r="3" fill="#ffffff">
+                          <animateMotion dur="16s" repeatCount="indefinite" rotate="auto" begin="5s">
+                            <mpath href="#orbit1Chart1"/>
+                          </animateMotion>
+                        </circle>
+                        <use href="#orbit2Chart1" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="26 974">
+                          <animate attributeName="stroke-dashoffset" values="26;-974" dur="16s" repeatCount="indefinite" begin="10s"/>
+                        </use>
+                        <circle r="3" fill="#ffffff">
+                          <animateMotion dur="16s" repeatCount="indefinite" rotate="auto" begin="10s">
+                            <mpath href="#orbit2Chart1"/>
+                          </animateMotion>
+                        </circle>
+                      </g>
+                    </svg>
+                    Revenue Overview
+                  </div>
                   <svg class="chart-svg" viewBox="0 0 300 120" preserveAspectRatio="none">
                     <path d="M0,80 Q75,20 150,60 T300,40" stroke="rgba(255, 255, 255, 0.8)" stroke-width="2" fill="none"/>
                   </svg>
                 </div>
                 
                 <div class="chart-card">
-                  <div class="chart-title">Revenue Overview</div>
+                  <div class="chart-title">
+                    <svg width="16" height="16" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 0.4rem;">
+                      <defs>
+                        <filter id="softGlowChart2" x="-50%" y="-50%" width="200%" height="200%">
+                          <feGaussianBlur stdDeviation="1.2" result="b"/>
+                          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                        </filter>
+                        <path id="orbit0Chart2" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                        <path id="orbit1Chart2" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                        <path id="orbit2Chart2" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+                      </defs>
+                      <g stroke="#68859e" stroke-width="2" fill="none">
+                        <use href="#orbit0Chart2"/>
+                        <use href="#orbit1Chart2"/>
+                        <use href="#orbit2Chart2"/>
+                      </g>
+                      <g stroke-linecap="round" filter="url(#softGlowChart2)">
+                        <use href="#orbit0Chart2" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="26 974">
+                          <animate attributeName="stroke-dashoffset" values="26;-974" dur="16s" repeatCount="indefinite" begin="0s"/>
+                        </use>
+                        <circle r="3" fill="#ffffff">
+                          <animateMotion dur="16s" repeatCount="indefinite" rotate="auto" begin="0s">
+                            <mpath href="#orbit0Chart2"/>
+                          </animateMotion>
+                        </circle>
+                        <use href="#orbit1Chart2" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="26 974">
+                          <animate attributeName="stroke-dashoffset" values="26;-974" dur="16s" repeatCount="indefinite" begin="5s"/>
+                        </use>
+                        <circle r="3" fill="#ffffff">
+                          <animateMotion dur="16s" repeatCount="indefinite" rotate="auto" begin="5s">
+                            <mpath href="#orbit1Chart2"/>
+                          </animateMotion>
+                        </circle>
+                        <use href="#orbit2Chart2" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="26 974">
+                          <animate attributeName="stroke-dashoffset" values="26;-974" dur="16s" repeatCount="indefinite" begin="10s"/>
+                        </use>
+                        <circle r="3" fill="#ffffff">
+                          <animateMotion dur="16s" repeatCount="indefinite" rotate="auto" begin="10s">
+                            <mpath href="#orbit2Chart2"/>
+                          </animateMotion>
+                        </circle>
+                      </g>
+                    </svg>
+                    Revenue Overview
+                  </div>
                   <svg class="chart-svg" viewBox="0 0 300 120" preserveAspectRatio="none">
                     <path d="M0,90 Q75,40 150,70 T300,30" stroke="#22c55e" stroke-width="2" fill="none"/>
                   </svg>
