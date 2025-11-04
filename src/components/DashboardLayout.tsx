@@ -13,7 +13,7 @@ const DashboardLayout = ({
       {/* Header with logo and AI indicator */}
       <header className="fixed top-0 left-0 right-0 bg-background/90 backdrop-blur-sm z-30 md:left-64 rounded-lg">
         <div className="flex items-center justify-center py-5">
-          <h1 className="text-2xl font-bold leading-none">
+          <h1 className="text-2xl leading-none" style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 300 }}>
             <span className="text-foreground">WIN</span>
             <span className="text-green-600">A</span>
             <span className="text-foreground">BET</span>
