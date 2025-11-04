@@ -470,10 +470,10 @@ function generateParlayCardHTML(parlay) {
       let legHTML = "";
 
       if (leg.bet_type === "moneyline") {
-        const showTeam1Win = leg.moneyline_team === "team1" && parlay.result === "win";
-        const showTeam2Win = leg.moneyline_team === "team2" && parlay.result === "win";
-        const showTeam1Loss = leg.moneyline_team === "team1" && parlay.result === "loose";
-        const showTeam2Loss = leg.moneyline_team === "team2" && parlay.result === "loose";
+        const showTeam1Win = leg.moneyline_team === "team1" && legResult === "win";
+        const showTeam2Win = leg.moneyline_team === "team2" && legResult === "win";
+        const showTeam1Loss = leg.moneyline_team === "team1" && legResult === "loose";
+        const showTeam2Loss = leg.moneyline_team === "team2" && legResult === "loose";
 
         legHTML = `
         <div style="text-align: center; color: rgba(255, 255, 255, 0.6); font-size: 1.5rem; margin-bottom: 1.25rem;">MONEYLINE</div>
