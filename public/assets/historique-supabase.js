@@ -444,6 +444,23 @@ function generateParlayCardHTML(parlay) {
   // Générer le HTML des legs
   const legsHTML = parlay.legs
     .map((leg, index) => {
+      // Déterminer le statut de la leg
+      const legResult = leg.result || "pending";
+      
+      // Définir les styles selon le résultat
+      const legBorderColor = legResult === "win" ? "#16a34a" 
+                           : legResult === "loose" ? "#ef4444" 
+                           : "#ffffff";
+      const legBorderWidth = legResult === "pending" ? "1px" : "4px";
+      const legOpacity = legResult === "loose" ? "0.6" : "1";
+      
+      // Badge de statut
+      const statusBadge = legResult === "win" 
+        ? '<div style="position:absolute;top:0.5rem;right:0.5rem;background:#16a34a;color:#fff;padding:0.5rem 1rem;border-radius:0.5rem;font-weight:700;font-size:1rem;">✓ GAGNÉ</div>'
+        : legResult === "loose" 
+        ? '<div style="position:absolute;top:0.5rem;right:0.5rem;background:#ef4444;color:#fff;padding:0.5rem 1rem;border-radius:0.5rem;font-weight:700;font-size:1rem;">✗ PERDU</div>'
+        : '';
+
       let legHTML = "";
 
       if (leg.bet_type === "moneyline") {
@@ -529,7 +546,8 @@ function generateParlayCardHTML(parlay) {
       }
 
       return `
-      <div style="background: #000000; border-radius: 1rem; padding: 2rem; margin-bottom: ${index < parlay.legs.length - 1 ? "1.5rem" : "0"};">
+      <div style="position:relative;background:#000000;border:${legBorderWidth} solid ${legBorderColor};border-radius:1rem;padding:2rem;margin-bottom:${index < parlay.legs.length - 1 ? "1.5rem" : "0"};opacity:${legOpacity};">
+        ${statusBadge}
         ${legHTML}
       </div>
     `;
