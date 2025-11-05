@@ -1059,16 +1059,16 @@
       @media (max-width: 1024px) {
         :root {
           /* 🎯 Background gris - Contrôle manuel complet sur mobile */
-          --stats-container-width-mobile: 100%;       /* 🔧 Largeur du background gris */
-          --stats-container-height-mobile: auto;      /* 🔧 Hauteur du background gris */
-          --stats-container-top-mobile: auto;         /* 🔧 Position top */
+          --stats-container-width-mobile: 320px;      /* 🔧 Largeur du background gris */
+          --stats-container-height-mobile: 220px;     /* 🔧 Hauteur du background gris */
+          --stats-container-top-mobile: 0px;          /* 🔧 Position top */
           --stats-container-bottom-mobile: auto;      /* 🔧 Position bottom */
-          --stats-container-left-mobile: auto;        /* 🔧 Position left */
+          --stats-container-left-mobile: 0px;         /* 🔧 Position left */
           --stats-container-right-mobile: auto;       /* 🔧 Position right */
           --stats-container-margin-top-mobile: 0;     /* 🔧 Marge supérieure */
           --stats-container-margin-bottom-mobile: 0;  /* 🔧 Marge inférieure */
-          --stats-container-margin-left-mobile: auto; /* 🔧 Marge gauche (auto = centré) */
-          --stats-container-margin-right-mobile: auto;/* 🔧 Marge droite (auto = centré) */
+          --stats-container-margin-left-mobile: 0;    /* 🔧 Marge gauche */
+          --stats-container-margin-right-mobile: 0;   /* 🔧 Marge droite */
           
           /* 🎯 Rectangle central (stats + graphiques) - Contrôle indépendant */
           --stats-grid-width-mobile: 100%;        /* Largeur du contenu central */
@@ -1110,15 +1110,17 @@
           width: var(--stats-container-width-mobile);
           height: var(--stats-container-height-mobile);
           max-width: none; /* Pas de limitation */
+          box-sizing: border-box;
           
-          /* Positionnement contrôlé manuellement */
-          position: relative;
+          /* Positionnement 100% manuel et précis */
+          position: absolute;
           top: var(--stats-container-top-mobile);
           bottom: var(--stats-container-bottom-mobile);
           left: var(--stats-container-left-mobile);
           right: var(--stats-container-right-mobile);
           
           /* Marges contrôlées manuellement */
+          margin: 0; /* reset du margin auto global */
           margin-top: var(--stats-container-margin-top-mobile);
           margin-bottom: var(--stats-container-margin-bottom-mobile);
           margin-left: var(--stats-container-margin-left-mobile);
@@ -1127,6 +1129,7 @@
           /* Pas de transform automatique */
           transform: none;
           transform-origin: top center;
+          z-index: 1;
         }
         
         /* Appliquer les dimensions aux rectangles graphiques */
