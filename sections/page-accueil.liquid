@@ -1058,13 +1058,15 @@
       /* Responsive - Visible sur mobile mais réduit par scale */
       @media (max-width: 1024px) {
         :root {
-          --stats-container-max-width: 1700px; /* Largeur uniquement pour mobile */
+          /* 🎯 Encadré complet - Dimensions de base pour mobile */
+          --stats-container-width-mobile: 1400px; /* Largeur de base avant scale */
+          --stats-container-height-mobile: auto; /* Hauteur (auto = proportionnel) */
           
           /* Dimensions des rectangles graphiques (chart-card) sur mobile */
           --chart-card-width-mobile: 100%; /* largeur */
           --chart-card-height-mobile: 240px; /* hauteur */
           
-          /* Position et taille carte providers (petite carte gauche) sur mobile */
+          /* 🎯 Position et taille carte providers (petite carte gauche) sur mobile */
           --card-providers-top: auto;
           --card-providers-bottom: -10rem;
           --card-providers-left: -25rem;
@@ -1072,7 +1074,7 @@
           --card-providers-width: 280px;
           --card-providers-height: 270px;
           
-          /* Position et taille countries card (petite carte droite) sur mobile */
+          /* 🎯 Position et taille countries card (petite carte droite) sur mobile */
           --card-countries-top: -10rem;
           --card-countries-bottom: auto;
           --card-countries-left: auto;
@@ -1086,8 +1088,11 @@
           padding: 0;
           overflow: visible;
         }
+        
         .stats-section .stats-container {
           transform-origin: top center;
+          width: var(--stats-container-width-mobile);
+          max-width: var(--stats-container-width-mobile);
           /* Le transform: scale() sera appliqué dynamiquement en JS */
         }
         
@@ -1097,7 +1102,7 @@
           height: var(--chart-card-height-mobile);
         }
         
-        /* Appliquer position et taille aux cartes spéciales */
+        /* 🎯 Scaling proportionnel pour carte providers */
         .card-providers {
           top: var(--card-providers-top);
           bottom: var(--card-providers-bottom);
@@ -1107,6 +1112,14 @@
           height: var(--card-providers-height);
         }
         
+        .card-providers > * {
+          transform: scale(calc(var(--card-providers-width) / 280));
+          transform-origin: top left;
+          width: 280px;
+          height: 270px;
+        }
+        
+        /* 🎯 Scaling proportionnel pour countries card */
         .countries-card {
           top: var(--card-countries-top);
           bottom: var(--card-countries-bottom);
@@ -1114,6 +1127,13 @@
           right: var(--card-countries-right);
           width: var(--card-countries-width);
           height: var(--card-countries-height);
+        }
+        
+        .countries-card > * {
+          transform: scale(calc(var(--card-countries-width) / 280));
+          transform-origin: top left;
+          width: 280px;
+          height: 270px;
         }
       }
     </style>
@@ -1517,13 +1537,13 @@
           return;
         }
         
-        // En-dessous de 1024px: calcul du scale (BASE_WIDTH dynamique depuis le CSS)
-        var maxWidthStr = getComputedStyle(container).maxWidth;
-        var BASE_WIDTH = parseFloat(maxWidthStr) || container.scrollWidth || 1400;
+        // En-dessous de 1024px: calcul du scale (BASE_WIDTH depuis --stats-container-width-mobile)
+        var computedStyles = getComputedStyle(document.documentElement);
+        var BASE_WIDTH = parseFloat(computedStyles.getPropertyValue('--stats-container-width-mobile')) || 1400;
         var MARGIN = 40; // marges de sécurité
         var scale = Math.min(1, (viewportWidth - MARGIN) / BASE_WIDTH);
         
-        // Appliquer le scale
+        // Appliquer le scale (tout le contenu scale proportionnellement)
         container.style.transformOrigin = 'top center';
         container.style.transform = 'scale(' + scale + ')';
         
