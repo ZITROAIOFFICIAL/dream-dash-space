@@ -1066,6 +1066,8 @@
           --stats-grid-width-mobile: 100%;        /* Largeur du contenu central */
           --stats-grid-max-width-mobile: 1200px;  /* 🔧 MODIFIER CETTE VALEUR pour changer la taille */
           --stats-grid-padding-mobile: 2rem;      /* Padding interne */
+          --stats-grid-translate-x-mobile: 0px;   /* 🔧 Déplacement horizontal (gauche/droite) */
+          --stats-grid-translate-y-mobile: 0px;   /* 🔧 Déplacement vertical (haut/bas) */
           
           /* Dimensions des rectangles graphiques (chart-card) sur mobile */
           --chart-card-width-mobile: 100%; /* largeur */
@@ -1101,6 +1103,7 @@
           width: var(--stats-grid-width-mobile);
           max-width: var(--stats-grid-max-width-mobile);
           margin: 0 auto;
+          transform: translate(var(--stats-grid-translate-x-mobile), var(--stats-grid-translate-y-mobile));
         }
         
         /* Appliquer les dimensions aux rectangles graphiques */
@@ -1116,6 +1119,7 @@
           padding: var(--stats-grid-padding-mobile);
           margin: 0 auto;
           transform-origin: top center;
+          transform: translate(var(--stats-grid-translate-x-mobile), var(--stats-grid-translate-y-mobile));
         }
         
         /* Scaling proportionnel du contenu interne */
