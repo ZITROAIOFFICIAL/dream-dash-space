@@ -1091,9 +1091,8 @@
         
         .stats-section .stats-container {
           transform-origin: top center;
-          width: var(--stats-container-width-mobile);
-          max-width: var(--stats-container-width-mobile);
           /* Le transform: scale() sera appliqué dynamiquement en JS */
+          /* La largeur ne doit PAS être forcée ici, le scale JS s'en occupe */
         }
         
         /* Appliquer les dimensions aux rectangles graphiques */
