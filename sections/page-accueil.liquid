@@ -1065,7 +1065,6 @@
           /* 🎯 Rectangle central (stats + graphiques) - Contrôle indépendant */
           --stats-grid-width-mobile: 100%;        /* Largeur du contenu central */
           --stats-grid-max-width-mobile: 1200px;  /* 🔧 MODIFIER pour changer la largeur max */
-          --stats-grid-max-height-mobile: none;   /* 🔧 MODIFIER pour changer la hauteur max (ex: 800px) */
           --stats-grid-padding-mobile: 2rem;      /* Padding interne */
           --stats-grid-translate-x-mobile: 0px;   /* 🔧 Déplacement horizontal (gauche/droite) */
           --stats-grid-translate-y-mobile: 0px;   /* 🔧 Déplacement vertical (haut/bas) */
@@ -1103,8 +1102,6 @@
           /* Le transform sera appliqué 100% en JS pour que le background suive le contenu */
           width: var(--stats-grid-width-mobile);
           max-width: var(--stats-grid-max-width-mobile);
-          max-height: var(--stats-grid-max-height-mobile);
-          overflow: hidden;
           margin: 0 auto;
         }
         
@@ -1429,115 +1426,115 @@
                     <text x="294" y="94" text-anchor="end" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">Juil</text>
                   </svg>
                 </div>
-                
-                <!-- Cartes spéciales superposées (position absolute) -->
-                <div class="special-card card-providers">
-                  <div class="card-title">
-                    <svg width="30" height="30" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 0.4rem; flex-shrink: 0;">
-                      <defs>
-                        <filter id="softGlowCardIA" x="-50%" y="-50%" width="200%" height="200%">
-                          <feGaussianBlur stdDeviation="1.2" result="b"/>
-                          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                        </filter>
-                        <path id="orbit0CardIA" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
-                        <path id="orbit1CardIA" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
-                        <path id="orbit2CardIA" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
-                      </defs>
-                      <g stroke="#68859e" stroke-width="2" fill="none">
-                        <use href="#orbit0CardIA"/>
-                        <use href="#orbit1CardIA"/>
-                        <use href="#orbit2CardIA"/>
-                      </g>
-                      <g stroke-linecap="round" filter="url(#softGlowCardIA)">
-                        <use href="#orbit0CardIA" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                          <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
-                        </use>
-                        <use href="#orbit1CardIA" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                          <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
-                        </use>
-                        <use href="#orbit2CardIA" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                          <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
-                        </use>
-                      </g>
-                      <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
-                    </svg>
-                    Paris sportifs trouvé par notre ia
-                  </div>
-                  <div style="display: flex; gap: 4rem; justify-content: center; align-items: center; margin: -1.3rem auto -2rem auto;">
-                    <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Untitled_design-53_259d94e8-1fda-4bc6-bef8-c4a429bb9b48.png?v=1762325075" alt="Logo 1" style="width: 55px; height: 55px;">
-                    <span style="color: #9ca3af; font-size: 2rem; font-weight: 600;">vs</span>
-                    <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Untitled_design-54_8a0e6c7a-da28-45db-a3f9-352fa7600b33.png?v=1762325074" alt="Logo 2" style="width: 55px; height: 55px;">
-                  </div>
-                       <div style="text-align: center; margin: -0.5rem 0 -2rem 0;">
-                    <span style="color: #ffffff; font-size: 2.5rem; font-weight: 700;">x2.13</span>
-                  </div>
-                  <div style="text-align: center; margin: 0rem 0 -2rem 0;">
-                    <span style="color: #9ca3af; font-size: 1.2rem; font-weight: 600;">Prédiction ia : Victoire KC</span>
-                  </div>
-                  <div style="text-align: center; margin: 0rem 0 -1rem 0;">
-                    <span style="color: #9ca3af; font-size: 1.2rem; font-weight: 600;">Résultat final: Victoire KC</span>
-                  </div>
-                  
-                  <div class="credit-card">
-                    <div style="font-size: 1.5rem; color: #9ca3af; font-weight: 500; margin-bottom: -0.7rem;">Cashout</div>
-                    <div style="font-size: 2.75rem; font-weight: 700; color: #ffffff;">+213.27$</div>
-                    <div style="font-size: 0.75rem; color: #9ca3af; font-weight: 400; margin-top: -0.7rem;">+ 192.88 de bénéfice</div>
-                  </div>
-                </div>
-                
-                <div class="special-card countries-card">
-                          <div class="card-title">
-                    <svg width="30" height="30" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 0.4rem; flex-shrink: 0;">
-                      <defs>
-                        <filter id="softGlowCardIA" x="-50%" y="-50%" width="200%" height="200%">
-                          <feGaussianBlur stdDeviation="1.2" result="b"/>
-                          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                        </filter>
-                        <path id="orbit0CardIA" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
-                        <path id="orbit1CardIA" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
-                        <path id="orbit2CardIA" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
-                      </defs>
-                      <g stroke="#68859e" stroke-width="2" fill="none">
-                        <use href="#orbit0CardIA"/>
-                        <use href="#orbit1CardIA"/>
-                        <use href="#orbit2CardIA"/>
-                      </g>
-                      <g stroke-linecap="round" filter="url(#softGlowCardIA)">
-                        <use href="#orbit0CardIA" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                          <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
-                        </use>
-                        <use href="#orbit1CardIA" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                          <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
-                        </use>
-                        <use href="#orbit2CardIA" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                          <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
-                        </use>
-                      </g>
-                      <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
-                    </svg>
-                    Paris sportifs trouvé par notre ia
-                  </div>
-                  <div style="display: flex; gap: 4rem; justify-content: center; align-items: center; margin: -1.3rem auto -2rem auto;">
-                    <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Untitled_design-52_6e928f84-18bd-4128-bffd-322aa2abea6b.png?v=1762306850" alt="Logo 1" style="width: 45px; height: 45px;">
-                    <span style="color: #9ca3af; font-size: 2rem; font-weight: 600;">vs</span>
-                    <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Untitled_design-51_0926c52d-21ab-4c3a-a552-bc96dade5fb1.png?v=1762306851" alt="Logo 2" style="width: 45px; height: 45px;">
-                  </div>
-                       <div style="text-align: center; margin: -0.5rem 0 -2rem 0;">
-                    <span style="color: #ffffff; font-size: 2.5rem; font-weight: 700;">x2.93</span>
-                  </div>
-                  <div style="text-align: center; margin: 0rem 0 -2rem 0;">
-                    <span style="color: #9ca3af; font-size: 1.2rem; font-weight: 600;">Prédiction ia : Victoire CH</span>
-                  </div>
-                  <div style="text-align: center; margin: 0rem 0 -1rem 0;">
-                    <span style="color: #9ca3af; font-size: 1.2rem; font-weight: 600;">Résultat final: Victoire CH</span>
-                  </div>
-                  
-                  <div class="credit-card">
-                    <div style="font-size: 1.5rem; color: #9ca3af; font-weight: 500; margin-bottom: -0.7rem;">Cashout</div>
-                    <div style="font-size: 2.75rem; font-weight: 700; color: #ffffff;">+292.88$</div>
-                    <div style="font-size: 0.75rem; color: #9ca3af; font-weight: 400; margin-top: -0.7rem;">+ 192.88 de bénéfice</div>
-                  </div>
-                </div>
+              </div>
+            </div>
+            
+            <!-- Cartes spéciales superposées (position absolute) - En dehors du scale -->
+            <div class="special-card card-providers">
+              <div class="card-title">
+                <svg width="30" height="30" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 0.4rem; flex-shrink: 0;">
+                  <defs>
+                    <filter id="softGlowCardIA" x="-50%" y="-50%" width="200%" height="200%">
+                      <feGaussianBlur stdDeviation="1.2" result="b"/>
+                      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                    <path id="orbit0CardIA" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                    <path id="orbit1CardIA" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                    <path id="orbit2CardIA" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+                  </defs>
+                  <g stroke="#68859e" stroke-width="2" fill="none">
+                    <use href="#orbit0CardIA"/>
+                    <use href="#orbit1CardIA"/>
+                    <use href="#orbit2CardIA"/>
+                  </g>
+                  <g stroke-linecap="round" filter="url(#softGlowCardIA)">
+                    <use href="#orbit0CardIA" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                      <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                    </use>
+                    <use href="#orbit1CardIA" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                      <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                    </use>
+                    <use href="#orbit2CardIA" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                      <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                    </use>
+                  </g>
+                  <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
+                </svg>
+                Paris sportifs trouvé par notre ia
+              </div>
+              <div style="display: flex; gap: 4rem; justify-content: center; align-items: center; margin: -1.3rem auto -2rem auto;">
+                <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Untitled_design-53_259d94e8-1fda-4bc6-bef8-c4a429bb9b48.png?v=1762325075" alt="Logo 1" style="width: 55px; height: 55px;">
+                <span style="color: #9ca3af; font-size: 2rem; font-weight: 600;">vs</span>
+                <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Untitled_design-54_8a0e6c7a-da28-45db-a3f9-352fa7600b33.png?v=1762325074" alt="Logo 2" style="width: 55px; height: 55px;">
+              </div>
+              <div style="text-align: center; margin: -0.5rem 0 -2rem 0;">
+                <span style="color: #ffffff; font-size: 2.5rem; font-weight: 700;">x2.13</span>
+              </div>
+              <div style="text-align: center; margin: 0rem 0 -2rem 0;">
+                <span style="color: #9ca3af; font-size: 1.2rem; font-weight: 600;">Prédiction ia : Victoire KC</span>
+              </div>
+              <div style="text-align: center; margin: 0rem 0 -1rem 0;">
+                <span style="color: #9ca3af; font-size: 1.2rem; font-weight: 600;">Résultat final: Victoire KC</span>
+              </div>
+              
+              <div class="credit-card">
+                <div style="font-size: 1.5rem; color: #9ca3af; font-weight: 500; margin-bottom: -0.7rem;">Cashout</div>
+                <div style="font-size: 2.75rem; font-weight: 700; color: #ffffff;">+213.27$</div>
+                <div style="font-size: 0.75rem; color: #9ca3af; font-weight: 400; margin-top: -0.7rem;">+ 192.88 de bénéfice</div>
+              </div>
+            </div>
+            
+            <div class="special-card countries-card">
+              <div class="card-title">
+                <svg width="30" height="30" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 0.4rem; flex-shrink: 0;">
+                  <defs>
+                    <filter id="softGlowCardIA" x="-50%" y="-50%" width="200%" height="200%">
+                      <feGaussianBlur stdDeviation="1.2" result="b"/>
+                      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                    <path id="orbit0CardIA" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                    <path id="orbit1CardIA" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                    <path id="orbit2CardIA" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+                  </defs>
+                  <g stroke="#68859e" stroke-width="2" fill="none">
+                    <use href="#orbit0CardIA"/>
+                    <use href="#orbit1CardIA"/>
+                    <use href="#orbit2CardIA"/>
+                  </g>
+                  <g stroke-linecap="round" filter="url(#softGlowCardIA)">
+                    <use href="#orbit0CardIA" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                      <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                    </use>
+                    <use href="#orbit1CardIA" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                      <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                    </use>
+                    <use href="#orbit2CardIA" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                      <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                    </use>
+                  </g>
+                  <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
+                </svg>
+                Paris sportifs trouvé par notre ia
+              </div>
+              <div style="display: flex; gap: 4rem; justify-content: center; align-items: center; margin: -1.3rem auto -2rem auto;">
+                <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Untitled_design-52_6e928f84-18bd-4128-bffd-322aa2abea6b.png?v=1762306850" alt="Logo 1" style="width: 45px; height: 45px;">
+                <span style="color: #9ca3af; font-size: 2rem; font-weight: 600;">vs</span>
+                <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Untitled_design-51_0926c52d-21ab-4c3a-a552-bc96dade5fb1.png?v=1762306851" alt="Logo 2" style="width: 45px; height: 45px;">
+              </div>
+              <div style="text-align: center; margin: -0.5rem 0 -2rem 0;">
+                <span style="color: #ffffff; font-size: 2.5rem; font-weight: 700;">x2.93</span>
+              </div>
+              <div style="text-align: center; margin: 0rem 0 -2rem 0;">
+                <span style="color: #9ca3af; font-size: 1.2rem; font-weight: 600;">Prédiction ia : Victoire CH</span>
+              </div>
+              <div style="text-align: center; margin: 0rem 0 -1rem 0;">
+                <span style="color: #9ca3af; font-size: 1.2rem; font-weight: 600;">Résultat final: Victoire CH</span>
+              </div>
+              
+              <div class="credit-card">
+                <div style="font-size: 1.5rem; color: #9ca3af; font-weight: 500; margin-bottom: -0.7rem;">Cashout</div>
+                <div style="font-size: 2.75rem; font-weight: 700; color: #ffffff;">+292.88$</div>
+                <div style="font-size: 0.75rem; color: #9ca3af; font-weight: 400; margin-top: -0.7rem;">+ 192.88 de bénéfice</div>
               </div>
             </div>
           </div>
