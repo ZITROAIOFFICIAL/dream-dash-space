@@ -1069,6 +1069,7 @@
           --stats-container-margin-bottom-mobile: 0;  /* 🔧 Marge inférieure */
           --stats-container-margin-left-mobile: 0;    /* 🔧 Marge gauche */
           --stats-container-margin-right-mobile: 0;   /* 🔧 Marge droite */
+          --stats-container-border-radius-mobile: 12px; /* 🔧 Arrondi des coins */
           
           /* 🎯 Rectangle central (stats + graphiques) - Contrôle indépendant */
           --stats-grid-width-mobile: 260%;        /* Largeur du contenu central */
@@ -1129,6 +1130,7 @@
           /* Transform pour centrer parfaitement */
           transform: translateX(-50%);
           transform-origin: top center;
+          border-radius: var(--stats-container-border-radius-mobile);
           z-index: 1;
         }
         
