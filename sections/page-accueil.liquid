@@ -1097,6 +1097,9 @@
           --chart-card-width-mobile: 100%; /* largeur */
           --chart-card-height-mobile: 240px; /* hauteur */
           
+          /* 🎯 Décalage horizontal des cartes depuis le centre (une seule valeur pour les deux) */
+          --cards-horizontal-offset-mobile: 130px; /* 🔧 MODIFIER pour bouger les deux cartes symétriquement */
+          
           /* 🎯 Position et taille carte providers (petite carte gauche) sur mobile */
           --card-providers-top: auto;
           --card-providers-bottom: 40px;
@@ -1182,7 +1185,7 @@
           right: var(--card-providers-right);
           width: var(--card-providers-width);
           height: var(--card-providers-height);
-          transform: translateX(-50%) scale(var(--card-providers-scale-mobile));
+          transform: translateX(calc(-50% - var(--cards-horizontal-offset-mobile))) scale(var(--card-providers-scale-mobile));
           transform-origin: center;
         }
         
@@ -1194,7 +1197,7 @@
           right: var(--card-countries-right);
           width: var(--card-countries-width);
           height: var(--card-countries-height);
-          transform: translateX(-50%) scale(var(--card-countries-scale-mobile));
+          transform: translateX(calc(-50% + var(--cards-horizontal-offset-mobile))) scale(var(--card-countries-scale-mobile));
           transform-origin: center;
         }
       }
