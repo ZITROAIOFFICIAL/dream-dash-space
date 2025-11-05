@@ -1063,7 +1063,7 @@
           --stats-container-height-mobile: 220px;     /* 🔧 Hauteur du background gris */
           --stats-container-top-mobile: 0px;          /* 🔧 Position top */
           --stats-container-bottom-mobile: auto;      /* 🔧 Position bottom */
-          --stats-container-left-mobile: 0px;         /* 🔧 Position left */
+          --stats-container-left-mobile: 50%;         /* 🔧 Position left - centré */
           --stats-container-right-mobile: auto;       /* 🔧 Position right */
           --stats-container-margin-top-mobile: 0;     /* 🔧 Marge supérieure */
           --stats-container-margin-bottom-mobile: 0;  /* 🔧 Marge inférieure */
@@ -1126,8 +1126,8 @@
           margin-left: var(--stats-container-margin-left-mobile);
           margin-right: var(--stats-container-margin-right-mobile);
           
-          /* Pas de transform automatique */
-          transform: none;
+          /* Transform pour centrer parfaitement */
+          transform: translateX(-50%);
           transform-origin: top center;
           z-index: 1;
         }
@@ -1143,9 +1143,11 @@
           width: var(--stats-grid-width-mobile);
           max-width: var(--stats-grid-max-width-mobile);
           padding: var(--stats-grid-padding-mobile);
-          margin: 0 auto;
+          position: relative;
+          left: 50%;
           transform-origin: top center;
-          transform: translate(var(--stats-grid-translate-x-mobile), var(--stats-grid-translate-y-mobile));
+          /* Combiner le centrage + les translations existantes */
+          transform: translateX(calc(-50% + var(--stats-grid-translate-x-mobile))) translateY(var(--stats-grid-translate-y-mobile));
         }
         
         /* Scaling proportionnel du contenu interne */
