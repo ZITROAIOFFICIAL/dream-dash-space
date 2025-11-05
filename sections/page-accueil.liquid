@@ -1574,21 +1574,41 @@
       function adjustStatsSection() {
         var section = document.querySelector('.stats-section');
         var container = document.querySelector('.stats-section .stats-container');
+        var grid = document.querySelector('.stats-grid');
         
-        if (!section || !container) return;
+        if (!section || !container || !grid) return;
         
         var viewportWidth = window.innerWidth;
         
         // Au-dessus de 1024px: reset (desktop)
         if (viewportWidth > 1024) {
-          container.style.transform = '';
+          grid.style.transform = '';
           section.style.height = '';
           return;
         }
         
-        // En-dessous de 1024px: NE RIEN FAIRE (contrôle 100% via CSS)
-        // L'utilisateur contrôle tout via les variables CSS
-        return;
+        // En-dessous de 1024px: appliquer le scale sur .stats-grid
+        var computedStyles = getComputedStyle(document.documentElement);
+        
+        // Récupérer le scale manuel uniforme
+        var scale = parseFloat(computedStyles.getPropertyValue('--stats-grid-scale-mobile')) || 1;
+        
+        // Limiter à 400% max
+        scale = Math.min(scale, 4);
+        
+        // Récupérer les translations
+        var tx = (computedStyles.getPropertyValue('--stats-grid-translate-x-mobile') || '0px').trim();
+        var ty = (computedStyles.getPropertyValue('--stats-grid-translate-y-mobile') || '0px').trim();
+        
+        // Appliquer le scale + translation sur .stats-grid
+        grid.style.transformOrigin = 'top center';
+        grid.style.transform = 'translate(' + tx + ',' + ty + ') scale(' + scale + ')';
+        
+        // Ajuster la hauteur de la section
+        setTimeout(function() {
+          var rect = container.getBoundingClientRect();
+          section.style.height = rect.height + 'px';
+        }, 50);
       }
       
       // Exécuter au chargement et au resize
