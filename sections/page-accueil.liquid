@@ -150,10 +150,20 @@
       --laptop-right-transform: -4rem;
       --laptop-nav-gap: 1.75rem;
       --laptop-scrolled-width: calc(100% - 20rem);
+      
+      /* 🎯 Scale global dashboard laptop allongé */
+      --dashboard-scale-laptop-extended: 1; /* Valeur par défaut: 1 = 100% */
     }
 
     /* Laptop étendu (1441px - 1800px) - Rectangle gris bord à bord + éléments centrés */
     @media (min-width: 1441px) and (max-width: 1800px) {
+      
+      /* 🎯 SCALE GLOBAL - Toute la section dashboard */
+      .stats-section {
+        transform: scale(var(--dashboard-scale-laptop-extended));
+        transform-origin: top center;
+      }
+      
       .header.scrolled::before {
         width: var(--laptop-scrolled-width) !important;
         height: 90%;
