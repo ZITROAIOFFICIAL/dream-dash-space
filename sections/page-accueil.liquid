@@ -1184,6 +1184,23 @@
           transform-origin: center;
         }
       }
+      
+      /* Laptop (1024px+) - Centrage du background comme sur mobile */
+      @media (min-width: 1024px) {
+        .stats-section {
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+        }
+        
+        .stats-container {
+          position: relative;
+          left: 0;
+          right: 0;
+          margin-left: auto;
+          margin-right: auto;
+        }
+      }
     </style>
 
     <section class="hero-section">
