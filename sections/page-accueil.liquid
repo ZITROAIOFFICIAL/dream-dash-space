@@ -6,7 +6,7 @@
   <title>WINABET.AI - Page d'Accueil</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Fustat:wght@400&display=swap" rel="stylesheet">
   {% render 'dashboard-styles' %}
   <style>
     /* Empêcher le scroll horizontal */
@@ -433,18 +433,18 @@
             </svg>
             <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span id="desktop-time" style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">17:34</span></span>
           </div>
+        </div>
+
+        <!-- Menu Items -->
+        <nav class="desktop-nav">
+          <a href="https://winabet.ai/collections/all#bet" class="desktop-nav-item">Accéder au Dashboard</a>
+          <a href="#" class="desktop-nav-item">Abonnement</a>
+          <a href="#" class="desktop-nav-item">Support</a>
+        </nav>
       </div>
-    </div>
 
-    <!-- Menu Items -->
-    <nav class="desktop-nav">
-      <a href="https://winabet.ai/collections/all#bet" class="desktop-nav-item">Accéder au Dashboard</a>
-      <a href="#" class="desktop-nav-item">Abonnement</a>
-      <a href="#" class="desktop-nav-item">Support</a>
-    </nav>
-
-    <!-- Right: Auth Buttons -->
-    <div class="desktop-right">
+      <!-- Right: Auth Buttons -->
+      <div class="desktop-right">
         <a href="#" class="desktop-auth-link">Se Connecter</a>
         <a href="#" class="desktop-auth-btn">Commencer Gratuitement</a>
       </div>
@@ -821,7 +821,7 @@
         backdrop-filter: blur(20px);
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 1.5rem;
-        padding: 2rem;
+        padding: 2.3rem;
         transition: all 0.3s ease;
       }
 
@@ -853,7 +853,6 @@
         font-weight: 550;
         color: #ffffff;
         margin-bottom: -1rem;
-        font-family: 'Outfit', sans-serif;
       }
 
       .stat-change {
@@ -863,19 +862,16 @@
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        font-family: 'Outfit', sans-serif;
       }
 
       .stat-change .percentage {
         display: inline-flex;
         align-items: center;
-        padding: 0rem 0.7rem;
+        padding: 0.25rem 0.5rem;
         background: #15803d;
         color: #ffffff;
         border-radius: 1.5rem;
-        font-size: 0.9rem;
-        font-weight: 400;
-        font-family: 'Inter', sans-serif;
+        font-weight: 600;
       }
 
       /* Cartes graphiques - 2 en bas, côte à côte sur toute la largeur */
@@ -888,10 +884,9 @@
       }
 
       .chart-title {
-        font-size: 1.2rem;
-        color: rgba(255, 255, 255, 0.6);
-        font-weight: 400;
-        text-align: left;
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 600;
       }
 
       .chart-svg {
@@ -923,22 +918,22 @@
 
       /* Card Providers - En bas à gauche */
       .card-providers {
-        bottom: -10rem;
-        left: -25rem;
+        bottom: -8rem;
+        left: -20rem;
         width: 280px;
         height: 270px;
       }
 
       /* Countries Card - En haut à droite */
       .countries-card {
-        top: -10rem;
-        right: -25rem;
+        top: -8rem;
+        right: -20rem;
         width: 280px;
         height: 270px;
       }
 
       .card-title {
-        font-size: 1.15rem;
+        font-size: 1.125rem;
         color: #ffffff;
         font-weight: 600;
       }
@@ -948,22 +943,7 @@
         background: rgba(50, 50, 60, 0.5);
         border: 1px solid rgba(255, 255, 255, 0.15);
         border-radius: 1rem;
-        padding: 1rem 1.5rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        min-height: 70px;
-        margin-top: auto;
-      }
-
-      .cashout-label {
-        font-size: 0.875rem;
-        color: rgba(255, 255, 255, 0.7);
-        font-weight: 500;
-        margin-bottom: 0.5rem;
-        text-align: center;
+        padding: 1.5rem;
       }
 
       /* Payment Buttons */
@@ -1117,211 +1097,57 @@
                 
                 <!-- 3 cartes statistiques en haut -->
                 <div class="stat-card">
-                  <div class="stat-label">Bénéfice paris sportifs</div>
+                  <div class="stat-label">Bénéfice paris sportif</div>
                   <div class="stat-value">+ 12 437.08 $</div>
                   <div class="stat-change">
                     <span class="percentage">+21%</span>
-                    <span>Depuis le dernier mois</span>
+                    <span>since last month</span>
                   </div>
                 </div>
                 
                 <div class="stat-card">
-                  <div class="stat-label">Paris sportifs placés</div>
-                  <div class="stat-value">183</div>
+                  <div class="stat-label">Sales</div>
+                  <div class="stat-value">3,260</div>
                   <div class="stat-change">
                     <span class="percentage">+12%</span>
-                    <span>Depuis le dernier mois</span>
+                    <span>since last month</span>
                   </div>
                 </div>
                 
                 <div class="stat-card">
-                  <div class="stat-label">Paris sportifs gagnés</div>
-                  <div class="stat-value">167</div>
+                  <div class="stat-label">New Customers</div>
+                  <div class="stat-value">963</div>
                   <div class="stat-change">
-                    <span class="percentage">+4%</span>
-                    <span>Depuis le dernier mois</span>
+                    <span class="percentage">+8%</span>
+                    <span>since last month</span>
                   </div>
                 </div>
                 
                 <!-- 2 graphiques Revenue Overview en bas -->
                 <div class="chart-card">
-                  <div class="chart-title">
-                    <svg width="30" height="30" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 0.4rem; flex-shrink: 0;">
-                      <defs>
-                        <filter id="softGlowChart1" x="-50%" y="-50%" width="200%" height="200%">
-                          <feGaussianBlur stdDeviation="1.2" result="b"/>
-                          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                        </filter>
-                        <path id="orbit0Chart1" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
-                        <path id="orbit1Chart1" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
-                        <path id="orbit2Chart1" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
-                      </defs>
-                      <g stroke="#68859e" stroke-width="2" fill="none">
-                        <use href="#orbit0Chart1"/>
-                        <use href="#orbit1Chart1"/>
-                        <use href="#orbit2Chart1"/>
-                      </g>
-                      <g stroke-linecap="round" filter="url(#softGlowChart1)">
-                        <use href="#orbit0Chart1" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                          <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
-                        </use>
-                        <use href="#orbit1Chart1" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                          <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
-                        </use>
-                        <use href="#orbit2Chart1" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                          <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
-                        </use>
-                      </g>
-                      <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
-                    </svg>
-                   Paris sportifs trouvés par notre ia
-                  </div>
-                  <svg class="chart-svg" viewBox="0 0 300 100" preserveAspectRatio="xMidYMid meet">
-                    <defs>
-                      <!-- Gradient pour l'effet lumineux -->
-                      <linearGradient id="glowWhite" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" style="stop-color:rgba(255,255,255,0.15);stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:rgba(255,255,255,0);stop-opacity:1" />
-                      </linearGradient>
-                    </defs>
-                    
-                    <!-- Axe Y - Labels (200 à 100) tous les 20 -->
-                    <text x="11" y="8" text-anchor="end" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">200</text>
-                    <text x="11" y="22" text-anchor="end" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">180</text>
-                    <text x="11" y="36" text-anchor="end" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">160</text>
-                    <text x="11" y="50" text-anchor="end" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">140</text>
-                    <text x="11" y="64" text-anchor="end" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">120</text>
-                    <text x="11" y="78" text-anchor="end" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">100</text>
-                    
-                    <!-- Zone lumineuse sous la courbe -->
-                    <path d="M17,70 C35,70 35,30 53,30 C71,30 71,45 89,45 C107,45 107,20 125,20 C143,20 143,50 161,50 C179,50 179,35 197,35 C215,35 215,55 233,55 C251,55 251,40 269,40 C278,40 287,30 296,15 L296,90 L17,90 Z" 
-                          fill="url(#glowWhite)" opacity="0.4"/>
-                    
-                    <!-- Courbe lisse et fluide qui finit en montant -->
-                    <path d="M17,70 C35,70 35,30 53,30 C71,30 71,45 89,45 C107,45 107,20 125,20 C143,20 143,50 161,50 C179,50 179,35 197,35 C215,35 215,55 233,55 C251,55 251,40 269,40 C278,40 287,30 296,15" 
-                          stroke="rgba(255, 255, 255, 0.9)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                    
-                    <!-- Axe X - Mois -->
-                    <text x="17" y="94" text-anchor="start" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">Jan</text>
-                    <text x="62" y="94" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">Fév</text>
-                    <text x="107" y="94" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">Mar</text>
-                    <text x="152" y="94" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">Avr</text>
-                    <text x="197" y="94" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">Mai</text>
-                    <text x="242" y="94" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">Juin</text>
-                    <text x="294" y="94" text-anchor="end" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">Juil</text>
+                  <div class="chart-title">Revenue Overview</div>
+                  <svg class="chart-svg" viewBox="0 0 300 120" preserveAspectRatio="none">
+                    <path d="M0,80 Q75,20 150,60 T300,40" stroke="rgba(255, 255, 255, 0.8)" stroke-width="2" fill="none"/>
                   </svg>
                 </div>
                 
                 <div class="chart-card">
-                  <div class="chart-title">
-                    <svg width="30" height="30" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 0.4rem; flex-shrink: 0;">
-                      <defs>
-                        <filter id="softGlowChart2" x="-50%" y="-50%" width="200%" height="200%">
-                          <feGaussianBlur stdDeviation="1.2" result="b"/>
-                          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                        </filter>
-                        <path id="orbit0Chart2" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
-                        <path id="orbit1Chart2" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
-                        <path id="orbit2Chart2" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
-                      </defs>
-                      <g stroke="#68859e" stroke-width="2" fill="none">
-                        <use href="#orbit0Chart2"/>
-                        <use href="#orbit1Chart2"/>
-                        <use href="#orbit2Chart2"/>
-                      </g>
-                      <g stroke-linecap="round" filter="url(#softGlowChart2)">
-                        <use href="#orbit0Chart2" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                          <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
-                        </use>
-                        <use href="#orbit1Chart2" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                          <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
-                        </use>
-                        <use href="#orbit2Chart2" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                          <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
-                        </use>
-                      </g>
-                      <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
-                    </svg>
-                    Paris sportifs gagnant par notre ia
-                  </div>
-                  <svg class="chart-svg" viewBox="0 0 300 100" preserveAspectRatio="xMidYMid meet">
-                    <defs>
-                      <!-- Gradient pour l'effet lumineux vert -->
-                      <linearGradient id="glowGreen" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" style="stop-color:rgba(34,197,94,0.2);stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:rgba(34,197,94,0);stop-opacity:1" />
-                      </linearGradient>
-                    </defs>
-                    
-                    <!-- Axe Y - Labels (200 à 100) tous les 20 -->
-                    <text x="11" y="8" text-anchor="end" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">200</text>
-                    <text x="11" y="22" text-anchor="end" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">180</text>
-                    <text x="11" y="36" text-anchor="end" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">160</text>
-                    <text x="11" y="50" text-anchor="end" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">140</text>
-                    <text x="11" y="64" text-anchor="end" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">120</text>
-                    <text x="11" y="78" text-anchor="end" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">100</text>
-                    
-                    <!-- Zone lumineuse verte sous la courbe (même forme mais décalée de 7 unités vers le bas) -->
-                    <path d="M17,77 C35,77 35,37 53,37 C71,37 71,52 89,52 C107,52 107,27 125,27 C143,27 143,57 161,57 C179,57 179,42 197,42 C215,42 215,62 233,62 C251,62 251,47 269,47 C278,47 287,37 296,22 L296,90 L17,90 Z" 
-                          fill="url(#glowGreen)" opacity="0.5"/>
-                    
-                    <!-- Courbe verte (même forme que la blanche mais décalée de 7 unités vers le bas) -->
-                    <path d="M17,77 C35,77 35,37 53,37 C71,37 71,52 89,52 C107,52 107,27 125,27 C143,27 143,57 161,57 C179,57 179,42 197,42 C215,42 215,62 233,62 C251,62 251,47 269,47 C278,47 287,37 296,22" 
-                          stroke="#22c55e" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                    
-                    <!-- Axe X - Mois -->
-                    <text x="17" y="94" text-anchor="start" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">Jan</text>
-                    <text x="62" y="94" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">Fév</text>
-                    <text x="107" y="94" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">Mar</text>
-                    <text x="152" y="94" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">Avr</text>
-                    <text x="197" y="94" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">Mai</text>
-                    <text x="242" y="94" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">Juin</text>
-                    <text x="294" y="94" text-anchor="end" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">Juil</text>
+                  <div class="chart-title">Revenue Overview</div>
+                  <svg class="chart-svg" viewBox="0 0 300 120" preserveAspectRatio="none">
+                    <path d="M0,90 Q75,40 150,70 T300,30" stroke="#22c55e" stroke-width="2" fill="none"/>
                   </svg>
                 </div>
                 
                 <!-- Cartes spéciales superposées (position absolute) -->
                 <div class="special-card card-providers">
-                  <div class="card-title">
-                    <svg width="30" height="30" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 0.4rem; flex-shrink: 0;">
-                      <defs>
-                        <filter id="softGlowCardIA" x="-50%" y="-50%" width="200%" height="200%">
-                          <feGaussianBlur stdDeviation="1.2" result="b"/>
-                          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                        </filter>
-                        <path id="orbit0CardIA" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
-                        <path id="orbit1CardIA" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
-                        <path id="orbit2CardIA" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
-                      </defs>
-                      <g stroke="#68859e" stroke-width="2" fill="none">
-                        <use href="#orbit0CardIA"/>
-                        <use href="#orbit1CardIA"/>
-                        <use href="#orbit2CardIA"/>
-                      </g>
-                      <g stroke-linecap="round" filter="url(#softGlowCardIA)">
-                        <use href="#orbit0CardIA" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                          <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
-                        </use>
-                        <use href="#orbit1CardIA" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                          <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
-                        </use>
-                        <use href="#orbit2CardIA" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                          <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
-                        </use>
-                      </g>
-                      <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
-                    </svg>
-                    Paris sportifs trouvé par notre ia
-                  </div>
-                  <div style="display: flex; gap: 2.5rem; justify-content: center; align-items: center; margin: 0.5rem auto 1rem auto;">
-                    <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Untitled_design-52_6e928f84-18bd-4128-bffd-322aa2abea6b.png?v=1762306850" alt="Logo 1" style="width: 55px; height: 55px;">
-                    <span style="color: #9ca3af; font-size: 2rem; font-weight: 600;">vs</span>
-                    <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Untitled_design-51_0926c52d-21ab-4c3a-a552-bc96dade5fb1.png?v=1762306851" alt="Logo 2" style="width: 55px; height: 55px;">
-                  </div>
+                  <div class="card-title">20+ Card Providers</div>
                   <div class="credit-card">
-                    <div style="font-size: 1.5rem; color: #9ca3af; font-weight: 500; margin-bottom: -0.7rem;">Cashout</div>
-                    <div style="font-size: 2.75rem; font-weight: 700; color: #22c55e;">+392.88$</div>
-                    <div style="font-size: 0.75rem; color: #9ca3af; font-weight: 400; margin-top: -0.7rem;">+ 192.88 de bénéfice</div>
+                    <div style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.6); margin-bottom: 0.5rem;">Credit Card</div>
+                    <div style="font-size: 1.125rem; font-weight: 500; color: #ffffff;">•••• •••• •••• 4321</div>
+                  </div>
+                  <div class="payment-buttons">
+                    <button class="apple-pay">Apple Pay</button>
+                    <button class="google-pay">Google Pay</button>
                   </div>
                 </div>
                 
