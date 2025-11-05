@@ -840,9 +840,6 @@
 
         /* Hauteur des cartes graphiques (assure même hauteur) */
         --chart-card-height: 240px;
-        
-        /* 🔧 Scale de toute la section stats sur laptop (background gris + cartes + providers + countries) */
-        --stats-section-scale-laptop: 1; /* 1 = taille normale, 0.8 = 80%, 1.2 = 120% */
       }
 
       .stats-container {
@@ -1058,14 +1055,6 @@
         transform: scale(1.2);
       }
 
-      /* 🔧 LAPTOP - Scale contrôlable de toute la section dashboard */
-      @media (min-width: 1024px) and (max-width: 1440px) {
-        .stats-section {
-          transform: scale(var(--stats-section-scale-laptop));
-          transform-origin: top center;
-        }
-      }
-
       /* Responsive - Visible sur mobile mais réduit par scale */
       @media (max-width: 1024px) {
         :root {
@@ -1096,25 +1085,25 @@
           
           /* 🎯 Position et taille carte providers (petite carte gauche) sur mobile */
           --card-providers-top: auto;
-          --card-providers-bottom: -100rem;
-          --card-providers-left: -25rem;
+          --card-providers-bottom: 6rem;
+          --card-providers-left: 13rem;
           --card-providers-right: auto;
           --card-providers-width: 280px;
           --card-providers-height: 270px;
-          --card-providers-scale-mobile: 1; /* 🔧 Scale du contenu providers (texte, icônes) */
+          --card-providers-scale-mobile: 0.45; /* 🔧 Scale du contenu providers (texte, icônes) */
           
           /* 🎯 Position et taille countries card (petite carte droite) sur mobile */
-          --card-countries-top: -100rem;
-          --card-countries-bottom: auto;
+          --card-countries-top: auto;
+          --card-countries-bottom: -14rem;
           --card-countries-left: auto;
-          --card-countries-right: -25rem;
+          --card-countries-right: 12rem;
           --card-countries-width: 280px;
           --card-countries-height: 270px;
-          --card-countries-scale-mobile: 1; /* 🔧 Scale du contenu countries (drapeaux, texte) */
+          --card-countries-scale-mobile: 0.45; /* 🔧 Scale du contenu countries (drapeaux, texte) */
         }
         
         .stats-section {
-          margin-top: 1.25rem;
+          margin-top: 12.25rem;
           padding: 0;
           overflow: visible;
         }
