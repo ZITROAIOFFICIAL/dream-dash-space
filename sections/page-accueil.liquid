@@ -1058,9 +1058,17 @@
       /* Responsive - Visible sur mobile mais réduit par scale */
       @media (max-width: 1024px) {
         :root {
-          /* 🎯 Encadré complet - Dimensions de base pour mobile */
-          --stats-container-width-mobile: 1400px; /* Largeur de base avant scale */
-          --stats-container-height-mobile: auto; /* Hauteur (auto = proportionnel) */
+          /* 🎯 Background gris - Contrôle manuel complet sur mobile */
+          --stats-container-width-mobile: 100%;       /* 🔧 Largeur du background gris */
+          --stats-container-height-mobile: auto;      /* 🔧 Hauteur du background gris */
+          --stats-container-top-mobile: auto;         /* 🔧 Position top */
+          --stats-container-bottom-mobile: auto;      /* 🔧 Position bottom */
+          --stats-container-left-mobile: auto;        /* 🔧 Position left */
+          --stats-container-right-mobile: auto;       /* 🔧 Position right */
+          --stats-container-margin-top-mobile: 0;     /* 🔧 Marge supérieure */
+          --stats-container-margin-bottom-mobile: 0;  /* 🔧 Marge inférieure */
+          --stats-container-margin-left-mobile: auto; /* 🔧 Marge gauche (auto = centré) */
+          --stats-container-margin-right-mobile: auto;/* 🔧 Marge droite (auto = centré) */
           
           /* 🎯 Rectangle central (stats + graphiques) - Contrôle indépendant */
           --stats-grid-width-mobile: 100%;        /* Largeur du contenu central */
@@ -1098,11 +1106,27 @@
         }
         
         .stats-section .stats-container {
+          /* Dimensions contrôlées manuellement */
+          width: var(--stats-container-width-mobile);
+          height: var(--stats-container-height-mobile);
+          max-width: none; /* Pas de limitation */
+          
+          /* Positionnement contrôlé manuellement */
+          position: relative;
+          top: var(--stats-container-top-mobile);
+          bottom: var(--stats-container-bottom-mobile);
+          left: var(--stats-container-left-mobile);
+          right: var(--stats-container-right-mobile);
+          
+          /* Marges contrôlées manuellement */
+          margin-top: var(--stats-container-margin-top-mobile);
+          margin-bottom: var(--stats-container-margin-bottom-mobile);
+          margin-left: var(--stats-container-margin-left-mobile);
+          margin-right: var(--stats-container-margin-right-mobile);
+          
+          /* Pas de transform automatique */
+          transform: none;
           transform-origin: top center;
-          /* Le transform sera appliqué 100% en JS pour que le background suive le contenu */
-          width: var(--stats-grid-width-mobile);
-          max-width: var(--stats-grid-max-width-mobile);
-          margin: 0 auto;
         }
         
         /* Appliquer les dimensions aux rectangles graphiques */
@@ -1562,40 +1586,9 @@
           return;
         }
         
-        // En-dessous de 1024px: calcul du scale + translation contrôlée par variables CSS
-        var computedStyles = getComputedStyle(document.documentElement);
-        var BASE_WIDTH = parseFloat(computedStyles.getPropertyValue('--stats-container-width-mobile')) || 1400;
-        var MARGIN = 40; // marges de sécurité
-        
-        // Récupérer le scale manuel uniforme (évite la déformation du contenu)
-        var manualScale = parseFloat(computedStyles.getPropertyValue('--stats-grid-scale-mobile')) || 1;
-        
-        // Limiter à 400% max
-        var scale = Math.min(manualScale, 4); // max 400%
-        
-        // Récupérer les décalages depuis les variables CSS (mobile)
-        var tx = (computedStyles.getPropertyValue('--stats-grid-translate-x-mobile') || '0px').trim();
-        var ty = (computedStyles.getPropertyValue('--stats-grid-translate-y-mobile') || '0px').trim();
-        
-        // Helper: convertir en pixels (px et rem)
-        function toPx(v) {
-          if (!v) return 0;
-          v = v.trim();
-          if (v.endsWith('rem')) return parseFloat(v) * parseFloat(getComputedStyle(document.documentElement).fontSize || 16);
-          if (v.endsWith('px')) return parseFloat(v);
-          return parseFloat(v) || 0;
-        }
-        
-        // Appliquer translate + scale uniforme ensemble (pas de déformation)
-        container.style.transformOrigin = 'top center';
-        container.style.transform = 'translate(' + tx + ',' + ty + ') scale(' + scale + ')';
-        
-        // Ajuster la hauteur de la section pour inclure un éventuel décalage vertical positif
-        setTimeout(function() {
-          var rect = container.getBoundingClientRect();
-          var extraH = Math.max(0, toPx(ty));
-          section.style.height = (rect.height + extraH) + 'px';
-        }, 50);
+        // En-dessous de 1024px: NE RIEN FAIRE (contrôle 100% via CSS)
+        // L'utilisateur contrôle tout via les variables CSS
+        return;
       }
       
       // Exécuter au chargement et au resize
