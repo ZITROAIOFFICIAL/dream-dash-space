@@ -1055,10 +1055,16 @@
         transform: scale(1.2);
       }
 
-      /* Responsive - Desktop uniquement pour l'instant */
+      /* Responsive - Visible sur mobile mais réduit par scale */
       @media (max-width: 1024px) {
         .stats-section {
-          display: none; /* Masquer sur mobile pour l'instant */
+          margin-top: 1.25rem;
+          padding: 0;
+          overflow: visible;
+        }
+        .stats-section .stats-container {
+          transform-origin: top center;
+          /* Le transform: scale() sera appliqué dynamiquement en JS */
         }
       }
     </style>
@@ -1445,6 +1451,48 @@
   </main>
 
   <script>
+    // Mobile responsive scaling pour stats-section
+    (function() {
+      function adjustStatsSection() {
+        var section = document.querySelector('.stats-section');
+        var container = document.querySelector('.stats-section .stats-container');
+        
+        if (!section || !container) return;
+        
+        var viewportWidth = window.innerWidth;
+        
+        // Au-dessus de 1024px: reset (desktop)
+        if (viewportWidth > 1024) {
+          container.style.transform = '';
+          section.style.height = '';
+          return;
+        }
+        
+        // En-dessous de 1024px: calcul du scale
+        var BASE_WIDTH = 1400; // max-width du container
+        var MARGIN = 40; // marges de sécurité
+        var scale = Math.min(1, (viewportWidth - MARGIN) / BASE_WIDTH);
+        
+        // Appliquer le scale
+        container.style.transform = 'scale(' + scale + ')';
+        
+        // Calculer la hauteur réelle après scale pour corriger l'espacement
+        setTimeout(function() {
+          var rect = container.getBoundingClientRect();
+          section.style.height = rect.height + 'px';
+        }, 50);
+      }
+      
+      // Exécuter au chargement et au resize
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', adjustStatsSection);
+      } else {
+        adjustStatsSection();
+      }
+      
+      window.addEventListener('resize', adjustStatsSection);
+    })();
+    
     // Toggle Sidebar
     function toggleSidebar() {
       const sidebar = document.querySelector('.sidebar');
