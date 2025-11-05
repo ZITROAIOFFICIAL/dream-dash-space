@@ -1068,7 +1068,8 @@
           --stats-grid-padding-mobile: 2rem;      /* Padding interne */
           --stats-grid-translate-x-mobile: 0px;   /* 🔧 Déplacement horizontal (gauche/droite) */
           --stats-grid-translate-y-mobile: 0px;   /* 🔧 Déplacement vertical (haut/bas) */
-          --stats-grid-scale-mobile: 1;           /* 🔧 Zoom manuel (1 = 100%, 2.5 = 250%, 3 = 300%) */
+          --stats-grid-scale-width-mobile: 1;     /* 🔧 Scale largeur (1 = 100%, 2.5 = 250%, 4 = 400%) */
+          --stats-grid-scale-height-mobile: 1;    /* 🔧 Scale hauteur (1 = 100%, 2.5 = 250%, 4 = 400%) */
           
           /* Dimensions des rectangles graphiques (chart-card) sur mobile */
           --chart-card-width-mobile: 100%; /* largeur */
@@ -1567,14 +1568,13 @@
         var BASE_WIDTH = parseFloat(computedStyles.getPropertyValue('--stats-container-width-mobile')) || 1400;
         var MARGIN = 40; // marges de sécurité
         
-        // Récupérer le scale manuel depuis la variable CSS (ou 1 par défaut)
-        var manualScale = parseFloat(computedStyles.getPropertyValue('--stats-grid-scale-mobile')) || 1;
+        // Récupérer les scales manuels pour largeur et hauteur séparément
+        var manualScaleX = parseFloat(computedStyles.getPropertyValue('--stats-grid-scale-width-mobile')) || 1;
+        var manualScaleY = parseFloat(computedStyles.getPropertyValue('--stats-grid-scale-height-mobile')) || 1;
         
-        // Calculer un scale automatique basé sur la largeur viewport (SANS limite max)
-        var autoScale = (viewportWidth - MARGIN) / BASE_WIDTH;
-        
-        // Utiliser directement le scale manuel (sans calculs automatiques)
-        var scale = Math.min(manualScale, 4); // max 400%
+        // Limiter à 400% max pour chaque dimension
+        var scaleX = Math.min(manualScaleX, 4); // max 400%
+        var scaleY = Math.min(manualScaleY, 4); // max 400%
         
         // Récupérer les décalages depuis les variables CSS (mobile)
         var tx = (computedStyles.getPropertyValue('--stats-grid-translate-x-mobile') || '0px').trim();
@@ -1591,7 +1591,7 @@
         
         // Appliquer translate + scale ensemble pour éviter les overrides
         container.style.transformOrigin = 'top center';
-        container.style.transform = 'translate(' + tx + ',' + ty + ') scale(' + scale + ')';
+        container.style.transform = 'translate(' + tx + ',' + ty + ') scale(' + scaleX + ',' + scaleY + ')';
         
         // Ajuster la hauteur de la section pour inclure un éventuel décalage vertical positif
         setTimeout(function() {
