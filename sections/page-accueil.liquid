@@ -840,6 +840,14 @@
 
         /* Hauteur des cartes graphiques (assure même hauteur) */
         --chart-card-height: 240px;
+
+        /* 🎯 Cartes providers et countries - Desktop (>1024px) */
+        --card-providers-scale-desktop: 0.9;
+        --card-countries-scale-desktop: 0.9;
+        --card-providers-offset-x-desktop: -360px;  /* vers la gauche */
+        --card-providers-offset-y-desktop: 120px;   /* vers le bas */
+        --card-countries-offset-x-desktop: 360px;   /* vers la droite */
+        --card-countries-offset-y-desktop: -120px;  /* vers le haut */
       }
 
       .stats-container {
@@ -968,22 +976,35 @@
         transform: translateY(-4px);
       }
 
-      /* Card Providers - En bas à gauche */
-      .card-providers {
-        bottom: -10rem;
-        left: -25rem;
+      /* Card Providers et Countries - Base commune */
+      .card-providers,
+      .countries-card {
         width: 280px;
         height: 270px;
-        transform-origin: center;
       }
 
-      /* Countries Card - En haut à droite */
-      .countries-card {
-        top: -10rem;
-        right: -25rem;
-        width: 280px;
-        height: 270px;
-        transform-origin: center;
+      /* Desktop - Cartes centrées sur le conteneur */
+      @media (min-width: 1024px) {
+        .stats-container {
+          position: relative;
+        }
+
+        .card-providers,
+        .countries-card {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform-origin: center;
+          z-index: 10;
+        }
+
+        .card-providers {
+          transform: translate(calc(-50% + var(--card-providers-offset-x-desktop)), calc(-50% + var(--card-providers-offset-y-desktop))) scale(var(--card-providers-scale-desktop));
+        }
+
+        .countries-card {
+          transform: translate(calc(-50% + var(--card-countries-offset-x-desktop)), calc(-50% + var(--card-countries-offset-y-desktop))) scale(var(--card-countries-scale-desktop));
+        }
       }
 
       .card-title {
