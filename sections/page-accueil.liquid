@@ -1274,6 +1274,37 @@
                 
                 <!-- Cartes spéciales superposées (position absolute) -->
                 <div class="special-card card-providers">
+                  <div class="card-title">
+                    <svg width="30" height="30" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 0.4rem; flex-shrink: 0;">
+                      <defs>
+                        <filter id="softGlowCardIA" x="-50%" y="-50%" width="200%" height="200%">
+                          <feGaussianBlur stdDeviation="1.2" result="b"/>
+                          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                        </filter>
+                        <path id="orbit0CardIA" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                        <path id="orbit1CardIA" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                        <path id="orbit2CardIA" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+                      </defs>
+                      <g stroke="#68859e" stroke-width="2" fill="none">
+                        <use href="#orbit0CardIA"/>
+                        <use href="#orbit1CardIA"/>
+                        <use href="#orbit2CardIA"/>
+                      </g>
+                      <g stroke-linecap="round" filter="url(#softGlowCardIA)">
+                        <use href="#orbit0CardIA" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                          <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                        </use>
+                        <use href="#orbit1CardIA" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                          <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                        </use>
+                        <use href="#orbit2CardIA" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                          <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                        </use>
+                      </g>
+                      <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
+                    </svg>
+                    Paris sportifs trouvé par notre ia
+                  </div>
                   <div class="credit-card">
                     <div style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.7); font-weight: 500;">Cashout</div>
                     <div style="font-size: 1.25rem; font-weight: 600; color: #22c55e; margin-top: 0.25rem;">+392.88$</div>
