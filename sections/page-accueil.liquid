@@ -1059,6 +1059,26 @@
       @media (max-width: 1024px) {
         :root {
           --stats-container-max-width: 1700px; /* Largeur uniquement pour mobile */
+          
+          /* Dimensions des rectangles graphiques (chart-card) sur mobile */
+          --chart-card-width-mobile: 100%; /* largeur */
+          --chart-card-height-mobile: 240px; /* hauteur */
+          
+          /* Position et taille carte providers (petite carte gauche) sur mobile */
+          --card-providers-top: auto;
+          --card-providers-bottom: -10rem;
+          --card-providers-left: -25rem;
+          --card-providers-right: auto;
+          --card-providers-width: 280px;
+          --card-providers-height: 270px;
+          
+          /* Position et taille countries card (petite carte droite) sur mobile */
+          --card-countries-top: -10rem;
+          --card-countries-bottom: auto;
+          --card-countries-left: auto;
+          --card-countries-right: -25rem;
+          --card-countries-width: 280px;
+          --card-countries-height: 270px;
         }
         
         .stats-section {
@@ -1069,6 +1089,31 @@
         .stats-section .stats-container {
           transform-origin: top center;
           /* Le transform: scale() sera appliqué dynamiquement en JS */
+        }
+        
+        /* Appliquer les dimensions aux rectangles graphiques */
+        .chart-card {
+          width: var(--chart-card-width-mobile);
+          height: var(--chart-card-height-mobile);
+        }
+        
+        /* Appliquer position et taille aux cartes spéciales */
+        .card-providers {
+          top: var(--card-providers-top);
+          bottom: var(--card-providers-bottom);
+          left: var(--card-providers-left);
+          right: var(--card-providers-right);
+          width: var(--card-providers-width);
+          height: var(--card-providers-height);
+        }
+        
+        .countries-card {
+          top: var(--card-countries-top);
+          bottom: var(--card-countries-bottom);
+          left: var(--card-countries-left);
+          right: var(--card-countries-right);
+          width: var(--card-countries-width);
+          height: var(--card-countries-height);
         }
       }
     </style>
