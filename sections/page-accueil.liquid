@@ -1563,20 +1563,34 @@
           return;
         }
         
-        // En-dessous de 1024px: calcul du scale (BASE_WIDTH depuis --stats-container-width-mobile)
+        // En-dessous de 1024px: calcul du scale + translation contrôlée par variables CSS
         var computedStyles = getComputedStyle(document.documentElement);
         var BASE_WIDTH = parseFloat(computedStyles.getPropertyValue('--stats-container-width-mobile')) || 1400;
         var MARGIN = 40; // marges de sécurité
         var scale = Math.min(1, (viewportWidth - MARGIN) / BASE_WIDTH);
         
-        // Appliquer le scale (tout le contenu scale proportionnellement)
-        container.style.transformOrigin = 'top center';
-        container.style.transform = 'scale(' + scale + ')';
+        // Récupérer les décalages depuis les variables CSS (mobile)
+        var tx = (computedStyles.getPropertyValue('--stats-grid-translate-x-mobile') || '0px').trim();
+        var ty = (computedStyles.getPropertyValue('--stats-grid-translate-y-mobile') || '0px').trim();
         
-        // Calculer la hauteur réelle après scale pour corriger l'espacement
+        // Helper: convertir en pixels (px et rem)
+        function toPx(v) {
+          if (!v) return 0;
+          v = v.trim();
+          if (v.endsWith('rem')) return parseFloat(v) * parseFloat(getComputedStyle(document.documentElement).fontSize || 16);
+          if (v.endsWith('px')) return parseFloat(v);
+          return parseFloat(v) || 0;
+        }
+        
+        // Appliquer translate + scale ensemble pour éviter les overrides
+        container.style.transformOrigin = 'top center';
+        container.style.transform = 'translate(' + tx + ',' + ty + ') scale(' + scale + ')';
+        
+        // Ajuster la hauteur de la section pour inclure un éventuel décalage vertical positif
         setTimeout(function() {
           var rect = container.getBoundingClientRect();
-          section.style.height = rect.height + 'px';
+          var extraH = Math.max(0, toPx(ty));
+          section.style.height = (rect.height + extraH) + 'px';
         }, 50);
       }
       
