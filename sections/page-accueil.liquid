@@ -1097,7 +1097,10 @@
         .stats-section .stats-container {
           transform-origin: top center;
           /* Le transform: scale() sera appliqué dynamiquement en JS */
-          /* La largeur ne doit PAS être forcée ici, le scale JS s'en occupe */
+          /* 🎯 Le rectangle transparent suit les dimensions du contenu central */
+          width: var(--stats-grid-width-mobile);
+          max-width: var(--stats-grid-max-width-mobile);
+          margin: 0 auto;
         }
         
         /* Appliquer les dimensions aux rectangles graphiques */
