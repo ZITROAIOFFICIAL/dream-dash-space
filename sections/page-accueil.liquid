@@ -840,6 +840,9 @@
 
         /* Hauteur des cartes graphiques (assure même hauteur) */
         --chart-card-height: 240px;
+        
+        /* 🔧 Scale de toute la section stats sur laptop (background gris + cartes + providers + countries) */
+        --stats-section-scale-laptop: 1; /* 1 = taille normale, 0.8 = 80%, 1.2 = 120% */
       }
 
       .stats-container {
@@ -1053,6 +1056,14 @@
 
       .flag-emoji:hover {
         transform: scale(1.2);
+      }
+
+      /* 🔧 LAPTOP - Scale contrôlable de toute la section dashboard */
+      @media (min-width: 1024px) and (max-width: 1440px) {
+        .stats-section {
+          transform: scale(var(--stats-section-scale-laptop));
+          transform-origin: top center;
+        }
       }
 
       /* Responsive - Visible sur mobile mais réduit par scale */
