@@ -1068,6 +1068,7 @@
           --stats-grid-padding-mobile: 2rem;      /* Padding interne */
           --stats-grid-translate-x-mobile: 0px;   /* 🔧 Déplacement horizontal (gauche/droite) */
           --stats-grid-translate-y-mobile: 0px;   /* 🔧 Déplacement vertical (haut/bas) */
+          --stats-grid-scale-mobile: 1;           /* 🔧 Zoom manuel (1 = 100%, 2.5 = 250%, 3 = 300%) */
           
           /* Dimensions des rectangles graphiques (chart-card) sur mobile */
           --chart-card-width-mobile: 100%; /* largeur */
@@ -1567,7 +1568,15 @@
         var computedStyles = getComputedStyle(document.documentElement);
         var BASE_WIDTH = parseFloat(computedStyles.getPropertyValue('--stats-container-width-mobile')) || 1400;
         var MARGIN = 40; // marges de sécurité
-        var scale = Math.min(1, (viewportWidth - MARGIN) / BASE_WIDTH);
+        
+        // Récupérer le scale manuel depuis la variable CSS (ou 1 par défaut)
+        var manualScale = parseFloat(computedStyles.getPropertyValue('--stats-grid-scale-mobile')) || 1;
+        
+        // Calculer un scale automatique basé sur la largeur viewport (SANS limite max)
+        var autoScale = (viewportWidth - MARGIN) / BASE_WIDTH;
+        
+        // Utiliser le scale manuel combiné avec l'auto-scale (permet de dépasser 100%)
+        var scale = manualScale * Math.max(0.1, autoScale);
         
         // Récupérer les décalages depuis les variables CSS (mobile)
         var tx = (computedStyles.getPropertyValue('--stats-grid-translate-x-mobile') || '0px').trim();
