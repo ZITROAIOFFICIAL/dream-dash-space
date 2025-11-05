@@ -142,29 +142,37 @@
       }
     }
 
+    /* ==================== VARIABLES CSS PAGE ACCUEIL - LAPTOP ALLONGÉ ==================== */
+    :root {
+      --laptop-left-margin: -7rem;
+      --laptop-right-transform: 7rem;
+      --laptop-nav-gap: 1.75rem;
+      --laptop-scrolled-width: calc(100% - 20rem);
+    }
+
     /* Laptop étendu (1441px - 1800px) - Rectangle gris bord à bord + éléments centrés */
     @media (min-width: 1441px) and (max-width: 1800px) {
       .header.scrolled::before {
-        width: calc(100% - 20rem) !important;
+        width: var(--laptop-scrolled-width) !important;
         height: 90%;
         top: 100%;
       }
       
       /* Groupe gauche - centrer */
       .desktop-left {
-        margin-left: -7rem;
+        margin-left: var(--laptop-left-margin);
         gap: 1.25rem;
       }
       
       /* Groupe droite - centrer */
       .desktop-right {
-        transform: translateX(7rem);
+        transform: translateX(var(--laptop-right-transform));
         gap: 1.25rem;
       }
       
       /* Réduire légèrement les espacements */
       .desktop-nav {
-        gap: 1.75rem;
+        gap: var(--laptop-nav-gap);
       }
       
       /* Boutons - Déplacement pour laptop allongé */

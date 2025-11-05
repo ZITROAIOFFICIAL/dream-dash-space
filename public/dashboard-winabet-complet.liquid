@@ -16,6 +16,12 @@
       
       /* Position des boutons auth à droite */
       --desktop-right-offset: 10rem;
+      
+      /* Variables laptop allongé - Dashboard */
+      --laptop-left-margin: -7rem;
+      --laptop-right-transform: 7rem;
+      --laptop-nav-gap: 1.75rem;
+      --laptop-scrolled-width: calc(100% - 35rem);
     }
     
     /* ==================== DESKTOP UNIQUEMENT - AJUSTEMENTS FACILES ==================== */
@@ -147,7 +153,7 @@
     /* Laptop étendu (1441px - 1800px) - Rectangle gris bord à bord + éléments centrés */
     @media (min-width: 1441px) and (max-width: 1800px) {
       .header.scrolled::before {
-        width: calc(100% - 35rem) !important; /* Ajustez la valeur après le - pour réduire la largeur */
+        width: var(--laptop-scrolled-width) !important;
         height: 90%;
         top: 100%;
       }
