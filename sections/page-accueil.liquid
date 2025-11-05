@@ -1551,22 +1551,25 @@
       function adjustStatsSection() {
         var section = document.querySelector('.stats-section');
         var container = document.querySelector('.stats-section .stats-container');
+        var grid = container ? container.querySelector('.stats-grid') : null;
         
-        if (!section || !container) return;
+        if (!section || !container || !grid) return;
         
         var viewportWidth = window.innerWidth;
         
         // Au-dessus de 1024px: reset (desktop)
         if (viewportWidth > 1024) {
           container.style.transform = '';
+          grid.style.transform = '';
+          container.style.width = '';
+          container.style.height = '';
+          container.style.maxWidth = '';
           section.style.height = '';
           return;
         }
         
-        // En-dessous de 1024px: calcul du scale + translation contrôlée par variables CSS
+        // En-dessous de 1024px: scaler le grid et ajuster le container
         var computedStyles = getComputedStyle(document.documentElement);
-        var BASE_WIDTH = parseFloat(computedStyles.getPropertyValue('--stats-container-width-mobile')) || 1400;
-        var MARGIN = 40; // marges de sécurité
         
         // Récupérer le scale manuel uniforme (évite la déformation du contenu)
         var manualScale = parseFloat(computedStyles.getPropertyValue('--stats-grid-scale-mobile')) || 1;
@@ -1587,15 +1590,19 @@
           return parseFloat(v) || 0;
         }
         
-        // Appliquer translate + scale uniforme ensemble (pas de déformation)
-        container.style.transformOrigin = 'top center';
-        container.style.transform = 'translate(' + tx + ',' + ty + ') scale(' + scale + ')';
+        // Ne plus scaler le container, uniquement le grid
+        container.style.transform = 'none';
+        grid.style.transformOrigin = 'top center';
+        grid.style.transform = 'translate(' + tx + ',' + ty + ') scale(' + scale + ')';
         
-        // Ajuster la hauteur de la section pour inclure un éventuel décalage vertical positif
+        // Ajuster les dimensions du container pour envelopper exactement le grid scalé
         setTimeout(function() {
-          var rect = container.getBoundingClientRect();
+          var rect = grid.getBoundingClientRect();
           var extraH = Math.max(0, toPx(ty));
           section.style.height = (rect.height + extraH) + 'px';
+          container.style.width = rect.width + 'px';
+          container.style.height = rect.height + 'px';
+          container.style.maxWidth = 'none';
         }, 50);
       }
       
