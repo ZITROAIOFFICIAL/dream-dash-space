@@ -1100,7 +1100,7 @@
           /* 🎯 Position et taille carte providers (petite carte gauche) sur mobile */
           --card-providers-top: auto;
           --card-providers-bottom: 40px;
-          --card-providers-left: 8%;
+          --card-providers-left: 50%;
           --card-providers-right: auto;
           --card-providers-width: 280px;
           --card-providers-height: 270px;
@@ -1109,8 +1109,8 @@
           /* 🎯 Position et taille countries card (petite carte droite) sur mobile */
           --card-countries-top: auto;
           --card-countries-bottom: -154px;
-          --card-countries-left: auto;
-          --card-countries-right: 8%;
+          --card-countries-left: 50%;
+          --card-countries-right: auto;
           --card-countries-width: 280px;
           --card-countries-height: 270px;
           --card-countries-scale-mobile: 0.35; /* 🔧 Scale du contenu countries (drapeaux, texte) */
@@ -1182,7 +1182,7 @@
           right: var(--card-providers-right);
           width: var(--card-providers-width);
           height: var(--card-providers-height);
-          transform: scale(var(--card-providers-scale-mobile));
+          transform: translateX(-50%) scale(var(--card-providers-scale-mobile));
           transform-origin: center;
         }
         
@@ -1194,7 +1194,7 @@
           right: var(--card-countries-right);
           width: var(--card-countries-width);
           height: var(--card-countries-height);
-          transform: scale(var(--card-countries-scale-mobile));
+          transform: translateX(-50%) scale(var(--card-countries-scale-mobile));
           transform-origin: center;
         }
       }
