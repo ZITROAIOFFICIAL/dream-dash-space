@@ -1064,7 +1064,8 @@
           
           /* 🎯 Rectangle central (stats + graphiques) - Contrôle indépendant */
           --stats-grid-width-mobile: 100%;        /* Largeur du contenu central */
-          --stats-grid-max-width-mobile: 1200px;  /* 🔧 MODIFIER CETTE VALEUR pour changer la taille */
+          --stats-grid-max-width-mobile: 1200px;  /* 🔧 MODIFIER pour changer la largeur max */
+          --stats-grid-max-height-mobile: none;   /* 🔧 MODIFIER pour changer la hauteur max (ex: 800px) */
           --stats-grid-padding-mobile: 2rem;      /* Padding interne */
           --stats-grid-translate-x-mobile: 0px;   /* 🔧 Déplacement horizontal (gauche/droite) */
           --stats-grid-translate-y-mobile: 0px;   /* 🔧 Déplacement vertical (haut/bas) */
@@ -1102,6 +1103,8 @@
           /* Le transform sera appliqué 100% en JS pour que le background suive le contenu */
           width: var(--stats-grid-width-mobile);
           max-width: var(--stats-grid-max-width-mobile);
+          max-height: var(--stats-grid-max-height-mobile);
+          overflow: hidden;
           margin: 0 auto;
         }
         
