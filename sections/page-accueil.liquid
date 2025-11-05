@@ -1062,6 +1062,11 @@
           --stats-container-width-mobile: 1400px; /* Largeur de base avant scale */
           --stats-container-height-mobile: auto; /* Hauteur (auto = proportionnel) */
           
+          /* 🎯 Rectangle central (stats + graphiques) - Contrôle indépendant */
+          --stats-grid-width-mobile: 100%;        /* Largeur du contenu central */
+          --stats-grid-max-width-mobile: 1200px;  /* 🔧 MODIFIER CETTE VALEUR pour changer la taille */
+          --stats-grid-padding-mobile: 2rem;      /* Padding interne */
+          
           /* Dimensions des rectangles graphiques (chart-card) sur mobile */
           --chart-card-width-mobile: 100%; /* largeur */
           --chart-card-height-mobile: 240px; /* hauteur */
@@ -1099,6 +1104,21 @@
         .chart-card {
           width: var(--chart-card-width-mobile);
           height: var(--chart-card-height-mobile);
+        }
+        
+        /* 🎯 Contrôle indépendant du rectangle central (stats + graphiques) */
+        .stats-grid {
+          width: var(--stats-grid-width-mobile);
+          max-width: var(--stats-grid-max-width-mobile);
+          padding: var(--stats-grid-padding-mobile);
+          margin: 0 auto;
+          transform-origin: top center;
+        }
+        
+        /* Scaling proportionnel du contenu interne */
+        .stats-grid .stat-card,
+        .stats-grid .chart-card {
+          transform-origin: center;
         }
         
         /* 🎯 Scaling proportionnel pour carte providers */
