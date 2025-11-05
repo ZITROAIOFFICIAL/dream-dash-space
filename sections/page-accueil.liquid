@@ -46,6 +46,14 @@
         gap: 2rem !important;  /* Espacement entre badge online, logo et badge IA */
       }
       
+      /* Auth Buttons - Position de base */
+      .desktop-right .desktop-auth-link,
+      .desktop-right .desktop-auth-btn {
+        position: relative;
+        left: 0rem;
+        top: 0rem;
+      }
+      
       /* ===== AVEC SCROLL - Rectangle gris ===== */
       /* Déplacé dans des media queries dédiées plus bas pour laptop et grands écrans */
     }
@@ -160,25 +168,30 @@
       }
       
       /* Boutons - Déplacement pour laptop allongé */
-      .desktop-right .desktop-auth-link {
-        left: 0px;
-        top: 0px;
-      }
-      
+      .desktop-right .desktop-auth-link,
       .desktop-right .desktop-auth-btn {
+        position: relative;
         left: 0px;
         top: 0px;
       }
     }
 
-    /* Très grands écrans (>= 1801px) - largeur originale */
-    @media (min-width: 1801px) {
-      .header.scrolled::before {
-        width: calc(65% - 6rem);
-        height: 90%;
-        top: 100%;
+      /* Très grands écrans (>= 1801px) - largeur originale */
+      @media (min-width: 1801px) {
+        .header.scrolled::before {
+          width: calc(65% - 6rem);
+          height: 90%;
+          top: 100%;
+        }
+
+        /* Boutons - Déplacement pour très grands écrans */
+        .desktop-right .desktop-auth-link,
+        .desktop-right .desktop-auth-btn {
+          position: relative;
+          left: 0px;
+          top: 0px;
+        }
       }
-    }
   </style>
 </head>
 <body>
