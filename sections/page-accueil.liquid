@@ -818,7 +818,7 @@
         z-index: 3;
         margin-top: 5rem;
         width: var(--stats-section-width, 100%);
-        max-width: var(--stats-section-max-width, 1400px);
+        max-width: var(--stats-container-max-width, 1400px);
         margin-left: auto;
         margin-right: auto;
         padding: var(--stats-section-padding, 0 2rem);
@@ -1468,12 +1468,14 @@
           return;
         }
         
-        // En-dessous de 1024px: calcul du scale
-        var BASE_WIDTH = 1400; // max-width du container
+        // En-dessous de 1024px: calcul du scale (BASE_WIDTH dynamique depuis le CSS)
+        var maxWidthStr = getComputedStyle(container).maxWidth;
+        var BASE_WIDTH = parseFloat(maxWidthStr) || container.scrollWidth || 1400;
         var MARGIN = 40; // marges de sécurité
         var scale = Math.min(1, (viewportWidth - MARGIN) / BASE_WIDTH);
         
         // Appliquer le scale
+        container.style.transformOrigin = 'top center';
         container.style.transform = 'scale(' + scale + ')';
         
         // Calculer la hauteur réelle après scale pour corriger l'espacement
