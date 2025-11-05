@@ -822,7 +822,6 @@
         margin-left: auto;
         margin-right: auto;
         padding: var(--stats-section-padding, 0 2rem);
-        overflow: visible;
       }
 
       /* Conteneur englobant avec fond glassmorphism */
@@ -849,11 +848,11 @@
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 2rem;
         padding: var(--stats-container-padding);
-        width: fit-content;
+        min-height: var(--stats-container-min-height);
+        width: var(--stats-container-width);
+        max-width: var(--stats-container-max-width);
         margin: 0 auto;
         position: relative;
-        height: auto;
-        overflow: visible;
       }
 
       .stats-grid {
