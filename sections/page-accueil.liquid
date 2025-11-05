@@ -1159,6 +1159,14 @@
                    Paris sportifs trouvés par notre ia
                   </div>
                   <svg class="chart-svg" viewBox="0 0 300 100" preserveAspectRatio="xMidYMid meet">
+                    <defs>
+                      <!-- Gradient pour l'effet lumineux -->
+                      <linearGradient id="glowWhite" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:rgba(255,255,255,0.15);stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:rgba(255,255,255,0);stop-opacity:1" />
+                      </linearGradient>
+                    </defs>
+                    
                     <!-- Axe Y - Labels (200 à 100) tous les 20 -->
                     <text x="11" y="8" text-anchor="end" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">200</text>
                     <text x="11" y="22" text-anchor="end" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">180</text>
@@ -1167,8 +1175,12 @@
                     <text x="11" y="64" text-anchor="end" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">120</text>
                     <text x="11" y="78" text-anchor="end" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">100</text>
                     
-                    <!-- Courbe lisse avec variations importantes (100-200) -->
-                    <path d="M17,68 Q35,53 49,48 T73,10 Q87,24 96,38 T119,2 Q133,20 142,38 T165,63 Q179,45 188,28 T211,10 Q225,28 234,46 T257,28 Q271,42 280,56 T296,18" 
+                    <!-- Zone lumineuse sous la courbe -->
+                    <path d="M17,75 Q30,50 45,35 T73,15 Q87,30 96,45 T119,8 Q133,25 142,40 T165,70 Q179,50 188,30 T211,12 Q225,30 234,50 T257,35 Q271,50 280,65 T296,25 L296,90 L17,90 Z" 
+                          fill="url(#glowWhite)" opacity="0.4"/>
+                    
+                    <!-- Courbe lisse avec vagues prononcées -->
+                    <path d="M17,75 Q30,50 45,35 T73,15 Q87,30 96,45 T119,8 Q133,25 142,40 T165,70 Q179,50 188,30 T211,12 Q225,30 234,50 T257,35 Q271,50 280,65 T296,25" 
                           stroke="rgba(255, 255, 255, 0.9)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
                     
                     <!-- Axe X - Mois -->
@@ -1215,6 +1227,14 @@
                     Paris sportifs gagnant par notre ia
                   </div>
                   <svg class="chart-svg" viewBox="0 0 300 100" preserveAspectRatio="xMidYMid meet">
+                    <defs>
+                      <!-- Gradient pour l'effet lumineux vert -->
+                      <linearGradient id="glowGreen" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:rgba(34,197,94,0.2);stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:rgba(34,197,94,0);stop-opacity:1" />
+                      </linearGradient>
+                    </defs>
+                    
                     <!-- Axe Y - Labels (200 à 100) tous les 20 -->
                     <text x="11" y="8" text-anchor="end" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">200</text>
                     <text x="11" y="22" text-anchor="end" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">180</text>
@@ -1223,8 +1243,12 @@
                     <text x="11" y="64" text-anchor="end" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">120</text>
                     <text x="11" y="78" text-anchor="end" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="400" font-family="'Outfit', sans-serif">100</text>
                     
-                    <!-- Courbe verte lisse avec variations importantes (100-200) -->
-                    <path d="M17,76 Q35,61 49,56 T73,18 Q87,32 96,46 T119,10 Q133,28 142,46 T165,71 Q179,53 188,36 T211,18 Q225,36 234,54 T257,36 Q271,50 280,64 T296,26" 
+                    <!-- Zone lumineuse verte sous la courbe -->
+                    <path d="M17,80 Q30,55 45,40 T73,20 Q87,35 96,50 T119,13 Q133,30 142,45 T165,75 Q179,55 188,35 T211,17 Q225,35 234,55 T257,40 Q271,55 280,70 T296,30 L296,90 L17,90 Z" 
+                          fill="url(#glowGreen)" opacity="0.5"/>
+                    
+                    <!-- Courbe verte lisse avec vagues prononcées -->
+                    <path d="M17,80 Q30,55 45,40 T73,20 Q87,35 96,50 T119,13 Q133,30 142,45 T165,75 Q179,55 188,35 T211,17 Q225,35 234,55 T257,40 Q271,55 280,70 T296,30" 
                           stroke="#22c55e" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
                     
                     <!-- Axe X - Mois -->
