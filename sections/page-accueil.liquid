@@ -1099,12 +1099,11 @@
         
         .stats-section .stats-container {
           transform-origin: top center;
-          /* Le transform: scale() sera appliqué dynamiquement en JS */
+          /* Le transform: scale() + translate() sera appliqué dynamiquement en JS */
           /* 🎯 Le rectangle transparent suit les dimensions du contenu central */
           width: var(--stats-grid-width-mobile);
           max-width: var(--stats-grid-max-width-mobile);
           margin: 0 auto;
-          transform: translate(var(--stats-grid-translate-x-mobile), var(--stats-grid-translate-y-mobile));
         }
         
         /* Appliquer les dimensions aux rectangles graphiques */
@@ -1572,11 +1571,9 @@
         // Récupérer le scale manuel depuis la variable CSS (ou 1 par défaut)
         var manualScale = parseFloat(computedStyles.getPropertyValue('--stats-grid-scale-mobile')) || 1;
         
-        // Calculer un scale automatique basé sur la largeur viewport (SANS limite max)
-        var autoScale = (viewportWidth - MARGIN) / BASE_WIDTH;
-        
-        // Utiliser le scale manuel combiné avec l'auto-scale (permet de dépasser 100%)
-        var scale = manualScale * Math.max(0.1, autoScale);
+        // Le scale final utilise manualScale directement (permet 450% et plus)
+        // On garde un minimum de 10% pour éviter scale = 0
+        var scale = Math.max(0.1, manualScale);
         
         // Récupérer les décalages depuis les variables CSS (mobile)
         var tx = (computedStyles.getPropertyValue('--stats-grid-translate-x-mobile') || '0px').trim();
