@@ -818,7 +818,7 @@
         z-index: 3;
         margin-top: 5rem;
         width: var(--stats-section-width, 100%);
-        max-width: var(--stats-container-max-width, 1400px);
+        max-width: var(--stats-section-max-width, 1400px);
         margin-left: auto;
         margin-right: auto;
         padding: var(--stats-section-padding, 0 2rem);
@@ -1057,6 +1057,10 @@
 
       /* Responsive - Visible sur mobile mais réduit par scale */
       @media (max-width: 1024px) {
+        :root {
+          --stats-container-max-width: 1700px; /* Largeur uniquement pour mobile */
+        }
+        
         .stats-section {
           margin-top: 1.25rem;
           padding: 0;
