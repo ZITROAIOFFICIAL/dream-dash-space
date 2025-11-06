@@ -1220,6 +1220,170 @@
       }
     </style>
 
+    <style>
+      /* ==================== PROVIDERS CARD SECTION ==================== */
+      .providers-card-section {
+        margin-top: 4rem;
+        padding: 0 2rem;
+        display: none; /* Hidden on mobile by default */
+      }
+
+      @media (min-width: 769px) {
+        .providers-card-section {
+          display: block;
+        }
+      }
+
+      .providers-card-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .providers-card-inner {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        border-radius: 1.5rem;
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        background: rgba(0, 0, 0, 0.5);
+        transition: all 0.7s ease;
+        cursor: pointer;
+      }
+
+      .providers-card-inner:hover {
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+
+      .providers-card-background {
+        position: relative;
+        height: 28rem;
+        flex-shrink: 0;
+        overflow: hidden;
+      }
+
+      .providers-blur-effect {
+        position: absolute;
+        bottom: -16rem;
+        right: 0;
+        width: 24rem;
+        height: 24rem;
+        background: rgba(147, 197, 253, 0.4);
+        filter: blur(80px);
+      }
+
+      .providers-marquee-container {
+        position: absolute;
+        top: 4rem;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+      }
+
+      .providers-marquee-row {
+        display: flex;
+        overflow: hidden;
+        padding: 0.5rem;
+        gap: 4rem;
+        mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      }
+
+      .providers-marquee-content {
+        display: flex;
+        flex-shrink: 0;
+        justify-content: space-around;
+        gap: 4rem;
+        animation: marquee 20s linear infinite;
+      }
+
+      .providers-marquee-reverse .providers-marquee-content {
+        animation: marquee-reverse 20s linear infinite;
+      }
+
+      @keyframes marquee {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+
+      @keyframes marquee-reverse {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+
+      .provider-logo {
+        height: 7rem;
+        width: auto;
+        object-fit: contain;
+        opacity: 0.8;
+        transition: opacity 0.3s ease;
+      }
+
+      .provider-logo:hover {
+        opacity: 1;
+      }
+
+      .providers-card-content {
+        position: relative;
+        padding: 2rem 2.5rem;
+        z-index: 20;
+        margin-top: -7rem;
+      }
+
+      .providers-card-label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.875rem;
+        font-family: 'Outfit', sans-serif;
+        margin-bottom: 0.25rem;
+      }
+
+      .providers-card-label svg {
+        margin-top: -2px;
+      }
+
+      .providers-card-title {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 0.25rem;
+        font-size: 1.5rem;
+        font-weight: 500;
+        line-height: 2rem;
+        letter-spacing: -0.025em;
+        color: #ffffff;
+        font-family: 'Outfit', sans-serif;
+      }
+
+      .providers-arrow {
+        transition: transform 0.3s ease;
+      }
+
+      .providers-card-inner:hover .providers-arrow {
+        transform: rotate(-45deg);
+      }
+
+      .providers-card-description {
+        margin-top: 0.5rem;
+        max-width: 600px;
+        font-size: 0.875rem;
+        line-height: 1.5rem;
+        color: rgba(255, 255, 255, 0.5);
+        font-family: 'Outfit', sans-serif;
+      }
+    </style>
+
     <section class="hero-section">
       <!-- Background video -->
       <video 
@@ -1597,6 +1761,84 @@
           </div>
         </div>
 
+      </div>
+    </section>
+
+    <!-- Section Providers Card -->
+    <section class="providers-card-section">
+      <div class="providers-card-wrapper">
+        <div class="providers-card-inner">
+          <div class="providers-card-background">
+            <div class="providers-blur-effect"></div>
+            <div class="providers-marquee-container">
+              <!-- First marquee row -->
+              <div class="providers-marquee-row">
+                <div class="providers-marquee-content">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=MC" alt="mastercard" class="provider-logo">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=Visa" alt="visa" class="provider-logo">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=Amex" alt="amex" class="provider-logo">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=Discover" alt="discover" class="provider-logo">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=Diners" alt="diners" class="provider-logo">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=Elo" alt="elo" class="provider-logo">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=JCB" alt="jcb" class="provider-logo">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=Union" alt="unionpay" class="provider-logo">
+                </div>
+                <div class="providers-marquee-content">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=MC" alt="mastercard" class="provider-logo">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=Visa" alt="visa" class="provider-logo">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=Amex" alt="amex" class="provider-logo">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=Discover" alt="discover" class="provider-logo">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=Diners" alt="diners" class="provider-logo">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=Elo" alt="elo" class="provider-logo">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=JCB" alt="jcb" class="provider-logo">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=Union" alt="unionpay" class="provider-logo">
+                </div>
+              </div>
+              <!-- Second marquee row (reverse) -->
+              <div class="providers-marquee-row providers-marquee-reverse">
+                <div class="providers-marquee-content">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=Maestro" alt="maestro" class="provider-logo">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=Cirrus" alt="cirrus" class="provider-logo">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=Apple" alt="applepay" class="provider-logo">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=GPay" alt="googlepay" class="provider-logo">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=PayPal" alt="paypal" class="provider-logo">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=Stripe" alt="stripe" class="provider-logo">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=Square" alt="square" class="provider-logo">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=Venmo" alt="venmo" class="provider-logo">
+                </div>
+                <div class="providers-marquee-content">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=Maestro" alt="maestro" class="provider-logo">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=Cirrus" alt="cirrus" class="provider-logo">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=Apple" alt="applepay" class="provider-logo">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=GPay" alt="googlepay" class="provider-logo">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=PayPal" alt="paypal" class="provider-logo">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=Stripe" alt="stripe" class="provider-logo">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=Square" alt="square" class="provider-logo">
+                  <img src="https://via.placeholder.com/112x112/fff/000?text=Venmo" alt="venmo" class="provider-logo">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="providers-card-content">
+            <h3 class="providers-card-label">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="14" x="2" y="5" rx="2"></rect>
+                <line x1="2" x2="22" y1="10" y2="10"></line>
+              </svg>
+              Paiement
+            </h3>
+            <p class="providers-card-title">
+              20+ Fournisseurs de Cartes
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="providers-arrow">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </p>
+            <p class="providers-card-description">
+              Acceptez une variété de fournisseurs de cartes avec notre plateforme de paiement globale avec support des méthodes natives, Apple Pay et Google Pay.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   </main>
