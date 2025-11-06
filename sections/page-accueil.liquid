@@ -3176,13 +3176,93 @@
       </div>
     </section>
 
-    <!-- Pulse Image Section -->
+    <!-- Pulse SVG Section (animé) -->
     <section style="max-width: 1286px; margin: 4rem auto 0; padding: 0 2rem; text-align: center;">
-      <img 
-        src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/pulse.svg?v=1762414698" 
-        alt="Pulse visualization" 
-        style="width: 100%; max-width: 700px; height: auto; display: block; margin: 0 auto;"
-      />
+      <!-- winabet pulse svg (inline, animé) -->
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 604 283"
+        fill="none"
+        class="w-full h-full lg:w-[60%] lg:h-[60%] my-10 mx-auto gradient-mask-b-80"
+        aria-hidden="true" role="img" focusable="false" style="pointer-events:none"
+      >
+        <defs>
+          <!-- Balayages lumineux (animés) -->
+          <linearGradient id="pulseGradient1" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
+            <stop offset="4%" stop-color="rgba(255,255,255,0.5)"/>
+            <stop offset="8%" stop-color="rgba(255,255,255,0)"/>
+            <stop offset="70%" stop-color="rgba(255,255,255,0)"/>
+            <stop offset="74%" stop-color="rgba(255,255,255,0.5)"/>
+            <stop offset="78%" stop-color="rgba(255,255,255,0)"/>
+            <animate attributeName="y1" from="0%" to="100%" dur="2s" repeatCount="indefinite" begin="0s"/>
+            <animate attributeName="y2" from="100%" to="200%" dur="2s" repeatCount="indefinite" begin="0s"/>
+          </linearGradient>
+
+          <linearGradient id="pulseGradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
+            <stop offset="4%" stop-color="rgba(255,255,255,0.5)"/>
+            <stop offset="8%" stop-color="rgba(255,255,255,0)"/>
+            <stop offset="70%" stop-color="rgba(255,255,255,0)"/>
+            <stop offset="74%" stop-color="rgba(255,255,255,0.5)"/>
+            <stop offset="78%" stop-color="rgba(255,255,255,0)"/>
+            <animate attributeName="y1" from="0%" to="100%" dur="2s" repeatCount="indefinite" begin="0.25s"/>
+            <animate attributeName="y2" from="100%" to="200%" dur="2s" repeatCount="indefinite" begin="0.25s"/>
+          </linearGradient>
+
+          <linearGradient id="pulseGradient3" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
+            <stop offset="4%" stop-color="rgba(255,255,255,0.5)"/>
+            <stop offset="8%" stop-color="rgba(255,255,255,0)"/>
+            <stop offset="70%" stop-color="rgba(255,255,255,0)"/>
+            <stop offset="74%" stop-color="rgba(255,255,255,0.5)"/>
+            <stop offset="78%" stop-color="rgba(255,255,255,0)"/>
+            <animate attributeName="y1" from="0%" to="100%" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+            <animate attributeName="y2" from="100%" to="200%" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+          </linearGradient>
+
+          <linearGradient id="pulseGradient4" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
+            <stop offset="4%" stop-color="rgba(255,255,255,0.5)"/>
+            <stop offset="8%" stop-color="rgba(255,255,255,0)"/>
+            <stop offset="70%" stop-color="rgba(255,255,255,0)"/>
+            <stop offset="74%" stop-color="rgba(255,255,255,0.5)"/>
+            <stop offset="78%" stop-color="rgba(255,255,255,0)"/>
+            <animate attributeName="y1" from="0%" to="100%" dur="2s" repeatCount="indefinite" begin="0.75s"/>
+            <animate attributeName="y2" from="100%" to="200%" dur="2s" repeatCount="indefinite" begin="0.75s"/>
+          </linearGradient>
+
+          <!-- Traits de base (couleurs) -->
+          <linearGradient id="blueBase" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="rgba(48,165,255,0)"/>
+            <stop offset="100%" stop-color="#30A5FF"/>
+          </linearGradient>
+          <linearGradient id="yellowBase" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="rgba(255,186,23,0)"/>
+            <stop offset="100%" stop-color="#FFBA17"/>
+          </linearGradient>
+          <linearGradient id="redBase" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="rgba(255,134,111,0)"/>
+            <stop offset="100%" stop-color="#FF866F"/>
+          </linearGradient>
+          <linearGradient id="purpleBase" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="rgba(151,0,244,0)"/>
+            <stop offset="100%" stop-color="#9700F4"/>
+          </linearGradient>
+        </defs>
+
+        <!-- 4 courbes colorées (fixes) -->
+        <path d="M3 0C3 157 280 90 280 282"   stroke="url(#blueBase)"   stroke-width="3"/>
+        <path d="M200 0C200 157 294 90 294 282" stroke="url(#yellowBase)" stroke-width="3"/>
+        <path d="M400 0C400 157 307 90 307 282" stroke="url(#redBase)"    stroke-width="3"/>
+        <path d="M601 0C601 157 320 90 320 282" stroke="url(#purpleBase)" stroke-width="3"/>
+
+        <!-- Balayages lumineux (animés) par-dessus -->
+        <path d="M3 0C3 157 280 90 280 282"     stroke="url(#pulseGradient1)" stroke-width="3"/>
+        <path d="M200 0C200 157 294 90 294 282" stroke="url(#pulseGradient2)" stroke-width="3"/>
+        <path d="M400 0C400 157 307 90 307 282" stroke="url(#pulseGradient3)" stroke-width="3"/>
+        <path d="M601 0C601 157 320 90 320 282" stroke="url(#pulseGradient4)" stroke-width="3"/>
+      </svg>
     </section>
 
   </main>
