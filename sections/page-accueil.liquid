@@ -3280,29 +3280,36 @@
         
         var viewportWidth = window.innerWidth;
         
-        // Au-dessus de 1024px: reset (desktop)
+        // Desktop: reset
         if (viewportWidth > 1024) {
           grid.style.transform = '';
           section.style.height = '';
+          container.style.transform = 'translateX(-50%)';
           return;
         }
         
-        // En-dessous de 1024px: appliquer le scale sur .stats-grid
-        var computedStyles = getComputedStyle(document.documentElement);
+        // Mobile: scale dynamique basé sur iPhone Pro Max
+        var baseWidth = 428;           // iPhone Pro Max
+        var baseScale = 0.48;          // Scale de référence pour Pro Max
+        var dynamicScale = (viewportWidth / baseWidth) * baseScale;
         
-        // Récupérer le scale manuel uniforme
-        var scale = parseFloat(computedStyles.getPropertyValue('--stats-grid-scale-mobile')) || 1;
-        
-        // Limiter à 400% max
-        scale = Math.min(scale, 4);
+        // Limiter le scale entre 0.35 et 0.65
+        dynamicScale = Math.max(0.35, Math.min(0.65, dynamicScale));
         
         // Récupérer les translations
+        var computedStyles = getComputedStyle(document.documentElement);
         var tx = (computedStyles.getPropertyValue('--stats-grid-translate-x-mobile') || '0px').trim();
         var ty = (computedStyles.getPropertyValue('--stats-grid-translate-y-mobile') || '0px').trim();
         
-        // Appliquer le scale + translation sur .stats-grid
+        // Appliquer le scale au grid
         grid.style.transformOrigin = 'top center';
-        grid.style.transform = 'translate(' + tx + ',' + ty + ') scale(' + scale + ')';
+        grid.style.transform = 'translate(' + tx + ',' + ty + ') scale(' + dynamicScale + ')';
+        
+        // Ajuster la hauteur du background gris proportionnellement
+        var baseContainerHeight = 200; // Hauteur de base définie en CSS
+        var scaledHeight = baseContainerHeight * dynamicScale;
+        container.style.height = scaledHeight + 'px';
+        container.style.transform = 'translateX(-50%)';
         
         // Ajuster la hauteur de la section
         setTimeout(function() {
