@@ -841,7 +841,13 @@
         margin-right: auto;
         margin-bottom: -10rem;
         padding: var(--stats-section-padding, 0 2rem);
+      }
 
+      /* 🎯 Padding-bottom dashboard sur mobile uniquement */
+      @media (max-width: 767px) {
+        .stats-section {
+          padding-bottom: 20rem; /* 🔧 MODIFIEZ cette valeur pour contrôler l'espace en bas du dashboard sur mobile */
+        }
       }
 
       /* Conteneur englobant avec fond glassmorphism */
