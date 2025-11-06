@@ -1248,6 +1248,13 @@
         z-index: 50;
       }
 
+      /* 🎯 Gap mobile entre dashboard et providers card */
+      @media (max-width: 767px) {
+        .providers-card-section {
+          margin-top: -70rem; /* 🔧 MODIFIEZ cette valeur pour réduire/augmenter le gap sur mobile */
+        }
+      }
+
       .providers-card-wrapper {
         max-width: 1250px;
         margin: 0 auto;
