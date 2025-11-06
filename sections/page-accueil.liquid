@@ -1336,10 +1336,10 @@
         overflow: visible;
         padding: 0.5rem;
         gap: 4rem;
-        mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-        -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         --badge-offset: 0;
         --badge-scale: 1;
+        transform: translateY(var(--badge-offset, 0)) scale(var(--badge-scale, 1));
+        transform-origin: center;
       }
 
       /* Rangée 1 - Modifier ces valeurs pour déplacer/agrandir toute la rangée 1 */
@@ -1409,13 +1409,12 @@
         transition: opacity 0.3s ease, transform 0.3s ease;
         position: relative;
         z-index: 100;
-        transform: translateY(var(--badge-offset, 0)) scale(var(--badge-scale, 1));
       }
 
       @media (hover: hover) {
         .provider-badge-wrapper:hover {
           opacity: 1;
-          transform: translateY(var(--badge-offset, 0)) scale(calc(var(--badge-scale, 1) * 1.05));
+          transform: scale(1.05);
         }
       }
 
