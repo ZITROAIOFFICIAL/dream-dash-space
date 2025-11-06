@@ -1556,8 +1556,13 @@
 
         /* 🎯 Banner Image Section - Plus large sur mobile */
         .banner-image-section {
-          padding: 0 0.5rem !important;
+          padding: 0 0.5rem !important; /* ✏️ Modifiez ici: padding gauche/droite mobile (ex: 0rem, 0.5rem, 1rem) */
           margin: 2rem auto 4rem !important;
+        }
+
+        .banner-image-section img {
+          transform: scale(1.3); /* ✏️ Modifiez ici: grosseur de l'image (ex: 1.0 = normale, 1.3 = +30%, 1.5 = +50%) */
+          transform-origin: center;
         }
       }
 
