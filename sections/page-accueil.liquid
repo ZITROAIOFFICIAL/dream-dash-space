@@ -3287,21 +3287,22 @@
           return;
         }
         
-        // En-dessous de 1024px: calcul dynamique du scale basé sur la largeur
-        var baseWidth = 375; // Largeur de référence (iPhone standard)
-        var dynamicScale = viewportWidth / baseWidth;
+        // En-dessous de 1024px: appliquer le scale sur .stats-grid
+        var computedStyles = getComputedStyle(document.documentElement);
         
-        // Limiter le scale entre 0.75 (très petit mobile) et 1.2 (grand mobile)
-        dynamicScale = Math.max(0.75, Math.min(1.2, dynamicScale));
+        // Récupérer le scale manuel uniforme
+        var scale = parseFloat(computedStyles.getPropertyValue('--stats-grid-scale-mobile')) || 1;
+        
+        // Limiter à 400% max
+        scale = Math.min(scale, 4);
         
         // Récupérer les translations
-        var computedStyles = getComputedStyle(document.documentElement);
         var tx = (computedStyles.getPropertyValue('--stats-grid-translate-x-mobile') || '0px').trim();
         var ty = (computedStyles.getPropertyValue('--stats-grid-translate-y-mobile') || '0px').trim();
         
-        // Appliquer le scale dynamique + translation sur .stats-grid
+        // Appliquer le scale + translation sur .stats-grid
         grid.style.transformOrigin = 'top center';
-        grid.style.transform = 'translate(' + tx + ',' + ty + ') scale(' + dynamicScale + ')';
+        grid.style.transform = 'translate(' + tx + ',' + ty + ') scale(' + scale + ')';
         
         // Ajuster la hauteur de la section
         setTimeout(function() {
