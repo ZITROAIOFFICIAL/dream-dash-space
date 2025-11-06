@@ -1016,8 +1016,10 @@
         touch-action: manipulation;
       }
 
-      .special-card:hover {
-        transform: translateY(-4px);
+      @media (hover: hover) {
+        .special-card:hover {
+          transform: translateY(-4px);
+        }
       }
 
       /* Card Providers - En bas à gauche */
@@ -1288,11 +1290,14 @@
         border: 2px solid rgba(255, 255, 255, 0.1);
         background: rgba(0, 0, 0, 0.5);
         transition: all 0.7s ease;
+        touch-action: manipulation;
         cursor: pointer;
       }
 
-      .providers-card-inner:hover {
-        border-color: rgba(255, 255, 255, 0.2);
+      @media (hover: hover) {
+        .providers-card-inner:hover {
+          border-color: rgba(255, 255, 255, 0.2);
+        }
       }
 
       .providers-card-background {
@@ -1369,8 +1374,10 @@
         transition: opacity 0.3s ease;
       }
 
-      .provider-logo:hover {
-        opacity: 1;
+      @media (hover: hover) {
+        .provider-logo:hover {
+          opacity: 1;
+        }
       }
 
       .provider-badge-wrapper {
@@ -1379,12 +1386,15 @@
         justify-content: center;
         margin: 0 2rem;
         opacity: 0.9;
+        touch-action: manipulation;
         transition: opacity 0.3s ease, transform 0.3s ease;
       }
 
-      .provider-badge-wrapper:hover {
-        opacity: 1;
-        transform: scale(1.05);
+      @media (hover: hover) {
+        .provider-badge-wrapper:hover {
+          opacity: 1;
+          transform: scale(1.05);
+        }
       }
 
       .providers-card-content {
@@ -2995,16 +3005,31 @@
       }
     }
 
-    // Initialize on page load
-    document.addEventListener('DOMContentLoaded', function() {
-      updateTime();
-      setInterval(updateTime, 60000); // Update every minute
-      setInterval(updateMemberCount, 30000); // Update member count every 30 seconds
-      
-      // Add scroll listener
-      window.addEventListener('scroll', handleScroll);
-      handleScroll(); // Check initial state
-    });
+      // Initialize on page load
+      document.addEventListener('DOMContentLoaded', function() {
+        updateTime();
+        setInterval(updateTime, 60000); // Update every minute
+        setInterval(updateMemberCount, 30000); // Update member count every 30 seconds
+        
+        // Add scroll listener
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Check initial state
+
+        // Disable double-tap zoom on specific cards
+        const noZoomSelectors = ['.providers-card-inner', '.provider-badge-wrapper', '.special-card.card-providers', '.special-card.countries-card'];
+        let lastTouchEnd = 0;
+        noZoomSelectors.forEach(sel => {
+          document.querySelectorAll(sel).forEach(el => {
+            el.addEventListener('touchend', function(event) {
+              const now = Date.now();
+              if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+              }
+              lastTouchEnd = now;
+            }, { passive: false });
+          });
+        });
+      });
   </script>
 </body>
 </html>
