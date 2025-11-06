@@ -1499,11 +1499,59 @@
         font-family: 'fustat', sans-serif;
       }
 
-      /* 🎯 Mobile: Réduire le padding-top de la section Features */
+      /* 🎯 Styles pour la section du bas */
+      .providers-card-content-bottom {
+        position: relative;
+        padding: 0 2.5rem;
+        z-index: 20;
+        max-width: 1000px;
+        margin-bottom: 4rem;
+        text-align: left;
+      }
+
+      .providers-card-content-bottom .providers-card-label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 1.875rem;
+        font-family: 'fustat', sans-serif;
+        margin-bottom: 1.25rem;
+      }
+
+      .providers-card-content-bottom .providers-card-title-top {
+        margin-top: 0.25rem;
+        font-size: 4.5rem;
+        font-weight: 400;
+        line-height: 1.2;
+        letter-spacing: -0.025em;
+        color: #ffffff;
+        font-family: 'fustat', sans-serif;
+        margin-bottom: 1.25rem;
+      }
+
+      .providers-card-content-bottom .providers-card-description {
+        margin-top: 0.5rem;
+        max-width: 600px;
+        font-size: 1.875rem;
+        line-height: 1.5rem;
+        color: rgba(255, 255, 255, 0.5);
+        font-family: 'fustat', sans-serif;
+      }
+
+      /* 🎯 Mobile: Section Features du HAUT */
       @media (max-width: 767px) {
         .providers-card-content-top {
-          padding-top: 1rem; /* Ajustez cette valeur selon vos besoins */
-          margin-top: -40rem; /* 🔧 RÉDUCTION MAJEURE de l'espace au-dessus sur mobile */
+          padding-top: 1rem;
+          margin-top: -40rem;
+        }
+      }
+
+      /* 🎯 Mobile: Section Features du BAS */
+      @media (max-width: 767px) {
+        .providers-card-content-bottom {
+          padding-top: 1rem;
+          margin-top: 0;
         }
       }
 
@@ -3465,7 +3513,7 @@
 
     <!-- Section Bottom Title -->
     <section style="max-width: 1286px; margin: 6rem auto 4rem; padding: 0 2rem;">
-      <div class="providers-card-content-top">
+      <div class="providers-card-content-bottom">
         <h3 class="providers-card-label">
           ✦ Features
         </h3>
