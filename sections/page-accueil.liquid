@@ -1472,11 +1472,11 @@
       }
 
       .providers-card-content-top {
-        position: absolute;
-        top: 2rem;
-        left: 2.5rem;
+        position: relative;
+        padding: 0 2.5rem;
         z-index: 20;
         max-width: 600px;
+        margin-bottom: -2rem;
       }
 
       .providers-card-content-top .providers-card-label {
@@ -1893,19 +1893,19 @@
     <!-- Section Providers Card -->
     <section class="providers-card-section">
       <div class="providers-card-wrapper">
+        <!-- Content at top (outside rectangle) -->
+        <div class="providers-card-content-top">
+          <h3 class="providers-card-label">
+            ✦ Features
+          </h3>
+          <p class="providers-card-title-top">
+            Power your payments with ease
+          </p>
+          <p class="providers-card-description">
+            Know more about your customers than they do.
+          </p>
+        </div>
         <div class="providers-card-inner">
-          <!-- Content at top -->
-          <div class="providers-card-content-top">
-            <h3 class="providers-card-label">
-              ✦ Features
-            </h3>
-            <p class="providers-card-title-top">
-              Power your payments with ease
-            </p>
-            <p class="providers-card-description">
-              Know more about your customers than they do.
-            </p>
-          </div>
           <div class="providers-card-background">
             <div class="providers-blur-effect"></div>
             <div class="providers-marquee-container">
