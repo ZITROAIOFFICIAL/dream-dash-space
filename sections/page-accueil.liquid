@@ -759,8 +759,9 @@
       .hero-video {
         position: absolute;
         left: 50%;
-        top: 30%;
-        transform: translate(-50%, -50%) scale(3);
+        top: 0;
+        transform: translateX(-50%) scale(3);
+        transform-origin: top center;
         width: 100%;
         max-width: 100vw;
         height: auto;
@@ -800,8 +801,9 @@
       .hero-fallback-image {
         position: absolute;
         left: 50%;
-        top: 30%;
-        transform: translate(-50%, -50%) scale(3);
+        top: 0;
+        transform: translateX(-50%) scale(3);
+        transform-origin: top center;
         width: 100%;
         max-width: 100vw;
         height: auto;
@@ -817,8 +819,9 @@
         .hero-video,
         .hero-fallback-image {
           left: 50%;
-          top: 30%;
-          transform: translate(-50%, -50%) scale(1);
+          top: 0;
+          transform: translateX(-50%) scale(1);
+          transform-origin: top center;
           width: auto;
           height: auto;
           min-width: 100vw;
