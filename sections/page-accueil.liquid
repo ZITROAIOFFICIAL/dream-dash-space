@@ -3275,6 +3275,8 @@
         var section = document.querySelector('.stats-section');
         var container = document.querySelector('.stats-section .stats-container');
         var grid = document.querySelector('.stats-grid');
+        var cardProviders = document.querySelector('.card-providers');
+        var cardCountries = document.querySelector('.countries-card');
         
         if (!section || !container || !grid) return;
         
@@ -3284,25 +3286,43 @@
         if (viewportWidth > 1024) {
           grid.style.transform = '';
           section.style.height = '';
+          if (cardProviders) cardProviders.style.transform = '';
+          if (cardCountries) cardCountries.style.transform = '';
           return;
         }
         
         // Mobile: scale dynamique basé sur iPhone Pro Max
         var baseWidth = 428;           // iPhone Pro Max
-        var baseScale = 0.48;          // Scale de référence pour Pro Max
+        var baseScale = 0.48;          // Scale de référence pour Pro Max (grid)
+        var baseScaleCards = 0.40;     // Scale de référence pour les cartes
         var dynamicScale = (viewportWidth / baseWidth) * baseScale;
+        var dynamicScaleCards = (viewportWidth / baseWidth) * baseScaleCards;
         
-        // Limiter le scale entre 0.35 et 0.65
+        // Limiter le scale entre 0.35 et 0.65 pour le grid
         dynamicScale = Math.max(0.35, Math.min(0.65, dynamicScale));
+        // Limiter le scale entre 0.29 et 0.54 pour les cartes (proportionnel)
+        dynamicScaleCards = Math.max(0.29, Math.min(0.54, dynamicScaleCards));
         
         // Récupérer les translations
         var computedStyles = getComputedStyle(document.documentElement);
         var tx = (computedStyles.getPropertyValue('--stats-grid-translate-x-mobile') || '0px').trim();
         var ty = (computedStyles.getPropertyValue('--stats-grid-translate-y-mobile') || '0px').trim();
+        var cardsOffset = (computedStyles.getPropertyValue('--cards-horizontal-offset-mobile') || '0px').trim();
         
-        // Appliquer le scale UNIQUEMENT au grid (sans toucher au container ou section)
+        // Appliquer le scale au grid
         grid.style.transformOrigin = 'top center';
         grid.style.transform = 'translate(' + tx + ',' + ty + ') scale(' + dynamicScale + ')';
+        
+        // Appliquer le scale dynamique aux cartes provider et countries
+        if (cardProviders) {
+          cardProviders.style.transformOrigin = 'center';
+          cardProviders.style.transform = 'translateX(calc(-50% - ' + cardsOffset + ')) scale(' + dynamicScaleCards + ')';
+        }
+        
+        if (cardCountries) {
+          cardCountries.style.transformOrigin = 'center';
+          cardCountries.style.transform = 'translateX(calc(-50% + ' + cardsOffset + ')) scale(' + dynamicScaleCards + ')';
+        }
         
         // Ajuster la hauteur de la section
         setTimeout(function() {
