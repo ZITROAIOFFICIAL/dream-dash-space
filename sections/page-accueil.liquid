@@ -153,6 +153,10 @@
       
       /* 🎯 Scale global dashboard laptop allongé */
       --dashboard-scale-laptop-extended: 0.75; /* Valeur par défaut: 1 = 100% */
+      
+      /* 🎯 HAUTEUR DÉGRADÉ - Contrôle la hauteur du dégradé noir sur la vidéo */
+      --gradient-height-mobile: 40%; /* Mobile: Ajustez entre 20% et 60% */
+      --gradient-height-desktop: 30%; /* Desktop: Ajustez entre 20% et 60% */
     }
 
     /* Laptop étendu (1441px - 1800px) - Rectangle gris bord à bord + éléments centrés */
@@ -528,7 +532,7 @@
         bottom: 0;
         left: 0;
         right: 0;
-        height: 40%;
+        height: var(--gradient-height-mobile);
         background: linear-gradient(
           to bottom,
           transparent 0%,
@@ -549,7 +553,7 @@
 
         /* Dégradé plus court sur desktop */
         .hero-section::after {
-          height: 30%;
+          height: var(--gradient-height-desktop);
         }
       }
 
