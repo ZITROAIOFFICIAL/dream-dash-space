@@ -1338,6 +1338,20 @@
         gap: 4rem;
         mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        --badge-offset: 0;
+        --badge-scale: 1;
+      }
+
+      /* Rangée 1 - Modifier ces valeurs pour déplacer/agrandir toute la rangée 1 */
+      .providers-marquee-row.row-1 {
+        --badge-offset: 0px;
+        --badge-scale: 1;
+      }
+
+      /* Rangée 2 - Modifier ces valeurs pour déplacer/agrandir toute la rangée 2 */
+      .providers-marquee-row.row-2 {
+        --badge-offset: 0px;
+        --badge-scale: 1;
       }
 
       .providers-marquee-content {
@@ -1864,7 +1878,7 @@
               </svg>
 
               <!-- First marquee row -->
-              <div class="providers-marquee-row">
+              <div class="providers-marquee-row row-1">
                 <div class="providers-marquee-content">
                   <!-- Badge 1 -->
                   <div class="provider-badge-wrapper">
@@ -2360,7 +2374,7 @@
                 </div>
               </div>
               <!-- Second marquee row (reverse) -->
-              <div class="providers-marquee-row providers-marquee-reverse">
+              <div class="providers-marquee-row providers-marquee-reverse row-2">
                 <div class="providers-marquee-content">
                   <div class="provider-badge-wrapper">
                     <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
