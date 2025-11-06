@@ -866,7 +866,7 @@
       /* ==================== STATS SECTION ==================== */
       .stats-section {
         position: relative;
-        z-index: 3;
+        z-index: 1; /* 🔧 Réduit pour que providers-section passe au-dessus et ne bloque pas le scroll */
         margin-top: 5rem;
         margin-bottom: 0; /* 🔧 Pas d'espace après le dashboard */
         width: var(--stats-section-width, 100%);
@@ -874,6 +874,12 @@
         margin-left: auto;
         margin-right: auto;
         padding: var(--stats-section-padding, 0 2rem);
+        pointer-events: none; /* 🔧 Ne bloque pas le scroll */
+      }
+
+      /* Réactiver les interactions sur les éléments interactifs du dashboard */
+      .stats-section * {
+        pointer-events: auto;
       }
 
       /* Conteneur englobant avec fond glassmorphism */
@@ -1267,7 +1273,7 @@
     <style>
       /* ==================== PROVIDERS CARD SECTION ==================== */
       .providers-card-section {
-        margin-top: -60rem; /* 🔧 Remonté de 60rem vers le haut */
+        margin-top: -80rem; /* 🔧 Remonté de 80rem vers le haut */
         padding: 0 2rem;
         display: none; /* Hidden on mobile by default */
         position: relative;
