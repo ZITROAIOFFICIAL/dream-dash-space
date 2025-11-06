@@ -3284,7 +3284,6 @@
         if (viewportWidth > 1024) {
           grid.style.transform = '';
           section.style.height = '';
-          container.style.transform = 'translateX(-50%)';
           return;
         }
         
@@ -3301,15 +3300,9 @@
         var tx = (computedStyles.getPropertyValue('--stats-grid-translate-x-mobile') || '0px').trim();
         var ty = (computedStyles.getPropertyValue('--stats-grid-translate-y-mobile') || '0px').trim();
         
-        // Appliquer le scale au grid
+        // Appliquer le scale UNIQUEMENT au grid (sans toucher au container ou section)
         grid.style.transformOrigin = 'top center';
         grid.style.transform = 'translate(' + tx + ',' + ty + ') scale(' + dynamicScale + ')';
-        
-        // Ajuster la hauteur du background gris proportionnellement
-        var baseContainerHeight = 200; // Hauteur de base définie en CSS
-        var scaledHeight = baseContainerHeight * dynamicScale;
-        container.style.height = scaledHeight + 'px';
-        container.style.transform = 'translateX(-50%)';
         
         // Ajuster la hauteur de la section
         setTimeout(function() {
