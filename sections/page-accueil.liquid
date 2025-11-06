@@ -518,14 +518,23 @@
         background: #000000;
         position: relative;
         overflow: visible;
-        padding: 3rem 2.5rem 160rem;
+        padding: 3rem 2.5rem 0;
+      }
+
+      .hero-section::after {
+        content: "";
+        display: block;
+        height: 160rem;
       }
 
       @media (min-width: 768px) {
         .hero-section {
           min-height: auto;
           align-items: center;
-          padding: 1rem 1.5rem 120rem;
+          padding: 1rem 1.5rem 0;
+        }
+        .hero-section::after {
+          height: 120rem;
         }
       }
 
