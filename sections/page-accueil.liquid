@@ -868,7 +868,6 @@
         position: relative;
         z-index: 3;
         margin-top: 5rem;
-        margin-bottom: 0; /* 🔧 Pas d'espace après le dashboard */
         width: var(--stats-section-width, 100%);
         max-width: var(--stats-section-max-width, 1400px);
         margin-left: auto;
@@ -1266,43 +1265,9 @@
     <style>
       /* ==================== PROVIDERS CARD SECTION ==================== */
       .providers-card-section {
-        margin-top: -8rem; /* 🔧 Remonté mais sans cacher le texte */
+        margin-top: 4rem;
         padding: 0 2rem;
         display: none; /* Hidden on mobile by default */
-      }
-
-      /* Titre et description au-dessus de la section providers */
-      .providers-section-header {
-        max-width: 1200px;
-        margin: 0 auto 2rem auto;
-        text-align: left;
-      }
-
-      .providers-section-label {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 0.875rem;
-        font-weight: 500;
-        color: #fbbf24;
-        font-family: 'Outfit', sans-serif;
-        margin-bottom: 0.75rem;
-      }
-
-      .providers-section-title {
-        font-size: 2.5rem;
-        font-weight: 600;
-        color: #ffffff;
-        font-family: 'Outfit', sans-serif;
-        line-height: 1.2;
-        margin-bottom: 0.75rem;
-      }
-
-      .providers-section-description {
-        font-size: 1rem;
-        color: rgba(255, 255, 255, 0.6);
-        font-family: 'Outfit', sans-serif;
-        line-height: 1.5;
       }
 
       @media (min-width: 769px) {
@@ -1365,8 +1330,8 @@
       .providers-marquee-row {
         display: flex;
         overflow: hidden;
-        padding: 1rem 0.5rem; /* 🔧 Marge verticale et horizontale du marquee */
-        gap: 4rem; /* 🔧 Espacement entre les badges */
+        padding: 0.5rem;
+        gap: 4rem;
         mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
       }
@@ -1866,16 +1831,6 @@
 
     <!-- Section Providers Card -->
     <section class="providers-card-section">
-      <!-- En-tête de la section -->
-      <div class="providers-section-header">
-        <div class="providers-section-label">
-          <span>✨</span>
-          <span>Features</span>
-        </div>
-        <h2 class="providers-section-title">Power your payments with ease</h2>
-        <p class="providers-section-description">Know more about your customers than they do.</p>
-      </div>
-
       <div class="providers-card-wrapper">
         <div class="providers-card-inner">
           <div class="providers-card-background">
