@@ -1564,6 +1564,22 @@
           transform: scale(1.4); /* ✏️ Modifiez ici: grosseur de l'image (ex: 1.0 = normale, 1.30 = +50%, 1.5 = +50%) */
           transform-origin: center;
         }
+        
+        /* Badge plus petit sur mobile */
+        .banner-floating-badge {
+          width: 50px !important;
+          right: 5% !important;
+        }
+      }
+
+      /* 🎯 Animation de flottement pour le badge */
+      @keyframes float {
+        0%, 100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
       }
 
       /* 🎯 Three Cards Section Styles */
@@ -3538,10 +3554,16 @@
     </section>
 
     <!-- Banner Image Section -->
-    <section class="banner-image-section" style="max-width: 1286px; margin: 2rem auto 6rem; padding: 0 2rem;">
+    <section class="banner-image-section" style="max-width: 1286px; margin: 2rem auto 6rem; padding: 0 2rem; position: relative;">
       <a href="#" style="display: block; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
         <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Untitled_design-61_b4f54939-4c42-4497-a1b6-e541ca3ac4b0.png?v=1762471718" alt="Banner" style="width: 100%; height: auto; display: block; border-radius: 1rem;">
       </a>
+      
+      <!-- Badge flottant -->
+      <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Add_a_heading-10.svg?v=1762473424" 
+           alt="Badge" 
+           class="banner-floating-badge"
+           style="position: absolute; top: 10%; right: 8%; width: 70px; height: auto; z-index: 10; animation: float 3s ease-in-out infinite;">
     </section>
 
   </main>
