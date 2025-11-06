@@ -1470,6 +1470,44 @@
         font-family: 'fustat', sans-serif;
         margin-bottom: 1.25rem;
       }
+
+      .providers-card-content-top {
+        position: absolute;
+        top: 2rem;
+        left: 2.5rem;
+        z-index: 20;
+        max-width: 600px;
+      }
+
+      .providers-card-content-top .providers-card-label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 1.875rem;
+        font-family: 'fustat', sans-serif;
+        margin-bottom: 1.25rem;
+      }
+
+      .providers-card-content-top .providers-card-title-top {
+        margin-top: 0.25rem;
+        font-size: 2.5rem;
+        font-weight: 500;
+        line-height: 2.5rem;
+        letter-spacing: -0.025em;
+        color: #ffffff;
+        font-family: 'fustat', sans-serif;
+        margin-bottom: 1.25rem;
+      }
+
+      .providers-card-content-top .providers-card-description {
+        margin-top: 0.5rem;
+        max-width: 600px;
+        font-size: 0.875rem;
+        line-height: 1.5rem;
+        color: rgba(255, 255, 255, 0.5);
+        font-family: 'fustat', sans-serif;
+      }
     </style>
 
     <section class="hero-section">
@@ -1856,6 +1894,18 @@
     <section class="providers-card-section">
       <div class="providers-card-wrapper">
         <div class="providers-card-inner">
+          <!-- Content at top -->
+          <div class="providers-card-content-top">
+            <h3 class="providers-card-label">
+              ✦ Features
+            </h3>
+            <p class="providers-card-title-top">
+              Power your payments with ease
+            </p>
+            <p class="providers-card-description">
+              Know more about your customers than they do.
+            </p>
+          </div>
           <div class="providers-card-background">
             <div class="providers-blur-effect"></div>
             <div class="providers-marquee-container">
