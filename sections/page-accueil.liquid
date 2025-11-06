@@ -1333,6 +1333,20 @@
         opacity: 1;
       }
 
+      .provider-badge-wrapper {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 2rem;
+        opacity: 0.9;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+
+      .provider-badge-wrapper:hover {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+
       .providers-card-content {
         position: relative;
         padding: 2rem 2.5rem;
@@ -1772,50 +1786,1006 @@
           <div class="providers-card-background">
             <div class="providers-blur-effect"></div>
             <div class="providers-marquee-container">
+              <!-- SVG Definitions (réutilisables) -->
+              <svg width="0" height="0" style="position: absolute;">
+                <defs>
+                  <!-- Filter glow -->
+                  <filter id="iaGlowProviders" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="2" result="b"/>
+                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                  <filter id="softGlowProviders" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="1.2" result="b"/>
+                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                  <!-- Orbites pour l'atome -->
+                  <path id="orbit0Providers" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                  <path id="orbit1Providers" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                  <path id="orbit2Providers" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+                </defs>
+              </svg>
+
               <!-- First marquee row -->
               <div class="providers-marquee-row">
                 <div class="providers-marquee-content">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=MC" alt="mastercard" class="provider-logo">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=Visa" alt="visa" class="provider-logo">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=Amex" alt="amex" class="provider-logo">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=Discover" alt="discover" class="provider-logo">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=Diners" alt="diners" class="provider-logo">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=Elo" alt="elo" class="provider-logo">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=JCB" alt="jcb" class="provider-logo">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=Union" alt="unionpay" class="provider-logo">
+                  <!-- Badge 1 -->
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">MC</span></span>
+                    </div>
+                  </div>
+                  <!-- Badge 2 -->
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Visa</span></span>
+                    </div>
+                  </div>
+                  <!-- Badge 3 -->
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Amex</span></span>
+                    </div>
+                  </div>
+                  <!-- Badge 4 -->
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Discover</span></span>
+                    </div>
+                  </div>
+                  <!-- Badge 5 -->
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Diners</span></span>
+                    </div>
+                  </div>
+                  <!-- Badge 6 -->
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Elo</span></span>
+                    </div>
+                  </div>
+                  <!-- Badge 7 -->
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">JCB</span></span>
+                    </div>
+                  </div>
+                  <!-- Badge 8 -->
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Union</span></span>
+                    </div>
+                  </div>
                 </div>
                 <div class="providers-marquee-content">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=MC" alt="mastercard" class="provider-logo">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=Visa" alt="visa" class="provider-logo">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=Amex" alt="amex" class="provider-logo">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=Discover" alt="discover" class="provider-logo">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=Diners" alt="diners" class="provider-logo">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=Elo" alt="elo" class="provider-logo">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=JCB" alt="jcb" class="provider-logo">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=Union" alt="unionpay" class="provider-logo">
+                  <!-- Duplication pour continuité -->
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">MC</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Visa</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Amex</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Discover</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Diners</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Elo</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">JCB</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Union</span></span>
+                    </div>
+                  </div>
                 </div>
               </div>
               <!-- Second marquee row (reverse) -->
               <div class="providers-marquee-row providers-marquee-reverse">
                 <div class="providers-marquee-content">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=Maestro" alt="maestro" class="provider-logo">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=Cirrus" alt="cirrus" class="provider-logo">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=Apple" alt="applepay" class="provider-logo">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=GPay" alt="googlepay" class="provider-logo">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=PayPal" alt="paypal" class="provider-logo">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=Stripe" alt="stripe" class="provider-logo">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=Square" alt="square" class="provider-logo">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=Venmo" alt="venmo" class="provider-logo">
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Maestro</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Cirrus</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Apple</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">GPay</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">PayPal</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Stripe</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Square</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Venmo</span></span>
+                    </div>
+                  </div>
                 </div>
                 <div class="providers-marquee-content">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=Maestro" alt="maestro" class="provider-logo">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=Cirrus" alt="cirrus" class="provider-logo">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=Apple" alt="applepay" class="provider-logo">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=GPay" alt="googlepay" class="provider-logo">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=PayPal" alt="paypal" class="provider-logo">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=Stripe" alt="stripe" class="provider-logo">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=Square" alt="square" class="provider-logo">
-                  <img src="https://via.placeholder.com/112x112/fff/000?text=Venmo" alt="venmo" class="provider-logo">
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Maestro</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Cirrus</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Apple</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">GPay</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">PayPal</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Stripe</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Square</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Venmo</span></span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
