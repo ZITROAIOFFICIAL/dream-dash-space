@@ -157,6 +157,10 @@
       /* 🎯 HAUTEUR DÉGRADÉ - Contrôle la hauteur du dégradé noir sur la vidéo */
       --gradient-height-mobile: 40%; /* Mobile: Ajustez entre 20% et 60% */
       --gradient-height-desktop: 30%; /* Desktop: Ajustez entre 20% et 60% */
+      
+      /* 🎯 POSITION VERTICALE DÉGRADÉ - Contrôle où le dégradé commence (bottom) */
+      --gradient-position-mobile: 0%; /* Mobile: 0% = tout en bas, augmentez pour monter */
+      --gradient-position-desktop: 0%; /* Desktop: 0% = tout en bas, augmentez pour monter */
     }
 
     /* Laptop étendu (1441px - 1800px) - Rectangle gris bord à bord + éléments centrés */
@@ -529,7 +533,7 @@
       .hero-section::after {
         content: '';
         position: absolute;
-        bottom: 0;
+        bottom: var(--gradient-position-mobile);
         left: 0;
         right: 0;
         height: var(--gradient-height-mobile);
@@ -554,6 +558,7 @@
         /* Dégradé plus court sur desktop */
         .hero-section::after {
           height: var(--gradient-height-desktop);
+          bottom: var(--gradient-position-desktop);
         }
       }
 
