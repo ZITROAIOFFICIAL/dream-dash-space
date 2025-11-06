@@ -1270,15 +1270,9 @@
       .providers-card-section {
         margin-top: -32rem;
         padding: 0 2rem;
-        display: none; /* Hidden on mobile by default */
+        display: block; /* Visible on mobile */
         position: relative;
         z-index: 50;
-      }
-
-      @media (min-width: 769px) {
-        .providers-card-section {
-          display: block;
-        }
       }
 
       .providers-card-wrapper {
@@ -1308,9 +1302,15 @@
 
       .providers-card-background {
         position: relative;
-        height: 44rem;
+        height: 28rem;
         flex-shrink: 0;
         overflow: visible;
+      }
+
+      @media (min-width: 769px) {
+        .providers-card-background {
+          height: 44rem;
+        }
       }
 
       .providers-blur-effect {
