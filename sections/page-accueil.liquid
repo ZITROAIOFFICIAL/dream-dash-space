@@ -1380,12 +1380,12 @@
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        width: 4px;
+        width: 1px;
         height: 140px;
         pointer-events: none;
       }
-      .stats-platform-vline--left { left: calc(33.333% - 2px); }
-      .stats-platform-vline--right { left: calc(66.666% - 2px); }
+      .stats-platform-vline--left { left: 33.333%; }
+      .stats-platform-vline--right { left: 66.666%; }
       
       .stats-platform-vline svg {
         display: block;
@@ -4019,31 +4019,13 @@
         
         <div class="stats-platform-grid">
           <div class="stats-platform-vline stats-platform-vline--left">
-            <svg viewBox="0 0 4 140" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="lineGradient1" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0" />
-                  <stop offset="25%" style="stop-color:#ffffff;stop-opacity:0.3" />
-                  <stop offset="50%" style="stop-color:#ffffff;stop-opacity:0.6" />
-                  <stop offset="75%" style="stop-color:#ffffff;stop-opacity:0.3" />
-                  <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
-                </linearGradient>
-              </defs>
-              <line x1="2" y1="0" x2="2" y2="140" stroke="url(#lineGradient1)" stroke-width="2" stroke-linecap="round"/>
+            <svg viewBox="0 0 1 140" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0.5" y1="0" x2="0.5" y2="140" stroke="#2D3748" stroke-width="1" stroke-linecap="round"/>
             </svg>
           </div>
           <div class="stats-platform-vline stats-platform-vline--right">
-            <svg viewBox="0 0 4 140" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="lineGradient2" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0" />
-                  <stop offset="25%" style="stop-color:#ffffff;stop-opacity:0.3" />
-                  <stop offset="50%" style="stop-color:#ffffff;stop-opacity:0.6" />
-                  <stop offset="75%" style="stop-color:#ffffff;stop-opacity:0.3" />
-                  <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
-                </linearGradient>
-              </defs>
-              <line x1="2" y1="0" x2="2" y2="140" stroke="url(#lineGradient2)" stroke-width="2" stroke-linecap="round"/>
+            <svg viewBox="0 0 1 140" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0.5" y1="0" x2="0.5" y2="140" stroke="#2D3748" stroke-width="1" stroke-linecap="round"/>
             </svg>
           </div>
 
