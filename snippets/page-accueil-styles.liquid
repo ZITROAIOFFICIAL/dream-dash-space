@@ -2273,11 +2273,19 @@
       /* Mobile: augmenter la hauteur */
       @media (max-width: 768px) {
         .footer-image {
+          display: none;
+        }
+        
+        .footer-image-mobile {
+          display: block;
           width: 100%;
           height: auto;
-          min-height: 600px;
-          object-fit: cover;
-          object-position: center top;
+        }
+      }
+      
+      @media (min-width: 769px) {
+        .footer-image-mobile {
+          display: none;
         }
       }
     </style>
