@@ -1467,16 +1467,24 @@
         will-change: transform;
       }
 
+      /* ===== CONFIGURATION TAILLE CARTES ===== */
+      /* Modifier les tailles des cartes review */
+      --review-card-width-desktop: 325px;   /* Largeur maximum desktop */
+      --review-card-height-desktop: 350px;  /* Hauteur maximum desktop */
+      --review-card-width-mobile: 280px;    /* Largeur maximum mobile */
+      --review-card-height-mobile: 320px;   /* Hauteur maximum mobile */
+      /* ======================================== */
+
       /* Carte de review sans bordures */
       .review-card {
         flex: 0 0 calc(25% - 1.5rem);
-        max-width: 325px;
+        max-width: var(--review-card-width-desktop);
         background: linear-gradient(to bottom,rgb(19, 19, 19) 0%, #000000 80%);
         padding: 3rem 2rem;
         position: relative;
         border-radius: 12px;
         isolation: isolate;
-        max-height: 350px;
+        max-height: var(--review-card-height-desktop);
         display: flex;
         flex-direction: column;
       }
@@ -1539,6 +1547,8 @@
         .review-card {
           flex: 0 0 100%;
           min-width: 100%;
+          max-width: var(--review-card-width-mobile);
+          max-height: var(--review-card-height-mobile);
         }
         
         .reviews-title {
