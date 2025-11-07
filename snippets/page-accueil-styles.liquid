@@ -1467,24 +1467,11 @@
         will-change: transform;
       }
 
-      /* ===== CONFIGURATION TAILLE CARTES MOBILE ===== */
-      /* Modifier ces valeurs pour ajuster la taille sur mobile */
-      --review-card-width-mobile: 280px;  /* Largeur des cartes sur mobile */
-      --review-card-height-mobile: 320px; /* Hauteur des cartes sur mobile */
-      /* ============================================== */
-      
-      /* ===== CONFIGURATION GRADIENT CARTES ===== */
-      /* Modifier la couleur de départ et fin du gradient */
-      --review-card-gradient-start: rgb(30, 30, 30); /* Couleur de départ (plus foncé) */
-      --review-card-gradient-end: rgb(0, 0, 0);      /* Couleur de fin (noir complet) */
-      --review-card-gradient-end-position: 90%;      /* Position où le noir complet apparaît */
-      /* ========================================== */
-
       /* Carte de review sans bordures */
       .review-card {
         flex: 0 0 calc(25% - 1.5rem);
         max-width: 325px;
-        background: linear-gradient(to bottom, var(--review-card-gradient-start) 0%, var(--review-card-gradient-end) var(--review-card-gradient-end-position)) !important;
+        background: linear-gradient(to bottom,rgb(19, 19, 19) 0%, #000000 80%);
         padding: 3rem 2rem;
         position: relative;
         border-radius: 12px;
@@ -1492,15 +1479,6 @@
         max-height: 350px;
         display: flex;
         flex-direction: column;
-      }
-
-      /* Taille des cartes sur mobile uniquement */
-      @media (max-width: 768px) {
-        .review-card {
-          max-width: var(--review-card-width-mobile);
-          max-height: var(--review-card-height-mobile);
-          flex: 0 0 var(--review-card-width-mobile);
-        }
       }
 
       .review-text {
