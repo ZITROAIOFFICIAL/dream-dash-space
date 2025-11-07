@@ -1141,6 +1141,9 @@
           --dashboard-scale-mobile-standard: 0.90;    /* iPhone 12/13/14 (390px) = 90% */
           --dashboard-scale-mobile-small: 0.82;       /* iPhone SE, petits Android (375px) = 82% */
           --dashboard-scale-mobile-mini: 0.75;        /* Très petits écrans (360px) = 75% */
+          
+          /* 🎯 BOTTOM RESPONSIVE PROVIDER CARDS */
+          --card-providers-bottom-mobile: 60px;       /* Valeur de base pour iPhone Pro Max */
         }
         
         .stats-section {
@@ -1207,7 +1210,7 @@
         /* 🎯 Scaling proportionnel pour carte providers */
         .card-providers {
           top: var(--card-providers-top);
-          bottom: var(--card-providers-bottom);
+          bottom: var(--card-providers-bottom-mobile);
           left: var(--card-providers-left);
           right: var(--card-providers-right);
           width: var(--card-providers-width);
@@ -1256,6 +1259,23 @@
       @media (max-width: 374px) {
         .stats-section {
           transform: scale(var(--dashboard-scale-mobile-mini));
+        }
+        :root {
+          --card-providers-bottom-mobile: 15px; /* 60px → 15px (divisé par 4) */
+        }
+      }
+      
+      /* iPhone SE, petits Android (375px - 389px) - Ajuster bottom provider cards */
+      @media (max-width: 389px) and (min-width: 375px) {
+        :root {
+          --card-providers-bottom-mobile: 30px; /* 60px → 30px (divisé par 2) */
+        }
+      }
+      
+      /* iPhone 12/13/14 standard (390px - 427px) - Ajuster bottom provider cards */
+      @media (max-width: 427px) and (min-width: 390px) {
+        :root {
+          --card-providers-bottom-mobile: 45px; /* 60px → 45px (réduction de 25%) */
         }
       }
       
