@@ -1309,49 +1309,6 @@
         }
       }
 
-      .image-position-controls {
-        max-width: 1250px;
-        margin: 2rem auto;
-        padding: 2rem;
-        background: rgba(20, 30, 50, 0.9);
-        border-radius: 1rem;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      @media (max-width: 767px) {
-        .image-position-controls {
-          display: none;
-        }
-      }
-
-      .image-position-controls input[type="range"] {
-        -webkit-appearance: none;
-        appearance: none;
-        height: 6px;
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 5px;
-        outline: none;
-      }
-
-      .image-position-controls input[type="range"]::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 18px;
-        height: 18px;
-        background: #3b82f6;
-        cursor: pointer;
-        border-radius: 50%;
-      }
-
-      .image-position-controls input[type="range"]::-moz-range-thumb {
-        width: 18px;
-        height: 18px;
-        background: #3b82f6;
-        cursor: pointer;
-        border-radius: 50%;
-        border: none;
-      }
-
       .withdrawals-card-content {
         position: absolute;
         bottom: 0;
@@ -3795,7 +3752,7 @@
       <div class="withdrawals-card-wrapper">
         <div class="withdrawals-card-inner">
           <!-- Image en haut à droite -->
-          <div class="withdrawals-card-image-wrapper" id="withdrawalsImage">
+          <div class="withdrawals-card-image-wrapper">
             <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Untitled_design-38.svg?v=1762478638" alt="Withdrawals Interface">
           </div>
           
@@ -3820,67 +3777,6 @@
         </div>
       </div>
     </section>
-
-    <!-- Contrôles de positionnement (PC uniquement) -->
-    <div class="image-position-controls" id="imageControls">
-      <h3 style="margin-bottom: 1rem; color: white;">Position de l'image</h3>
-      
-      <div style="margin-bottom: 1rem;">
-        <label style="color: white; display: block; margin-bottom: 0.5rem;">Haut/Bas (px): <span id="topValue">30</span></label>
-        <input type="range" id="topControl" min="0" max="500" value="30" style="width: 100%;">
-      </div>
-      
-      <div style="margin-bottom: 1rem;">
-        <label style="color: white; display: block; margin-bottom: 0.5rem;">Droite (px): <span id="rightValue">0</span></label>
-        <input type="range" id="rightControl" min="0" max="500" value="0" style="width: 100%;">
-      </div>
-      
-      <div style="margin-bottom: 1rem;">
-        <label style="color: white; display: block; margin-bottom: 0.5rem;">Largeur (px): <span id="widthValue">350</span></label>
-        <input type="range" id="widthControl" min="100" max="800" value="350" style="width: 100%;">
-      </div>
-      
-      <div style="margin-bottom: 1rem;">
-        <label style="color: white; display: block; margin-bottom: 0.5rem;">Hauteur (px): <span id="heightValue">250</span></label>
-        <input type="range" id="heightControl" min="100" max="600" value="250" style="width: 100%;">
-      </div>
-    </div>
-
-    <script>
-      // Contrôles de position d'image (PC uniquement)
-      if (window.innerWidth >= 768) {
-        const imageWrapper = document.getElementById('withdrawalsImage');
-        const topControl = document.getElementById('topControl');
-        const rightControl = document.getElementById('rightControl');
-        const widthControl = document.getElementById('widthControl');
-        const heightControl = document.getElementById('heightControl');
-        
-        const topValue = document.getElementById('topValue');
-        const rightValue = document.getElementById('rightValue');
-        const widthValue = document.getElementById('widthValue');
-        const heightValue = document.getElementById('heightValue');
-        
-        topControl.addEventListener('input', function() {
-          imageWrapper.style.top = this.value + 'px';
-          topValue.textContent = this.value;
-        });
-        
-        rightControl.addEventListener('input', function() {
-          imageWrapper.style.right = this.value + 'px';
-          rightValue.textContent = this.value;
-        });
-        
-        widthControl.addEventListener('input', function() {
-          imageWrapper.style.width = this.value + 'px';
-          widthValue.textContent = this.value;
-        });
-        
-        heightControl.addEventListener('input', function() {
-          imageWrapper.style.height = this.value + 'px';
-          heightValue.textContent = this.value;
-        });
-      }
-    </script>
 
   </main>
 
