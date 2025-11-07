@@ -2251,6 +2251,11 @@
         // Reviews Auto-Scrolling Slider
         const track = document.getElementById('reviewsTrack');
         if (track) {
+          // ===== CONFIGURATION VITESSE SLIDER =====
+          const SLIDER_SPEED_DESKTOP = 0.5; // Vitesse desktop en pixels par frame
+          const SLIDER_SPEED_MOBILE = 0.3;  // Vitesse mobile en pixels par frame
+          // ========================================
+          
           const cards = Array.from(track.children);
           
           // Clone cards for infinite scroll
@@ -2264,7 +2269,11 @@
           const totalWidth = cardWidth * cards.length;
           
           function autoScroll() {
-            position -= 0.5; // Slow scroll speed
+            // Détecter si mobile ou desktop
+            const isMobile = window.innerWidth <= 768;
+            const speed = isMobile ? SLIDER_SPEED_MOBILE : SLIDER_SPEED_DESKTOP;
+            
+            position -= speed;
             
             // Reset position when we've scrolled through all original cards
             if (Math.abs(position) >= totalWidth) {
