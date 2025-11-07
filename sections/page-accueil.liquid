@@ -1303,6 +1303,15 @@
         border-bottom-left-radius: 1rem;
       }
       
+      /* Contrôle des images desktop/mobile */
+      .mobile-only-image {
+        display: none; /* Cacher l'image mobile sur desktop */
+      }
+      
+      .desktop-only-image {
+        display: block; /* Afficher l'image desktop par défaut */
+      }
+      
       .withdrawals-card-image-wrapper::after {
         content: '';
         position: absolute;
@@ -1318,11 +1327,25 @@
       }
 
       @media (max-width: 767px) {
+        /* Afficher l'image mobile uniquement */
+        .mobile-only-image {
+          display: block;
+        }
+        
+        .desktop-only-image {
+          display: none;
+        }
+        
         .withdrawals-card-image-wrapper {
-          width: 100%;
-          height: 200px;
-          right: 0;
-          top: 0;
+          /* ========== CONTRÔLES DE TAILLE ========== */
+          width: 100%;        /* ← MODIFIER pour agrandir/rétrécir la largeur */
+          height: 200px;      /* ← MODIFIER pour agrandir/rétrécir la hauteur */
+          
+          /* ========== CONTRÔLES DE POSITION ========== */
+          top: 0px;           /* ← MODIFIER pour descendre (augmenter) ou monter (diminuer) */
+          right: 0px;         /* ← MODIFIER pour déplacer à gauche (augmenter) ou droite (diminuer) */
+          left: auto;         /* ← Garder auto ou remplacer par une valeur (ex: 0px) */
+          bottom: auto;       /* ← Garder auto ou remplacer par une valeur (ex: 0px) */
         }
         
         .withdrawals-card-image-wrapper::after {
@@ -1346,7 +1369,7 @@
         .withdrawals-card-content {
           padding: 2rem 1.5rem;
           position: relative;
-          padding-top: 220px;
+          padding-top: 220px; /* ← MODIFIER si vous changez la hauteur de l'image (hauteur + 20px) */
         }
       }
 
@@ -3779,7 +3802,10 @@
         <div class="withdrawals-card-inner">
           <!-- Image en haut à droite -->
           <div class="withdrawals-card-image-wrapper">
-            <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Your_paragraph_text-5.svg?v=1762484110" alt="Withdrawals Interface">
+            <!-- Image Desktop uniquement -->
+            <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Your_paragraph_text-5.svg?v=1762484110" alt="Withdrawals Interface" class="desktop-only-image">
+            <!-- Image Mobile uniquement -->
+            <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Untitled_design-40.svg?v=1762484999" alt="Withdrawals Interface Mobile" class="mobile-only-image">
           </div>
           
           <!-- Content Area -->
