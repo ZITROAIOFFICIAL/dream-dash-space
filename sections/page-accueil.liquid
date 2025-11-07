@@ -1380,8 +1380,8 @@
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        width: 1px;
-        height: 140px;
+        width: 2px;
+        height: 120px;
         pointer-events: none;
       }
       .stats-platform-vline--left { left: 33.333%; }
@@ -1404,6 +1404,7 @@
         }
 
         .stats-platform-grid {
+          flex-direction: column;
           gap: 3rem;
         }
 
@@ -1412,7 +1413,19 @@
           font-size: 3rem;
         }
 
-        .stats-platform-separator { display: none; }
+        .stats-platform-separator {
+          display: block;
+          width: 100%;
+          height: 2px;
+          margin: 1.5rem 0;
+        }
+        
+        .stats-platform-separator svg {
+          display: block;
+          width: 100%;
+          height: 100%;
+        }
+        
         .stats-platform-vline { display: none; }
       }
 
@@ -4019,13 +4032,13 @@
         
         <div class="stats-platform-grid">
           <div class="stats-platform-vline stats-platform-vline--left">
-            <svg viewBox="0 0 1 140" xmlns="http://www.w3.org/2000/svg">
-              <line x1="0.5" y1="0" x2="0.5" y2="140" stroke="#2D3748" stroke-width="1" stroke-linecap="round"/>
+            <svg viewBox="0 0 2 120" xmlns="http://www.w3.org/2000/svg">
+              <line x1="1" y1="0" x2="1" y2="120" stroke="#2D3748" stroke-width="2" stroke-linecap="round"/>
             </svg>
           </div>
           <div class="stats-platform-vline stats-platform-vline--right">
-            <svg viewBox="0 0 1 140" xmlns="http://www.w3.org/2000/svg">
-              <line x1="0.5" y1="0" x2="0.5" y2="140" stroke="#2D3748" stroke-width="1" stroke-linecap="round"/>
+            <svg viewBox="0 0 2 120" xmlns="http://www.w3.org/2000/svg">
+              <line x1="1" y1="0" x2="1" y2="120" stroke="#2D3748" stroke-width="2" stroke-linecap="round"/>
             </svg>
           </div>
 
@@ -4035,12 +4048,24 @@
             </div>
             <div class="stats-platform-label">USD Transactions Processed</div>
           </div>
+          
+          <div class="stats-platform-separator">
+            <svg viewBox="0 0 100 2" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+              <line x1="0" y1="1" x2="100" y2="1" stroke="#2D3748" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
 
           <div class="stats-platform-item">
             <div class="stats-platform-value">
               <span class="stats-platform-number" data-target="1200">0</span><span class="stats-platform-suffix">+</span>
             </div>
             <div class="stats-platform-label">Merchants Worldwide</div>
+          </div>
+          
+          <div class="stats-platform-separator">
+            <svg viewBox="0 0 100 2" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+              <line x1="0" y1="1" x2="100" y2="1" stroke="#2D3748" stroke-width="2" stroke-linecap="round"/>
+            </svg>
           </div>
 
           <div class="stats-platform-item">
