@@ -1558,6 +1558,17 @@
         height: auto;
         z-index: 10;
       }
+      
+      /* 🏷️ Badge centre - Positions PC */
+      .badge-center {
+        position: absolute;
+        top: 10%;        /* ✏️ Position verticale PC badge centre (ex: 5%, 15%, 20%) */
+        left: 50%;       /* ✏️ Position horizontale PC badge centre */
+        transform: translateX(-50%); /* Centre l'image */
+        width: 350px;    /* ✏️ Taille PC badge centre */
+        height: auto;
+        z-index: 10;
+      }
 
       /* 🎯 Mobile: Section Features du HAUT */
       @media (max-width: 767px) {
@@ -1596,6 +1607,13 @@
           top: 22% !important;     /* ✏️ Position verticale mobile badge gauche */
           left: 3% !important;    /* ✏️ Position horizontale mobile badge gauche */
           width: 120px !important; /* ✏️ Taille mobile badge gauche */
+        }
+        
+        .badge-center {
+          top: 8% !important;      /* ✏️ Position verticale mobile badge centre */
+          left: 50% !important;    /* ✏️ Position horizontale mobile badge centre */
+          transform: translateX(-50%) !important; /* Centre l'image */
+          width: 120px !important; /* ✏️ Taille mobile badge centre */
         }
       }
 
@@ -3586,6 +3604,11 @@
       <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Add_a_heading-19.svg?v=1762475427" 
            alt="Badge" 
            class="badge-left">
+      
+      <!-- Badge centre -->
+      <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Add_a_heading-10.svg?v=1762473424" 
+           alt="Badge" 
+           class="badge-center">
     </section>
 
   </main>
