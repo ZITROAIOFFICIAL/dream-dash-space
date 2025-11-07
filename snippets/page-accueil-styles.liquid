@@ -2270,11 +2270,14 @@
         object-fit: cover;
       }
 
-      /* Mobile: zoom sur l'image */
+      /* Mobile: augmenter la hauteur */
       @media (max-width: 768px) {
         .footer-image {
-          transform: scale(1.5);
-          transform-origin: center center;
+          width: 100%;
+          height: auto;
+          min-height: 600px;
+          object-fit: cover;
+          object-position: center top;
         }
       }
     </style>
