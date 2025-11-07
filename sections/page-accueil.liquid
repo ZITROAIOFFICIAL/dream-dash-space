@@ -1328,6 +1328,7 @@
       }
 
       .stats-platform-grid {
+        position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1372,10 +1373,21 @@
       }
 
       .stats-platform-separator {
-        width: 1px;
-        height: 120px;
-        background: rgba(255, 255, 255, 0.35);
+        display: none;
       }
+
+      .stats-platform-vline {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1px;
+        height: 140px;
+        background: rgba(255, 255, 255, 0.65);
+        box-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
+        pointer-events: none;
+      }
+      .stats-platform-vline--left { left: 33.333%; }
+      .stats-platform-vline--right { left: 66.666%; }
 
       @media (max-width: 768px) {
         .stats-platform-title {
@@ -1396,9 +1408,8 @@
           font-size: 3rem;
         }
 
-        .stats-platform-separator {
-          display: none;
-        }
+        .stats-platform-separator { display: none; }
+        .stats-platform-vline { display: none; }
       }
 
       /* ==================== WITHDRAWALS CARD SECTION ==================== */
@@ -4003,24 +4014,23 @@
         <p class="stats-platform-description">See why our customers choose us for their payments.</p>
         
         <div class="stats-platform-grid">
+          <div class="stats-platform-vline stats-platform-vline--left"></div>
+          <div class="stats-platform-vline stats-platform-vline--right"></div>
+
           <div class="stats-platform-item">
             <div class="stats-platform-value">
               <span class="stats-platform-number" data-target="200">0</span><span class="stats-platform-suffix">M+</span>
             </div>
             <div class="stats-platform-label">USD Transactions Processed</div>
           </div>
-          
-          <div class="stats-platform-separator"></div>
-          
+
           <div class="stats-platform-item">
             <div class="stats-platform-value">
               <span class="stats-platform-number" data-target="1200">0</span><span class="stats-platform-suffix">+</span>
             </div>
             <div class="stats-platform-label">Merchants Worldwide</div>
           </div>
-          
-          <div class="stats-platform-separator"></div>
-          
+
           <div class="stats-platform-item">
             <div class="stats-platform-value">
               <span class="stats-platform-number" data-target="160">0</span><span class="stats-platform-suffix">+</span>
