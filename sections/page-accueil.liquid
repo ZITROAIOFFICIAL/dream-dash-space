@@ -1135,12 +1135,21 @@
           --card-countries-width: 280px;
           --card-countries-height: 270px;
           --card-countries-scale-mobile: 0.40; /* 🔧 Scale du contenu countries (drapeaux, texte) */
+          
+          /* 🎯 SCALE RESPONSIVE MOBILE DASHBOARD */
+          --dashboard-scale-mobile-base: 1;           /* iPhone Pro Max (428px+) = 100% */
+          --dashboard-scale-mobile-standard: 0.90;    /* iPhone 12/13/14 (390px) = 90% */
+          --dashboard-scale-mobile-small: 0.82;       /* iPhone SE, petits Android (375px) = 82% */
+          --dashboard-scale-mobile-mini: 0.75;        /* Très petits écrans (360px) = 75% */
         }
         
         .stats-section {
           margin-top: 7.25rem;
           padding: 0;
           overflow: visible;
+          /* 🎯 SCALE GLOBAL - Appliqué par défaut sur mobile */
+          transform: scale(var(--dashboard-scale-mobile-base));
+          transform-origin: top center;
         }
         
         .stats-section .stats-container {
@@ -1217,6 +1226,36 @@
           height: var(--card-countries-height);
           transform: translateX(calc(-50% + var(--cards-horizontal-offset-mobile))) scale(var(--card-countries-scale-mobile));
           transform-origin: center;
+        }
+      }
+      
+      /* 🎯 MEDIA QUERIES RESPONSIVE - Scale adaptatif par taille d'écran mobile */
+      
+      /* iPhone Pro Max et plus (428px+) - Scale 100% (base) */
+      @media (max-width: 1024px) and (min-width: 428px) {
+        .stats-section {
+          transform: scale(var(--dashboard-scale-mobile-base));
+        }
+      }
+      
+      /* iPhone 12/13/14 standard (390px - 427px) - Scale 90% */
+      @media (max-width: 427px) and (min-width: 390px) {
+        .stats-section {
+          transform: scale(var(--dashboard-scale-mobile-standard));
+        }
+      }
+      
+      /* iPhone SE, petits Android (375px - 389px) - Scale 82% */
+      @media (max-width: 389px) and (min-width: 375px) {
+        .stats-section {
+          transform: scale(var(--dashboard-scale-mobile-small));
+        }
+      }
+      
+      /* Très petits écrans (<375px) - Scale 75% */
+      @media (max-width: 374px) {
+        .stats-section {
+          transform: scale(var(--dashboard-scale-mobile-mini));
         }
       }
       
