@@ -1467,13 +1467,16 @@
 
       /* Carte de review avec bordures dégradées */
       .review-card {
-        flex: 0 0 calc(33.333% - 1.5rem);
-        min-width: 350px;
+        flex: 0 0 calc(25% - 1.5rem);
+        min-width: 280px;
         background: linear-gradient(to bottom, #070707 0%, #070707 75%, #000000 100%);
-        padding: 2.5rem;
+        padding: 3rem 2rem;
         position: relative;
         border-radius: 12px 12px 0 0;
         isolation: isolate;
+        min-height: 320px;
+        display: flex;
+        flex-direction: column;
       }
 
       /* Bordures latérales dégradées - commencent sous la bordure du haut */
@@ -1526,7 +1529,8 @@
         font-size: 1rem;
         line-height: 1.6;
         color: rgba(255, 255, 255, 0.8);
-        margin-bottom: 2rem;
+        margin-bottom: auto;
+        flex-grow: 1;
       }
 
       .review-author {
@@ -1535,6 +1539,7 @@
         font-weight: 600;
         color: #ffffff;
         margin-bottom: 0.25rem;
+        margin-top: 2rem;
       }
 
       .review-position {
