@@ -1376,21 +1376,23 @@
         display: none;
       }
 
-      .stats-platform-vline {
+      .sep-vertical {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        width: 4px;
-        height: 140px;
+        width: 1px;
+        height: 10rem;
+        background: rgba(255,255,255,0.10);
+        flex-shrink: 0;
+        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+        mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
         pointer-events: none;
       }
-      .stats-platform-vline--left { left: calc(33.333% - 2px); }
-      .stats-platform-vline--right { left: calc(66.666% - 2px); }
+      .sep-vertical--left { left: 33.333%; }
+      .sep-vertical--right { left: 66.666%; }
       
-      .stats-platform-vline svg {
-        display: block;
-        width: 100%;
-        height: 100%;
+      @media (max-width: 1023.98px) {
+        .sep-vertical { display: none; }
       }
 
       @media (max-width: 768px) {
@@ -4018,34 +4020,8 @@
         <p class="stats-platform-description">See why our customers choose us for their payments.</p>
         
         <div class="stats-platform-grid">
-          <div class="stats-platform-vline stats-platform-vline--left">
-            <svg viewBox="0 0 4 140" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="lineGradient1" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0" />
-                  <stop offset="25%" style="stop-color:#ffffff;stop-opacity:0.3" />
-                  <stop offset="50%" style="stop-color:#ffffff;stop-opacity:0.6" />
-                  <stop offset="75%" style="stop-color:#ffffff;stop-opacity:0.3" />
-                  <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
-                </linearGradient>
-              </defs>
-              <line x1="2" y1="0" x2="2" y2="140" stroke="url(#lineGradient1)" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <div class="stats-platform-vline stats-platform-vline--right">
-            <svg viewBox="0 0 4 140" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="lineGradient2" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0" />
-                  <stop offset="25%" style="stop-color:#ffffff;stop-opacity:0.3" />
-                  <stop offset="50%" style="stop-color:#ffffff;stop-opacity:0.6" />
-                  <stop offset="75%" style="stop-color:#ffffff;stop-opacity:0.3" />
-                  <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
-                </linearGradient>
-              </defs>
-              <line x1="2" y1="0" x2="2" y2="140" stroke="url(#lineGradient2)" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </div>
+          <div class="sep-vertical sep-vertical--left"></div>
+          <div class="sep-vertical sep-vertical--right"></div>
 
           <div class="stats-platform-item">
             <div class="stats-platform-value">
