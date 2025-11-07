@@ -1320,9 +1320,9 @@
       @media (max-width: 767px) {
         .withdrawals-card-image-wrapper {
           width: 100%;
-          height: {{ section.settings.mobile_image_height }}px;
+          height: 200px;
           right: 0;
-          top: {{ section.settings.mobile_image_top }}px;
+          top: 0;
         }
         
         .withdrawals-card-image-wrapper::after {
@@ -1346,7 +1346,7 @@
         .withdrawals-card-content {
           padding: 2rem 1.5rem;
           position: relative;
-          padding-top: calc({{ section.settings.mobile_image_height }}px + 20px);
+          padding-top: 220px;
         }
       }
 
@@ -4044,22 +4044,6 @@
       "id": "background_color",
       "label": "Couleur de fond",
       "default": "#000000"
-    },
-    {
-      "type": "header",
-      "content": "Image Position (Mobile)"
-    },
-    {
-      "type": "number",
-      "id": "mobile_image_top",
-      "label": "Position verticale image (px)",
-      "default": 0
-    },
-    {
-      "type": "number",
-      "id": "mobile_image_height",
-      "label": "Hauteur image (px)",
-      "default": 200
     }
   ],
   "presets": [
