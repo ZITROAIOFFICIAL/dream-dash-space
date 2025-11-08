@@ -408,7 +408,7 @@ function generateBetCardHTML(bet) {
         </div>
         <div style="text-align: center;">
           <div style="font-size: 3rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
-          <div class="history-over-under-display" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.5rem; padding: 1rem 1.25rem; margin-top: 1.25rem; max-width: 150px; margin-left: auto; margin-right: auto;">
+          <div class="history-over-under-display" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.5rem; padding: 1rem 1.25rem; margin-top: 1.25rem; max-width: 280px; margin-left: auto; margin-right: auto;">
             <div class="history-over-under-type" style="font-size: 1.5rem; font-weight: 700; color: rgba(255, 255, 255, 0.9); text-align: center; word-spacing: 9999px; line-height: 1.3;">${displayText?.toUpperCase()}</div>
             <div class="history-over-under-value" style="font-size: 2rem; font-weight: 700; color: #ffffff; margin-top: 0.5rem; text-align: center;">${bet.over_under_value}</div>
             ${bet.over_under_stat_type ? `<div class="history-over-under-stat" style="font-size: 1.5rem; color: rgba(255, 255, 255, 0.6); margin-top: 0.5rem; text-align: center; word-spacing: 9999px; line-height: 1.3;">${bet.over_under_stat_type}</div>` : ""}
@@ -557,7 +557,7 @@ function generateParlayCardHTML(parlay) {
           </div>
           <div style="text-align: center;">
             <div style="font-size: 2rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
-            <div class="history-over-under-display" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.5rem; padding: 0.75rem 1rem; margin-top: 1rem; max-width: 120px; margin-left: auto; margin-right: auto;">
+            <div class="history-over-under-display" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.5rem; padding: 0.75rem 1rem; margin-top: 1rem; max-width: 220px; margin-left: auto; margin-right: auto;">
               <div class="history-over-under-type" style="font-size: 0.5625rem; font-weight: 700; color: rgba(255, 255, 255, 0.9); text-align: center; word-spacing: 9999px; line-height: 1.3;">${displayText?.toUpperCase()}</div>
               <div class="history-over-under-value" style="font-size: 0.875rem; font-weight: 700; color: #ffffff; margin-top: 0.4rem; text-align: center;">${leg.over_under_value}</div>
               ${leg.over_under_stat_type ? `<div class="history-over-under-stat" style="font-size: 0.65rem; color: rgba(255, 255, 255, 0.6); margin-top: 0.4rem; text-align: center; word-spacing: 9999px; line-height: 1.3;">${leg.over_under_stat_type}</div>` : ""}
