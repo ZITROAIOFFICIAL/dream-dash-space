@@ -588,7 +588,32 @@
               {% if block.settings.send_to_history != true %}
                 <div class="ai-counter-above">
                   <div class="ai-spinner">
-                    <span class="ai-badge">IA</span>
+                    <svg width="30" height="30" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <filter id="softGlowBet" x="-50%" y="-50%" width="200%" height="200%">
+                          <feGaussianBlur stdDeviation="1.2" result="b"/>
+                          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                        </filter>
+                        <path id="orbit0Bet" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                        <path id="orbit1Bet" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                        <path id="orbit2Bet" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+                      </defs>
+                      <g stroke="#68859e" stroke-width="2" fill="none">
+                        <use href="#orbit0Bet"/><use href="#orbit1Bet"/><use href="#orbit2Bet"/>
+                      </g>
+                      <g stroke-linecap="round" filter="url(#softGlowBet)">
+                        <use href="#orbit0Bet" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                          <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                        </use>
+                        <use href="#orbit1Bet" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                          <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                        </use>
+                        <use href="#orbit2Bet" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                          <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                        </use>
+                      </g>
+                      <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
+                    </svg>
                   </div>
                   <span><span>{{ block.settings.ai_data_count | default: 2843 }}</span> DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
                 </div>
@@ -815,7 +840,32 @@
               {% if block.settings.send_to_history != true %}
                 <div class="ai-counter-above">
                   <div class="ai-spinner">
-                    <span class="ai-badge">IA</span>
+                    <svg width="30" height="30" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <filter id="softGlowParlay" x="-50%" y="-50%" width="200%" height="200%">
+                          <feGaussianBlur stdDeviation="1.2" result="b"/>
+                          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                        </filter>
+                        <path id="orbit0Parlay" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                        <path id="orbit1Parlay" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                        <path id="orbit2Parlay" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+                      </defs>
+                      <g stroke="#68859e" stroke-width="2" fill="none">
+                        <use href="#orbit0Parlay"/><use href="#orbit1Parlay"/><use href="#orbit2Parlay"/>
+                      </g>
+                      <g stroke-linecap="round" filter="url(#softGlowParlay)">
+                        <use href="#orbit0Parlay" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                          <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                        </use>
+                        <use href="#orbit1Parlay" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                          <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                        </use>
+                        <use href="#orbit2Parlay" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                          <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                        </use>
+                      </g>
+                      <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
+                    </svg>
                   </div>
                   <span><span>{{ block.settings.ai_data_count | default: 2843 }}</span> DONNÉES ANALYSÉES PAR NOTRE IA POUR CE BET</span>
                 </div>
@@ -1840,7 +1890,32 @@
 
         <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 0.75rem;">
           <div class="ai-spinner" style="width: 2.4rem; height: 2.4rem;">
-            <span class="ai-badge" style="color: #ffffff;">IA</span>
+            <svg width="30" height="30" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <filter id="softGlowDialog" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="1.2" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <path id="orbit0Dialog" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                <path id="orbit1Dialog" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                <path id="orbit2Dialog" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+              </defs>
+              <g stroke="#68859e" stroke-width="2" fill="none">
+                <use href="#orbit0Dialog"/><use href="#orbit1Dialog"/><use href="#orbit2Dialog"/>
+              </g>
+              <g stroke-linecap="round" filter="url(#softGlowDialog)">
+                <use href="#orbit0Dialog" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                  <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                </use>
+                <use href="#orbit1Dialog" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                  <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                </use>
+                <use href="#orbit2Dialog" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                  <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                </use>
+              </g>
+              <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
+            </svg>
           </div>
           <span style="color: #ffffff; font-weight: 300; font-size: 1.125rem; letter-spacing: 0.03em;">
             <span id="dialog-data-count">2 909</span> DONNÉES ANALYSÉ PAR NOTRE IA POUR CE BET JUSQU'À PRÉSENT
