@@ -2250,11 +2250,17 @@
 
       /* ===== SECTION FOOTER IMAGE ===== */
       .footer-image-section {
-        width: 100%;
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
         overflow: hidden;
         background: transparent;
         padding: 0;
-        margin: 8rem 0 0 0;
+        margin-top: 8rem;
+        margin-bottom: 0;
       }
 
       .footer-image-container {
@@ -2336,7 +2342,7 @@
       }
 
       .footer-gray-box {
-        background: rgba(40, 40, 40, 0.95);
+        background: #1c1c1c;
         border-radius: 12px;
         padding: 2.5rem;
         flex: 1;
