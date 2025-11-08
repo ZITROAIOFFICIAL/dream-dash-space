@@ -779,17 +779,16 @@
                   <button class="units-button">{{ block.settings.bet_units | default: '1' }} UNITS</button>
 
                   <div class="gain-section">
-                    <div class="gain-grid">
-                      <div class="bet-modify-box">
-                        <button class="modify-btn" onclick="openBetDialog(this)" data-multiplier="{{ block.settings.multiplier | default: '1.95' }}">Modifier</button>
-                        <div class="bet-amount-small">Votre mise</div>
-                        <div class="bet-amount-value-small">$100</div>
+                    <div class="cashout-full-width">
+                      <div class="cashout-label">CASHOUT</div>
+                      <div class="cashout-amount">${{ 100 | times: block.settings.multiplier | default: 1.95 | round: 2 }}</div>
+                      <div class="cashout-profit">+${{ 100 | times: block.settings.multiplier | default: 1.95 | minus: 100 | round: 2 }} bénéfice</div>
+                    </div>
+                    <div class="bet-modify-horizontal">
+                      <div class="bet-info">
+                        <span>VOTRE MISE - <span class="bet-amount-value-small">$100</span></span>
                       </div>
-                      <div class="cashout-box-large">
-                        <div class="cashout-label">CASHOUT</div>
-                        <div class="cashout-amount">${{ 100 | times: block.settings.multiplier | default: 1.95 | round: 2 }}</div>
-                        <div class="cashout-profit">+${{ 100 | times: block.settings.multiplier | default: 1.95 | minus: 100 | round: 2 }} bénéfice</div>
-                      </div>
+                      <button class="modify-btn" onclick="openBetDialog(this)" data-multiplier="{{ block.settings.multiplier | default: '1.95' }}">MODIFIER</button>
                     </div>
                   </div>
                 </div>
@@ -1524,17 +1523,16 @@
                   <button class="units-button">{{ block.settings.bet_units | default: '1' }} UNITS</button>
 
                   <div class="gain-section">
-                    <div class="gain-grid">
-                      <div class="bet-modify-box">
-                        <button class="modify-btn" onclick="openBetDialog(this)" data-multiplier="{{ block.settings.multiplier | default: '1.95' }}">Modifier</button>
-                        <div class="bet-amount-small">Votre mise</div>
-                        <div class="bet-amount-value-small">$100</div>
+                    <div class="cashout-full-width">
+                      <div class="cashout-label">CASHOUT</div>
+                      <div class="cashout-amount">${{ 100 | times: block.settings.multiplier | default: 1.95 | round: 2 }}</div>
+                      <div class="cashout-profit">+${{ 100 | times: block.settings.multiplier | default: 1.95 | minus: 100 | round: 2 }} bénéfice</div>
+                    </div>
+                    <div class="bet-modify-horizontal">
+                      <div class="bet-info">
+                        <span>VOTRE MISE - <span class="bet-amount-value-small">$100</span></span>
                       </div>
-                      <div class="cashout-box-large">
-                        <div class="cashout-label">CASHOUT</div>
-                        <div class="cashout-amount">${{ 100 | times: block.settings.multiplier | default: 1.95 | round: 2 }}</div>
-                        <div class="cashout-profit">+${{ 100 | times: block.settings.multiplier | default: 1.95 | minus: 100 | round: 2 }} bénéfice</div>
-                      </div>
+                      <button class="modify-btn" onclick="openBetDialog(this)" data-multiplier="{{ block.settings.multiplier | default: '1.95' }}">MODIFIER</button>
                     </div>
                   </div>
                 </div>
