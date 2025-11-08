@@ -97,16 +97,6 @@
             avec notre ia
           </h1>
 
-          <!-- Status Badge -->
-          <div style="display: flex; justify-content: center; margin: 1.5rem 0 1rem 0;">
-            <div style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1.25rem; background: rgba(39, 39, 42, 0.8); border: 1px solid rgba(82, 82, 91, 0.4); border-radius: 9999px; backdrop-filter: blur(10px);">
-              <svg width="8" height="8" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
-                <circle cx="10" cy="10" r="10" fill="#10b981"/>
-              </svg>
-              <span style="color: rgba(255, 255, 255, 0.9); font-family: 'Outfit', sans-serif; font-weight: 400; font-size: 0.875rem; white-space: nowrap; letter-spacing: 0.01em;">All Systems Operational</span>
-            </div>
-          </div>
-
           <p class="hero-subtitle">
             {{ section.settings.hero_subtitle }}
           </p>
@@ -2072,7 +2062,14 @@
                 <div class="footer-box-links">
                   <a href="#">Terms of Service</a>
                   <a href="#">Acceptable Use Policy</a>
-                  <span class="footer-status">● All Systems Operational</span>
+                  <span class="footer-status">
+                    <div style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 1rem; background: rgba(39, 39, 42, 0.8); border: 1px solid rgba(82, 82, 91, 0.4); border-radius: 9999px;">
+                      <svg width="8" height="8" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <circle cx="10" cy="10" r="10" fill="#10b981"/>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.9); font-family: 'Outfit', sans-serif; font-weight: 400; font-size: 0.75rem; white-space: nowrap;">All Systems Operational</span>
+                    </div>
+                  </span>
                 </div>
               </div>
             </div>
