@@ -245,15 +245,23 @@ function displayBetHistory(data) {
 
   if (emptyState) emptyState.style.display = "none";
 
-  // Afficher les statistiques
+  // Afficher les statistiques avec couleurs
+  const winsColor = (data.total_wins - data.total_losses >= 0) 
+    ? "rgba(34, 197, 94, 0.2)" 
+    : "rgba(239, 68, 68, 0.2)";
+
+  const unitsColor = (data.total_units >= 0) 
+    ? "rgba(34, 197, 94, 0.2)" 
+    : "rgba(239, 68, 68, 0.2)";
+
   statsContainer.innerHTML = `
-    <div style="background: #000000; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.5rem; padding: 1rem; text-align: center;">
+    <div style="background: ${winsColor}; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.5rem; padding: 1rem; text-align: center;">
       <div style="color: rgba(255, 255, 255, 0.9); font-weight: 700; font-size: 2rem;">
         ${data.total_wins - data.total_losses >= 0 ? "+" : ""}${data.total_wins - data.total_losses}
       </div>
       <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem; margin-top: 0.25rem; font-weight: 600;">PARIS EN +</div>
     </div>
-    <div style="background: #000000; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.5rem; padding: 1rem; text-align: center;">
+    <div style="background: ${unitsColor}; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.5rem; padding: 1rem; text-align: center;">
       <div style="color: rgba(255, 255, 255, 0.9); font-weight: 700; font-size: 2rem;">
         ${data.total_units >= 0 ? "+" : ""}${data.total_units.toFixed(2)}
       </div>
@@ -281,15 +289,23 @@ function displayParlayHistory(data) {
 
   if (emptyState) emptyState.style.display = "none";
 
-  // Afficher les statistiques
+  // Afficher les statistiques avec couleurs
+  const winsColor = (data.total_wins - data.total_losses >= 0) 
+    ? "rgba(34, 197, 94, 0.2)" 
+    : "rgba(239, 68, 68, 0.2)";
+
+  const unitsColor = (data.total_units >= 0) 
+    ? "rgba(34, 197, 94, 0.2)" 
+    : "rgba(239, 68, 68, 0.2)";
+
   statsContainer.innerHTML = `
-    <div style="background: #000000; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.5rem; padding: 1rem; text-align: center;">
+    <div style="background: ${winsColor}; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.5rem; padding: 1rem; text-align: center;">
       <div style="color: rgba(255, 255, 255, 0.9); font-weight: 700; font-size: 2rem;">
         ${data.total_wins - data.total_losses >= 0 ? "+" : ""}${data.total_wins - data.total_losses}
       </div>
       <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem; margin-top: 0.25rem; font-weight: 600;">PARLAYS EN +</div>
     </div>
-    <div style="background: #000000; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.5rem; padding: 1rem; text-align: center;">
+    <div style="background: ${unitsColor}; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.5rem; padding: 1rem; text-align: center;">
       <div style="color: rgba(255, 255, 255, 0.9); font-weight: 700; font-size: 2rem;">
         ${data.total_units >= 0 ? "+" : ""}${data.total_units.toFixed(2)}
       </div>
@@ -422,7 +438,7 @@ function generateBetCardHTML(bet) {
       <!-- Cote en haut -->
       <div style="text-align: center; margin-bottom: 2rem;">
         <div style="font-size: 1rem; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">COTE</div>
-        <div style="font-size: 2.5rem; font-weight: 700; color: #8B5CF6;">${bet.multiplier}</div>
+        <div style="font-size: 2.5rem; font-weight: 700; color: #ffffff;">${bet.multiplier}</div>
       </div>
       
       <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.5rem; margin-bottom: 2.5rem;">
@@ -580,7 +596,7 @@ function generateParlayCardHTML(parlay) {
       <!-- Cote en haut -->
       <div style="text-align: center; margin-bottom: 2rem;">
         <div style="font-size: 1rem; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">COTE</div>
-        <div style="font-size: 2.5rem; font-weight: 700; color: #8B5CF6;">${parlay.multiplier}</div>
+        <div style="font-size: 2.5rem; font-weight: 700; color: #ffffff;">${parlay.multiplier}</div>
       </div>
       
       <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.5rem; margin-bottom: 2.5rem;">
