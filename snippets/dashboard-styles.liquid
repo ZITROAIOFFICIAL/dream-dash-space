@@ -945,6 +945,13 @@
       background: rgba(0, 0, 0, 0.6);
     }
 
+    /* Ajout marge header sur PC */
+    @media (min-width: 769px) {
+      .confidence-badge {
+        padding: 0.75rem 1.5rem;
+      }
+    }
+
     .confidence-left {
       display: flex;
       align-items: center;
@@ -977,7 +984,7 @@
     .btn-analysis {
       padding: 0.5rem 1rem;
       background: #000000;
-      border: 2px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 0.25rem;
       color: rgba(255, 255, 255, 0.7);
       font-weight: 300;
