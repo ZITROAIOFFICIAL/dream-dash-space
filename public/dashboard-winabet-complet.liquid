@@ -225,6 +225,60 @@
   </style>
 </head>
 <body>
+  <!-- SVG Definitions pour icônes réutilisables -->
+  <svg style="display: none;">
+    <defs>
+      <!-- Icône atomique IA -->
+      <symbol id="atomicIcon" viewBox="0 0 200 200">
+        <filter id="atomGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="1.2" result="b"/>
+          <feMerge>
+            <feMergeNode in="b"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+        <path id="atomOrbit0" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+        <path id="atomOrbit1" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+        <path id="atomOrbit2" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+        
+        <g stroke="rgba(255, 255, 255, 0.3)" stroke-width="2" fill="none">
+          <use href="#atomOrbit0"/>
+          <use href="#atomOrbit1"/>
+          <use href="#atomOrbit2"/>
+        </g>
+        
+        <g stroke-linecap="round" filter="url(#atomGlow)">
+          <use href="#atomOrbit0" stroke="rgba(255, 255, 255, 0.9)" stroke-width="2" fill="none" stroke-dasharray="26 974">
+            <animate attributeName="stroke-dashoffset" values="26;-974" dur="16s" repeatCount="indefinite" begin="0s"/>
+          </use>
+          <circle r="3" fill="rgba(255, 255, 255, 0.9)">
+            <animateMotion dur="16s" repeatCount="indefinite" rotate="auto" begin="0s">
+              <mpath href="#atomOrbit0"/>
+            </animateMotion>
+          </circle>
+          
+          <use href="#atomOrbit1" stroke="rgba(255, 255, 255, 0.9)" stroke-width="2" fill="none" stroke-dasharray="26 974">
+            <animate attributeName="stroke-dashoffset" values="26;-974" dur="16s" repeatCount="indefinite" begin="5s"/>
+          </use>
+          <circle r="3" fill="rgba(255, 255, 255, 0.9)">
+            <animateMotion dur="16s" repeatCount="indefinite" rotate="auto" begin="5s">
+              <mpath href="#atomOrbit1"/>
+            </animateMotion>
+          </circle>
+          
+          <use href="#atomOrbit2" stroke="rgba(255, 255, 255, 0.9)" stroke-width="2" fill="none" stroke-dasharray="26 974">
+            <animate attributeName="stroke-dashoffset" values="26;-974" dur="16s" repeatCount="indefinite" begin="10s"/>
+          </use>
+          <circle r="3" fill="rgba(255, 255, 255, 0.9)">
+            <animateMotion dur="16s" repeatCount="indefinite" rotate="auto" begin="10s">
+              <mpath href="#atomOrbit2"/>
+            </animateMotion>
+          </circle>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
   <header class="header" style="background: transparent; position: fixed; height: 80px; width: 100%;">
     <!-- Mobile Toggle Button -->
     <button class="mobile-toggle" onclick="toggleSidebar()" aria-label="Toggle menu">
@@ -1898,7 +1952,7 @@
             </svg>
           </div>
           <span style="color: #ffffff; font-weight: 300; font-size: 1.125rem; letter-spacing: 0.03em;">
-            <span id="dialog-data-count">2 909</span> DONNÉES ANALYSÉ PAR NOTRE IA POUR CE BET JUSQU'À PRÉSENT
+            ANALYSE IA DÉTAILLÉE
           </span>
         </div>
 
@@ -1934,7 +1988,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Analyse — Marché & pricing (Équipe domicile)</div>
               <div class="analysis-subsection-content">
@@ -1944,7 +1998,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Analyse — Marché & pricing (Équipe domicile)</div>
               <div class="analysis-subsection-content">
@@ -1954,7 +2008,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Analyse — Marché & pricing (Équipe domicile)</div>
               <div class="analysis-subsection-content">
@@ -1964,7 +2018,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Analyse — Marché & pricing (Équipe extérieur)</div>
               <div class="analysis-subsection-content">
@@ -1974,7 +2028,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Analyse — Marché & pricing (Équipe extérieur)</div>
               <div class="analysis-subsection-content">
@@ -1984,7 +2038,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Analyse — Marché & pricing (Équipe extérieur)</div>
               <div class="analysis-subsection-content">
@@ -1998,7 +2052,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Historique des confrontations (H2H)</div>
               <div class="analysis-subsection-content">
@@ -2012,7 +2066,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Lineup / Alignement projeté du jour</div>
               <div class="analysis-subsection-content">
@@ -2026,7 +2080,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Analyse — Power Play (Équipe domicile)</div>
               <div class="analysis-subsection-content">
@@ -2036,7 +2090,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Analyse — Power Play (Équipe extérieur)</div>
               <div class="analysis-subsection-content">
@@ -2046,7 +2100,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Analyse — Discipline & Pénalités (Équipe domicile)</div>
               <div class="analysis-subsection-content">
@@ -2056,7 +2110,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Analyse — Discipline & Pénalités (Équipe extérieur)</div>
               <div class="analysis-subsection-content">
@@ -2070,7 +2124,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Analyse — Performance du gardien (Équipe domicile)</div>
               <div class="analysis-subsection-content">
@@ -2080,7 +2134,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Analyse — Performance du gardien (Équipe extérieur)</div>
               <div class="analysis-subsection-content">
@@ -2090,7 +2144,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Analyse — Structure défensive (Équipe domicile)</div>
               <div class="analysis-subsection-content">
@@ -2100,7 +2154,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Analyse — Structure défensive (Équipe extérieur)</div>
               <div class="analysis-subsection-content">
@@ -2114,7 +2168,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Analyse — Expected Goals (Équipe domicile)</div>
               <div class="analysis-subsection-content">
@@ -2124,7 +2178,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Analyse — Expected Goals (Équipe extérieur)</div>
               <div class="analysis-subsection-content">
@@ -2134,7 +2188,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Analyse — Possession (Corsi/Fenwick) (Équipe domicile)</div>
               <div class="analysis-subsection-content">
@@ -2144,7 +2198,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Analyse — Possession (Corsi/Fenwick) (Équipe extérieur)</div>
               <div class="analysis-subsection-content">
@@ -2158,7 +2212,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Analyse — Profondeur offensive (Équipe domicile)</div>
               <div class="analysis-subsection-content">
@@ -2168,7 +2222,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Analyse — Profondeur offensive (Équipe extérieur)</div>
               <div class="analysis-subsection-content">
@@ -2178,7 +2232,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Analyse — Stabilité défensive (Équipe domicile)</div>
               <div class="analysis-subsection-content">
@@ -2188,7 +2242,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Analyse — Stabilité défensive (Équipe extérieur)</div>
               <div class="analysis-subsection-content">
@@ -2202,7 +2256,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Analyse — Cadence & calendrier (Équipe domicile)</div>
               <div class="analysis-subsection-content">
@@ -2212,7 +2266,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Analyse — Cadence & calendrier (Équipe extérieur)</div>
               <div class="analysis-subsection-content">
@@ -2222,7 +2276,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Analyse — Avantage domicile / extérieur (Équipe domicile)</div>
               <div class="analysis-subsection-content">
@@ -2232,7 +2286,7 @@
 
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Analyse — Avantage domicile / extérieur (Équipe extérieur)</div>
               <div class="analysis-subsection-content">
@@ -2246,7 +2300,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Analyse — Facteurs additionnels</div>
               <div class="analysis-subsection-content">
@@ -2265,7 +2319,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Probabilité implicite - Équipe domicile</div>
               <div class="analysis-subsection-content">
@@ -2274,7 +2328,7 @@
             </div>
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Comparaison bookmakers - Équipe domicile</div>
               <div class="analysis-subsection-content">
@@ -2283,7 +2337,7 @@
             </div>
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Mouvement de ligne - Équipe domicile</div>
               <div class="analysis-subsection-content">
@@ -2292,7 +2346,7 @@
             </div>
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Closing line value - Équipe domicile</div>
               <div class="analysis-subsection-content">
@@ -2304,7 +2358,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Probabilité implicite - Équipe extérieur</div>
               <div class="analysis-subsection-content">
@@ -2313,7 +2367,7 @@
             </div>
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Comparaison bookmakers - Équipe extérieur</div>
               <div class="analysis-subsection-content">
@@ -2322,7 +2376,7 @@
             </div>
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Mouvement de ligne - Équipe extérieur</div>
               <div class="analysis-subsection-content">
@@ -2331,7 +2385,7 @@
             </div>
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Closing line value - Équipe extérieur</div>
               <div class="analysis-subsection-content">
@@ -2345,7 +2399,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Analyse H2H</div>
               <div class="analysis-subsection-content">
@@ -2359,7 +2413,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Starters offensifs - Équipe domicile</div>
               <div class="analysis-subsection-content">
@@ -2368,7 +2422,7 @@
             </div>
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Starters défensifs - Équipe domicile</div>
               <div class="analysis-subsection-content">
@@ -2380,7 +2434,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Starters offensifs - Équipe extérieur</div>
               <div class="analysis-subsection-content">
@@ -2389,7 +2443,7 @@
             </div>
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Starters défensifs - Équipe extérieur</div>
               <div class="analysis-subsection-content">
@@ -2403,7 +2457,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">QB - Équipe domicile</div>
               <div class="analysis-subsection-content">
@@ -2415,7 +2469,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">QB - Équipe extérieur</div>
               <div class="analysis-subsection-content">
@@ -2429,7 +2483,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Jeu au sol - Équipe domicile</div>
               <div class="analysis-subsection-content">
@@ -2441,7 +2495,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Jeu au sol - Équipe extérieur</div>
               <div class="analysis-subsection-content">
@@ -2455,7 +2509,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Défense vs passe - Équipe domicile</div>
               <div class="analysis-subsection-content">
@@ -2464,7 +2518,7 @@
             </div>
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Défense vs course - Équipe domicile</div>
               <div class="analysis-subsection-content">
@@ -2476,7 +2530,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Défense vs passe - Équipe extérieur</div>
               <div class="analysis-subsection-content">
@@ -2485,7 +2539,7 @@
             </div>
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Défense vs course - Équipe extérieur</div>
               <div class="analysis-subsection-content">
@@ -2499,7 +2553,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">3rd down & red zone - Équipe domicile</div>
               <div class="analysis-subsection-content">
@@ -2508,7 +2562,7 @@
             </div>
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Discipline - Équipe domicile</div>
               <div class="analysis-subsection-content">
@@ -2520,7 +2574,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">3rd down & red zone - Équipe extérieur</div>
               <div class="analysis-subsection-content">
@@ -2529,7 +2583,7 @@
             </div>
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Discipline - Équipe extérieur</div>
               <div class="analysis-subsection-content">
@@ -2543,7 +2597,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Unités spéciales - Équipe domicile</div>
               <div class="analysis-subsection-content">
@@ -2555,7 +2609,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Unités spéciales - Équipe extérieur</div>
               <div class="analysis-subsection-content">
@@ -2569,7 +2623,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Coaching - Équipe domicile</div>
               <div class="analysis-subsection-content">
@@ -2581,7 +2635,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Coaching - Équipe extérieur</div>
               <div class="analysis-subsection-content">
@@ -2595,7 +2649,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Contexte physique - Équipe domicile</div>
               <div class="analysis-subsection-content">
@@ -2607,7 +2661,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Contexte physique - Équipe extérieur</div>
               <div class="analysis-subsection-content">
@@ -2621,7 +2675,7 @@
           <div class="analysis-section">
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Conditions météo</div>
               <div class="analysis-subsection-content">
@@ -2630,7 +2684,7 @@
             </div>
             <div class="analysis-subsection">
               <div class="analysis-subsection-icon">
-                <span class="ai-badge">IA</span>
+                <svg><use href="#atomicIcon"/></svg>
               </div>
               <div class="analysis-subsection-title">Facteurs psychologiques</div>
               <div class="analysis-subsection-content">

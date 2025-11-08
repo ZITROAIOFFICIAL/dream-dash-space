@@ -2077,8 +2077,8 @@
     }
 
     .analysis-subsection {
-      background: transparent;
-      border: 2px solid hsl(var(--primary));
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 0.75rem;
       padding: 1rem 1rem 1rem 3.5rem;
       margin-bottom: 1rem;
@@ -2097,30 +2097,9 @@
       justify-content: center;
     }
 
-    .analysis-subsection-icon::before {
-      content: '';
-      position: absolute;
+    .analysis-subsection-icon svg {
       width: 100%;
       height: 100%;
-      border-radius: 50%;
-      border: 3px solid transparent;
-      border-top-color: #ffffff;
-      border-right-color: #ffffff;
-      border-bottom-color: #ffffff;
-      animation: spin 1s linear infinite;
-    }
-
-    .analysis-subsection-icon svg {
-      display: none;
-    }
-    
-    .analysis-subsection-icon .ai-badge {
-      position: relative;
-      color: #ffffff;
-      font-weight: 300;
-      font-size: 10px;
-      line-height: 1;
-      z-index: 10;
     }
 
     .analysis-subsection-title {
