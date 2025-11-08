@@ -1093,13 +1093,13 @@
                     {% assign leg_badge = '' %}
                     
                     {% if leg1_result == 'win' %}
-                      {% assign leg_border_color = '#16a34a' %}
+                      {% assign leg_border_color = 'rgba(255, 255, 255, 0.50)' %}
                       {% assign leg_border_width = '4px' %}
-                      {% assign leg_badge = '<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: #16a34a; color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; z-index: 10;">✓ GAGNÉ</div>' %}
+                      {% assign leg_badge = '<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: rgba(255,255,255,0.20); color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; z-index: 10;">✓ GAGNÉ</div>' %}
                     {% elsif leg1_result == 'loose' %}
-                      {% assign leg_border_color = '#ef4444' %}
+                      {% assign leg_border_color = 'rgba(255, 255, 255, 0.20)' %}
                       {% assign leg_border_width = '4px' %}
-                      {% assign leg_badge = '<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: #ef4444; color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; z-index: 10;">✗ PERDU</div>' %}
+                      {% assign leg_badge = '<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: rgba(255,255,255,0.10); color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; z-index: 10;">✗ PERDU</div>' %}
                     {% endif %}
                     
                   <div style="position: relative; border: {{ leg_border_width }} solid {{ leg_border_color }}; border-radius: 1rem; padding: 1.5rem; margin-bottom: 1rem; background: rgba(0, 0, 0, 0.3);">
@@ -1209,13 +1209,13 @@
                     {% assign leg_badge = '' %}
                     
                     {% if leg2_result == 'win' %}
-                      {% assign leg_border_color = '#16a34a' %}
+                      {% assign leg_border_color = 'rgba(255, 255, 255, 0.50)' %}
                       {% assign leg_border_width = '4px' %}
-                      {% assign leg_badge = '<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: #16a34a; color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; z-index: 10;">✓ GAGNÉ</div>' %}
+                      {% assign leg_badge = '<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: rgba(255,255,255,0.20); color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; z-index: 10;">✓ GAGNÉ</div>' %}
                     {% elsif leg2_result == 'loose' %}
-                      {% assign leg_border_color = '#ef4444' %}
+                      {% assign leg_border_color = 'rgba(255, 255, 255, 0.20)' %}
                       {% assign leg_border_width = '4px' %}
-                      {% assign leg_badge = '<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: #ef4444; color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; z-index: 10;">✗ PERDU</div>' %}
+                      {% assign leg_badge = '<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: rgba(255,255,255,0.10); color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; z-index: 10;">✗ PERDU</div>' %}
                     {% endif %}
                     
                   <div style="position: relative; border: {{ leg_border_width }} solid {{ leg_border_color }}; border-radius: 1rem; padding: 1.5rem; margin-bottom: 1rem; background: rgba(0, 0, 0, 0.3);">
@@ -1435,13 +1435,13 @@
                       {% assign leg_badge = '' %}
                       
                       {% if leg_result == 'win' %}
-                        {% assign leg_border_color = '#16a34a' %}
+                        {% assign leg_border_color = 'rgba(255, 255, 255, 0.50)' %}
                         {% assign leg_border_width = '4px' %}
-                        {% assign leg_badge = '<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: #16a34a; color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; z-index: 10;">✓ GAGNÉ</div>' %}
+                        {% assign leg_badge = '<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: rgba(255,255,255,0.20); color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; z-index: 10;">✓ GAGNÉ</div>' %}
                       {% elsif leg_result == 'loose' %}
-                        {% assign leg_border_color = '#ef4444' %}
+                        {% assign leg_border_color = 'rgba(255, 255, 255, 0.20)' %}
                         {% assign leg_border_width = '4px' %}
-                        {% assign leg_badge = '<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: #ef4444; color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; z-index: 10;">✗ PERDU</div>' %}
+                        {% assign leg_badge = '<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: rgba(255,255,255,0.10); color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; z-index: 10;">✗ PERDU</div>' %}
                       {% endif %}
                       
                     <div style="position: relative; border: {{ leg_border_width }} solid {{ leg_border_color }}; border-radius: 1rem; padding: 1.5rem; margin-bottom: 1rem; background: rgba(0, 0, 0, 0.3);">

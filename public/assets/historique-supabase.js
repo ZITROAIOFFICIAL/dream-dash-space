@@ -313,14 +313,14 @@ function generateBetCardHTML(bet) {
   if (bet.result === "win") {
     const unitsValue = (betUnits * (bet.multiplier - 1)).toFixed(2);
     unitsText = `Win +${unitsValue} UNITS`;
-    unitsColor = "#22c55e";
+    unitsColor = "rgba(255, 255, 255, 0.20)";
   } else if (bet.result === "loose") {
     const unitsValue = betUnits.toFixed(2);
     unitsText = `Lose -${unitsValue} UNITS`;
-    unitsColor = "#ef4444";
+    unitsColor = "rgba(255, 255, 255, 0.10)";
   } else {
     unitsText = "EN ATTENTE";
-    unitsColor = "#f59e0b";
+    unitsColor = "rgba(255, 255, 255, 0.10)";
   }
 
   // Générer le HTML selon le type de bet
@@ -336,23 +336,23 @@ function generateBetCardHTML(bet) {
       <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 2rem; font-weight: 600; margin-bottom: 2rem;">MONEYLINE</div>
       <div style="display: flex; align-items: center; justify-content: center; gap: 1.5rem;">
         <div style="text-align: center; flex: 1;">
-          <div style="width: 7rem; height: 7rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem; ${showTeam1Win ? "border: 5px solid rgba(255, 255, 255, 0.5);" : ""} ${showTeam1Loss ? "border: 5px solid #ef4444;" : ""}">
+          <div style="width: 7rem; height: 7rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem; ${showTeam1Win ? "border: 5px solid rgba(255, 255, 255, 0.5);" : ""} ${showTeam1Loss ? "border: 5px solid rgba(255, 255, 255, 0.2);" : ""}">
             <img src="${sanitizeLogo(bet.team1_logo)}" alt="${bet.team1_name}" style="width: 100%; height: 100%; object-fit: contain;">
           </div>
           <div style="font-size: 1.3rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team1_name}</div>
           ${showTeam1Win ? '<div style="font-size: 1.75rem; font-weight: 700; color: rgba(255, 255, 255, 0.9); margin-top: 1rem; text-align: center;">VICTOIRE</div>' : ""}
-          ${showTeam1Loss ? '<div style="font-size: 1.75rem; font-weight: 700; color: #ef4444; margin-top: 1rem; text-align: center;">DÉFAITE</div>' : ""}
+          ${showTeam1Loss ? '<div style="font-size: 1.75rem; font-weight: 700; color: rgba(255, 255, 255, 0.6); margin-top: 1rem; text-align: center;">DÉFAITE</div>' : ""}
         </div>
         <div style="text-align: center;">
           <div style="font-size: 3rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
         </div>
         <div style="text-align: center; flex: 1;">
-          <div style="width: 7rem; height: 7rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem; ${showTeam2Win ? "border: 5px solid rgba(255, 255, 255, 0.5);" : ""} ${showTeam2Loss ? "border: 5px solid #ef4444;" : ""}">
+          <div style="width: 7rem; height: 7rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem; ${showTeam2Win ? "border: 5px solid rgba(255, 255, 255, 0.5);" : ""} ${showTeam2Loss ? "border: 5px solid rgba(255, 255, 255, 0.2);" : ""}">
             <img src="${sanitizeLogo(bet.team2_logo)}" alt="${bet.team2_name}" style="width: 100%; height: 100%; object-fit: contain;">
           </div>
           <div style="font-size: 1.3rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team2_name}</div>
           ${showTeam2Win ? '<div style="font-size: 1.75rem; font-weight: 700; color: rgba(255, 255, 255, 0.9); margin-top: 1rem; text-align: center;">VICTOIRE</div>' : ""}
-          ${showTeam2Loss ? '<div style="font-size: 1.75rem; font-weight: 700; color: #ef4444; margin-top: 1rem; text-align: center;">DÉFAITE</div>' : ""}
+          ${showTeam2Loss ? '<div style="font-size: 1.75rem; font-weight: 700; color: rgba(255, 255, 255, 0.6); margin-top: 1rem; text-align: center;">DÉFAITE</div>' : ""}
         </div>
       </div>
     `;
@@ -392,8 +392,8 @@ function generateBetCardHTML(bet) {
         </div>
         <div style="text-align: center;">
           <div style="font-size: 3rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
-          <div class="history-over-under-display" style="background: rgba(34, 197, 94, 0.1); border: 2px solid #22c55e; border-radius: 0.5rem; padding: 1rem 1.25rem; margin-top: 1.25rem; max-width: 150px; margin-left: auto; margin-right: auto;">
-            <div class="history-over-under-type" style="font-size: 1.5rem; font-weight: 700; color: #22c55e; text-align: center; word-spacing: 9999px; line-height: 1.3;">${displayText?.toUpperCase()}</div>
+          <div class="history-over-under-display" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.5rem; padding: 1rem 1.25rem; margin-top: 1.25rem; max-width: 150px; margin-left: auto; margin-right: auto;">
+            <div class="history-over-under-type" style="font-size: 1.5rem; font-weight: 700; color: rgba(255, 255, 255, 0.9); text-align: center; word-spacing: 9999px; line-height: 1.3;">${displayText?.toUpperCase()}</div>
             <div class="history-over-under-value" style="font-size: 2rem; font-weight: 700; color: #ffffff; margin-top: 0.5rem; text-align: center;">${bet.over_under_value}</div>
             ${bet.over_under_stat_type ? `<div class="history-over-under-stat" style="font-size: 1.5rem; color: rgba(255, 255, 255, 0.6); margin-top: 0.5rem; text-align: center; word-spacing: 9999px; line-height: 1.3;">${bet.over_under_stat_type}</div>` : ""}
           </div>
@@ -443,14 +443,14 @@ function generateParlayCardHTML(parlay) {
   if (parlay.result === "win") {
     const unitsValue = (betUnits * (parlay.multiplier - 1)).toFixed(2);
     unitsText = `Win +${unitsValue} UNITS`;
-    unitsColor = "rgba(255, 255, 255, 0.3)";
+    unitsColor = "rgba(255, 255, 255, 0.20)";
   } else if (parlay.result === "loose") {
     const unitsValue = betUnits.toFixed(2);
     unitsText = `Lose -${unitsValue} UNITS`;
-    unitsColor = "#ef4444";
+    unitsColor = "rgba(255, 255, 255, 0.10)";
   } else {
     unitsText = "EN ATTENTE";
-    unitsColor = "#f59e0b";
+    unitsColor = "rgba(255, 255, 255, 0.10)";
   }
 
   // Générer le HTML des legs
@@ -460,18 +460,18 @@ function generateParlayCardHTML(parlay) {
       const legResult = leg.result || "pending";
       
       // Définir les styles selon le résultat
-      const legBorderColor = legResult === "win" ? "rgba(255, 255, 255, 0.3)" 
-                           : legResult === "loose" ? "#ef4444" 
-                           : "#ffffff";
+    const legBorderColor = legResult === "win" ? "rgba(255, 255, 255, 0.50)" 
+                     : legResult === "loose" ? "rgba(255, 255, 255, 0.20)" 
+                     : "#ffffff";
       const legBorderWidth = legResult === "pending" ? "1px" : "4px";
       const legOpacity = legResult === "loose" ? "0.6" : "1";
       
       // Badge de statut
-      const statusBadge = legResult === "win" 
-        ? '<div style="position:absolute;top:0.5rem;right:0.5rem;background:rgba(255,255,255,0.2);color:#fff;padding:0.5rem 1rem;border-radius:0.5rem;font-weight:700;font-size:1rem;">✓ GAGNÉ</div>'
-        : legResult === "loose" 
-        ? '<div style="position:absolute;top:0.5rem;right:0.5rem;background:#ef4444;color:#fff;padding:0.5rem 1rem;border-radius:0.5rem;font-weight:700;font-size:1rem;">✗ PERDU</div>'
-        : '';
+    const statusBadge = legResult === "win" 
+  ? '<div style="position:absolute;top:0.5rem;right:0.5rem;background:rgba(255,255,255,0.20);color:#fff;padding:0.5rem 1rem;border-radius:0.5rem;font-weight:700;font-size:1rem;">✓ GAGNÉ</div>'
+  : legResult === "loose" 
+  ? '<div style="position:absolute;top:0.5rem;right:0.5rem;background:rgba(255,255,255,0.10);color:#fff;padding:0.5rem 1rem;border-radius:0.5rem;font-weight:700;font-size:1rem;">✗ PERDU</div>'
+  : '';
 
       let legHTML = "";
 
@@ -485,23 +485,23 @@ function generateParlayCardHTML(parlay) {
         <div style="text-align: center; color: rgba(255, 255, 255, 0.6); font-size: 1.5rem; margin-bottom: 1.25rem;">MONEYLINE</div>
         <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
           <div style="text-align: center; flex: 1;">
-            <div style="width: 4.5rem; height: 4.5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; padding: 0.75rem; ${showTeam1Win ? "border: 4px solid rgba(255, 255, 255, 0.5);" : ""} ${showTeam1Loss ? "border: 4px solid #ef4444;" : ""}">
+            <div style="width: 4.5rem; height: 4.5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; padding: 0.75rem; ${showTeam1Win ? "border: 4px solid rgba(255, 255, 255, 0.5);" : ""} ${showTeam1Loss ? "border: 4px solid rgba(255, 255, 255, 0.2);" : ""}">
               <img src="${sanitizeLogo(leg.team1_logo)}" alt="${leg.team1_name}" style="width: 100%; height: 100%; object-fit: contain;">
             </div>
             <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${leg.team1_name}</div>
             ${showTeam1Win ? '<div style="font-size: 1.125rem; font-weight: 700; color: rgba(255, 255, 255, 0.9); margin-top: 0.5rem; text-align: center;">VICTOIRE</div>' : ""}
-            ${showTeam1Loss ? '<div style="font-size: 1.125rem; font-weight: 700; color: #ef4444; margin-top: 0.5rem; text-align: center;">DÉFAITE</div>' : ""}
+            ${showTeam1Loss ? '<div style="font-size: 1.125rem; font-weight: 700; color: rgba(255, 255, 255, 0.6); margin-top: 0.5rem; text-align: center;">DÉFAITE</div>' : ""}
           </div>
           <div style="text-align: center;">
             <div style="font-size: 2rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
           </div>
           <div style="text-align: center; flex: 1;">
-            <div style="width: 4.5rem; height: 4.5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; padding: 0.75rem; ${showTeam2Win ? "border: 4px solid rgba(255, 255, 255, 0.5);" : ""} ${showTeam2Loss ? "border: 4px solid #ef4444;" : ""}">
+            <div style="width: 4.5rem; height: 4.5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; padding: 0.75rem; ${showTeam2Win ? "border: 4px solid rgba(255, 255, 255, 0.5);" : ""} ${showTeam2Loss ? "border: 4px solid rgba(255, 255, 255, 0.2);" : ""}">
               <img src="${sanitizeLogo(leg.team2_logo)}" alt="${leg.team2_name}" style="width: 100%; height: 100%; object-fit: contain;">
             </div>
             <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${leg.team2_name}</div>
             ${showTeam2Win ? '<div style="font-size: 1.125rem; font-weight: 700; color: rgba(255, 255, 255, 0.9); margin-top: 0.5rem; text-align: center;">VICTOIRE</div>' : ""}
-            ${showTeam2Loss ? '<div style="font-size: 1.125rem; font-weight: 700; color: #ef4444; margin-top: 0.5rem; text-align: center;">DÉFAITE</div>' : ""}
+            ${showTeam2Loss ? '<div style="font-size: 1.125rem; font-weight: 700; color: rgba(255, 255, 255, 0.6); margin-top: 0.5rem; text-align: center;">DÉFAITE</div>' : ""}
           </div>
         </div>
       `;
@@ -603,7 +603,7 @@ function showSuccessToast(message) {
   const toast = document.createElement("div");
   toast.textContent = "✅ " + message;
   toast.style.cssText =
-    "position:fixed;top:20px;right:20px;background:#22c55e;color:#fff;padding:1rem 2rem;border-radius:0.5rem;font-weight:600;z-index:9999;box-shadow:0 4px 6px rgba(0,0,0,0.3);";
+    "position:fixed;top:20px;right:20px;background:rgba(255,255,255,0.15);color:#fff;padding:1rem 2rem;border-radius:0.5rem;font-weight:600;z-index:9999;box-shadow:0 4px 6px rgba(0,0,0,0.3);";
   document.body.appendChild(toast);
   setTimeout(() => toast.remove(), 3000);
 }
@@ -616,7 +616,7 @@ function showErrorToast(message) {
   const toast = document.createElement("div");
   toast.textContent = "❌ " + message;
   toast.style.cssText =
-    "position:fixed;top:20px;right:20px;background:#ef4444;color:#fff;padding:1rem 2rem;border-radius:0.5rem;font-weight:600;z-index:9999;box-shadow:0 4px 6px rgba(0,0,0,0.3);";
+    "position:fixed;top:20px;right:20px;background:rgba(255,255,255,0.10);color:#fff;padding:1rem 2rem;border-radius:0.5rem;font-weight:600;z-index:9999;box-shadow:0 4px 6px rgba(0,0,0,0.3);";
   document.body.appendChild(toast);
   setTimeout(() => toast.remove(), 3000);
 }

@@ -415,7 +415,7 @@
     }
 
     .logo .text-primary {
-      color: #16a34a;
+      color: #ffffff;
     }
 
     .logo .text-sm {
@@ -582,8 +582,8 @@
     }
 
     .ai-update-indicator svg {
-      color: #16a34a !important;
-      stroke: #16a34a !important;
+      color: #ffffff !important;
+      stroke: #ffffff !important;
     }
 
     .ai-spinner {
@@ -600,7 +600,7 @@
 
     .ai-badge {
       position: relative;
-      color: #16a34a;
+      color: #ffffff;
       font-weight: 300;
       font-size: 10px;
       line-height: 1;
@@ -898,18 +898,7 @@
       justify-content: center;
     }
 
-    .ai-counter-above .ai-spinner::before {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      border: 3px solid transparent;
-      border-top-color: #ffffff;
-      border-right-color: #ffffff;
-      border-bottom-color: #ffffff;
-      animation: spin 1s linear infinite;
-    }
+    /* Spinner supprimé - icône SVG atomique uniquement */
 
     .ai-counter-above .ai-badge {
       position: relative;
@@ -1638,7 +1627,7 @@
     /* History Card */
     .history-card {
       background: #000000;
-      border: 3px solid #16a34a;
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 0.375rem;
       padding: 1rem;
       margin-bottom: 1rem;
@@ -1666,18 +1655,18 @@
     }
 
     .badge-success {
-      background: rgba(22, 163, 74, 0.2);
-      color: #16a34a;
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
     }
 
     .badge-danger {
-      background: rgba(239, 68, 68, 0.2);
-      color: #ef4444;
+      background: rgba(255, 255, 255, 0.10);
+      color: #ffffff;
     }
 
     .badge-warning {
-      background: rgba(234, 179, 8, 0.2);
-      color: #eab308;
+      background: rgba(255, 255, 255, 0.10);
+      color: #ffffff;
     }
 
     /* Strategy Cards */
@@ -1834,24 +1823,13 @@
 
     /* Analysis Dialog */
     .analysis-header {
-      background: rgba(22, 163, 74, 0.1);
+      background: rgba(255, 255, 255, 0.05);
       padding: 1.5rem;
       text-align: center;
       position: relative;
     }
 
-    .analysis-header .ai-spinner::before {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      border: 3px solid transparent;
-      border-top-color: #ffffff;
-      border-right-color: #ffffff;
-      border-bottom-color: #ffffff;
-      animation: spin 1s linear infinite;
-    }
+    /* Spinner supprimé - icône SVG atomique uniquement */
 
     /* AI Loading Overlay */
     .ai-loading-overlay {
