@@ -1198,33 +1198,53 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
+      gap: 0.5rem;
       font-size: 0.875rem;
       color: rgba(255, 255, 255, 0.8);
-      padding: 0 1rem;
+      padding: 0 0.5rem;
       margin-bottom: 0.75rem;
+      flex-wrap: nowrap;
     }
 
     .bet-modify-horizontal .bet-info {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.35rem;
+      white-space: nowrap;
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .bet-modify-horizontal .bet-info span {
+      white-space: nowrap;
     }
 
     .bet-modify-horizontal .modify-btn {
       background: rgba(255, 255, 255, 0.1);
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 0.5rem;
-      padding: 0.5rem 1rem;
-      font-size: 0.875rem;
+      padding: 0.35rem 0.6rem;
+      font-size: 0.8rem;
       color: #ffffff;
       font-weight: 400;
       cursor: pointer;
       transition: background 0.2s;
+      flex: 0 0 auto;
     }
 
     .bet-modify-horizontal .modify-btn:hover {
       background: rgba(255, 255, 255, 0.15);
+    }
+
+    @media (max-width: 420px) {
+      .bet-modify-horizontal {
+        gap: 0.35rem;
+        padding: 0 0.4rem;
+      }
+      .bet-modify-horizontal .modify-btn {
+        padding: 0.3rem 0.5rem;
+        font-size: 0.78rem;
+      }
     }
 
     .gain-section-label {
