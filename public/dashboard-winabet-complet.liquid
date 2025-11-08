@@ -614,65 +614,63 @@
                    data-over-under-text-custom="{{ block.settings.over_under_text_custom }}"
                    data-moneyline-team="{{ block.settings.moneyline_team | default: 'team2' }}"
               >
-                <!-- AI Analysis Header - Nouveau Layout -->
-                 <div class="confidence-badge" style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.625rem 1rem; background: rgba(0, 0, 0, 0.6); border-top: 1px solid rgba(255, 255, 255, 0.15); border-bottom: 1px solid rgba(255, 255, 255, 0.15);">
-                  <!-- Gauche: Icône IA + Pourcentage + Texte -->
-                  <div style="display: flex; align-items: center; gap: 0.75rem;">
-                    <!-- Icône IA atomique (40px) -->
-                    <div style="position: relative; width: 40px; height: 40px; flex-shrink: 0;">
-                      <svg width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                          <filter id="softGlowBetHeader{{ forloop.index }}" x="-50%" y="-50%" width="200%" height="200%">
-                            <feGaussianBlur stdDeviation="1.2" result="b"/>
-                            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                          </filter>
-                          <path id="orbit0BetHeader{{ forloop.index }}" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
-                          <path id="orbit1BetHeader{{ forloop.index }}" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
-                          <path id="orbit2BetHeader{{ forloop.index }}" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
-                        </defs>
-                        <g stroke="#68859e" stroke-width="2" fill="none">
-                          <use href="#orbit0BetHeader{{ forloop.index }}"/><use href="#orbit1BetHeader{{ forloop.index }}"/><use href="#orbit2BetHeader{{ forloop.index }}"/>
-                        </g>
-                        <g stroke-linecap="round" filter="url(#softGlowBetHeader{{ forloop.index }})">
-                          <use href="#orbit0BetHeader{{ forloop.index }}" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
-                          </use>
-                          <use href="#orbit1BetHeader{{ forloop.index }}" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
-                          </use>
-                          <use href="#orbit2BetHeader{{ forloop.index }}" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
-                          </use>
-                        </g>
-                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
-                      </svg>
-                    </div>
-                    
-                    <!-- Pourcentage + Texte -->
-                    <div style="display: flex; flex-direction: column; gap: 0.125rem;">
-                      <!-- Pourcentage plus petit (1.125rem) -->
-                      <span style="font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.125rem; color: #ffffff; line-height: 1;">{{ block.settings.win_percentage | default: 92 }}%</span>
-                      <!-- Texte en minuscules et très petit -->
-                      <span style="font-family: 'Outfit', sans-serif; font-weight: 300; font-size: 0.625rem; color: rgba(255, 255, 255, 0.7); line-height: 1; text-transform: lowercase;">confiance ia pour ce bet</span>
-                    </div>
-                  </div>
-                  
-                  <!-- Droite: Bouton VOIR ANALYSE IA avec coins arrondis (8px) -->
-                  <button 
+                 <!-- AI Analysis Header - Nouveau Layout -->
+                 <div class="confidence-badge" style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.625rem 1rem; background: rgba(0, 0, 0, 0.6);">
+                   <!-- Gauche: Icône IA + Pourcentage -->
+                   <div style="display: flex; align-items: center; gap: 1rem;">
+                     <!-- Icône IA atomique (50px) -->
+                     <div style="position: relative; width: 50px; height: 50px; flex-shrink: 0;">
+                       <svg width="50" height="50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                         <defs>
+                           <filter id="softGlowBetHeader{{ forloop.index }}" x="-50%" y="-50%" width="200%" height="200%">
+                             <feGaussianBlur stdDeviation="1.2" result="b"/>
+                             <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                           </filter>
+                           <path id="orbit0BetHeader{{ forloop.index }}" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                           <path id="orbit1BetHeader{{ forloop.index }}" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                           <path id="orbit2BetHeader{{ forloop.index }}" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+                         </defs>
+                         <g stroke="#68859e" stroke-width="2" fill="none">
+                           <use href="#orbit0BetHeader{{ forloop.index }}"/><use href="#orbit1BetHeader{{ forloop.index }}"/><use href="#orbit2BetHeader{{ forloop.index }}"/>
+                         </g>
+                         <g stroke-linecap="round" filter="url(#softGlowBetHeader{{ forloop.index }})">
+                           <use href="#orbit0BetHeader{{ forloop.index }}" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                             <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                           </use>
+                           <use href="#orbit1BetHeader{{ forloop.index }}" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                             <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                           </use>
+                           <use href="#orbit2BetHeader{{ forloop.index }}" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                             <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                           </use>
+                         </g>
+                         <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
+                       </svg>
+                     </div>
+                     
+                     <!-- Pourcentage -->
+                     <span style="font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.125rem; color: #ffffff; line-height: 1;">{{ block.settings.win_percentage | default: 92 }}%</span>
+                   </div>
+                   
+                   <!-- Centre: Texte confiance ia -->
+                   <span style="font-family: 'Outfit', sans-serif; font-weight: 300; font-size: 0.875rem; color: rgba(255, 255, 255, 0.7); line-height: 1; text-transform: lowercase;">confiance ia pour ce bet</span>
+                   
+                   <!-- Droite: Bouton VOIR ANALYSE IA avec coins arrondis (8px) -->
+                   <button 
                      style="padding: 0.5rem 1rem; background: #000000; color: rgba(255, 255, 255, 0.7); border: 2px solid rgba(255, 255, 255, 0.15); border-radius: 0.5rem; font-family: 'Outfit', sans-serif; font-weight: 300; font-size: 0.75rem; cursor: pointer; transition: all 0.2s; line-height: 1.2; white-space: nowrap;"
-                    onclick="openAnalysisDialog(this)"
-                    data-win-percentage="{{ block.settings.win_percentage | default: 92 }}"
-                    data-ai-data-count="{{ block.settings.ai_data_count | default: 2843 }}"
-                    data-sport-type="{{ block.settings.sport_type | default: 'nhl' }}"
-                    data-team1="{{ block.settings.team1_name | default: 'ÉQUIPE DOMICILE' }}"
-                    data-team2="{{ block.settings.team2_name | default: 'ÉQUIPE EXTÉRIEUR' }}"
-                    data-auto-increment="{{ block.settings.auto_increment_enabled }}"
-                    data-increment-interval="{{ block.settings.auto_increment_interval | default: 5 }}"
-                    data-increment-amount="{{ block.settings.auto_increment_amount | default: 5 }}"
-                  >
-                    VOIR<br>ANALYSE<br>IA
-                  </button>
-                </div>
+                     onclick="openAnalysisDialog(this)"
+                     data-win-percentage="{{ block.settings.win_percentage | default: 92 }}"
+                     data-ai-data-count="{{ block.settings.ai_data_count | default: 2843 }}"
+                     data-sport-type="{{ block.settings.sport_type | default: 'nhl' }}"
+                     data-team1="{{ block.settings.team1_name | default: 'ÉQUIPE DOMICILE' }}"
+                     data-team2="{{ block.settings.team2_name | default: 'ÉQUIPE EXTÉRIEUR' }}"
+                     data-auto-increment="{{ block.settings.auto_increment_enabled }}"
+                     data-increment-interval="{{ block.settings.auto_increment_interval | default: 5 }}"
+                     data-increment-amount="{{ block.settings.auto_increment_amount | default: 5 }}"
+                   >
+                     VOIR<br>ANALYSE<br>IA
+                   </button>
+                 </div>
 
                 <div class="bet-card-content">
                   <button class="multiplier-button">x{{ block.settings.multiplier | default: '1.95' }}</button>
@@ -1012,65 +1010,63 @@
                    data-send-to-history="{{ block.settings.send_to_history }}"
                    data-legs='{{ legs_json | strip_newlines | strip }}'
               >
-                <!-- AI Analysis Header - Nouveau Layout -->
-                <div class="confidence-badge" style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.625rem 1rem; background: rgba(0, 0, 0, 0.6); border-top: 1px solid rgba(255, 255, 255, 0.15); border-bottom: 1px solid rgba(255, 255, 255, 0.15);">
-                  <!-- Gauche: Icône IA + Pourcentage + Texte -->
-                  <div style="display: flex; align-items: center; gap: 0.75rem;">
-                    <!-- Icône IA atomique (40px) -->
-                    <div style="position: relative; width: 40px; height: 40px; flex-shrink: 0;">
-                      <svg width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                          <filter id="softGlowParlayHeader{{ forloop.index }}" x="-50%" y="-50%" width="200%" height="200%">
-                            <feGaussianBlur stdDeviation="1.2" result="b"/>
-                            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                          </filter>
-                          <path id="orbit0ParlayHeader{{ forloop.index }}" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
-                          <path id="orbit1ParlayHeader{{ forloop.index }}" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
-                          <path id="orbit2ParlayHeader{{ forloop.index }}" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
-                        </defs>
-                        <g stroke="#68859e" stroke-width="2" fill="none">
-                          <use href="#orbit0ParlayHeader{{ forloop.index }}"/><use href="#orbit1ParlayHeader{{ forloop.index }}"/><use href="#orbit2ParlayHeader{{ forloop.index }}"/>
-                        </g>
-                        <g stroke-linecap="round" filter="url(#softGlowParlayHeader{{ forloop.index }})">
-                          <use href="#orbit0ParlayHeader{{ forloop.index }}" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
-                          </use>
-                          <use href="#orbit1ParlayHeader{{ forloop.index }}" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
-                          </use>
-                          <use href="#orbit2ParlayHeader{{ forloop.index }}" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
-                          </use>
-                        </g>
-                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
-                      </svg>
-                    </div>
-                    
-                    <!-- Pourcentage + Texte -->
-                    <div style="display: flex; flex-direction: column; gap: 0.125rem;">
-                      <!-- Pourcentage plus petit (1.125rem) -->
-                      <span style="font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.125rem; color: #ffffff; line-height: 1;">{{ block.settings.win_percentage | default: 92 }}%</span>
-                      <!-- Texte en minuscules et très petit -->
-                      <span style="font-family: 'Outfit', sans-serif; font-weight: 300; font-size: 0.625rem; color: rgba(255, 255, 255, 0.7); line-height: 1; text-transform: lowercase;">confiance ia pour ce parlay</span>
-                    </div>
-                  </div>
-                  
-                  <!-- Droite: Bouton VOIR ANALYSE IA avec coins arrondis (8px) -->
-                  <button 
-                    style="padding: 0.5rem 1rem; background: #000000; color: rgba(255, 255, 255, 0.7); border: 2px solid rgba(255, 255, 255, 0.15); border-radius: 0.5rem; font-family: 'Outfit', sans-serif; font-weight: 300; font-size: 0.75rem; cursor: pointer; transition: all 0.2s; line-height: 1.2; white-space: nowrap;"
-                    onclick="openAnalysisDialog(this)"
-                    data-win-percentage="{{ block.settings.win_percentage | default: 92 }}"
-                    data-ai-data-count="{{ block.settings.ai_data_count | default: 2843 }}"
-                    data-sport-type="{{ block.settings.sport_type | default: 'nhl' }}"
-                    data-team1="{{ block.settings.leg1_team1_name | default: 'ÉQUIPE DOMICILE' }}"
-                    data-team2="{{ block.settings.leg1_team2_name | default: 'ÉQUIPE EXTÉRIEUR' }}"
-                    data-auto-increment="{{ block.settings.auto_increment_enabled }}"
-                    data-increment-interval="{{ block.settings.auto_increment_interval | default: 5 }}"
-                    data-increment-amount="{{ block.settings.auto_increment_amount | default: 5 }}"
-                  >
-                    VOIR<br>ANALYSE<br>IA
-                  </button>
-                </div>
+                 <!-- AI Analysis Header - Nouveau Layout -->
+                 <div class="confidence-badge" style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.625rem 1rem; background: rgba(0, 0, 0, 0.6);">
+                   <!-- Gauche: Icône IA + Pourcentage -->
+                   <div style="display: flex; align-items: center; gap: 1rem;">
+                     <!-- Icône IA atomique (50px) -->
+                     <div style="position: relative; width: 50px; height: 50px; flex-shrink: 0;">
+                       <svg width="50" height="50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                         <defs>
+                           <filter id="softGlowParlayHeader{{ forloop.index }}" x="-50%" y="-50%" width="200%" height="200%">
+                             <feGaussianBlur stdDeviation="1.2" result="b"/>
+                             <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                           </filter>
+                           <path id="orbit0ParlayHeader{{ forloop.index }}" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                           <path id="orbit1ParlayHeader{{ forloop.index }}" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                           <path id="orbit2ParlayHeader{{ forloop.index }}" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+                         </defs>
+                         <g stroke="#68859e" stroke-width="2" fill="none">
+                           <use href="#orbit0ParlayHeader{{ forloop.index }}"/><use href="#orbit1ParlayHeader{{ forloop.index }}"/><use href="#orbit2ParlayHeader{{ forloop.index }}"/>
+                         </g>
+                         <g stroke-linecap="round" filter="url(#softGlowParlayHeader{{ forloop.index }})">
+                           <use href="#orbit0ParlayHeader{{ forloop.index }}" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                             <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                           </use>
+                           <use href="#orbit1ParlayHeader{{ forloop.index }}" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                             <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                           </use>
+                           <use href="#orbit2ParlayHeader{{ forloop.index }}" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                             <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                           </use>
+                         </g>
+                         <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
+                       </svg>
+                     </div>
+                     
+                     <!-- Pourcentage -->
+                     <span style="font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.125rem; color: #ffffff; line-height: 1;">{{ block.settings.win_percentage | default: 92 }}%</span>
+                   </div>
+                   
+                   <!-- Centre: Texte confiance ia -->
+                   <span style="font-family: 'Outfit', sans-serif; font-weight: 300; font-size: 0.875rem; color: rgba(255, 255, 255, 0.7); line-height: 1; text-transform: lowercase;">confiance ia pour ce parlay</span>
+                   
+                   <!-- Droite: Bouton VOIR ANALYSE IA avec coins arrondis (8px) -->
+                   <button 
+                     style="padding: 0.5rem 1rem; background: #000000; color: rgba(255, 255, 255, 0.7); border: 2px solid rgba(255, 255, 255, 0.15); border-radius: 0.5rem; font-family: 'Outfit', sans-serif; font-weight: 300; font-size: 0.75rem; cursor: pointer; transition: all 0.2s; line-height: 1.2; white-space: nowrap;"
+                     onclick="openAnalysisDialog(this)"
+                     data-win-percentage="{{ block.settings.win_percentage | default: 92 }}"
+                     data-ai-data-count="{{ block.settings.ai_data_count | default: 2843 }}"
+                     data-sport-type="{{ block.settings.sport_type | default: 'nhl' }}"
+                     data-team1="{{ block.settings.leg1_team1_name | default: 'ÉQUIPE DOMICILE' }}"
+                     data-team2="{{ block.settings.leg1_team2_name | default: 'ÉQUIPE EXTÉRIEUR' }}"
+                     data-auto-increment="{{ block.settings.auto_increment_enabled }}"
+                     data-increment-interval="{{ block.settings.auto_increment_interval | default: 5 }}"
+                     data-increment-amount="{{ block.settings.auto_increment_amount | default: 5 }}"
+                   >
+                     VOIR<br>ANALYSE<br>IA
+                   </button>
+                 </div>
 
                 <div class="bet-card-content">
                   <!-- Multiplicateur de Mise -->
