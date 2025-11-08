@@ -669,12 +669,7 @@
                 </div>
 
                 <div class="bet-card-content">
-                  <!-- Multiplicateur de Mise -->
-                  <div class="multiplier-section-label">MULTIPLICATEUR DE MISE</div>
                   <button class="multiplier-button">x{{ block.settings.multiplier | default: '1.95' }}</button>
-
-                  <!-- Parier Sur -->
-                  <div class="bet-section-label" style="margin-top: 1.5rem;">PARIER SUR</div>
                   <div class="match-info-new">
                     {% assign bet_type = block.settings.bet_type | default: 'moneyline' %}
                     
@@ -781,13 +776,9 @@
                     {% endif %}
                   </div>
 
-                  <!-- Mise -->
-                  <div class="bet-section-label">MISE</div>
                   <button class="units-button">{{ block.settings.bet_units | default: '1' }} UNITS</button>
 
-                  <!-- Votre Gain -->
                   <div class="gain-section">
-                    <div class="gain-section-label">VOTRE GAIN</div>
                     <div class="gain-grid">
                       <div class="bet-modify-box">
                         <button class="modify-btn" onclick="openBetDialog(this)" data-multiplier="{{ block.settings.multiplier | default: '1.95' }}">Modifier</button>
@@ -1530,13 +1521,9 @@
                   {% endif %}
                   {% endfor %}
 
-                  <!-- Mise -->
-                  <div class="bet-section-label">MISE</div>
                   <button class="units-button">{{ block.settings.bet_units | default: '1' }} UNITS</button>
 
-                  <!-- Votre Gain -->
                   <div class="gain-section">
-                    <div class="gain-section-label">VOTRE GAIN</div>
                     <div class="gain-grid">
                       <div class="bet-modify-box">
                         <button class="modify-btn" onclick="openBetDialog(this)" data-multiplier="{{ block.settings.multiplier | default: '1.95' }}">Modifier</button>
