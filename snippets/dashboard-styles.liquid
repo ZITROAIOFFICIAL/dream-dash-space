@@ -856,7 +856,7 @@
     /* Bet Card */
     .bet-card {
       background: #000000;
-      border: 2px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 1rem;
       padding: 0;
       margin-bottom: 1.5rem;
@@ -1045,7 +1045,7 @@
       align-items: stretch;
       gap: 0.25rem;
       padding: 0.25rem 1rem 0.5rem;
-      border: 2px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 0.75rem;
       margin-bottom: 1.5rem;
       position: relative;
@@ -1201,11 +1201,14 @@
       gap: 0.75rem;
       font-size: 0.875rem;
       color: rgba(255, 255, 255, 0.8);
-      padding: 0.5rem 0 0 0;
+      padding: 0.25rem 0 0 0; /* reduce top padding a bit */
       margin-bottom: 0.75rem;
       flex-wrap: nowrap;
       word-spacing: 0.25rem;
       text-align: center;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .bet-modify-horizontal .bet-info {
