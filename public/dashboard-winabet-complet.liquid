@@ -615,7 +615,7 @@
                    data-moneyline-team="{{ block.settings.moneyline_team | default: 'team2' }}"
               >
                  <!-- AI Analysis Header - Nouveau Layout -->
-            <div class="confidence-badge" style="display: flex; align-items: center; justify-content: flex-start; gap: 0.5rem; padding: 0.75rem 1.5rem; background: rgba(0, 0, 0, 0.6); margin-top: 0.75rem; margin-bottom: 0.25rem;">
+            <div class="confidence-badge" style="display: flex; align-items: center; justify-content: flex-start; gap: 0.5rem; padding: 0.75rem 1.5rem; background: rgba(0, 0, 0, 0.6); margin-top: 0.75rem; margin-bottom: 0.125rem;">
                    <!-- Gauche: Icône IA + Pourcentage -->
                    <div style="display: flex; align-items: center; gap: 1rem;">
                      <!-- Icône IA atomique (50px) -->
@@ -656,8 +656,8 @@
                    <span style="font-family: 'Outfit', sans-serif; font-weight: 400; font-size: 1.125rem; color: rgba(255, 255, 255, 0.7); line-height: 1; text-transform: lowercase; margin-left: 0.5rem;">confiance ia pour ce bet</span>
                    
                    <!-- Droite: Bouton VOIR ANALYSE IA avec coins arrondis (8px) -->
-                    <button 
-                      style="padding: 0.5rem 1rem; background: #000000; color: rgba(255, 255, 255, 0.7); border: 2px solid rgba(255, 255, 255, 0.15); border-radius: 0.5rem; font-family: 'Outfit', sans-serif; font-weight: 300; font-size: 0.75rem; cursor: pointer; transition: all 0.2s; line-height: 1.2; white-space: nowrap; margin-left: auto;"
+                     <button 
+                      style="padding: 0.5rem 1rem; background: #000000; color: rgba(255, 255, 255, 0.7); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.5rem; font-family: 'Outfit', sans-serif; font-weight: 300; font-size: 0.75rem; cursor: pointer; transition: all 0.2s; line-height: 1.2; white-space: nowrap; margin-left: auto;"
                      onclick="openAnalysisDialog(this)"
                      data-win-percentage="{{ block.settings.win_percentage | default: 92 }}"
                      data-ai-data-count="{{ block.settings.ai_data_count | default: 2843 }}"
@@ -1011,7 +1011,7 @@
                    data-legs='{{ legs_json | strip_newlines | strip }}'
               >
                  <!-- AI Analysis Header - Nouveau Layout -->
-                 <div class="confidence-badge" style="display: flex; align-items: center; justify-content: flex-start; gap: 0.5rem; padding: 0.75rem 1.5rem; background: rgba(0, 0, 0, 0.6); margin-top: 0.75rem; margin-bottom: 0.25rem;">
+                 <div class="confidence-badge" style="display: flex; align-items: center; justify-content: flex-start; gap: 0.5rem; padding: 0.75rem 1.5rem; background: rgba(0, 0, 0, 0.6); margin-top: 0.75rem; margin-bottom: 0.125rem;">
                    <!-- Gauche: Icône IA + Pourcentage -->
                    <div style="display: flex; align-items: center; gap: 1rem;">
                      <!-- Icône IA atomique (50px) -->
@@ -1052,8 +1052,8 @@
                    <span style="font-family: 'Outfit', sans-serif; font-weight: 400; font-size: 1.125rem; color: rgba(255, 255, 255, 0.7); line-height: 1; text-transform: lowercase; margin-left: 0.5rem;">confiance ia pour ce parlay</span>
                    
                    <!-- Droite: Bouton VOIR ANALYSE IA avec coins arrondis (8px) -->
-                    <button 
-                      style="padding: 0.5rem 1rem; background: #000000; color: rgba(255, 255, 255, 0.7); border: 2px solid rgba(255, 255, 255, 0.15); border-radius: 0.5rem; font-family: 'Outfit', sans-serif; font-weight: 300; font-size: 0.75rem; cursor: pointer; transition: all 0.2s; line-height: 1.2; white-space: nowrap; margin-left: auto;"
+                     <button 
+                      style="padding: 0.5rem 1rem; background: #000000; color: rgba(255, 255, 255, 0.7); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.5rem; font-family: 'Outfit', sans-serif; font-weight: 300; font-size: 0.75rem; cursor: pointer; transition: all 0.2s; line-height: 1.2; white-space: nowrap; margin-left: auto;"
                      onclick="openAnalysisDialog(this)"
                      data-win-percentage="{{ block.settings.win_percentage | default: 92 }}"
                      data-ai-data-count="{{ block.settings.ai_data_count | default: 2843 }}"
