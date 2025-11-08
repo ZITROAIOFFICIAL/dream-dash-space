@@ -329,11 +329,11 @@ function generateBetCardHTML(bet) {
   if (bet.result === "win") {
     const unitsValue = (betUnits * (bet.multiplier - 1)).toFixed(2);
     unitsText = `Win +${unitsValue} UNITS`;
-    unitsColor = "rgba(255, 255, 255, 0.20)";
+    unitsColor = "rgba(34, 197, 94, 0.2)";
   } else if (bet.result === "loose") {
     const unitsValue = betUnits.toFixed(2);
     unitsText = `Lose -${unitsValue} UNITS`;
-    unitsColor = "rgba(255, 255, 255, 0.10)";
+    unitsColor = "rgba(239, 68, 68, 0.2)";
   } else {
     unitsText = "EN ATTENTE";
     unitsColor = "rgba(255, 255, 255, 0.10)";
@@ -459,11 +459,11 @@ function generateParlayCardHTML(parlay) {
   if (parlay.result === "win") {
     const unitsValue = (betUnits * (parlay.multiplier - 1)).toFixed(2);
     unitsText = `Win +${unitsValue} UNITS`;
-    unitsColor = "rgba(255, 255, 255, 0.20)";
+    unitsColor = "rgba(34, 197, 94, 0.2)";
   } else if (parlay.result === "loose") {
     const unitsValue = betUnits.toFixed(2);
     unitsText = `Lose -${unitsValue} UNITS`;
-    unitsColor = "rgba(255, 255, 255, 0.10)";
+    unitsColor = "rgba(239, 68, 68, 0.2)";
   } else {
     unitsText = "EN ATTENTE";
     unitsColor = "rgba(255, 255, 255, 0.10)";
