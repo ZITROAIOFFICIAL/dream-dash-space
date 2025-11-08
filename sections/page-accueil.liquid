@@ -12,6 +12,7 @@
   
 </head>
 <body>
+<div id="accueil">
 
 <section class="hero-section">
       <!-- Background video -->
@@ -2077,9 +2078,19 @@
       </div>
     </section>
 
+</div>
+
     <!-- Section Politique Winabet.ai -->
-    <section id="politique" class="politique-section" style="background: linear-gradient(180deg, #000000 0%, #0a0a0a 100%); padding: 6rem 2rem; min-height: 100vh;">
+    <section id="politique" class="politique-section" style="display:none; background: linear-gradient(180deg, #000000 0%, #0a0a0a 100%); padding: 6rem 2rem; min-height: 100vh;">
       <div class="politique-container" style="max-width: 1200px; margin: 0 auto;">
+        <div class="politique-header" style="max-width:1200px;margin:0 auto 1.5rem;display:flex;align-items:center;">
+          <a href="#" class="back-to-home" style="display:inline-flex;align-items:center;gap:0.5rem;color:#fff;text-decoration:none;padding:.5rem 1rem;border:1px solid rgba(82,82,91,.4);border-radius:9999px;background:rgba(39,39,42,.6);transition:all 0.3s ease;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="flex-shrink:0">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7 7-7M3 12h18"></path>
+            </svg>
+            <span>Retour à l'accueil</span>
+          </a>
+        </div>
         <h1 class="politique-title" style="font-family: 'Outfit', sans-serif; font-weight: 300; font-size: 3rem; color: #ffffff; text-align: center; margin-bottom: 4rem;">Notre politique Winabet.ai</h1>
         
         <div class="politique-content" style="display: flex; flex-direction: column; gap: 2rem;">
@@ -2364,6 +2375,36 @@
           autoScroll();
         }
       });
+
+      // Navigation interne pour la page Politique
+      (function() {
+        function showPage() {
+          var hash = window.location.hash.replace('#','');
+          var home = document.getElementById('accueil');
+          var politique = document.getElementById('politique');
+          if (!home || !politique) return;
+
+          if (hash === 'politique') {
+            home.style.display = 'none';
+            politique.style.display = 'block';
+            window.scrollTo(0, 0);
+          } else {
+            politique.style.display = 'none';
+            home.style.display = 'block';
+          }
+        }
+        
+        document.addEventListener('DOMContentLoaded', showPage);
+        window.addEventListener('hashchange', showPage);
+        
+        document.addEventListener('click', function(e) {
+          var btn = e.target.closest('.back-to-home');
+          if (btn) {
+            e.preventDefault();
+            window.location.hash = '';
+          }
+        });
+      })();
   </script>
 </body>
 </html>
