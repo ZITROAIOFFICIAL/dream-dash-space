@@ -2128,12 +2128,17 @@
     }
 
     .card-wrapper > * {
-      max-width: 32rem;
+      max-width: 36rem;
       width: 100%;
     }
 
     /* Desktop - Agrandissement manuel des cartes (20% plus grand) */
     @media (min-width: 1024px) {
+      /* Réduire la largeur des cartes sur desktop */
+      .card-wrapper > * {
+        max-width: 32rem;
+      }
+
       /* Cards Grid - 2 colonnes */
       .cards-grid {
         grid-template-columns: repeat(2, 1fr);
