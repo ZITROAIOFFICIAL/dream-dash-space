@@ -2062,14 +2062,42 @@
     <!-- Section Bottom Title -->
     <section style="max-width: 1286px; margin: 6rem auto 4rem; padding: 0 2rem;">
       <div class="providers-card-content-bottom">
-        <h3 class="providers-card-label">
-          ✦ Features
+        <h3 class="providers-card-label" style="display: flex; align-items: center; gap: 0.5rem;">
+          <svg id="atom-features-section" width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+            <defs>
+              <filter id="softGlowFeaturesSection" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="1.2" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <path id="orbit0FeaturesSection" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+              <path id="orbit1FeaturesSection" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+              <path id="orbit2FeaturesSection" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+            </defs>
+            <g stroke="#68859e" stroke-width="2" fill="none">
+              <use href="#orbit0FeaturesSection"/>
+              <use href="#orbit1FeaturesSection"/>
+              <use href="#orbit2FeaturesSection"/>
+            </g>
+            <g stroke-linecap="round" filter="url(#softGlowFeaturesSection)">
+              <use href="#orbit0FeaturesSection" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+              </use>
+              <use href="#orbit1FeaturesSection" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+              </use>
+              <use href="#orbit2FeaturesSection" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+              </use>
+            </g>
+            <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+          </svg>
+          Portée mondiale
         </h3>
         <p class="providers-card-title-top">
-          Power your payments with ease
+          Gagne de l'argent de n'importe où
         </p>
         <p class="providers-card-description">
-          Know more about your customers than they do.
+          Nos cartes s'actualisent en temps réel partout dans le monde ; quand ça passe, tu encaisses — peu importe où tu es.
         </p>
       </div>
     </section>
