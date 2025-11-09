@@ -402,39 +402,53 @@
           <h3 class="providers-card-label">
             <svg width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 0.4rem;">
               <defs>
-                <filter id="softGlowLabel" x="-50%" y="-50%" width="200%" height="200%">
+                <filter id="softGlowLabelAtom" x="-50%" y="-50%" width="200%" height="200%">
                   <feGaussianBlur stdDeviation="1.2" result="b"/>
                   <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
                 </filter>
-                <path id="orbit0Label" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
-                <path id="orbit1Label" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
-                <path id="orbit2Label" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+                <path id="orbit0LabelAtom" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                <path id="orbit1LabelAtom" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                <path id="orbit2LabelAtom" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
               </defs>
               <g stroke="#68859e" stroke-width="2" fill="none">
-                <use href="#orbit0Label"/>
-                <use href="#orbit1Label"/>
-                <use href="#orbit2Label"/>
+                <use href="#orbit0LabelAtom"/>
+                <use href="#orbit1LabelAtom"/>
+                <use href="#orbit2LabelAtom"/>
               </g>
-              <g stroke-linecap="round" filter="url(#softGlowLabel)">
-                <use href="#orbit0Label" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                  <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+              <g stroke-linecap="round" filter="url(#softGlowLabelAtom)">
+                <use href="#orbit0LabelAtom" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="26 974">
+                  <animate attributeName="stroke-dashoffset" values="26;-974" dur="16s" repeatCount="indefinite" begin="0s"/>
                 </use>
-                <use href="#orbit1Label" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                  <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                <circle r="3" fill="#ffffff">
+                  <animateMotion dur="16s" repeatCount="indefinite" rotate="auto" begin="0s">
+                    <mpath href="#orbit0LabelAtom"/>
+                  </animateMotion>
+                </circle>
+                <use href="#orbit1LabelAtom" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="26 974">
+                  <animate attributeName="stroke-dashoffset" values="26;-974" dur="16s" repeatCount="indefinite" begin="5s"/>
                 </use>
-                <use href="#orbit2Label" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                  <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                <circle r="3" fill="#ffffff">
+                  <animateMotion dur="16s" repeatCount="indefinite" rotate="auto" begin="5s">
+                    <mpath href="#orbit1LabelAtom"/>
+                  </animateMotion>
+                </circle>
+                <use href="#orbit2LabelAtom" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="26 974">
+                  <animate attributeName="stroke-dashoffset" values="26;-974" dur="16s" repeatCount="indefinite" begin="10s"/>
                 </use>
+                <circle r="3" fill="#ffffff">
+                  <animateMotion dur="16s" repeatCount="indefinite" rotate="auto" begin="10s">
+                    <mpath href="#orbit2LabelAtom"/>
+                  </animateMotion>
+                </circle>
               </g>
-              <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
             </svg>
-            Fonctionnalité ia
+            Analyse ia
           </h3>
           <p class="providers-card-title-top">
-            Notre ia traque les meilleurs paris sportifs
+            Example de ce que notre ia suit en continue
           </p>
           <p class="providers-card-description">
-            Notre ia réunit toutes les données disponibles et les analyse pour ressortir les paris aux meilleures chances de passer, statistiquement.
+            Données de marché, prix et tendances mises à jour en continu. Les badges ci-dessous montrent une partie seulement de ce qu'elle suit pour trouver les paris aux meilleures chances de passer. L'analyse complète de chaque bet apparaît directement sur nos cartes.
           </p>
         </div>
         <div class="providers-card-inner">
