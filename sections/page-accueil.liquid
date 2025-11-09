@@ -1836,11 +1836,39 @@
 
     <!-- Text Section Below Pulse SVG -->
     <section style="max-width: 1286px; margin: 2rem auto 4rem; padding: 0 2rem; text-align: center;">
-      <h2 style="font-family: 'Outfit', sans-serif; font-weight: 400; font-size: 2.5rem; color: #ffffff; margin-bottom: 1rem; line-height: 1.2;">
-        Get ⚡ instant payouts
+      <h2 style="font-family: 'Outfit', sans-serif; font-weight: 400; font-size: 2.5rem; color: #ffffff; margin-bottom: 1rem; line-height: 1.2; display: flex; align-items: center; justify-content: center; gap: 0.75rem;">
+        <svg id="atom-desktop" width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+          <defs>
+            <filter id="softGlowDesktopClone3" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="1.2" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <path id="orbit0DesktopClone3" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+            <path id="orbit1DesktopClone3" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+            <path id="orbit2DesktopClone3" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+          </defs>
+          <g stroke="#68859e" stroke-width="2" fill="none">
+            <use href="#orbit0DesktopClone3"/>
+            <use href="#orbit1DesktopClone3"/>
+            <use href="#orbit2DesktopClone3"/>
+          </g>
+          <g stroke-linecap="round" filter="url(#softGlowDesktopClone3)">
+            <use href="#orbit0DesktopClone3" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+              <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+            </use>
+            <use href="#orbit1DesktopClone3" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+              <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+            </use>
+            <use href="#orbit2DesktopClone3" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+              <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+            </use>
+          </g>
+          <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+        </svg>
+        3 cartes récentes de notre ia
       </h2>
       <p style="font-family: 'Outfit', sans-serif; font-weight: 300; font-size: 1.25rem; color: rgba(255, 255, 255, 0.6); margin: 0;">
-        Get payouts quickly with crypto or bank transfers.
+        extraits de notre historique : détectées par notre ia, validées par le résultat, cashout affiché.
       </p>
     </section>
 
