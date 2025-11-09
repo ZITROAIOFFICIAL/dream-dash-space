@@ -350,12 +350,12 @@ function generateBetCardHTML(bet) {
 
     matchHTML = `
       <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 2rem; font-weight: 600; margin-bottom: 2rem;">MONEYLINE</div>
-      <div style="display: flex; align-items: center; justify-content: center; gap: 1.5rem;">
+      <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
         <div style="text-align: center; flex: 1;">
-          <div style="width: 7rem; height: 7rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem; ${showTeam1Win ? "border: 5px solid rgba(255, 255, 255, 0.5);" : ""} ${showTeam1Loss ? "border: 5px solid rgba(255, 255, 255, 0.2);" : ""}">
+          <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem; ${showTeam1Win ? "border: 5px solid rgba(255, 255, 255, 0.5);" : ""} ${showTeam1Loss ? "border: 5px solid rgba(255, 255, 255, 0.2);" : ""}">
             <img src="${sanitizeLogo(bet.team1_logo)}" alt="${bet.team1_name}" style="width: 100%; height: 100%; object-fit: contain;">
           </div>
-          <div style="font-size: 1.3rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team1_name}</div>
+          <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team1_name}</div>
           ${showTeam1Win ? '<div style="font-size: 1.75rem; font-weight: 700; color: rgba(255, 255, 255, 0.9); margin-top: 1rem; text-align: center;">VICTOIRE</div>' : ""}
           ${showTeam1Loss ? '<div style="font-size: 1.75rem; font-weight: 700; color: rgba(255, 255, 255, 0.6); margin-top: 1rem; text-align: center;">DÉFAITE</div>' : ""}
         </div>
@@ -363,10 +363,10 @@ function generateBetCardHTML(bet) {
           <div style="font-size: 3rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
         </div>
         <div style="text-align: center; flex: 1;">
-          <div style="width: 7rem; height: 7rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem; ${showTeam2Win ? "border: 5px solid rgba(255, 255, 255, 0.5);" : ""} ${showTeam2Loss ? "border: 5px solid rgba(255, 255, 255, 0.2);" : ""}">
+          <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem; ${showTeam2Win ? "border: 5px solid rgba(255, 255, 255, 0.5);" : ""} ${showTeam2Loss ? "border: 5px solid rgba(255, 255, 255, 0.2);" : ""}">
             <img src="${sanitizeLogo(bet.team2_logo)}" alt="${bet.team2_name}" style="width: 100%; height: 100%; object-fit: contain;">
           </div>
-          <div style="font-size: 1.3rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team2_name}</div>
+          <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team2_name}</div>
           ${showTeam2Win ? '<div style="font-size: 1.75rem; font-weight: 700; color: rgba(255, 255, 255, 0.9); margin-top: 1rem; text-align: center;">VICTOIRE</div>' : ""}
           ${showTeam2Loss ? '<div style="font-size: 1.75rem; font-weight: 700; color: rgba(255, 255, 255, 0.6); margin-top: 1rem; text-align: center;">DÉFAITE</div>' : ""}
         </div>
@@ -375,22 +375,22 @@ function generateBetCardHTML(bet) {
   } else if (bet.bet_type === "spread") {
     matchHTML = `
       <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 2rem; font-weight: 600; margin-bottom: 2rem;">SPREAD</div>
-      <div style="display: flex; align-items: center; justify-content: center; gap: 1.5rem;">
+      <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
         <div style="text-align: center; flex: 1;">
-          <div style="width: 7rem; height: 7rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem; ${bet.spread_team === "team1" ? "border: 5px solid rgba(255, 255, 255, 0.5);" : ""}">
+          <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem; ${bet.spread_team === "team1" ? "border: 5px solid rgba(255, 255, 255, 0.5);" : ""}">
             <img src="${sanitizeLogo(bet.team1_logo)}" alt="${bet.team1_name}" style="width: 100%; height: 100%; object-fit: contain;">
           </div>
-          <div style="font-size: 1.3rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team1_name}</div>
+          <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team1_name}</div>
           ${bet.spread_team === "team1" ? `<div style="font-size: 1.75rem; font-weight: 700; color: rgba(255, 255, 255, 0.9); margin-top: 1rem; text-align: center;">${bet.spread_value}</div>` : ""}
         </div>
         <div style="text-align: center;">
           <div style="font-size: 3rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
         </div>
         <div style="text-align: center; flex: 1;">
-          <div style="width: 7rem; height: 7rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem; ${bet.spread_team === "team2" ? "border: 5px solid rgba(255, 255, 255, 0.5);" : ""}">
+          <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem; ${bet.spread_team === "team2" ? "border: 5px solid rgba(255, 255, 255, 0.5);" : ""}">
             <img src="${sanitizeLogo(bet.team2_logo)}" alt="${bet.team2_name}" style="width: 100%; height: 100%; object-fit: contain;">
           </div>
-          <div style="font-size: 1.3rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team2_name}</div>
+          <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team2_name}</div>
           ${bet.spread_team === "team2" ? `<div style="font-size: 1.75rem; font-weight: 700; color: rgba(255, 255, 255, 0.9); margin-top: 1rem; text-align: center;">${bet.spread_value}</div>` : ""}
         </div>
       </div>
@@ -399,12 +399,12 @@ function generateBetCardHTML(bet) {
     const displayText = bet.over_under_text_custom || bet.over_under_type;
     matchHTML = `
       <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 2rem; font-weight: 600; margin-bottom: 2rem;">${displayText?.toUpperCase()}</div>
-      <div style="display: flex; align-items: center; justify-content: center; gap: 1.5rem;">
+      <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
         <div style="text-align: center; flex: 1;">
-          <div style="width: 7rem; height: 7rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem;">
+          <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem;">
             <img src="${sanitizeLogo(bet.team1_logo)}" alt="${bet.team1_name}" style="width: 100%; height: 100%; object-fit: contain;">
           </div>
-          <div style="font-size: 1.3rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team1_name}</div>
+          <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team1_name}</div>
         </div>
         <div style="text-align: center;">
           <div style="font-size: 3rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
@@ -415,10 +415,10 @@ function generateBetCardHTML(bet) {
           </div>
         </div>
         <div style="text-align: center; flex: 1;">
-          <div style="width: 7rem; height: 7rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem;">
+          <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem;">
             <img src="${sanitizeLogo(bet.team2_logo)}" alt="${bet.team2_name}" style="width: 100%; height: 100%; object-fit: contain;">
           </div>
-          <div style="font-size: 1.3rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team2_name}</div>
+          <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team2_name}</div>
         </div>
       </div>
     `;
