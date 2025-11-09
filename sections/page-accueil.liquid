@@ -2862,6 +2862,16 @@ document.addEventListener('DOMContentLoaded', function() {
     { date: 'Dec \'23', sales: 550, revenue: 480, customers: 320, x: 0.95 }
   ];
   
+  // Afficher les données du milieu par défaut
+  function showDefaultData() {
+    const middlePoint = dataPoints[5]; // Jun '23 - point du milieu
+    tooltip.querySelector('.tooltip-date').textContent = middlePoint.date;
+    tooltip.querySelector('.sales-value').textContent = middlePoint.sales;
+    tooltip.querySelector('.revenue-value').textContent = middlePoint.revenue;
+    tooltip.querySelector('.customers-value').textContent = middlePoint.customers;
+    tooltip.style.display = 'block';
+  }
+  
   function updateTooltip(e) {
     const rect = graphContainer.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -2889,11 +2899,28 @@ document.addEventListener('DOMContentLoaded', function() {
     tooltip.style.display = 'block';
   }
   
-  function hideTooltip() {
-    tooltip.style.display = 'none';
+  function resetTooltip() {
+    // Revenir au point du milieu quand la souris quitte
+    showDefaultData();
   }
   
+  // Afficher les données par défaut au chargement
+  showDefaultData();
+  
   graphContainer.addEventListener('mousemove', updateTooltip);
-  graphContainer.addEventListener('mouseleave', hideTooltip);
+  graphContainer.addEventListener('mouseleave', resetTooltip);
+  
+  // Support tactile pour mobile
+  graphContainer.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+    const touch = e.touches[0];
+    const mouseEvent = new MouseEvent('mousemove', {
+      clientX: touch.clientX,
+      clientY: touch.clientY
+    });
+    graphContainer.dispatchEvent(mouseEvent);
+  });
+  
+  graphContainer.addEventListener('touchend', resetTooltip);
 });
 </script>
