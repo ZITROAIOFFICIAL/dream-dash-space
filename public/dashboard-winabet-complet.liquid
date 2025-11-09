@@ -3108,16 +3108,19 @@
     function toggleSidebar() {
       const sidebar = document.querySelector('.sidebar');
       const overlay = document.querySelector('.overlay');
+      const headerToggle = document.querySelector('header .mobile-toggle');
       isMobileSidebarOpen = !isMobileSidebarOpen;
       
       if (isMobileSidebarOpen) {
         sidebar.classList.add('active');
         overlay.classList.add('active');
         document.body.classList.add('body-no-scroll');
+        if (headerToggle) headerToggle.classList.add('active');
       } else {
         sidebar.classList.remove('active');
         overlay.classList.remove('active');
         document.body.classList.remove('body-no-scroll');
+        if (headerToggle) headerToggle.classList.remove('active');
       }
     }
 
