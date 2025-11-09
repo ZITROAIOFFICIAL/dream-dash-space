@@ -2940,7 +2940,7 @@
           statsObserver.observe(statsSection);
         }
 
-        // Reviews Auto-Scrolling Slider
+        // Reviews Auto-Scrolling Slider with Drag/Swipe Support
         const track = document.getElementById('reviewsTrack');
         if (track) {
           const cards = Array.from(track.children);
@@ -2954,19 +2954,98 @@
           let position = 0;
           const cardWidth = cards[0].offsetWidth + 32; // width + gap
           const totalWidth = cardWidth * cards.length;
+          let isDragging = false;
+          let startX = 0;
+          let currentX = 0;
+          let animationId = null;
+          let velocity = 0;
           
           function autoScroll() {
-            position -= 0.5; // Slow scroll speed
+            if (!isDragging) {
+              position -= 0.5; // Slow scroll speed
+              velocity = -0.5;
+              
+              // Reset position when we've scrolled through all original cards
+              if (Math.abs(position) >= totalWidth) {
+                position = 0;
+              }
+              
+              track.style.transform = `translateX(${position}px)`;
+            }
+            animationId = requestAnimationFrame(autoScroll);
+          }
+          
+          // Mouse events
+          track.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.pageX - position;
+            track.style.cursor = 'grabbing';
+            velocity = 0;
+          });
+          
+          track.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            currentX = e.pageX - startX;
+            const delta = currentX - position;
+            velocity = delta;
+            position = currentX;
             
-            // Reset position when we've scrolled through all original cards
+            // Reset position if dragged too far
             if (Math.abs(position) >= totalWidth) {
-              position = 0;
+              position = position % totalWidth;
+              startX = e.pageX - position;
+            }
+            if (position > 0) {
+              position = -(totalWidth - Math.abs(position));
+              startX = e.pageX - position;
             }
             
             track.style.transform = `translateX(${position}px)`;
-            requestAnimationFrame(autoScroll);
-          }
+          });
           
+          track.addEventListener('mouseup', () => {
+            isDragging = false;
+            track.style.cursor = 'grab';
+          });
+          
+          track.addEventListener('mouseleave', () => {
+            isDragging = false;
+            track.style.cursor = 'grab';
+          });
+          
+          // Touch events
+          track.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            startX = e.touches[0].pageX - position;
+            velocity = 0;
+          });
+          
+          track.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            currentX = e.touches[0].pageX - startX;
+            const delta = currentX - position;
+            velocity = delta;
+            position = currentX;
+            
+            // Reset position if dragged too far
+            if (Math.abs(position) >= totalWidth) {
+              position = position % totalWidth;
+              startX = e.touches[0].pageX - position;
+            }
+            if (position > 0) {
+              position = -(totalWidth - Math.abs(position));
+              startX = e.touches[0].pageX - position;
+            }
+            
+            track.style.transform = `translateX(${position}px)`;
+          });
+          
+          track.addEventListener('touchend', () => {
+            isDragging = false;
+          });
+          
+          track.style.cursor = 'grab';
           autoScroll();
         }
       });
