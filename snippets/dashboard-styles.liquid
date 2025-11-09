@@ -172,7 +172,9 @@
     }
     
     body.sidebar-open .header > *:not(.mobile-toggle) {
-      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transform: translateZ(0) !important;
     }
     
     /* Ensure mobile toggle (X) is visible and clickable above everything */
