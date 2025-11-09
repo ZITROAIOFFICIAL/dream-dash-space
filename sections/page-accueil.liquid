@@ -2141,16 +2141,39 @@
             <!-- Bottom Text Section -->
             <div class="withdrawals-text-section">
               <div class="withdrawals-title-row">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 0.5rem;">
-                  <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="rgba(255, 255, 255, 0.6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M2 17L12 22L22 17" stroke="rgba(255, 255, 255, 0.6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M2 12L12 17L22 12" stroke="rgba(255, 255, 255, 0.6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <svg id="atom-withdrawals" width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0; margin-right: 0.5rem;">
+                  <defs>
+                    <filter id="softGlowWithdrawals" x="-50%" y="-50%" width="200%" height="200%">
+                      <feGaussianBlur stdDeviation="1.2" result="b"/>
+                      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                    <path id="orbit0Withdrawals" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                    <path id="orbit1Withdrawals" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                    <path id="orbit2Withdrawals" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+                  </defs>
+                  <g stroke="#68859e" stroke-width="2" fill="none">
+                    <use href="#orbit0Withdrawals"/>
+                    <use href="#orbit1Withdrawals"/>
+                    <use href="#orbit2Withdrawals"/>
+                  </g>
+                  <g stroke-linecap="round" filter="url(#softGlowWithdrawals)">
+                    <use href="#orbit0Withdrawals" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                      <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                    </use>
+                    <use href="#orbit1Withdrawals" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                      <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                    </use>
+                    <use href="#orbit2Withdrawals" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                      <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                    </use>
+                  </g>
+                  <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
                 </svg>
-                <span class="withdrawals-label">Balance</span>
+                <span class="withdrawals-label">Résultats</span>
               </div>
-              <h2 class="withdrawals-main-title">Global Withdrawals</h2>
+              <h2 class="withdrawals-main-title">Bilan des paris en direct</h2>
               <p class="withdrawals-description">
-                Recieve payouts with LTC, USDT & local bank transfers. Choose between automatic or instant payouts through our platform.
+                Profit total, paris placés, gagnés et perdus — mis à jour automatiquement par notre ia dans la section historique.
               </p>
             </div>
           </div>
