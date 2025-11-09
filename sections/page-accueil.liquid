@@ -1618,12 +1618,39 @@
 
         <!-- Card 2: Fidelity Analytics -->
         <a href="#" class="feature-card">
-          <div class="feature-card-background">
+          <div class="feature-card-background analytics-graph-container">
             <img 
               src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Untitled_design-46.svg?v=1762717490" 
               alt="Analytics visualization"
-              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;"
+              class="analytics-graph-image"
             />
+            
+            <!-- Tooltip -->
+            <div class="analytics-tooltip" style="display: none;">
+              <div class="tooltip-date"></div>
+              <div class="tooltip-data">
+                <div class="tooltip-item">
+                  <span class="tooltip-color" style="background: #5b8def;"></span>
+                  <span class="tooltip-label">Sales</span>
+                  <span class="tooltip-value sales-value"></span>
+                </div>
+                <div class="tooltip-item">
+                  <span class="tooltip-color" style="background: #f59e0b;"></span>
+                  <span class="tooltip-label">Revenue</span>
+                  <span class="tooltip-value revenue-value"></span>
+                </div>
+                <div class="tooltip-item">
+                  <span class="tooltip-color" style="background: #ffffff;"></span>
+                  <span class="tooltip-label">Customers</span>
+                  <span class="tooltip-value customers-value"></span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Points indicateurs -->
+            <div class="graph-point blue-point" style="display: none;"></div>
+            <div class="graph-point orange-point" style="display: none;"></div>
+            <div class="graph-point white-point" style="display: none;"></div>
           </div>
           <div class="feature-card-content">
             <h3 class="feature-card-label">
@@ -2817,3 +2844,107 @@
   ]
 }
 {% endschema %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const graphContainer = document.querySelector('.analytics-graph-container');
+  if (!graphContainer) return;
+  
+  const tooltip = graphContainer.querySelector('.analytics-tooltip');
+  const bluePoint = graphContainer.querySelector('.blue-point');
+  const orangePoint = graphContainer.querySelector('.orange-point');
+  const whitePoint = graphContainer.querySelector('.white-point');
+  
+  // Données du graphique (mois avec valeurs progressives)
+  const dataPoints = [
+    { date: 'Jan \'23', sales: 150, revenue: 45, customers: 90, x: 0.05 },
+    { date: 'Fév \'23', sales: 180, revenue: 55, customers: 110, x: 0.15 },
+    { date: 'Mar \'23', sales: 210, revenue: 70, customers: 130, x: 0.25 },
+    { date: 'Avr \'23', sales: 250, revenue: 85, customers: 160, x: 0.35 },
+    { date: 'Mai \'23', sales: 280, revenue: 120, customers: 180, x: 0.45 },
+    { date: 'Juin \'23', sales: 320, revenue: 180, customers: 210, x: 0.55 },
+    { date: 'Juil \'23', sales: 380, revenue: 240, customers: 250, x: 0.65 },
+    { date: 'Août \'23', sales: 420, revenue: 310, customers: 270, x: 0.75 },
+    { date: 'Sep \'23', sales: 480, revenue: 390, customers: 290, x: 0.85 },
+    { date: 'Oct \'23', sales: 520, revenue: 440, customers: 310, x: 0.90 },
+    { date: 'Déc \'23', sales: 550, revenue: 480, customers: 320, x: 0.95 }
+  ];
+  
+  // Courbes simulées (positions Y pour chaque ligne en fonction de X)
+  function getYPositionForLine(xPercent, lineType) {
+    // Simulation basée sur l'image - les courbes suivent une progression
+    const baseHeight = 0.7; // Début en bas
+    const progression = (xPercent - 0.05) / 0.9; // Normaliser de 0 à 1
+    
+    if (lineType === 'blue') {
+      return baseHeight - (progression * 0.5) - Math.sin(xPercent * 3) * 0.05;
+    } else if (lineType === 'orange') {
+      return baseHeight - (progression * 0.4) - Math.sin(xPercent * 3.5) * 0.04;
+    } else { // white
+      return baseHeight - (progression * 0.2) - Math.sin(xPercent * 4) * 0.03;
+    }
+  }
+  
+  function updateTooltip(e) {
+    const rect = graphContainer.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const xPercent = x / rect.width;
+    
+    // Trouver le point de données le plus proche
+    let closestPoint = dataPoints[0];
+    let minDist = Math.abs(xPercent - dataPoints[0].x);
+    
+    for (let point of dataPoints) {
+      const dist = Math.abs(xPercent - point.x);
+      if (dist < minDist) {
+        minDist = dist;
+        closestPoint = point;
+      }
+    }
+    
+    // Mettre à jour le contenu du tooltip
+    tooltip.querySelector('.tooltip-date').textContent = closestPoint.date;
+    tooltip.querySelector('.sales-value').textContent = closestPoint.sales;
+    tooltip.querySelector('.revenue-value').textContent = closestPoint.revenue;
+    tooltip.querySelector('.customers-value').textContent = closestPoint.customers;
+    
+    // Calculer les positions Y pour chaque ligne
+    const blueY = getYPositionForLine(closestPoint.x, 'blue');
+    const orangeY = getYPositionForLine(closestPoint.x, 'orange');
+    const whiteY = getYPositionForLine(closestPoint.x, 'white');
+    
+    // Positionner les points
+    bluePoint.style.left = (closestPoint.x * 100) + '%';
+    bluePoint.style.top = (blueY * 100) + '%';
+    bluePoint.style.transform = 'translate(-50%, -50%)';
+    bluePoint.style.display = 'block';
+    
+    orangePoint.style.left = (closestPoint.x * 100) + '%';
+    orangePoint.style.top = (orangeY * 100) + '%';
+    orangePoint.style.transform = 'translate(-50%, -50%)';
+    orangePoint.style.display = 'block';
+    
+    whitePoint.style.left = (closestPoint.x * 100) + '%';
+    whitePoint.style.top = (whiteY * 100) + '%';
+    whitePoint.style.transform = 'translate(-50%, -50%)';
+    whitePoint.style.display = 'block';
+    
+    // Positionner le tooltip au-dessus du point moyen
+    const avgY = (blueY + orangeY + whiteY) / 3;
+    tooltip.style.left = (closestPoint.x * 100) + '%';
+    tooltip.style.top = (avgY * 100 - 15) + '%';
+    tooltip.style.transform = 'translate(-50%, -100%)';
+    tooltip.style.display = 'block';
+  }
+  
+  function hideTooltip() {
+    tooltip.style.display = 'none';
+    bluePoint.style.display = 'none';
+    orangePoint.style.display = 'none';
+    whitePoint.style.display = 'none';
+  }
+  
+  graphContainer.addEventListener('mousemove', updateTooltip);
+  graphContainer.addEventListener('mouseleave', hideTooltip);
+});
+</script>
