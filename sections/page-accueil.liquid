@@ -1627,21 +1627,41 @@
           </div>
           <div class="feature-card-content">
             <h3 class="feature-card-label">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
-                <path d="m19 9-5 5-4-4-3 3"></path>
+              <svg id="atom-desktop" width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                <defs>
+                  <filter id="softGlowDesktopClone" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="1.2" result="b"/>
+                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                  <path id="orbit0DesktopClone" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                  <path id="orbit1DesktopClone" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                  <path id="orbit2DesktopClone" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+                </defs>
+                <g stroke="#68859e" stroke-width="2" fill="none">
+                  <use href="#orbit0DesktopClone"/>
+                  <use href="#orbit1DesktopClone"/>
+                  <use href="#orbit2DesktopClone"/>
+                </g>
+                <g stroke-linecap="round" filter="url(#softGlowDesktopClone)">
+                  <use href="#orbit0DesktopClone" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                  <use href="#orbit1DesktopClone" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                  <use href="#orbit2DesktopClone" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                </g>
+                <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
               </svg>
-              Analytics
+              Données
             </h3>
             <p class="feature-card-title">
-              Fidelity Analytics
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14"></path>
-                <path d="m12 5 7 7-7 7"></path>
-              </svg>
+              Suivi des résultats ia →
             </p>
             <p class="feature-card-description">
-              Get deep insights into customer behavior and betting patterns with our advanced analytics dashboard.
+              Nous avons un historique qui montre exactement les résultats.
             </p>
           </div>
         </a>
