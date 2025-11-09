@@ -1500,9 +1500,75 @@
         <!-- Card 1: Global Payments -->
         <a href="#" class="feature-card" style="background: #000000;">
           <div class="feature-card-background">
-            <video autoplay muted loop playsinline poster="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Untitled_design-62_af01ab5b-40d7-4744-983c-722d32577d62.png?v=1762672791" style="position: absolute; top: 0; left: 0; width: 350px; height: auto; z-index: 10;">
+            <!-- Image pour mode économie d'énergie -->
+            <img id="global-payment-image" src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Untitled_design-62_af01ab5b-40d7-4744-983c-722d32577d62.png?v=1762672791" 
+                 alt="Global Payments" 
+                 style="position: absolute; top: 0; left: 0; width: 350px; height: auto; z-index: 10; display: none;">
+
+            <!-- Vidéo pour mode normal -->
+            <video id="global-payment-video" autoplay muted loop playsinline 
+                   style="position: absolute; top: 0; left: 0; width: 350px; height: auto; z-index: 10;">
               <source src="https://cdn.shopify.com/videos/c/o/v/da4f44ae10c5414389cf41fc21656621.mp4" type="video/mp4">
             </video>
+
+            <script>
+            (function() {
+              const video = document.getElementById('global-payment-video');
+              const image = document.getElementById('global-payment-image');
+              
+              async function detectPowerSavingMode() {
+                let isPowerSaving = false;
+                
+                // 1. Vérifier la préférence de mouvement réduit
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                  isPowerSaving = true;
+                }
+                
+                // 2. Vérifier la Battery API (si disponible)
+                if ('getBattery' in navigator) {
+                  try {
+                    const battery = await navigator.getBattery();
+                    // Mode économie si batterie < 20% ou si en charge avec niveau bas
+                    if (battery.level < 0.2 || (battery.charging && battery.level < 0.5)) {
+                      isPowerSaving = true;
+                    }
+                  } catch (e) {
+                    console.log('Battery API non disponible');
+                  }
+                }
+                
+                // 3. Vérifier si la vidéo peut jouer (détection indirecte du mode économie)
+                const canPlay = await new Promise((resolve) => {
+                  video.play().then(() => resolve(true)).catch(() => resolve(false));
+                });
+                
+                if (!canPlay) {
+                  isPowerSaving = true;
+                }
+                
+                return isPowerSaving;
+              }
+              
+              // Appliquer la logique d'affichage
+              detectPowerSavingMode().then(isPowerSaving => {
+                if (isPowerSaving) {
+                  // Mode économie d'énergie : afficher l'image uniquement
+                  video.style.display = 'none';
+                  video.pause();
+                  image.style.display = 'block';
+                } else {
+                  // Mode normal : afficher la vidéo
+                  video.style.display = 'block';
+                  image.style.display = 'none';
+                  video.play().catch(() => {
+                    // Si la vidéo ne peut pas jouer, afficher l'image
+                    video.style.display = 'none';
+                    image.style.display = 'block';
+                  });
+                }
+              });
+            })();
+            </script>
             <canvas class="feature-card-canvas" style="width:600px;height:600px;max-width:100%;aspect-ratio:1" width="942" height="1200"></canvas>
           </div>
           <div class="feature-card-content">
