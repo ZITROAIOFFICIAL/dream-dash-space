@@ -1448,21 +1448,65 @@
           </div>
           <div class="providers-card-content">
             <h3 class="providers-card-label">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect width="20" height="14" x="2" y="5" rx="2"></rect>
-                <line x1="2" x2="22" y1="10" y2="10"></line>
+              <svg role="img" aria-label="Icône atomique animée" width="16" height="16" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <filter id="softGlowLabel2" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="1.2" result="b" />
+                    <feMerge>
+                      <feMergeNode in="b" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                  <path id="orbit0Label2" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000" />
+                  <path id="orbit1Label2" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000" />
+                  <path id="orbit2Label2" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000" />
+                </defs>
+                <g stroke="currentColor" stroke-width="2" fill="none" opacity="0.5">
+                  <use href="#orbit0Label2" />
+                  <use href="#orbit1Label2" />
+                  <use href="#orbit2Label2" />
+                </g>
+                <g stroke-linecap="round" filter="url(#softGlowLabel2)" stroke="currentColor">
+                  <use href="#orbit0Label2" stroke-width="2" fill="none" stroke-dasharray="26 974">
+                    <animate attributeName="stroke-dashoffset" values="26;-974" dur="16s" repeatCount="indefinite" begin="0s" />
+                  </use>
+                  <circle r="3" fill="currentColor">
+                    <animateMotion dur="16s" repeatCount="indefinite" rotate="auto" begin="0s">
+                      <mpath href="#orbit0Label2" />
+                    </animateMotion>
+                  </circle>
+                  <use href="#orbit1Label2" stroke-width="2" fill="none" stroke-dasharray="26 974">
+                    <animate attributeName="stroke-dashoffset" values="26;-974" dur="16s" repeatCount="indefinite" begin="5s" />
+                  </use>
+                  <circle r="3" fill="currentColor">
+                    <animateMotion dur="16s" repeatCount="indefinite" rotate="auto" begin="5s">
+                      <mpath href="#orbit1Label2" />
+                    </animateMotion>
+                  </circle>
+                  <use href="#orbit2Label2" stroke-width="2" fill="none" stroke-dasharray="26 974">
+                    <animate attributeName="stroke-dashoffset" values="26;-974" dur="16s" repeatCount="indefinite" begin="10s" />
+                  </use>
+                  <circle r="3" fill="currentColor">
+                    <animateMotion dur="16s" repeatCount="indefinite" rotate="auto" begin="10s">
+                      <mpath href="#orbit2Label2" />
+                    </animateMotion>
+                  </circle>
+                </g>
+                <text x="100" y="108" text-anchor="middle" fill="currentColor" font-size="32" font-weight="700" font-family="system-ui, -apple-system, sans-serif">
+                  IA
+                </text>
               </svg>
-              Paiement
+              Analyse ia
             </h3>
             <p class="providers-card-title">
-              20+ Fournisseurs de Cartes
+              Example de ce que notre ia suit en continue
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="providers-arrow">
                 <path d="M5 12h14"></path>
                 <path d="m12 5 7 7-7 7"></path>
               </svg>
             </p>
             <p class="providers-card-description">
-              Acceptez une variété de fournisseurs de cartes avec notre plateforme de paiement globale avec support des méthodes natives, Apple Pay et Google Pay.
+              Données de marché, prix et tendances mises à jour en continu. Les badges ci-dessous montrent une partie seulement de ce qu'elle suit pour trouver les paris aux meilleures chances de passer. L'analyse complète de chaque bet apparaît directement sur nos cartes.
             </p>
           </div>
         </div>
