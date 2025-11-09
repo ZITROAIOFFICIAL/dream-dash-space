@@ -2184,8 +2184,38 @@
     <!-- Section Statistics Platform -->
     <section class="stats-platform-section">
       <div class="stats-platform-container">
-        <h2 class="stats-platform-title">A 🤝 secure platform</h2>
-        <p class="stats-platform-description">See why our customers choose us for their payments.</p>
+        <h2 class="stats-platform-title" style="display: flex; align-items: center; justify-content: center; gap: 12px;">
+          <svg id="atom-stats-platform" width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+            <defs>
+              <filter id="softGlowStatsPlatform" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="1.2" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <path id="orbit0StatsPlatform" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+              <path id="orbit1StatsPlatform" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+              <path id="orbit2StatsPlatform" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+            </defs>
+            <g stroke="#68859e" stroke-width="2" fill="none">
+              <use href="#orbit0StatsPlatform"/>
+              <use href="#orbit1StatsPlatform"/>
+              <use href="#orbit2StatsPlatform"/>
+            </g>
+            <g stroke-linecap="round" filter="url(#softGlowStatsPlatform)">
+              <use href="#orbit0StatsPlatform" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+              </use>
+              <use href="#orbit1StatsPlatform" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+              </use>
+              <use href="#orbit2StatsPlatform" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+              </use>
+            </g>
+            <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+          </svg>
+          Des chiffres qui parlent
+        </h2>
+        <p class="stats-platform-description">Mise à jour en continu par notre ia.</p>
         
         <div class="stats-platform-grid">
           <div class="stats-platform-vline stats-platform-vline--left">
@@ -2201,9 +2231,9 @@
 
           <div class="stats-platform-item">
             <div class="stats-platform-value">
-              <span class="stats-platform-number" data-target="200">0</span><span class="stats-platform-suffix">M+</span>
+              <span class="stats-platform-number" data-target="100000">0</span><span class="stats-platform-suffix">+</span>
             </div>
-            <div class="stats-platform-label">USD Transactions Processed</div>
+            <div class="stats-platform-label">données analysées / jour</div>
           </div>
           
           <div class="stats-platform-separator">
@@ -2214,9 +2244,9 @@
 
           <div class="stats-platform-item">
             <div class="stats-platform-value">
-              <span class="stats-platform-number" data-target="1200">0</span><span class="stats-platform-suffix">+</span>
+              <span class="stats-platform-number" data-target="1000">0</span><span class="stats-platform-suffix">+</span>
             </div>
-            <div class="stats-platform-label">Merchants Worldwide</div>
+            <div class="stats-platform-label">abonnés actifs</div>
           </div>
           
           <div class="stats-platform-separator">
@@ -2227,9 +2257,9 @@
 
           <div class="stats-platform-item">
             <div class="stats-platform-value">
-              <span class="stats-platform-number" data-target="160">0</span><span class="stats-platform-suffix">+</span>
+              <span class="stats-platform-number" data-target="65">0</span><span class="stats-platform-suffix">%+</span>
             </div>
-            <div class="stats-platform-label">Countries Supported</div>
+            <div class="stats-platform-label">win rate historique</div>
           </div>
         </div>
       </div>
