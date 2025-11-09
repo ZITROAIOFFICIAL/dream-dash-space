@@ -1617,7 +1617,7 @@
         </a>
 
         <!-- Card 2: Fidelity Analytics -->
-        <a href="#" class="feature-card">
+        <a href="javascript:void(0)" class="feature-card">
           <div class="feature-card-background analytics-graph-container">
             <img 
               src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Untitled_design-46.svg?v=1762717490" 
@@ -2934,16 +2934,37 @@ document.addEventListener('DOMContentLoaded', function() {
   graphContainer.addEventListener('mousemove', updateTooltip);
   graphContainer.addEventListener('mouseleave', resetTooltip);
   
-  // Support tactile pour mobile
-  graphContainer.addEventListener('touchmove', function(e) {
-    e.preventDefault();
-    const touch = e.touches[0];
-    const mouseEvent = new MouseEvent('mousemove', {
-      clientX: touch.clientX,
-      clientY: touch.clientY
-    });
-    graphContainer.dispatchEvent(mouseEvent);
+  // Support tactile pour mobile avec détection de direction
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let isHorizontalSwipe = false;
+  
+  graphContainer.addEventListener('touchstart', function(e) {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    isHorizontalSwipe = false;
   });
+  
+  graphContainer.addEventListener('touchmove', function(e) {
+    const touch = e.touches[0];
+    const deltaX = Math.abs(touch.clientX - touchStartX);
+    const deltaY = Math.abs(touch.clientY - touchStartY);
+    
+    // Déterminer si c'est un mouvement horizontal (pour le graphique) ou vertical (pour le scroll)
+    if (!isHorizontalSwipe && deltaX > 10 || deltaY > 10) {
+      isHorizontalSwipe = deltaX > deltaY;
+    }
+    
+    // Seulement empêcher le scroll et mettre à jour le tooltip si c'est un mouvement horizontal
+    if (isHorizontalSwipe) {
+      e.preventDefault();
+      const mouseEvent = new MouseEvent('mousemove', {
+        clientX: touch.clientX,
+        clientY: touch.clientY
+      });
+      graphContainer.dispatchEvent(mouseEvent);
+    }
+  }, { passive: false });
   
   graphContainer.addEventListener('touchend', resetTooltip);
 });
