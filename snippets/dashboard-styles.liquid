@@ -171,7 +171,8 @@
       z-index: 100;
     }
     
-    body.sidebar-open .header > *:not(.mobile-toggle) {
+    /* Cacher les badges/logo dupliqués dans le sidebar quand il est ouvert */
+    body.sidebar-open .sidebar .mobile-only {
       display: none !important;
     }
     
