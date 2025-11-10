@@ -1071,13 +1071,20 @@
       <div class="rejoindre-container" style="max-width: 1200px; margin: 0 auto;">
         <!-- Bouton retour à l'accueil -->
         <div class="rejoindre-header" style="max-width:1200px;margin:0 auto 1.5rem;display:flex;align-items:center;">
-          <a href="#" class="back-to-home" style="display:inline-flex;align-items:center;gap:0.5rem;color:#fff;text-decoration:none;padding:.5rem 1rem;border:1px solid rgba(82,82,91,.4);border-radius:9999px;background:rgba(39,39,42,.6);transition:all 0.3s ease;">
+          <a href="#" class="back-to-home" style="display:inline-flex;align-items:center;gap:0.5rem;color:#fff;text-decoration:none;padding:.5rem 1rem;border:1px solid rgba(82,82,91,.4);border-radius:9999px;background:rgba(39,39,42,.6);transition:all 0.3s ease;margin-top:-3rem;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="flex-shrink:0">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7 7-7M3 12h18"></path>
             </svg>
             <span>Retour à l'accueil</span>
           </a>
         </div>
+        <style>
+          @media (min-width: 769px) {
+            .back-to-home {
+              margin-top: 0 !important;
+            }
+          }
+        </style>
         
         <!-- Logo Winabet -->
         <div style="text-align: center; margin-bottom: 3rem;">
