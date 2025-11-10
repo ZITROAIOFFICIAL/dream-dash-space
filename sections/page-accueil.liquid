@@ -1069,6 +1069,12 @@
     <!-- Section Rejoindre -->
     <section id="rejoindre" class="rejoindre-section" style="display:none; background: linear-gradient(180deg, #000000 0%, #0a0a0a 100%); padding: 2rem 2rem 6rem; min-height: 100vh;">
       <style>
+        @media (max-width: 768px) {
+          .logo-abonnement-container {
+            left: 60% !important;
+          }
+        }
+        
         @media (min-width: 769px) {
           #rejoindre.rejoindre-section {
             padding: 6rem 2rem !important;
@@ -1122,7 +1128,7 @@
               </svg>
               
               <!-- Logo et texte Abonnement centrés ensemble -->
-              <div style="position: absolute; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 2rem;">
+              <div class="logo-abonnement-container" style="position: absolute; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 2rem;">
                 <div style="font-family: 'Outfit', sans-serif; font-size: 2.5rem; letter-spacing: -0.02em; font-weight: 300;">
                   <span style="color: #ffffff;">wina</span><span style="color: rgba(255, 255, 255, 0.35);">bet</span><span style="color: #ffffff; font-size: 0.8rem; margin-left: -0.15em;">.ai</span>
                 </div>
