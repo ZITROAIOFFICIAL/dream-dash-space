@@ -22,6 +22,34 @@
       --laptop-right-transform: 10rem;
       --laptop-nav-gap: 1.75rem;
       --laptop-scrolled-width: calc(100% - 15rem);
+      
+      /* ===== TAILLE VIDÉO - MODIFIEZ ICI ===== */
+      /* Desktop: largeur max de la vidéo */
+      --video-max-width-desktop: 1200px;
+      
+      /* Mobile: largeur max de la vidéo */
+      --video-max-width-mobile: 100%;
+    }
+    
+    /* Style pour les vidéos */
+    .video-container {
+      width: 100%;
+      max-width: var(--video-max-width-desktop);
+      margin: 0 auto 2rem auto;
+    }
+    
+    .video-container video {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      display: block;
+    }
+    
+    /* Mobile: appliquer la largeur mobile */
+    @media (max-width: 768px) {
+      .video-container {
+        max-width: var(--video-max-width-mobile);
+      }
     }
     
     /* ==================== DESKTOP UNIQUEMENT - AJUSTEMENTS FACILES ==================== */
@@ -666,13 +694,12 @@
     <div id="page-bet" class="page active">
       <div class="container">
         <!-- Vidéo en boucle -->
-        <div style="width: 100%; max-width: 1200px; margin: 0 auto 2rem auto;">
+        <div class="video-container">
           <video 
             autoplay 
             loop 
             muted 
-            playsinline 
-            style="width: 100%; height: auto; border-radius: 12px; display: block;"
+            playsinline
           >
             <source src="https://cdn.shopify.com/videos/c/o/v/8d4ee094c0044c0e8bdb95482b822830.mp4" type="video/mp4">
             Votre navigateur ne supporte pas la lecture de vidéos.
@@ -943,13 +970,12 @@
     <div id="page-parlay" class="page">
       <div class="container">
         <!-- Vidéo en boucle -->
-        <div style="width: 100%; max-width: 1200px; margin: 0 auto 2rem auto;">
+        <div class="video-container">
           <video 
             autoplay 
             loop 
             muted 
-            playsinline 
-            style="width: 100%; height: auto; border-radius: 12px; display: block;"
+            playsinline
           >
             <source src="https://cdn.shopify.com/videos/c/o/v/8d4ee094c0044c0e8bdb95482b822830.mp4" type="video/mp4">
             Votre navigateur ne supporte pas la lecture de vidéos.
