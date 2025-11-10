@@ -1773,12 +1773,36 @@
             }
             
             .pricing-options-grid {
-              grid-template-columns: repeat(2, 1fr) !important;
-              gap: 0.75rem;
+              grid-template-columns: repeat(3, 1fr) !important;
+              gap: 0.5rem;
             }
             
             .pricing-option {
-              padding: 0.875rem 1rem !important;
+              padding: 0.5rem 0.5rem !important;
+              font-size: 0.75rem;
+            }
+            
+            .pricing-option[data-plan="monthly"],
+            .pricing-option[data-plan="quarterly"],
+            .pricing-option[data-plan="annually"] {
+              grid-column: span 1;
+            }
+            
+            .pricing-option[data-plan="interac"] {
+              grid-column: span 3;
+              padding: 0.75rem 1rem !important;
+            }
+            
+            .pricing-option > div {
+              font-size: 0.7rem !important;
+            }
+            
+            .pricing-option > div[style*="font-size: 1.5rem"] {
+              font-size: 1rem !important;
+            }
+            
+            .pricing-option > div[style*="font-size: 1.1rem"] {
+              font-size: 0.85rem !important;
             }
             
             #continue-payment-btn {
