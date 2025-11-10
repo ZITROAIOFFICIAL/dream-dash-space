@@ -296,9 +296,15 @@
     <nav class="sidebar-nav">
       <!-- Auth Buttons -->
       <div style="padding: 1.95rem 1.95rem 2.6rem 1.95rem; display: flex; flex-direction: column; gap: 0.975rem;">
-        <a href="#" class="auth-btn-white">
-          Se Connecter
-        </a>
+        {% if customer %}
+          <a href="https://account.winabet.ai" class="auth-btn-white">
+            Connecté ✓
+          </a>
+        {% else %}
+          <a href="https://account.winabet.ai" class="auth-btn-white">
+            Se Connecter
+          </a>
+        {% endif %}
         <a href="#" class="auth-btn-gray">
           Commencer Gratuitement
         </a>
@@ -499,7 +505,11 @@
 
       <!-- Right: Auth Buttons -->
       <div class="desktop-right">
-        <a href="#" class="desktop-auth-link">Se Connecter</a>
+        {% if customer %}
+          <a href="https://account.winabet.ai" class="desktop-auth-link">Connecté ✓</a>
+        {% else %}
+          <a href="https://account.winabet.ai" class="desktop-auth-link">Se Connecter</a>
+        {% endif %}
         <a href="#" class="desktop-auth-btn">Commencer Gratuitement</a>
       </div>
     </div>
