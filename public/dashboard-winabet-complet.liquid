@@ -653,6 +653,64 @@
       </a>
     </nav>
 
+    <!-- Sticky Footer for Plan Selection -->
+    <div id="sticky-plan-footer" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000; background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(10px); border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 1.5rem 2rem;">
+      <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem;">
+        
+        <!-- Options de paiement en grille -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+          
+          <!-- Option Mensuelle -->
+          <label class="plan-option" data-plan="monthly" style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: rgba(113, 113, 122, 0.08); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 0.75rem; cursor: pointer; transition: all 0.3s;">
+            <input type="radio" name="payment-frequency" value="monthly" style="width: 20px; height: 20px; cursor: pointer; accent-color: #ffffff;">
+            <div style="flex: 1;">
+              <div style="font-size: 1.2rem; font-weight: 500; margin-bottom: 0.25rem;">Mensuel</div>
+              <div style="font-size: 1.5rem; font-weight: 600; color: #ffffff; margin-bottom: 0.25rem;">99$ / mois</div>
+              <div style="font-size: 0.85rem; color: rgba(255, 255, 255, 0.6);">Facturé 99$ chaque mois</div>
+            </div>
+          </label>
+
+          <!-- Option Trimestrielle -->
+          <label class="plan-option" data-plan="quarterly" style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: rgba(113, 113, 122, 0.08); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 0.75rem; cursor: pointer; transition: all 0.3s;">
+            <input type="radio" name="payment-frequency" value="quarterly" style="width: 20px; height: 20px; cursor: pointer; accent-color: #ffffff;">
+            <div style="flex: 1;">
+              <div style="font-size: 1.2rem; font-weight: 500; margin-bottom: 0.25rem;">Trimestriel</div>
+              <div style="font-size: 1.5rem; font-weight: 600; color: #ffffff; margin-bottom: 0.25rem;">79.99$ / mois</div>
+              <div style="font-size: 0.85rem; color: rgba(255, 255, 255, 0.6);">Facturé 239.97$ tous les 3 mois</div>
+            </div>
+          </label>
+
+          <!-- Option Semestrielle (RECOMMANDÉ) -->
+          <label class="plan-option" data-plan="biannually" style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: rgba(113, 113, 122, 0.08); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 0.75rem; cursor: pointer; transition: all 0.3s; position: relative;">
+            <div style="position: absolute; top: -0.5rem; right: 1rem; background: #ffffff; color: #000000; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em;">RECOMMANDÉ</div>
+            <input type="radio" name="payment-frequency" value="biannually" style="width: 20px; height: 20px; cursor: pointer; accent-color: #ffffff;">
+            <div style="flex: 1;">
+              <div style="font-size: 1.2rem; font-weight: 500; margin-bottom: 0.25rem;">Semestriel</div>
+              <div style="font-size: 1.5rem; font-weight: 600; color: #ffffff; margin-bottom: 0.25rem;">64.99$ / mois</div>
+              <div style="font-size: 0.85rem; color: rgba(255, 255, 255, 0.6);">Facturé 389.94$ tous les 6 mois</div>
+            </div>
+          </label>
+
+          <!-- Option Annuelle (MEILLEURE VALEUR) -->
+          <label class="plan-option" data-plan="annually" style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: rgba(113, 113, 122, 0.08); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 0.75rem; cursor: pointer; transition: all 0.3s; position: relative;">
+            <div style="position: absolute; top: -0.5rem; right: 1rem; background: #ffffff; color: #000000; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em;">MEILLEURE VALEUR</div>
+            <input type="radio" name="payment-frequency" value="annually" style="width: 20px; height: 20px; cursor: pointer; accent-color: #ffffff;">
+            <div style="flex: 1;">
+              <div style="font-size: 1.2rem; font-weight: 500; margin-bottom: 0.25rem;">Annuel</div>
+              <div style="font-size: 1.5rem; font-weight: 600; color: #ffffff; margin-bottom: 0.25rem;">49.99$ / mois</div>
+              <div style="font-size: 0.85rem; color: rgba(255, 255, 255, 0.6);">Facturé 599.88$ / an</div>
+            </div>
+          </label>
+
+        </div>
+
+        <!-- Bouton Continuer -->
+        <button id="continue-to-checkout" disabled style="background: #ffffff; color: #000000; border: none; padding: 1.25rem 2.5rem; border-radius: 0.75rem; font-size: 1.2rem; font-weight: 600; cursor: not-allowed; transition: all 0.3s; font-family: 'Outfit', sans-serif; opacity: 0.5; width: 100%;">
+          Continuer vers le paiement
+        </button>
+      </div>
+    </div>
+
     <div class="sidebar-footer">
       © 2024 WINABET.AI
     </div>
@@ -1923,7 +1981,70 @@
       </div>
     </div>
 
-    <!-- PAGE 9: CONNEXION REQUISE -->
+    <!-- PAGE 9: SÉLECTION DE PLANS -->
+    <div id="page-selection-plans" class="page">
+      <div class="container" style="max-width: 1200px; margin: 0 auto; padding-bottom: 200px;">
+        <!-- Hero Section -->
+        <div style="text-align: center; margin-bottom: 3rem;">
+          <h1 style="font-size: 3.5rem; margin-bottom: 1rem; font-weight: 300;">Rejoignez WINABET.AI</h1>
+          <p class="subtitle" style="font-size: 1.3rem; margin-bottom: 2rem; color: rgba(255, 255, 255, 0.7);">
+            Commencez avec 1 jour d'essai gratuit, puis continuez avec la fréquence de paiement qui vous convient
+          </p>
+        </div>
+
+        <!-- Avantages du plan -->
+        <div style="background: rgba(113, 113, 122, 0.08); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1rem; padding: 2.5rem; margin-bottom: 3rem;">
+          <h2 style="font-size: 2rem; margin-bottom: 2rem; text-align: center; font-weight: 300;">Ce que vous obtenez</h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+            <div style="display: flex; align-items: start; gap: 1rem;">
+              <div style="flex-shrink: 0; width: 24px; height: 24px; background: rgba(255, 255, 255, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem;">✓</div>
+              <div>
+                <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; font-weight: 500;">Accès complet aux bets du jour</h3>
+                <p style="color: rgba(255, 255, 255, 0.6); font-size: 0.95rem;">Recevez nos meilleures recommandations quotidiennes analysées par IA</p>
+              </div>
+            </div>
+            <div style="display: flex; align-items: start; gap: 1rem;">
+              <div style="flex-shrink: 0; width: 24px; height: 24px; background: rgba(255, 255, 255, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem;">✓</div>
+              <div>
+                <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; font-weight: 500;">Parlays à haute probabilité</h3>
+                <p style="color: rgba(255, 255, 255, 0.6); font-size: 0.95rem;">Maximisez vos gains avec nos combinaisons optimisées</p>
+              </div>
+            </div>
+            <div style="display: flex; align-items: start; gap: 1rem;">
+              <div style="flex-shrink: 0; width: 24px; height: 24px; background: rgba(255, 255, 255, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem;">✓</div>
+              <div>
+                <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; font-weight: 500;">Historique complet</h3>
+                <p style="color: rgba(255, 255, 255, 0.6); font-size: 0.95rem;">Suivez toutes vos performances et statistiques</p>
+              </div>
+            </div>
+            <div style="display: flex; align-items: start; gap: 1rem;">
+              <div style="flex-shrink: 0; width: 24px; height: 24px; background: rgba(255, 255, 255, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem;">✓</div>
+              <div>
+                <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; font-weight: 500;">Support prioritaire</h3>
+                <p style="color: rgba(255, 255, 255, 0.6); font-size: 0.95rem;">Bénéficiez d'une assistance rapide et dédiée</p>
+              </div>
+            </div>
+            <div style="display: flex; align-items: start; gap: 1rem;">
+              <div style="flex-shrink: 0; width: 24px; height: 24px; background: rgba(255, 255, 255, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem;">✓</div>
+              <div>
+                <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; font-weight: 500;">Mises à jour IA en temps réel</h3>
+                <p style="color: rgba(255, 255, 255, 0.6); font-size: 0.95rem;">Profitez des dernières analyses de notre système IA</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Choix de la fréquence de paiement -->
+        <div style="text-align: center; margin-bottom: 150px;">
+          <h2 style="font-size: 2rem; margin-bottom: 3rem; font-weight: 300;">Choisissez votre fréquence de paiement</h2>
+          <p style="color: rgba(255, 255, 255, 0.6); font-size: 1rem; margin-bottom: 2rem;">
+            Toutes les options incluent 1 jour d'essai gratuit
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 10: CONNEXION REQUISE -->
     <div id="page-auth-required" class="page">
       <div class="container" style="max-width: 800px; margin: 0 auto; text-align: center; padding-top: 8rem;">
         <div style="font-size: 8rem; margin-bottom: 2rem; opacity: 0.8;">🔒</div>
@@ -3364,6 +3485,16 @@
         window.loadParlayHistory();
       }
 
+      // Afficher/masquer le sticky footer pour la page de sélection de plans
+      const stickyFooter = document.getElementById('sticky-plan-footer');
+      if (stickyFooter) {
+        if (pageName === 'selection-plans') {
+          stickyFooter.style.display = 'block';
+        } else {
+          stickyFooter.style.display = 'none';
+        }
+      }
+
       // Update URL hash
       window.location.hash = pageName;
     }
@@ -3837,6 +3968,105 @@
       
       lastScrollTop = scrollTop;
     });
+
+    // ===== GESTION DE LA SÉLECTION DE PLANS =====
+    let selectedPlan = null;
+
+    // Données des plans
+    const plans = {
+      monthly: {
+        name: 'Mensuel',
+        price: '99$',
+        billing: 'Facturé 99$ chaque mois',
+        link: '' // À remplir plus tard
+      },
+      quarterly: {
+        name: 'Trimestriel',
+        price: '79.99$',
+        billing: 'Facturé 239.97$ tous les 3 mois',
+        link: '' // À remplir plus tard
+      },
+      biannually: {
+        name: 'Semestriel',
+        price: '64.99$',
+        billing: 'Facturé 389.94$ tous les 6 mois',
+        link: '' // À remplir plus tard
+      },
+      annually: {
+        name: 'Annuel',
+        price: '49.99$',
+        billing: 'Facturé 599.88$ / an',
+        link: '' // À remplir plus tard
+      }
+    };
+
+    // Fonction de sélection de plan
+    function selectPlan(planKey) {
+      selectedPlan = planKey;
+      
+      // Mettre à jour l'UI des options
+      document.querySelectorAll('.plan-option').forEach(option => {
+        const optionPlanKey = option.dataset.plan;
+        const radio = option.querySelector('input[type="radio"]');
+        
+        if (optionPlanKey === planKey) {
+          option.style.border = '2px solid #ffffff';
+          option.style.background = 'rgba(113, 113, 122, 0.12)';
+          if (radio) radio.checked = true;
+        } else {
+          option.style.border = '2px solid rgba(255, 255, 255, 0.1)';
+          option.style.background = 'rgba(113, 113, 122, 0.08)';
+          if (radio) radio.checked = false;
+        }
+      });
+      
+      // Activer le bouton
+      const button = document.getElementById('continue-to-checkout');
+      if (button) {
+        button.disabled = false;
+        button.style.opacity = '1';
+        button.style.cursor = 'pointer';
+      }
+    }
+
+    // Fonction de redirection vers checkout
+    function continueToCheckout() {
+      if (!selectedPlan) return;
+      
+      const plan = plans[selectedPlan];
+      if (plan && plan.link) {
+        window.location.href = plan.link;
+      } else {
+        alert('Lien de paiement non configuré. Veuillez contacter le support.');
+      }
+    }
+
+    // Ajouter les écouteurs d'événements pour la page de sélection de plans
+    document.addEventListener('DOMContentLoaded', function() {
+      // Écouteurs pour les options de plan
+      const planOptions = document.querySelectorAll('.plan-option');
+      planOptions.forEach(option => {
+        option.addEventListener('click', function() {
+          const planKey = this.dataset.plan;
+          selectPlan(planKey);
+        });
+      });
+
+      // Écouteur pour le bouton continuer
+      const continueButton = document.getElementById('continue-to-checkout');
+      if (continueButton) {
+        continueButton.addEventListener('click', continueToCheckout);
+      }
+
+      // Vérifier si on doit afficher le sticky footer au chargement
+      const hash = window.location.hash.substring(1);
+      if (hash === 'selection-plans') {
+        const stickyFooter = document.getElementById('sticky-plan-footer');
+        if (stickyFooter) {
+          stickyFooter.style.display = 'block';
+        }
+      }
+    });
   </script>
 
   <!-- CSS pour l'animation flip -->
@@ -3860,6 +4090,43 @@
       display: inline-block;
       min-width: 2ch;
       text-align: center;
+    }
+
+    /* Responsive design pour le sticky footer de sélection de plans */
+    @media (max-width: 768px) {
+      #sticky-plan-footer {
+        padding: 1rem 1rem !important;
+      }
+      
+      #sticky-plan-footer > div > div:first-child {
+        grid-template-columns: 1fr !important;
+        gap: 0.75rem !important;
+      }
+      
+      .plan-option {
+        padding: 1rem !important;
+      }
+      
+      .plan-option > div > div:first-child {
+        font-size: 1rem !important;
+      }
+      
+      .plan-option > div > div:nth-child(2) {
+        font-size: 1.2rem !important;
+      }
+      
+      .plan-option > div > div:last-child {
+        font-size: 0.8rem !important;
+      }
+      
+      #continue-to-checkout {
+        font-size: 1rem !important;
+        padding: 1rem 2rem !important;
+      }
+      
+      #page-selection-plans .container {
+        padding-bottom: 450px !important;
+      }
     }
   </style>
 
