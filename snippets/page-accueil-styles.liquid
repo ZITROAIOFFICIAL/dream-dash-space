@@ -296,22 +296,16 @@
     <nav class="sidebar-nav">
       <!-- Auth Buttons -->
       <div style="padding: 1.95rem 1.95rem 2.6rem 1.95rem; display: flex; flex-direction: column; gap: 0.975rem;">
-        {% if customer %}
-          <a href="https://account.winabet.ai" class="auth-btn-white">
-            Connecté ✓
-          </a>
-        {% else %}
-          <a href="https://account.winabet.ai" class="auth-btn-white">
-            Se Connecter
-          </a>
-        {% endif %}
+        <a href="#" class="auth-btn-white">
+          Se Connecter
+        </a>
         <a href="#" class="auth-btn-gray">
           Commencer Gratuitement
         </a>
       </div>
 
       <!-- Navigation Links -->
-      <a class="nav-item" href="https://winabet.ai/pages/dashboard">
+      <a class="nav-item" href="https://winabet.ai/collections/all#bet">
         <span>Accéder au Dashboard</span>
         <svg class="chevron-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="9 18 15 12 9 6"></polyline>
@@ -497,7 +491,7 @@
 
         <!-- Menu Items -->
         <nav class="desktop-nav">
-          <a href="https://winabet.ai/pages/dashboard" class="desktop-nav-item">Accéder au Dashboard</a>
+          <a href="https://winabet.ai/collections/all#bet" class="desktop-nav-item">Accéder au Dashboard</a>
           <a href="#" class="desktop-nav-item">Abonnement</a>
           <a href="#support" class="desktop-nav-item">Support</a>
         </nav>
@@ -505,11 +499,7 @@
 
       <!-- Right: Auth Buttons -->
       <div class="desktop-right">
-        {% if customer %}
-          <a href="https://account.winabet.ai" class="desktop-auth-link">Connecté ✓</a>
-        {% else %}
-          <a href="https://account.winabet.ai" class="desktop-auth-link">Se Connecter</a>
-        {% endif %}
+        <a href="#" class="desktop-auth-link">Se Connecter</a>
         <a href="#" class="desktop-auth-btn">Commencer Gratuitement</a>
       </div>
     </div>
