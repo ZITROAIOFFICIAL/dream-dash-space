@@ -796,7 +796,7 @@
         </div>
         
         <div class="ai-loading-text">
-          <p>Analyse en cours des meilleures opportunités</p>
+          <p id="rotating-text">BET DU JOUR</p>
         </div>
         
         <h1>BET DU JOUR</h1>
@@ -3743,6 +3743,25 @@
       // Update time display
       updateTime();
       setInterval(updateTime, 1000);
+
+      // Rotation du texte après 3 cycles du shimmer (7.5s)
+      const rotatingTextEl = document.getElementById('rotating-text');
+      if (rotatingTextEl) {
+        const texts = [
+          'BET DU JOUR',
+          'Analyse de centaine de site de paris sportifs',
+          'Analyse et comparaison entre les sites',
+          'Analyse des données',
+          "Analyse de l'historique entre les équipes",
+          'Analyse des lineup des équipes'
+        ];
+        let currentIndex = 0;
+        
+        setInterval(() => {
+          currentIndex = (currentIndex + 1) % texts.length;
+          rotatingTextEl.textContent = texts[currentIndex];
+        }, 7500); // 3 cycles de 2.5s = 7.5s
+      }
 
       // In Shopify editor, preserve the current page across partial reloads
       document.addEventListener('shopify:section:load', () => {
