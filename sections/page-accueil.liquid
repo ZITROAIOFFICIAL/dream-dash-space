@@ -1181,7 +1181,7 @@
         </h3>
         
         <!-- Grid des options -->
-        <div class="pricing-options-grid" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin-bottom: 1.25rem;">
+        <div class="pricing-options-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.25rem;">
           
           <!-- Option 1: Mensuel -->
           <div class="pricing-option" data-plan="monthly" onclick="selectPricingOption('monthly')" style="position: relative; background: rgba(26, 26, 26, 0.6); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 0.75rem; padding: 1rem 1.25rem; cursor: pointer; transition: all 0.3s ease;">
@@ -1239,35 +1239,7 @@
             </div>
           </div>
           
-          <!-- Option 3: Semestriel -->
-          <div class="pricing-option" data-plan="biannually" onclick="selectPricingOption('biannually')" style="position: relative; background: rgba(26, 26, 26, 0.6); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 0.75rem; padding: 1rem 1.25rem; cursor: pointer; transition: all 0.3s ease;">
-            <svg class="checkmark" style="position: absolute; top: 0.5rem; right: 0.5rem; width: 20px; height: 20px; display: none;" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3">
-              <path d="M20 6L9 17l-5-5"/>
-            </svg>
-            
-            <div style="background: rgba(34, 197, 94, 0.15); color: #22c55e; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 600; display: inline-block; margin-bottom: 0.5rem; font-family: 'Outfit', sans-serif;">
-              1 jour gratuit
-            </div>
-            
-            <div style="color: #ffffff; font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; font-family: 'Outfit', sans-serif;">
-              Semestriel
-            </div>
-            
-            <div style="color: #ffffff; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem; font-family: 'Outfit', sans-serif;">
-              64.99$
-              <span style="font-size: 0.9rem; font-weight: 400; color: rgba(255, 255, 255, 0.7);">/ mois</span>
-            </div>
-            
-            <div style="color: rgba(255, 255, 255, 0.6); font-size: 0.8rem; font-family: 'Outfit', sans-serif;">
-              389.94$ tous les 6 mois
-            </div>
-            
-            <div style="margin-top: 0.5rem; background: #ffffff; color: #000000; padding: 0.35rem 0.75rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 700; display: inline-block; font-family: 'Outfit', sans-serif;">
-              POPULAIRE - 34%
-            </div>
-          </div>
-          
-          <!-- Option 4: Annuel -->
+          <!-- Option 3: Annuel -->
           <div class="pricing-option" data-plan="annually" onclick="selectPricingOption('annually')" style="position: relative; background: rgba(26, 26, 26, 0.6); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 0.75rem; padding: 1rem 1.25rem; cursor: pointer; transition: all 0.3s ease;">
             <svg class="checkmark" style="position: absolute; top: 0.5rem; right: 0.5rem; width: 20px; height: 20px; display: none;" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3">
               <path d="M20 6L9 17l-5-5"/>
@@ -1714,12 +1686,6 @@
           billing: 'Facturé 239.97$ tous les 3 mois',
           link: ''
         },
-        biannually: {
-          name: 'Semestriel',
-          price: '64.99$ / mois',
-          billing: 'Facturé 389.94$ tous les 6 mois',
-          link: ''
-        },
         annually: {
           name: 'Annuel',
           price: '49.99$ / mois',
@@ -1797,19 +1763,7 @@
           /* Responsive design */
           @media (max-width: 1200px) {
             .pricing-options-grid {
-              grid-template-columns: repeat(3, 1fr) !important;
-            }
-            .pricing-option[data-plan="annually"],
-            .pricing-option[data-plan="interac"] {
-              grid-column: span 1;
-            }
-            .pricing-option[data-plan="annually"] {
-              grid-column-start: 1;
-              grid-row-start: 2;
-            }
-            .pricing-option[data-plan="interac"] {
-              grid-column-start: 2;
-              grid-row-start: 2;
+              grid-template-columns: repeat(2, 1fr) !important;
             }
           }
           
@@ -1819,10 +1773,8 @@
             }
             
             .pricing-options-grid {
-              grid-template-columns: 1fr !important;
+              grid-template-columns: repeat(2, 1fr) !important;
               gap: 0.75rem;
-              max-height: 50vh;
-              overflow-y: auto;
             }
             
             .pricing-option {
