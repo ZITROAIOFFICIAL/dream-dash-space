@@ -3451,7 +3451,16 @@
       const hash = window.location.hash.substring(1);
       let savedPage = '';
       try { savedPage = localStorage.getItem('dashboard_current_page') || ''; } catch {}
-      const targetPage = hash || savedPage || 'bet';
+      let targetPage = hash || savedPage || 'bet';
+
+      // Si connecté mais que la page cible est 'auth-required', rediriger vers bet
+      if (targetPage === 'auth-required') {
+        targetPage = 'bet';
+        // Nettoyer le localStorage et le hash
+        try { localStorage.setItem('dashboard_current_page', 'bet'); } catch {}
+        window.location.hash = '';
+      }
+
       navigateTo(null, targetPage);
 
       // Update time display
