@@ -35,7 +35,7 @@
     .video-container {
       width: 100%;
       max-width: var(--video-max-width-desktop);
-      margin: 0 auto 1rem auto; /* Marge en bas de la vidéo */
+      margin: 0 auto 0.5rem auto; /* Marge en bas réduite */
     }
     
     .video-container video {
@@ -57,18 +57,24 @@
       --shimmer-duration: 2.5s;
       --shimmer-color-base: rgba(255, 255, 255, 0.4);
       --shimmer-color-highlight: rgba(255, 255, 255, 0.8);
-      --shimmer-text-size: 1rem;
+      
+      /* ===== TAILLE TEXTE SHIMMER - MODIFIEZ ICI ===== */
+      /* Desktop: taille du texte shimmer */
+      --shimmer-text-size-desktop: 1rem;
+      
+      /* Mobile: taille du texte shimmer */
+      --shimmer-text-size-mobile: 0.9rem;
     }
     
     .ai-loading-text {
       text-align: center;
-      margin: 1.5rem auto 1.5rem auto;
+      margin: 0.5rem auto 1.5rem auto; /* Marge réduite en haut */
       max-width: 600px;
       padding: 0 1rem;
     }
     
     .ai-loading-text p {
-      font-size: var(--shimmer-text-size);
+      font-size: var(--shimmer-text-size-desktop);
       font-family: 'Outfit', sans-serif;
       font-weight: 300;
       color: var(--shimmer-color-base);
@@ -101,11 +107,11 @@
     /* Ajustements responsive pour le texte shimmer */
     @media (max-width: 768px) {
       .ai-loading-text {
-        margin: 1rem auto 1rem auto;
+        margin: 0.4rem auto 1rem auto;
       }
       
       .ai-loading-text p {
-        font-size: 0.9rem;
+        font-size: var(--shimmer-text-size-mobile);
       }
     }
     
