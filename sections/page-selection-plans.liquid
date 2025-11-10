@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sélectionnez votre plan - WINABET.AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: #0a0a0a;
+      color: #ffffff;
+      min-height: 100vh;
+      padding-bottom: 120px;
+    }
+
+    .header {
+      padding: 1.5rem 1rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 300;
+      line-height: 1;
+    }
+
+    .logo-win { color: #ffffff; }
+    .logo-a { color: #22c55e; }
+    .logo-bet { color: #ffffff; }
+    .logo-ai {
+      font-size: 0.9rem;
+      color: #22c55e;
+      margin-left: -0.15em;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    .hero-section {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding: 2rem 1rem;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 2rem;
+      font-weight: 400;
+    }
+
+    .benefits-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .benefit-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .benefit-icon {
+      width: 24px;
+      height: 24px;
+      color: #22c55e;
+      flex-shrink: 0;
+    }
+
+    .benefit-text {
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .plans-section {
+      margin-bottom: 2rem;
+    }
+
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .plan-card {
+      position: relative;
+      background: #1a1a1a;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .plan-card:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .plan-card.selected {
+      border-color: #ffffff;
+      background: #202020;
+    }
+
+    .plan-badge {
+      position: absolute;
+      top: -12px;
+      right: 1rem;
+      background: #ffffff;
+      color: #000000;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .plan-header {
+      margin-bottom: 1rem;
+    }
+
+    .plan-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .plan-trial {
+      font-size: 0.875rem;
+      color: #22c55e;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .trial-icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    .plan-pricing {
+      margin-bottom: 1.5rem;
+    }
+
+    .plan-price-main {
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .plan-price-period {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 400;
+    }
+
+    .plan-price-total {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 400;
+      margin-top: 0.5rem;
+    }
+
+    .plan-radio {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .radio-input {
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .plan-card.selected .radio-input {
+      border-color: #ffffff;
+    }
+
+    .plan-card.selected .radio-input::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 10px;
+      height: 10px;
+      background: #ffffff;
+      border-radius: 50%;
+    }
+
+    .radio-label {
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .sticky-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #1a1a1a;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1.5rem;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .sticky-footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .selected-plan-info {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .selected-plan-name {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .selected-plan-price {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .continue-btn {
+      background: #ffffff;
+      color: #000000;
+      padding: 1rem 2.5rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .continue-btn:hover {
+      background: rgba(255, 255, 255, 0.9);
+      transform: translateY(-1px);
+    }
+
+    .continue-btn:disabled {
+      background: rgba(255, 255, 255, 0.2);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .validation-message {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ef4444;
+      color: #ffffff;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      z-index: 200;
+      display: none;
+      animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -20px);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .plans-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sticky-footer-content {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .continue-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <span class="logo-win">WIN</span><span class="logo-a">A</span><span class="logo-bet">BET</span><span class="logo-ai">.AI</span>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Hero Section -->
+    <div class="hero-section">
+      <h1 class="hero-title">Choisissez votre plan WINABET.AI</h1>
+      <p class="hero-subtitle">Commencez avec 1 jour d'essai gratuit, puis continuez avec le plan qui vous convient</p>
+      
+      <div class="benefits-list">
+        <div class="benefit-item">
+          <svg class="benefit-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+          </svg>
+          <span class="benefit-text">Accès complet aux bets du jour</span>
+        </div>
+        <div class="benefit-item">
+          <svg class="benefit-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+          </svg>
+          <span class="benefit-text">Parlays à haute probabilité</span>
+        </div>
+        <div class="benefit-item">
+          <svg class="benefit-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+          </svg>
+          <span class="benefit-text">Historique complet</span>
+        </div>
+        <div class="benefit-item">
+          <svg class="benefit-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+          </svg>
+          <span class="benefit-text">Support prioritaire</span>
+        </div>
+        <div class="benefit-item">
+          <svg class="benefit-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+          </svg>
+          <span class="benefit-text">Mises à jour IA en temps réel</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Plans Section -->
+    <div class="plans-section">
+      <div class="plans-grid">
+        <!-- Plan Mensuel -->
+        <div class="plan-card" data-plan="monthly" data-price="99.00" data-total="99.00" data-period="mois">
+          <div class="plan-header">
+            <h2 class="plan-title">Mensuel</h2>
+            <div class="plan-trial">
+              <svg class="trial-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              1 jour d'essai gratuit
+            </div>
+          </div>
+          <div class="plan-pricing">
+            <div class="plan-price-main">99<span style="font-size: 1.5rem;">$</span></div>
+            <div class="plan-price-period">par mois</div>
+            <div class="plan-price-total">Facturé mensuellement</div>
+          </div>
+          <div class="plan-radio">
+            <div class="radio-input"></div>
+            <span class="radio-label">Sélectionner ce plan</span>
+          </div>
+        </div>
+
+        <!-- Plan Trimestriel -->
+        <div class="plan-card" data-plan="quarterly" data-price="79.99" data-total="239.97" data-period="3 mois">
+          <div class="plan-header">
+            <h2 class="plan-title">Trimestriel</h2>
+            <div class="plan-trial">
+              <svg class="trial-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              1 jour d'essai gratuit
+            </div>
+          </div>
+          <div class="plan-pricing">
+            <div class="plan-price-main">79.99<span style="font-size: 1.5rem;">$</span></div>
+            <div class="plan-price-period">par mois</div>
+            <div class="plan-price-total">239.97$ tous les 3 mois</div>
+          </div>
+          <div class="plan-radio">
+            <div class="radio-input"></div>
+            <span class="radio-label">Sélectionner ce plan</span>
+          </div>
+        </div>
+
+        <!-- Plan Semestriel -->
+        <div class="plan-card" data-plan="biannual" data-price="64.99" data-total="389.94" data-period="6 mois">
+          <div class="plan-badge">MEILLEURE VALEUR</div>
+          <div class="plan-header">
+            <h2 class="plan-title">Semestriel</h2>
+            <div class="plan-trial">
+              <svg class="trial-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              1 jour d'essai gratuit
+            </div>
+          </div>
+          <div class="plan-pricing">
+            <div class="plan-price-main">64.99<span style="font-size: 1.5rem;">$</span></div>
+            <div class="plan-price-period">par mois</div>
+            <div class="plan-price-total">389.94$ tous les 6 mois</div>
+          </div>
+          <div class="plan-radio">
+            <div class="radio-input"></div>
+            <span class="radio-label">Sélectionner ce plan</span>
+          </div>
+        </div>
+
+        <!-- Plan Annuel -->
+        <div class="plan-card" data-plan="annual" data-price="49.99" data-total="599.88" data-period="12 mois">
+          <div class="plan-badge">RECOMMANDÉ</div>
+          <div class="plan-header">
+            <h2 class="plan-title">Annuel</h2>
+            <div class="plan-trial">
+              <svg class="trial-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              1 jour d'essai gratuit
+            </div>
+          </div>
+          <div class="plan-pricing">
+            <div class="plan-price-main">49.99<span style="font-size: 1.5rem;">$</span></div>
+            <div class="plan-price-period">par mois</div>
+            <div class="plan-price-total">599.88$ tous les 12 mois</div>
+          </div>
+          <div class="plan-radio">
+            <div class="radio-input"></div>
+            <span class="radio-label">Sélectionner ce plan</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky Footer -->
+  <div class="sticky-footer">
+    <div class="sticky-footer-content">
+      <div class="selected-plan-info">
+        <div class="selected-plan-name" id="selected-name">Aucun plan sélectionné</div>
+        <div class="selected-plan-price" id="selected-price">Choisissez un plan ci-dessus</div>
+      </div>
+      <button class="continue-btn" id="continue-btn" disabled>Continuer vers le paiement</button>
+    </div>
+  </div>
+
+  <!-- Validation Message -->
+  <div class="validation-message" id="validation-message">
+    Veuillez sélectionner un plan avant de continuer
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const planCards = document.querySelectorAll('.plan-card');
+      const continueBtn = document.getElementById('continue-btn');
+      const selectedNameEl = document.getElementById('selected-name');
+      const selectedPriceEl = document.getElementById('selected-price');
+      const validationMessage = document.getElementById('validation-message');
+      
+      let selectedPlan = null;
+
+      // Handle plan selection
+      planCards.forEach(card => {
+        card.addEventListener('click', function() {
+          // Remove selected class from all cards
+          planCards.forEach(c => c.classList.remove('selected'));
+          
+          // Add selected class to clicked card
+          this.classList.add('selected');
+          
+          // Get plan data
+          selectedPlan = {
+            type: this.dataset.plan,
+            price: this.dataset.price,
+            total: this.dataset.total,
+            period: this.dataset.period,
+            name: this.querySelector('.plan-title').textContent
+          };
+          
+          // Update sticky footer
+          selectedNameEl.textContent = selectedPlan.name;
+          selectedPriceEl.textContent = `${selectedPlan.price}$ / mois (${selectedPlan.total}$ tous les ${selectedPlan.period})`;
+          
+          // Enable continue button
+          continueBtn.disabled = false;
+        });
+      });
+
+      // Handle continue button click
+      continueBtn.addEventListener('click', function() {
+        if (!selectedPlan) {
+          // Show validation message
+          validationMessage.style.display = 'block';
+          setTimeout(() => {
+            validationMessage.style.display = 'none';
+          }, 3000);
+          return;
+        }
+
+        // TODO: Redirect to Shopify checkout with variant_id
+        // For now, log the selected plan
+        console.log('Selected plan:', selectedPlan);
+        
+        // Example redirect (replace with actual Shopify variant IDs):
+        // window.location.href = `/cart/add?id=${variantId}&quantity=1`;
+        
+        // Temporary: Show alert
+        alert(`Plan sélectionné: ${selectedPlan.name}\nPrix: ${selectedPlan.price}$ / mois\nTotal: ${selectedPlan.total}$\n\nRedirection vers le paiement...`);
+      });
+    });
+  </script>
+</body>
+</html>
