@@ -52,6 +52,63 @@
       }
     }
     
+    /* ==================== ANIMATION SHIMMER TEXTE IA ==================== */
+    :root {
+      --shimmer-duration: 2.5s;
+      --shimmer-color-base: rgba(255, 255, 255, 0.4);
+      --shimmer-color-highlight: rgba(255, 255, 255, 0.8);
+      --shimmer-text-size: 1rem;
+    }
+    
+    .ai-loading-text {
+      text-align: center;
+      margin: 1.5rem auto 1.5rem auto;
+      max-width: 600px;
+      padding: 0 1rem;
+    }
+    
+    .ai-loading-text p {
+      font-size: var(--shimmer-text-size);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 300;
+      color: var(--shimmer-color-base);
+      position: relative;
+      display: inline-block;
+      background: linear-gradient(
+        90deg,
+        var(--shimmer-color-base) 0%,
+        var(--shimmer-color-base) 40%,
+        var(--shimmer-color-highlight) 50%,
+        var(--shimmer-color-base) 60%,
+        var(--shimmer-color-base) 100%
+      );
+      background-size: 200% 100%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer var(--shimmer-duration) ease-in-out infinite;
+    }
+    
+    @keyframes shimmer {
+      0% {
+        background-position: -200% 0;
+      }
+      100% {
+        background-position: 200% 0;
+      }
+    }
+    
+    /* Ajustements responsive pour le texte shimmer */
+    @media (max-width: 768px) {
+      .ai-loading-text {
+        margin: 1rem auto 1rem auto;
+      }
+      
+      .ai-loading-text p {
+        font-size: 0.9rem;
+      }
+    }
+    
     /* ==================== DESKTOP UNIQUEMENT - AJUSTEMENTS FACILES ==================== */
     @media (min-width: 769px) {
       
@@ -706,6 +763,10 @@
           </video>
         </div>
         
+        <div class="ai-loading-text">
+          <p>Analyse en cours des meilleures opportunités...</p>
+        </div>
+        
         <h1>BET DU JOUR</h1>
         <p class="subtitle">Les bet avec la meilleur probabilité de réussite aujourd'hui. Nous affichons tous les bet avec minimum de 70% de chance de gagner selon notre IA.</p>
 
@@ -980,6 +1041,10 @@
             <source src="https://cdn.shopify.com/videos/c/o/v/8d4ee094c0044c0e8bdb95482b822830.mp4" type="video/mp4">
             Votre navigateur ne supporte pas la lecture de vidéos.
           </video>
+        </div>
+        
+        <div class="ai-loading-text">
+          <p>Calcul des probabilités de victoire...</p>
         </div>
         
         <h1>PARLAY DU JOUR</h1>
