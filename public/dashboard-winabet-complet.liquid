@@ -3694,11 +3694,12 @@
       initGlobalAutoIncrementCounters();
 
       // Vérifier l'accès utilisateur
-      const isUserLoggedIn = {{ user_is_logged_in | json }};
+      const isShopifyEditor = {{ request.design_mode | json }};
+      const isUserLoggedIn = {{ user_is_logged_in | json }} || isShopifyEditor;
       const accessLevel = '{{ access_level }}';
 
-      // Si paiement échoué, forcer la page payment-failed
-      if (accessLevel === 'payment_failed') {
+      // Si paiement échoué, forcer la page payment-failed (uniquement hors éditeur)
+      if (accessLevel === 'payment_failed' && !isShopifyEditor) {
         performNavigation('payment-failed');
         // Désactiver tous les liens de navigation
         document.querySelectorAll('.nav-item, .desktop-nav-item').forEach(item => {
@@ -3708,8 +3709,8 @@
         return;
       }
 
-      // Si pas connecté, forcer l'affichage de la page de connexion requise
-      if (!isUserLoggedIn) {
+      // Si pas connecté, forcer l'affichage de la page de connexion requise (uniquement hors éditeur)
+      if (!isUserLoggedIn && !isShopifyEditor) {
         performNavigation('auth-required');
         
         // Désactiver tous les liens de navigation
