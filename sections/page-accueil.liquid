@@ -103,9 +103,9 @@
           </p>
 
           <div class="hero-cta">
-          <a href="#pricing" class="btn-primary">
-            {{ section.settings.cta_primary_text }}
-          </a>
+            <a href="{{ section.settings.cta_primary_link }}" class="btn-primary">
+              {{ section.settings.cta_primary_text }}
+            </a>
           </div>
 
           <!-- Stats Section -->
@@ -395,7 +395,1669 @@
     </section>
 
     <!-- Section Providers Card -->
-    {% render 'providers-badges-section' %}
+    <section class="providers-card-section">
+      <div class="providers-card-wrapper">
+        <!-- Content at top (outside rectangle) -->
+        <div class="providers-card-content-top">
+          <h3 class="providers-card-label">
+            <svg width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 0.4rem;">
+              <defs>
+                <filter id="softGlowLabel" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="1.2" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <path id="orbit0Label" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                <path id="orbit1Label" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                <path id="orbit2Label" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+              </defs>
+              <g stroke="#68859e" stroke-width="2" fill="none">
+                <use href="#orbit0Label"/>
+                <use href="#orbit1Label"/>
+                <use href="#orbit2Label"/>
+              </g>
+              <g stroke-linecap="round" filter="url(#softGlowLabel)">
+                <use href="#orbit0Label" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                  <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                </use>
+                <use href="#orbit1Label" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                  <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                </use>
+                <use href="#orbit2Label" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                  <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                </use>
+              </g>
+              <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
+            </svg>
+            Fonctionnalité ia
+          </h3>
+          <p class="providers-card-title-top">
+            Notre ia traque les meilleurs paris sportifs
+          </p>
+          <p class="providers-card-description">
+            Notre ia réunit toutes les données disponibles et les analyse pour ressortir les paris aux meilleures chances de passer, statistiquement.
+          </p>
+        </div>
+        <div class="providers-card-inner">
+          <div class="providers-card-background">
+            <div class="providers-blur-effect"></div>
+            <div class="providers-marquee-container">
+              <!-- SVG Definitions (réutilisables) -->
+              <svg width="0" height="0" style="position: absolute;">
+                <defs>
+                  <!-- Filter glow -->
+                  <filter id="iaGlowProviders" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="2" result="b"/>
+                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                  <filter id="softGlowProviders" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="1.2" result="b"/>
+                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                  <!-- Orbites pour l'atome -->
+                  <path id="orbit0Providers" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                  <path id="orbit1Providers" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                  <path id="orbit2Providers" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+                </defs>
+              </svg>
+
+              <!-- First marquee row -->
+              <div class="providers-marquee-row row-1">
+                <div class="providers-marquee-content">
+                  <!-- Badge 1 -->
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgb(255, 255, 255); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">Comparaison bookmaker <span style="color: rgb(255, 255, 255); font-weight: 600;"></span></span>
+                    </div>
+                  </div>
+                  <!-- Badge 2 -->
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgb(255, 255, 255); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">mouvement de ligne <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;"></span></span>
+                    </div>
+                  </div>
+                  <!-- Badge 3 -->
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgb(255, 255, 255); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">Closing line value <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;"></span></span>
+                    </div>
+                  </div>
+                  <!-- Badge 4 -->
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgb(255, 255, 255); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">probabilité impicite <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;"></span></span>
+                    </div>
+                  </div>
+                  <!-- Badge 5 -->
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgb(255, 255, 255); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">analyse h2h<span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;"></span></span>
+                    </div>
+                  </div>
+                  <!-- Badge 6 -->
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgb(255, 255, 255); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">starter offensive <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;"></span></span>
+                    </div>
+                  </div>
+                  <!-- Badge 7 -->
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgb(255, 255, 255); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">Jeu au sol <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;"></span></span>
+                    </div>
+                  </div>
+                  <!-- Badge 8 -->
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;"> <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">analyse marché</span></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="providers-marquee-content">
+                  <!-- Duplication pour continuité -->
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;"> <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Analyse cotes</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Visa</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Amex</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Discover</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Diners</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Elo</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">JCB</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Union</span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Second marquee row (reverse) -->
+              <div class="providers-marquee-row providers-marquee-reverse row-2">
+                <div class="providers-marquee-content">
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;"> <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">ratio argent / mises</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;"> <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Parlay gagnant analisé </span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;"> <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Historique des matchs</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">% Meilleur paris trouvé !</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;"> <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">% que le bet passe </span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;"> <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Analyse % confiance ia</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;"> <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">cash-out estimé
+</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;"> <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Recherche Meilleur bet</span></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="providers-marquee-content">
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;"> <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">ratio argent / mises</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;"> <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">argent du public</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;"><span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Historique Analisé</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;"> <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">taux de réussite</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;"> <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">PayPalee</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Stripe</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Square</span></span>
+                    </div>
+                  </div>
+                  <div class="provider-badge-wrapper">
+                    <div style="position: relative; display: flex; align-items: center; gap: 0.52rem; padding: 0.44rem 0.72rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 40px; min-width: 140px; z-index: 2;">
+                      <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% + 10px); height: calc(100% + 10px); pointer-events: none; z-index: -1;">
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#68859e" stroke-width="1" opacity="0.3"/>
+                        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="20" ry="20" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="70 1000" stroke-linecap="round" filter="url(#iaGlowProviders)" opacity="0.9">
+                          <animate attributeName="stroke-dashoffset" values="0;-540" dur="8s" repeatCount="indefinite"/>
+                        </rect>
+                      </svg>
+                      <svg width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                        <g stroke="#68859e" stroke-width="2" fill="none">
+                          <use href="#orbit0Providers"/>
+                          <use href="#orbit1Providers"/>
+                          <use href="#orbit2Providers"/>
+                        </g>
+                        <g stroke-linecap="round" filter="url(#softGlowProviders)">
+                          <use href="#orbit0Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit1Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                          <use href="#orbit2Providers" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                            <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                          </use>
+                        </g>
+                        <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+                      </svg>
+                      <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1.04rem; white-space: nowrap;">MAJ <span style="color: rgba(255, 255, 255, 0.95); font-weight: 600;">Square</span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="providers-card-content">
+            <h3 class="providers-card-label">
+              <svg id="atom-desktop" width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                <defs>
+                  <filter id="softGlowDesktopClone" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="1.2" result="b"/>
+                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                  <path id="orbit0DesktopClone" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                  <path id="orbit1DesktopClone" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                  <path id="orbit2DesktopClone" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+                </defs>
+                <g stroke="#68859e" stroke-width="2" fill="none">
+                  <use href="#orbit0DesktopClone"/>
+                  <use href="#orbit1DesktopClone"/>
+                  <use href="#orbit2DesktopClone"/>
+                </g>
+                <g stroke-linecap="round" filter="url(#softGlowDesktopClone)">
+                  <use href="#orbit0DesktopClone" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                  <use href="#orbit1DesktopClone" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                  <use href="#orbit2DesktopClone" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                </g>
+                <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+              </svg>
+              Analyse ia
+            </h3>
+            <p class="providers-card-title">
+              Example de ce que notre ia suit en continue
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="providers-arrow">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </p>
+            <p class="providers-card-description">
+              Données de marché, prix et tendances mises à jour en continu. Les badges ci-dessous montrent une partie seulement de ce qu'elle suit pour trouver les paris aux meilleures chances de passer. L'analyse complète de chaque bet apparaît directement sur nos cartes.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Three Feature Cards Section -->
+    <section class="three-cards-section">
+      <div class="three-cards-grid">
+        
+        <!-- Card 1: Global Payments -->
+        <a href="javascript:void(0)" class="feature-card" style="background: #000000;">
+          <div class="feature-card-background">
+            <!-- Image pour mode économie d'énergie -->
+            <img id="global-payment-image" src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Untitled_design-62_af01ab5b-40d7-4744-983c-722d32577d62.png?v=1762672791" 
+                 alt="Global Payments" 
+                 style="position: absolute; top: 0; left: 0; width: 450px; height: auto; z-index: 10; display: none;">
+
+            <!-- Vidéo pour mode normal -->
+            <video id="global-payment-video" autoplay muted loop playsinline 
+                   style="position: absolute; top: 0; left: 0; width: 450px; height: auto; z-index: 10;">
+              <source src="https://cdn.shopify.com/videos/c/o/v/da4f44ae10c5414389cf41fc21656621.mp4" type="video/mp4">
+            </video>
+
+            <script>
+            (function() {
+              const video = document.getElementById('global-payment-video');
+              const image = document.getElementById('global-payment-image');
+              
+              async function detectPowerSavingMode() {
+                let isPowerSaving = false;
+                
+                // 1. Vérifier la préférence de mouvement réduit
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                  isPowerSaving = true;
+                }
+                
+                // 2. Vérifier la Battery API (si disponible)
+                if ('getBattery' in navigator) {
+                  try {
+                    const battery = await navigator.getBattery();
+                    // Mode économie si batterie < 20% ou si en charge avec niveau bas
+                    if (battery.level < 0.2 || (battery.charging && battery.level < 0.5)) {
+                      isPowerSaving = true;
+                    }
+                  } catch (e) {
+                    console.log('Battery API non disponible');
+                  }
+                }
+                
+                // 3. Vérifier si la vidéo peut jouer (détection indirecte du mode économie)
+                const canPlay = await new Promise((resolve) => {
+                  video.play().then(() => resolve(true)).catch(() => resolve(false));
+                });
+                
+                if (!canPlay) {
+                  isPowerSaving = true;
+                }
+                
+                return isPowerSaving;
+              }
+              
+              // Appliquer la logique d'affichage
+              detectPowerSavingMode().then(isPowerSaving => {
+                if (isPowerSaving) {
+                  // Mode économie d'énergie : afficher l'image uniquement
+                  video.style.display = 'none';
+                  video.pause();
+                  image.style.display = 'block';
+                } else {
+                  // Mode normal : afficher la vidéo
+                  video.style.display = 'block';
+                  image.style.display = 'none';
+                  video.play().catch(() => {
+                    // Si la vidéo ne peut pas jouer, afficher l'image
+                    video.style.display = 'none';
+                    image.style.display = 'block';
+                  });
+                }
+              });
+            })();
+            </script>
+            <canvas class="feature-card-canvas" style="width:600px;height:600px;max-width:100%;aspect-ratio:1" width="942" height="1200"></canvas>
+          </div>
+          <div class="feature-card-content">
+            <h3 class="feature-card-label">
+              <svg id="atom-desktop" width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                <defs>
+                  <filter id="softGlowDesktopClone" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="1.2" result="b"/>
+                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                  <path id="orbit0DesktopClone" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                  <path id="orbit1DesktopClone" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                  <path id="orbit2DesktopClone" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+                </defs>
+                <g stroke="#68859e" stroke-width="2" fill="none">
+                  <use href="#orbit0DesktopClone"/>
+                  <use href="#orbit1DesktopClone"/>
+                  <use href="#orbit2DesktopClone"/>
+                </g>
+                <g stroke-linecap="round" filter="url(#softGlowDesktopClone)">
+                  <use href="#orbit0DesktopClone" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                  <use href="#orbit1DesktopClone" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                  <use href="#orbit2DesktopClone" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                </g>
+                <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+              </svg>
+              Connexion en temps réel
+            </h3>
+            <p class="feature-card-title">
+              Notre ia connectée au marché en temps réel
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </p>
+            <p class="feature-card-description">
+              Notre ia se met à jour en continu : dès qu'un prix ou une tendance change, l'info arrive et nos cartes se mettent à jour automatiquement.
+            </p>
+          </div>
+        </a>
+
+        <!-- Card 2: Fidelity Analytics -->
+        <a href="javascript:void(0)" class="feature-card">
+          <div class="feature-card-background analytics-graph-container">
+            <img 
+              src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Untitled_design-46.svg?v=1762717490" 
+              alt="Analytics visualization"
+              class="analytics-graph-image"
+            />
+            
+            <!-- Tooltip -->
+            <div class="analytics-tooltip" style="display: none;">
+              <div class="tooltip-date"></div>
+              <div class="tooltip-data">
+                <div class="tooltip-item">
+                  <span class="tooltip-color" style="background: #4f4db7;"></span>
+                  <span class="tooltip-label">Paris trouvés IA</span>
+                  <span class="tooltip-value sales-value"></span>
+                </div>
+                <div class="tooltip-item">
+                  <span class="tooltip-color" style="background: #f59e0b;"></span>
+                  <span class="tooltip-label">Paris gagnants IA</span>
+                  <span class="tooltip-value revenue-value"></span>
+                </div>
+                <div class="tooltip-item">
+                  <span class="tooltip-color" style="background: #ffffff;"></span>
+                  <span class="tooltip-label">Profit (units)</span>
+                  <span class="tooltip-value customers-value"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="feature-card-content">
+            <h3 class="feature-card-label">
+              <svg id="atom-desktop" width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                <defs>
+                  <filter id="softGlowDesktopClone" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="1.2" result="b"/>
+                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                  <path id="orbit0DesktopClone" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                  <path id="orbit1DesktopClone" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                  <path id="orbit2DesktopClone" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+                </defs>
+                <g stroke="#68859e" stroke-width="2" fill="none">
+                  <use href="#orbit0DesktopClone"/>
+                  <use href="#orbit1DesktopClone"/>
+                  <use href="#orbit2DesktopClone"/>
+                </g>
+                <g stroke-linecap="round" filter="url(#softGlowDesktopClone)">
+                  <use href="#orbit0DesktopClone" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                  <use href="#orbit1DesktopClone" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                  <use href="#orbit2DesktopClone" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                </g>
+                <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+              </svg>
+             Résulat
+            </h3>
+            <p class="feature-card-title">
+              Suivi des résultats ia
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </p>
+            <p class="feature-card-description">
+              Nous avons un historique qui montre exactement les résultats.
+            </p>
+          </div>
+        </a>
+
+        <!-- Card 3: Faster Checkouts -->
+        <a href="javascript:void(0)" class="feature-card">
+          <div class="feature-card-background">
+            <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Add_a_heading-23.svg?v=1762723692" alt="Analyse IA" style="width:450px;height:450px;max-width:100%;aspect-ratio:1;object-fit:cover;position:relative;top:-50px;left:0px;" />
+          </div>
+          <div class="feature-card-content">
+            <h3 class="feature-card-label">
+              <svg id="atom-desktop" width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                <defs>
+                  <filter id="softGlowDesktopClone" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="1.2" result="b"/>
+                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                  <path id="orbit0DesktopClone" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                  <path id="orbit1DesktopClone" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                  <path id="orbit2DesktopClone" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+                </defs>
+                <g stroke="#68859e" stroke-width="2" fill="none">
+                  <use href="#orbit0DesktopClone"/>
+                  <use href="#orbit1DesktopClone"/>
+                  <use href="#orbit2DesktopClone"/>
+                </g>
+                <g stroke-linecap="round" filter="url(#softGlowDesktopClone)">
+                  <use href="#orbit0DesktopClone" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                  <use href="#orbit1DesktopClone" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                  <use href="#orbit2DesktopClone" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                </g>
+                <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+              </svg>
+              données analysées
+            </h3>
+            <p class="feature-card-title">
+              notre ia analyse tout, en continu
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </p>
+            <p class="feature-card-description">
+              avec plus de 100 000 données analysées chaque jour, notre ia fait ressortir les paris qui ont statistiquement les meilleures chances de passer.
+            </p>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Pulse SVG Section (animé) -->
+    <section style="max-width: 1286px; margin: 4rem auto 0; padding: 0 2rem; text-align: center;">
+      <!-- winabet pulse svg (inline, animé) -->
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 604 283"
+        fill="none"
+        class="w-[80%] h-[80%] lg:w-[45%] lg:h-[45%] my-10 mx-auto gradient-mask-b-80"
+        aria-hidden="true" role="img" focusable="false" style="pointer-events:none"
+      >
+        <defs>
+          <!-- Balayages lumineux (animés) -->
+          <linearGradient id="pulseGradient1" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
+            <stop offset="4%" stop-color="rgba(255,255,255,0.5)"/>
+            <stop offset="8%" stop-color="rgba(255,255,255,0)"/>
+            <stop offset="70%" stop-color="rgba(255,255,255,0)"/>
+            <stop offset="74%" stop-color="rgba(255,255,255,0.5)"/>
+            <stop offset="78%" stop-color="rgba(255,255,255,0)"/>
+            <animate attributeName="y1" from="0%" to="100%" dur="2s" repeatCount="indefinite" begin="0s"/>
+            <animate attributeName="y2" from="100%" to="200%" dur="2s" repeatCount="indefinite" begin="0s"/>
+          </linearGradient>
+
+          <linearGradient id="pulseGradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
+            <stop offset="4%" stop-color="rgba(255,255,255,0.5)"/>
+            <stop offset="8%" stop-color="rgba(255,255,255,0)"/>
+            <stop offset="70%" stop-color="rgba(255,255,255,0)"/>
+            <stop offset="74%" stop-color="rgba(255,255,255,0.5)"/>
+            <stop offset="78%" stop-color="rgba(255,255,255,0)"/>
+            <animate attributeName="y1" from="0%" to="100%" dur="2s" repeatCount="indefinite" begin="0.25s"/>
+            <animate attributeName="y2" from="100%" to="200%" dur="2s" repeatCount="indefinite" begin="0.25s"/>
+          </linearGradient>
+
+          <linearGradient id="pulseGradient3" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
+            <stop offset="4%" stop-color="rgba(255,255,255,0.5)"/>
+            <stop offset="8%" stop-color="rgba(255,255,255,0)"/>
+            <stop offset="70%" stop-color="rgba(255,255,255,0)"/>
+            <stop offset="74%" stop-color="rgba(255,255,255,0.5)"/>
+            <stop offset="78%" stop-color="rgba(255,255,255,0)"/>
+            <animate attributeName="y1" from="0%" to="100%" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+            <animate attributeName="y2" from="100%" to="200%" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+          </linearGradient>
+
+          <linearGradient id="pulseGradient4" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
+            <stop offset="4%" stop-color="rgba(255,255,255,0.5)"/>
+            <stop offset="8%" stop-color="rgba(255,255,255,0)"/>
+            <stop offset="70%" stop-color="rgba(255,255,255,0)"/>
+            <stop offset="74%" stop-color="rgba(255,255,255,0.5)"/>
+            <stop offset="78%" stop-color="rgba(255,255,255,0)"/>
+            <animate attributeName="y1" from="0%" to="100%" dur="2s" repeatCount="indefinite" begin="0.75s"/>
+            <animate attributeName="y2" from="100%" to="200%" dur="2s" repeatCount="indefinite" begin="0.75s"/>
+          </linearGradient>
+
+          <!-- Traits de base (couleurs) -->
+          <linearGradient id="blueBase" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="rgba(48,165,255,0)"/>
+            <stop offset="100%" stop-color="#30A5FF"/>
+          </linearGradient>
+          <linearGradient id="yellowBase" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="rgba(255,186,23,0)"/>
+            <stop offset="100%" stop-color="#FFBA17"/>
+          </linearGradient>
+          <linearGradient id="redBase" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="rgba(255,134,111,0)"/>
+            <stop offset="100%" stop-color="#FF866F"/>
+          </linearGradient>
+          <linearGradient id="purpleBase" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="rgba(151,0,244,0)"/>
+            <stop offset="100%" stop-color="#9700F4"/>
+          </linearGradient>
+        </defs>
+
+        <!-- 4 courbes colorées (fixes) -->
+        <path d="M3 0C3 157 280 90 280 282"   stroke="url(#blueBase)"   stroke-width="3"/>
+        <path d="M200 0C200 157 294 90 294 282" stroke="url(#yellowBase)" stroke-width="3"/>
+        <path d="M400 0C400 157 307 90 307 282" stroke="url(#redBase)"    stroke-width="3"/>
+        <path d="M601 0C601 157 320 90 320 282" stroke="url(#purpleBase)" stroke-width="3"/>
+
+        <!-- Balayages lumineux (animés) par-dessus -->
+        <path d="M3 0C3 157 280 90 280 282"     stroke="url(#pulseGradient1)" stroke-width="3"/>
+        <path d="M200 0C200 157 294 90 294 282" stroke="url(#pulseGradient2)" stroke-width="3"/>
+        <path d="M400 0C400 157 307 90 307 282" stroke="url(#pulseGradient3)" stroke-width="3"/>
+        <path d="M601 0C601 157 320 90 320 282" stroke="url(#pulseGradient4)" stroke-width="3"/>
+      </svg>
+    </section>
+
+    <!-- Text Section Below Pulse SVG -->
+    <section style="max-width: 1286px; margin: 2rem auto 4rem; padding: 0 2rem; text-align: center;">
+      <h2 style="font-family: 'Outfit', sans-serif; font-weight: 400; font-size: 2.5rem; color: #ffffff; margin-bottom: 1rem; line-height: 1.2; display: flex; align-items: center; justify-content: center; gap: 0.75rem;">
+        <svg id="atom-desktop" width="29" height="29" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+          <defs>
+            <filter id="softGlowDesktopClone3" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="1.2" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <path id="orbit0DesktopClone3" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+            <path id="orbit1DesktopClone3" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+            <path id="orbit2DesktopClone3" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+          </defs>
+          <g stroke="#68859e" stroke-width="2" fill="none">
+            <use href="#orbit0DesktopClone3"/>
+            <use href="#orbit1DesktopClone3"/>
+            <use href="#orbit2DesktopClone3"/>
+          </g>
+          <g stroke-linecap="round" filter="url(#softGlowDesktopClone3)">
+            <use href="#orbit0DesktopClone3" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+              <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+            </use>
+            <use href="#orbit1DesktopClone3" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+              <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+            </use>
+            <use href="#orbit2DesktopClone3" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+              <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+            </use>
+          </g>
+          <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+        </svg>
+        3 cartes récentes de notre ia
+      </h2>
+      <p style="font-family: 'Outfit', sans-serif; font-weight: 300; font-size: 1.25rem; color: rgba(255, 255, 255, 0.6); margin: 0;">
+        extraits de notre historique : détectées par notre ia, validées par le résultat, cashout affiché.
+      </p>
+    </section>
+
+    <!-- Three Payout Cards Section -->
+    <section class="three-cards-section" style="max-width: 1280px; margin: 0 auto 4rem;">
+      <div class="three-cards-grid">
+        
+        <!-- Card 1: Crypto Payments -->
+        <div class="feature-card">
+          <div class="feature-card-background">
+            <canvas class="feature-card-canvas" style="width:600px;height:600px;max-width:100%;aspect-ratio:1" width="982" height="1200"></canvas>
+          </div>
+          <div class="feature-card-content" style="display: flex; flex-direction: column; padding: -50.25rem 2rem 1rem 2rem; margin-top: -27rem;">
+            <div class="card-title" style="text-align: center; margin-top: -15rem;font-size: 1.8rem;margin-bottom: 1rem; font-weight: 400;">
+              <svg width="50" height="50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 0.4rem; flex-shrink: 0;">
+                <defs>
+                  <filter id="softGlowCard1" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="1.2" result="b"/>
+                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                  <path id="orbit0Card1" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                  <path id="orbit1Card1" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                  <path id="orbit2Card1" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+                </defs>
+                <g stroke="#68859e" stroke-width="2" fill="none">
+                  <use href="#orbit0Card1"/>
+                  <use href="#orbit1Card1"/>
+                  <use href="#orbit2Card1"/>
+                </g>
+                <g stroke-linecap="round" filter="url(#softGlowCard1)">
+                  <use href="#orbit0Card1" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                  <use href="#orbit1Card1" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                  <use href="#orbit2Card1" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                </g>
+                <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
+              </svg>
+              Paris sportifs trouvé par notre ia
+            </div>
+            <div style="display: flex; gap: 2.5rem; justify-content: center; align-items: center; margin: -0.5rem 0.5rem auto;">
+              <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/8_700_._21-2.png?v=1762725116" alt="Logo 1" style="width: 100px; height: 100px;">
+              <span style="color: #9ca3af; font-size: 2rem; font-weight: 600;">vs</span>
+              <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/8_700_._21-3.png?v=1762725180" alt="Logo 2" style="width: 100px; height: 100px;">
+            </div>
+            <div style="text-align: center; margin-top: -1rem;margin-bottom: 2rem; max-width: 700px;">
+              <span style="color: #ffffff;font-size: 4.5rem; font-weight: 400;">x2.13</span>
+            </div>
+            <div style="text-align: center; max-width: 700px;">
+              <span style="color: #9ca3af; font-size: 2.1rem; font-weight: 400;">Prédiction ia : Victoire Kings</span>
+            </div>
+            <div style="text-align: center; max-width: 700px;margin-bottom: 2.5rem;">
+              <span style="color: #9ca3af; font-size: 2.1rem; font-weight: 400; font-family: 'fustat', sans-serif;">Résultat final: Victoire Kings</span>
+            </div>
+            
+            <div class="credit-card">
+              <div style="font-size: 1.8rem; color: #9ca3af; font-weight: 400; margin-bottom: -0.7rem;">Cashout</div>
+              <div style="font-size: 3.75rem; font-weight: 400; color: #ffffff;">+213.27$</div>
+              <div style="font-size: 1.25rem; color: #9ca3af; font-weight: 400; margin-top: -0.7rem;">+ 113.27$ de bénéfice</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Bank Transfers -->
+        <div class="feature-card">
+          <div class="feature-card-background">
+            <canvas class="feature-card-canvas" style="width:600px;height:600px;max-width:100%;aspect-ratio:1" width="982" height="1200"></canvas>
+          </div>
+          <div class="feature-card-content" style="display: flex; flex-direction: column; padding: -50.25rem 2rem 1rem 2rem; margin-top: -27rem;">
+            <div class="card-title" style="text-align: center; margin-top: -15rem;font-size: 1.8rem;margin-bottom: 1rem; font-weight: 400;">
+              <svg width="50" height="50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 0.4rem; flex-shrink: 0;">
+                <defs>
+                  <filter id="softGlowCard1" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="1.2" result="b"/>
+                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                  <path id="orbit0Card1" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                  <path id="orbit1Card1" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                  <path id="orbit2Card1" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+                </defs>
+                <g stroke="#68859e" stroke-width="2" fill="none">
+                  <use href="#orbit0Card1"/>
+                  <use href="#orbit1Card1"/>
+                  <use href="#orbit2Card1"/>
+                </g>
+                <g stroke-linecap="round" filter="url(#softGlowCard1)">
+                  <use href="#orbit0Card1" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                  <use href="#orbit1Card1" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                  <use href="#orbit2Card1" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                </g>
+                <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
+              </svg>
+              Paris sportifs trouvé par notre ia
+            </div>
+            <div style="display: flex; gap: 2.5rem; justify-content: center; align-items: center; margin: -0.5rem 0.5rem auto;">
+              <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/8_700_._21-4.png?v=1762725353" alt="Logo 1" style="width: 100px; height: 100px;">
+              <span style="color: #9ca3af; font-size: 2rem; font-weight: 600;">vs</span>
+              <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Untitled_design-54_8a0e6c7a-da28-45db-a3f9-352fa7600b33.png?v=1762325074" alt="Logo 2" style="width: 100px; height: 100px;">
+            </div>
+            <div style="text-align: center; margin-top: -1rem;margin-bottom: 2rem; max-width: 700px;">
+              <span style="color: #ffffff;font-size: 4.5rem; font-weight: 400;">x1.74</span>
+            </div>
+            <div style="text-align: center; max-width: 700px;">
+              <span style="color: #9ca3af; font-size: 2.1rem; font-weight: 400;">Prédiction ia : Victoire Saints</span>
+            </div>
+            <div style="text-align: center; max-width: 700px;margin-bottom: 2.5rem;">
+              <span style="color: #9ca3af; font-size: 2.1rem; font-weight: 400; font-family: 'fustat', sans-serif;">Résultat final: Victoire Saints</span>
+            </div>
+            
+            <div class="credit-card">
+              <div style="font-size: 1.8rem; color: #9ca3af; font-weight: 400; margin-bottom: -0.7rem;">Cashout</div>
+              <div style="font-size: 3.75rem; font-weight: 400; color: #ffffff;">+174.50$</div>
+              <div style="font-size: 1.25rem; color: #9ca3af; font-weight: 400; margin-top: -0.7rem;">+ 74.50$ de bénéfice</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Secure Transactions -->
+        <div class="feature-card">
+          <div class="feature-card-background">
+            <canvas class="feature-card-canvas" style="width:600px;height:600px;max-width:100%;aspect-ratio:1" width="982" height="1200"></canvas>
+          </div>
+          <div class="feature-card-content" style="display: flex; flex-direction: column; padding: -50.25rem 2rem 1rem 2rem; margin-top: -27rem;">
+            <div class="card-title" style="text-align: center; margin-top: -15rem;font-size: 1.8rem;margin-bottom: 1rem; font-weight: 400;">
+              <svg width="50" height="50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 0.4rem; flex-shrink: 0;">
+                <defs>
+                  <filter id="softGlowCard1" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="1.2" result="b"/>
+                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                  <path id="orbit0Card1" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                  <path id="orbit1Card1" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                  <path id="orbit2Card1" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+                </defs>
+                <g stroke="#68859e" stroke-width="2" fill="none">
+                  <use href="#orbit0Card1"/>
+                  <use href="#orbit1Card1"/>
+                  <use href="#orbit2Card1"/>
+                </g>
+                <g stroke-linecap="round" filter="url(#softGlowCard1)">
+                  <use href="#orbit0Card1" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                  <use href="#orbit1Card1" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                  <use href="#orbit2Card1" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                </g>
+                <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
+              </svg>
+              Paris sportifs trouvé par notre ia
+            </div>
+            <div style="display: flex; gap: 2.5rem; justify-content: center; align-items: center; margin: -0.5rem 0.5rem auto;">
+              <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/8_700_._21-5.png?v=1762725604" alt="Logo 1" style="width: 100px; height: 100px;">
+              <span style="color: #9ca3af; font-size: 2rem; font-weight: 600;">vs</span>
+              <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/8_700_._21-6.png?v=1762725658" alt="Logo 2" style="width: 100px; height: 100px;">
+            </div>
+            <div style="text-align: center; margin-top: -1rem;margin-bottom: 2rem; max-width: 700px;">
+              <span style="color: #ffffff;font-size: 4.5rem; font-weight: 400;">x1.91</span>
+            </div>
+            <div style="text-align: center; max-width: 700px;">
+              <span style="color: #9ca3af; font-size: 2.1rem; font-weight: 400;">Prédiction ia : Victoire Blackhawks</span>
+            </div>
+            <div style="text-align: center; max-width: 700px;margin-bottom: 2.5rem;">
+              <span style="color: #9ca3af; font-size: 2.1rem; font-weight: 400; font-family: 'fustat', sans-serif;">Résultat final: Victoire Blackhawks</span>
+            </div>
+            
+            <div class="credit-card">
+              <div style="font-size: 1.8rem; color: #9ca3af; font-weight: 400; margin-bottom: -0.7rem;">Cashout</div>
+              <div style="font-size: 3.75rem; font-weight: 400; color: #ffffff;">+191.02$</div>
+              <div style="font-size: 1.25rem; color: #9ca3af; font-weight: 400; margin-top: -0.7rem;">+ 91.02 de bénéfice</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
 
     <!-- Section Bottom Title -->
     <section style="max-width: 1286px; margin: 6rem auto 4rem; padding: 0 2rem;">
@@ -618,167 +2280,138 @@
             <!-- Review Card 1 -->
             <div class="review-card">
               <p class="review-text">
-                "C'est vraiment bien winabet, honnetemenet, c'est le meilleur truc pour faire de l'argent facile, no cap ta rien a faire a part checker les cartes"
+                "I've used Mailgun, Sendgrid, and Mandrill and they don't even come close to the developer experience you get with Resend."
               </p>
-              <div class="review-author">Émile castonguay</div>
+              <div class="review-author">Brandon Jacobowitz</div>
               <div class="review-position">Abonné depuis +1 mois</div>
             </div>
             
             <!-- Review Card 2 -->
             <div class="review-card">
               <p class="review-text">
-                "A date j'ai fait 2000$ de profit en un mois, c'est vraiment ezzzz"
+                "Resend is an amazing product. It was so easy to switch from Sendgrid, and the best part is the integration is so good habits with Resond. Everyone should be using this."
               </p>
-              <div class="review-author">Xavier Landry</div>
+              <div class="review-author">Shakor Kabir</div>
               <div class="review-position">Abonné depuis +1 mois</div>
             </div>
             
             <!-- Review Card 3 -->
             <div class="review-card">
               <p class="review-text">
-                "Vraiment bien"
+                "All of our customers are located in South America, so knowing that could handle our emails from the region closest to our users is very important."
               </p>
-              <div class="review-author">Louis Gagnon</div>
+              <div class="review-author">Giovanni Keppelen</div>
               <div class="review-position">Abonné depuis +1 mois</div>
             </div>
             
             <!-- Review Card 4 -->
             <div class="review-card">
               <p class="review-text">
-                "L'ia est trop forte c,est juste cave, c'est rare qu,On perd asti, on win tout le temps "
+                "The developer experience is incredible. Setup took minutes and the API is intuitive. Best email service I've used."
               </p>
-              <div class="review-author">Antony Boulier</div>
+              <div class="review-author">Sarah Chen</div>
+              <div class="review-position">Abonné depuis +1 mois</div>
+            </div>
+            
+            <!-- Review Card 5 -->
+            <div class="review-card">
+              <p class="review-text">
+                "Migration was seamless and the deliverability rates are outstanding. Our open rates increased by 40% after switching."
+              </p>
+              <div class="review-author">Michael Rodriguez</div>
               <div class="review-position">Abonné depuis +1 mois</div>
             </div>
             
             <!-- Review Card 6 -->
             <div class="review-card">
               <p class="review-text">
-                "Wallah c,est trop facie, tu peux facile faire 1000$ par mois si tu fait pas toutes les bets, je conceille si tu vex vraiment faire deL'argent a quick"
+                "Les prédictions sont incroyablement précises. J'ai amélioré mes résultats de 60% depuis que j'utilise Winabet.ai."
               </p>
-              <div class="review-author">Samuel Charest</div>
+              <div class="review-author">Thomas Dubois</div>
               <div class="review-position">Abonné depuis +1 mois</div>
             </div>
             
             <!-- Review Card 7 -->
             <div class="review-card">
               <p class="review-text">
-                "Très value, chu deja postifi sur mon abnnement en 1 journée"
+                "L'interface est claire et les statistiques sont mises à jour en temps réel. Exactement ce dont j'avais besoin."
               </p>
-              <div class="review-author">Jonathan painchaud</div>
+              <div class="review-author">Sophie Martin</div>
               <div class="review-position">Abonné depuis +1 mois</div>
             </div>
-
+            
             <!-- Review Card 8 -->
             <div class="review-card">
               <p class="review-text">
-                "Juste avec le free trials, tu peux te faire la'rgent pour te payer l'abonnement par mois, c'est vraiment un glitch s'taffaire la "
+                "Je suis les cartes quotidiennes et les résultats parlent d'eux-mêmes. Meilleur outil d'analyse que j'ai utilisé."
               </p>
-              <div class="review-author">William Bouchard</div>
+              <div class="review-author">Antoine Lefebvre</div>
               <div class="review-position">Abonné depuis +1 mois</div>
             </div>
-
-
+            
             <!-- Review Card 9 -->
             <div class="review-card">
               <p class="review-text">
-                "J'travaile a shop, pis j'ai juste besoind de 2 min pour chekc er les bet pour me faire de l'argent, c'est vraiment simple honetement c'est bien fait. "
+                "L'analyse des données est impressionnante. Plus de 100 000 données analysées chaque jour, ça se voit dans la qualité."
               </p>
-              <div class="review-author">Julien Goselin</div>
+              <div class="review-author">Julie Tremblay</div>
               <div class="review-position">Abonné depuis +1 mois</div>
             </div>
-
+            
             <!-- Review Card 10 -->
             <div class="review-card">
               <p class="review-text">
-                "J'avais besoin d'argent pour mon opération, je sais que ca va avoir l'air  fake, mais j'ai vraimenr reussis a me faire mon argent pur l'opération, avec ca, mais j'avais déja de l'argent, donc j'ia mis gros, mais j'ai fait gros. Si ta pas bcp, tu va fairr moin mais tu peux faire bcp pareil"
+                "Simple à utiliser même pour un débutant. Les explications sont claires et les prévisions sont fiables."
               </p>
-              <div class="review-author">Xavier nevromont </div>
+              <div class="review-author">Marc Bouchard</div>
               <div class="review-position">Abonné depuis +1 mois</div>
             </div>
-
+            
             <!-- Review Card 11 -->
             <div class="review-card">
               <p class="review-text">
-                "J'arrete l'école a 15 ans, a cause de ca, big j'capable de fair eplus par mois en me mettant a fond que d,avori ue vrai job "
+                "Je recommande à tous mes amis. Les résultats en direct et l'historique complet sont des atouts majeurs."
               </p>
-              <div class="review-author">Mathieu Bouthillette</div>
+              <div class="review-author">Caroline Roy</div>
               <div class="review-position">Abonné depuis +1 mois</div>
             </div>
-
+            
             <!-- Review Card 12 -->
             <div class="review-card">
               <p class="review-text">
-                "J'fait des paris sportifs depusi longrmeps, c,est de loin le meilleur outils, pour te faire gagner le sbet, c'est juste mathématique, l'ia scrape toute, c'est sur que c'est accurate un peu"
+                "L'IA derrière Winabet est vraiment puissante. Les probabilités calculées sont beaucoup plus précises que la concurrence."
               </p>
-              <div class="review-author">Emanuel Ducharme</div>
+              <div class="review-author">David Gagnon</div>
               <div class="review-position">Abonné depuis +1 mois</div>
             </div>
-
+            
             <!-- Review Card 13 -->
             <div class="review-card">
               <p class="review-text">
-                "le site es trop bien, faire de l'argent c'est facile avec ca, gnr tu criss rien a part faire ce qui te dise,puis si tu te demande pk n fait dess review, y nous donne 25% si on fait u review sincere le mois suivant. ( jsp si j'ai le droti de le dire )  "
+                "Suivi en temps réel exceptionnel. Je peux voir l'évolution de mes paris et ajuster ma stratégie facilement."
               </p>
-              <div class="review-author">Hugo Vallière
-              </div>
+              <div class="review-author">Isabelle Côté</div>
               <div class="review-position">Abonné depuis +1 mois</div>
             </div>
-
+            
             <!-- Review Card 14 -->
             <div class="review-card">
               <p class="review-text">
-                "Bonne app pour le sparis sportifs"
+                "Excellent rapport qualité-prix. Les analyses sont détaillées et les mises à jour constantes apportent une vraie valeur."
               </p>
-              <div class="review-author">Victor paldorer</div>
+              <div class="review-author">Philippe Bergeron</div>
               <div class="review-position">Abonné depuis +1 mois</div>
             </div>
-
+            
             <!-- Review Card 15 -->
             <div class="review-card">
               <p class="review-text">
-                "J'fait mes pti jogging tranquille, pis je place mes bets en meem trmps, 5 min par jours, pis tu pex faire 200-300 par jours, si tu met quand meme bcp"
+                "Depuis que j'utilise Winabet.ai, mes décisions sont basées sur des données solides plutôt que sur l'intuition. Game changer."
               </p>
-              <div class="review-author">Édouard ousset</div>
+              <div class="review-author">Émilie Lavoie</div>
               <div class="review-position">Abonné depuis +1 mois</div>
             </div>
-
-            <!-- Review Card 16 -->
-            <div class="review-card">
-              <p class="review-text">
-                "Tu gagne pas chaque bet, mais laplsu part, donc tu fini toujorus rentbale, mais faut que tu suivent les units qui mette, pis qu eut calcue bien, faut pas faire n'importe quoi non plus"
-              </p>
-              <div class="review-author">Emerick langevin</div>
-              <div class="review-position">Abonné depuis +1 mois</div>
-            </div>
-
-            <!-- Review Card 17 -->
-            <div class="review-card">
-              <p class="review-text">
-                "Je connais rien la dedans, mais je fai tjsute lire les bet de la jurnée,pis je fait de l'argent "
-              </p>
-              <div class="review-author">Vincent Guay</div>
-              <div class="review-position">Abonné depuis +1 mois</div>
-            </div>
-
-            <!-- Review Card 18 -->
-            <div class="review-card">
-              <p class="review-text">
-                "Jpeu renta tout mes mes trucs avec ca, le loud est vraiment pas chere quand c'est gratis"
-              </p>
-              <div class="review-author">Thomas Bilodeau</div>
-              <div class="review-position">Abonné depuis +1 mois</div>
-            </div>
-
-            <!-- Review Card 19 -->
-            <div class="review-card">
-              <p class="review-text">
-                "Je confirme que c'est une bonne app, bien fait, simple, je reste abonné."
-              </p>
-              <div class="review-author">Alexis boulon-covretti</div>
-              <div class="review-position">Abonné depuis +1 mois</div>
-            </div>
-           </div>
+          </div>
         </div>
         
       </div>
@@ -1068,239 +2701,6 @@
 
   </main>
 
-  <!-- Section Pricing (sélection d'abonnement) -->
-  <section id="pricing" style="display:none; background: linear-gradient(180deg, #000000 0%, #0a0a0a 100%); padding: 3rem 2rem 0rem 2rem; min-height: 100vh; position: relative;">
-    <div class="pricing-container" style="max-width: 1200px; margin: 0 auto; padding-bottom: 280px;">
-      
-      <!-- Header avec bouton retour -->
-      <div class="pricing-header" style="max-width:1200px;margin:0 auto 1.5rem;display:flex;align-items:center;">
-        <a href="#" class="back-to-home" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; transition: color 0.3s; font-family: 'Outfit', sans-serif;">
-          <span style="font-size: 1.5rem;">←</span> Retour à l'accueil
-        </a>
-      </div>
-      
-      <!-- Logo Winabet -->
-      <div style="text-align: center; margin-bottom: 3rem;">
-        <div class="logo" style="display: inline-block; font-family: 'Fustat', sans-serif; font-size: 2rem; font-weight: 400; color: #ffffff;">
-          wina<span style="color: #71717a;">bet</span>.ai
-        </div>
-      </div>
-      
-      <!-- Hero Section -->
-      <div style="text-align: center; margin-bottom: 4rem;">
-        <h1 style="font-size: 3rem; margin-bottom: 1rem; color: #ffffff; font-family: 'Outfit', sans-serif; font-weight: 700; line-height: 1.2;">
-          Rejoignez WINABET.AI
-        </h1>
-        <p style="font-size: 1.25rem; color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; font-weight: 300; max-width: 700px; margin: 0 auto;">
-          Commencez avec 1 jour d'essai gratuit, puis continuez avec le plan qui vous convient
-        </p>
-      </div>
-      
-      <!-- Section Avantages -->
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 4rem;">
-        
-        <div style="background: rgba(113, 113, 122, 0.1); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1rem; padding: 2rem; transition: all 0.3s;">
-          <div style="font-size: 2rem; margin-bottom: 1rem;">✓</div>
-          <h3 style="color: #ffffff; font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; font-family: 'Outfit', sans-serif;">
-            Accès complet aux paris du jour
-          </h3>
-          <p style="color: rgba(255, 255, 255, 0.6); font-family: 'Outfit', sans-serif; line-height: 1.6;">
-            Analysés par notre IA avancée
-          </p>
-        </div>
-        
-        <div style="background: rgba(113, 113, 122, 0.1); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1rem; padding: 2rem; transition: all 0.3s;">
-          <div style="font-size: 2rem; margin-bottom: 1rem;">✓</div>
-          <h3 style="color: #ffffff; font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; font-family: 'Outfit', sans-serif;">
-            Parlays haute probabilité
-          </h3>
-          <p style="color: rgba(255, 255, 255, 0.6); font-family: 'Outfit', sans-serif; line-height: 1.6;">
-            Calculés quotidiennement
-          </p>
-        </div>
-        
-        <div style="background: rgba(113, 113, 122, 0.1); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1rem; padding: 2rem; transition: all 0.3s;">
-          <div style="font-size: 2rem; margin-bottom: 1rem;">✓</div>
-          <h3 style="color: #ffffff; font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; font-family: 'Outfit', sans-serif;">
-            Historique complet
-          </h3>
-          <p style="color: rgba(255, 255, 255, 0.6); font-family: 'Outfit', sans-serif; line-height: 1.6;">
-            De tous vos paris
-          </p>
-        </div>
-        
-        <div style="background: rgba(113, 113, 122, 0.1); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1rem; padding: 2rem; transition: all 0.3s;">
-          <div style="font-size: 2rem; margin-bottom: 1rem;">✓</div>
-          <h3 style="color: #ffffff; font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; font-family: 'Outfit', sans-serif;">
-            Support prioritaire
-          </h3>
-          <p style="color: rgba(255, 255, 255, 0.6); font-family: 'Outfit', sans-serif; line-height: 1.6;">
-            7 jours sur 7
-          </p>
-        </div>
-        
-        <div style="background: rgba(113, 113, 122, 0.1); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1rem; padding: 2rem; transition: all 0.3s;">
-          <div style="font-size: 2rem; margin-bottom: 1rem;">✓</div>
-          <h3 style="color: #ffffff; font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; font-family: 'Outfit', sans-serif;">
-            Mises à jour en temps réel
-          </h3>
-          <p style="color: rgba(255, 255, 255, 0.6); font-family: 'Outfit', sans-serif; line-height: 1.6;">
-            Notifications instantanées
-          </p>
-        </div>
-        
-        <div style="background: rgba(113, 113, 122, 0.1); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1rem; padding: 2rem; transition: all 0.3s;">
-          <div style="font-size: 2rem; margin-bottom: 1rem;">✓</div>
-          <h3 style="color: #ffffff; font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; font-family: 'Outfit', sans-serif;">
-            Analyse prédictive avancée
-          </h3>
-          <p style="color: rgba(255, 255, 255, 0.6); font-family: 'Outfit', sans-serif; line-height: 1.6;">
-            Basée sur l'IA et les données historiques
-          </p>
-        </div>
-        
-      </div>
-      
-      <!-- Description -->
-      <div style="text-align: center; max-width: 800px; margin: 0 auto 4rem;">
-        <p style="font-size: 1.1rem; color: rgba(255, 255, 255, 0.7); font-family: 'Outfit', sans-serif; line-height: 1.8;">
-          WINABET.AI utilise des algorithmes d'intelligence artificielle avancés pour analyser des milliers de données sportives en temps réel. 
-          Notre plateforme vous donne accès aux meilleures opportunités de paris, calculées avec précision pour maximiser vos gains.
-        </p>
-      </div>
-      
-    </div>
-    
-    <!-- STICKY FOOTER avec les 5 options -->
-    <div id="pricing-sticky-footer" style="position: fixed; bottom: 0; left: 0; right: 0; z-index: 999; background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(12px); border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 1.5rem 2rem 1.5rem; box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);">
-      <div style="max-width: 1400px; margin: 0 auto;">
-        
-        <!-- Titre du footer -->
-        <h3 style="color: #ffffff; font-size: 1.2rem; text-align: center; margin-bottom: 1.25rem; font-family: 'Outfit', sans-serif; font-weight: 600;">
-          Choisissez votre fréquence de paiement
-        </h3>
-        
-        <!-- Grid des options -->
-        <div class="pricing-options-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.25rem;">
-          
-          <!-- Option 1: Mensuel -->
-          <div class="pricing-option" data-plan="monthly" onclick="selectPricingOption('monthly')" style="position: relative; background: rgba(26, 26, 26, 0.6); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 0.75rem; padding: 1rem 1.25rem; cursor: pointer; transition: all 0.3s ease;">
-            <svg class="checkmark" style="position: absolute; top: 0.5rem; right: 0.5rem; width: 20px; height: 20px; display: none;" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3">
-              <path d="M20 6L9 17l-5-5"/>
-            </svg>
-            
-            <div style="background: rgba(34, 197, 94, 0.15); color: #22c55e; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 600; display: inline-block; margin-bottom: 0.5rem; font-family: 'Outfit', sans-serif;">
-              1 jour gratuit
-            </div>
-            
-            <div style="color: #ffffff; font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; font-family: 'Outfit', sans-serif;">
-              Mensuel
-            </div>
-            
-            <div style="color: #ffffff; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem; font-family: 'Outfit', sans-serif;">
-              99$
-              <span style="font-size: 0.9rem; font-weight: 400; color: rgba(255, 255, 255, 0.7);">/ mois</span>
-            </div>
-            
-            <div style="color: rgba(255, 255, 255, 0.6); font-size: 0.8rem; font-family: 'Outfit', sans-serif;">
-              Facturé 99$ chaque mois
-            </div>
-            
-            <div style="margin-top: 0.5rem; background: rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.8); padding: 0.25rem 0.5rem; border-radius: 0.375rem; font-size: 0.7rem; font-weight: 500; display: inline-block; font-family: 'Outfit', sans-serif;">
-              Le plus flexible
-            </div>
-          </div>
-          
-          <!-- Option 2: Trimestriel -->
-          <div class="pricing-option" data-plan="quarterly" onclick="selectPricingOption('quarterly')" style="position: relative; background: rgba(26, 26, 26, 0.6); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 0.75rem; padding: 1rem 1.25rem; cursor: pointer; transition: all 0.3s ease;">
-            <svg class="checkmark" style="position: absolute; top: 0.5rem; right: 0.5rem; width: 20px; height: 20px; display: none;" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3">
-              <path d="M20 6L9 17l-5-5"/>
-            </svg>
-            
-            <div style="background: rgba(34, 197, 94, 0.15); color: #22c55e; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 600; display: inline-block; margin-bottom: 0.5rem; font-family: 'Outfit', sans-serif;">
-              1 jour gratuit
-            </div>
-            
-            <div style="color: #ffffff; font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; font-family: 'Outfit', sans-serif;">
-              Trimestriel
-            </div>
-            
-            <div style="color: #ffffff; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem; font-family: 'Outfit', sans-serif;">
-              79.99$
-              <span style="font-size: 0.9rem; font-weight: 400; color: rgba(255, 255, 255, 0.7);">/ mois</span>
-            </div>
-            
-            <div style="color: rgba(255, 255, 255, 0.6); font-size: 0.8rem; font-family: 'Outfit', sans-serif;">
-              239.97$ tous les 3 mois
-            </div>
-            
-            <div style="margin-top: 0.5rem; background: rgba(34, 197, 94, 0.15); color: #22c55e; padding: 0.25rem 0.5rem; border-radius: 0.375rem; font-size: 0.7rem; font-weight: 600; display: inline-block; font-family: 'Outfit', sans-serif;">
-              Économisez 19%
-            </div>
-          </div>
-          
-          <!-- Option 3: Annuel -->
-          <div class="pricing-option" data-plan="annually" onclick="selectPricingOption('annually')" style="position: relative; background: rgba(26, 26, 26, 0.6); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 0.75rem; padding: 1rem 1.25rem; cursor: pointer; transition: all 0.3s ease;">
-            <svg class="checkmark" style="position: absolute; top: 0.5rem; right: 0.5rem; width: 20px; height: 20px; display: none;" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3">
-              <path d="M20 6L9 17l-5-5"/>
-            </svg>
-            
-            <div style="background: rgba(34, 197, 94, 0.15); color: #22c55e; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 600; display: inline-block; margin-bottom: 0.5rem; font-family: 'Outfit', sans-serif;">
-              1 jour gratuit
-            </div>
-            
-            <div style="color: #ffffff; font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; font-family: 'Outfit', sans-serif;">
-              Annuel
-            </div>
-            
-            <div style="color: #ffffff; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem; font-family: 'Outfit', sans-serif;">
-              49.99$
-              <span style="font-size: 0.9rem; font-weight: 400; color: rgba(255, 255, 255, 0.7);">/ mois</span>
-            </div>
-            
-            <div style="color: rgba(255, 255, 255, 0.6); font-size: 0.8rem; font-family: 'Outfit', sans-serif;">
-              599.88$ / an
-            </div>
-            
-            <div style="margin-top: 0.5rem; background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%); color: #000000; padding: 0.35rem 0.75rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 700; display: inline-block; font-family: 'Outfit', sans-serif;">
-              MEILLEURE VALEUR - 49%
-            </div>
-          </div>
-          
-          <!-- Option 5: Virement Interac -->
-          <div class="pricing-option" data-plan="interac" onclick="selectPricingOption('interac')" style="position: relative; background: rgba(26, 26, 26, 0.6); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 0.75rem; padding: 1rem 1.25rem; cursor: pointer; transition: all 0.3s ease;">
-            <svg class="checkmark" style="position: absolute; top: 0.5rem; right: 0.5rem; width: 20px; height: 20px; display: none;" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3">
-              <path d="M20 6L9 17l-5-5"/>
-            </svg>
-            
-            <div style="color: #ffffff; font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; margin-top: 1.5rem; font-family: 'Outfit', sans-serif;">
-              Virement Interac
-            </div>
-            
-            <div style="color: #ffffff; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem; font-family: 'Outfit', sans-serif;">
-              Paiement direct
-            </div>
-            
-            <div style="color: rgba(255, 255, 255, 0.6); font-size: 0.8rem; font-family: 'Outfit', sans-serif; margin-bottom: 0.5rem;">
-              Contactez-nous pour les détails
-            </div>
-            
-            <div style="margin-top: 0.5rem; background: rgba(59, 130, 246, 0.15); color: #3b82f6; padding: 0.25rem 0.5rem; border-radius: 0.375rem; font-size: 0.7rem; font-weight: 600; display: inline-block; font-family: 'Outfit', sans-serif;">
-              Paiement canadien
-            </div>
-          </div>
-          
-        </div>
-        
-        <!-- Bouton continuer -->
-        <button id="continue-payment-btn" onclick="continueToPayment()" disabled style="background: #ffffff; color: #000000; padding: 1rem 2.5rem; border-radius: 0.5rem; font-weight: 600; font-size: 1.1rem; border: none; cursor: not-allowed; margin: 0 auto; display: block; font-family: 'Outfit', sans-serif; opacity: 0.4; transition: all 0.3s;">
-          Continuer vers le paiement
-        </button>
-        
-      </div>
-    </div>
-  </section>
-
   <script>
     // Mobile responsive scaling pour stats-section
     (function() {
@@ -1512,7 +2912,7 @@
           statsObserver.observe(statsSection);
         }
 
-        // Reviews Auto-Scrolling Slider with Drag/Swipe Support
+        // Reviews Auto-Scrolling Slider
         const track = document.getElementById('reviewsTrack');
         if (track) {
           const cards = Array.from(track.children);
@@ -1526,135 +2926,46 @@
           let position = 0;
           const cardWidth = cards[0].offsetWidth + 32; // width + gap
           const totalWidth = cardWidth * cards.length;
-          let isDragging = false;
-          let startX = 0;
-          let currentX = 0;
-          let animationId = null;
-          let velocity = 0;
           
           function autoScroll() {
-            if (!isDragging) {
-              position -= 0.5; // Slow scroll speed
-              velocity = -0.5;
-              
-              // Reset position when we've scrolled through all original cards
-              if (Math.abs(position) >= totalWidth) {
-                position = 0;
-              }
-              
-              track.style.transform = `translateX(${position}px)`;
+            position -= 0.5; // Slow scroll speed
+            
+            // Reset position when we've scrolled through all original cards
+            if (Math.abs(position) >= totalWidth) {
+              position = 0;
             }
-            animationId = requestAnimationFrame(autoScroll);
+            
+            track.style.transform = `translateX(${position}px)`;
+            requestAnimationFrame(autoScroll);
           }
           
-          // Mouse events
-          track.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            startX = e.pageX - position;
-            track.style.cursor = 'grabbing';
-            velocity = 0;
-          });
-          
-          track.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            e.preventDefault();
-            currentX = e.pageX - startX;
-            const delta = currentX - position;
-            velocity = delta;
-            position = currentX;
-            
-            // Reset position if dragged too far
-            if (Math.abs(position) >= totalWidth) {
-              position = position % totalWidth;
-              startX = e.pageX - position;
-            }
-            if (position > 0) {
-              position = -(totalWidth - Math.abs(position));
-              startX = e.pageX - position;
-            }
-            
-            track.style.transform = `translateX(${position}px)`;
-          });
-          
-          track.addEventListener('mouseup', () => {
-            isDragging = false;
-            track.style.cursor = 'grab';
-          });
-          
-          track.addEventListener('mouseleave', () => {
-            isDragging = false;
-            track.style.cursor = 'grab';
-          });
-          
-          // Touch events
-          track.addEventListener('touchstart', (e) => {
-            isDragging = true;
-            startX = e.touches[0].pageX - position;
-            velocity = 0;
-          });
-          
-          track.addEventListener('touchmove', (e) => {
-            if (!isDragging) return;
-            currentX = e.touches[0].pageX - startX;
-            const delta = currentX - position;
-            velocity = delta;
-            position = currentX;
-            
-            // Reset position if dragged too far
-            if (Math.abs(position) >= totalWidth) {
-              position = position % totalWidth;
-              startX = e.touches[0].pageX - position;
-            }
-            if (position > 0) {
-              position = -(totalWidth - Math.abs(position));
-              startX = e.touches[0].pageX - position;
-            }
-            
-            track.style.transform = `translateX(${position}px)`;
-          });
-          
-          track.addEventListener('touchend', () => {
-            isDragging = false;
-          });
-          
-          track.style.cursor = 'grab';
           autoScroll();
         }
       });
 
-      // Navigation interne pour la page Politique, Support et Pricing
+      // Navigation interne pour la page Politique et Support
       (function() {
         function showPage() {
           var hash = window.location.hash.replace('#','');
           var home = document.getElementById('accueil');
           var politique = document.getElementById('politique');
           var support = document.getElementById('support');
-          var pricing = document.getElementById('pricing');
           if (!home || !politique || !support) return;
 
           if (hash === 'politique') {
             home.style.display = 'none';
             politique.style.display = 'block';
             support.style.display = 'none';
-            if (pricing) pricing.style.display = 'none';
             window.scrollTo(0, 0);
           } else if (hash === 'support') {
             home.style.display = 'none';
             politique.style.display = 'none';
             support.style.display = 'block';
-            if (pricing) pricing.style.display = 'none';
-            window.scrollTo(0, 0);
-          } else if (hash === 'pricing') {
-            home.style.display = 'none';
-            politique.style.display = 'none';
-            support.style.display = 'none';
-            if (pricing) pricing.style.display = 'block';
             window.scrollTo(0, 0);
           } else {
             home.style.display = 'block';
             politique.style.display = 'none';
             support.style.display = 'none';
-            if (pricing) pricing.style.display = 'none';
           }
         }
         
@@ -1668,154 +2979,6 @@
             window.location.hash = '';
           }
         });
-      })();
-
-      // Gestion de la sélection des plans de paiement
-      var selectedPricingOption = null;
-
-      var pricingPlans = {
-        monthly: {
-          name: 'Mensuel',
-          price: '99$ / mois',
-          billing: 'Facturé 99$ chaque mois',
-          link: '' // À remplir avec le lien Shopify
-        },
-        quarterly: {
-          name: 'Trimestriel',
-          price: '79.99$ / mois',
-          billing: 'Facturé 239.97$ tous les 3 mois',
-          link: ''
-        },
-        annually: {
-          name: 'Annuel',
-          price: '49.99$ / mois',
-          billing: 'Facturé 599.88$ / an',
-          link: ''
-        },
-        interac: {
-          name: 'Virement Interac',
-          price: 'Paiement direct',
-          billing: 'Contactez-nous pour les détails',
-          link: '#support'
-        }
-      };
-
-      function selectPricingOption(planKey) {
-        selectedPricingOption = planKey;
-        
-        // Retirer la classe selected de toutes les options
-        var allOptions = document.querySelectorAll('.pricing-option');
-        allOptions.forEach(function(opt) {
-          opt.classList.remove('selected');
-          opt.style.border = '2px solid rgba(255, 255, 255, 0.1)';
-          opt.style.background = 'rgba(26, 26, 26, 0.6)';
-          var checkmark = opt.querySelector('.checkmark');
-          if (checkmark) checkmark.style.display = 'none';
-        });
-        
-        // Ajouter la classe selected à l'option cliquée
-        var selected = document.querySelector('.pricing-option[data-plan="' + planKey + '"]');
-        if (selected) {
-          selected.classList.add('selected');
-          selected.style.border = '2px solid #ffffff';
-          selected.style.background = 'rgba(255, 255, 255, 0.08)';
-          var checkmark = selected.querySelector('.checkmark');
-          if (checkmark) checkmark.style.display = 'block';
-        }
-        
-        // Activer le bouton
-        var btn = document.getElementById('continue-payment-btn');
-        if (btn) {
-          btn.disabled = false;
-          btn.style.opacity = '1';
-          btn.style.cursor = 'pointer';
-        }
-      }
-
-      function continueToPayment() {
-        if (!selectedPricingOption) return;
-        
-        var plan = pricingPlans[selectedPricingOption];
-        if (plan && plan.link) {
-          window.location.href = plan.link;
-        } else {
-          alert('Lien de paiement à configurer. Veuillez contacter le support.');
-        }
-      }
-
-      // Styles CSS pour les interactions
-      (function() {
-        var style = document.createElement('style');
-        style.textContent = `
-          .pricing-option:hover {
-            border-color: rgba(255, 255, 255, 0.3) !important;
-            background: rgba(26, 26, 26, 0.8) !important;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-          }
-          
-          #continue-payment-btn:not(:disabled):hover {
-            background: #f3f4f6;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-          }
-          
-          /* Responsive design */
-          @media (max-width: 1200px) {
-            .pricing-options-grid {
-              grid-template-columns: repeat(2, 1fr) !important;
-            }
-          }
-          
-          @media (max-width: 768px) {
-            #pricing-sticky-footer {
-              padding: 1rem 1rem 1.5rem;
-            }
-            
-            .pricing-options-grid {
-              grid-template-columns: repeat(3, 1fr) !important;
-              gap: 0.5rem;
-            }
-            
-            .pricing-option {
-              padding: 0.4rem 0.4rem !important;
-              font-size: 0.75rem;
-            }
-            
-            .pricing-option[data-plan="monthly"],
-            .pricing-option[data-plan="quarterly"],
-            .pricing-option[data-plan="annually"] {
-              grid-column: span 1;
-            }
-            
-            .pricing-option[data-plan="interac"] {
-              grid-column: span 3;
-              padding: 0.75rem 1rem !important;
-            }
-            
-            .pricing-option > div {
-              font-size: 0.7rem !important;
-            }
-            
-            .pricing-option > div[style*="font-size: 1.5rem"] {
-              font-size: 1rem !important;
-            }
-            
-            .pricing-option > div[style*="font-size: 1.1rem"] {
-              font-size: 0.85rem !important;
-            }
-            
-            #continue-payment-btn {
-              width: 100%;
-              padding: 0.875rem 1.5rem !important;
-            }
-            
-            .pricing-container {
-              padding-bottom: 400px !important;
-            }
-          }
-        `;
-        document.head.appendChild(style);
       })();
   </script>
 </body>

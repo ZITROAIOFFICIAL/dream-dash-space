@@ -225,58 +225,6 @@
   </style>
 </head>
 <body>
-  {% comment %} Détection de l'état de connexion {% endcomment %}
-  {% assign user_is_logged_in = false %}
-  {% if customer %}
-    {% assign user_is_logged_in = true %}
-  {% endif %}
-
-  {% comment %} Détection des customer tags {% endcomment %}
-  {% assign has_payment_failed = false %}
-  {% assign has_subscription = false %}
-  {% assign has_free_trial = false %}
-
-  {% if customer and customer.tags.size > 0 %}
-    {% for tag in customer.tags %}
-      {% assign tag_lower = tag | downcase %}
-      {% if tag_lower contains 'paiement échoué' or tag_lower contains 'paiement echoue' %}
-        {% assign has_payment_failed = true %}
-      {% elsif tag_lower contains 'abonnement' %}
-        {% assign has_subscription = true %}
-      {% elsif tag_lower contains 'free trials' or tag_lower contains 'free trial' %}
-        {% assign has_free_trial = true %}
-      {% endif %}
-    {% endfor %}
-  {% endif %}
-
-  {% comment %} Déterminer le niveau d'accès {% endcomment %}
-  {% assign access_level = 'full' %}
-  {% if has_payment_failed %}
-    {% assign access_level = 'payment_failed' %}
-  {% elsif has_subscription %}
-    {% assign access_level = 'full' %}
-  {% elsif has_free_trial %}
-    {% assign access_level = 'free_trial' %}
-  {% endif %}
-
-  {% comment %} CSS conditionnel: cacher sidebar si non connecté ou paiement échoué {% endcomment %}
-  {% if access_level == 'payment_failed' or customer == nil %}
-  <style>
-    .sidebar {
-      display: none !important;
-    }
-    .mobile-toggle {
-      display: none !important;
-    }
-    .main-content {
-      margin-left: 0 !important;
-    }
-    .overlay {
-      display: none !important;
-    }
-  </style>
-  {% endif %}
-
   <!-- SVG Definitions pour icônes réutilisables -->
   <svg style="display: none;">
     <defs>
@@ -670,15 +618,9 @@
 
         {% assign bet_cards = section.blocks | where: 'type', 'bet_card' %}
         {% if bet_cards.size > 0 %}
-          {% assign visible_bets = 0 %}
           <div class="cards-grid">
           {% for block in bet_cards %}
             {% if block.settings.show_card %}
-              {% comment %} Limiter à 1 bet si free trial {% endcomment %}
-              {% if access_level == 'free_trial' and visible_bets >= 1 %}
-                {% comment %} Cacher les bets suivants {% endcomment %}
-              {% else %}
-                {% assign visible_bets = visible_bets | plus: 1 %}
               <div class="card-wrapper">
 
               <div class="bet-card" style="{% if block.settings.send_to_history == true %}display:none{% endif %}" 
@@ -894,26 +836,8 @@
                 </div>
               </div>
               </div> <!-- card-wrapper -->
-              {% endif %}
             {% endif %}
           {% endfor %}
-          
-{% comment %} Message de restriction pour free trial {% endcomment %}
-{% if access_level == 'free_trial' and bet_cards.size > 1 %}
-  <div class="card text-center" style="padding: 2.5rem; background: rgba(255, 255, 255, 0.03); border: 2px solid rgba(255, 255, 255, 0.1);">
-    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔒</div>
-    <h3 style="color: rgba(255, 255, 255, 0.95); font-size: 1.6rem; margin-bottom: 0.8rem; font-weight: 600;">Débloquer tous les bets</h3>
-    <p style="color: rgba(255, 255, 255, 0.7); font-size: 1.05rem; margin-bottom: 1.5rem; line-height: 1.5;">
-      Pour voir tous les bets, un plan payant est requis. Une fois votre essai gratuit terminé, vous y aurez accès.
-    </p>
-    <a href="https://winabet.ai" style="display: inline-block; background: rgba(255, 255, 255, 0.1); color: #ffffff; padding: 0.9rem 2rem; border-radius: 0.5rem; text-decoration: none; font-size: 1rem; font-weight: 600; border: 1px solid rgba(255, 255, 255, 0.2); transition: all 0.2s; margin-bottom: 1.2rem;">
-      Passer à un Abonnement
-    </a>
-    <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.9rem; margin-top: 1.2rem;">
-      Besoin d'assistance ? Contactez-nous au <a href="tel:4382234581" style="color: rgba(255, 255, 255, 0.8); text-decoration: underline;">438-223-4581</a> ou <a href="mailto:info@winabet.ai" style="color: rgba(255, 255, 255, 0.8); text-decoration: underline;">info@winabet.ai</a>
-    </p>
-  </div>
-{% endif %}
           </div> <!-- cards-grid -->
         {% else %}
           <div class="card text-center" style="padding: 2rem;">
@@ -931,25 +855,8 @@
         <h1>PARLAY DU JOUR</h1>
         <p class="subtitle">Les parlay avec la meilleur probabilité de réussite aujourd'hui. Nous affichons tous les parlay avec minimum de 60% de chance de gagner selon notre IA.</p>
 
-    {% if access_level == 'free_trial' %}
-      <!-- Message de restriction pour free trial -->
-      <div class="card text-center" style="padding: 3rem; margin-top: 2rem; background: rgba(255, 255, 255, 0.03); border: 2px solid rgba(255, 255, 255, 0.1);">
-        <div style="font-size: 3rem; margin-bottom: 1.2rem;">🔒</div>
-        <h2 style="color: rgba(255, 255, 255, 0.95); font-size: 2rem; margin-bottom: 1.2rem; font-weight: 600;">Parlays Réservés aux Abonnés</h2>
-        <p style="color: rgba(255, 255, 255, 0.7); font-size: 1.15rem; margin-bottom: 2rem; line-height: 1.6; max-width: 600px; margin-left: auto; margin-right: auto;">
-          Pour voir tous les parlays, un plan payant est requis. Une fois votre essai gratuit terminé, vous y aurez accès.
-        </p>
-        <a href="https://winabet.ai" style="display: inline-block; background: rgba(255, 255, 255, 0.1); color: #ffffff; padding: 1.1rem 2.5rem; border-radius: 0.5rem; text-decoration: none; font-size: 1.1rem; font-weight: 600; border: 1px solid rgba(255, 255, 255, 0.2); transition: all 0.2s; margin-bottom: 1.5rem;">
-          Passer à un Abonnement
-        </a>
-        <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.9rem; margin-top: 1.5rem;">
-          Besoin d'assistance ? Contactez-nous au <a href="tel:4382234581" style="color: rgba(255, 255, 255, 0.8); text-decoration: underline;">438-223-4581</a> ou <a href="mailto:info@winabet.ai" style="color: rgba(255, 255, 255, 0.8); text-decoration: underline;">info@winabet.ai</a>
-        </p>
-      </div>
-        {% else %}
-          <!-- Contenu normal des parlays pour les membres avec abonnement -->
-          {% assign has_parlay = false %}
-          <div class="cards-grid">
+        {% assign has_parlay = false %}
+        <div class="cards-grid">
         {% for block in section.blocks %}
           {% if block.type == 'parlay_card' and block.settings.show_card %}
             {% assign has_parlay = true %}
@@ -1686,7 +1593,6 @@
             </p>
           </div>
         {% endif %}
-        {% endif %}
       </div>
     </div>
 
@@ -1920,64 +1826,6 @@
             Nous répondons sous 24-48h
           </p>
         </div>
-      </div>
-    </div>
-
-    <!-- PAGE 9: CONNEXION REQUISE -->
-    <div id="page-auth-required" class="page">
-      <div class="container" style="max-width: 800px; margin: 0 auto; text-align: center; padding-top: 8rem;">
-        <div style="font-size: 8rem; margin-bottom: 2rem; opacity: 0.8;">🔒</div>
-        <h1 style="font-size: 3.5rem; margin-bottom: 1.5rem; font-weight: 600; background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.7) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Accès Restreint</h1>
-        <p class="subtitle" style="font-size: 1.5rem; margin-bottom: 4rem; color: rgba(255, 255, 255, 0.7); max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6;">
-          Vous devez être connecté et avoir un plan actif pour accéder au Dashboard
-        </p>
-        
-        <!-- Boutons d'action -->
-        <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-top: 3rem;">
-          <a href="https://account.winabet.ai" style="background: linear-gradient(135deg, #ffffff 0%, #e4e4e7 100%); color: #000000; padding: 1.5rem 3.5rem; border-radius: 0.75rem; text-decoration: none; font-size: 1.3rem; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2); font-family: 'Outfit', sans-serif; display: inline-block;">
-            Se Connecter
-          </a>
-          <a href="https://winabet.ai" style="background: linear-gradient(135deg, rgba(113, 113, 122, 0.3) 0%, rgba(113, 113, 122, 0.2) 100%); color: #ffffff; padding: 1.5rem 3.5rem; border-radius: 0.75rem; text-decoration: none; font-size: 1.3rem; font-weight: 600; border: 1px solid rgba(255, 255, 255, 0.2); transition: all 0.3s; font-family: 'Outfit', sans-serif; display: inline-block;">
-            Commencer Gratuitement
-          </a>
-        </div>
-        
-        <!-- Message additionnel -->
-        <p style="margin-top: 4rem; color: rgba(255, 255, 255, 0.5); font-size: 1.1rem;">
-          Besoin d'aide? <a href="mailto:info@winabet.ai.com" style="color: rgba(255, 255, 255, 0.8); text-decoration: underline;">Contactez-nous</a>
-        </p>
-      </div>
-    </div>
-
-    <!-- PAGE 10: PAIEMENT ÉCHOUÉ -->
-    <div id="page-payment-failed" class="page">
-      <div class="container" style="max-width: 800px; margin: 0 auto; text-align: center;">
-        <div style="font-size: 5rem; margin-bottom: 1.5rem;">⚠️</div>
-        <h1 style="font-size: 3rem; margin-bottom: 1.2rem; font-weight: 600; color: rgba(255, 255, 255, 0.95);">Problème de Paiement</h1>
-        <p class="subtitle" style="font-size: 1.4rem; margin-bottom: 2rem; color: rgba(255, 255, 255, 0.75); line-height: 1.5;">
-          Votre dernier paiement n'a pas pu être traité.
-        </p>
-        
-        <div style="background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.15); border-radius: 1rem; padding: 2.5rem; margin-bottom: 2.5rem;">
-          <h3 style="color: rgba(255, 255, 255, 0.9); font-size: 1.3rem; margin-bottom: 1rem; font-weight: 600;">🔄 Mise à Jour Requise</h3>
-          <p style="color: rgba(255, 255, 255, 0.75); font-size: 1.1rem; line-height: 1.6; margin: 0;">
-            Veuillez mettre à jour vos informations de paiement afin que le paiement s'effectue et retrouvez l'accès à toutes les fonctionnalités.
-          </p>
-        </div>
-        
-        <!-- Boutons d'action -->
-        <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem;">
-          <a href="https://account.winabet.ai" style="background: rgba(255, 255, 255, 0.1); color: #ffffff; padding: 1.1rem 2.5rem; border-radius: 0.5rem; text-decoration: none; font-size: 1.1rem; font-weight: 600; border: 1px solid rgba(255, 255, 255, 0.2); transition: all 0.2s;">
-            Mettre à Jour le Paiement
-          </a>
-          <a href="https://winabet.ai" style="background: rgba(255, 255, 255, 0.05); color: rgba(255, 255, 255, 0.85); padding: 1.1rem 2.5rem; border-radius: 0.5rem; text-decoration: none; font-size: 1.1rem; font-weight: 600; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.2s;">
-            Retour à l'Accueil
-          </a>
-        </div>
-        
-        <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.9rem;">
-          Besoin d'assistance ? Contactez-nous au <a href="tel:4382234581" style="color: rgba(255, 255, 255, 0.8); text-decoration: underline;">438-223-4581</a> ou <a href="mailto:info@winabet.ai" style="color: rgba(255, 255, 255, 0.8); text-decoration: underline;">info@winabet.ai</a>
-        </p>
       </div>
     </div>
 
@@ -3284,29 +3132,13 @@
         event.preventDefault();
       }
 
-      // Vérifier l'accès
-      const isUserLoggedIn = {{ user_is_logged_in | json }};
-      const accessLevel = '{{ access_level }}';
-      
-      // Si paiement échoué, forcer la page payment-failed
-      if (accessLevel === 'payment_failed' && pageName !== 'payment-failed') {
-        performNavigation('payment-failed');
-        return;
-      }
-      
-      // Si pas connecté, forcer la page auth-required
-      if (!isUserLoggedIn && pageName !== 'auth-required' && pageName !== 'payment-failed') {
-        performNavigation('auth-required');
-        return;
-      }
-
       // Ne rien faire si on est déjà sur cette page
       if (currentPage === pageName) {
         return;
       }
 
-      // Afficher le chargement AI pour les pages bet et parlay (seulement si accès autorisé)
-      if ((pageName === 'bet' || pageName === 'parlay') && accessLevel !== 'payment_failed') {
+      // Afficher le chargement AI pour les pages bet et parlay
+      if (pageName === 'bet' || pageName === 'parlay') {
         const loadingOverlay = document.getElementById('ai-loading-overlay');
         loadingOverlay.classList.add('active');
         document.body.classList.add('body-no-scroll');
@@ -3538,50 +3370,11 @@
       // Initialiser l'auto-incrémentation globale des compteurs au-dessus des cartes
       initGlobalAutoIncrementCounters();
 
-      // Vérifier l'accès utilisateur
-      const isUserLoggedIn = {{ user_is_logged_in | json }};
-      const accessLevel = '{{ access_level }}';
-
-      // Si paiement échoué, forcer la page payment-failed
-      if (accessLevel === 'payment_failed') {
-        performNavigation('payment-failed');
-        // Désactiver tous les liens de navigation
-        document.querySelectorAll('.nav-item, .desktop-nav-item').forEach(item => {
-          item.style.pointerEvents = 'none';
-          item.style.opacity = '0.5';
-        });
-        return;
-      }
-
-      // Si pas connecté, forcer l'affichage de la page de connexion requise
-      if (!isUserLoggedIn) {
-        performNavigation('auth-required');
-        
-        // Désactiver tous les liens de navigation
-        document.querySelectorAll('.nav-item, .desktop-nav-item').forEach(item => {
-          if (!item.dataset.page || item.dataset.page !== 'auth-required') {
-            item.style.pointerEvents = 'none';
-            item.style.opacity = '0.5';
-          }
-        });
-        
-        return; // Arrêter l'exécution normale
-      }
-
-      // Handle hash navigation with persistence (utilisateurs connectés uniquement)
+      // Handle hash navigation with persistence
       const hash = window.location.hash.substring(1);
       let savedPage = '';
       try { savedPage = localStorage.getItem('dashboard_current_page') || ''; } catch {}
-      let targetPage = hash || savedPage || 'bet';
-
-      // Si connecté mais que la page cible est 'auth-required' ou 'payment-failed', rediriger vers bet
-      if (targetPage === 'auth-required' || targetPage === 'payment-failed') {
-        targetPage = 'bet';
-        // Nettoyer le localStorage et le hash
-        try { localStorage.setItem('dashboard_current_page', 'bet'); } catch {}
-        window.location.hash = '';
-      }
-
+      const targetPage = hash || savedPage || 'bet';
       navigateTo(null, targetPage);
 
       // Update time display
