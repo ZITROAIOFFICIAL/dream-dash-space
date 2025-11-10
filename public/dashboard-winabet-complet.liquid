@@ -364,7 +364,14 @@
   {% endif %}
 
   {% comment %} CSS conditionnel: cacher sidebar si non connecté ou paiement échoué {% endcomment %}
-  {% if access_level == 'payment_failed' or (customer == nil and is_shopify_editor == false) %}
+  {% assign should_hide_sidebar = false %}
+  {% if access_level == 'payment_failed' %}
+    {% assign should_hide_sidebar = true %}
+  {% elsif customer == nil and is_shopify_editor == false %}
+    {% assign should_hide_sidebar = true %}
+  {% endif %}
+  
+  {% if should_hide_sidebar %}
   <style>
     .sidebar {
       display: none !important;
