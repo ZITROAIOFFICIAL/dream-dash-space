@@ -1074,13 +1074,21 @@
       
       <!-- Header avec bouton retour -->
       <div class="pricing-header" style="max-width:1200px;margin:0 auto 1.5rem;display:flex;align-items:center;">
-        <a href="#" class="back-to-home" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; transition: color 0.3s; font-family: 'Outfit', sans-serif; margin-top: 2rem;">
+        <a href="#" class="back-to-home" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; transition: color 0.3s; font-family: 'Outfit', sans-serif;">
           <span style="font-size: 1.5rem;">←</span> Retour à l'accueil
         </a>
         <style>
+          /* Mobile margin-top */
+          @media (max-width: 767px) {
+            .back-to-home {
+              margin-top: 2rem;
+            }
+          }
+          
+          /* Desktop margin-top */
           @media (min-width: 768px) {
             .back-to-home {
-              margin-top: 3rem !important;
+              margin-top: 3rem;
             }
           }
         </style>
