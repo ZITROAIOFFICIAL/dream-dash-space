@@ -231,8 +231,36 @@
     {% assign user_is_logged_in = true %}
   {% endif %}
 
-  {% comment %} CSS conditionnel: cacher sidebar si non connecté {% endcomment %}
-  {% unless customer %}
+  {% comment %} Détection des customer tags {% endcomment %}
+  {% assign has_payment_failed = false %}
+  {% assign has_subscription = false %}
+  {% assign has_free_trial = false %}
+
+  {% if customer and customer.tags.size > 0 %}
+    {% for tag in customer.tags %}
+      {% assign tag_lower = tag | downcase %}
+      {% if tag_lower contains 'paiement échoué' or tag_lower contains 'paiement echoue' %}
+        {% assign has_payment_failed = true %}
+      {% elsif tag_lower contains 'abonnement' %}
+        {% assign has_subscription = true %}
+      {% elsif tag_lower contains 'free trials' or tag_lower contains 'free trial' %}
+        {% assign has_free_trial = true %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {% comment %} Déterminer le niveau d'accès {% endcomment %}
+  {% assign access_level = 'full' %}
+  {% if has_payment_failed %}
+    {% assign access_level = 'payment_failed' %}
+  {% elsif has_subscription %}
+    {% assign access_level = 'full' %}
+  {% elsif has_free_trial %}
+    {% assign access_level = 'free_trial' %}
+  {% endif %}
+
+  {% comment %} CSS conditionnel: cacher sidebar si non connecté ou paiement échoué {% endcomment %}
+  {% if access_level == 'payment_failed' or customer == nil %}
   <style>
     .sidebar {
       display: none !important;
@@ -247,7 +275,7 @@
       display: none !important;
     }
   </style>
-  {% endunless %}
+  {% endif %}
 
   <!-- SVG Definitions pour icônes réutilisables -->
   <svg style="display: none;">
@@ -642,9 +670,15 @@
 
         {% assign bet_cards = section.blocks | where: 'type', 'bet_card' %}
         {% if bet_cards.size > 0 %}
+          {% assign visible_bets = 0 %}
           <div class="cards-grid">
           {% for block in bet_cards %}
             {% if block.settings.show_card %}
+              {% comment %} Limiter à 1 bet si free trial {% endcomment %}
+              {% if access_level == 'free_trial' and visible_bets >= 1 %}
+                {% comment %} Cacher les bets suivants {% endcomment %}
+              {% else %}
+                {% assign visible_bets = visible_bets | plus: 1 %}
               <div class="card-wrapper">
 
               <div class="bet-card" style="{% if block.settings.send_to_history == true %}display:none{% endif %}" 
@@ -860,8 +894,24 @@
                 </div>
               </div>
               </div> <!-- card-wrapper -->
+              {% endif %}
             {% endif %}
           {% endfor %}
+          
+          {% comment %} Message de restriction pour free trial {% endcomment %}
+          {% if access_level == 'free_trial' and bet_cards.size > 1 %}
+            <div class="card text-center" style="padding: 3rem; background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(22, 163, 74, 0.1) 100%); border: 2px solid rgba(34, 197, 94, 0.3);">
+              <div style="font-size: 3rem; margin-bottom: 1rem;">🔒</div>
+              <h3 style="color: #22c55e; font-size: 1.8rem; margin-bottom: 1rem; font-weight: 600;">Débloquer tous les bets du jour</h3>
+              <p style="color: rgba(255, 255, 255, 0.8); font-size: 1.2rem; margin-bottom: 2rem; line-height: 1.6;">
+                Vous êtes en période d'essai gratuit et ne pouvez voir qu'un seul bet par jour. 
+                Passez à un abonnement payant pour débloquer tous les bets du jour et maximiser vos gains !
+              </p>
+              <a href="https://winabet.ai" style="display: inline-block; background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); color: #ffffff; padding: 1rem 2.5rem; border-radius: 0.5rem; text-decoration: none; font-size: 1.1rem; font-weight: 600; transition: transform 0.2s;">
+                Passer à un Abonnement Payant
+              </a>
+            </div>
+          {% endif %}
           </div> <!-- cards-grid -->
         {% else %}
           <div class="card text-center" style="padding: 2rem;">
@@ -879,8 +929,23 @@
         <h1>PARLAY DU JOUR</h1>
         <p class="subtitle">Les parlay avec la meilleur probabilité de réussite aujourd'hui. Nous affichons tous les parlay avec minimum de 60% de chance de gagner selon notre IA.</p>
 
-        {% assign has_parlay = false %}
-        <div class="cards-grid">
+        {% if access_level == 'free_trial' %}
+          <!-- Message de restriction pour free trial -->
+          <div class="card text-center" style="padding: 4rem; margin-top: 2rem; background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(22, 163, 74, 0.1) 100%); border: 2px solid rgba(34, 197, 94, 0.3);">
+            <div style="font-size: 4rem; margin-bottom: 1.5rem;">🔒</div>
+            <h2 style="color: #22c55e; font-size: 2.5rem; margin-bottom: 1.5rem; font-weight: 600;">Débloquer les Parlays du Jour</h2>
+            <p style="color: rgba(255, 255, 255, 0.85); font-size: 1.3rem; margin-bottom: 2.5rem; line-height: 1.7; max-width: 700px; margin-left: auto; margin-right: auto;">
+              Les parlays du jour sont exclusivement réservés aux membres avec un abonnement payant. 
+              Passez à un abonnement pour accéder à nos recommendations de parlays à haute probabilité et multiplier vos gains !
+            </p>
+            <a href="https://winabet.ai" style="display: inline-block; background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); color: #ffffff; padding: 1.2rem 3rem; border-radius: 0.5rem; text-decoration: none; font-size: 1.2rem; font-weight: 600; transition: transform 0.2s; box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);">
+              Passer à un Abonnement Payant
+            </a>
+          </div>
+        {% else %}
+          <!-- Contenu normal des parlays pour les membres avec abonnement -->
+          {% assign has_parlay = false %}
+          <div class="cards-grid">
         {% for block in section.blocks %}
           {% if block.type == 'parlay_card' and block.settings.show_card %}
             {% assign has_parlay = true %}
@@ -1617,6 +1682,7 @@
             </p>
           </div>
         {% endif %}
+        {% endif %}
       </div>
     </div>
 
@@ -1876,6 +1942,35 @@
         <p style="margin-top: 4rem; color: rgba(255, 255, 255, 0.5); font-size: 1.1rem;">
           Besoin d'aide? <a href="mailto:info@winabet.ai.com" style="color: rgba(255, 255, 255, 0.8); text-decoration: underline;">Contactez-nous</a>
         </p>
+      </div>
+    </div>
+
+    <!-- PAGE 10: PAIEMENT ÉCHOUÉ -->
+    <div id="page-payment-failed" class="page">
+      <div class="container" style="max-width: 900px; margin: 0 auto; text-align: center;">
+        <div style="font-size: 6rem; margin-bottom: 2rem;">❌</div>
+        <h1 style="font-size: 3.5rem; margin-bottom: 1.5rem; font-weight: 600; color: #ef4444;">Paiement Échoué</h1>
+        <p class="subtitle" style="font-size: 1.6rem; margin-bottom: 2rem; color: rgba(255, 255, 255, 0.85); line-height: 1.6;">
+          Votre dernier paiement n'a pas pu être traité. Vous ne pouvez pas accéder au Dashboard pour le moment.
+        </p>
+        
+        <div style="background: rgba(239, 68, 68, 0.1); border: 2px solid rgba(239, 68, 68, 0.3); border-radius: 1rem; padding: 2rem; margin-bottom: 3rem; text-align: left;">
+          <h3 style="color: #ef4444; font-size: 1.4rem; margin-bottom: 1rem; font-weight: 600;">🔒 Accès Suspendu</h3>
+          <p style="color: rgba(255, 255, 255, 0.8); font-size: 1.1rem; line-height: 1.7; margin: 0;">
+            Pour continuer à utiliser WINABET.AI, veuillez créer un nouveau compte et souscrire à un plan payant. 
+            Malheureusement, nous ne pouvons pas réactiver les comptes avec paiements échoués pour des raisons de sécurité.
+          </p>
+        </div>
+        
+        <!-- Boutons d'action -->
+        <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+          <a href="https://account.winabet.ai" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: #ffffff; padding: 1.2rem 3rem; border-radius: 0.5rem; text-decoration: none; font-size: 1.2rem; font-weight: 600; transition: transform 0.2s; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);">
+            Créer un Nouveau Compte
+          </a>
+          <a href="https://winabet.ai" style="background: linear-gradient(135deg, rgba(113, 113, 122, 0.3) 0%, rgba(113, 113, 122, 0.2) 100%); color: #ffffff; padding: 1.2rem 3rem; border-radius: 0.5rem; text-decoration: none; font-size: 1.2rem; font-weight: 600; border: 1px solid rgba(255, 255, 255, 0.1); transition: transform 0.2s;">
+            Retour à l'Accueil
+          </a>
+        </div>
       </div>
     </div>
 
@@ -3182,11 +3277,18 @@
         event.preventDefault();
       }
 
-      // Vérifier si l'utilisateur est connecté
+      // Vérifier l'accès
       const isUserLoggedIn = {{ user_is_logged_in | json }};
+      const accessLevel = '{{ access_level }}';
+      
+      // Si paiement échoué, forcer la page payment-failed
+      if (accessLevel === 'payment_failed' && pageName !== 'payment-failed') {
+        performNavigation('payment-failed');
+        return;
+      }
       
       // Si pas connecté, forcer la page auth-required
-      if (!isUserLoggedIn && pageName !== 'auth-required') {
+      if (!isUserLoggedIn && pageName !== 'auth-required' && pageName !== 'payment-failed') {
         performNavigation('auth-required');
         return;
       }
@@ -3196,8 +3298,8 @@
         return;
       }
 
-      // Afficher le chargement AI pour les pages bet et parlay
-      if (pageName === 'bet' || pageName === 'parlay') {
+      // Afficher le chargement AI pour les pages bet et parlay (seulement si accès autorisé)
+      if ((pageName === 'bet' || pageName === 'parlay') && accessLevel !== 'payment_failed') {
         const loadingOverlay = document.getElementById('ai-loading-overlay');
         loadingOverlay.classList.add('active');
         document.body.classList.add('body-no-scroll');
@@ -3429,8 +3531,20 @@
       // Initialiser l'auto-incrémentation globale des compteurs au-dessus des cartes
       initGlobalAutoIncrementCounters();
 
-      // Vérifier si l'utilisateur est connecté
+      // Vérifier l'accès utilisateur
       const isUserLoggedIn = {{ user_is_logged_in | json }};
+      const accessLevel = '{{ access_level }}';
+
+      // Si paiement échoué, forcer la page payment-failed
+      if (accessLevel === 'payment_failed') {
+        performNavigation('payment-failed');
+        // Désactiver tous les liens de navigation
+        document.querySelectorAll('.nav-item, .desktop-nav-item').forEach(item => {
+          item.style.pointerEvents = 'none';
+          item.style.opacity = '0.5';
+        });
+        return;
+      }
 
       // Si pas connecté, forcer l'affichage de la page de connexion requise
       if (!isUserLoggedIn) {
@@ -3453,8 +3567,8 @@
       try { savedPage = localStorage.getItem('dashboard_current_page') || ''; } catch {}
       let targetPage = hash || savedPage || 'bet';
 
-      // Si connecté mais que la page cible est 'auth-required', rediriger vers bet
-      if (targetPage === 'auth-required') {
+      // Si connecté mais que la page cible est 'auth-required' ou 'payment-failed', rediriger vers bet
+      if (targetPage === 'auth-required' || targetPage === 'payment-failed') {
         targetPage = 'bet';
         // Nettoyer le localStorage et le hash
         try { localStorage.setItem('dashboard_current_page', 'bet'); } catch {}
