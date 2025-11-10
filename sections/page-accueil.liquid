@@ -1093,8 +1093,46 @@
           </div>
         </div>
 
-        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-          <h1 style="font-size: 3.5rem; margin-bottom: 1rem; color: #ffffff; font-family: 'Outfit', sans-serif; font-weight: 600;">Rejoindre winabet.ai</h1>
+        <!-- Carte style bet -->
+        <div style="max-width: 600px; margin: 0 auto;">
+          <div style="background: rgba(0, 0, 0, 0.55); backdrop-filter: blur(40px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 1.5rem; padding: 2rem; min-height: 500px;">
+            <!-- Header avec icône IA et titre -->
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+              <svg width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                <defs>
+                  <filter id="softGlowRejoindre" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="1.2" result="b"/>
+                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                  <path id="orbit0Rejoindre" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                  <path id="orbit1Rejoindre" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                  <path id="orbit2Rejoindre" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+                </defs>
+                <g stroke="#68859e" stroke-width="2" fill="none">
+                  <use href="#orbit0Rejoindre"/>
+                  <use href="#orbit1Rejoindre"/>
+                  <use href="#orbit2Rejoindre"/>
+                </g>
+                <g stroke-linecap="round" filter="url(#softGlowRejoindre)">
+                  <use href="#orbit0Rejoindre" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                  <use href="#orbit1Rejoindre" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                  <use href="#orbit2Rejoindre" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                </g>
+                <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
+              </svg>
+              <span style="font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 500; color: rgba(255, 255, 255, 0.9);">Paris sportifs trouvé par notre ia</span>
+            </div>
+            
+            <!-- Espace vide pour le contenu futur -->
+            <div style="min-height: 350px;">
+            </div>
+          </div>
         </div>
       </div>
     </section>
