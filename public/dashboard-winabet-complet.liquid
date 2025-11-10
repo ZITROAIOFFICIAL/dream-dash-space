@@ -340,18 +340,31 @@
     {% endfor %}
   {% endif %}
 
+  {% comment %} Détection de l'éditeur Shopify {% endcomment %}
+  {% assign is_shopify_editor = false %}
+  {% if request.design_mode %}
+    {% assign is_shopify_editor = true %}
+  {% endif %}
+
   {% comment %} Déterminer le niveau d'accès {% endcomment %}
   {% assign access_level = 'full' %}
-  {% if has_payment_failed %}
-    {% assign access_level = 'payment_failed' %}
-  {% elsif has_subscription %}
+  
+  {% comment %} En mode éditeur Shopify, toujours accès complet {% endcomment %}
+  {% if is_shopify_editor %}
     {% assign access_level = 'full' %}
-  {% elsif has_free_trial %}
-    {% assign access_level = 'free_trial' %}
+  {% else %}
+    {% comment %} Production normale : vérifier les tags client {% endcomment %}
+    {% if has_payment_failed %}
+      {% assign access_level = 'payment_failed' %}
+    {% elsif has_subscription %}
+      {% assign access_level = 'full' %}
+    {% elsif has_free_trial %}
+      {% assign access_level = 'free_trial' %}
+    {% endif %}
   {% endif %}
 
   {% comment %} CSS conditionnel: cacher sidebar si non connecté ou paiement échoué {% endcomment %}
-  {% if access_level == 'payment_failed' or customer == nil %}
+  {% if access_level == 'payment_failed' or (customer == nil and is_shopify_editor == false) %}
   <style>
     .sidebar {
       display: none !important;
@@ -366,6 +379,12 @@
       display: none !important;
     }
   </style>
+  {% endif %}
+
+  {% if is_shopify_editor %}
+    <div style="position: fixed; top: 10px; right: 10px; background: rgba(149, 117, 205, 0.2); border: 1px solid rgba(149, 117, 205, 0.5); padding: 0.5rem 1rem; border-radius: 8px; z-index: 9999; color: #9575cd; font-family: 'Outfit', sans-serif; font-size: 0.75rem; font-weight: 500;">
+      🎨 MODE ÉDITEUR SHOPIFY
+    </div>
   {% endif %}
 
   <!-- SVG Definitions pour icônes réutilisables -->
@@ -3413,7 +3432,8 @@
       }
 
       // Vérifier l'accès
-      const isUserLoggedIn = {{ user_is_logged_in | json }};
+      const isShopifyEditor = {{ request.design_mode | json }};
+      const isUserLoggedIn = {{ user_is_logged_in | json }} || isShopifyEditor;
       const accessLevel = '{{ access_level }}';
       
       // Si paiement échoué, forcer la page payment-failed
