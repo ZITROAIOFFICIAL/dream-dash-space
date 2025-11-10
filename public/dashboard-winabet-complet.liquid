@@ -225,6 +225,30 @@
   </style>
 </head>
 <body>
+  {% comment %} Détection de l'état de connexion {% endcomment %}
+  {% assign user_is_logged_in = false %}
+  {% if customer %}
+    {% assign user_is_logged_in = true %}
+  {% endif %}
+
+  {% comment %} CSS conditionnel: cacher sidebar si non connecté {% endcomment %}
+  {% unless customer %}
+  <style>
+    .sidebar {
+      display: none !important;
+    }
+    .mobile-toggle {
+      display: none !important;
+    }
+    .main-content {
+      margin-left: 0 !important;
+    }
+    .overlay {
+      display: none !important;
+    }
+  </style>
+  {% endunless %}
+
   <!-- SVG Definitions pour icônes réutilisables -->
   <svg style="display: none;">
     <defs>
@@ -1829,6 +1853,32 @@
       </div>
     </div>
 
+    <!-- PAGE 9: CONNEXION REQUISE -->
+    <div id="page-auth-required" class="page">
+      <div class="container" style="max-width: 800px; margin: 0 auto; text-align: center; padding-top: 8rem;">
+        <div style="font-size: 8rem; margin-bottom: 2rem; opacity: 0.8;">🔒</div>
+        <h1 style="font-size: 3.5rem; margin-bottom: 1.5rem; font-weight: 600; background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.7) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Accès Restreint</h1>
+        <p class="subtitle" style="font-size: 1.5rem; margin-bottom: 4rem; color: rgba(255, 255, 255, 0.7); max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+          Vous devez être connecté et avoir un plan actif pour accéder au Dashboard
+        </p>
+        
+        <!-- Boutons d'action -->
+        <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-top: 3rem;">
+          <a href="https://account.winabet.ai" style="background: linear-gradient(135deg, #ffffff 0%, #e4e4e7 100%); color: #000000; padding: 1.5rem 3.5rem; border-radius: 0.75rem; text-decoration: none; font-size: 1.3rem; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2); font-family: 'Outfit', sans-serif; display: inline-block;">
+            Se Connecter
+          </a>
+          <a href="https://winabet.ai" style="background: linear-gradient(135deg, rgba(113, 113, 122, 0.3) 0%, rgba(113, 113, 122, 0.2) 100%); color: #ffffff; padding: 1.5rem 3.5rem; border-radius: 0.75rem; text-decoration: none; font-size: 1.3rem; font-weight: 600; border: 1px solid rgba(255, 255, 255, 0.2); transition: all 0.3s; font-family: 'Outfit', sans-serif; display: inline-block;">
+            Commencer Gratuitement
+          </a>
+        </div>
+        
+        <!-- Message additionnel -->
+        <p style="margin-top: 4rem; color: rgba(255, 255, 255, 0.5); font-size: 1.1rem;">
+          Besoin d'aide? <a href="mailto:info@winabet.ai.com" style="color: rgba(255, 255, 255, 0.8); text-decoration: underline;">Contactez-nous</a>
+        </p>
+      </div>
+    </div>
+
     {% render 'strategy-detail-pages' %}
   </main>
 
@@ -3132,6 +3182,15 @@
         event.preventDefault();
       }
 
+      // Vérifier si l'utilisateur est connecté
+      const isUserLoggedIn = {{ user_is_logged_in | json }};
+      
+      // Si pas connecté, forcer la page auth-required
+      if (!isUserLoggedIn && pageName !== 'auth-required') {
+        performNavigation('auth-required');
+        return;
+      }
+
       // Ne rien faire si on est déjà sur cette page
       if (currentPage === pageName) {
         return;
@@ -3370,7 +3429,25 @@
       // Initialiser l'auto-incrémentation globale des compteurs au-dessus des cartes
       initGlobalAutoIncrementCounters();
 
-      // Handle hash navigation with persistence
+      // Vérifier si l'utilisateur est connecté
+      const isUserLoggedIn = {{ user_is_logged_in | json }};
+
+      // Si pas connecté, forcer l'affichage de la page de connexion requise
+      if (!isUserLoggedIn) {
+        performNavigation('auth-required');
+        
+        // Désactiver tous les liens de navigation
+        document.querySelectorAll('.nav-item, .desktop-nav-item').forEach(item => {
+          if (!item.dataset.page || item.dataset.page !== 'auth-required') {
+            item.style.pointerEvents = 'none';
+            item.style.opacity = '0.5';
+          }
+        });
+        
+        return; // Arrêter l'exécution normale
+      }
+
+      // Handle hash navigation with persistence (utilisateurs connectés uniquement)
       const hash = window.location.hash.substring(1);
       let savedPage = '';
       try { savedPage = localStorage.getItem('dashboard_current_page') || ''; } catch {}
