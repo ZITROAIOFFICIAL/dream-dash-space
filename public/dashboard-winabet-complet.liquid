@@ -54,16 +54,16 @@
     
     /* ==================== ANIMATION SHIMMER TEXTE IA ==================== */
     :root {
-      --shimmer-duration: 2.5s;
-      --shimmer-color-base: rgba(255, 255, 255, 0.4);
-      --shimmer-color-highlight: rgba(255, 255, 255, 0.8);
+      --shimmer-duration: 5s;
+      --shimmer-color-base: rgba(255, 255, 255, 0.95);
+      --shimmer-color-highlight: rgba(168, 168, 168, 0.6);
       
       /* ===== TAILLE TEXTE SHIMMER - MODIFIEZ ICI ===== */
       /* Desktop: taille du texte shimmer */
-      --shimmer-text-size-desktop: 1rem;
+      --shimmer-text-size-desktop: 1.4rem;
       
       /* Mobile: taille du texte shimmer */
-      --shimmer-text-size-mobile: 0.9rem;
+      --shimmer-text-size-mobile: 1.2rem;
     }
     
     .ai-loading-text {
@@ -97,10 +97,10 @@
     
     @keyframes shimmer {
       0% {
-        background-position: -200% 0;
+        background-position: 200% 0;
       }
       100% {
-        background-position: 200% 0;
+        background-position: -200% 0;
       }
     }
     
