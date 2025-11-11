@@ -3847,11 +3847,12 @@
         const hideAllIcons = () => {
           lightIconBet.style.display = 'none';
           editIconBet.style.display = 'none';
-          // Centrage pur du texte sans icône
+          // Texte seul: aligner à gauche sans réserver d'espace
           container.style.display = 'block';
           container.style.alignItems = '';
           container.style.justifyContent = '';
           container.style.gap = '';
+          container.style.textAlign = 'left';
         };
         
         const showLightIcon = () => {
@@ -3861,6 +3862,7 @@
           container.style.alignItems = 'center';
           container.style.justifyContent = 'center';
           container.style.gap = '0.3rem';
+          container.style.textAlign = '';
         };
         
         const showEditIcon = () => {
@@ -3870,6 +3872,8 @@
           container.style.alignItems = 'center';
           container.style.justifyContent = 'center';
           container.style.gap = '0.3rem';
+          container.style.textAlign = '';
+        };
         };
         
         const runSequence = () => {
@@ -3968,11 +3972,12 @@
         const hideAllIconsParlay = () => {
           lightIconParlay.style.display = 'none';
           editIconParlay.style.display = 'none';
-          // Centrage pur du texte sans icône
+          // Texte seul: aligner à gauche sans réserver d'espace
           containerParlay.style.display = 'block';
           containerParlay.style.alignItems = '';
           containerParlay.style.justifyContent = '';
           containerParlay.style.gap = '';
+          containerParlay.style.textAlign = 'left';
         };
         
         const showLightIconParlay = () => {
@@ -3982,6 +3987,7 @@
           containerParlay.style.alignItems = 'center';
           containerParlay.style.justifyContent = 'center';
           containerParlay.style.gap = '0.3rem';
+          containerParlay.style.textAlign = '';
         };
         
         const showEditIconParlay = () => {
@@ -3991,6 +3997,8 @@
           containerParlay.style.alignItems = 'center';
           containerParlay.style.justifyContent = 'center';
           containerParlay.style.gap = '0.3rem';
+          containerParlay.style.textAlign = '';
+        };
         };
         
         const runSequenceParlay = () => {
