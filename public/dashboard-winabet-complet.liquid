@@ -3237,9 +3237,6 @@
         autoResizeOverUnderText();
         autoShrinkTeamLogos();
       }, 100);
-      // Redimensionner aussi l'historique
-      const event = new Event('DOMContentLoaded');
-      document.dispatchEvent(event);
     });
 
     // ===========================
@@ -3822,6 +3819,12 @@
       const editIconBet = document.getElementById('edit-icon-bet');
       
       if (rotatingTextEl && lightIconBet && editIconBet) {
+        // Protection : vérifier si déjà initialisé
+        if (rotatingTextEl.dataset.seqInit === '1') {
+          return; // Déjà initialisé, ne rien faire
+        }
+        rotatingTextEl.dataset.seqInit = '1';
+        
         let currentPhase = 'normal';
         let reflectionDuration = 0;
         let normalRotations = 0;
@@ -3916,6 +3919,12 @@
       const editIconParlay = document.getElementById('edit-icon-parlay');
       
       if (rotatingTextParlayEl && lightIconParlay && editIconParlay) {
+        // Protection : vérifier si déjà initialisé
+        if (rotatingTextParlayEl.dataset.seqInit === '1') {
+          return; // Déjà initialisé, ne rien faire
+        }
+        rotatingTextParlayEl.dataset.seqInit = '1';
+        
         let currentPhaseParlay = 'normal';
         let reflectionDurationParlay = 0;
         let normalRotationsParlay = 0;
