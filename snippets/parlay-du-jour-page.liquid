@@ -6,14 +6,22 @@
           <!-- Vidéo en boucle -->
           <div class="video-container">
             <video 
+              id="parlay-video"
               autoplay 
               loop 
               muted 
               playsinline
+              style="display: block;"
             >
               <source src="https://cdn.shopify.com/videos/c/o/v/8d4ee094c0044c0e8bdb95482b822830.mp4" type="video/mp4">
               Votre navigateur ne supporte pas la lecture de vidéos.
             </video>
+            <img 
+              id="parlay-fallback-image"
+              src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/frame_000.png?v=1762845718"
+              alt="Analyse IA"
+              style="display: none; width: 100%; height: 100%; object-fit: cover;"
+            />
           </div>
           
           <div class="ai-loading-text">

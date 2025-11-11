@@ -913,14 +913,22 @@
           <!-- Vidéo en boucle -->
           <div class="video-container">
             <video 
+              id="bet-video"
               autoplay 
               loop 
               muted 
               playsinline
+              style="display: block;"
             >
               <source src="https://cdn.shopify.com/videos/c/o/v/8d4ee094c0044c0e8bdb95482b822830.mp4" type="video/mp4">
               Votre navigateur ne supporte pas la lecture de vidéos.
             </video>
+            <img 
+              id="bet-fallback-image"
+              src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/frame_000.png?v=1762845718"
+              alt="Analyse IA"
+              style="display: none; width: 100%; height: 100%; object-fit: cover;"
+            />
           </div>
           
           <div class="ai-loading-text">
@@ -3090,6 +3098,75 @@
 
       // Initialiser l'auto-incrémentation globale des compteurs au-dessus des cartes
       initGlobalAutoIncrementCounters();
+
+      // Détection du mode économie de batterie et remplacement vidéo par image
+      (async function initBatterySaverDetection() {
+        // Fonction de détection du mode économie de batterie
+        async function detectBatterySaverMode() {
+          try {
+            // Tentative de détection via Battery API
+            if ('getBattery' in navigator) {
+              const battery = await navigator.getBattery();
+              // Détecter batterie faible et non en charge
+              const isLowBattery = battery.level < 0.2 && !battery.charging;
+              return isLowBattery;
+            }
+          } catch (e) {
+            console.log('Battery API non disponible:', e);
+          }
+          return false;
+        }
+
+        // Fonction pour remplacer la vidéo par l'image
+        function switchToFallbackImage(videoId, imageId) {
+          const video = document.getElementById(videoId);
+          const image = document.getElementById(imageId);
+          
+          if (video && image) {
+            video.style.display = 'none';
+            image.style.display = 'block';
+            console.log(`Mode économie détecté: vidéo ${videoId} remplacée par image`);
+          }
+        }
+
+        // Fonction pour vérifier si la vidéo peut se lire
+        function checkVideoPlayback(videoId, imageId) {
+          const video = document.getElementById(videoId);
+          
+          if (!video) return;
+          
+          // Tentative de lecture
+          const playPromise = video.play();
+          
+          if (playPromise !== undefined) {
+            playPromise.catch(error => {
+              // Si la lecture échoue (possible en mode économie de batterie)
+              console.log('Lecture vidéo bloquée, passage à l\'image:', error);
+              switchToFallbackImage(videoId, imageId);
+            });
+          }
+          
+          // Vérifier si la vidéo stalle après quelques secondes
+          setTimeout(() => {
+            if (video.paused || video.readyState < 3) {
+              switchToFallbackImage(videoId, imageId);
+            }
+          }, 2000);
+        }
+
+        // Vérifier le mode économie de batterie
+        const isBatterySaver = await detectBatterySaverMode();
+        
+        if (isBatterySaver) {
+          // Remplacer immédiatement par l'image
+          switchToFallbackImage('bet-video', 'bet-fallback-image');
+          switchToFallbackImage('parlay-video', 'parlay-fallback-image');
+        } else {
+          // Vérifier la lecture des vidéos
+          checkVideoPlayback('bet-video', 'bet-fallback-image');
+          checkVideoPlayback('parlay-video', 'parlay-fallback-image');
+        }
+      })();
 
       // Vérifier l'accès utilisateur
       const isShopifyEditor = {{ request.design_mode | json }};
