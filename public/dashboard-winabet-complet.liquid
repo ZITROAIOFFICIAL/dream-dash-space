@@ -66,20 +66,6 @@
       display: block;
     }
     
-    /* Mobile: appliquer la largeur et marges mobiles */
-    @media (max-width: 768px) {
-      .video-container {
-        max-width: var(--video-max-width-mobile);
-        margin-top: var(--video-margin-top-mobile);
-        margin-bottom: var(--video-margin-bottom-mobile);
-      }
-      
-      .separator-line {
-        margin-top: var(--separator-margin-top-mobile);
-        margin-bottom: var(--separator-margin-bottom-mobile);
-      }
-    }
-    
     /* Style pour la ligne de séparation */
     .separator-line {
       width: 100%;
@@ -89,6 +75,20 @@
       margin-left: auto;
       margin-right: auto;
       padding: 0 1rem;
+    }
+    
+    /* Mobile: appliquer la largeur et marges mobiles */
+    @media (max-width: 768px) {
+      .video-container {
+        max-width: var(--video-max-width-mobile);
+        margin-top: var(--video-margin-top-mobile);
+        margin-bottom: var(--video-margin-bottom-mobile);
+      }
+      
+      .separator-line {
+        margin-top: var(--separator-margin-top-mobile) !important;
+        margin-bottom: var(--separator-margin-bottom-mobile) !important;
+      }
     }
     
     /* ==================== ANIMATION SHIMMER TEXTE IA ==================== */
