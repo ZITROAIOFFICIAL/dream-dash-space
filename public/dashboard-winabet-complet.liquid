@@ -107,9 +107,9 @@
     }
     
     .ai-loading-text {
-      text-align: center;
+      text-align: left;
       margin: 0.5rem auto 3.5rem auto; /* Marge réduite en haut */
-      max-width: 100%;
+      max-width: 800px;
       padding: 0 1rem;
     }
     
@@ -835,7 +835,7 @@
           </video>
         </div>
         
-        <div class="ai-loading-text">
+        <div class="ai-loading-text" style="display: flex; align-items: center; justify-content: flex-start; gap: 0.75rem;">
           <!-- SVG Lumière - visible pendant phases de réflexion -->
           <svg id="light-icon-bet" style="display: none; flex-shrink: 0; color: var(--shimmer-color-base); background: linear-gradient(90deg, var(--shimmer-color-base) 0%, var(--shimmer-color-highlight) 20%, var(--shimmer-color-highlight) 40%, var(--shimmer-color-base) 60%, var(--shimmer-color-base) 100%); background-size: 200% 100%; background-clip: text; -webkit-background-clip: text; animation: shimmer 6s ease-in-out infinite;" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M9 18h6M10 22h4M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8c0-3.31-2.69-6-6-6S6 4.69 6 8c0 1.3.53 2.48 1.5 3.5.76.76 1.23 1.52 1.41 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1131,7 +1131,7 @@
           </video>
         </div>
         
-        <div class="ai-loading-text">
+        <div class="ai-loading-text" style="display: flex; align-items: center; justify-content: flex-start; gap: 0.75rem;">
           <!-- SVG Lumière - visible pendant phases de réflexion -->
           <svg id="light-icon-parlay" style="display: none; flex-shrink: 0; color: var(--shimmer-color-base); background: linear-gradient(90deg, var(--shimmer-color-base) 0%, var(--shimmer-color-highlight) 20%, var(--shimmer-color-highlight) 40%, var(--shimmer-color-base) 60%, var(--shimmer-color-base) 100%); background-size: 200% 100%; background-clip: text; -webkit-background-clip: text; animation: shimmer 6s ease-in-out infinite;" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M9 18h6M10 22h4M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8c0-3.31-2.69-6-6-6S6 4.69 6 8c0 1.3.53 2.48 1.5 3.5.76.76 1.23 1.52 1.41 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -3237,6 +3237,9 @@
         autoResizeOverUnderText();
         autoShrinkTeamLogos();
       }, 100);
+      // Redimensionner aussi l'historique
+      const event = new Event('DOMContentLoaded');
+      document.dispatchEvent(event);
     });
 
     // ===========================
@@ -3819,16 +3822,9 @@
       const editIconBet = document.getElementById('edit-icon-bet');
       
       if (rotatingTextEl && lightIconBet && editIconBet) {
-        // Protection : vérifier si déjà initialisé
-        if (rotatingTextEl.dataset.seqInit === '1') {
-          return; // Déjà initialisé, ne rien faire
-        }
-        rotatingTextEl.dataset.seqInit = '1';
-        
-        const container = rotatingTextEl.closest('.ai-loading-text');
-        
-        let currentPhase = 'normal';
+        let currentPhase = 'reflection';
         let reflectionDuration = 0;
+        let normalTextsIndex = 0;
         let normalRotations = 0;
         
         const normalTexts = [
@@ -3837,49 +3833,68 @@
           '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-3]</span> Analyse et comparaison entre les sites...',
           '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-4]</span> Analyse des données...',
           '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-5]</span> Analyse de l\'historique entre les équipes...',
-          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-6]</span> Analyse des lineup des équipes...'
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-6]</span> Analyse des lineup des équipes...',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-7]</span> Lecture des cotes en direct . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-8]</span> Comparaison des prix entre books . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-9]</span> Mouvement de ligne suivi . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-10]</span> Probabilité implicite recalculée . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-11]</span> Valeur de clôture (CLV) estimée . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-12]</span> Reverse line move (RLM) en suivi . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-13]</span> Écart de prix repéré . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-14]</span> Meilleur prix identifié . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-15]</span> Consensus du marché vérifié . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-16]</span> Mises vs argent en revue . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-17]</span> Volume du marché en hausse . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-18]</span> Timing d\'achat évalué . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-19]</span> Moneyline — évaluation . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-20]</span> Spread — évaluation . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-21]</span> Over / Under — évaluation . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-22]</span> Ouverture → position actuelle . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-23]</span> Prix moyen du marché . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-24]</span> Limites de mise vérifiées . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-25]</span> Liquidité du marché suivie . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-26]</span> Variations rapides contrôlées . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-27]</span> H2H récent pris en compte . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-28]</span> Domicile / extérieur en revue . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-29]</span> Forme récente analysée . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-30]</span> Séries de W / L notées . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-31]</span> Calendrier / repos pris en compte . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-32]</span> Blessures clés vérifiées . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-33]</span> Lineups confirmés . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-34]</span> Gardien partant confirmé . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-35]</span> Power play — tendance récente . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-36]</span> Discipline — pénalités récentes . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-37]</span> Tirs au but — tendance . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-38]</span> Rythme de jeu estimé . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-39]</span> Marchés dérivés écartés (simple) . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-40]</span> Alt lines ignorées (simple) . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-41]</span> Fenêtre de prix optimale . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-42]</span> Edge estimé mis à jour . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-43]</span> ROI attendu ajusté . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-44]</span> Cash-out moyen observé . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-45]</span> Ouverture vs clôture comparées . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-46]</span> Concordance des lignes entre books . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-47]</span> Outliers de prix détectés . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-48]</span> Split public vs pros suivi . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-49]</span> Fenêtre d\'achat recommandée . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-50]</span> Alerte de freeze de ligne . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-51]</span> Cote cible atteinte (marché) . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-52]</span> Risque marché évalué . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-53]</span> Score de confiance IA mis à jour . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-54]</span> Historique comparable chargé . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-55]</span> Suivi en temps réel continu . . .'
         ];
-        
-        const getRandomText = () => {
-          return normalTexts[Math.floor(Math.random() * normalTexts.length)];
-        };
         
         const hideAllIcons = () => {
           lightIconBet.style.display = 'none';
           editIconBet.style.display = 'none';
-          // Texte seul: aligner à gauche sans réserver d'espace
-          container.style.display = 'block';
-          container.style.alignItems = '';
-          container.style.justifyContent = '';
-          container.style.gap = '';
-          container.style.textAlign = 'left';
-        };
-        
-        const showLightIcon = () => {
-          lightIconBet.style.display = 'block';
-          editIconBet.style.display = 'none';
-          container.style.display = 'flex';
-          container.style.alignItems = 'center';
-          container.style.justifyContent = 'center';
-          container.style.gap = '0.3rem';
-          container.style.textAlign = '';
-        };
-        
-        const showEditIcon = () => {
-          lightIconBet.style.display = 'none';
-          editIconBet.style.display = 'block';
-          container.style.display = 'flex';
-          container.style.alignItems = 'center';
-          container.style.justifyContent = 'center';
-          container.style.gap = '0.3rem';
-          container.style.textAlign = '';
-        };
         };
         
         const runSequence = () => {
           switch(currentPhase) {
             case 'reflection':
-              showLightIcon();
+              hideAllIcons();
+              lightIconBet.style.display = 'block';
               rotatingTextEl.innerHTML = 'En réflexion...';
               reflectionDuration = Math.floor(Math.random() * (30000 - 5000 + 1)) + 5000;
               setTimeout(() => {
@@ -3889,7 +3904,8 @@
               break;
               
             case 'confirmed':
-              showLightIcon();
+              hideAllIcons();
+              lightIconBet.style.display = 'block';
               const seconds = Math.round(reflectionDuration / 1000);
               rotatingTextEl.innerHTML = `Réfléchie pendant ${seconds} secondes`;
               setTimeout(() => {
@@ -3899,7 +3915,8 @@
               break;
               
             case 'modifying':
-              showEditIcon();
+              hideAllIcons();
+              editIconBet.style.display = 'block';
               rotatingTextEl.innerHTML = 'Modification des données ...';
               const modifyingDuration = Math.floor(Math.random() * (30000 - 12000 + 1)) + 12000;
               setTimeout(() => {
@@ -3909,10 +3926,12 @@
               break;
               
             case 'modified':
-              showEditIcon();
+              hideAllIcons();
+              editIconBet.style.display = 'block';
               rotatingTextEl.innerHTML = 'Modification des données effectuées';
               setTimeout(() => {
                 currentPhase = 'normal';
+                normalTextsIndex = 0;
                 normalRotations = 0;
                 runSequence();
               }, 5000);
@@ -3920,8 +3939,12 @@
               
             case 'normal':
               hideAllIcons();
-              rotatingTextEl.innerHTML = getRandomText();
-              normalRotations++;
+              rotatingTextEl.innerHTML = normalTexts[normalTextsIndex];
+              normalTextsIndex = (normalTextsIndex + 1) % normalTexts.length;
+              
+              if (normalTextsIndex === 0) {
+                normalRotations++;
+              }
               
               const maxRotations = Math.floor(Math.random() * (6 - 3 + 1)) + 3;
               
@@ -3944,16 +3967,9 @@
       const editIconParlay = document.getElementById('edit-icon-parlay');
       
       if (rotatingTextParlayEl && lightIconParlay && editIconParlay) {
-        // Protection : vérifier si déjà initialisé
-        if (rotatingTextParlayEl.dataset.seqInit === '1') {
-          return; // Déjà initialisé, ne rien faire
-        }
-        rotatingTextParlayEl.dataset.seqInit = '1';
-        
-        const containerParlay = rotatingTextParlayEl.closest('.ai-loading-text');
-        
-        let currentPhaseParlay = 'normal';
+        let currentPhaseParlay = 'reflection';
         let reflectionDurationParlay = 0;
+        let normalTextsIndexParlay = 0;
         let normalRotationsParlay = 0;
         
         const normalTextsPar = [
@@ -3962,49 +3978,69 @@
           '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-3]</span> Évaluation des risques du parlay...',
           '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-4]</span> Analyse approfondie des matchs...',
           '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-5]</span> Calcul des cotes combinées...',
-          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-6]</span> Vérification des statistiques...'
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-6]</span> Vérification des statistiques...',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-7]</span> Agrégation des cotes par leg . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-8]</span> Comparaison des prix par leg . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-9]</span> Corrélation entre legs (sgp) . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-10]</span> Probabilité combinée mise à jour . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-11]</span> EV global mis à jour . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-12]</span> Edge global pondéré . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-13]</span> CLV parlay estimée . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-14]</span> RLM suivi par leg . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-15]</span> Alt lines évaluées par leg . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-16]</span> Team totals corrélés vérifiés . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-17]</span> Draw no bet envisagé par leg . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-18]</span> Round robin 2/3 évalué . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-19]</span> Round robin 3/4 évalué . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-20]</span> Même journée pour tous les legs . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-21]</span> Sports mixtes filtrés . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-22]</span> Ordre des legs optimisé . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-23]</span> Fiabilité des legs classée . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-24]</span> Handle par leg vérifié . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-25]</span> Bet splits par leg lus . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-26]</span> Outliers de prix par leg repérés . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-27]</span> Meilleur book par leg identifié . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-28]</span> Marge (vig) globale recalculée . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-29]</span> Liquidité par leg suivie . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-30]</span> Limites de mise par leg vérifiées . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-31]</span> Timing d\'achat par leg évalué . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-32]</span> Écart court terme / long terme par leg . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-33]</span> Synchronisation live multi-books . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-34]</span> Variations rapides multi-legs contrôlées . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-35]</span> H2H récent par leg intégré . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-36]</span> Domicile / extérieur par leg intégré . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-37]</span> Blessures clés par leg prises en compte . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-38]</span> Lineups impactant les legs suivis . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-39]</span> Forme récente par leg analysée . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-40]</span> Pace / rythme attendu par leg . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-41]</span> Fenêtres de prix alignées . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-42]</span> Notes par leg harmonisées . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-43]</span> Score confiance parlay ajusté . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-44]</span> Risque global parlay évalué . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-45]</span> Exposure par sport contrôlée . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-46]</span> Corrélation totals vs sides vérifiée . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-47]</span> Alt totals testés par leg . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-48]</span> Écart de cote inter-books agrégé . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-49]</span> Prix moyen multi-books calculé . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-50]</span> Écart vs ouverture par leg . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-51]</span> Position vs clôture par leg . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-52]</span> Cash-out potentiel suivi . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-53]</span> Hedging scénarios envisagés . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-54]</span> Normalisation des formats de cote . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-55]</span> Nettoyage des doublons de marché . . .',
+          '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-56]</span> Rafraîchissement multi-sources continu . . .'
         ];
-        
-        const getRandomTextPar = () => {
-          return normalTextsPar[Math.floor(Math.random() * normalTextsPar.length)];
-        };
         
         const hideAllIconsParlay = () => {
           lightIconParlay.style.display = 'none';
           editIconParlay.style.display = 'none';
-          // Texte seul: aligner à gauche sans réserver d'espace
-          containerParlay.style.display = 'block';
-          containerParlay.style.alignItems = '';
-          containerParlay.style.justifyContent = '';
-          containerParlay.style.gap = '';
-          containerParlay.style.textAlign = 'left';
-        };
-        
-        const showLightIconParlay = () => {
-          lightIconParlay.style.display = 'block';
-          editIconParlay.style.display = 'none';
-          containerParlay.style.display = 'flex';
-          containerParlay.style.alignItems = 'center';
-          containerParlay.style.justifyContent = 'center';
-          containerParlay.style.gap = '0.3rem';
-          containerParlay.style.textAlign = '';
-        };
-        
-        const showEditIconParlay = () => {
-          lightIconParlay.style.display = 'none';
-          editIconParlay.style.display = 'block';
-          containerParlay.style.display = 'flex';
-          containerParlay.style.alignItems = 'center';
-          containerParlay.style.justifyContent = 'center';
-          containerParlay.style.gap = '0.3rem';
-          containerParlay.style.textAlign = '';
-        };
         };
         
         const runSequenceParlay = () => {
           switch(currentPhaseParlay) {
             case 'reflection':
-              showLightIconParlay();
+              hideAllIconsParlay();
+              lightIconParlay.style.display = 'block';
               rotatingTextParlayEl.innerHTML = 'En réflexion...';
               reflectionDurationParlay = Math.floor(Math.random() * (30000 - 5000 + 1)) + 5000;
               setTimeout(() => {
@@ -4014,7 +4050,8 @@
               break;
               
             case 'confirmed':
-              showLightIconParlay();
+              hideAllIconsParlay();
+              lightIconParlay.style.display = 'block';
               const secondsPar = Math.round(reflectionDurationParlay / 1000);
               rotatingTextParlayEl.innerHTML = `Réfléchie pendant ${secondsPar} secondes`;
               setTimeout(() => {
@@ -4024,7 +4061,8 @@
               break;
               
             case 'modifying':
-              showEditIconParlay();
+              hideAllIconsParlay();
+              editIconParlay.style.display = 'block';
               rotatingTextParlayEl.innerHTML = 'Modification des données ...';
               const modifyingDurationPar = Math.floor(Math.random() * (30000 - 12000 + 1)) + 12000;
               setTimeout(() => {
@@ -4034,10 +4072,12 @@
               break;
               
             case 'modified':
-              showEditIconParlay();
+              hideAllIconsParlay();
+              editIconParlay.style.display = 'block';
               rotatingTextParlayEl.innerHTML = 'Modification des données effectuées';
               setTimeout(() => {
                 currentPhaseParlay = 'normal';
+                normalTextsIndexParlay = 0;
                 normalRotationsParlay = 0;
                 runSequenceParlay();
               }, 5000);
@@ -4045,8 +4085,12 @@
               
             case 'normal':
               hideAllIconsParlay();
-              rotatingTextParlayEl.innerHTML = getRandomTextPar();
-              normalRotationsParlay++;
+              rotatingTextParlayEl.innerHTML = normalTextsPar[normalTextsIndexParlay];
+              normalTextsIndexParlay = (normalTextsIndexParlay + 1) % normalTextsPar.length;
+              
+              if (normalTextsIndexParlay === 0) {
+                normalRotationsParlay++;
+              }
               
               const maxRotationsPar = Math.floor(Math.random() * (6 - 3 + 1)) + 3;
               
