@@ -457,25 +457,30 @@
   {% endif %}
 
   {% comment %} Déterminer le niveau d'accès {% endcomment %}
-  {% assign access_level = 'full' %}
+  {% assign access_level = 'no_subscription' %}
   
   {% comment %} En mode éditeur Shopify, toujours accès complet {% endcomment %}
   {% if is_shopify_editor %}
     {% assign access_level = 'full' %}
   {% else %}
     {% comment %} Production normale : vérifier les tags client {% endcomment %}
-    {% if has_payment_failed %}
+    {% if customer == nil %}
+      {% assign access_level = 'no_subscription' %}
+    {% elsif has_payment_failed %}
       {% assign access_level = 'payment_failed' %}
     {% elsif has_subscription %}
       {% assign access_level = 'full' %}
     {% elsif has_free_trial %}
       {% assign access_level = 'free_trial' %}
+    {% else %}
+      {% comment %} Utilisateur connecté MAIS aucun tag valide {% endcomment %}
+      {% assign access_level = 'no_subscription' %}
     {% endif %}
   {% endif %}
 
   {% comment %} CSS conditionnel: cacher sidebar si non connecté ou paiement échoué {% endcomment %}
   {% assign should_hide_sidebar = false %}
-  {% if access_level == 'payment_failed' %}
+  {% if access_level == 'payment_failed' or access_level == 'no_subscription' %}
     {% assign should_hide_sidebar = true %}
   {% elsif customer == nil and is_shopify_editor == false %}
     {% assign should_hide_sidebar = true %}
@@ -1471,6 +1476,38 @@
           </a>
           <a href="https://winabet.ai" style="background: rgba(255, 255, 255, 0.05); color: rgba(255, 255, 255, 0.85); padding: 1.1rem 2.5rem; border-radius: 0.5rem; text-decoration: none; font-size: 1.1rem; font-weight: 600; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.2s;">
             Retour à l'Accueil
+          </a>
+        </div>
+        
+        <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.9rem;">
+          Besoin d'assistance ? Contactez-nous au <a href="tel:4382234581" style="color: rgba(255, 255, 255, 0.8); text-decoration: underline;">438-223-4581</a> ou <a href="mailto:info@winabet.ai" style="color: rgba(255, 255, 255, 0.8); text-decoration: underline;">info@winabet.ai</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- PAGE 11: ABONNEMENT REQUIS -->
+    <div id="page-no-subscription" class="page">
+      <div class="container" style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <div style="font-size: 5rem; margin-bottom: 1.5rem;">🔒</div>
+        <h1 style="font-size: 3rem; margin-bottom: 1.2rem; font-weight: 600; color: rgba(255, 255, 255, 0.95);">Abonnement Requis</h1>
+        <p class="subtitle" style="font-size: 1.4rem; margin-bottom: 2rem; color: rgba(255, 255, 255, 0.75); line-height: 1.5;">
+          Vous devez souscrire à un abonnement pour accéder au Dashboard WINABET.AI
+        </p>
+        
+        <div style="background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.15); border-radius: 1rem; padding: 2.5rem; margin-bottom: 2.5rem;">
+          <h3 style="color: rgba(255, 255, 255, 0.9); font-size: 1.3rem; margin-bottom: 1rem; font-weight: 600;">🚀 Débloquer l'Accès Complet</h3>
+          <p style="color: rgba(255, 255, 255, 0.75); font-size: 1.1rem; line-height: 1.6; margin: 0;">
+            Commencez votre essai gratuit ou souscrivez à un abonnement pour accéder aux prédictions de notre IA et maximiser vos gains.
+          </p>
+        </div>
+        
+        <!-- Boutons d'action -->
+        <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem;">
+          <a href="https://winabet.ai" style="background: linear-gradient(135deg, #ffffff 0%, #e4e4e7 100%); color: #000000; padding: 1.5rem 3.5rem; border-radius: 0.75rem; text-decoration: none; font-size: 1.3rem; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2); font-family: 'Outfit', sans-serif; display: inline-block;">
+            Commencer l'Essai Gratuit
+          </a>
+          <a href="https://winabet.ai" style="background: rgba(255, 255, 255, 0.1); color: #ffffff; padding: 1.5rem 3.5rem; border-radius: 0.75rem; text-decoration: none; font-size: 1.3rem; font-weight: 600; border: 1px solid rgba(255, 255, 255, 0.2); transition: all 0.3s; font-family: 'Outfit', sans-serif; display: inline-block;">
+            Voir les Plans
           </a>
         </div>
         
@@ -2791,8 +2828,14 @@
         return;
       }
       
+      // Si pas d'abonnement, forcer la page no-subscription
+      if (accessLevel === 'no_subscription' && pageName !== 'no-subscription') {
+        performNavigation('no-subscription');
+        return;
+      }
+      
       // Si pas connecté, forcer la page auth-required
-      if (!isUserLoggedIn && pageName !== 'auth-required' && pageName !== 'payment-failed') {
+      if (!isUserLoggedIn && pageName !== 'auth-required' && pageName !== 'payment-failed' && pageName !== 'no-subscription') {
         performNavigation('auth-required');
         return;
       }
@@ -3054,6 +3097,17 @@
         return;
       }
 
+      // Si pas d'abonnement, forcer la page no-subscription (uniquement hors éditeur)
+      if (accessLevel === 'no_subscription' && !isShopifyEditor) {
+        performNavigation('no-subscription');
+        // Désactiver tous les liens de navigation
+        document.querySelectorAll('.nav-item, .desktop-nav-item').forEach(item => {
+          item.style.pointerEvents = 'none';
+          item.style.opacity = '0.5';
+        });
+        return;
+      }
+
       // Si pas connecté, forcer l'affichage de la page de connexion requise (uniquement hors éditeur)
       if (!isUserLoggedIn && !isShopifyEditor) {
         performNavigation('auth-required');
@@ -3075,8 +3129,8 @@
       try { savedPage = localStorage.getItem('dashboard_current_page') || ''; } catch {}
       let targetPage = hash || savedPage || 'bet';
 
-      // Si connecté mais que la page cible est 'auth-required' ou 'payment-failed', rediriger vers bet
-      if (targetPage === 'auth-required' || targetPage === 'payment-failed') {
+      // Si connecté mais que la page cible est spéciale, rediriger vers bet
+      if (targetPage === 'auth-required' || targetPage === 'payment-failed' || targetPage === 'no-subscription') {
         targetPage = 'bet';
         // Nettoyer le localStorage et le hash
         try { localStorage.setItem('dashboard_current_page', 'bet'); } catch {}
