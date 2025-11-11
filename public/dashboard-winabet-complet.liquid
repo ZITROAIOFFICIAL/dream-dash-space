@@ -3855,13 +3855,26 @@
       updateTime();
       setInterval(updateTime, 1000);
 
+      // Fonctions pour choisir les phases aléatoirement
+      const getRandomStartPhase = () => {
+        const phases = ['reflection', 'modifying', 'normal'];
+        return phases[Math.floor(Math.random() * phases.length)];
+      };
+
+      const getNextRandomPhase = (currentPhase, lastPhase) => {
+        const allPhases = ['reflection', 'confirmed', 'modifying', 'modified', 'normal'];
+        const availablePhases = allPhases.filter(p => p !== currentPhase && p !== lastPhase);
+        return availablePhases[Math.floor(Math.random() * availablePhases.length)];
+      };
+
       // Système de séquence d'analyse avec 4 phases pour Bet
       const rotatingTextEl = document.getElementById('rotating-text');
       const lightIconBet = document.getElementById('light-icon-bet');
       const editIconBet = document.getElementById('edit-icon-bet');
       
       if (rotatingTextEl && lightIconBet && editIconBet) {
-        let currentPhase = 'reflection';
+        let currentPhase = getRandomStartPhase();
+        let lastPhase = null;
         let reflectionDuration = 0;
         let normalTextsIndex = 0;
         let normalRotations = 0;
@@ -3937,7 +3950,8 @@
               rotatingTextEl.innerHTML = 'En réflexion...';
               reflectionDuration = Math.floor(Math.random() * (30000 - 5000 + 1)) + 5000;
               setTimeout(() => {
-                currentPhase = 'confirmed';
+                lastPhase = currentPhase;
+                currentPhase = getNextRandomPhase(currentPhase, lastPhase);
                 runSequence();
               }, reflectionDuration);
               break;
@@ -3948,7 +3962,8 @@
               const seconds = Math.round(reflectionDuration / 1000);
               rotatingTextEl.innerHTML = `Réfléchie pendant ${seconds} secondes`;
               setTimeout(() => {
-                currentPhase = 'modifying';
+                lastPhase = currentPhase;
+                currentPhase = getNextRandomPhase(currentPhase, lastPhase);
                 runSequence();
               }, 5000);
               break;
@@ -3959,7 +3974,8 @@
               rotatingTextEl.innerHTML = 'Modification des données ...';
               const modifyingDuration = Math.floor(Math.random() * (30000 - 12000 + 1)) + 12000;
               setTimeout(() => {
-                currentPhase = 'modified';
+                lastPhase = currentPhase;
+                currentPhase = getNextRandomPhase(currentPhase, lastPhase);
                 runSequence();
               }, modifyingDuration);
               break;
@@ -3969,7 +3985,8 @@
               editIconBet.style.display = 'block';
               rotatingTextEl.innerHTML = 'Modification des données effectuées';
               setTimeout(() => {
-                currentPhase = 'normal';
+                lastPhase = currentPhase;
+                currentPhase = getNextRandomPhase(currentPhase, lastPhase);
                 normalTextsIndex = 0;
                 normalRotations = 0;
                 runSequence();
@@ -3988,7 +4005,8 @@
               const maxRotations = Math.floor(Math.random() * (6 - 3 + 1)) + 3;
               
               if (normalRotations >= maxRotations) {
-                currentPhase = 'reflection';
+                lastPhase = currentPhase;
+                currentPhase = getNextRandomPhase(currentPhase, lastPhase);
                 setTimeout(runSequence, Math.floor(Math.random() * (15000 - 2000 + 1)) + 2000);
               } else {
                 setTimeout(runSequence, Math.floor(Math.random() * (15000 - 2000 + 1)) + 2000);
@@ -4006,7 +4024,8 @@
       const editIconParlay = document.getElementById('edit-icon-parlay');
       
       if (rotatingTextParlayEl && lightIconParlay && editIconParlay) {
-        let currentPhaseParlay = 'reflection';
+        let currentPhaseParlay = getRandomStartPhase();
+        let lastPhaseParlay = null;
         let reflectionDurationParlay = 0;
         let normalTextsIndexParlay = 0;
         let normalRotationsParlay = 0;
@@ -4083,7 +4102,8 @@
               rotatingTextParlayEl.innerHTML = 'En réflexion...';
               reflectionDurationParlay = Math.floor(Math.random() * (30000 - 5000 + 1)) + 5000;
               setTimeout(() => {
-                currentPhaseParlay = 'confirmed';
+                lastPhaseParlay = currentPhaseParlay;
+                currentPhaseParlay = getNextRandomPhase(currentPhaseParlay, lastPhaseParlay);
                 runSequenceParlay();
               }, reflectionDurationParlay);
               break;
@@ -4094,7 +4114,8 @@
               const secondsPar = Math.round(reflectionDurationParlay / 1000);
               rotatingTextParlayEl.innerHTML = `Réfléchie pendant ${secondsPar} secondes`;
               setTimeout(() => {
-                currentPhaseParlay = 'modifying';
+                lastPhaseParlay = currentPhaseParlay;
+                currentPhaseParlay = getNextRandomPhase(currentPhaseParlay, lastPhaseParlay);
                 runSequenceParlay();
               }, 5000);
               break;
@@ -4105,7 +4126,8 @@
               rotatingTextParlayEl.innerHTML = 'Modification des données ...';
               const modifyingDurationPar = Math.floor(Math.random() * (30000 - 12000 + 1)) + 12000;
               setTimeout(() => {
-                currentPhaseParlay = 'modified';
+                lastPhaseParlay = currentPhaseParlay;
+                currentPhaseParlay = getNextRandomPhase(currentPhaseParlay, lastPhaseParlay);
                 runSequenceParlay();
               }, modifyingDurationPar);
               break;
@@ -4115,7 +4137,8 @@
               editIconParlay.style.display = 'block';
               rotatingTextParlayEl.innerHTML = 'Modification des données effectuées';
               setTimeout(() => {
-                currentPhaseParlay = 'normal';
+                lastPhaseParlay = currentPhaseParlay;
+                currentPhaseParlay = getNextRandomPhase(currentPhaseParlay, lastPhaseParlay);
                 normalTextsIndexParlay = 0;
                 normalRotationsParlay = 0;
                 runSequenceParlay();
@@ -4134,7 +4157,8 @@
               const maxRotationsPar = Math.floor(Math.random() * (6 - 3 + 1)) + 3;
               
               if (normalRotationsParlay >= maxRotationsPar) {
-                currentPhaseParlay = 'reflection';
+                lastPhaseParlay = currentPhaseParlay;
+                currentPhaseParlay = getNextRandomPhase(currentPhaseParlay, lastPhaseParlay);
                 setTimeout(runSequenceParlay, Math.floor(Math.random() * (15000 - 2000 + 1)) + 2000);
               } else {
                 setTimeout(runSequenceParlay, Math.floor(Math.random() * (15000 - 2000 + 1)) + 2000);
