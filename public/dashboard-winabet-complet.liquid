@@ -3837,9 +3837,7 @@
       const globeIconBet = document.getElementById('globe-icon-bet');
       
       if (rotatingTextEl && lightIconBet && editIconBet && globeIconBet) {
-        // Phases possibles : reflection, normal
-        const startPhases = ['reflection', 'normal'];
-        let currentPhase = startPhases[Math.floor(Math.random() * startPhases.length)];
+        let currentPhase = 'normal';
         let reflectionDuration = 0;
         let normalRotations = 0;
         
@@ -3936,9 +3934,7 @@
       const globeIconParlay = document.getElementById('globe-icon-parlay');
       
       if (rotatingTextParlayEl && lightIconParlay && editIconParlay && globeIconParlay) {
-        // Phases possibles : reflection, normal
-        const startPhasesPar = ['reflection', 'normal'];
-        let currentPhaseParlay = startPhasesPar[Math.floor(Math.random() * startPhasesPar.length)];
+        let currentPhaseParlay = 'normal';
         let reflectionDurationParlay = 0;
         let normalRotationsParlay = 0;
         
