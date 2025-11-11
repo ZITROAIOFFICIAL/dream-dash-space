@@ -141,6 +141,13 @@
       
       /* Mobile: taille du texte shimmer */
       --shimmer-text-size-mobile: 1.6rem;
+      
+      /* ===== MARGES DU TEXTE SHIMMER - MODIFIEZ ICI ===== */
+      --shimmer-text-margin-top: 0.5rem;
+      --shimmer-text-margin-bottom: 0.5rem;
+      
+      /* Alignement horizontal: left, center, right */
+      --shimmer-text-align: center;
     }
     
     .ai-loading-text {
@@ -165,6 +172,9 @@
       overflow: hidden;
       text-overflow: clip;
       max-width: 100%;
+      margin-top: var(--shimmer-text-margin-top);
+      margin-bottom: var(--shimmer-text-margin-bottom);
+      text-align: var(--shimmer-text-align);
       background: linear-gradient(
         90deg,
         var(--shimmer-color-base) 0%,
