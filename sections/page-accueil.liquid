@@ -1667,6 +1667,255 @@
         });
       })();
   </script>
+
+  <!-- Barre sticky des forfaits -->
+  <style>
+    /* Padding pour éviter que le contenu soit caché par la barre sticky */
+    body {
+      padding-bottom: 160px;
+    }
+
+    @media (max-width: 767px) {
+      body {
+        padding-bottom: 180px;
+      }
+    }
+
+    /* Conteneur de la barre sticky */
+    .pricing-sticky-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 999;
+      background: rgba(10, 10, 10, 0.98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1rem 1.5rem;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+      animation: slideUp 0.5s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .pricing-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .pricing-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.95);
+      text-align: center;
+      margin: 0 0 0.75rem 0;
+    }
+
+    .pricing-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    /* Desktop : 4 rectangles côte à côte */
+    @media (min-width: 768px) {
+      .pricing-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      
+      .pricing-sticky-bar {
+        padding: 1.25rem 2rem;
+      }
+    }
+
+    /* Mobile : 2x2 */
+    @media (max-width: 767px) {
+      .pricing-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 0.75rem;
+      }
+
+      .pricing-title {
+        font-size: 0.95rem;
+        margin-bottom: 0.6rem;
+      }
+    }
+
+    /* Carte individuelle */
+    .pricing-card {
+      background: rgba(26, 26, 26, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 1rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 100px;
+    }
+
+    @media (max-width: 767px) {
+      .pricing-card {
+        padding: 0.75rem;
+        min-height: 85px;
+      }
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(16, 185, 129, 0.5);
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2);
+    }
+
+    /* Mise en avant du forfait annuel */
+    .pricing-card-highlight {
+      border-color: rgba(16, 185, 129, 0.6);
+      background: rgba(16, 185, 129, 0.05);
+      position: relative;
+    }
+
+    .pricing-card-highlight::before {
+      content: 'MEILLEUR CHOIX';
+      position: absolute;
+      top: -8px;
+      right: 10px;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-family: 'Outfit', sans-serif;
+      letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 767px) {
+      .pricing-card-highlight::before {
+        font-size: 0.55rem;
+        padding: 2px 6px;
+        top: -6px;
+        right: 6px;
+      }
+    }
+
+    /* Carte Interac */
+    .pricing-card-interac {
+      border-color: rgba(56, 189, 248, 0.4);
+      background: rgba(56, 189, 248, 0.05);
+    }
+
+    .pricing-card-interac:hover {
+      border-color: rgba(56, 189, 248, 0.6);
+      box-shadow: 0 8px 24px rgba(56, 189, 248, 0.2);
+    }
+
+    /* Textes des cartes */
+    .pricing-amount {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: white;
+      line-height: 1.2;
+      margin-bottom: 0.3rem;
+    }
+
+    @media (max-width: 767px) {
+      .pricing-amount {
+        font-size: 1.1rem;
+        margin-bottom: 0.25rem;
+      }
+    }
+
+    .pricing-trial {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: rgba(16, 185, 129, 1);
+      margin-bottom: 0.2rem;
+    }
+
+    @media (max-width: 767px) {
+      .pricing-trial {
+        font-size: 0.7rem;
+      }
+    }
+
+    .pricing-period {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    @media (max-width: 767px) {
+      .pricing-period {
+        font-size: 0.65rem;
+      }
+    }
+
+    .pricing-cta {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: rgba(56, 189, 248, 1);
+      margin-top: 0.3rem;
+    }
+
+    @media (max-width: 767px) {
+      .pricing-cta {
+        font-size: 0.75rem;
+      }
+    }
+  </style>
+
+  <div class="pricing-sticky-bar">
+    <div class="pricing-container">
+      <h3 class="pricing-title">Choisissez votre forfait</h3>
+      <div class="pricing-grid">
+        <!-- Rectangle 1 : Mensuel -->
+        <div class="pricing-card" onclick="window.location.href='#mensuel'">
+          <div class="pricing-amount">99$/mois</div>
+          <div class="pricing-trial">+ essai gratuit</div>
+          <div class="pricing-period">(chaque mois)</div>
+        </div>
+        
+        <!-- Rectangle 2 : Semestriel -->
+        <div class="pricing-card" onclick="window.location.href='#semestriel'">
+          <div class="pricing-amount">74.99$/mois</div>
+          <div class="pricing-trial">+ essai gratuit</div>
+          <div class="pricing-period">(chaque 6 mois)</div>
+        </div>
+        
+        <!-- Rectangle 3 : Annuel -->
+        <div class="pricing-card pricing-card-highlight" onclick="window.location.href='#annuel'">
+          <div class="pricing-amount">49.99$/mois</div>
+          <div class="pricing-trial">+ essai gratuit</div>
+          <div class="pricing-period">(annuel)</div>
+        </div>
+        
+        <!-- Rectangle 4 : Interac -->
+        <div class="pricing-card pricing-card-interac" onclick="window.location.href='#interac'">
+          <div class="pricing-amount">Virement interac</div>
+          <div class="pricing-cta">Voir nos options</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
 
