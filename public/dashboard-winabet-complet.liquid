@@ -835,7 +835,53 @@
           </video>
         </div>
         
-        <div class="ai-loading-text">
+        <div class="ai-loading-text" style="display: flex; align-items: center; justify-content: center; gap: 0.75rem;">
+          <!-- SVG AtomIcon - visible seulement pendant "En réflexion..." -->
+          <svg id="atom-icon-bet" style="display: none; flex-shrink: 0;" width="48" height="48" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="1.2" result="b" />
+                <feMerge>
+                  <feMergeNode in="b" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <path id="orbit0" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000" />
+              <path id="orbit1" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000" />
+              <path id="orbit2" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000" />
+            </defs>
+            <g stroke="currentColor" stroke-width="2" fill="none" opacity="0.5">
+              <use href="#orbit0" />
+              <use href="#orbit1" />
+              <use href="#orbit2" />
+            </g>
+            <g stroke-linecap="round" filter="url(#softGlow)" stroke="currentColor">
+              <use href="#orbit0" stroke-width="2" fill="none" stroke-dasharray="26 974">
+                <animate attributeName="stroke-dashoffset" values="26;-974" dur="16s" repeatCount="indefinite" begin="0s" />
+              </use>
+              <circle r="3" fill="currentColor">
+                <animateMotion dur="16s" repeatCount="indefinite" rotate="auto" begin="0s">
+                  <mpath href="#orbit0" />
+                </animateMotion>
+              </circle>
+              <use href="#orbit1" stroke-width="2" fill="none" stroke-dasharray="26 974">
+                <animate attributeName="stroke-dashoffset" values="26;-974" dur="16s" repeatCount="indefinite" begin="5s" />
+              </use>
+              <circle r="3" fill="currentColor">
+                <animateMotion dur="16s" repeatCount="indefinite" rotate="auto" begin="5s">
+                  <mpath href="#orbit1" />
+                </animateMotion>
+              </circle>
+              <use href="#orbit2" stroke-width="2" fill="none" stroke-dasharray="26 974">
+                <animate attributeName="stroke-dashoffset" values="26;-974" dur="16s" repeatCount="indefinite" begin="10s" />
+              </use>
+              <circle r="3" fill="currentColor">
+                <animateMotion dur="16s" repeatCount="indefinite" rotate="auto" begin="10s">
+                  <mpath href="#orbit2" />
+                </animateMotion>
+              </circle>
+            </g>
+          </svg>
           <p id="rotating-text">Analyse des meilleurs opportunitées en cours</p>
         </div>
         
@@ -1122,7 +1168,53 @@
           </video>
         </div>
         
-        <div class="ai-loading-text">
+        <div class="ai-loading-text" style="display: flex; align-items: center; justify-content: center; gap: 0.75rem;">
+          <!-- SVG AtomIcon - visible seulement pendant "En réflexion..." -->
+          <svg id="atom-icon-parlay" style="display: none; flex-shrink: 0;" width="48" height="48" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="softGlowParlay" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="1.2" result="b" />
+                <feMerge>
+                  <feMergeNode in="b" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <path id="orbitParlay0" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000" />
+              <path id="orbitParlay1" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000" />
+              <path id="orbitParlay2" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000" />
+            </defs>
+            <g stroke="currentColor" stroke-width="2" fill="none" opacity="0.5">
+              <use href="#orbitParlay0" />
+              <use href="#orbitParlay1" />
+              <use href="#orbitParlay2" />
+            </g>
+            <g stroke-linecap="round" filter="url(#softGlowParlay)" stroke="currentColor">
+              <use href="#orbitParlay0" stroke-width="2" fill="none" stroke-dasharray="26 974">
+                <animate attributeName="stroke-dashoffset" values="26;-974" dur="16s" repeatCount="indefinite" begin="0s" />
+              </use>
+              <circle r="3" fill="currentColor">
+                <animateMotion dur="16s" repeatCount="indefinite" rotate="auto" begin="0s">
+                  <mpath href="#orbitParlay0" />
+                </animateMotion>
+              </circle>
+              <use href="#orbitParlay1" stroke-width="2" fill="none" stroke-dasharray="26 974">
+                <animate attributeName="stroke-dashoffset" values="26;-974" dur="16s" repeatCount="indefinite" begin="5s" />
+              </use>
+              <circle r="3" fill="currentColor">
+                <animateMotion dur="16s" repeatCount="indefinite" rotate="auto" begin="5s">
+                  <mpath href="#orbitParlay1" />
+                </animateMotion>
+              </circle>
+              <use href="#orbitParlay2" stroke-width="2" fill="none" stroke-dasharray="26 974">
+                <animate attributeName="stroke-dashoffset" values="26;-974" dur="16s" repeatCount="indefinite" begin="10s" />
+              </use>
+              <circle r="3" fill="currentColor">
+                <animateMotion dur="16s" repeatCount="indefinite" rotate="auto" begin="10s">
+                  <mpath href="#orbitParlay2" />
+                </animateMotion>
+              </circle>
+            </g>
+          </svg>
           <p id="rotating-text-parlay">Calcul des probabilités de victoire</p>
         </div>
         
@@ -3800,11 +3892,13 @@
 
       // Rotation du texte avec intervalle aléatoire entre 2s et 15s
       const rotatingTextEl = document.getElementById('rotating-text');
-      if (rotatingTextEl) {
+      const atomIconBet = document.getElementById('atom-icon-bet');
+      if (rotatingTextEl && atomIconBet) {
         const texts = [
           'Analise en cours des meilleurs oportunitées',
           'Analyse de centaine de site de paris sportifs',
           'Analyse et comparaison entre les sites',
+          'En réflexion...',
           'Analyse des données',
           "Analyse de l'historique entre les équipes",
           'Analyse des lineup des équipes'
@@ -3820,6 +3914,14 @@
         const rotateText = () => {
           currentIndex = (currentIndex + 1) % texts.length;
           rotatingTextEl.textContent = texts[currentIndex];
+          
+          // Afficher le SVG seulement si le texte est "En réflexion..."
+          if (texts[currentIndex] === 'En réflexion...') {
+            atomIconBet.style.display = 'block';
+          } else {
+            atomIconBet.style.display = 'none';
+          }
+          
           setTimeout(rotateText, getRandomDelay());
         };
         
@@ -3829,10 +3931,12 @@
 
       // Rotation du texte pour la page Parlay avec intervalle aléatoire entre 2s et 15s
       const rotatingTextParlayEl = document.getElementById('rotating-text-parlay');
-      if (rotatingTextParlayEl) {
+      const atomIconParlay = document.getElementById('atom-icon-parlay');
+      if (rotatingTextParlayEl && atomIconParlay) {
         const parlayTexts = [
           'Calcul des probabilités de victoire',
           'Analyse des combinaisons optimales',
+          'En réflexion...',
           'Évaluation des risques du parlay',
           'Analyse approfondie des matchs',
           'Calcul des cotes combinées',
@@ -3849,6 +3953,14 @@
         const rotateTextParlay = () => {
           parlayIndex = (parlayIndex + 1) % parlayTexts.length;
           rotatingTextParlayEl.textContent = parlayTexts[parlayIndex];
+          
+          // Afficher le SVG seulement si le texte est "En réflexion..."
+          if (parlayTexts[parlayIndex] === 'En réflexion...') {
+            atomIconParlay.style.display = 'block';
+          } else {
+            atomIconParlay.style.display = 'none';
+          }
+          
           setTimeout(rotateTextParlay, getRandomDelayParlay());
         };
         
