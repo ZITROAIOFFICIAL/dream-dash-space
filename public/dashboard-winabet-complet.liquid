@@ -38,6 +38,15 @@
       /* Mobile: marges haut et bas de la vidéo */
       --video-margin-top-mobile: 0;
       --video-margin-bottom-mobile: 0.5rem;
+      
+      /* ===== MARGES LIGNE DE SÉPARATION - MODIFIEZ ICI ===== */
+      /* Desktop: marges haut et bas de la ligne */
+      --separator-margin-top-desktop: 0;
+      --separator-margin-bottom-desktop: 2rem;
+      
+      /* Mobile: marges haut et bas de la ligne */
+      --separator-margin-top-mobile: 0;
+      --separator-margin-bottom-mobile: 2rem;
     }
     
     /* Style pour les vidéos */
@@ -64,6 +73,22 @@
         margin-top: var(--video-margin-top-mobile);
         margin-bottom: var(--video-margin-bottom-mobile);
       }
+      
+      .separator-line {
+        margin-top: var(--separator-margin-top-mobile);
+        margin-bottom: var(--separator-margin-bottom-mobile);
+      }
+    }
+    
+    /* Style pour la ligne de séparation */
+    .separator-line {
+      width: 100%;
+      max-width: 800px;
+      margin-top: var(--separator-margin-top-desktop);
+      margin-bottom: var(--separator-margin-bottom-desktop);
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 1rem;
     }
     
     /* ==================== ANIMATION SHIMMER TEXTE IA ==================== */
@@ -815,7 +840,7 @@
         </div>
         
         <!-- Ligne de séparation SVG -->
-        <div style="width: 100%; max-width: 800px; margin: 0 auto 2rem auto; padding: 0 1rem;">
+        <div class="separator-line">
           <svg width="100%" height="2" viewBox="0 0 800 2" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
             <line x1="0" y1="1" x2="800" y2="1" stroke="rgba(150, 150, 150, 0.6)" stroke-width="2" stroke-linecap="round"/>
           </svg>
