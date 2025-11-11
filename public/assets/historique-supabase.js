@@ -313,8 +313,22 @@ function displayParlayHistory(data) {
     </div>
   `;
 
-  // Afficher chaque parlay
-  container.innerHTML = data.parlays.map((parlay) => generateParlayCardHTML(parlay)).join("");
+  // Fonction helper pour parser les dates DD/MM/YYYY
+  function parseDate(dateString) {
+    if (!dateString) return new Date(0); // Date par défaut si vide
+    const [day, month, year] = dateString.split('/').map(Number);
+    return new Date(year, month - 1, day);
+  }
+
+  // Trier les parlays par date (plus récent en premier)
+  const sortedParlays = [...data.parlays].sort((a, b) => {
+    const dateA = parseDate(a.match_date);
+    const dateB = parseDate(b.match_date);
+    return dateB - dateA; // Ordre décroissant (plus récent d'abord)
+  });
+
+  // Afficher chaque parlay trié
+  container.innerHTML = sortedParlays.map((parlay) => generateParlayCardHTML(parlay)).join("");
 }
 
 // ==================== GÉNÉRATION HTML ====================
