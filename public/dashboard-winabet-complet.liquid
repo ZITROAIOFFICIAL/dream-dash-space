@@ -149,6 +149,10 @@
       padding: 0 1rem;
     }
     
+    .ai-loading-text {
+      min-height: calc(var(--shimmer-text-size-desktop) * 1.2);
+    }
+    
     .ai-loading-text p {
       font-size: var(--shimmer-text-size-desktop);
       font-family: 'Fustat', sans-serif;
@@ -175,6 +179,17 @@
       animation: shimmer var(--shimmer-duration) linear infinite;
     }
     
+    /* Mode centrage strict utilisé UNIQUEMENT pour le texte normal */
+    .ai-loading-text.center-only {
+      display: grid !important;
+      place-items: center;
+      gap: 0 !important;
+    }
+    
+    .ai-loading-text.center-only svg {
+      display: none !important;
+    }
+    
     @keyframes shimmer {
       0% {
         background-position: 200% 0;
@@ -189,6 +204,7 @@
       .ai-loading-text {
         margin: 0.4rem auto 1rem auto;
         padding: 0 0.5rem;
+        min-height: calc(var(--shimmer-text-size-mobile) * 1.6);
       }
       
       .ai-loading-text p {
@@ -3867,17 +3883,46 @@
         return availablePhases[Math.floor(Math.random() * availablePhases.length)];
       };
 
+      // Helpers de persistance
+      const SAVE_KEYS = {
+        bet: 'ai_seq_bet_v1',
+        parlay: 'ai_seq_parlay_v1',
+      };
+
+      function saveSequenceState(key, state) {
+        try {
+          localStorage.setItem(key, JSON.stringify(state));
+        } catch {}
+      }
+
+      function loadSequenceState(key) {
+        try {
+          const raw = localStorage.getItem(key);
+          if (!raw) return null;
+          return JSON.parse(raw);
+        } catch {
+          return null;
+        }
+      }
+
+      function nowMs() {
+        return Date.now();
+      }
+
       // Système de séquence d'analyse avec 4 phases pour Bet
       const rotatingTextEl = document.getElementById('rotating-text');
       const lightIconBet = document.getElementById('light-icon-bet');
       const editIconBet = document.getElementById('edit-icon-bet');
       
       if (rotatingTextEl && lightIconBet && editIconBet) {
-        let currentPhase = getRandomStartPhase();
-        let lastPhase = null;
-        let reflectionDuration = 0;
-        let normalTextsIndex = 0;
-        let normalRotations = 0;
+        const aiContainerBet = rotatingTextEl.parentElement;
+        
+        let savedBet = loadSequenceState(SAVE_KEYS.bet);
+        let currentPhase = savedBet?.phase || 'normal';
+        let lastPhase = savedBet?.lastPhase ?? null;
+        let reflectionDuration = savedBet?.reflectionDuration ?? 0;
+        let normalTextsIndex = savedBet?.nextIndex ?? 0;
+        let normalRotations = savedBet?.normalRotations ?? 0;
         
         const normalTexts = [
           '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-1]</span> Analyse en cours des meilleures opportunités...',
@@ -3942,45 +3987,52 @@
           editIconBet.style.display = 'none';
         };
         
-        const runSequence = () => {
-          switch(currentPhase) {
+        function saveBet(endAt, displayedIndex) {
+          const state = {
+            phase: currentPhase,
+            lastPhase,
+            reflectionDuration,
+            normalRotations,
+            displayedIndex: displayedIndex ?? null,
+            nextIndex: normalTextsIndex,
+            endAt,
+            savedAt: nowMs(),
+          };
+          saveSequenceState(SAVE_KEYS.bet, state);
+        }
+
+        function applyCenterModeForNormal(on) {
+          if (!aiContainerBet) return;
+          if (on) aiContainerBet.classList.add('center-only');
+          else aiContainerBet.classList.remove('center-only');
+        }
+
+        function renderFromStateAndSchedule(remaining) {
+          switch (currentPhase) {
             case 'reflection':
+              applyCenterModeForNormal(false);
               hideAllIcons();
               lightIconBet.style.display = 'block';
               rotatingTextEl.innerHTML = 'En réflexion...';
-              reflectionDuration = Math.floor(Math.random() * (30000 - 5000 + 1)) + 5000;
-              setTimeout(() => {
-                lastPhase = currentPhase;
-                currentPhase = getNextRandomPhase(currentPhase, lastPhase);
-                runSequence();
-              }, reflectionDuration);
+              setTimeout(nextPhaseBet, Math.max(0, remaining));
               break;
-              
             case 'confirmed':
+              applyCenterModeForNormal(false);
               hideAllIcons();
               lightIconBet.style.display = 'block';
-              const seconds = Math.round(reflectionDuration / 1000);
+              const seconds = Math.round((reflectionDuration || 0) / 1000);
               rotatingTextEl.innerHTML = `Réfléchie pendant ${seconds} secondes`;
-              setTimeout(() => {
-                lastPhase = currentPhase;
-                currentPhase = getNextRandomPhase(currentPhase, lastPhase);
-                runSequence();
-              }, 5000);
+              setTimeout(nextPhaseBet, Math.max(0, remaining));
               break;
-              
             case 'modifying':
+              applyCenterModeForNormal(false);
               hideAllIcons();
               editIconBet.style.display = 'block';
               rotatingTextEl.innerHTML = 'Modification des données ...';
-              const modifyingDuration = Math.floor(Math.random() * (30000 - 12000 + 1)) + 12000;
-              setTimeout(() => {
-                lastPhase = currentPhase;
-                currentPhase = getNextRandomPhase(currentPhase, lastPhase);
-                runSequence();
-              }, modifyingDuration);
+              setTimeout(nextPhaseBet, Math.max(0, remaining));
               break;
-              
             case 'modified':
+              applyCenterModeForNormal(false);
               hideAllIcons();
               editIconBet.style.display = 'block';
               rotatingTextEl.innerHTML = 'Modification des données effectuées';
@@ -3990,32 +4042,129 @@
                 normalTextsIndex = 0;
                 normalRotations = 0;
                 runSequence();
-              }, 5000);
+              }, Math.max(0, remaining));
+              break;
+            case 'normal':
+            default:
+              applyCenterModeForNormal(true);
+              hideAllIcons();
+              const displayedIndex = savedBet?.displayedIndex ?? normalTextsIndex;
+              rotatingTextEl.innerHTML = normalTexts[displayedIndex % normalTexts.length];
+              normalTextsIndex = (displayedIndex + 1) % normalTexts.length;
+
+              if (remaining > 0) {
+                saveBet(nowMs() + remaining, displayedIndex);
+                setTimeout(runSequence, remaining);
+              } else {
+                runSequence();
+              }
+              break;
+          }
+        }
+
+        function nextPhaseBet() {
+          lastPhase = currentPhase;
+          currentPhase = getNextRandomPhase(currentPhase, lastPhase);
+          runSequence();
+        }
+        
+        const runSequence = () => {
+          switch(currentPhase) {
+            case 'reflection':
+              applyCenterModeForNormal(false);
+              hideAllIcons();
+              lightIconBet.style.display = 'block';
+              rotatingTextEl.innerHTML = 'En réflexion...';
+              reflectionDuration = Math.floor(Math.random() * (30000 - 5000 + 1)) + 5000;
+              const endAt = nowMs() + reflectionDuration;
+              saveBet(endAt, null);
+              setTimeout(() => {
+                lastPhase = currentPhase;
+                currentPhase = getNextRandomPhase(currentPhase, lastPhase);
+                runSequence();
+              }, reflectionDuration);
+              break;
+              
+            case 'confirmed':
+              applyCenterModeForNormal(false);
+              hideAllIcons();
+              lightIconBet.style.display = 'block';
+              const seconds = Math.round((reflectionDuration || 0) / 1000);
+              rotatingTextEl.innerHTML = `Réfléchie pendant ${seconds} secondes`;
+              const duration = 5000;
+              saveBet(nowMs() + duration, null);
+              setTimeout(() => {
+                lastPhase = currentPhase;
+                currentPhase = getNextRandomPhase(currentPhase, lastPhase);
+                runSequence();
+              }, duration);
+              break;
+              
+            case 'modifying':
+              applyCenterModeForNormal(false);
+              hideAllIcons();
+              editIconBet.style.display = 'block';
+              rotatingTextEl.innerHTML = 'Modification des données ...';
+              const modifyingDuration = Math.floor(Math.random() * (30000 - 12000 + 1)) + 12000;
+              saveBet(nowMs() + modifyingDuration, null);
+              setTimeout(() => {
+                lastPhase = currentPhase;
+                currentPhase = getNextRandomPhase(currentPhase, lastPhase);
+                runSequence();
+              }, modifyingDuration);
+              break;
+              
+            case 'modified':
+              applyCenterModeForNormal(false);
+              hideAllIcons();
+              editIconBet.style.display = 'block';
+              rotatingTextEl.innerHTML = 'Modification des données effectuées';
+              const durationMod = 5000;
+              saveBet(nowMs() + durationMod, null);
+              setTimeout(() => {
+                lastPhase = currentPhase;
+                currentPhase = getNextRandomPhase(currentPhase, lastPhase);
+                normalTextsIndex = 0;
+                normalRotations = 0;
+                runSequence();
+              }, durationMod);
               break;
               
             case 'normal':
+              applyCenterModeForNormal(true);
               hideAllIcons();
-              rotatingTextEl.innerHTML = normalTexts[normalTextsIndex];
+              const displayedIndex = normalTextsIndex;
+              rotatingTextEl.innerHTML = normalTexts[displayedIndex];
+
               normalTextsIndex = (normalTextsIndex + 1) % normalTexts.length;
-              
-              if (normalTextsIndex === 0) {
-                normalRotations++;
-              }
-              
+              if (normalTextsIndex === 0) normalRotations++;
+
               const maxRotations = Math.floor(Math.random() * (6 - 3 + 1)) + 3;
-              
-              if (normalRotations >= maxRotations) {
-                lastPhase = currentPhase;
-                currentPhase = getNextRandomPhase(currentPhase, lastPhase);
-                setTimeout(runSequence, Math.floor(Math.random() * (15000 - 2000 + 1)) + 2000);
-              } else {
-                setTimeout(runSequence, Math.floor(Math.random() * (15000 - 2000 + 1)) + 2000);
-              }
+              const delay = Math.floor(Math.random() * (15000 - 2000 + 1)) + 2000;
+              const endAtNormal = nowMs() + delay;
+              saveBet(endAtNormal, displayedIndex);
+
+              setTimeout(() => {
+                if (normalRotations >= maxRotations) {
+                  lastPhase = currentPhase;
+                  currentPhase = getNextRandomPhase(currentPhase, lastPhase);
+                }
+                runSequence();
+              }, delay);
               break;
           }
         };
         
-        runSequence();
+        const remaining = savedBet?.endAt ? Math.max(0, savedBet.endAt - nowMs()) : 0;
+        if (savedBet && remaining > 0) {
+          renderFromStateAndSchedule(remaining);
+        } else {
+          if (!savedBet) {
+            normalTextsIndex = Math.floor(Math.random() * normalTexts.length);
+          }
+          currentPhase = 'normal';
+          runSequence();
+        }
       }
 
       // Système de séquence d'analyse avec 4 phases pour Parlay
@@ -4024,11 +4173,14 @@
       const editIconParlay = document.getElementById('edit-icon-parlay');
       
       if (rotatingTextParlayEl && lightIconParlay && editIconParlay) {
-        let currentPhaseParlay = getRandomStartPhase();
-        let lastPhaseParlay = null;
-        let reflectionDurationParlay = 0;
-        let normalTextsIndexParlay = 0;
-        let normalRotationsParlay = 0;
+        const aiContainerParlay = rotatingTextParlayEl.parentElement;
+        
+        let savedParlay = loadSequenceState(SAVE_KEYS.parlay);
+        let currentPhaseParlay = savedParlay?.phase || 'normal';
+        let lastPhaseParlay = savedParlay?.lastPhase ?? null;
+        let reflectionDurationParlay = savedParlay?.reflectionDuration ?? 0;
+        let normalTextsIndexParlay = savedParlay?.nextIndex ?? 0;
+        let normalRotationsParlay = savedParlay?.normalRotations ?? 0;
         
         const normalTextsPar = [
           '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-1]</span> Calcul des probabilités de victoire...',
@@ -4094,45 +4246,52 @@
           editIconParlay.style.display = 'none';
         };
         
-        const runSequenceParlay = () => {
-          switch(currentPhaseParlay) {
+        function saveParlay(endAt, displayedIndex) {
+          const state = {
+            phase: currentPhaseParlay,
+            lastPhase: lastPhaseParlay,
+            reflectionDuration: reflectionDurationParlay,
+            normalRotations: normalRotationsParlay,
+            displayedIndex: displayedIndex ?? null,
+            nextIndex: normalTextsIndexParlay,
+            endAt,
+            savedAt: nowMs(),
+          };
+          saveSequenceState(SAVE_KEYS.parlay, state);
+        }
+
+        function applyCenterModeForNormalParlay(on) {
+          if (!aiContainerParlay) return;
+          if (on) aiContainerParlay.classList.add('center-only');
+          else aiContainerParlay.classList.remove('center-only');
+        }
+
+        function renderFromStateAndScheduleParlay(remaining) {
+          switch (currentPhaseParlay) {
             case 'reflection':
+              applyCenterModeForNormalParlay(false);
               hideAllIconsParlay();
               lightIconParlay.style.display = 'block';
               rotatingTextParlayEl.innerHTML = 'En réflexion...';
-              reflectionDurationParlay = Math.floor(Math.random() * (30000 - 5000 + 1)) + 5000;
-              setTimeout(() => {
-                lastPhaseParlay = currentPhaseParlay;
-                currentPhaseParlay = getNextRandomPhase(currentPhaseParlay, lastPhaseParlay);
-                runSequenceParlay();
-              }, reflectionDurationParlay);
+              setTimeout(nextPhaseParlay, Math.max(0, remaining));
               break;
-              
             case 'confirmed':
+              applyCenterModeForNormalParlay(false);
               hideAllIconsParlay();
               lightIconParlay.style.display = 'block';
-              const secondsPar = Math.round(reflectionDurationParlay / 1000);
+              const secondsPar = Math.round((reflectionDurationParlay || 0) / 1000);
               rotatingTextParlayEl.innerHTML = `Réfléchie pendant ${secondsPar} secondes`;
-              setTimeout(() => {
-                lastPhaseParlay = currentPhaseParlay;
-                currentPhaseParlay = getNextRandomPhase(currentPhaseParlay, lastPhaseParlay);
-                runSequenceParlay();
-              }, 5000);
+              setTimeout(nextPhaseParlay, Math.max(0, remaining));
               break;
-              
             case 'modifying':
+              applyCenterModeForNormalParlay(false);
               hideAllIconsParlay();
               editIconParlay.style.display = 'block';
               rotatingTextParlayEl.innerHTML = 'Modification des données ...';
-              const modifyingDurationPar = Math.floor(Math.random() * (30000 - 12000 + 1)) + 12000;
-              setTimeout(() => {
-                lastPhaseParlay = currentPhaseParlay;
-                currentPhaseParlay = getNextRandomPhase(currentPhaseParlay, lastPhaseParlay);
-                runSequenceParlay();
-              }, modifyingDurationPar);
+              setTimeout(nextPhaseParlay, Math.max(0, remaining));
               break;
-              
             case 'modified':
+              applyCenterModeForNormalParlay(false);
               hideAllIconsParlay();
               editIconParlay.style.display = 'block';
               rotatingTextParlayEl.innerHTML = 'Modification des données effectuées';
@@ -4142,32 +4301,129 @@
                 normalTextsIndexParlay = 0;
                 normalRotationsParlay = 0;
                 runSequenceParlay();
-              }, 5000);
+              }, Math.max(0, remaining));
+              break;
+            case 'normal':
+            default:
+              applyCenterModeForNormalParlay(true);
+              hideAllIconsParlay();
+              const displayedIndex = savedParlay?.displayedIndex ?? normalTextsIndexParlay;
+              rotatingTextParlayEl.innerHTML = normalTextsPar[displayedIndex % normalTextsPar.length];
+              normalTextsIndexParlay = (displayedIndex + 1) % normalTextsPar.length;
+
+              if (remaining > 0) {
+                saveParlay(nowMs() + remaining, displayedIndex);
+                setTimeout(runSequenceParlay, remaining);
+              } else {
+                runSequenceParlay();
+              }
+              break;
+          }
+        }
+
+        function nextPhaseParlay() {
+          lastPhaseParlay = currentPhaseParlay;
+          currentPhaseParlay = getNextRandomPhase(currentPhaseParlay, lastPhaseParlay);
+          runSequenceParlay();
+        }
+        
+        const runSequenceParlay = () => {
+          switch(currentPhaseParlay) {
+            case 'reflection':
+              applyCenterModeForNormalParlay(false);
+              hideAllIconsParlay();
+              lightIconParlay.style.display = 'block';
+              rotatingTextParlayEl.innerHTML = 'En réflexion...';
+              reflectionDurationParlay = Math.floor(Math.random() * (30000 - 5000 + 1)) + 5000;
+              const endAt = nowMs() + reflectionDurationParlay;
+              saveParlay(endAt, null);
+              setTimeout(() => {
+                lastPhaseParlay = currentPhaseParlay;
+                currentPhaseParlay = getNextRandomPhase(currentPhaseParlay, lastPhaseParlay);
+                runSequenceParlay();
+              }, reflectionDurationParlay);
+              break;
+              
+            case 'confirmed':
+              applyCenterModeForNormalParlay(false);
+              hideAllIconsParlay();
+              lightIconParlay.style.display = 'block';
+              const secondsPar = Math.round((reflectionDurationParlay || 0) / 1000);
+              rotatingTextParlayEl.innerHTML = `Réfléchie pendant ${secondsPar} secondes`;
+              const duration = 5000;
+              saveParlay(nowMs() + duration, null);
+              setTimeout(() => {
+                lastPhaseParlay = currentPhaseParlay;
+                currentPhaseParlay = getNextRandomPhase(currentPhaseParlay, lastPhaseParlay);
+                runSequenceParlay();
+              }, duration);
+              break;
+              
+            case 'modifying':
+              applyCenterModeForNormalParlay(false);
+              hideAllIconsParlay();
+              editIconParlay.style.display = 'block';
+              rotatingTextParlayEl.innerHTML = 'Modification des données ...';
+              const modifyingDurationPar = Math.floor(Math.random() * (30000 - 12000 + 1)) + 12000;
+              saveParlay(nowMs() + modifyingDurationPar, null);
+              setTimeout(() => {
+                lastPhaseParlay = currentPhaseParlay;
+                currentPhaseParlay = getNextRandomPhase(currentPhaseParlay, lastPhaseParlay);
+                runSequenceParlay();
+              }, modifyingDurationPar);
+              break;
+              
+            case 'modified':
+              applyCenterModeForNormalParlay(false);
+              hideAllIconsParlay();
+              editIconParlay.style.display = 'block';
+              rotatingTextParlayEl.innerHTML = 'Modification des données effectuées';
+              const durationMod = 5000;
+              saveParlay(nowMs() + durationMod, null);
+              setTimeout(() => {
+                lastPhaseParlay = currentPhaseParlay;
+                currentPhaseParlay = getNextRandomPhase(currentPhaseParlay, lastPhaseParlay);
+                normalTextsIndexParlay = 0;
+                normalRotationsParlay = 0;
+                runSequenceParlay();
+              }, durationMod);
               break;
               
             case 'normal':
+              applyCenterModeForNormalParlay(true);
               hideAllIconsParlay();
-              rotatingTextParlayEl.innerHTML = normalTextsPar[normalTextsIndexParlay];
+              const displayedIndex = normalTextsIndexParlay;
+              rotatingTextParlayEl.innerHTML = normalTextsPar[displayedIndex];
+
               normalTextsIndexParlay = (normalTextsIndexParlay + 1) % normalTextsPar.length;
-              
-              if (normalTextsIndexParlay === 0) {
-                normalRotationsParlay++;
-              }
-              
+              if (normalTextsIndexParlay === 0) normalRotationsParlay++;
+
               const maxRotationsPar = Math.floor(Math.random() * (6 - 3 + 1)) + 3;
-              
-              if (normalRotationsParlay >= maxRotationsPar) {
-                lastPhaseParlay = currentPhaseParlay;
-                currentPhaseParlay = getNextRandomPhase(currentPhaseParlay, lastPhaseParlay);
-                setTimeout(runSequenceParlay, Math.floor(Math.random() * (15000 - 2000 + 1)) + 2000);
-              } else {
-                setTimeout(runSequenceParlay, Math.floor(Math.random() * (15000 - 2000 + 1)) + 2000);
-              }
+              const delay = Math.floor(Math.random() * (15000 - 2000 + 1)) + 2000;
+              const endAtNormal = nowMs() + delay;
+              saveParlay(endAtNormal, displayedIndex);
+
+              setTimeout(() => {
+                if (normalRotationsParlay >= maxRotationsPar) {
+                  lastPhaseParlay = currentPhaseParlay;
+                  currentPhaseParlay = getNextRandomPhase(currentPhaseParlay, lastPhaseParlay);
+                }
+                runSequenceParlay();
+              }, delay);
               break;
           }
         };
         
-        runSequenceParlay();
+        const remaining = savedParlay?.endAt ? Math.max(0, savedParlay.endAt - nowMs()) : 0;
+        if (savedParlay && remaining > 0) {
+          renderFromStateAndScheduleParlay(remaining);
+        } else {
+          if (!savedParlay) {
+            normalTextsIndexParlay = Math.floor(Math.random() * normalTextsPar.length);
+          }
+          currentPhaseParlay = 'normal';
+          runSequenceParlay();
+        }
       }
 
       // In Shopify editor, preserve the current page across partial reloads
