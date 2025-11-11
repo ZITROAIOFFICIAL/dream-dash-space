@@ -3237,9 +3237,6 @@
         autoResizeOverUnderText();
         autoShrinkTeamLogos();
       }, 100);
-      // Redimensionner aussi l'historique
-      const event = new Event('DOMContentLoaded');
-      document.dispatchEvent(event);
     });
 
     // ===========================
@@ -3760,6 +3757,9 @@
 
     // Initialize
     document.addEventListener('DOMContentLoaded', () => {
+      if (window.__aiInitDone) return;
+      window.__aiInitDone = true;
+      
       updateDisplay();
 
       // Initialiser l'auto-incrémentation globale des compteurs au-dessus des cartes
