@@ -913,10 +913,1060 @@
           </div>
         </div>
         
-{% render 'bet-du-jour-page' %}
+        <h1>BET DU JOUR</h1>
+        <p class="subtitle">Les bet avec la meilleur probabilité de réussite aujourd'hui. Nous affichons tous les bet avec minimum de 70% de chance de gagner selon notre IA.</p>
 
-{% render 'parlay-du-jour-page' %}
+        {% assign bet_cards = section.blocks | where: 'type', 'bet_card' %}
+        {% if bet_cards.size > 0 %}
+          {% assign visible_bets = 0 %}
+          <div class="cards-grid">
+          {% for block in bet_cards %}
+            {% if block.settings.show_card %}
+              {% comment %} Limiter à 1 bet si free trial {% endcomment %}
+              {% if access_level == 'free_trial' and visible_bets >= 1 %}
+                {% comment %} Cacher les bets suivants {% endcomment %}
+              {% else %}
+                {% assign visible_bets = visible_bets | plus: 1 %}
+              <div class="card-wrapper">
 
+              <div class="bet-card" style="{% if block.settings.send_to_history == true %}display:none{% endif %}" 
+                   {{ block.shopify_attributes }}
+                   data-block-type="bet_card"
+                   data-block-id="{{ block.id }}"
+                   data-sport-type="{{ block.settings.sport_type | default: 'nhl' }}"
+                   data-ai-data-count="{{ block.settings.ai_data_count | default: 2843 }}"
+                   data-win-percentage="{{ block.settings.win_percentage | default: 92 }}"
+                   data-bet-type="{{ block.settings.bet_type | default: 'moneyline' }}"
+                   data-team1-name="{{ block.settings.team1_name }}"
+                   data-team1-logo="{{ block.settings.team1_logo | image_url: width: 200 }}"
+                   data-team2-name="{{ block.settings.team2_name }}"
+                   data-team2-logo="{{ block.settings.team2_logo | image_url: width: 200 }}"
+                   data-match-time="{{ block.settings.match_time }}"
+                   data-match-date="{{ block.settings.match_date }}"
+                   data-multiplier="{{ block.settings.multiplier }}"
+                   data-bet-units="{{ block.settings.bet_units }}"
+                   data-odds="{{ block.settings.odds }}"
+                   data-best-bookmaker="{{ block.settings.best_bookmaker }}"
+                   data-best-odds="{{ block.settings.best_odds }}"
+                   data-result="{{ block.settings.result | default: 'pending' }}"
+                   data-send-to-history="{{ block.settings.send_to_history }}"
+                   data-spread-value="{{ block.settings.spread_value }}"
+                   data-spread-team="{{ block.settings.spread_team }}"
+                   data-over-under-type="{{ block.settings.over_under_type }}"
+                   data-over-under-value="{{ block.settings.over_under_value }}"
+                   data-over-under-stat-type="{{ block.settings.over_under_stat_type }}"
+                   data-over-under-text-custom="{{ block.settings.over_under_text_custom }}"
+                   data-moneyline-team="{{ block.settings.moneyline_team | default: 'team2' }}"
+              >
+                 <!-- AI Analysis Header - Nouveau Layout -->
+             <div class="confidence-badge" style="display: flex; align-items: center; justify-content: flex-start; gap: 0.5rem; background: rgba(0, 0, 0, 0.6); margin-top: 0.75rem; margin-bottom: 0.125rem;">
+                   <!-- Gauche: Icône IA + Pourcentage -->
+                   <div style="display: flex; align-items: center; gap: 1rem;">
+                     <!-- Icône IA atomique (50px) -->
+                     <div style="position: relative; width: 50px; height: 50px; flex-shrink: 0;">
+                       <svg width="50" height="50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                         <defs>
+                           <filter id="softGlowBetHeader{{ forloop.index }}" x="-50%" y="-50%" width="200%" height="200%">
+                             <feGaussianBlur stdDeviation="1.2" result="b"/>
+                             <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                           </filter>
+                           <path id="orbit0BetHeader{{ forloop.index }}" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                           <path id="orbit1BetHeader{{ forloop.index }}" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                           <path id="orbit2BetHeader{{ forloop.index }}" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+                         </defs>
+                         <g stroke="#68859e" stroke-width="2" fill="none">
+                           <use href="#orbit0BetHeader{{ forloop.index }}"/><use href="#orbit1BetHeader{{ forloop.index }}"/><use href="#orbit2BetHeader{{ forloop.index }}"/>
+                         </g>
+                         <g stroke-linecap="round" filter="url(#softGlowBetHeader{{ forloop.index }})">
+                           <use href="#orbit0BetHeader{{ forloop.index }}" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                             <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                           </use>
+                           <use href="#orbit1BetHeader{{ forloop.index }}" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                             <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                           </use>
+                           <use href="#orbit2BetHeader{{ forloop.index }}" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                             <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                           </use>
+                         </g>
+                         <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
+                       </svg>
+                     </div>
+                     
+                     <!-- Pourcentage -->
+                <span style="font-family: 'outfit', sans-serif; font-weight: 300; font-size: 1.80rem; color: #ffffff; line-height: 1;">{{ block.settings.win_percentage | default: 92 }}%</span>
+                   </div>
+                   
+                   <!-- Centre: Texte confiance ia -->
+                   <span style="font-family: 'fustat', sans-serif; font-weight: 400; font-size: 1.25rem; color: rgba(255, 255, 255, 0.7); line-height: 1;  margin-left: 0.5rem;">Confiance ia pour ce bet</span>
+                   
+                   <!-- Droite: Bouton VOIR ANALYSE IA avec coins arrondis (8px) -->
+                      <button 
+                      style="padding: 0.5rem 1rem; background: rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.7); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.5rem; font-family: 'Outfit', sans-serif; font-weight: 300; font-size: 0.75rem; cursor: pointer; transition: all 0.2s; line-height: 1.2; white-space: nowrap; margin-left: auto;"
+                     onclick="openAnalysisDialog(this)"
+                     data-win-percentage="{{ block.settings.win_percentage | default: 92 }}"
+                     data-ai-data-count="{{ block.settings.ai_data_count | default: 2843 }}"
+                     data-sport-type="{{ block.settings.sport_type | default: 'nhl' }}"
+                     data-team1="{{ block.settings.team1_name | default: 'ÉQUIPE DOMICILE' }}"
+                     data-team2="{{ block.settings.team2_name | default: 'ÉQUIPE EXTÉRIEUR' }}"
+                     data-auto-increment="{{ block.settings.auto_increment_enabled }}"
+                     data-increment-interval="{{ block.settings.auto_increment_interval | default: 5 }}"
+                     data-increment-amount="{{ block.settings.auto_increment_amount | default: 5 }}"
+                   >
+                     VOIR<br>ANALYSE<br>IA
+                   </button>
+                 </div>
+
+                <div class="bet-card-content">
+                  <button class="multiplier-button">x{{ block.settings.multiplier | default: '1.95' }}</button>
+                  <div class="match-info-new">
+                    {% assign bet_type = block.settings.bet_type | default: 'moneyline' %}
+                    
+                    {% if bet_type == 'moneyline' %}
+                      <!-- MONEYLINE -->
+                      {% assign moneyline_team = block.settings.moneyline_team | default: 'team2' %}
+                      <div class="match-info-header">MONEYLINE</div>
+                      <div class="match-info-content">
+                        <div class="team-side {% if moneyline_team == 'team1' %}selected{% endif %}">
+                          {% if block.settings.team1_logo %}
+                            <img src="{{ block.settings.team1_logo | image_url: width: 200 }}" alt="{{ block.settings.team1_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.team1_name | default: 'ST. LOUIS' }}</div>
+                          {% if moneyline_team == 'team1' %}
+                            <div class="team-bet-type">VICTOIRE</div>
+                          {% endif %}
+                        </div>
+
+                        <div class="match-center">
+                          <div class="match-time-new">{{ block.settings.match_time | default: '7:00 PM' }}</div>
+                          <div class="match-vs-new">VS</div>
+                        </div>
+
+                        <div class="team-side {% if moneyline_team == 'team2' %}selected{% endif %}">
+                          {% if block.settings.team2_logo %}
+                            <img src="{{ block.settings.team2_logo | image_url: width: 200 }}" alt="{{ block.settings.team2_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.team2_name | default: 'PITTSBURGH' }}</div>
+                          {% if moneyline_team == 'team2' %}
+                            <div class="team-bet-type">VICTOIRE</div>
+                          {% endif %}
+                        </div>
+                      </div>
+                    
+                    {% elsif bet_type == 'spread' %}
+                      <!-- SPREAD -->
+                      <div class="match-info-header">SPREAD</div>
+                      <div class="match-info-content">
+                        <div class="team-side {% if block.settings.spread_team == 'team1' %}selected{% endif %}">
+                          {% if block.settings.team1_logo %}
+                            <img src="{{ block.settings.team1_logo | image_url: width: 200 }}" alt="{{ block.settings.team1_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.team1_name | default: 'ST. LOUIS' }}</div>
+                          {% if block.settings.spread_team == 'team1' %}
+                            <div class="team-bet-type">{{ block.settings.spread_value | default: '-3.5' }}</div>
+                          {% endif %}
+                        </div>
+
+                        <div class="match-center">
+                          <div class="match-time-new">{{ block.settings.match_time | default: '7:00 PM' }}</div>
+                          <div class="match-vs-new">VS</div>
+                        </div>
+
+                        <div class="team-side {% if block.settings.spread_team == 'team2' %}selected{% endif %}">
+                          {% if block.settings.team2_logo %}
+                            <img src="{{ block.settings.team2_logo | image_url: width: 200 }}" alt="{{ block.settings.team2_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.team2_name | default: 'PITTSBURGH' }}</div>
+                          {% if block.settings.spread_team == 'team2' %}
+                            <div class="team-bet-type">{{ block.settings.spread_value | default: '-3.5' }}</div>
+                          {% endif %}
+                        </div>
+                      </div>
+                    
+                     {% elsif bet_type == 'over_under' %}
+                      <!-- OVER/UNDER -->
+                      {% assign custom_text = block.settings.over_under_text_custom | default: '' %}
+                      {% if custom_text != blank %}
+                        <div class="match-info-header">{{ custom_text | upcase }}</div>
+                      {% else %}
+                        <div class="match-info-header">{{ block.settings.over_under_type | default: 'OVER' | upcase }}</div>
+                      {% endif %}
+                      <div class="match-info-content">
+                        <div class="team-side">
+                          {% if block.settings.team1_logo %}
+                            <img src="{{ block.settings.team1_logo | image_url: width: 200 }}" alt="{{ block.settings.team1_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.team1_name | default: 'ST. LOUIS' }}</div>
+                        </div>
+
+                        <div class="match-center">
+                          <div class="match-time-new">{{ block.settings.match_time | default: '7:00 PM' }}</div>
+                          <div class="match-vs-new">VS</div>
+                          <div class="over-under-display">
+                            {% if custom_text != blank %}
+                              <div class="over-under-type">{{ custom_text | upcase }}</div>
+                            {% else %}
+                              <div class="over-under-type">{{ block.settings.over_under_type | default: 'OVER' | upcase }}</div>
+                            {% endif %}
+                            <div class="over-under-value">{{ block.settings.over_under_value | default: '225.5' }}</div>
+                            {% if block.settings.over_under_stat_type != blank %}
+                              <div class="over-under-stat">{{ block.settings.over_under_stat_type }}</div>
+                            {% endif %}
+                          </div>
+                        </div>
+
+                        <div class="team-side">
+                          {% if block.settings.team2_logo %}
+                            <img src="{{ block.settings.team2_logo | image_url: width: 200 }}" alt="{{ block.settings.team2_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.team2_name | default: 'PITTSBURGH' }}</div>
+                        </div>
+                      </div>
+                    {% endif %}
+                  </div>
+
+                  <button class="units-button">{{ block.settings.bet_units | default: '1' }} UNITS</button>
+
+                  <div class="gain-section">
+                    <div class="bet-modify-horizontal">
+                      <div class="bet-info">
+                        <span>VOTRE MISE - <span class="bet-amount-value-small">$100</span></span>
+                      </div>
+                      <button class="modify-btn" onclick="openBetDialog(this)" data-multiplier="{{ block.settings.multiplier | default: '1.95' }}">MODIFIER</button>
+                    </div>
+                    <div class="cashout-full-width">
+                      <div class="cashout-label">CASHOUT</div>
+                      <div class="cashout-amount">${{ 100 | times: block.settings.multiplier | default: 1.95 | round: 2 }}</div>
+                      <div class="cashout-profit">+${{ 100 | times: block.settings.multiplier | default: 1.95 | minus: 100 | round: 2 }} bénéfice</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div> <!-- card-wrapper -->
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+          
+{% comment %} Message de restriction pour free trial {% endcomment %}
+{% if access_level == 'free_trial' and bet_cards.size > 1 %}
+  <div class="card text-center" style="padding: 2.5rem; background: rgba(255, 255, 255, 0.03); border: 2px solid rgba(255, 255, 255, 0.1);">
+    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔒</div>
+    <h3 style="color: rgba(255, 255, 255, 0.95); font-size: 1.6rem; margin-bottom: 0.8rem; font-weight: 600;">Débloquer tous les bets</h3>
+    <p style="color: rgba(255, 255, 255, 0.7); font-size: 1.05rem; margin-bottom: 1.5rem; line-height: 1.5;">
+      Pour voir tous les bets, un plan payant est requis. Une fois votre essai gratuit terminé, vous y aurez accès.
+    </p>
+    <a href="https://winabet.ai" style="display: inline-block; background: rgba(255, 255, 255, 0.1); color: #ffffff; padding: 0.9rem 2rem; border-radius: 0.5rem; text-decoration: none; font-size: 1rem; font-weight: 600; border: 1px solid rgba(255, 255, 255, 0.2); transition: all 0.2s; margin-bottom: 1.2rem;">
+      Passer à un Abonnement
+    </a>
+    <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.9rem; margin-top: 1.2rem;">
+      Besoin d'assistance ? Contactez-nous au <a href="tel:4382234581" style="color: rgba(255, 255, 255, 0.8); text-decoration: underline;">438-223-4581</a> ou <a href="mailto:info@winabet.ai" style="color: rgba(255, 255, 255, 0.8); text-decoration: underline;">info@winabet.ai</a>
+    </p>
+  </div>
+{% endif %}
+          </div> <!-- cards-grid -->
+        {% else %}
+          <div class="card text-center" style="padding: 2rem;">
+            <p style="color: rgba(255, 255, 255, 0.6);">
+              Aucune carte de pari ajoutée. Utilisez l'éditeur Shopify pour ajouter vos premières recommandations de type "🎯 Carte Bet du Jour".
+            </p>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- PAGE 2: PARLAY DU JOUR -->
+    <div id="page-parlay" class="page">
+      <div class="container">
+        <!-- Carte englobante vidéo + texte -->
+        <div class="video-text-card">
+          <h2 class="video-card-title">Analyse IA en temps réel</h2>
+          <!-- Vidéo en boucle -->
+          <div class="video-container">
+            <video 
+              autoplay 
+              loop 
+              muted 
+              playsinline
+            >
+              <source src="https://cdn.shopify.com/videos/c/o/v/8d4ee094c0044c0e8bdb95482b822830.mp4" type="video/mp4">
+              Votre navigateur ne supporte pas la lecture de vidéos.
+            </video>
+          </div>
+          
+          <div class="ai-loading-text" style="display: flex; align-items: center; justify-content: center; gap: 0.75rem;">
+            <!-- SVG Lumière - visible pendant phases de réflexion -->
+            <svg id="light-icon-parlay" style="display: none; flex-shrink: 0; color: var(--shimmer-color-base); background: linear-gradient(90deg, var(--shimmer-color-base) 0%, var(--shimmer-color-highlight) 20%, var(--shimmer-color-highlight) 40%, var(--shimmer-color-base) 60%, var(--shimmer-color-base) 100%); background-size: 200% 100%; background-clip: text; -webkit-background-clip: text; animation: shimmer 6s ease-in-out infinite;" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 18h6M10 22h4M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8c0-3.31-2.69-6-6-6S6 4.69 6 8c0 1.3.53 2.48 1.5 3.5.76.76 1.23 1.52 1.41 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <!-- SVG Modification - visible pendant phases de modification -->
+            <svg id="edit-icon-parlay" style="display: none; flex-shrink: 0; color: var(--shimmer-color-base); background: linear-gradient(90deg, var(--shimmer-color-base) 0%, var(--shimmer-color-highlight) 20%, var(--shimmer-color-highlight) 40%, var(--shimmer-color-base) 60%, var(--shimmer-color-base) 100%); background-size: 200% 100%; background-clip: text; -webkit-background-clip: text; animation: shimmer 6s ease-in-out infinite;" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <p id="rotating-text-parlay">Calcul des probabilités de victoire</p>
+          </div>
+        </div>
+        
+        <h1>PARLAY DU JOUR</h1>
+        <p class="subtitle">Les parlay avec la meilleur probabilité de réussite aujourd'hui. Nous affichons tous les parlay avec minimum de 60% de chance de gagner selon notre IA.</p>
+
+    {% if access_level == 'free_trial' %}
+      <!-- Message de restriction pour free trial -->
+      <div class="card text-center" style="padding: 3rem; margin-top: 2rem; background: rgba(255, 255, 255, 0.03); border: 2px solid rgba(255, 255, 255, 0.1);">
+        <div style="font-size: 3rem; margin-bottom: 1.2rem;">🔒</div>
+        <h2 style="color: rgba(255, 255, 255, 0.95); font-size: 2rem; margin-bottom: 1.2rem; font-weight: 600;">Parlays Réservés aux Abonnés</h2>
+        <p style="color: rgba(255, 255, 255, 0.7); font-size: 1.15rem; margin-bottom: 2rem; line-height: 1.6; max-width: 600px; margin-left: auto; margin-right: auto;">
+          Pour voir tous les parlays, un plan payant est requis. Une fois votre essai gratuit terminé, vous y aurez accès.
+        </p>
+        <a href="https://winabet.ai" style="display: inline-block; background: rgba(255, 255, 255, 0.1); color: #ffffff; padding: 1.1rem 2.5rem; border-radius: 0.5rem; text-decoration: none; font-size: 1.1rem; font-weight: 600; border: 1px solid rgba(255, 255, 255, 0.2); transition: all 0.2s; margin-bottom: 1.5rem;">
+          Passer à un Abonnement
+        </a>
+        <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.9rem; margin-top: 1.5rem;">
+          Besoin d'assistance ? Contactez-nous au <a href="tel:4382234581" style="color: rgba(255, 255, 255, 0.8); text-decoration: underline;">438-223-4581</a> ou <a href="mailto:info@winabet.ai" style="color: rgba(255, 255, 255, 0.8); text-decoration: underline;">info@winabet.ai</a>
+        </p>
+      </div>
+        {% else %}
+          <!-- Contenu normal des parlays pour les membres avec abonnement -->
+          {% assign has_parlay = false %}
+          <div class="cards-grid">
+        {% for block in section.blocks %}
+          {% if block.type == 'parlay_card' and block.settings.show_card %}
+            {% assign has_parlay = true %}
+              <div class="card-wrapper">
+
+              {% capture legs_json %}[
+                {% for i in (1..10) %}
+                  {% case i %}
+                    {% when 1 %}
+                      {% assign leg_team1_name = block.settings.leg1_team1_name %}
+                      {% assign leg_team1_logo = block.settings.leg1_team1_logo %}
+                      {% assign leg_team2_name = block.settings.leg1_team2_name %}
+                      {% assign leg_team2_logo = block.settings.leg1_team2_logo %}
+                      {% assign leg_bet_type = block.settings.leg1_bet_type %}
+                      {% assign leg_match_time = block.settings.leg1_match_time %}
+                      {% assign leg_spread_value = block.settings.leg1_spread_value %}
+                      {% assign leg_spread_team = block.settings.leg1_spread_team %}
+                      {% assign leg_over_under_type = block.settings.leg1_over_under_type %}
+                      {% assign leg_over_under_value = block.settings.leg1_over_under_value %}
+                      {% assign leg_over_under_stat_type = block.settings.leg1_over_under_stat_type %}
+                      {% assign leg_over_under_text_custom = block.settings.leg1_over_under_text_custom %}
+                      {% assign leg_moneyline_team = block.settings.leg1_moneyline_team %}
+                      {% assign leg_result = block.settings.leg1_result | default: 'pending' %}
+                    {% when 2 %}
+                      {% assign leg_team1_name = block.settings.leg2_team1_name %}
+                      {% assign leg_team1_logo = block.settings.leg2_team1_logo %}
+                      {% assign leg_team2_name = block.settings.leg2_team2_name %}
+                      {% assign leg_team2_logo = block.settings.leg2_team2_logo %}
+                      {% assign leg_bet_type = block.settings.leg2_bet_type %}
+                      {% assign leg_match_time = block.settings.leg2_match_time %}
+                      {% assign leg_spread_value = block.settings.leg2_spread_value %}
+                      {% assign leg_spread_team = block.settings.leg2_spread_team %}
+                      {% assign leg_over_under_type = block.settings.leg2_over_under_type %}
+                      {% assign leg_over_under_value = block.settings.leg2_over_under_value %}
+                      {% assign leg_over_under_stat_type = block.settings.leg2_over_under_stat_type %}
+                      {% assign leg_over_under_text_custom = block.settings.leg2_over_under_text_custom %}
+                      {% assign leg_result = block.settings.leg2_result | default: 'pending' %}
+                    {% when 3 %}
+                      {% assign leg_team1_name = block.settings.leg3_team1_name %}
+                      {% assign leg_team1_logo = block.settings.leg3_team1_logo %}
+                      {% assign leg_team2_name = block.settings.leg3_team2_name %}
+                      {% assign leg_team2_logo = block.settings.leg3_team2_logo %}
+                      {% assign leg_bet_type = block.settings.leg3_bet_type %}
+                      {% assign leg_match_time = block.settings.leg3_match_time %}
+                      {% assign leg_spread_value = block.settings.leg3_spread_value %}
+                      {% assign leg_spread_team = block.settings.leg3_spread_team %}
+                      {% assign leg_over_under_type = block.settings.leg3_over_under_type %}
+                      {% assign leg_over_under_value = block.settings.leg3_over_under_value %}
+                      {% assign leg_over_under_stat_type = block.settings.leg3_over_under_stat_type %}
+                      {% assign leg_over_under_text_custom = block.settings.leg3_over_under_text_custom %}
+                      {% assign leg_result = block.settings.leg3_result | default: 'pending' %}
+                    {% when 4 %}
+                      {% assign leg_team1_name = block.settings.leg4_team1_name %}
+                      {% assign leg_team1_logo = block.settings.leg4_team1_logo %}
+                      {% assign leg_team2_name = block.settings.leg4_team2_name %}
+                      {% assign leg_team2_logo = block.settings.leg4_team2_logo %}
+                      {% assign leg_bet_type = block.settings.leg4_bet_type %}
+                      {% assign leg_match_time = block.settings.leg4_match_time %}
+                      {% assign leg_spread_value = block.settings.leg4_spread_value %}
+                      {% assign leg_spread_team = block.settings.leg4_spread_team %}
+                      {% assign leg_over_under_type = block.settings.leg4_over_under_type %}
+                      {% assign leg_over_under_value = block.settings.leg4_over_under_value %}
+                      {% assign leg_over_under_stat_type = block.settings.leg4_over_under_stat_type %}
+                      {% assign leg_over_under_text_custom = block.settings.leg4_over_under_text_custom %}
+                      {% assign leg_result = block.settings.leg4_result | default: 'pending' %}
+                    {% when 5 %}
+                      {% assign leg_team1_name = block.settings.leg5_team1_name %}
+                      {% assign leg_team1_logo = block.settings.leg5_team1_logo %}
+                      {% assign leg_team2_name = block.settings.leg5_team2_name %}
+                      {% assign leg_team2_logo = block.settings.leg5_team2_logo %}
+                      {% assign leg_bet_type = block.settings.leg5_bet_type %}
+                      {% assign leg_match_time = block.settings.leg5_match_time %}
+                      {% assign leg_spread_value = block.settings.leg5_spread_value %}
+                      {% assign leg_spread_team = block.settings.leg5_spread_team %}
+                      {% assign leg_over_under_type = block.settings.leg5_over_under_type %}
+                      {% assign leg_over_under_value = block.settings.leg5_over_under_value %}
+                      {% assign leg_over_under_stat_type = block.settings.leg5_over_under_stat_type %}
+                      {% assign leg_over_under_text_custom = block.settings.leg5_over_under_text_custom %}
+                      {% assign leg_result = block.settings.leg5_result | default: 'pending' %}
+                    {% when 6 %}
+                      {% assign leg_team1_name = block.settings.leg6_team1_name %}
+                      {% assign leg_team1_logo = block.settings.leg6_team1_logo %}
+                      {% assign leg_team2_name = block.settings.leg6_team2_name %}
+                      {% assign leg_team2_logo = block.settings.leg6_team2_logo %}
+                      {% assign leg_bet_type = block.settings.leg6_bet_type %}
+                      {% assign leg_match_time = block.settings.leg6_match_time %}
+                      {% assign leg_spread_value = block.settings.leg6_spread_value %}
+                      {% assign leg_spread_team = block.settings.leg6_spread_team %}
+                      {% assign leg_over_under_type = block.settings.leg6_over_under_type %}
+                      {% assign leg_over_under_value = block.settings.leg6_over_under_value %}
+                      {% assign leg_over_under_stat_type = block.settings.leg6_over_under_stat_type %}
+                      {% assign leg_over_under_text_custom = block.settings.leg6_over_under_text_custom %}
+                      {% assign leg_result = block.settings.leg6_result | default: 'pending' %}
+                    {% when 7 %}
+                      {% assign leg_team1_name = block.settings.leg7_team1_name %}
+                      {% assign leg_team1_logo = block.settings.leg7_team1_logo %}
+                      {% assign leg_team2_name = block.settings.leg7_team2_name %}
+                      {% assign leg_team2_logo = block.settings.leg7_team2_logo %}
+                      {% assign leg_bet_type = block.settings.leg7_bet_type %}
+                      {% assign leg_match_time = block.settings.leg7_match_time %}
+                      {% assign leg_spread_value = block.settings.leg7_spread_value %}
+                      {% assign leg_spread_team = block.settings.leg7_spread_team %}
+                      {% assign leg_over_under_type = block.settings.leg7_over_under_type %}
+                      {% assign leg_over_under_value = block.settings.leg7_over_under_value %}
+                      {% assign leg_over_under_stat_type = block.settings.leg7_over_under_stat_type %}
+                      {% assign leg_over_under_text_custom = block.settings.leg7_over_under_text_custom %}
+                      {% assign leg_result = block.settings.leg7_result | default: 'pending' %}
+                    {% when 8 %}
+                      {% assign leg_team1_name = block.settings.leg8_team1_name %}
+                      {% assign leg_team1_logo = block.settings.leg8_team1_logo %}
+                      {% assign leg_team2_name = block.settings.leg8_team2_name %}
+                      {% assign leg_team2_logo = block.settings.leg8_team2_logo %}
+                      {% assign leg_bet_type = block.settings.leg8_bet_type %}
+                      {% assign leg_match_time = block.settings.leg8_match_time %}
+                      {% assign leg_spread_value = block.settings.leg8_spread_value %}
+                      {% assign leg_spread_team = block.settings.leg8_spread_team %}
+                      {% assign leg_over_under_type = block.settings.leg8_over_under_type %}
+                      {% assign leg_over_under_value = block.settings.leg8_over_under_value %}
+                      {% assign leg_over_under_stat_type = block.settings.leg8_over_under_stat_type %}
+                      {% assign leg_over_under_text_custom = block.settings.leg8_over_under_text_custom %}
+                      {% assign leg_result = block.settings.leg8_result | default: 'pending' %}
+                    {% when 9 %}
+                      {% assign leg_team1_name = block.settings.leg9_team1_name %}
+                      {% assign leg_team1_logo = block.settings.leg9_team1_logo %}
+                      {% assign leg_team2_name = block.settings.leg9_team2_name %}
+                      {% assign leg_team2_logo = block.settings.leg9_team2_logo %}
+                      {% assign leg_bet_type = block.settings.leg9_bet_type %}
+                      {% assign leg_match_time = block.settings.leg9_match_time %}
+                      {% assign leg_spread_value = block.settings.leg9_spread_value %}
+                      {% assign leg_spread_team = block.settings.leg9_spread_team %}
+                      {% assign leg_over_under_type = block.settings.leg9_over_under_type %}
+                      {% assign leg_over_under_value = block.settings.leg9_over_under_value %}
+                      {% assign leg_over_under_stat_type = block.settings.leg9_over_under_stat_type %}
+                      {% assign leg_over_under_text_custom = block.settings.leg9_over_under_text_custom %}
+                      {% assign leg_result = block.settings.leg9_result | default: 'pending' %}
+                    {% when 10 %}
+                      {% assign leg_team1_name = block.settings.leg10_team1_name %}
+                      {% assign leg_team1_logo = block.settings.leg10_team1_logo %}
+                      {% assign leg_team2_name = block.settings.leg10_team2_name %}
+                      {% assign leg_team2_logo = block.settings.leg10_team2_logo %}
+                      {% assign leg_bet_type = block.settings.leg10_bet_type %}
+                      {% assign leg_match_time = block.settings.leg10_match_time %}
+                      {% assign leg_spread_value = block.settings.leg10_spread_value %}
+                      {% assign leg_spread_team = block.settings.leg10_spread_team %}
+                      {% assign leg_over_under_type = block.settings.leg10_over_under_type %}
+                      {% assign leg_over_under_value = block.settings.leg10_over_under_value %}
+                      {% assign leg_over_under_stat_type = block.settings.leg10_over_under_stat_type %}
+                      {% assign leg_over_under_text_custom = block.settings.leg10_over_under_text_custom %}
+                      {% assign leg_result = block.settings.leg10_result | default: 'pending' %}
+                  {% endcase %}
+                  
+                  {% if leg_team1_name != blank %}
+                    {% unless forloop.first %},{% endunless %}
+                    {
+                      "team1_name": "{{ leg_team1_name }}",
+                      "team1_logo": "{{ leg_team1_logo | image_url: width: 200 }}",
+                      "team2_name": "{{ leg_team2_name }}",
+                      "team2_logo": "{{ leg_team2_logo | image_url: width: 200 }}",
+                      "bet_type": "{{ leg_bet_type }}",
+                      "match_time": "{{ leg_match_time }}",
+                      "spread_value": "{{ leg_spread_value }}",
+                      "spread_team": "{{ leg_spread_team }}",
+                      "over_under_type": "{{ leg_over_under_type }}",
+                       "over_under_value": "{{ leg_over_under_value }}",
+                       "over_under_stat_type": "{{ leg_over_under_stat_type }}",
+                       "over_under_text_custom": "{{ leg_over_under_text_custom }}",
+                       "moneyline_team": "{{ leg_moneyline_team | default: 'team2' }}",
+                       "result": "{{ leg_result | default: 'pending' }}"
+                     }
+                  {% endif %}
+                {% endfor %}
+              ]{% endcapture %}
+
+              <div class="bet-card" style="{% if block.settings.send_to_history == true %}display:none{% endif %}" 
+                   {{ block.shopify_attributes }}
+                   data-block-type="parlay_card"
+                   data-block-id="{{ block.id }}"
+                   data-sport-type="{{ block.settings.sport_type | default: 'nhl' }}"
+                   data-ai-data-count="{{ block.settings.ai_data_count | default: 5214 }}"
+                   data-win-percentage="{{ block.settings.win_percentage | default: 78 }}"
+                   data-multiplier="{{ block.settings.multiplier }}"
+                   data-bet-units="{{ block.settings.bet_units }}"
+                   data-odds="{{ block.settings.odds }}"
+                   data-best-bookmaker="{{ block.settings.best_bookmaker }}"
+                   data-best-odds="{{ block.settings.best_odds }}"
+                   data-match-date="{{ block.settings.match_date }}"
+                   data-match-time="{{ block.settings.match_time }}"
+                   data-result="{{ block.settings.result | default: 'pending' }}"
+                   data-send-to-history="{{ block.settings.send_to_history }}"
+                   data-legs='{{ legs_json | strip_newlines | strip }}'
+              >
+                 <!-- AI Analysis Header - Nouveau Layout -->
+                 <div class="confidence-badge" style="display: flex; align-items: center; justify-content: flex-start; gap: 0.5rem; padding: 0.75rem 1.5rem; background: rgba(0, 0, 0, 0.6); margin-top: 0.75rem; margin-bottom: 0.125rem;">
+                   <!-- Gauche: Icône IA + Pourcentage -->
+                   <div style="display: flex; align-items: center; gap: 1rem;">
+                     <!-- Icône IA atomique (50px) -->
+                     <div style="position: relative; width: 50px; height: 50px; flex-shrink: 0;">
+                       <svg width="50" height="50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                         <defs>
+                           <filter id="softGlowParlayHeader{{ forloop.index }}" x="-50%" y="-50%" width="200%" height="200%">
+                             <feGaussianBlur stdDeviation="1.2" result="b"/>
+                             <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                           </filter>
+                           <path id="orbit0ParlayHeader{{ forloop.index }}" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                           <path id="orbit1ParlayHeader{{ forloop.index }}" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                           <path id="orbit2ParlayHeader{{ forloop.index }}" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+                         </defs>
+                         <g stroke="#68859e" stroke-width="2" fill="none">
+                           <use href="#orbit0ParlayHeader{{ forloop.index }}"/><use href="#orbit1ParlayHeader{{ forloop.index }}"/><use href="#orbit2ParlayHeader{{ forloop.index }}"/>
+                         </g>
+                         <g stroke-linecap="round" filter="url(#softGlowParlayHeader{{ forloop.index }})">
+                           <use href="#orbit0ParlayHeader{{ forloop.index }}" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                             <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                           </use>
+                           <use href="#orbit1ParlayHeader{{ forloop.index }}" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                             <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                           </use>
+                           <use href="#orbit2ParlayHeader{{ forloop.index }}" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                             <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                           </use>
+                         </g>
+                         <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
+                       </svg>
+                     </div>
+                     
+                     <!-- Pourcentage -->
+                     <span style="font-family: 'outift', sans-serif; font-weight: 300; font-size: 1.80rem; color: #ffffff; line-height: 1;">{{ block.settings.win_percentage | default: 92 }}%</span>
+                   </div>
+                   
+                   <!-- Centre: Texte confiance ia -->
+                   <span style="font-family: 'fustat', sans-serif; font-weight: 400; font-size: 1.25rem; color: rgba(255, 255, 255, 0.7); line-height: 1; margin-left: 0.5rem;">
+                    Confiance ia pour ce parlay</span>
+                   
+                   <!-- Droite: Bouton VOIR ANALYSE IA avec coins arrondis (8px) -->
+                     <button 
+                      style="padding: 0.5rem 1rem; background: #000000; color: rgba(255, 255, 255, 0.7); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.5rem; font-family: 'Outfit', sans-serif; font-weight: 300; font-size: 0.75rem; cursor: pointer; transition: all 0.2s; line-height: 1.2; white-space: nowrap; margin-left: auto;"
+                     onclick="openAnalysisDialog(this)"
+                     data-win-percentage="{{ block.settings.win_percentage | default: 92 }}"
+                     data-ai-data-count="{{ block.settings.ai_data_count | default: 2843 }}"
+                     data-sport-type="{{ block.settings.sport_type | default: 'nhl' }}"
+                     data-team1="{{ block.settings.leg1_team1_name | default: 'ÉQUIPE DOMICILE' }}"
+                     data-team2="{{ block.settings.leg1_team2_name | default: 'ÉQUIPE EXTÉRIEUR' }}"
+                     data-auto-increment="{{ block.settings.auto_increment_enabled }}"
+                     data-increment-interval="{{ block.settings.auto_increment_interval | default: 5 }}"
+                     data-increment-amount="{{ block.settings.auto_increment_amount | default: 5 }}"
+                   >
+                     VOIR<br>ANALYSE<br>IA
+                   </button>
+                 </div>
+
+                 <div class="bet-card-content">
+                  <!-- Multiplicateur de Mise -->
+                  <button class="multiplier-button">x{{ block.settings.multiplier | default: '1.95' }}</button>
+
+                  <!-- Parier Sur -->
+                  
+                  <!-- LEG 1 -->
+                  {% if block.settings.leg1_team1_name != blank %}
+                    {% assign leg1_result = block.settings.leg1_result | default: 'pending' %}
+                    {% assign leg_border_color = '#ffffff' %}
+                    {% assign leg_border_width = '1px' %}
+                    {% assign leg_badge = '' %}
+                    
+                    {% if leg1_result == 'win' %}
+                      {% assign leg_border_color = 'rgba(255, 255, 255, 0.50)' %}
+                      {% assign leg_border_width = '4px' %}
+                      {% assign leg_badge = '<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: rgba(255,255,255,0.20); color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; z-index: 10;">✓ GAGNÉ</div>' %}
+                    {% elsif leg1_result == 'loose' %}
+                      {% assign leg_border_color = 'rgba(255, 255, 255, 0.20)' %}
+                      {% assign leg_border_width = '4px' %}
+                      {% assign leg_badge = '<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: rgba(255,255,255,0.10); color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; z-index: 10;">✗ PERDU</div>' %}
+                    {% endif %}
+                    
+                  <div style="position: relative; border: {{ leg_border_width }} solid {{ leg_border_color }}; border-radius: 1rem; padding: 1.5rem; margin-bottom: 1rem; background: rgba(0, 0, 0, 0.3);">
+                    {{ leg_badge }}
+                  <div class="match-info-new">
+                    {% assign leg_bet_type = block.settings.leg1_bet_type | default: 'moneyline' %}
+                    
+                    {% if leg_bet_type == 'moneyline' %}
+                      {% assign moneyline_team = block.settings.leg1_moneyline_team | default: 'team2' %}
+                      <div class="match-info-header">LEG 1 - MONEYLINE</div>
+                      <div class="match-info-content">
+                        <div class="team-side {% if moneyline_team == 'team1' %}selected{% endif %}">
+                          {% if block.settings.leg1_team1_logo %}
+                            <img src="{{ block.settings.leg1_team1_logo | image_url: width: 200 }}" alt="{{ block.settings.leg1_team1_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.leg1_team1_name }}</div>
+                          {% if moneyline_team == 'team1' %}
+                            <div class="team-bet-type">VICTOIRE</div>
+                          {% endif %}
+                        </div>
+                        <div class="match-center">
+                          <div class="match-time-new">{{ block.settings.leg1_match_time | default: '7:00 PM' }}</div>
+                          <div class="match-vs-new">VS</div>
+                        </div>
+                        <div class="team-side {% if moneyline_team == 'team2' %}selected{% endif %}">
+                          {% if block.settings.leg1_team2_logo %}
+                            <img src="{{ block.settings.leg1_team2_logo | image_url: width: 200 }}" alt="{{ block.settings.leg1_team2_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.leg1_team2_name }}</div>
+                          {% if moneyline_team == 'team2' %}
+                            <div class="team-bet-type">VICTOIRE</div>
+                          {% endif %}
+                        </div>
+                      </div>
+                    {% elsif leg_bet_type == 'spread' %}
+                      <div class="match-info-header">LEG 1 - SPREAD</div>
+                      <div class="match-info-content">
+                        <div class="team-side {% if block.settings.leg1_spread_team == 'team1' %}selected{% endif %}">
+                          {% if block.settings.leg1_team1_logo %}
+                            <img src="{{ block.settings.leg1_team1_logo | image_url: width: 200 }}" alt="{{ block.settings.leg1_team1_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.leg1_team1_name }}</div>
+                          {% if block.settings.leg1_spread_team == 'team1' %}
+                            <div class="team-bet-type">{{ block.settings.leg1_spread_value | default: '-3.5' }}</div>
+                          {% endif %}
+                        </div>
+                        <div class="match-center">
+                          <div class="match-time-new">{{ block.settings.leg1_match_time | default: '7:00 PM' }}</div>
+                          <div class="match-vs-new">VS</div>
+                        </div>
+                        <div class="team-side {% if block.settings.leg1_spread_team == 'team2' %}selected{% endif %}">
+                          {% if block.settings.leg1_team2_logo %}
+                            <img src="{{ block.settings.leg1_team2_logo | image_url: width: 200 }}" alt="{{ block.settings.leg1_team2_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.leg1_team2_name }}</div>
+                          {% if block.settings.leg1_spread_team == 'team2' %}
+                            <div class="team-bet-type">{{ block.settings.leg1_spread_value | default: '-3.5' }}</div>
+                          {% endif %}
+                        </div>
+                      </div>
+                    {% elsif leg_bet_type == 'over_under' %}
+                      {% assign custom_text = block.settings.leg1_over_under_text_custom | default: '' %}
+                      {% if custom_text != blank %}
+                        <div class="match-info-header">LEG 1 - {{ custom_text | upcase }}</div>
+                      {% else %}
+                        <div class="match-info-header">LEG 1 - {{ block.settings.leg1_over_under_type | default: 'OVER' | upcase }}</div>
+                      {% endif %}
+                      <div class="match-info-content">
+                        <div class="team-side">
+                          {% if block.settings.leg1_team1_logo %}
+                            <img src="{{ block.settings.leg1_team1_logo | image_url: width: 200 }}" alt="{{ block.settings.leg1_team1_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.leg1_team1_name }}</div>
+                        </div>
+                        <div class="match-center">
+                          <div class="match-time-new">{{ block.settings.leg1_match_time | default: '7:00 PM' }}</div>
+                          <div class="match-vs-new">VS</div>
+                          <div class="over-under-display">
+                            {% if custom_text != blank %}
+                              <div class="over-under-type">{{ custom_text | upcase }}</div>
+                            {% else %}
+                              <div class="over-under-type">{{ block.settings.leg1_over_under_type | default: 'OVER' | upcase }}</div>
+                            {% endif %}
+                            <div class="over-under-value">{{ block.settings.leg1_over_under_value | default: '225.5' }}</div>
+                            {% if block.settings.leg1_over_under_stat_type != blank %}
+                              <div class="over-under-stat">{{ block.settings.leg1_over_under_stat_type }}</div>
+                            {% endif %}
+                          </div>
+                        </div>
+                        <div class="team-side">
+                          {% if block.settings.leg1_team2_logo %}
+                            <img src="{{ block.settings.leg1_team2_logo | image_url: width: 200 }}" alt="{{ block.settings.leg1_team2_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.leg1_team2_name }}</div>
+                        </div>
+                      </div>
+                    {% endif %}
+                  </div>
+                  </div>
+                  {% endif %}
+
+                  <!-- LEG 2 -->
+                  {% if block.settings.leg2_team1_name != blank %}
+                    {% assign leg2_result = block.settings.leg2_result | default: 'pending' %}
+                    {% assign leg_border_color = '#ffffff' %}
+                    {% assign leg_border_width = '1px' %}
+                    {% assign leg_badge = '' %}
+                    
+                    {% if leg2_result == 'win' %}
+                      {% assign leg_border_color = 'rgba(255, 255, 255, 0.50)' %}
+                      {% assign leg_border_width = '4px' %}
+                      {% assign leg_badge = '<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: rgba(255,255,255,0.20); color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; z-index: 10;">✓ GAGNÉ</div>' %}
+                    {% elsif leg2_result == 'loose' %}
+                      {% assign leg_border_color = 'rgba(255, 255, 255, 0.20)' %}
+                      {% assign leg_border_width = '4px' %}
+                      {% assign leg_badge = '<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: rgba(255,255,255,0.10); color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; z-index: 10;">✗ PERDU</div>' %}
+                    {% endif %}
+                    
+                  <div style="position: relative; border: {{ leg_border_width }} solid {{ leg_border_color }}; border-radius: 1rem; padding: 1.5rem; margin-bottom: 1rem; background: rgba(0, 0, 0, 0.3);">
+                    {{ leg_badge }}
+                  <div class="match-info-new">
+                    {% assign leg_bet_type = block.settings.leg2_bet_type | default: 'moneyline' %}
+                    
+                    {% if leg_bet_type == 'moneyline' %}
+                      <div class="match-info-header">LEG 2 - MONEYLINE</div>
+                      <div class="match-info-content">
+                        <div class="team-side">
+                          {% if block.settings.leg2_team1_logo %}
+                            <img src="{{ block.settings.leg2_team1_logo | image_url: width: 200 }}" alt="{{ block.settings.leg2_team1_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.leg2_team1_name }}</div>
+                        </div>
+                        <div class="match-center">
+                          <div class="match-time-new">{{ block.settings.leg2_match_time | default: '7:00 PM' }}</div>
+                          <div class="match-vs-new">VS</div>
+                        </div>
+                        <div class="team-side selected">
+                          {% if block.settings.leg2_team2_logo %}
+                            <img src="{{ block.settings.leg2_team2_logo | image_url: width: 200 }}" alt="{{ block.settings.leg2_team2_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.leg2_team2_name }}</div>
+                          <div class="team-bet-type">VICTOIRE</div>
+                        </div>
+                      </div>
+                    {% elsif leg_bet_type == 'spread' %}
+                      <div class="match-info-header">LEG 2 - SPREAD</div>
+                      <div class="match-info-content">
+                        <div class="team-side {% if block.settings.leg2_spread_team == 'team1' %}selected{% endif %}">
+                          {% if block.settings.leg2_team1_logo %}
+                            <img src="{{ block.settings.leg2_team1_logo | image_url: width: 200 }}" alt="{{ block.settings.leg2_team1_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.leg2_team1_name }}</div>
+                          {% if block.settings.leg2_spread_team == 'team1' %}
+                            <div class="team-bet-type">{{ block.settings.leg2_spread_value | default: '-3.5' }}</div>
+                          {% endif %}
+                        </div>
+                        <div class="match-center">
+                          <div class="match-time-new">{{ block.settings.leg2_match_time | default: '7:00 PM' }}</div>
+                          <div class="match-vs-new">VS</div>
+                        </div>
+                        <div class="team-side {% if block.settings.leg2_spread_team == 'team2' %}selected{% endif %}">
+                          {% if block.settings.leg2_team2_logo %}
+                            <img src="{{ block.settings.leg2_team2_logo | image_url: width: 200 }}" alt="{{ block.settings.leg2_team2_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.leg2_team2_name }}</div>
+                          {% if block.settings.leg2_spread_team == 'team2' %}
+                            <div class="team-bet-type">{{ block.settings.leg2_spread_value | default: '-3.5' }}</div>
+                          {% endif %}
+                        </div>
+                      </div>
+                    {% elsif leg_bet_type == 'over_under' %}
+                      {% assign custom_text = block.settings.leg2_over_under_text_custom | default: '' %}
+                      {% if custom_text != blank %}
+                        <div class="match-info-header">LEG 2 - {{ custom_text | upcase }}</div>
+                      {% else %}
+                        <div class="match-info-header">LEG 2 - {{ block.settings.leg2_over_under_type | default: 'OVER' | upcase }}</div>
+                      {% endif %}
+                      <div class="match-info-content">
+                        <div class="team-side">
+                          {% if block.settings.leg2_team1_logo %}
+                            <img src="{{ block.settings.leg2_team1_logo | image_url: width: 200 }}" alt="{{ block.settings.leg2_team1_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.leg2_team1_name }}</div>
+                        </div>
+                        <div class="match-center">
+                          <div class="match-time-new">{{ block.settings.leg2_match_time | default: '7:00 PM' }}</div>
+                          <div class="match-vs-new">VS</div>
+                          <div class="over-under-display">
+                            {% if custom_text != blank %}
+                              <div class="over-under-type">{{ custom_text | upcase }}</div>
+                            {% else %}
+                              <div class="over-under-type">{{ block.settings.leg2_over_under_type | default: 'OVER' | upcase }}</div>
+                            {% endif %}
+                            <div class="over-under-value">{{ block.settings.leg2_over_under_value | default: '225.5' }}</div>
+                            {% if block.settings.leg2_over_under_stat_type != blank %}
+                              <div class="over-under-stat">{{ block.settings.leg2_over_under_stat_type }}</div>
+                            {% endif %}
+                          </div>
+                        </div>
+                        <div class="team-side">
+                          {% if block.settings.leg2_team2_logo %}
+                            <img src="{{ block.settings.leg2_team2_logo | image_url: width: 200 }}" alt="{{ block.settings.leg2_team2_name }}" class="team-logo">
+                          {% endif %}
+                          <div class="team-name-new">{{ block.settings.leg2_team2_name }}</div>
+                        </div>
+                      </div>
+                    {% endif %}
+                  </div>
+                  </div>
+                  {% endif %}
+
+                  <!-- LEG 3 à LEG 10: Structure similaire mais trop longue, je vais créer une approche compacte ci-dessous -->
+                  
+                  {% for i in (3..10) %}
+                    {% case i %}
+                      {% when 3 %}
+                        {% assign team1_name = block.settings.leg3_team1_name %}
+                        {% assign team1_logo = block.settings.leg3_team1_logo %}
+                        {% assign team2_name = block.settings.leg3_team2_name %}
+                        {% assign team2_logo = block.settings.leg3_team2_logo %}
+                        {% assign match_time = block.settings.leg3_match_time %}
+                        {% assign leg_bet_type = block.settings.leg3_bet_type %}
+                        {% assign spread_value = block.settings.leg3_spread_value %}
+                        {% assign spread_team = block.settings.leg3_spread_team %}
+                        {% assign over_under_type = block.settings.leg3_over_under_type %}
+                        {% assign over_under_value = block.settings.leg3_over_under_value %}
+                        {% assign over_under_stat_type = block.settings.leg3_over_under_stat_type %}
+                        {% assign over_under_text_custom = block.settings.leg3_over_under_text_custom | default: '' %}
+                        {% assign leg_result = block.settings.leg3_result | default: 'pending' %}
+                      {% when 4 %}
+                        {% assign team1_name = block.settings.leg4_team1_name %}
+                        {% assign team1_logo = block.settings.leg4_team1_logo %}
+                        {% assign team2_name = block.settings.leg4_team2_name %}
+                        {% assign team2_logo = block.settings.leg4_team2_logo %}
+                        {% assign match_time = block.settings.leg4_match_time %}
+                        {% assign leg_bet_type = block.settings.leg4_bet_type %}
+                        {% assign spread_value = block.settings.leg4_spread_value %}
+                        {% assign spread_team = block.settings.leg4_spread_team %}
+                        {% assign over_under_type = block.settings.leg4_over_under_type %}
+                        {% assign over_under_value = block.settings.leg4_over_under_value %}
+                        {% assign over_under_stat_type = block.settings.leg4_over_under_stat_type %}
+                        {% assign over_under_text_custom = block.settings.leg4_over_under_text_custom | default: '' %}
+                        {% assign leg_result = block.settings.leg4_result | default: 'pending' %}
+                      {% when 5 %}
+                        {% assign team1_name = block.settings.leg5_team1_name %}
+                        {% assign team1_logo = block.settings.leg5_team1_logo %}
+                        {% assign team2_name = block.settings.leg5_team2_name %}
+                        {% assign team2_logo = block.settings.leg5_team2_logo %}
+                        {% assign match_time = block.settings.leg5_match_time %}
+                        {% assign leg_bet_type = block.settings.leg5_bet_type %}
+                        {% assign spread_value = block.settings.leg5_spread_value %}
+                        {% assign spread_team = block.settings.leg5_spread_team %}
+                        {% assign over_under_type = block.settings.leg5_over_under_type %}
+                        {% assign over_under_value = block.settings.leg5_over_under_value %}
+                        {% assign over_under_stat_type = block.settings.leg5_over_under_stat_type %}
+                        {% assign over_under_text_custom = block.settings.leg5_over_under_text_custom | default: '' %}
+                        {% assign leg_result = block.settings.leg5_result | default: 'pending' %}
+                      {% when 6 %}
+                        {% assign team1_name = block.settings.leg6_team1_name %}
+                        {% assign team1_logo = block.settings.leg6_team1_logo %}
+                        {% assign team2_name = block.settings.leg6_team2_name %}
+                        {% assign team2_logo = block.settings.leg6_team2_logo %}
+                        {% assign match_time = block.settings.leg6_match_time %}
+                        {% assign leg_bet_type = block.settings.leg6_bet_type %}
+                        {% assign spread_value = block.settings.leg6_spread_value %}
+                        {% assign spread_team = block.settings.leg6_spread_team %}
+                        {% assign over_under_type = block.settings.leg6_over_under_type %}
+                        {% assign over_under_value = block.settings.leg6_over_under_value %}
+                        {% assign over_under_stat_type = block.settings.leg6_over_under_stat_type %}
+                        {% assign over_under_text_custom = block.settings.leg6_over_under_text_custom | default: '' %}
+                        {% assign leg_result = block.settings.leg6_result | default: 'pending' %}
+                      {% when 7 %}
+                        {% assign team1_name = block.settings.leg7_team1_name %}
+                        {% assign team1_logo = block.settings.leg7_team1_logo %}
+                        {% assign team2_name = block.settings.leg7_team2_name %}
+                        {% assign team2_logo = block.settings.leg7_team2_logo %}
+                        {% assign match_time = block.settings.leg7_match_time %}
+                        {% assign leg_bet_type = block.settings.leg7_bet_type %}
+                        {% assign spread_value = block.settings.leg7_spread_value %}
+                        {% assign spread_team = block.settings.leg7_spread_team %}
+                        {% assign over_under_type = block.settings.leg7_over_under_type %}
+                        {% assign over_under_value = block.settings.leg7_over_under_value %}
+                        {% assign over_under_stat_type = block.settings.leg7_over_under_stat_type %}
+                        {% assign over_under_text_custom = block.settings.leg7_over_under_text_custom | default: '' %}
+                        {% assign leg_result = block.settings.leg7_result | default: 'pending' %}
+                      {% when 8 %}
+                        {% assign team1_name = block.settings.leg8_team1_name %}
+                        {% assign team1_logo = block.settings.leg8_team1_logo %}
+                        {% assign team2_name = block.settings.leg8_team2_name %}
+                        {% assign team2_logo = block.settings.leg8_team2_logo %}
+                        {% assign match_time = block.settings.leg8_match_time %}
+                        {% assign leg_bet_type = block.settings.leg8_bet_type %}
+                        {% assign spread_value = block.settings.leg8_spread_value %}
+                        {% assign spread_team = block.settings.leg8_spread_team %}
+                        {% assign over_under_type = block.settings.leg8_over_under_type %}
+                        {% assign over_under_value = block.settings.leg8_over_under_value %}
+                        {% assign over_under_stat_type = block.settings.leg8_over_under_stat_type %}
+                        {% assign over_under_text_custom = block.settings.leg8_over_under_text_custom | default: '' %}
+                        {% assign leg_result = block.settings.leg8_result | default: 'pending' %}
+                      {% when 9 %}
+                        {% assign team1_name = block.settings.leg9_team1_name %}
+                        {% assign team1_logo = block.settings.leg9_team1_logo %}
+                        {% assign team2_name = block.settings.leg9_team2_name %}
+                        {% assign team2_logo = block.settings.leg9_team2_logo %}
+                        {% assign match_time = block.settings.leg9_match_time %}
+                        {% assign leg_bet_type = block.settings.leg9_bet_type %}
+                        {% assign spread_value = block.settings.leg9_spread_value %}
+                        {% assign spread_team = block.settings.leg9_spread_team %}
+                        {% assign over_under_type = block.settings.leg9_over_under_type %}
+                        {% assign over_under_value = block.settings.leg9_over_under_value %}
+                        {% assign over_under_stat_type = block.settings.leg9_over_under_stat_type %}
+                        {% assign over_under_text_custom = block.settings.leg9_over_under_text_custom | default: '' %}
+                        {% assign leg_result = block.settings.leg9_result | default: 'pending' %}
+                      {% when 10 %}
+                        {% assign team1_name = block.settings.leg10_team1_name %}
+                        {% assign team1_logo = block.settings.leg10_team1_logo %}
+                        {% assign team2_name = block.settings.leg10_team2_name %}
+                        {% assign team2_logo = block.settings.leg10_team2_logo %}
+                        {% assign match_time = block.settings.leg10_match_time %}
+                        {% assign leg_bet_type = block.settings.leg10_bet_type %}
+                        {% assign spread_value = block.settings.leg10_spread_value %}
+                        {% assign spread_team = block.settings.leg10_spread_team %}
+                        {% assign over_under_type = block.settings.leg10_over_under_type %}
+                        {% assign over_under_value = block.settings.leg10_over_under_value %}
+                        {% assign over_under_stat_type = block.settings.leg10_over_under_stat_type %}
+                        {% assign over_under_text_custom = block.settings.leg10_over_under_text_custom | default: '' %}
+                        {% assign leg_result = block.settings.leg10_result | default: 'pending' %}
+                    {% endcase %}
+                    
+                    {% if team1_name != blank %}
+                      {% assign leg_border_color = '#ffffff' %}
+                      {% assign leg_border_width = '1px' %}
+                      {% assign leg_badge = '' %}
+                      
+                      {% if leg_result == 'win' %}
+                        {% assign leg_border_color = 'rgba(255, 255, 255, 0.50)' %}
+                        {% assign leg_border_width = '4px' %}
+                        {% assign leg_badge = '<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: rgba(255,255,255,0.20); color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; z-index: 10;">✓ GAGNÉ</div>' %}
+                      {% elsif leg_result == 'loose' %}
+                        {% assign leg_border_color = 'rgba(255, 255, 255, 0.20)' %}
+                        {% assign leg_border_width = '4px' %}
+                        {% assign leg_badge = '<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: rgba(255,255,255,0.10); color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; z-index: 10;">✗ PERDU</div>' %}
+                      {% endif %}
+                      
+                    <div style="position: relative; border: {{ leg_border_width }} solid {{ leg_border_color }}; border-radius: 1rem; padding: 1.5rem; margin-bottom: 1rem; background: rgba(0, 0, 0, 0.3);">
+                      {{ leg_badge }}
+                    <div class="match-info-new">
+                      {% assign current_leg_bet_type = leg_bet_type | default: 'moneyline' %}
+                      
+                      {% if current_leg_bet_type == 'moneyline' %}
+                        <div class="match-info-header">LEG {{ i }} - MONEYLINE</div>
+                        <div class="match-info-content">
+                          <div class="team-side">
+                            {% if team1_logo %}
+                              <img src="{{ team1_logo | image_url: width: 200 }}" alt="{{ team1_name }}" class="team-logo">
+                            {% endif %}
+                            <div class="team-name-new">{{ team1_name }}</div>
+                          </div>
+                          <div class="match-center">
+                            <div class="match-time-new">{{ match_time | default: '7:00 PM' }}</div>
+                            <div class="match-vs-new">VS</div>
+                          </div>
+                          <div class="team-side selected">
+                            {% if team2_logo %}
+                              <img src="{{ team2_logo | image_url: width: 200 }}" alt="{{ team2_name }}" class="team-logo">
+                            {% endif %}
+                            <div class="team-name-new">{{ team2_name }}</div>
+                            <div class="team-bet-type">VICTOIRE</div>
+                          </div>
+                        </div>
+                      {% elsif current_leg_bet_type == 'spread' %}
+                        <div class="match-info-header">LEG {{ i }} - SPREAD</div>
+                        <div class="match-info-content">
+                          <div class="team-side {% if spread_team == 'team1' %}selected{% endif %}">
+                            {% if team1_logo %}
+                              <img src="{{ team1_logo | image_url: width: 200 }}" alt="{{ team1_name }}" class="team-logo">
+                            {% endif %}
+                            <div class="team-name-new">{{ team1_name }}</div>
+                            {% if spread_team == 'team1' %}
+                              <div class="team-bet-type">{{ spread_value | default: '-3.5' }}</div>
+                            {% endif %}
+                          </div>
+                          <div class="match-center">
+                            <div class="match-time-new">{{ match_time | default: '7:00 PM' }}</div>
+                            <div class="match-vs-new">VS</div>
+                          </div>
+                          <div class="team-side {% if spread_team == 'team2' %}selected{% endif %}">
+                            {% if team2_logo %}
+                              <img src="{{ team2_logo | image_url: width: 200 }}" alt="{{ team2_name }}" class="team-logo">
+                            {% endif %}
+                            <div class="team-name-new">{{ team2_name }}</div>
+                            {% if spread_team == 'team2' %}
+                              <div class="team-bet-type">{{ spread_value | default: '-3.5' }}</div>
+                            {% endif %}
+                          </div>
+                        </div>
+                      {% elsif current_leg_bet_type == 'over_under' %}
+                        {% if over_under_text_custom != blank %}
+                          <div class="match-info-header">LEG {{ i }} - {{ over_under_text_custom | upcase }}</div>
+                        {% else %}
+                          <div class="match-info-header">LEG {{ i }} - {{ over_under_type | default: 'OVER' | upcase }}</div>
+                        {% endif %}
+                        <div class="match-info-content">
+                          <div class="team-side">
+                            {% if team1_logo %}
+                              <img src="{{ team1_logo | image_url: width: 200 }}" alt="{{ team1_name }}" class="team-logo">
+                            {% endif %}
+                            <div class="team-name-new">{{ team1_name }}</div>
+                          </div>
+                          <div class="match-center">
+                            <div class="match-time-new">{{ match_time | default: '7:00 PM' }}</div>
+                            <div class="match-vs-new">VS</div>
+                            <div class="over-under-display">
+                              {% if over_under_text_custom != blank %}
+                                <div class="over-under-type">{{ over_under_text_custom | upcase }}</div>
+                              {% else %}
+                                <div class="over-under-type">{{ over_under_type | default: 'OVER' | upcase }}</div>
+                              {% endif %}
+                              <div class="over-under-value">{{ over_under_value | default: '225.5' }}</div>
+                              {% if over_under_stat_type != blank %}
+                                <div class="over-under-stat">{{ over_under_stat_type }}</div>
+                              {% endif %}
+                            </div>
+                          </div>
+                          <div class="team-side">
+                            {% if team2_logo %}
+                              <img src="{{ team2_logo | image_url: width: 200 }}" alt="{{ team2_name }}" class="team-logo">
+                            {% endif %}
+                            <div class="team-name-new">{{ team2_name }}</div>
+                          </div>
+                        </div>
+                    {% endif %}
+                  </div>
+                  </div>
+                  {% endif %}
+                  {% endfor %}
+
+                  <button class="units-button">{{ block.settings.bet_units | default: '1' }} UNITS</button>
+
+                  <div class="gain-section">
+                    <div class="bet-modify-horizontal">
+                      <div class="bet-info">
+                        <span>VOTRE MISE - <span class="bet-amount-value-small">$100</span></span>
+                      </div>
+                      <button class="modify-btn" onclick="openBetDialog(this)" data-multiplier="{{ block.settings.multiplier | default: '1.95' }}">MODIFIER</button>
+                    </div>
+                    <div class="cashout-full-width">
+                      <div class="cashout-label">CASHOUT</div>
+                      <div class="cashout-amount">${{ 100 | times: block.settings.multiplier | default: 1.95 | round: 2 }}</div>
+                      <div class="cashout-profit">+${{ 100 | times: block.settings.multiplier | default: 1.95 | minus: 100 | round: 2 }} bénéfice</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div> <!-- card-wrapper -->
+          {% endif %}
+        {% endfor %}
+        </div> <!-- cards-grid -->
+        {% if has_parlay == false %}
+          <div class="card text-center" style="padding: 2rem;">
+            <p style="color: rgba(255, 255, 255, 0.6);">
+              Aucune carte de parlay ajoutée. Utilisez l'éditeur Shopify pour ajouter vos premières recommandations de type "🎲 Carte Parlay".
+            </p>
+          </div>
+        {% endif %}
+        {% endif %}
+      </div>
+    </div>
 
     <!-- PAGE 3: HISTORIQUE BET DU JOUR -->
     {% render 'historique-bet-page' %}
