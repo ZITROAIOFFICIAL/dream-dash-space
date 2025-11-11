@@ -109,7 +109,7 @@
     .ai-loading-text {
       text-align: center;
       margin: 0.5rem auto 3.5rem auto; /* Marge réduite en haut */
-      max-width: 800px;
+      max-width: 100%;
       padding: 0 1rem;
     }
     
@@ -3847,7 +3847,12 @@
         const hideAllIcons = () => {
           lightIconBet.style.display = 'none';
           editIconBet.style.display = 'none';
-          container.style.display = 'block';
+          // Centrage pur en mode texte seul
+          container.style.display = 'grid';
+          container.style.placeItems = 'center';
+          container.style.alignItems = '';
+          container.style.justifyContent = '';
+          container.style.gap = '';
         };
         
         const showLightIcon = () => {
@@ -3901,8 +3906,7 @@
               break;
               
             case 'modified':
-              hideAllIcons();
-              editIconBet.style.display = 'block';
+              showEditIcon();
               rotatingTextEl.innerHTML = 'Modification des données effectuées';
               setTimeout(() => {
                 currentPhase = 'normal';
@@ -3965,7 +3969,12 @@
         const hideAllIconsParlay = () => {
           lightIconParlay.style.display = 'none';
           editIconParlay.style.display = 'none';
-          containerParlay.style.display = 'block';
+          // Centrage pur en mode texte seul
+          containerParlay.style.display = 'grid';
+          containerParlay.style.placeItems = 'center';
+          containerParlay.style.alignItems = '';
+          containerParlay.style.justifyContent = '';
+          containerParlay.style.gap = '';
         };
         
         const showLightIconParlay = () => {
@@ -4019,8 +4028,7 @@
               break;
               
             case 'modified':
-              hideAllIconsParlay();
-              editIconParlay.style.display = 'block';
+              showEditIconParlay();
               rotatingTextParlayEl.innerHTML = 'Modification des données effectuées';
               setTimeout(() => {
                 currentPhaseParlay = 'normal';
