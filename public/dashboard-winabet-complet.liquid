@@ -169,10 +169,15 @@
     @media (max-width: 768px) {
       .ai-loading-text {
         margin: 0.4rem auto 1rem auto;
+        padding: 0 0.5rem;
       }
       
       .ai-loading-text p {
-        font-size: var(--shimmer-text-size-mobile);
+        font-size: clamp(0.75rem, 3.5vw, 0.95rem);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: clip;
+        max-width: 100%;
       }
     }
     
