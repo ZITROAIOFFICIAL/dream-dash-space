@@ -29,13 +29,25 @@
       
       /* Mobile: largeur max de la vidéo */
       --video-max-width-mobile: 55%;
+      
+      /* ===== MARGES VIDÉO - MODIFIEZ ICI ===== */
+      /* Desktop: marges haut et bas de la vidéo */
+      --video-margin-top-desktop: 0;
+      --video-margin-bottom-desktop: 0.5rem;
+      
+      /* Mobile: marges haut et bas de la vidéo */
+      --video-margin-top-mobile: 0;
+      --video-margin-bottom-mobile: 0.5rem;
     }
     
     /* Style pour les vidéos */
     .video-container {
       width: 100%;
       max-width: var(--video-max-width-desktop);
-      margin: 0 auto 0.5rem auto; /* Marge en bas réduite */
+      margin-top: var(--video-margin-top-desktop);
+      margin-bottom: var(--video-margin-bottom-desktop);
+      margin-left: auto;
+      margin-right: auto;
     }
     
     .video-container video {
@@ -45,10 +57,12 @@
       display: block;
     }
     
-    /* Mobile: appliquer la largeur mobile */
+    /* Mobile: appliquer la largeur et marges mobiles */
     @media (max-width: 768px) {
       .video-container {
         max-width: var(--video-max-width-mobile);
+        margin-top: var(--video-margin-top-mobile);
+        margin-bottom: var(--video-margin-bottom-mobile);
       }
     }
     
