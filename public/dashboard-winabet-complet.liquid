@@ -1123,7 +1123,7 @@
         </div>
         
         <div class="ai-loading-text">
-          <p>Calcul des probabilités de victoire</p>
+          <p id="rotating-text-parlay">Calcul des probabilités de victoire</p>
         </div>
         
         <!-- Ligne de séparation SVG -->
@@ -3798,7 +3798,7 @@
       updateTime();
       setInterval(updateTime, 1000);
 
-      // Rotation du texte après 3 cycles du shimmer (7.5s)
+      // Rotation du texte avec intervalle aléatoire entre 2s et 15s
       const rotatingTextEl = document.getElementById('rotating-text');
       if (rotatingTextEl) {
         const texts = [
@@ -3811,10 +3811,49 @@
         ];
         let currentIndex = 0;
         
-        setInterval(() => {
+        // Fonction pour obtenir un délai aléatoire entre 2s et 15s
+        const getRandomDelay = () => {
+          return Math.floor(Math.random() * (15000 - 2000 + 1)) + 2000;
+        };
+        
+        // Fonction récursive pour changer le texte avec délai aléatoire
+        const rotateText = () => {
           currentIndex = (currentIndex + 1) % texts.length;
           rotatingTextEl.textContent = texts[currentIndex];
-        }, 7500); // 3 cycles de 2.5s = 7.5s
+          setTimeout(rotateText, getRandomDelay());
+        };
+        
+        // Démarrer la rotation avec un premier délai aléatoire
+        setTimeout(rotateText, getRandomDelay());
+      }
+
+      // Rotation du texte pour la page Parlay avec intervalle aléatoire entre 2s et 15s
+      const rotatingTextParlayEl = document.getElementById('rotating-text-parlay');
+      if (rotatingTextParlayEl) {
+        const parlayTexts = [
+          'Calcul des probabilités de victoire',
+          'Analyse des combinaisons optimales',
+          'Évaluation des risques du parlay',
+          'Analyse approfondie des matchs',
+          'Calcul des cotes combinées',
+          'Vérification des statistiques'
+        ];
+        let parlayIndex = 0;
+        
+        // Fonction pour obtenir un délai aléatoire entre 2s et 15s
+        const getRandomDelayParlay = () => {
+          return Math.floor(Math.random() * (15000 - 2000 + 1)) + 2000;
+        };
+        
+        // Fonction récursive pour changer le texte avec délai aléatoire
+        const rotateTextParlay = () => {
+          parlayIndex = (parlayIndex + 1) % parlayTexts.length;
+          rotatingTextParlayEl.textContent = parlayTexts[parlayIndex];
+          setTimeout(rotateTextParlay, getRandomDelayParlay());
+        };
+        
+        // Démarrer la rotation avec un premier délai aléatoire
+        setTimeout(rotateTextParlay, getRandomDelayParlay());
       }
 
       // In Shopify editor, preserve the current page across partial reloads
