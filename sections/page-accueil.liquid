@@ -1069,11 +1069,8 @@
     <!-- Section Rejoindre -->
     <section id="rejoindre" class="rejoindre-section" style="display:none; background: #000000; min-height: 100vh;">
       <style>
-        /* Bouton retour à l'accueil en haut à gauche */
+        /* Bouton retour à l'accueil centré */
         .back-to-home-pricing {
-          position: absolute;
-          top: 2rem;
-          left: 2rem;
           display: inline-flex;
           align-items: center;
           gap: 0.5rem;
@@ -1086,21 +1083,13 @@
           transition: all 0.3s ease;
           font-family: 'Outfit', sans-serif;
           font-size: 0.95rem;
-          z-index: 10;
+          margin-top: 2rem;
+          margin-bottom: 1.5rem;
         }
 
         .back-to-home-pricing:hover {
           background: rgba(39, 39, 42, 0.8);
           border-color: rgba(82, 82, 91, 0.6);
-        }
-
-        @media (max-width: 768px) {
-          .back-to-home-pricing {
-            top: 1rem;
-            left: 1rem;
-            font-size: 0.85rem;
-            padding: 0.4rem 0.8rem;
-          }
         }
 
         /* Container principal centré */
@@ -1224,6 +1213,13 @@
 
         /* Responsive Mobile */
         @media (max-width: 768px) {
+          .back-to-home-pricing {
+            font-size: 0.85rem;
+            padding: 0.4rem 0.8rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+          }
+
           .pricing-page-container {
             padding: 1.5rem 1.5rem;
           }
