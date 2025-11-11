@@ -1069,6 +1069,40 @@
     <!-- Section Rejoindre -->
     <section id="rejoindre" class="rejoindre-section" style="display:none; background: #000000; min-height: 100vh;">
       <style>
+        /* Bouton retour à l'accueil en haut à gauche */
+        .back-to-home-pricing {
+          position: absolute;
+          top: 2rem;
+          left: 2rem;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          color: #fff;
+          text-decoration: none;
+          padding: 0.5rem 1rem;
+          border: 1px solid rgba(82, 82, 91, 0.4);
+          border-radius: 9999px;
+          background: rgba(39, 39, 42, 0.6);
+          transition: all 0.3s ease;
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.95rem;
+          z-index: 10;
+        }
+
+        .back-to-home-pricing:hover {
+          background: rgba(39, 39, 42, 0.8);
+          border-color: rgba(82, 82, 91, 0.6);
+        }
+
+        @media (max-width: 768px) {
+          .back-to-home-pricing {
+            top: 1rem;
+            left: 1rem;
+            font-size: 0.85rem;
+            padding: 0.4rem 0.8rem;
+          }
+        }
+
         /* Container principal centré */
         .pricing-page-container {
           max-width: 700px;
@@ -1225,6 +1259,14 @@
           }
         }
       </style>
+
+      <!-- Bouton retour à l'accueil -->
+      <a href="#" class="back-to-home-pricing">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="flex-shrink:0">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7 7-7M3 12h18"></path>
+        </svg>
+        <span>Retour à l'accueil</span>
+      </a>
 
       <div class="pricing-page-container">
         <!-- Logo WINABET.AI -->
