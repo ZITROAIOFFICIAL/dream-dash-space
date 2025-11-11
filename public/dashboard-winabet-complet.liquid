@@ -845,6 +845,13 @@
             <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
+          <!-- SVG Planète - visible pendant phase normale -->
+          <svg id="planet-icon-bet" style="display: none; flex-shrink: 0; color: var(--shimmer-color-base); background: linear-gradient(90deg, var(--shimmer-color-base) 0%, var(--shimmer-color-highlight) 20%, var(--shimmer-color-highlight) 40%, var(--shimmer-color-base) 60%, var(--shimmer-color-base) 100%); background-size: 200% 100%; background-clip: text; -webkit-background-clip: text; animation: shimmer 6s ease-in-out infinite;" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.5"/>
+            <ellipse cx="12" cy="12" rx="12" ry="4" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+            <circle cx="9" cy="10" r="1.5" fill="currentColor" opacity="0.4"/>
+            <circle cx="15" cy="13" r="1" fill="currentColor" opacity="0.3"/>
+          </svg>
           <p id="rotating-text">Analyse des meilleurs opportunitées en cours</p>
         </div>
         
@@ -1140,6 +1147,13 @@
           <svg id="edit-icon-parlay" style="display: none; flex-shrink: 0; color: var(--shimmer-color-base); background: linear-gradient(90deg, var(--shimmer-color-base) 0%, var(--shimmer-color-highlight) 20%, var(--shimmer-color-highlight) 40%, var(--shimmer-color-base) 60%, var(--shimmer-color-base) 100%); background-size: 200% 100%; background-clip: text; -webkit-background-clip: text; animation: shimmer 6s ease-in-out infinite;" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <!-- SVG Planète - visible pendant phase normale -->
+          <svg id="planet-icon-parlay" style="display: none; flex-shrink: 0; color: var(--shimmer-color-base); background: linear-gradient(90deg, var(--shimmer-color-base) 0%, var(--shimmer-color-highlight) 20%, var(--shimmer-color-highlight) 40%, var(--shimmer-color-base) 60%, var(--shimmer-color-base) 100%); background-size: 200% 100%; background-clip: text; -webkit-background-clip: text; animation: shimmer 6s ease-in-out infinite;" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.5"/>
+            <ellipse cx="12" cy="12" rx="12" ry="4" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+            <circle cx="9" cy="10" r="1.5" fill="currentColor" opacity="0.4"/>
+            <circle cx="15" cy="13" r="1" fill="currentColor" opacity="0.3"/>
           </svg>
           <p id="rotating-text-parlay">Calcul des probabilités de victoire</p>
         </div>
@@ -3817,8 +3831,9 @@
       const rotatingTextEl = document.getElementById('rotating-text');
       const lightIconBet = document.getElementById('light-icon-bet');
       const editIconBet = document.getElementById('edit-icon-bet');
+      const planetIconBet = document.getElementById('planet-icon-bet');
       
-      if (rotatingTextEl && lightIconBet && editIconBet) {
+      if (rotatingTextEl && lightIconBet && editIconBet && planetIconBet) {
         // Protection : vérifier si déjà initialisé
         if (rotatingTextEl.dataset.seqInit === '1') {
           return; // Déjà initialisé, ne rien faire
@@ -3847,17 +3862,18 @@
         const hideAllIcons = () => {
           lightIconBet.style.display = 'none';
           editIconBet.style.display = 'none';
-          // Centrage pur en mode texte seul
-          container.style.display = 'grid';
-          container.style.placeItems = 'center';
-          container.style.alignItems = '';
-          container.style.justifyContent = '';
-          container.style.gap = '';
+          planetIconBet.style.display = 'block';
+          // Flex pour aligner icône + texte
+          container.style.display = 'flex';
+          container.style.alignItems = 'center';
+          container.style.justifyContent = 'center';
+          container.style.gap = '0.3rem';
         };
         
         const showLightIcon = () => {
           lightIconBet.style.display = 'block';
           editIconBet.style.display = 'none';
+          planetIconBet.style.display = 'none';
           container.style.display = 'flex';
           container.style.alignItems = 'center';
           container.style.justifyContent = 'center';
@@ -3867,6 +3883,7 @@
         const showEditIcon = () => {
           lightIconBet.style.display = 'none';
           editIconBet.style.display = 'block';
+          planetIconBet.style.display = 'none';
           container.style.display = 'flex';
           container.style.alignItems = 'center';
           container.style.justifyContent = 'center';
@@ -3939,8 +3956,9 @@
       const rotatingTextParlayEl = document.getElementById('rotating-text-parlay');
       const lightIconParlay = document.getElementById('light-icon-parlay');
       const editIconParlay = document.getElementById('edit-icon-parlay');
+      const planetIconParlay = document.getElementById('planet-icon-parlay');
       
-      if (rotatingTextParlayEl && lightIconParlay && editIconParlay) {
+      if (rotatingTextParlayEl && lightIconParlay && editIconParlay && planetIconParlay) {
         // Protection : vérifier si déjà initialisé
         if (rotatingTextParlayEl.dataset.seqInit === '1') {
           return; // Déjà initialisé, ne rien faire
@@ -3969,17 +3987,18 @@
         const hideAllIconsParlay = () => {
           lightIconParlay.style.display = 'none';
           editIconParlay.style.display = 'none';
-          // Centrage pur en mode texte seul
-          containerParlay.style.display = 'grid';
-          containerParlay.style.placeItems = 'center';
-          containerParlay.style.alignItems = '';
-          containerParlay.style.justifyContent = '';
-          containerParlay.style.gap = '';
+          planetIconParlay.style.display = 'block';
+          // Flex pour aligner icône + texte
+          containerParlay.style.display = 'flex';
+          containerParlay.style.alignItems = 'center';
+          containerParlay.style.justifyContent = 'center';
+          containerParlay.style.gap = '0.3rem';
         };
         
         const showLightIconParlay = () => {
           lightIconParlay.style.display = 'block';
           editIconParlay.style.display = 'none';
+          planetIconParlay.style.display = 'none';
           containerParlay.style.display = 'flex';
           containerParlay.style.alignItems = 'center';
           containerParlay.style.justifyContent = 'center';
@@ -3989,6 +4008,7 @@
         const showEditIconParlay = () => {
           lightIconParlay.style.display = 'none';
           editIconParlay.style.display = 'block';
+          planetIconParlay.style.display = 'none';
           containerParlay.style.display = 'flex';
           containerParlay.style.alignItems = 'center';
           containerParlay.style.justifyContent = 'center';
