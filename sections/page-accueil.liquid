@@ -1067,230 +1067,226 @@
     </section>
 
     <!-- Section Rejoindre -->
-    <section id="rejoindre" class="rejoindre-section" style="display:none; background: linear-gradient(180deg, #000000 0%, #0a0a0a 100%); padding: 2rem 2rem 6rem; min-height: 100vh;">
+    <section id="rejoindre" class="rejoindre-section" style="display:none; background: linear-gradient(180deg, #000000 0%, #0a0a0a 100%); min-height: 100vh;">
       <style>
-        @media (max-width: 768px) {
-          .logo-abonnement-container {
-            left: 53% !important;
-          }
-          
-          #rejoindre.rejoindre-section {
-            margin-top: -3rem !important;
-          }
-          
-          .rejoindre-header {
-            margin-bottom: 0.75rem !important;
-          }
+        /* Container principal centré */
+        .pricing-page-container {
+          max-width: 700px;
+          margin: 0 auto;
+          padding: 4rem 2rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          min-height: 100vh;
         }
-        
-        @media (min-width: 769px) {
-          #rejoindre.rejoindre-section {
-            padding: 6rem 2rem !important;
+
+        /* Logo WINABET.AI */
+        .pricing-logo {
+          font-family: 'Outfit', sans-serif;
+          font-size: 3rem;
+          letter-spacing: -0.02em;
+          font-weight: 300;
+          margin-bottom: 3rem;
+          text-align: center;
+        }
+
+        /* Titre principal */
+        .pricing-main-title {
+          font-family: 'Outfit', sans-serif;
+          font-size: 2.5rem;
+          font-weight: 600;
+          color: rgba(255, 255, 255, 0.95);
+          text-align: center;
+          line-height: 1.2;
+          margin-bottom: 1.5rem;
+          max-width: 700px;
+        }
+
+        /* Description */
+        .pricing-description {
+          font-family: 'Outfit', sans-serif;
+          font-size: 1.1rem;
+          font-weight: 400;
+          color: rgba(255, 255, 255, 0.7);
+          text-align: center;
+          line-height: 1.6;
+          margin-bottom: 2rem;
+          max-width: 600px;
+        }
+
+        /* Bouton CTA */
+        .pricing-cta-button {
+          background: #3b82f6;
+          color: white;
+          font-family: 'Outfit', sans-serif;
+          font-size: 1.1rem;
+          font-weight: 600;
+          padding: 1rem 2.5rem;
+          border-radius: 9999px;
+          border: none;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          text-decoration: none;
+          display: inline-block;
+          margin-bottom: 3rem;
+        }
+
+        .pricing-cta-button:hover {
+          background: #2563eb;
+          transform: translateY(-2px);
+          box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Liste des avantages */
+        .pricing-features-list {
+          width: 100%;
+          max-width: 500px;
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .pricing-feature-item {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+        }
+
+        .pricing-feature-checkmark {
+          width: 24px;
+          height: 24px;
+          min-width: 24px;
+          border-radius: 50%;
+          background: rgba(59, 130, 246, 0.2);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+
+        .pricing-feature-text {
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.95rem;
+          font-weight: 400;
+          color: rgba(255, 255, 255, 0.85);
+          line-height: 1.4;
+        }
+
+        /* Responsive Mobile */
+        @media (max-width: 768px) {
+          .pricing-page-container {
+            padding: 2rem 1.5rem;
+          }
+
+          .pricing-logo {
+            font-size: 2.5rem;
+            margin-bottom: 2.5rem;
+          }
+
+          .pricing-main-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.25rem;
+          }
+
+          .pricing-description {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+          }
+
+          .pricing-cta-button {
+            font-size: 1rem;
+            padding: 0.875rem 2rem;
+            margin-bottom: 2.5rem;
+          }
+
+          .pricing-feature-text {
+            font-size: 0.85rem;
           }
         }
       </style>
-      <div class="rejoindre-container" style="max-width: 1200px; margin: 0 auto;">
-        <!-- Bouton retour à l'accueil -->
-        <div class="rejoindre-header" style="max-width:1200px;margin:0 auto 1.5rem;display:flex;align-items:center;justify-content:center;">
-          <a href="#" class="back-to-home" style="display:inline-flex;align-items:center;gap:0.5rem;color:#fff;text-decoration:none;padding:.5rem 1rem;border:1px solid rgba(82,82,91,.4);border-radius:9999px;background:rgba(39,39,42,.6);transition:all 0.3s ease;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="flex-shrink:0">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7 7-7M3 12h18"></path>
-            </svg>
-            <span>Retour à l'accueil</span>
-          </a>
+
+      <div class="pricing-page-container">
+        <!-- Logo WINABET.AI -->
+        <div class="pricing-logo">
+          <span style="color: #ffffff;">wina</span><span style="color: rgba(255, 255, 255, 0.35);">bet</span><span style="color: #ffffff; font-size: 0.8em; margin-left: -0.05em;">.ai</span>
         </div>
-        
-        <!-- Carte style bet -->
-        <div style="max-width: 600px; margin: 0 auto;">
-          <div style="background: rgba(0, 0, 0, 0.55); backdrop-filter: blur(40px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 1.5rem; padding: 2rem; min-height: 500px;">
-            <!-- Header avec icône IA, titre Abonnement et logo winabet centré -->
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
-              <!-- Icône IA à gauche -->
-              <svg width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
-                <defs>
-                  <filter id="softGlowRejoindre" x="-50%" y="-50%" width="200%" height="200%">
-                    <feGaussianBlur stdDeviation="1.2" result="b"/>
-                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                  </filter>
-                  <path id="orbit0Rejoindre" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
-                  <path id="orbit1Rejoindre" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
-                  <path id="orbit2Rejoindre" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
-                </defs>
-                <g stroke="#68859e" stroke-width="2" fill="none">
-                  <use href="#orbit0Rejoindre"/>
-                  <use href="#orbit1Rejoindre"/>
-                  <use href="#orbit2Rejoindre"/>
-                </g>
-                <g stroke-linecap="round" filter="url(#softGlowRejoindre)">
-                  <use href="#orbit0Rejoindre" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                    <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
-                  </use>
-                  <use href="#orbit1Rejoindre" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                    <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
-                  </use>
-                  <use href="#orbit2Rejoindre" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                    <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
-                  </use>
-                </g>
-                <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="54">IA</text>
+
+        <!-- Titre principal -->
+        <h1 class="pricing-main-title">
+          Commencer un essai gratuit de 1 journée de winabet.ai
+        </h1>
+
+        <!-- Description -->
+        <p class="pricing-description">
+          Obtenez l'accès complet à toutes les fonctionnalités pour tester notre IA de paris sportifs, incluant l'analyse en temps réel et plus de 150 sélections par mois. Aucune carte de crédit requise.
+        </p>
+
+        <!-- Bouton CTA -->
+        <a href="#" class="pricing-cta-button">
+          Commencer l'essai gratuit
+        </a>
+
+        <!-- Liste des avantages -->
+        <div class="pricing-features-list">
+          <!-- Item 1 -->
+          <div class="pricing-feature-item">
+            <div class="pricing-feature-checkmark">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
-              
-              <!-- Logo et texte Abonnement centrés ensemble -->
-              <div class="logo-abonnement-container" style="position: absolute; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 2rem;">
-                <div style="font-family: 'Outfit', sans-serif; font-size: 2.5rem; letter-spacing: -0.02em; font-weight: 300;">
-                  <span style="color: #ffffff;">wina</span><span style="color: rgba(255, 255, 255, 0.35);">bet</span><span style="color: #ffffff; font-size: 0.8rem; margin-left: -0.15em;">.ai</span>
-                </div>
-                <span style="font-family: 'fustat', sans-serif; font-size: 1.75rem; font-weight: 400; color: rgb(255, 255, 255); position: relative; top: 3.5px;">Abonnement</span>
-              </div>
-              
-              <!-- Spacer pour équilibrer -->
-              <div style="width: 40px;"></div>
             </div>
-            
-            <!-- Style responsive pour les tailles de texte -->
-            <style>
-              .feature-title {
-                font-family: 'Outfit', sans-serif;
-                font-weight: 600;
-                color: rgba(255, 255, 255, 0.95);
-                margin-bottom: 0.25rem;
-                line-height: 1.3;
-                font-size: 1.5rem; /* Mobile */
-              }
-              .feature-description {
-                font-family: 'Outfit', sans-serif;
-                font-weight: 300;
-                color: rgba(255, 255, 255, 0.65);
-                line-height: 1.5;
-                font-size: 1.15rem; /* Mobile */
-              }
-              @media (min-width: 768px) {
-                .feature-title {
-                  font-size: 2rem; /* Desktop */
-                }
-                .feature-description {
-                  font-size: 1.4rem; /* Desktop */
-                }
-              }
-            </style>
+            <span class="pricing-feature-text">IA en temps réel</span>
+          </div>
 
-            <!-- Titre Accès instantané -->
-            <div style="text-align: center; margin-bottom: 1rem;">
-              <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 600; color: rgba(255, 255, 255, 0.95); margin: 0;">
-                Accès instantané après achat
-              </h3>
+          <!-- Item 2 -->
+          <div class="pricing-feature-item">
+            <div class="pricing-feature-checkmark">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
             </div>
+            <span class="pricing-feature-text">Analyse quotidienne approfondie</span>
+          </div>
 
-            <!-- Liste des fonctionnalités -->
-            <div style="padding: 2rem 0;">
-              <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-                
-                <!-- Item 1 : IA en temps réel -->
-                <div style="display: flex; align-items: flex-start; gap: 1rem;">
-                  <!-- Icône checkmark rond -->
-                  <div style="width: 28px; height: 28px; min-width: 28px; border-radius: 50%; background: rgba(113, 113, 122, 0.2); display: flex; align-items: center; justify-content: center; margin-top: 2px;">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                  </div>
-                  <!-- Contenu -->
-                  <div style="flex: 1;">
-                    <div class="feature-title">
-                      IA en temps réel
-                    </div>
-                    <div class="feature-description">
-                      identifie les paris à forte valeur et s'ajuste aux mouvements de cotes
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Item 2 : Analyse quotidienne approfondie -->
-                <div style="display: flex; align-items: flex-start; gap: 1rem;">
-                  <div style="width: 28px; height: 28px; min-width: 28px; border-radius: 50%; background: rgba(113, 113, 122, 0.2); display: flex; align-items: center; justify-content: center; margin-top: 2px;">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                  </div>
-                  <div style="flex: 1;">
-                    <div class="feature-title">
-                      Analyse quotidienne approfondie
-                    </div>
-                    <div class="feature-description">
-                      plus de 1000 paris potentiels étudiés chaque jour pour trouver les meilleures opportunités
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Item 3 : Accès complet aux picks NHL & NFL -->
-                <div style="display: flex; align-items: flex-start; gap: 1rem;">
-                  <div style="width: 28px; height: 28px; min-width: 28px; border-radius: 50%; background: rgba(113, 113, 122, 0.2); display: flex; align-items: center; justify-content: center; margin-top: 2px;">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                  </div>
-                  <div style="flex: 1;">
-                    <div class="feature-title">
-                      Accès complet aux picks NHL & NFL
-                    </div>
-                    <div class="feature-description">
-                      reçois toutes les prédictions analysées et optimisées par notre IA
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Item 4 : 150+ sélections / mois -->
-                <div style="display: flex; align-items: flex-start; gap: 1rem;">
-                  <div style="width: 28px; height: 28px; min-width: 28px; border-radius: 50%; background: rgba(113, 113, 122, 0.2); display: flex; align-items: center; justify-content: center; margin-top: 2px;">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                  </div>
-                  <div style="flex: 1;">
-                    <div class="feature-title">
-                      150+ sélections / mois
-                    </div>
-                    <div class="feature-description">
-                      volume pensé pour lisser la variance et stabiliser les résultats
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Item 5 : Communauté privée -->
-                <div style="display: flex; align-items: flex-start; gap: 1rem;">
-                  <div style="width: 28px; height: 28px; min-width: 28px; border-radius: 50%; background: rgba(113, 113, 122, 0.2); display: flex; align-items: center; justify-content: center; margin-top: 2px;">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                  </div>
-                  <div style="flex: 1;">
-                    <div class="feature-title">
-                      Communauté privée
-                    </div>
-                    <div class="feature-description">
-                      accès aux tendances du jour et aux signaux réservés aux membres
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Item 6 : Support prioritaire 7j/7 -->
-                <div style="display: flex; align-items: flex-start; gap: 1rem;">
-                  <div style="width: 28px; height: 28px; min-width: 28px; border-radius: 50%; background: rgba(113, 113, 122, 0.2); display: flex; align-items: center; justify-content: center; margin-top: 2px;">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                  </div>
-                  <div style="flex: 1;">
-                    <div class="feature-title">
-                      Support prioritaire 7j/7
-                    </div>
-                    <div class="feature-description">
-                      réponses rapides + conseils d'optimisation de vos mises
-                    </div>
-                  </div>
-                </div>
-
-              </div>
+          <!-- Item 3 -->
+          <div class="pricing-feature-item">
+            <div class="pricing-feature-checkmark">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
             </div>
+            <span class="pricing-feature-text">Accès complet aux picks NHL & NFL</span>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="pricing-feature-item">
+            <div class="pricing-feature-checkmark">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <span class="pricing-feature-text">150+ sélections / mois</span>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="pricing-feature-item">
+            <div class="pricing-feature-checkmark">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <span class="pricing-feature-text">Communauté privée</span>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="pricing-feature-item">
+            <div class="pricing-feature-checkmark">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <span class="pricing-feature-text">Support prioritaire 7j/7</span>
           </div>
         </div>
       </div>
@@ -1668,253 +1664,6 @@
       })();
   </script>
 
-  <!-- Barre sticky des forfaits -->
-  <style>
-    /* Padding pour éviter que le contenu soit caché par la barre sticky */
-    body {
-      padding-bottom: 160px;
-    }
-
-    @media (max-width: 767px) {
-      body {
-        padding-bottom: 180px;
-      }
-    }
-
-    /* Conteneur de la barre sticky */
-    .pricing-sticky-bar {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 999;
-      background: rgba(10, 10, 10, 0.98);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 1rem 1.5rem;
-      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
-      animation: slideUp 0.5s ease-out;
-    }
-
-    @keyframes slideUp {
-      from {
-        transform: translateY(100%);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    .pricing-container {
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .pricing-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: rgba(255, 255, 255, 0.95);
-      text-align: center;
-      margin: 0 0 0.75rem 0;
-    }
-
-    .pricing-grid {
-      display: grid;
-      gap: 1rem;
-    }
-
-    /* Desktop : 4 rectangles côte à côte */
-    @media (min-width: 768px) {
-      .pricing-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-      
-      .pricing-sticky-bar {
-        padding: 1.25rem 2rem;
-      }
-    }
-
-    /* Mobile : 2x2 */
-    @media (max-width: 767px) {
-      .pricing-grid {
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-        gap: 0.75rem;
-      }
-
-      .pricing-title {
-        font-size: 1.1rem;
-        margin-bottom: 0.6rem;
-      }
-    }
-
-    /* Carte individuelle */
-    .pricing-card {
-      background: rgba(26, 26, 26, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 1rem;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      min-height: 100px;
-    }
-
-    @media (max-width: 767px) {
-      .pricing-card {
-        padding: 0.75rem;
-        min-height: 85px;
-      }
-    }
-
-    .pricing-card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(16, 185, 129, 0.5);
-      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2);
-    }
-
-    /* Mise en avant du forfait annuel */
-    .pricing-card-highlight {
-      border-color: rgba(16, 185, 129, 0.6);
-      background: rgba(16, 185, 129, 0.05);
-      position: relative;
-    }
-
-    .pricing-card-highlight::before {
-      content: 'MEILLEUR CHOIX';
-      position: absolute;
-      top: -8px;
-      right: 10px;
-      background: linear-gradient(135deg, #10b981, #059669);
-      color: white;
-      font-size: 0.65rem;
-      font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 6px;
-      font-family: 'Outfit', sans-serif;
-      letter-spacing: 0.5px;
-    }
-
-    @media (max-width: 767px) {
-      .pricing-card-highlight::before {
-        font-size: 0.55rem;
-        padding: 2px 6px;
-        top: -6px;
-        right: 6px;
-      }
-    }
-
-    /* Carte Interac */
-    .pricing-card-interac {
-      border-color: rgba(56, 189, 248, 0.4);
-      background: rgba(56, 189, 248, 0.05);
-    }
-
-    .pricing-card-interac:hover {
-      border-color: rgba(56, 189, 248, 0.6);
-      box-shadow: 0 8px 24px rgba(56, 189, 248, 0.2);
-    }
-
-    /* Textes des cartes */
-    .pricing-amount {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: white;
-      line-height: 1.2;
-      margin-bottom: 0.2rem;
-    }
-
-    @media (max-width: 767px) {
-      .pricing-amount {
-        font-size: 1.35rem;
-        margin-bottom: 0.25rem;
-      }
-    }
-
-    .pricing-trial {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1rem;
-      font-weight: 500;
-      color: rgba(16, 185, 129, 1);
-      margin-bottom: 0.15rem;
-    }
-
-    @media (max-width: 767px) {
-      .pricing-trial {
-        font-size: 0.85rem;
-      }
-    }
-
-    .pricing-period {
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 400;
-      color: rgba(255, 255, 255, 0.6);
-    }
-
-    @media (max-width: 767px) {
-      .pricing-period {
-        font-size: 0.8rem;
-      }
-    }
-
-    .pricing-cta {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: rgba(56, 189, 248, 1);
-      margin-top: 0.3rem;
-    }
-
-    @media (max-width: 767px) {
-      .pricing-cta {
-        font-size: 0.9rem;
-      }
-    }
-  </style>
-
-  <div class="pricing-sticky-bar">
-    <div class="pricing-container">
-      <h3 class="pricing-title">Choisissez votre forfait</h3>
-      <div class="pricing-grid">
-        <!-- Rectangle 1 : Mensuel -->
-        <div class="pricing-card">
-          <div class="pricing-amount">99$/mois</div>
-          <div class="pricing-trial">+ essai gratuit</div>
-          <div class="pricing-period">(chaque mois)</div>
-        </div>
-        
-        <!-- Rectangle 2 : Semestriel -->
-        <div class="pricing-card">
-          <div class="pricing-amount">74.99$/mois</div>
-          <div class="pricing-trial">+ essai gratuit</div>
-          <div class="pricing-period">(chaque 6 mois)</div>
-        </div>
-        
-        <!-- Rectangle 3 : Annuel -->
-        <div class="pricing-card pricing-card-highlight">
-          <div class="pricing-amount">49.99$/mois</div>
-          <div class="pricing-trial">+ essai gratuit</div>
-          <div class="pricing-period">(annuel)</div>
-        </div>
-        
-        <!-- Rectangle 4 : Interac -->
-        <div class="pricing-card pricing-card-interac">
-          <div class="pricing-amount">Virement interac</div>
-          <div class="pricing-cta">Voir nos options</div>
-        </div>
-      </div>
-    </div>
-  </div>
 
 </body>
 </html>
