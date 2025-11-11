@@ -3902,8 +3902,14 @@
           '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[A-1]</span> Analyse terminée, résultat disponible . . .'
         ];
         
+        let lastTextIndex = -1;
         const getRandomText = () => {
-          return normalTexts[Math.floor(Math.random() * normalTexts.length)];
+          let newIndex;
+          do {
+            newIndex = Math.floor(Math.random() * normalTexts.length);
+          } while (newIndex === lastTextIndex && normalTexts.length > 1);
+          lastTextIndex = newIndex;
+          return normalTexts[newIndex];
         };
         
         const hideAllIcons = () => {
@@ -4027,8 +4033,14 @@
           '<span style="font-size: 0.85em; opacity: 0.6; font-family: monospace; color: #999;">[P-6]</span> Vérification des statistiques...'
         ];
         
+        let lastTextIndexPar = -1;
         const getRandomTextPar = () => {
-          return normalTextsPar[Math.floor(Math.random() * normalTextsPar.length)];
+          let newIndex;
+          do {
+            newIndex = Math.floor(Math.random() * normalTextsPar.length);
+          } while (newIndex === lastTextIndexPar && normalTextsPar.length > 1);
+          lastTextIndexPar = newIndex;
+          return normalTextsPar[newIndex];
         };
         
         const hideAllIconsParlay = () => {
