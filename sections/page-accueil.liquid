@@ -1468,6 +1468,184 @@
             font-size: 2rem;
           }
         }
+
+        /* Boutons de valeurs prédéfinies */
+        .profit-value-buttons {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.75rem;
+          margin-top: 0.75rem;
+        }
+
+        .profit-value-btn {
+          padding: 0.75rem 1.5rem;
+          background: rgba(255, 255, 255, 0.05);
+          border: 2px solid rgba(255, 255, 255, 0.1);
+          border-radius: 12px;
+          color: rgba(255, 255, 255, 0.7);
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.95rem;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .profit-value-btn:hover {
+          background: rgba(255, 255, 255, 0.1);
+          border-color: rgba(255, 255, 255, 0.3);
+          color: rgba(255, 255, 255, 0.9);
+        }
+
+        .profit-value-btn.active {
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          border-color: #667eea;
+          color: #ffffff;
+          font-weight: 600;
+        }
+
+        /* Icône info */
+        .info-icon {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 20px;
+          height: 20px;
+          margin-left: 0.5rem;
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          border-radius: 50%;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          vertical-align: middle;
+        }
+
+        .info-icon:hover {
+          background: rgba(255, 255, 255, 0.2);
+          border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .info-icon svg {
+          width: 12px;
+          height: 12px;
+          stroke: rgba(255, 255, 255, 0.9);
+          stroke-width: 2;
+        }
+
+        /* Input personnalisé */
+        .custom-input-wrapper {
+          margin-top: 1rem;
+        }
+
+        /* Popup modal */
+        .unit-info-popup {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 9999;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 1rem;
+        }
+
+        .unit-info-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.6);
+          backdrop-filter: blur(4px);
+        }
+
+        .unit-info-content {
+          position: relative;
+          background: #ffffff;
+          color: #000000;
+          padding: 2rem;
+          border-radius: 16px;
+          max-width: 500px;
+          width: 100%;
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+          animation: popupFadeIn 0.3s ease;
+        }
+
+        @keyframes popupFadeIn {
+          from { opacity: 0; transform: scale(0.9); }
+          to { opacity: 1; transform: scale(1); }
+        }
+
+        .unit-info-close {
+          position: absolute;
+          top: 1rem;
+          right: 1rem;
+          width: 32px;
+          height: 32px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(0, 0, 0, 0.05);
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        .unit-info-close:hover {
+          background: rgba(0, 0, 0, 0.1);
+        }
+
+        .unit-info-close svg {
+          width: 16px;
+          height: 16px;
+          stroke: #000000;
+          stroke-width: 2;
+        }
+
+        .unit-info-content h4 {
+          font-family: 'Outfit', sans-serif;
+          font-size: 1.5rem;
+          font-weight: 700;
+          margin: 0 0 1rem 0;
+          color: #000000;
+        }
+
+        .unit-info-content p {
+          font-family: 'Outfit', sans-serif;
+          font-size: 1rem;
+          line-height: 1.6;
+          color: #333333;
+          margin: 0;
+        }
+
+        /* Responsive mobile */
+        @media (max-width: 768px) {
+          .profit-value-buttons {
+            gap: 0.5rem;
+          }
+          
+          .profit-value-btn {
+            padding: 0.6rem 1rem;
+            font-size: 0.85rem;
+            flex: 1 1 calc(33.333% - 0.5rem);
+            min-width: 70px;
+          }
+          
+          .unit-info-content {
+            padding: 1.5rem;
+            max-width: calc(100% - 2rem);
+          }
+          
+          .unit-info-content h4 {
+            font-size: 1.25rem;
+          }
+          
+          .unit-info-content p {
+            font-size: 0.9rem;
+          }
+        }
       </style>
 
       <div class="pricing-page-container">
@@ -1581,19 +1759,43 @@
 
         <!-- Simulateur de profit -->
         <div class="profit-simulator">
-          <h3 class="profit-simulator-title">💰 Simulateur de Gains</h3>
-          <p class="profit-simulator-subtitle">Calculez combien vous auriez gagné avec nos prédictions IA</p>
+          <h3 class="profit-simulator-title">💰 Simulateur si vous auriez fait tous nos bets du jour et parlay jusqu'à présent</h3>
+          <p class="profit-simulator-subtitle">(selon notre vrai historique)</p>
           
           <div class="profit-input-group">
-            <label for="unit-value-input" class="profit-input-label">Valeur d'1 unité</label>
-            <div class="profit-input-wrapper">
-              <input type="number" id="unit-value-input" class="profit-input" placeholder="20" min="1" step="1">
-              <span class="currency-symbol">$</span>
+            <label class="profit-input-label">
+              Déterminer la valeur d'une unité
+              <button class="info-icon" id="info-unit-btn" type="button">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+              </button>
+            </label>
+            
+            <div class="profit-value-buttons">
+              <button class="profit-value-btn" data-value="20">20$</button>
+              <button class="profit-value-btn" data-value="40">40$</button>
+              <button class="profit-value-btn" data-value="60">60$</button>
+              <button class="profit-value-btn" data-value="100">100$</button>
+              <button class="profit-value-btn" data-value="200">200$</button>
+              <button class="profit-value-btn" data-value="500">500$</button>
+              <button class="profit-value-btn" data-value="1000">1000$</button>
+              <button class="profit-value-btn" id="other-value-btn" data-value="other">Autre</button>
+            </div>
+            
+            <!-- Input caché pour valeur personnalisée -->
+            <div id="custom-input-wrapper" class="custom-input-wrapper" style="display: none;">
+              <div class="profit-input-wrapper">
+                <input type="number" id="custom-unit-input" class="profit-input" placeholder="Entrez une valeur" min="1" step="1">
+                <span class="currency-symbol">$</span>
+              </div>
             </div>
           </div>
           
           <button id="calculate-profit-btn" class="profit-calculate-btn">
-            Calculer mes gains potentiels
+            Simulez comme si j'avais fait les bets winabet.ai
           </button>
           
           <div id="profit-result" class="profit-result" style="display: none;">
@@ -1643,6 +1845,26 @@
               </svg>
               <p class="profit-loading-text">L'IA analyse vos gains potentiels...</p>
             </div>
+          </div>
+        </div>
+
+        <!-- Popup d'information sur les unités -->
+        <div id="unit-info-popup" class="unit-info-popup" style="display: none;">
+          <div class="unit-info-overlay"></div>
+          <div class="unit-info-content">
+            <button class="unit-info-close" id="close-popup-btn" type="button">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+            <h4>Qu'est-ce qu'une unité ?</h4>
+            <p>
+              Une unité est la valeur associée à un pourcentage de votre bankroll. 
+              Donc si votre bankroll est 1000$ et 1 unité (souvent 1-5%) = 50$ = 5%. 
+              C'est une unité de mesure pour bien bet. Vous pouvez commencer avec un 
+              bankroll petit ou gros comme vous voulez.
+            </p>
           </div>
         </div>
 
@@ -2220,18 +2442,85 @@ document.addEventListener('DOMContentLoaded', function() {
 // Simulateur de profit
 document.addEventListener('DOMContentLoaded', function() {
   const calculateBtn = document.getElementById('calculate-profit-btn');
-  const unitInput = document.getElementById('unit-value-input');
   const resultDiv = document.getElementById('profit-result');
   const loadingDiv = document.getElementById('profit-loading');
   
-  if (!calculateBtn || !unitInput || !resultDiv || !loadingDiv) return;
+  // Variables pour le simulateur
+  let selectedUnitValue = null;
+  const valueButtons = document.querySelectorAll('.profit-value-btn');
+  const customInputWrapper = document.getElementById('custom-input-wrapper');
+  const customInput = document.getElementById('custom-unit-input');
+  const otherBtn = document.getElementById('other-value-btn');
+
+  // Gérer la sélection des boutons de valeur
+  valueButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      // Retirer la classe active de tous les boutons
+      valueButtons.forEach(b => b.classList.remove('active'));
+      
+      // Ajouter la classe active au bouton cliqué
+      this.classList.add('active');
+      
+      const value = this.getAttribute('data-value');
+      
+      if (value === 'other') {
+        // Afficher l'input personnalisé
+        customInputWrapper.style.display = 'block';
+        selectedUnitValue = null; // Attendre que l'utilisateur entre une valeur
+        customInput.focus();
+      } else {
+        // Masquer l'input personnalisé et utiliser la valeur prédéfinie
+        customInputWrapper.style.display = 'none';
+        selectedUnitValue = parseFloat(value);
+      }
+    });
+  });
+
+  // Gérer l'input personnalisé
+  if (customInput) {
+    customInput.addEventListener('input', function() {
+      const value = parseFloat(this.value);
+      if (value && value > 0) {
+        selectedUnitValue = value;
+      } else {
+        selectedUnitValue = null;
+      }
+    });
+  }
+
+  // Gérer le popup d'information
+  const infoBtn = document.getElementById('info-unit-btn');
+  const popup = document.getElementById('unit-info-popup');
+  const closePopupBtn = document.getElementById('close-popup-btn');
+  const popupOverlay = document.querySelector('.unit-info-overlay');
+
+  if (infoBtn && popup) {
+    infoBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      popup.style.display = 'flex';
+    });
+  }
+
+  if (closePopupBtn && popup) {
+    closePopupBtn.addEventListener('click', function() {
+      popup.style.display = 'none';
+    });
+  }
+
+  if (popupOverlay && popup) {
+    popupOverlay.addEventListener('click', function() {
+      popup.style.display = 'none';
+    });
+  }
+  
+  if (!calculateBtn || !resultDiv || !loadingDiv) return;
 
   calculateBtn.addEventListener('click', async function() {
-    const unitValue = parseFloat(unitInput.value);
+    const unitValue = selectedUnitValue;
     
     // Validation
     if (!unitValue || unitValue <= 0) {
-      alert('Veuillez entrer une valeur valide supérieure à 0');
+      alert('Veuillez sélectionner une valeur d\'unité ou entrer une valeur personnalisée supérieure à 0');
       return;
     }
 
