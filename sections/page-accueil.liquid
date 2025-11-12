@@ -2012,13 +2012,13 @@
             <div class="pricing-plan-card selected" data-plan="monthly">
               <div class="pricing-plan-header">
                 <div class="pricing-plan-left">
+                  <div class="pricing-plan-trial">Essai gratuit 1 jour</div>
                   <div class="pricing-plan-price">
                     <span class="pricing-plan-amount">99$</span>
                     <span class="pricing-plan-period">/mois</span>
                   </div>
-                  <div class="pricing-plan-billing">Facturé chaque mois</div>
+                  <div class="pricing-plan-billing">Facturé chaque mois - Début de la facturation : <span class="billing-start-date"></span></div>
                 </div>
-                <div class="pricing-plan-trial">Essai gratuit 1 jour</div>
               </div>
             </div>
 
@@ -2026,14 +2026,14 @@
             <div class="pricing-plan-card" data-plan="6months">
               <div class="pricing-plan-header">
                 <div class="pricing-plan-left">
+                  <div class="pricing-plan-trial">Essai gratuit 1 jour</div>
                   <div class="pricing-plan-price">
                     <span class="pricing-plan-amount-old">99$</span>
                     <span class="pricing-plan-amount">79$</span>
                     <span class="pricing-plan-period">/mois</span>
                   </div>
-                  <div class="pricing-plan-billing">Facturé chaque 6 mois</div>
+                  <div class="pricing-plan-billing">Facturé chaque 6 mois - Début de la facturation : <span class="billing-start-date"></span></div>
                 </div>
-                <div class="pricing-plan-trial">Essai gratuit 1 jour</div>
               </div>
             </div>
 
@@ -2041,14 +2041,14 @@
             <div class="pricing-plan-card" data-plan="yearly">
               <div class="pricing-plan-header">
                 <div class="pricing-plan-left">
+                  <div class="pricing-plan-trial">Essai gratuit 1 jour</div>
                   <div class="pricing-plan-price">
                     <span class="pricing-plan-amount-old">99$</span>
                     <span class="pricing-plan-amount">59$</span>
                     <span class="pricing-plan-period">/mois</span>
                   </div>
-                  <div class="pricing-plan-billing">Facturé chaque année</div>
+                  <div class="pricing-plan-billing">Facturé chaque année - Début de la facturation : <span class="billing-start-date"></span></div>
                 </div>
-                <div class="pricing-plan-trial">Essai gratuit 1 jour</div>
               </div>
             </div>
 
@@ -3954,6 +3954,22 @@ document.addEventListener('DOMContentLoaded', function() {
       loadingDiv.style.display = 'none';
       alert('Impossible de charger l\'historique. Veuillez réessayer plus tard.');
     }
+  });
+
+  // Calculer et afficher la date de début de facturation (24h après maintenant)
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  
+  const months = ['jan', 'fév', 'mar', 'avr', 'mai', 'juin', 'juil', 'août', 'sep', 'oct', 'nov', 'déc'];
+  const day = tomorrow.getDate();
+  const month = months[tomorrow.getMonth()];
+  const year = tomorrow.getFullYear();
+  
+  const billingStartDate = `${day} ${month} ${year}`;
+  
+  // Mettre à jour tous les éléments de date de facturation
+  document.querySelectorAll('.billing-start-date').forEach(el => {
+    el.textContent = billingStartDate;
   });
 });
 </script>
