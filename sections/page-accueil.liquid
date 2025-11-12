@@ -1211,6 +1211,151 @@
           line-height: 1.5;
         }
 
+        /* Grille des forfaits */
+        .pricing-plans-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 2rem;
+          width: 100%;
+          max-width: 1200px;
+          margin: 4rem 0;
+        }
+
+        .pricing-plan-card {
+          position: relative;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 16px;
+          padding: 2.5rem 2rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          transition: all 0.3s ease;
+        }
+
+        .pricing-plan-card:hover {
+          border-color: rgba(255, 255, 255, 0.25);
+          background: rgba(255, 255, 255, 0.05);
+          transform: translateY(-4px);
+        }
+
+        .pricing-plan-card-popular {
+          border-color: rgba(102, 126, 234, 0.5);
+        }
+
+        .pricing-plan-card-best {
+          border-color: rgba(16, 185, 129, 0.5);
+        }
+
+        .pricing-plan-card-custom {
+          border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .pricing-plan-badge {
+          position: absolute;
+          top: -12px;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          color: white;
+          padding: 0.4rem 1rem;
+          border-radius: 9999px;
+          font-size: 0.75rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+        }
+
+        .pricing-plan-badge-best {
+          background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        .pricing-plan-title {
+          font-family: 'Outfit', sans-serif;
+          font-size: 1.8rem;
+          font-weight: 600;
+          color: rgba(255, 255, 255, 0.95);
+          margin-bottom: 1.5rem;
+        }
+
+        .pricing-plan-price {
+          display: flex;
+          align-items: baseline;
+          gap: 0.5rem;
+          margin-bottom: 1rem;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .pricing-plan-amount-old {
+          font-family: 'Outfit', sans-serif;
+          font-size: 1.8rem;
+          font-weight: 400;
+          color: rgba(255, 255, 255, 0.4);
+          text-decoration: line-through;
+        }
+
+        .pricing-plan-amount {
+          font-family: 'Outfit', sans-serif;
+          font-size: 3rem;
+          font-weight: 700;
+          color: white;
+        }
+
+        .pricing-plan-period {
+          font-family: 'Outfit', sans-serif;
+          font-size: 1.2rem;
+          font-weight: 400;
+          color: rgba(255, 255, 255, 0.6);
+        }
+
+        .pricing-plan-trial {
+          font-family: 'Outfit', sans-serif;
+          font-size: 1rem;
+          font-weight: 400;
+          color: rgba(16, 185, 129, 0.8);
+          margin-bottom: 2rem;
+        }
+
+        .pricing-plan-description {
+          font-family: 'Outfit', sans-serif;
+          font-size: 1.2rem;
+          font-weight: 400;
+          color: rgba(255, 255, 255, 0.7);
+          margin: 2rem 0;
+          line-height: 1.6;
+        }
+
+        .pricing-plan-button {
+          width: 100%;
+          padding: 1rem 2rem;
+          background: white;
+          color: black;
+          font-family: 'Outfit', sans-serif;
+          font-size: 1.1rem;
+          font-weight: 500;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .pricing-plan-button:hover {
+          background: rgba(255, 255, 255, 0.9);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .pricing-plan-button-outline {
+          background: transparent;
+          color: white;
+          border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .pricing-plan-button-outline:hover {
+          background: rgba(255, 255, 255, 0.1);
+          border-color: rgba(255, 255, 255, 0.5);
+        }
+
         /* Responsive Mobile */
         @media (max-width: 768px) {
           .back-to-home-pricing {
@@ -1256,6 +1401,28 @@
           .pricing-feature-description {
             font-size: 1.2rem;
             max-width:340px;
+          }
+
+          .pricing-plans-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin: 3rem 0;
+          }
+
+          .pricing-plan-card {
+            padding: 2rem 1.5rem;
+          }
+
+          .pricing-plan-title {
+            font-size: 1.5rem;
+          }
+
+          .pricing-plan-amount {
+            font-size: 2.2rem;
+          }
+
+          .pricing-plan-amount-old {
+            font-size: 1.4rem;
           }
         }
 
@@ -1760,23 +1927,88 @@
           <span style="color: #ffffff;">wina</span><span style="color: rgba(255, 255, 255, 0.35);">bet</span><span style="color: #ffffff; font-size: 0.8em; margin-left: -0.05em;">.ai</span>
         </div>
 
-        <!-- Titre principal -->
-        <h1 class="pricing-main-title">
-        Commencer un essai gratuit de 1 journée 
-        </h1>
+        <!-- Contenu initial -->
+        <div id="pricing-initial-content">
+          <!-- Titre principal -->
+          <h1 class="pricing-main-title">
+          Commencer un essai gratuit de 1 journée 
+          </h1>
 
-        <!-- Description -->
-        <p class="pricing-description">
-          Essai gratuit d'une journée de notre IA et nos paris sportifs. Annuler à n'importe quel moments</strong>.
-        </p>
+          <!-- Description -->
+          <p class="pricing-description">
+            Essai gratuit d'une journée de notre IA et nos paris sportifs. Annuler à n'importe quel moments</strong>.
+          </p>
 
-        <!-- Bouton CTA -->
-        <a href="#" class="pricing-cta-button">
-          Commencer l'essai gratuit
-        </a>
+          <!-- Bouton CTA -->
+          <a href="#" class="pricing-cta-button" id="start-trial-button">
+            Commencer l'essai gratuit
+          </a>
+        </div>
+
+        <!-- Section des forfaits (cachée par défaut) -->
+        <div id="pricing-plans-section" style="display: none;">
+          <!-- Titre principal -->
+          <h1 class="pricing-main-title">
+            Choisissez votre forfait
+          </h1>
+
+          <!-- Description -->
+          <p class="pricing-description">
+            Tous les forfaits incluent un essai gratuit d'une journée
+          </p>
+
+          <!-- Grille des 4 forfaits -->
+          <div class="pricing-plans-grid">
+            <!-- Plan 1 - Mensuel -->
+            <div class="pricing-plan-card">
+              <h3 class="pricing-plan-title">Mensuel</h3>
+              <div class="pricing-plan-price">
+                <span class="pricing-plan-amount">99$</span>
+                <span class="pricing-plan-period">/mois</span>
+              </div>
+              <div class="pricing-plan-trial">+ essai gratuit 1 jour</div>
+              <button class="pricing-plan-button">Choisir ce forfait</button>
+            </div>
+
+            <!-- Plan 2 - 6 mois -->
+            <div class="pricing-plan-card pricing-plan-card-popular">
+              <div class="pricing-plan-badge">Populaire</div>
+              <h3 class="pricing-plan-title">6 mois</h3>
+              <div class="pricing-plan-price">
+                <span class="pricing-plan-amount-old">99$</span>
+                <span class="pricing-plan-amount">79$</span>
+                <span class="pricing-plan-period">/mois</span>
+              </div>
+              <div class="pricing-plan-trial">+ essai gratuit 1 jour</div>
+              <button class="pricing-plan-button">Choisir ce forfait</button>
+            </div>
+
+            <!-- Plan 3 - Annuel -->
+            <div class="pricing-plan-card pricing-plan-card-best">
+              <div class="pricing-plan-badge pricing-plan-badge-best">Meilleure valeur</div>
+              <h3 class="pricing-plan-title">Annuel</h3>
+              <div class="pricing-plan-price">
+                <span class="pricing-plan-amount-old">99$</span>
+                <span class="pricing-plan-amount">59$</span>
+                <span class="pricing-plan-period">/mois</span>
+              </div>
+              <div class="pricing-plan-trial">+ essai gratuit 1 jour</div>
+              <button class="pricing-plan-button">Choisir ce forfait</button>
+            </div>
+
+            <!-- Plan 4 - Virement Interac -->
+            <div class="pricing-plan-card pricing-plan-card-custom">
+              <h3 class="pricing-plan-title">Virement Interac</h3>
+              <div class="pricing-plan-description">
+                Découvrir nos options personnalisées
+              </div>
+              <button class="pricing-plan-button pricing-plan-button-outline">En savoir plus</button>
+            </div>
+          </div>
+        </div>
 
         <!-- Liste des avantages -->
-        <div class="pricing-features-list">
+        <div class="pricing-features-list" id="pricing-features-list">
           <!-- Item 1 -->
           <div class="pricing-feature-item">
             <div class="pricing-feature-checkmark">
@@ -2663,6 +2895,32 @@
           if (btn) {
             e.preventDefault();
             window.location.hash = '';
+          }
+        });
+      })();
+
+      // ==================== GESTION DES FORFAITS PRICING ====================
+      (function() {
+        document.addEventListener('DOMContentLoaded', function() {
+          const startTrialButton = document.getElementById('start-trial-button');
+          const initialContent = document.getElementById('pricing-initial-content');
+          const plansSection = document.getElementById('pricing-plans-section');
+          const featuresList = document.getElementById('pricing-features-list');
+          
+          if (startTrialButton && initialContent && plansSection && featuresList) {
+            startTrialButton.addEventListener('click', function(e) {
+              e.preventDefault();
+              // Cacher le contenu initial et la liste des avantages
+              initialContent.style.display = 'none';
+              featuresList.style.display = 'none';
+              // Afficher les forfaits
+              plansSection.style.display = 'block';
+              // Scroller vers le haut pour voir les forfaits
+              window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+              });
+            });
           }
         });
       })();
