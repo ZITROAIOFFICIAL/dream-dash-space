@@ -1289,10 +1289,9 @@
 
         .pricing-plan-header {
           display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
+          flex-direction: column;
+          align-items: stretch;
           width: 100%;
-          margin-bottom: 0.5rem;
         }
 
         .pricing-plan-left {
@@ -1361,7 +1360,7 @@
           font-size: 0.95rem;
           font-weight: 400;
           color: white;
-          margin-top: 1rem;
+          margin-bottom: 1.5rem;
           text-align: center;
         }
 
@@ -1375,6 +1374,8 @@
           border-radius: 9999px;
           white-space: nowrap;
           text-align: center;
+          margin-top: 1.5rem;
+          align-self: flex-start;
         }
 
         .pricing-plan-description {
@@ -2029,6 +2030,7 @@
             <!-- Plan 1 - Mensuel -->
             <div class="pricing-plan-card selected" data-plan="monthly">
               <div class="pricing-plan-header">
+                <div class="pricing-plan-cancel">Annuler à tout moment sans frais</div>
                 <div class="pricing-plan-left">
                   <div class="pricing-plan-price">
                     <span class="pricing-plan-amount">99$</span>
@@ -2036,7 +2038,6 @@
                   </div>
                   <div class="pricing-plan-billing">Facturé chaque mois</div>
                   <div class="pricing-plan-billing-date">Premier paiement: <span class="billing-start-date"></span></div>
-                  <div class="pricing-plan-cancel">Annuler à tout moment sans frais</div>
                 </div>
                 <div class="pricing-plan-trial">Essai gratuit 1 jour</div>
               </div>
@@ -2045,6 +2046,7 @@
             <!-- Plan 2 - 6 mois -->
             <div class="pricing-plan-card" data-plan="6months">
               <div class="pricing-plan-header">
+                <div class="pricing-plan-cancel">Annuler à tout moment sans frais</div>
                 <div class="pricing-plan-left">
                   <div class="pricing-plan-price">
                     <span class="pricing-plan-amount-old">99$</span>
@@ -2053,7 +2055,6 @@
                   </div>
                   <div class="pricing-plan-billing">Facturé chaque 6 mois</div>
                   <div class="pricing-plan-billing-date">Premier paiement: <span class="billing-start-date"></span></div>
-                  <div class="pricing-plan-cancel">Annuler à tout moment sans frais</div>
                 </div>
                 <div class="pricing-plan-trial">Essai gratuit 1 jour</div>
               </div>
@@ -2062,6 +2063,7 @@
             <!-- Plan 3 - Annuel -->
             <div class="pricing-plan-card" data-plan="yearly">
               <div class="pricing-plan-header">
+                <div class="pricing-plan-cancel">Annuler à tout moment sans frais</div>
                 <div class="pricing-plan-left">
                   <div class="pricing-plan-price">
                     <span class="pricing-plan-amount-old">99$</span>
@@ -2070,7 +2072,6 @@
                   </div>
                   <div class="pricing-plan-billing">Facturé chaque année</div>
                   <div class="pricing-plan-billing-date">Premier paiement: <span class="billing-start-date"></span></div>
-                  <div class="pricing-plan-cancel">Annuler à tout moment sans frais</div>
                 </div>
                 <div class="pricing-plan-trial">Essai gratuit 1 jour</div>
               </div>
