@@ -2127,7 +2127,7 @@
           </div>
 
           <!-- Bouton Continuer -->
-          <a href="#" class="pricing-continue-button" style="text-decoration: none; text-align: center;">Continuer</a>
+          <button class="pricing-continue-button">Continuer</button>
         </div>
 
         <!-- Liste des avantages -->
@@ -2977,24 +2977,40 @@
         const pricingCards = document.querySelectorAll('.pricing-plan-card[data-plan]');
         const continueButton = document.querySelector('.pricing-continue-button');
         
-        // Fonction pour mettre à jour le texte et le lien du bouton
+        // URLs pour chaque plan
+        const planUrls = {
+          monthly: 'https://winabet.ai/cart/clear?return_to=%2Fcart%2Fadd%3Fitems%5B0%5D%5Bid%5D%3D47693665468667%26items%5B0%5D%5Bquantity%5D%3D1%26items%5B0%5D%5Bselling_plan%5D%3D4543316219%26return_to%3D%252Fcheckout%253F',
+          '6months': 'https://winabet.ai/cart/clear?return_to=%2Fcart%2Fadd%3Fitems%5B0%5D%5Bid%5D%3D47694846230779%26items%5B0%5D%5Bquantity%5D%3D1%26items%5B0%5D%5Bselling_plan%5D%3D4543348987%26return_to%3D%252Fcheckout%253F',
+          yearly: 'https://winabet.ai/cart/clear?return_to=%2Fcart%2Fadd%3Fitems%5B0%5D%5Bid%5D%3D47694852030715%26items%5B0%5D%5Bquantity%5D%3D1%26items%5B0%5D%5Bselling_plan%5D%3D4543381755%26return_to%3D%252Fcheckout%253F',
+          interac: '#'
+        };
+        
+        // Fonction pour mettre à jour le texte du bouton
         function updateContinueButton(plan) {
           if (!continueButton) return;
           
           if (plan === 'monthly') {
             continueButton.textContent = 'Commencer pour (0$), puis 99$/mois';
-            continueButton.href = 'https://winabet.ai/cart/clear?return_to=%2Fcart%2Fadd%3Fitems%5B0%5D%5Bid%5D%3D47693665468667%26items%5B0%5D%5Bquantity%5D%3D1%26items%5B0%5D%5Bselling_plan%5D%3D4543316219%26return_to%3D%252Fcheckout%253F';
           } else if (plan === '6months') {
             continueButton.textContent = 'Commencer pour (0$), puis 79$/mois';
-            continueButton.href = 'https://winabet.ai/cart/clear?return_to=%2Fcart%2Fadd%3Fitems%5B0%5D%5Bid%5D%3D47694846230779%26items%5B0%5D%5Bquantity%5D%3D1%26items%5B0%5D%5Bselling_plan%5D%3D4543348987%26return_to%3D%252Fcheckout%253F';
           } else if (plan === 'yearly') {
             continueButton.textContent = 'Commencer pour (0$), puis 59$/mois';
-            continueButton.href = 'https://winabet.ai/cart/clear?return_to=%2Fcart%2Fadd%3Fitems%5B0%5D%5Bid%5D%3D47694852030715%26items%5B0%5D%5Bquantity%5D%3D1%26items%5B0%5D%5Bselling_plan%5D%3D4543381755%26return_to%3D%252Fcheckout%253F';
           } else if (plan === 'interac') {
             continueButton.textContent = 'Continuer avec virement Interac';
-            continueButton.href = '#';
           }
         }
+        
+        // Gérer le clic sur le bouton continuer
+        continueButton.addEventListener('click', function() {
+          const selectedCard = document.querySelector('.pricing-plan-card.selected');
+          if (selectedCard) {
+            const selectedPlan = selectedCard.getAttribute('data-plan');
+            const url = planUrls[selectedPlan];
+            if (url && url !== '#') {
+              window.location.href = url;
+            }
+          }
+        });
         
         pricingCards.forEach(card => {
           card.addEventListener('click', function() {
