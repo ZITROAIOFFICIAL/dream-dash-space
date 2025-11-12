@@ -2975,14 +2975,41 @@
 
         // Gestion des cartes de tarification cliquables
         const pricingCards = document.querySelectorAll('.pricing-plan-card[data-plan]');
+        const continueButton = document.querySelector('.pricing-continue-button');
+        
+        // Fonction pour mettre à jour le texte du bouton
+        function updateContinueButton(plan) {
+          if (!continueButton) return;
+          
+          if (plan === 'monthly') {
+            continueButton.textContent = 'Commencer pour (0$), puis 99$/mois';
+          } else if (plan === '6months') {
+            continueButton.textContent = 'Commencer pour (0$), puis 79$/mois';
+          } else if (plan === 'yearly') {
+            continueButton.textContent = 'Commencer pour (0$), puis 59$/mois';
+          } else if (plan === 'interac') {
+            continueButton.textContent = 'Continuer avec virement Interac';
+          }
+        }
+        
         pricingCards.forEach(card => {
           card.addEventListener('click', function() {
             // Retirer la classe selected de toutes les cartes
             pricingCards.forEach(c => c.classList.remove('selected'));
             // Ajouter la classe selected à la carte cliquée
             this.classList.add('selected');
+            
+            // Mettre à jour le texte du bouton
+            const selectedPlan = this.getAttribute('data-plan');
+            updateContinueButton(selectedPlan);
           });
         });
+        
+        // Initialiser le texte du bouton avec le plan par défaut (monthly)
+        const defaultCard = document.querySelector('.pricing-plan-card.selected');
+        if (defaultCard) {
+          updateContinueButton(defaultCard.getAttribute('data-plan'));
+        }
       });
 
       // Navigation interne pour la page Politique, Support et Rejoindre
