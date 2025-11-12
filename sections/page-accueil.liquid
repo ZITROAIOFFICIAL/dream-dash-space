@@ -2208,6 +2208,15 @@ document.addEventListener('DOMContentLoaded', function() {
   graphContainer.addEventListener('touchend', resetTooltip);
 });
 
+// Initialisation SUPABASE_CONFIG avec shop.permanent_domain
+(function() {
+  if (!window.SUPABASE_CONFIG) {
+    window.SUPABASE_CONFIG = {};
+  }
+  window.SUPABASE_CONFIG.url = 'https://ycvfyorgkhuxcosfrsxs.supabase.co';
+  window.SUPABASE_CONFIG.shopDomain = '{{ shop.permanent_domain }}';
+})();
+
 // Simulateur de profit
 document.addEventListener('DOMContentLoaded', function() {
   const calculateBtn = document.getElementById('calculate-profit-btn');
@@ -2231,28 +2240,90 @@ document.addEventListener('DOMContentLoaded', function() {
     resultDiv.style.display = 'none';
 
     try {
-      // Configuration Supabase (réutiliser la config existante)
-      const FUNCTIONS_URL = window.SUPABASE_CONFIG?.url?.replace('.supabase.co', '.functions.supabase.co') || 
-                            'https://ycvfyorgkhuxcosfrsxs.functions.supabase.co';
-      const SHOP_DOMAIN = window.SUPABASE_CONFIG?.shopDomain || window.location.hostname;
+      // Délai aléatoire de 3 à 6 secondes
+      const randomDelay = Math.floor(Math.random() * 3000) + 3000; // 3000-6000ms
+      
+      // Fonction pour extraire les unités depuis les éléments HTML
+      const extractUnitsFromDOM = () => {
+        let betUnits = 0;
+        let parlayUnits = 0;
+        
+        // Chercher dans #bet-stats
+        const betStatsEl = document.getElementById('bet-stats');
+        if (betStatsEl) {
+          const betUnitsText = betStatsEl.textContent || '';
+          const betMatch = betUnitsText.match(/([+-]?\d+\.?\d*)\s*unités?/i);
+          if (betMatch) {
+            betUnits = parseFloat(betMatch[1]);
+          }
+        }
+        
+        // Chercher dans #parlay-stats
+        const parlayStatsEl = document.getElementById('parlay-stats');
+        if (parlayStatsEl) {
+          const parlayUnitsText = parlayStatsEl.textContent || '';
+          const parlayMatch = parlayUnitsText.match(/([+-]?\d+\.?\d*)\s*unités?/i);
+          if (parlayMatch) {
+            parlayUnits = parseFloat(parlayMatch[1]);
+          }
+        }
+        
+        // Retourner null si aucune donnée trouvée
+        if (betUnits === 0 && parlayUnits === 0 && !betStatsEl && !parlayStatsEl) {
+          return null;
+        }
+        
+        return { betUnits, parlayUnits };
+      };
+      
+      // Configuration Supabase (forcer l'utilisation du bon domain)
+      const FUNCTIONS_URL = 'https://ycvfyorgkhuxcosfrsxs.functions.supabase.co';
+      const SHOP_DOMAIN = window.SUPABASE_CONFIG?.shopDomain || '{{ shop.permanent_domain }}';
+      
+      // Fonction pour récupérer les données via edge functions
+      const fetchFromAPI = async () => {
+        const [betResponse, parlayResponse] = await Promise.all([
+          fetch(`${FUNCTIONS_URL}/get-bet-history?shop_domain=${SHOP_DOMAIN}`),
+          fetch(`${FUNCTIONS_URL}/get-parlay-history?shop_domain=${SHOP_DOMAIN}`)
+        ]);
 
-      // Appel simultané aux deux edge functions
-      const [betResponse, parlayResponse] = await Promise.all([
-        fetch(`${FUNCTIONS_URL}/get-bet-history?shop_domain=${SHOP_DOMAIN}`),
-        fetch(`${FUNCTIONS_URL}/get-parlay-history?shop_domain=${SHOP_DOMAIN}`)
-      ]);
+        if (!betResponse.ok || !parlayResponse.ok) {
+          throw new Error('Erreur lors du chargement de l\'historique');
+        }
 
-      if (!betResponse.ok || !parlayResponse.ok) {
-        throw new Error('Erreur lors du chargement de l\'historique');
+        const betData = await betResponse.json();
+        const parlayData = await parlayResponse.json();
+        
+        return {
+          betUnits: betData.total_units || 0,
+          parlayUnits: parlayData.total_units || 0,
+          betData,
+          parlayData
+        };
+      };
+      
+      // Tenter d'extraire depuis le DOM, sinon fallback sur l'API
+      let unitsData;
+      const domData = extractUnitsFromDOM();
+      
+      if (domData) {
+        // Attendre le délai avant d'afficher
+        await new Promise(resolve => setTimeout(resolve, randomDelay));
+        unitsData = { 
+          betUnits: domData.betUnits, 
+          parlayUnits: domData.parlayUnits,
+          betData: { total_bets: 0 },
+          parlayData: { total_parlays: 0 }
+        };
+      } else {
+        // Fallback: appeler les edge functions
+        const apiDataPromise = fetchFromAPI();
+        await new Promise(resolve => setTimeout(resolve, randomDelay));
+        unitsData = await apiDataPromise;
       }
-
-      const betData = await betResponse.json();
-      const parlayData = await parlayResponse.json();
-
+      
       // Calculer les unités totales
-      const betUnits = betData.total_units || 0;
-      const parlayUnits = parlayData.total_units || 0;
-      const totalUnits = betUnits + parlayUnits;
+      const totalUnits = unitsData.betUnits + unitsData.parlayUnits;
 
       // Calculer le profit en dollars
       const profitDollars = totalUnits * unitValue;
@@ -2280,7 +2351,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Message contextuel
       if (totalUnits > 0) {
-        messageEl.textContent = `🎉 Avec nos prédictions IA, vous auriez réalisé un profit de ${dollarsText} ! Ces résultats sont basés sur notre historique réel de ${betData.total_bets || 0} bets et ${parlayData.total_parlays || 0} parlays.`;
+        messageEl.textContent = `🎉 Avec nos prédictions IA, vous auriez réalisé un profit de ${dollarsText} ! Ces résultats sont basés sur notre historique réel.`;
       } else if (totalUnits < 0) {
         messageEl.textContent = `📊 Sur cette période, le résultat aurait été de ${dollarsText}. Nos performances varient selon les périodes, mais notre stratégie long terme vise la rentabilité.`;
       } else {
