@@ -2001,6 +2001,46 @@
           </div>
         </div>
 
+        <!-- Slider d'historique des bets -->
+        <div class="bet-history-slider-section">
+          <div class="bet-history-slider-title">
+            <svg width="50" height="50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+              <defs>
+                <filter id="softGlowHistory" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="1.2" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <path id="orbitHistory0" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                <path id="orbitHistory1" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                <path id="orbitHistory2" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+              </defs>
+              <g stroke="#68859e" stroke-width="2" fill="none">
+                <use href="#orbitHistory0"/>
+                <use href="#orbitHistory1"/>
+                <use href="#orbitHistory2"/>
+              </g>
+              <g stroke-linecap="round" filter="url(#softGlowHistory)">
+                <use href="#orbitHistory0" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                  <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                </use>
+                <use href="#orbitHistory1" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                  <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                </use>
+                <use href="#orbitHistory2" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                  <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                </use>
+              </g>
+              <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+            </svg>
+            <h2>Historique de nos prédictions IA</h2>
+          </div>
+          <div class="bet-history-slider-wrapper">
+            <div id="bet-history-slider" class="bet-history-slider-container">
+              <p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Chargement de l'historique...</p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -2371,6 +2411,199 @@
           if (btn) {
             e.preventDefault();
             window.location.hash = '';
+          }
+        });
+      })();
+
+      // ==================== BET HISTORY SLIDER ====================
+      (function() {
+        // Fonction pour sanitizer les logos (éviter 404)
+        function sanitizeLogo(url) {
+          const pixel = "data:image/gif;base64,R0lGODlhAQABAAAAACw=";
+          if (!url) return pixel;
+          const u = String(url).trim();
+          if (/Liquid error/i.test(u)) return pixel;
+          if (u.startsWith("//")) return "https:" + u;
+          if (/^https?:\/\//.test(u)) return u;
+          return pixel;
+        }
+
+        // Fonction pour générer le HTML d'une carte de bet
+        function generateBetCardHTML(bet) {
+          let unitsText, unitsColor;
+          const betUnits = parseFloat(bet.bet_units || "1");
+
+          if (bet.result === "win") {
+            const unitsValue = (betUnits * (bet.multiplier - 1)).toFixed(2);
+            unitsText = `Win +${unitsValue} UNITS`;
+            unitsColor = "rgba(34, 197, 94, 0.2)";
+          } else if (bet.result === "loose") {
+            const unitsValue = betUnits.toFixed(2);
+            unitsText = `Lose -${unitsValue} UNITS`;
+            unitsColor = "rgba(239, 68, 68, 0.2)";
+          } else {
+            unitsText = "EN ATTENTE";
+            unitsColor = "rgba(255, 255, 255, 0.10)";
+          }
+
+          let matchHTML = "";
+
+          if (bet.bet_type === "moneyline") {
+            const showTeam1Win = bet.moneyline_team === "team1" && bet.result === "win";
+            const showTeam2Win = bet.moneyline_team === "team2" && bet.result === "win";
+            const showTeam1Loss = bet.moneyline_team === "team1" && bet.result === "loose";
+            const showTeam2Loss = bet.moneyline_team === "team2" && bet.result === "loose";
+
+            matchHTML = `
+              <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 2rem; font-weight: 600; margin-bottom: 2rem;">MONEYLINE</div>
+              <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
+                <div style="text-align: center; flex: 1;">
+                  <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem; ${showTeam1Win ? "border: 5px solid rgba(255, 255, 255, 0.5);" : ""} ${showTeam1Loss ? "border: 5px solid rgba(255, 255, 255, 0.2);" : ""}">
+                    <img src="${sanitizeLogo(bet.team1_logo)}" alt="${bet.team1_name}" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.style.display='none'">
+                  </div>
+                  <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team1_name}</div>
+                  ${showTeam1Win ? '<div style="font-size: 1.75rem; font-weight: 700; color: rgba(255, 255, 255, 0.9); margin-top: 1rem; text-align: center;">VICTOIRE</div>' : ""}
+                  ${showTeam1Loss ? '<div style="font-size: 1.75rem; font-weight: 700; color: rgba(255, 255, 255, 0.6); margin-top: 1rem; text-align: center;">DÉFAITE</div>' : ""}
+                </div>
+                <div style="text-align: center;">
+                  <div style="font-size: 3rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
+                </div>
+                <div style="text-align: center; flex: 1;">
+                  <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem; ${showTeam2Win ? "border: 5px solid rgba(255, 255, 255, 0.5);" : ""} ${showTeam2Loss ? "border: 5px solid rgba(255, 255, 255, 0.2);" : ""}">
+                    <img src="${sanitizeLogo(bet.team2_logo)}" alt="${bet.team2_name}" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.style.display='none'">
+                  </div>
+                  <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team2_name}</div>
+                  ${showTeam2Win ? '<div style="font-size: 1.75rem; font-weight: 700; color: rgba(255, 255, 255, 0.9); margin-top: 1rem; text-align: center;">VICTOIRE</div>' : ""}
+                  ${showTeam2Loss ? '<div style="font-size: 1.75rem; font-weight: 700; color: rgba(255, 255, 255, 0.6); margin-top: 1rem; text-align: center;">DÉFAITE</div>' : ""}
+                </div>
+              </div>
+            `;
+          } else if (bet.bet_type === "spread") {
+            matchHTML = `
+              <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 2rem; font-weight: 600; margin-bottom: 2rem;">SPREAD</div>
+              <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
+                <div style="text-align: center; flex: 1;">
+                  <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem; ${bet.spread_team === "team1" ? "border: 5px solid rgba(255, 255, 255, 0.5);" : ""}">
+                    <img src="${sanitizeLogo(bet.team1_logo)}" alt="${bet.team1_name}" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.style.display='none'">
+                  </div>
+                  <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team1_name}</div>
+                  ${bet.spread_team === "team1" ? `<div style="font-size: 1.75rem; font-weight: 700; color: rgba(255, 255, 255, 0.9); margin-top: 1rem; text-align: center;">${bet.spread_value}</div>` : ""}
+                </div>
+                <div style="text-align: center;">
+                  <div style="font-size: 3rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
+                </div>
+                <div style="text-align: center; flex: 1;">
+                  <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem; ${bet.spread_team === "team2" ? "border: 5px solid rgba(255, 255, 255, 0.5);" : ""}">
+                    <img src="${sanitizeLogo(bet.team2_logo)}" alt="${bet.team2_name}" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.style.display='none'">
+                  </div>
+                  <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team2_name}</div>
+                  ${bet.spread_team === "team2" ? `<div style="font-size: 1.75rem; font-weight: 700; color: rgba(255, 255, 255, 0.9); margin-top: 1rem; text-align: center;">${bet.spread_value}</div>` : ""}
+                </div>
+              </div>
+            `;
+          } else if (bet.bet_type === "over_under") {
+            const displayText = bet.over_under_text_custom || bet.over_under_type;
+            matchHTML = `
+              <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 2rem; font-weight: 600; margin-bottom: 2rem;">${displayText?.toUpperCase()}</div>
+              <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
+                <div style="text-align: center; flex: 1;">
+                  <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem;">
+                    <img src="${sanitizeLogo(bet.team1_logo)}" alt="${bet.team1_name}" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.style.display='none'">
+                  </div>
+                  <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team1_name}</div>
+                </div>
+                <div style="text-align: center;">
+                  <div style="font-size: 3rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
+                  <div class="history-over-under-display" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.5rem; padding: 1rem 1.25rem; margin-top: 1.25rem; max-width: 280px; margin-left: auto; margin-right: auto;">
+                    <div class="history-over-under-type" style="font-size: 1.5rem; font-weight: 700; color: rgba(255, 255, 255, 0.9); text-align: center; word-spacing: 9999px; line-height: 1.3;">${displayText?.toUpperCase()}</div>
+                    <div class="history-over-under-value" style="font-size: 2rem; font-weight: 700; color: #ffffff; margin-top: 0.5rem; text-align: center;">${bet.over_under_value}</div>
+                    ${bet.over_under_stat_type ? `<div class="history-over-under-stat" style="font-size: 1.5rem; color: rgba(255, 255, 255, 0.6); margin-top: 0.5rem; text-align: center; word-spacing: 9999px; line-height: 1.3;">${bet.over_under_stat_type}</div>` : ""}
+                  </div>
+                </div>
+                <div style="text-align: center; flex: 1;">
+                  <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem;">
+                    <img src="${sanitizeLogo(bet.team2_logo)}" alt="${bet.team2_name}" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.style.display='none'">
+                  </div>
+                  <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team2_name}</div>
+                </div>
+              </div>
+            `;
+          }
+
+          return `
+            <div class="card-wrapper">
+              <div style="max-width: 32rem; margin: 2rem auto 0.5rem; padding: 0 2rem;">
+                <div style="background: ${unitsColor}; color: #ffffff; padding: 1rem 2rem; border-radius: 0.5rem; font-size: 1.5rem; font-weight: 700; text-align: center;">
+                  ${unitsText}
+                </div>
+              </div>
+              
+              <div class="history-card" style="background: #000000; border: 2px solid ${unitsColor}; border-radius: 1rem; padding: 4rem; margin: 0 auto 2rem; max-width: 36rem; width: 100%; display: flex; flex-direction: column; align-items: center;">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                  <div style="font-size: 1rem; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">COTE</div>
+                  <div style="font-size: 2.5rem; font-weight: 700; color: #ffffff;">${bet.multiplier}</div>
+                </div>
+                
+                <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.5rem; margin-bottom: 2.5rem;">
+                  ${bet.match_date} - ${bet.match_time}
+                </div>
+                
+                ${matchHTML}
+              </div>
+            </div>
+          `;
+        }
+
+        // Fonction pour charger l'historique des bets
+        async function loadBetHistoryForSlider() {
+          try {
+            const FUNCTIONS_URL = 'https://ycvfyorgkhuxcosfrsxs.functions.supabase.co';
+            const SHOP_DOMAIN = window.SUPABASE_CONFIG?.shopDomain || '{{ shop.permanent_domain }}';
+            
+            const response = await fetch(`${FUNCTIONS_URL}/get-bet-history?shop_domain=${SHOP_DOMAIN}`);
+            const data = await response.json();
+            
+            return data.bets || [];
+          } catch (error) {
+            console.error('❌ Erreur chargement slider:', error);
+            return [];
+          }
+        }
+
+        // Fonction pour créer le slider
+        function createBetSlider(bets) {
+          const sliderContainer = document.getElementById('bet-history-slider');
+          if (!sliderContainer) return;
+
+          // Filtrer pour ne garder que les bets terminés (win/loose)
+          const completedBets = bets.filter(bet => bet.result === 'win' || bet.result === 'loose');
+          
+          if (completedBets.length === 0) {
+            sliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Aucune prédiction complétée pour le moment.</p>';
+            return;
+          }
+
+          // Prendre les 10 derniers bets complétés
+          const sliderBets = completedBets.slice(0, 10);
+          
+          // Générer le HTML pour chaque bet
+          const cardsHTML = sliderBets.map(bet => generateBetCardHTML(bet)).join('');
+          
+          // Dupliquer les cartes pour créer un effet de boucle infinie
+          sliderContainer.innerHTML = cardsHTML + cardsHTML;
+        }
+
+        // Initialiser au chargement de la page
+        document.addEventListener('DOMContentLoaded', async function() {
+          try {
+            const bets = await loadBetHistoryForSlider();
+            createBetSlider(bets);
+          } catch (error) {
+            console.error('❌ Erreur initialisation slider:', error);
+            const sliderContainer = document.getElementById('bet-history-slider');
+            if (sliderContainer) {
+              sliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Erreur de chargement.</p>';
+            }
           }
         });
       })();

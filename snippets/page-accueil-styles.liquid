@@ -2585,4 +2585,120 @@
         color: #ffffff;
       }
 
+      /* ==================== BET HISTORY SLIDER ==================== */
+      .bet-history-slider-section {
+        margin-top: 4rem;
+        padding: 0 1rem;
+      }
+
+      .bet-history-slider-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .bet-history-slider-title h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #ffffff;
+        text-align: center;
+        margin: 0;
+      }
+
+      .bet-history-slider-wrapper {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        padding: 2rem 0;
+      }
+
+      .bet-history-slider-container {
+        display: flex;
+        gap: 2rem;
+        animation: slideLeft 80s linear infinite;
+        will-change: transform;
+      }
+
+      .bet-history-slider-container:hover {
+        animation-play-state: paused;
+      }
+
+      @keyframes slideLeft {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* Cartes dans le slider */
+      .bet-history-slider-container .card-wrapper {
+        flex: 0 0 auto;
+        width: 400px;
+        margin: 0;
+      }
+
+      .bet-history-slider-container .history-card {
+        background: #000000;
+        border-radius: 1rem;
+        padding: 2rem;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      /* Ajustements responsive pour le slider */
+      @media (max-width: 768px) {
+        .bet-history-slider-title h2 {
+          font-size: 1.5rem;
+        }
+
+        .bet-history-slider-title svg {
+          width: 35px;
+          height: 35px;
+        }
+
+        .bet-history-slider-container .card-wrapper {
+          width: 300px;
+        }
+
+        .bet-history-slider-container .history-card {
+          padding: 1.5rem;
+        }
+
+        /* Réduire les tailles de police dans les cartes mobile */
+        .bet-history-slider-container .history-card [style*="font-size: 2.5rem"] {
+          font-size: 1.8rem !important;
+        }
+
+        .bet-history-slider-container .history-card [style*="font-size: 2rem"] {
+          font-size: 1.5rem !important;
+        }
+
+        .bet-history-slider-container .history-card [style*="font-size: 3rem"] {
+          font-size: 2rem !important;
+        }
+
+        .bet-history-slider-container .history-card [style*="font-size: 1.75rem"] {
+          font-size: 1.3rem !important;
+        }
+
+        .bet-history-slider-container .history-card [style*="font-size: 1.5rem"] {
+          font-size: 1.1rem !important;
+        }
+
+        .bet-history-slider-container .history-card [style*="width: 5rem"] {
+          width: 3.5rem !important;
+          height: 3.5rem !important;
+        }
+      }
+
+      @media (min-width: 769px) and (max-width: 1024px) {
+        .bet-history-slider-container .card-wrapper {
+          width: 350px;
+        }
+      }
+
     </style>
