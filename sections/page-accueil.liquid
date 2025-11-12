@@ -2661,57 +2661,60 @@
         }
 
         // Fonction pour initialiser le slider manuel (drag/swipe + auto-scroll)
-        function initManualSlider(slider) {
+        function initManualSlider(sliderContainer) {
+          // Cibler le parent wrapper qui a overflow-x: auto
+          const wrapper = sliderContainer.parentElement;
+          
           let isDragging = false;
           let startX;
           let scrollLeft;
           let autoScrollInterval;
 
           // Drag avec souris
-          slider.addEventListener('mousedown', (e) => {
+          wrapper.addEventListener('mousedown', (e) => {
             isDragging = true;
-            slider.style.cursor = 'grabbing';
-            startX = e.pageX - slider.offsetLeft;
-            scrollLeft = slider.scrollLeft;
+            sliderContainer.style.cursor = 'grabbing';
+            startX = e.pageX - wrapper.offsetLeft;
+            scrollLeft = wrapper.scrollLeft;
             clearInterval(autoScrollInterval);
           });
 
-          slider.addEventListener('mousemove', (e) => {
+          wrapper.addEventListener('mousemove', (e) => {
             if (!isDragging) return;
             e.preventDefault();
-            const x = e.pageX - slider.offsetLeft;
+            const x = e.pageX - wrapper.offsetLeft;
             const walk = (x - startX) * 2;
-            slider.scrollLeft = scrollLeft - walk;
+            wrapper.scrollLeft = scrollLeft - walk;
           });
 
-          slider.addEventListener('mouseup', () => {
+          wrapper.addEventListener('mouseup', () => {
             isDragging = false;
-            slider.style.cursor = 'grab';
+            sliderContainer.style.cursor = 'grab';
             startAutoScroll();
           });
 
-          slider.addEventListener('mouseleave', () => {
+          wrapper.addEventListener('mouseleave', () => {
             if (isDragging) {
               isDragging = false;
-              slider.style.cursor = 'grab';
+              sliderContainer.style.cursor = 'grab';
               startAutoScroll();
             }
           });
 
           // Touch pour mobile
-          slider.addEventListener('touchstart', (e) => {
+          wrapper.addEventListener('touchstart', (e) => {
             startX = e.touches[0].pageX;
-            scrollLeft = slider.scrollLeft;
+            scrollLeft = wrapper.scrollLeft;
             clearInterval(autoScrollInterval);
           });
 
-          slider.addEventListener('touchmove', (e) => {
+          wrapper.addEventListener('touchmove', (e) => {
             const x = e.touches[0].pageX;
             const walk = (startX - x) * 2;
-            slider.scrollLeft = scrollLeft + walk;
+            wrapper.scrollLeft = scrollLeft + walk;
           });
 
-          slider.addEventListener('touchend', () => {
+          wrapper.addEventListener('touchend', () => {
             startAutoScroll();
           });
 
@@ -2720,13 +2723,12 @@
             clearInterval(autoScrollInterval);
             autoScrollInterval = setInterval(() => {
               if (!isDragging) {
-                slider.scrollLeft += 1;
+                wrapper.scrollLeft += 1;
                 // Boucle infinie : revenir au début si à la fin
-                if (slider.scrollLeft >= slider.scrollWidth / 2) {
+                if (wrapper.scrollLeft >= wrapper.scrollWidth / 2) {
                   // Reset sans animation pour éviter le "jump" visible
-                  const wrapper = slider.parentElement;
                   wrapper.style.scrollBehavior = 'auto';
-                  slider.scrollLeft = 1;
+                  wrapper.scrollLeft = 1;
                   setTimeout(() => {
                     wrapper.style.scrollBehavior = 'smooth';
                   }, 50);
