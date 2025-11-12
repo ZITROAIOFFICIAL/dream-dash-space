@@ -1570,8 +1570,8 @@
 
         /* Boutons de valeurs prédéfinies (20$, 40$, etc.) */
         .profit-value-buttons {
-          display: flex;
-          flex-wrap: wrap;
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
           gap: 0.75rem;
           margin-top: 0.75rem;  /* DESKTOP: Marge haut boutons valeurs */
           margin-bottom: 0;     /* DESKTOP: Marge bas boutons valeurs */
