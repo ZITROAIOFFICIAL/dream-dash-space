@@ -2626,10 +2626,28 @@
           // Dupliquer 4 fois pour un effet de boucle infinie fluide
           sliderContainer.innerHTML = cardsHTML + cardsHTML + cardsHTML + cardsHTML;
           
-          // Forcer le reflow pour déclencher l'animation immédiatement
-          sliderContainer.style.animation = 'none';
-          sliderContainer.offsetHeight; // Trigger reflow
-          sliderContainer.style.animation = '';
+          // Animation avec requestAnimationFrame pour contrôle total
+          let animationId = null;
+          let currentPosition = 0;
+          const speed = 0.5; // pixels par frame (ajustable)
+          const totalWidth = sliderContainer.scrollWidth / 4; // largeur d'un cycle complet
+          
+          function animate() {
+            if (!sliderContainer) return;
+            
+            currentPosition -= speed;
+            
+            // Reset quand on a parcouru un cycle complet (25% du total)
+            if (Math.abs(currentPosition) >= totalWidth) {
+              currentPosition = 0;
+            }
+            
+            sliderContainer.style.transform = `translateX(${currentPosition}px)`;
+            animationId = requestAnimationFrame(animate);
+          }
+          
+          // Démarrer l'animation
+          animate();
           
           // Ajouter la fonctionnalité de scroll horizontal manuel
           const sliderWrapper = sliderContainer.parentElement;
@@ -2649,42 +2667,26 @@
             // Gestion du drag avec la souris
             let isDragging = false;
             let startX;
-            let startTranslateX;
-            
-            const getTranslateX = (el) => {
-              const style = window.getComputedStyle(el);
-              const transform = style.transform || style.webkitTransform || 'matrix(1, 0, 0, 1, 0, 0)';
-              const match3d = transform.match(/matrix3d\(([^)]+)\)/);
-              if (match3d) {
-                const values = match3d[1].split(',').map(parseFloat);
-                return values[12] || 0;
-              }
-              const match2d = transform.match(/matrix\(([^)]+)\)/);
-              if (match2d) {
-                const values = match2d[1].split(',').map(parseFloat);
-                return values[4] || 0;
-              }
-              return 0;
-            };
+            let dragStartPosition;
             
             sliderWrapper.addEventListener('mousedown', (e) => {
               isDragging = true;
               sliderWrapper.style.cursor = 'grabbing';
               startX = e.pageX;
-              startTranslateX = getTranslateX(sliderContainer);
-              // Désactiver l'animation pour contrôler via transform
-              sliderContainer.style.animation = 'none';
+              dragStartPosition = currentPosition;
+              // Arrêter l'animation pendant le drag
+              if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+              }
             });
             
             sliderWrapper.addEventListener('mouseleave', () => {
               if (isDragging) {
                 isDragging = false;
                 sliderWrapper.style.cursor = 'grab';
-                // Reprendre l'animation depuis le début (simple et fiable)
-                sliderContainer.style.removeProperty('transform');
-                // reflow
-                void sliderContainer.offsetWidth;
-                sliderContainer.style.animation = '';
+                // Reprendre l'animation là où on est
+                animate();
               }
             });
             
@@ -2692,9 +2694,8 @@
               if (isDragging) {
                 isDragging = false;
                 sliderWrapper.style.cursor = 'grab';
-                sliderContainer.style.removeProperty('transform');
-                void sliderContainer.offsetWidth;
-                sliderContainer.style.animation = '';
+                // Reprendre l'animation là où on est
+                animate();
               }
             });
             
@@ -2702,21 +2703,31 @@
               if (!isDragging) return;
               e.preventDefault();
               const dx = e.pageX - startX;
-              sliderContainer.style.transform = `translateX(${startTranslateX + dx}px)`;
+              currentPosition = dragStartPosition + dx;
+              
+              // Gérer le wrap autour pour la boucle infinie
+              while (currentPosition > 0) currentPosition -= totalWidth;
+              while (currentPosition <= -totalWidth) currentPosition += totalWidth;
+              
+              sliderContainer.style.transform = `translateX(${currentPosition}px)`;
             });
 
             // Support tactile
             let touchStartX = 0;
             let touchStartY = 0;
-            let touchStartTranslateX = 0;
+            let touchDragStartPosition = 0;
 
             sliderWrapper.addEventListener('touchstart', (e) => {
               if (!e.touches || e.touches.length === 0) return;
               const t = e.touches[0];
               touchStartX = t.clientX;
               touchStartY = t.clientY;
-              touchStartTranslateX = getTranslateX(sliderContainer);
-              sliderContainer.style.animation = 'none';
+              touchDragStartPosition = currentPosition;
+              // Arrêter l'animation
+              if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+              }
             }, { passive: true });
 
             sliderWrapper.addEventListener('touchmove', (e) => {
@@ -2727,14 +2738,19 @@
               // Si le mouvement est principalement horizontal, on gère le slide
               if (Math.abs(dx) > Math.abs(dy)) {
                 e.preventDefault();
-                sliderContainer.style.transform = `translateX(${touchStartTranslateX + dx}px)`;
+                currentPosition = touchDragStartPosition + dx;
+                
+                // Gérer le wrap pour la boucle infinie
+                while (currentPosition > 0) currentPosition -= totalWidth;
+                while (currentPosition <= -totalWidth) currentPosition += totalWidth;
+                
+                sliderContainer.style.transform = `translateX(${currentPosition}px)`;
               }
             }, { passive: false });
 
             sliderWrapper.addEventListener('touchend', () => {
-              sliderContainer.style.removeProperty('transform');
-              void sliderContainer.offsetWidth;
-              sliderContainer.style.animation = '';
+              // Reprendre l'animation là où on est
+              animate();
             });
             
             // Style pour indiquer que c'est draggable
