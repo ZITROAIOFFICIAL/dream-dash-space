@@ -1258,6 +1258,216 @@
             max-width:340px;
           }
         }
+
+        /* Styles du simulateur de profit */
+        .profit-simulator {
+          position: relative;
+          width: 100%;
+          max-width: 600px;
+          margin: 4rem auto 0;
+          padding: 2.5rem;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 16px;
+          backdrop-filter: blur(10px);
+        }
+
+        .profit-simulator-title {
+          font-family: 'Outfit', sans-serif;
+          font-size: 2rem;
+          font-weight: 600;
+          color: #ffffff;
+          text-align: center;
+          margin-bottom: 0.5rem;
+        }
+
+        .profit-simulator-subtitle {
+          font-family: 'Outfit', sans-serif;
+          font-size: 1rem;
+          color: rgba(255, 255, 255, 0.6);
+          text-align: center;
+          margin-bottom: 2rem;
+        }
+
+        .profit-input-group {
+          margin-bottom: 1.5rem;
+        }
+
+        .profit-input-label {
+          display: block;
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.9rem;
+          color: rgba(255, 255, 255, 0.7);
+          margin-bottom: 0.5rem;
+        }
+
+        .profit-input-wrapper {
+          position: relative;
+          display: flex;
+          align-items: center;
+        }
+
+        .profit-input {
+          width: 100%;
+          padding: 1rem 2.5rem 1rem 1rem;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 8px;
+          color: #ffffff;
+          font-family: 'Outfit', sans-serif;
+          font-size: 1.1rem;
+          transition: all 0.3s ease;
+        }
+
+        .profit-input:focus {
+          outline: none;
+          border-color: rgba(255, 255, 255, 0.4);
+          background: rgba(255, 255, 255, 0.08);
+          box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+        }
+
+        .profit-input::placeholder {
+          color: rgba(255, 255, 255, 0.3);
+        }
+
+        .currency-symbol {
+          position: absolute;
+          right: 1rem;
+          font-family: 'Outfit', sans-serif;
+          font-size: 1.1rem;
+          color: rgba(255, 255, 255, 0.5);
+          pointer-events: none;
+        }
+
+        .profit-calculate-btn {
+          width: 100%;
+          padding: 1.2rem;
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8));
+          color: #000000;
+          font-family: 'Outfit', sans-serif;
+          font-size: 1.1rem;
+          font-weight: 600;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .profit-calculate-btn:hover {
+          background: linear-gradient(135deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.9));
+          transform: translateY(-2px);
+          box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+        }
+
+        .profit-result {
+          margin-top: 2rem;
+          padding: 2rem;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          border-radius: 12px;
+          animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        .profit-result-content {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+
+        .profit-units-display,
+        .profit-dollars-display {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .profit-label {
+          font-family: 'Outfit', sans-serif;
+          font-size: 1rem;
+          color: rgba(255, 255, 255, 0.7);
+        }
+
+        .profit-value {
+          font-family: 'Outfit', sans-serif;
+          font-size: 1.5rem;
+          font-weight: 600;
+          color: #10b981;
+        }
+
+        .profit-value-big {
+          font-family: 'Outfit', sans-serif;
+          font-size: 2.5rem;
+          font-weight: 700;
+          color: #10b981;
+        }
+
+        .profit-value.negative,
+        .profit-value-big.negative {
+          color: #ef4444;
+        }
+
+        .profit-message {
+          margin-top: 1rem;
+          padding: 1rem;
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 8px;
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.9rem;
+          color: rgba(255, 255, 255, 0.8);
+          text-align: center;
+        }
+
+        .profit-loading {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.8);
+          border-radius: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 10;
+        }
+
+        .profit-loading-content {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 1rem;
+        }
+
+        .profit-loading-text {
+          font-family: 'Outfit', sans-serif;
+          font-size: 1rem;
+          color: rgba(255, 255, 255, 0.9);
+          text-align: center;
+        }
+
+        @media (max-width: 768px) {
+          .profit-simulator {
+            padding: 2rem 1.5rem;
+            margin: 3rem auto 0;
+          }
+
+          .profit-simulator-title {
+            font-size: 1.6rem;
+          }
+
+          .profit-simulator-subtitle {
+            font-size: 0.9rem;
+          }
+
+          .profit-value-big {
+            font-size: 2rem;
+          }
+        }
       </style>
 
       <div class="pricing-page-container">
@@ -1368,6 +1578,74 @@
             </div>
           </div>
         </div>
+
+        <!-- Simulateur de profit -->
+        <div class="profit-simulator">
+          <h3 class="profit-simulator-title">💰 Simulateur de Gains</h3>
+          <p class="profit-simulator-subtitle">Calculez combien vous auriez gagné avec nos prédictions IA</p>
+          
+          <div class="profit-input-group">
+            <label for="unit-value-input" class="profit-input-label">Valeur d'1 unité</label>
+            <div class="profit-input-wrapper">
+              <input type="number" id="unit-value-input" class="profit-input" placeholder="20" min="1" step="1">
+              <span class="currency-symbol">$</span>
+            </div>
+          </div>
+          
+          <button id="calculate-profit-btn" class="profit-calculate-btn">
+            Calculer mes gains potentiels
+          </button>
+          
+          <div id="profit-result" class="profit-result" style="display: none;">
+            <div class="profit-result-content">
+              <div class="profit-units-display">
+                <span class="profit-label">Total des unités en profit :</span>
+                <span id="profit-units-value" class="profit-value">+0</span>
+              </div>
+              <div class="profit-dollars-display">
+                <span class="profit-label">Vos gains potentiels :</span>
+                <span id="profit-dollars-value" class="profit-value-big">$0</span>
+              </div>
+              <p id="profit-message" class="profit-message"></p>
+            </div>
+          </div>
+          
+          <!-- Overlay de chargement -->
+          <div id="profit-loading" class="profit-loading" style="display: none;">
+            <div class="profit-loading-content">
+              <svg id="atom-profit-simulator" width="50" height="50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                <defs>
+                  <filter id="softGlowSimulator" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="1.2" result="b"/>
+                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                  <path id="orbit0Simulator" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                  <path id="orbit1Simulator" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                  <path id="orbit2Simulator" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+                </defs>
+                <g stroke="#68859e" stroke-width="2" fill="none">
+                  <use href="#orbit0Simulator"/>
+                  <use href="#orbit1Simulator"/>
+                  <use href="#orbit2Simulator"/>
+                </g>
+                <g stroke-linecap="round" filter="url(#softGlowSimulator)">
+                  <use href="#orbit0Simulator" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                  <use href="#orbit1Simulator" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                  <use href="#orbit2Simulator" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                </g>
+                <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+              </svg>
+              <p class="profit-loading-text">L'IA analyse vos gains potentiels...</p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -1928,5 +2206,96 @@ document.addEventListener('DOMContentLoaded', function() {
   }, { passive: false });
   
   graphContainer.addEventListener('touchend', resetTooltip);
+});
+
+// Simulateur de profit
+document.addEventListener('DOMContentLoaded', function() {
+  const calculateBtn = document.getElementById('calculate-profit-btn');
+  const unitInput = document.getElementById('unit-value-input');
+  const resultDiv = document.getElementById('profit-result');
+  const loadingDiv = document.getElementById('profit-loading');
+  
+  if (!calculateBtn || !unitInput || !resultDiv || !loadingDiv) return;
+
+  calculateBtn.addEventListener('click', async function() {
+    const unitValue = parseFloat(unitInput.value);
+    
+    // Validation
+    if (!unitValue || unitValue <= 0) {
+      alert('Veuillez entrer une valeur valide supérieure à 0');
+      return;
+    }
+
+    // Afficher le loader
+    loadingDiv.style.display = 'flex';
+    resultDiv.style.display = 'none';
+
+    try {
+      // Configuration Supabase (réutiliser la config existante)
+      const FUNCTIONS_URL = window.SUPABASE_CONFIG?.url?.replace('.supabase.co', '.functions.supabase.co') || 
+                            'https://ycvfyorgkhuxcosfrsxs.functions.supabase.co';
+      const SHOP_DOMAIN = window.SUPABASE_CONFIG?.shopDomain || window.location.hostname;
+
+      // Appel simultané aux deux edge functions
+      const [betResponse, parlayResponse] = await Promise.all([
+        fetch(`${FUNCTIONS_URL}/get-bet-history?shop_domain=${SHOP_DOMAIN}`),
+        fetch(`${FUNCTIONS_URL}/get-parlay-history?shop_domain=${SHOP_DOMAIN}`)
+      ]);
+
+      if (!betResponse.ok || !parlayResponse.ok) {
+        throw new Error('Erreur lors du chargement de l\'historique');
+      }
+
+      const betData = await betResponse.json();
+      const parlayData = await parlayResponse.json();
+
+      // Calculer les unités totales
+      const betUnits = betData.total_units || 0;
+      const parlayUnits = parlayData.total_units || 0;
+      const totalUnits = betUnits + parlayUnits;
+
+      // Calculer le profit en dollars
+      const profitDollars = totalUnits * unitValue;
+
+      // Afficher les résultats
+      const unitsValueEl = document.getElementById('profit-units-value');
+      const dollarsValueEl = document.getElementById('profit-dollars-value');
+      const messageEl = document.getElementById('profit-message');
+
+      // Mettre à jour les valeurs
+      const unitsText = totalUnits >= 0 ? `+${totalUnits.toFixed(2)}` : totalUnits.toFixed(2);
+      unitsValueEl.textContent = unitsText;
+      
+      const dollarsText = profitDollars >= 0 ? `+$${profitDollars.toFixed(2)}` : `-$${Math.abs(profitDollars).toFixed(2)}`;
+      dollarsValueEl.textContent = dollarsText;
+
+      // Appliquer les classes de couleur
+      if (totalUnits >= 0) {
+        unitsValueEl.classList.remove('negative');
+        dollarsValueEl.classList.remove('negative');
+      } else {
+        unitsValueEl.classList.add('negative');
+        dollarsValueEl.classList.add('negative');
+      }
+
+      // Message contextuel
+      if (totalUnits > 0) {
+        messageEl.textContent = `🎉 Avec nos prédictions IA, vous auriez réalisé un profit de ${dollarsText} ! Ces résultats sont basés sur notre historique réel de ${betData.total_bets || 0} bets et ${parlayData.total_parlays || 0} parlays.`;
+      } else if (totalUnits < 0) {
+        messageEl.textContent = `📊 Sur cette période, le résultat aurait été de ${dollarsText}. Nos performances varient selon les périodes, mais notre stratégie long terme vise la rentabilité.`;
+      } else {
+        messageEl.textContent = `📊 Aucune unité de profit/perte enregistrée pour le moment. Consultez nos historiques pour voir les performances détaillées.`;
+      }
+
+      // Cacher le loader et afficher les résultats
+      loadingDiv.style.display = 'none';
+      resultDiv.style.display = 'block';
+
+    } catch (error) {
+      console.error('Erreur lors du calcul des gains:', error);
+      loadingDiv.style.display = 'none';
+      alert('Impossible de charger l\'historique. Veuillez réessayer plus tard.');
+    }
+  });
 });
 </script>
