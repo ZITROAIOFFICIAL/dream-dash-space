@@ -1226,7 +1226,7 @@
           background: rgba(255, 255, 255, 0.03);
           border: 1px solid rgba(255, 255, 255, 0.1);
           border-radius: 16px;
-          padding: 2.5rem 2rem;
+          padding: 1.5rem 1.5rem;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -1271,10 +1271,10 @@
 
         .pricing-plan-title {
           font-family: 'Outfit', sans-serif;
-          font-size: 1.8rem;
+          font-size: 1.5rem;
           font-weight: 600;
           color: rgba(255, 255, 255, 0.95);
-          margin-bottom: 1.5rem;
+          margin-bottom: 1rem;
         }
 
         .pricing-plan-price {
@@ -1296,7 +1296,7 @@
 
         .pricing-plan-amount {
           font-family: 'Outfit', sans-serif;
-          font-size: 3rem;
+          font-size: 2.2rem;
           font-weight: 700;
           color: white;
         }
@@ -1310,10 +1310,10 @@
 
         .pricing-plan-trial {
           font-family: 'Outfit', sans-serif;
-          font-size: 1rem;
+          font-size: 0.9rem;
           font-weight: 400;
           color: rgba(16, 185, 129, 0.8);
-          margin-bottom: 2rem;
+          margin-bottom: 1.5rem;
         }
 
         .pricing-plan-description {
@@ -1327,11 +1327,11 @@
 
         .pricing-plan-button {
           width: 100%;
-          padding: 1rem 2rem;
+          padding: 0.8rem 1.5rem;
           background: white;
           color: black;
           font-family: 'Outfit', sans-serif;
-          font-size: 1.1rem;
+          font-size: 1rem;
           font-weight: 500;
           border: none;
           border-radius: 8px;
@@ -1928,7 +1928,7 @@
         </div>
 
         <!-- Contenu initial -->
-        <div id="pricing-initial-content">
+        <div id="pricing-initial-content" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
           <!-- Titre principal -->
           <h1 class="pricing-main-title">
           Commencer un essai gratuit de 1 journée 
@@ -2906,13 +2906,17 @@
           const initialContent = document.getElementById('pricing-initial-content');
           const plansSection = document.getElementById('pricing-plans-section');
           const featuresList = document.getElementById('pricing-features-list');
+          const pricingLogo = document.querySelector('.pricing-logo');
           
           if (startTrialButton && initialContent && plansSection && featuresList) {
             startTrialButton.addEventListener('click', function(e) {
               e.preventDefault();
-              // Cacher le contenu initial et la liste des avantages
+              // Cacher le contenu initial, la liste des avantages, et le logo
               initialContent.style.display = 'none';
               featuresList.style.display = 'none';
+              if (pricingLogo) {
+                pricingLogo.style.display = 'none';
+              }
               // Afficher les forfaits
               plansSection.style.display = 'block';
               // Scroller vers le haut pour voir les forfaits
