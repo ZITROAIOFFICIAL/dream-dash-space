@@ -2042,7 +2042,15 @@
               <div id="wins-count" style="font-size: 2.5rem; font-weight: 700; color: #22c55e;">-</div>
             </div>
             <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.75rem; padding: 1.5rem 2.5rem; text-align: center; min-width: 200px;">
-              <div style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Units en positif</div>
+              <div style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                Units en positif
+                <button class="info-icon" id="info-unit-btn-history" type="button" style="background: transparent; border: none; cursor: pointer; padding: 0; display: inline-flex; align-items: center; vertical-align: middle;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="rgba(255, 255, 255, 0.6)" stroke-width="2"></circle>
+                    <text x="12" y="17" text-anchor="middle" fill="rgba(255, 255, 255, 0.6)" font-size="14" font-weight="700" stroke="none">?</text>
+                  </svg>
+                </button>
+              </div>
               <div id="units-count" style="font-size: 2.5rem; font-weight: 700;">-</div>
             </div>
           </div>
@@ -3067,12 +3075,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Gérer le popup d'information
   const infoBtn = document.getElementById('info-unit-btn');
+  const infoBtnHistory = document.getElementById('info-unit-btn-history');
   const popup = document.getElementById('unit-info-popup');
   const closePopupBtn = document.getElementById('close-popup-btn');
   const popupOverlay = document.querySelector('.unit-info-overlay');
 
   if (infoBtn && popup) {
     infoBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      popup.style.display = 'flex';
+    });
+  }
+  
+  if (infoBtnHistory && popup) {
+    infoBtnHistory.addEventListener('click', function(e) {
       e.preventDefault();
       popup.style.display = 'flex';
     });
