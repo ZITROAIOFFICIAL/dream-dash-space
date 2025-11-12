@@ -2079,7 +2079,7 @@
               </div>
               
               <div class="reviews-slider">
-                <div class="reviews-track" id="reviewsTrack">
+                <div class="reviews-track" id="reviewsTrackBet">
                   <!-- Review Card 1 -->
                   <div class="review-card">
                     <p class="review-text">
@@ -2502,9 +2502,11 @@
           statsObserver.observe(statsSection);
         }
 
-        // Reviews Auto-Scrolling Slider with Drag/Swipe Support
-        const track = document.getElementById('reviewsTrack');
-        if (track) {
+        // Reviews Auto-Scrolling Slider with Drag/Swipe Support (Fonction réutilisable)
+        function initReviewsSlider(trackId) {
+          const track = document.getElementById(trackId);
+          if (!track) return;
+          
           const cards = Array.from(track.children);
           
           // Clone cards for infinite scroll
@@ -2610,6 +2612,10 @@
           track.style.cursor = 'grab';
           autoScroll();
         }
+        
+        // Initialiser les deux sliders
+        initReviewsSlider('reviewsTrack');
+        initReviewsSlider('reviewsTrackBet');
       });
 
       // Navigation interne pour la page Politique, Support et Rejoindre
