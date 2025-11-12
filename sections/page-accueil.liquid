@@ -1137,6 +1137,8 @@
           line-height: 1.6;
           margin-bottom: 7.5rem;
           max-width: 500px;
+          margin-left: auto;
+          margin-right: auto;
         }
 
         /* Bouton CTA */
@@ -2907,15 +2909,19 @@
           const plansSection = document.getElementById('pricing-plans-section');
           const featuresList = document.getElementById('pricing-features-list');
           const pricingLogo = document.querySelector('.pricing-logo');
+          const backButton = document.querySelector('.back-to-home-pricing');
           
           if (startTrialButton && initialContent && plansSection && featuresList) {
             startTrialButton.addEventListener('click', function(e) {
               e.preventDefault();
-              // Cacher le contenu initial, la liste des avantages, et le logo
+              // Cacher le contenu initial, la liste des avantages, le logo et le bouton retour
               initialContent.style.display = 'none';
               featuresList.style.display = 'none';
               if (pricingLogo) {
                 pricingLogo.style.display = 'none';
+              }
+              if (backButton) {
+                backButton.style.display = 'none';
               }
               // Afficher les forfaits
               plansSection.style.display = 'block';
