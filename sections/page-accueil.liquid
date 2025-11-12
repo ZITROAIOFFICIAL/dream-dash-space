@@ -1251,14 +1251,12 @@
 
         .pricing-plan-card {
           position: relative;
-          background: rgba(39, 39, 42, 0.5);
+          background: #000000;
           border: 2px solid rgba(113, 113, 122, 0.3);
           border-radius: 12px;
           padding: 0.8rem 1rem;
           display: flex;
           flex-direction: column;
-          align-items: center;
-          text-align: center;
           transition: all 0.3s ease;
           cursor: pointer;
         }
@@ -1269,7 +1267,7 @@
 
         .pricing-plan-card.selected {
           border-color: rgba(255, 255, 255, 1);
-          background: rgba(255, 255, 255, 0.08);
+          background: #000000;
         }
 
         .pricing-plan-card.selected::after {
@@ -1289,21 +1287,33 @@
           font-weight: bold;
         }
 
+        .pricing-plan-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          width: 100%;
+          margin-bottom: 0.5rem;
+        }
+
+        .pricing-plan-left {
+          flex: 1;
+        }
+
         .pricing-plan-title {
           font-family: 'Outfit', sans-serif;
           font-size: 1.1rem;
           font-weight: 600;
           color: rgba(255, 255, 255, 0.95);
           margin-bottom: 0.5rem;
+          text-align: left;
         }
 
         .pricing-plan-price {
           display: flex;
           align-items: baseline;
           gap: 0.5rem;
-          margin-bottom: 0.5rem;
+          margin-bottom: 0.3rem;
           flex-wrap: wrap;
-          justify-content: center;
         }
 
         .pricing-plan-amount-old {
@@ -1328,12 +1338,25 @@
           color: rgba(255, 255, 255, 0.6);
         }
 
+        .pricing-plan-billing {
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.8rem;
+          font-weight: 400;
+          color: rgba(255, 255, 255, 0.5);
+          margin-bottom: 0;
+          text-align: left;
+        }
+
         .pricing-plan-trial {
           font-family: 'Outfit', sans-serif;
-          font-size: 0.75rem;
-          font-weight: 400;
-          color: rgba(16, 185, 129, 0.8);
-          margin-bottom: 0;
+          font-size: 0.65rem;
+          font-weight: 500;
+          color: rgba(16, 185, 129, 0.9);
+          background: rgba(16, 185, 129, 0.1);
+          padding: 0.3rem 0.6rem;
+          border-radius: 9999px;
+          white-space: nowrap;
+          text-align: center;
         }
 
         .pricing-plan-description {
@@ -1986,42 +2009,62 @@
           <!-- Grille des 4 forfaits -->
           <div class="pricing-plans-grid">
             <!-- Plan 1 - Mensuel -->
-            <div class="pricing-plan-card">
-              <h3 class="pricing-plan-title">Mensuel</h3>
-              <div class="pricing-plan-price">
-                <span class="pricing-plan-amount">99$</span>
-                <span class="pricing-plan-period">/mois</span>
+            <div class="pricing-plan-card selected" data-plan="monthly">
+              <div class="pricing-plan-header">
+                <div class="pricing-plan-left">
+                  <h3 class="pricing-plan-title">Mensuel</h3>
+                  <div class="pricing-plan-price">
+                    <span class="pricing-plan-amount">99$</span>
+                    <span class="pricing-plan-period">/mois</span>
+                  </div>
+                  <div class="pricing-plan-billing">Facturé chaque mois</div>
+                </div>
+                <div class="pricing-plan-trial">Essai gratuit 1 jour</div>
               </div>
-              <div class="pricing-plan-trial">+ essai gratuit 1 jour</div>
             </div>
 
             <!-- Plan 2 - 6 mois -->
-            <div class="pricing-plan-card">
-              <h3 class="pricing-plan-title">6 mois</h3>
-              <div class="pricing-plan-price">
-                <span class="pricing-plan-amount-old">99$</span>
-                <span class="pricing-plan-amount">79$</span>
-                <span class="pricing-plan-period">/mois</span>
+            <div class="pricing-plan-card" data-plan="6months">
+              <div class="pricing-plan-header">
+                <div class="pricing-plan-left">
+                  <h3 class="pricing-plan-title">6 mois</h3>
+                  <div class="pricing-plan-price">
+                    <span class="pricing-plan-amount-old">99$</span>
+                    <span class="pricing-plan-amount">79$</span>
+                    <span class="pricing-plan-period">/mois</span>
+                  </div>
+                  <div class="pricing-plan-billing">Facturé chaque 6 mois</div>
+                </div>
+                <div class="pricing-plan-trial">Essai gratuit 1 jour</div>
               </div>
-              <div class="pricing-plan-trial">+ essai gratuit 1 jour</div>
             </div>
 
             <!-- Plan 3 - Annuel -->
-            <div class="pricing-plan-card selected">
-              <h3 class="pricing-plan-title">Annuel</h3>
-              <div class="pricing-plan-price">
-                <span class="pricing-plan-amount-old">99$</span>
-                <span class="pricing-plan-amount">59$</span>
-                <span class="pricing-plan-period">/mois</span>
+            <div class="pricing-plan-card" data-plan="yearly">
+              <div class="pricing-plan-header">
+                <div class="pricing-plan-left">
+                  <h3 class="pricing-plan-title">Annuel</h3>
+                  <div class="pricing-plan-price">
+                    <span class="pricing-plan-amount-old">99$</span>
+                    <span class="pricing-plan-amount">59$</span>
+                    <span class="pricing-plan-period">/mois</span>
+                  </div>
+                  <div class="pricing-plan-billing">Facturé chaque année</div>
+                </div>
+                <div class="pricing-plan-trial">Essai gratuit 1 jour</div>
               </div>
-              <div class="pricing-plan-trial">+ essai gratuit 1 jour</div>
             </div>
 
             <!-- Plan 4 - Virement Interac -->
-            <div class="pricing-plan-card">
-              <h3 class="pricing-plan-title">Virement Interac</h3>
-              <div class="pricing-plan-description">
-                Découvrir nos options personnalisées
+            <div class="pricing-plan-card" data-plan="interac">
+              <div class="pricing-plan-header">
+                <div class="pricing-plan-left">
+                  <h3 class="pricing-plan-title">Virement Interac</h3>
+                  <div class="pricing-plan-description">
+                    Découvrir nos options personnalisées
+                  </div>
+                </div>
+                <div class="pricing-plan-trial">Essai gratuit 1 jour</div>
               </div>
             </div>
           </div>
@@ -2872,6 +2915,17 @@
         // Initialiser les deux sliders
         initReviewsSlider('reviewsTrack');
         initReviewsSlider('reviewsTrackBet');
+
+        // Gestion des cartes de tarification cliquables
+        const pricingCards = document.querySelectorAll('.pricing-plan-card[data-plan]');
+        pricingCards.forEach(card => {
+          card.addEventListener('click', function() {
+            // Retirer la classe selected de toutes les cartes
+            pricingCards.forEach(c => c.classList.remove('selected'));
+            // Ajouter la classe selected à la carte cliquée
+            this.classList.add('selected');
+          });
+        });
       });
 
       // Navigation interne pour la page Politique, Support et Rejoindre
