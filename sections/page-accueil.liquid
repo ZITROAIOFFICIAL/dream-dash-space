@@ -1274,7 +1274,7 @@
 
         .profit-simulator-title {
           font-family: 'Outfit', sans-serif;
-          font-size: 2rem;
+          font-size: 2.5rem;
           font-weight: 600;
           color: #ffffff;
           text-align: center;
@@ -1283,7 +1283,7 @@
 
         .profit-simulator-subtitle {
           font-family: 'Outfit', sans-serif;
-          font-size: 1rem;
+          font-size: 1.2rem;
           color: rgba(255, 255, 255, 0.6);
           text-align: center;
           margin-bottom: 2rem;
@@ -1296,9 +1296,10 @@
         .profit-input-label {
           display: block;
           font-family: 'Outfit', sans-serif;
-          font-size: 0.9rem;
-          color: rgba(255, 255, 255, 0.7);
+          font-size: 1.1rem;
+          color: rgba(255, 255, 255, 0.8);
           margin-bottom: 0.5rem;
+          text-align: center;
         }
 
         .profit-input-wrapper {
@@ -1508,27 +1509,24 @@
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          width: 20px;
-          height: 20px;
+          width: 24px;
+          height: 24px;
           margin-left: 0.5rem;
-          background: rgba(255, 255, 255, 0.1);
-          border: 1px solid rgba(255, 255, 255, 0.3);
-          border-radius: 50%;
+          background: transparent;
+          border: none;
           cursor: pointer;
           transition: all 0.2s ease;
           vertical-align: middle;
         }
 
         .info-icon:hover {
-          background: rgba(255, 255, 255, 0.2);
-          border-color: rgba(255, 255, 255, 0.5);
+          opacity: 0.8;
+          transform: scale(1.1);
         }
 
         .info-icon svg {
-          width: 12px;
-          height: 12px;
-          stroke: rgba(255, 255, 255, 0.9);
-          stroke-width: 2;
+          width: 24px;
+          height: 24px;
         }
 
         /* Input personnalisé */
@@ -1766,9 +1764,9 @@
             <label class="profit-input-label">
               Déterminer la valeur d'une unité
               <button class="info-icon" id="info-unit-btn" type="button">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <text x="12" y="16" text-anchor="middle" fill="currentColor" font-size="14" font-weight="600" stroke="none">?</text>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" stroke="rgba(255, 255, 255, 0.8)" stroke-width="2"></circle>
+                  <text x="12" y="17" text-anchor="middle" fill="rgba(255, 255, 255, 0.8)" font-size="16" font-weight="700" stroke="none">?</text>
                 </svg>
               </button>
             </label>
