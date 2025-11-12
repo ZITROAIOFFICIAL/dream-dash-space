@@ -2654,12 +2654,12 @@
           const unitsCountElement = document.getElementById('units-count');
           
           if (winsCountElement) {
-            winsCountElement.textContent = `${winsCount}/${sliderBets.length}`;
+            winsCountElement.textContent = `+${winsCount}`;
           }
           
           if (unitsCountElement) {
             const formattedUnits = totalUnits >= 0 ? `+${totalUnits.toFixed(2)}` : totalUnits.toFixed(2);
-            unitsCountElement.textContent = formattedUnits;
+            unitsCountElement.textContent = `${formattedUnits} units`;
             unitsCountElement.style.color = totalUnits >= 0 ? '#22c55e' : '#ef4444';
           }
           
