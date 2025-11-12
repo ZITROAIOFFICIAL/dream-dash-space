@@ -2615,6 +2615,7 @@
         padding: 2rem 0;
         scrollbar-width: none; /* Firefox */
         -ms-overflow-style: none; /* IE et Edge */
+        -webkit-overflow-scrolling: touch; /* iOS momentum scroll */
       }
       
       /* Cacher la scrollbar pour Chrome, Safari et Opera */
@@ -2629,9 +2630,6 @@
         will-change: transform;
       }
 
-      .bet-history-slider-container:hover {
-        animation-play-state: paused;
-      }
 
       @keyframes slideLeft {
         0% {

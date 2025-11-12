@@ -2656,16 +2656,27 @@
               sliderWrapper.style.cursor = 'grabbing';
               startX = e.pageX - sliderWrapper.offsetLeft;
               scrollLeft = sliderWrapper.scrollLeft;
+              // Pause animation pendant le drag pour permettre le contrôle manuel
+              sliderContainer.style.animationPlayState = 'paused';
             });
             
             sliderWrapper.addEventListener('mouseleave', () => {
-              isDragging = false;
-              sliderWrapper.style.cursor = 'grab';
+              if (isDragging) {
+                isDragging = false;
+                sliderWrapper.style.cursor = 'grab';
+                sliderContainer.style.animationPlayState = 'running';
+              }
             });
             
             sliderWrapper.addEventListener('mouseup', () => {
-              isDragging = false;
-              sliderWrapper.style.cursor = 'grab';
+              if (isDragging) {
+                isDragging = false;
+                sliderWrapper.style.cursor = 'grab';
+                // Reprendre l'animation après le drag
+                setTimeout(() => {
+                  sliderContainer.style.animationPlayState = 'running';
+                }, 120);
+              }
             });
             
             sliderWrapper.addEventListener('mousemove', (e) => {
@@ -2674,6 +2685,38 @@
               const x = e.pageX - sliderWrapper.offsetLeft;
               const walk = (x - startX) * 2;
               sliderWrapper.scrollLeft = scrollLeft - walk;
+            });
+
+            // Support tactile
+            let touchStartX = 0;
+            let touchStartY = 0;
+            let touchScrollLeft = 0;
+
+            sliderWrapper.addEventListener('touchstart', (e) => {
+              if (!e.touches || e.touches.length === 0) return;
+              const t = e.touches[0];
+              touchStartX = t.clientX;
+              touchStartY = t.clientY;
+              touchScrollLeft = sliderWrapper.scrollLeft;
+              sliderContainer.style.animationPlayState = 'paused';
+            }, { passive: true });
+
+            sliderWrapper.addEventListener('touchmove', (e) => {
+              if (!e.touches || e.touches.length === 0) return;
+              const t = e.touches[0];
+              const dx = t.clientX - touchStartX;
+              const dy = t.clientY - touchStartY;
+              // Si le mouvement est principalement horizontal, on gère le slide
+              if (Math.abs(dx) > Math.abs(dy)) {
+                e.preventDefault();
+                sliderWrapper.scrollLeft = touchScrollLeft - dx;
+              }
+            }, { passive: false });
+
+            sliderWrapper.addEventListener('touchend', () => {
+              setTimeout(() => {
+                sliderContainer.style.animationPlayState = 'running';
+              }, 150);
             });
             
             // Style pour indiquer que c'est draggable
