@@ -2623,8 +2623,8 @@
           // Générer le HTML pour chaque bet
           const cardsHTML = sliderBets.map(bet => generateBetCardHTML(bet)).join('');
           
-          // Dupliquer les cartes pour créer un effet de boucle infinie
-          sliderContainer.innerHTML = cardsHTML + cardsHTML;
+          // Dupliquer 4 fois pour un effet de boucle infinie fluide
+          sliderContainer.innerHTML = cardsHTML + cardsHTML + cardsHTML + cardsHTML;
           
           // Forcer le reflow pour déclencher l'animation immédiatement
           sliderContainer.style.animation = 'none';
