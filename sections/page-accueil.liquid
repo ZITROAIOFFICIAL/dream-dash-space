@@ -2656,6 +2656,14 @@
           // Dupliquer les cartes pour créer un effet de boucle infinie
           sliderContainer.innerHTML = cardsHTML + cardsHTML;
           
+          // Assurer l'overflow minimal pour que le slider glisse
+          const wrapper = sliderContainer.parentElement;
+          if (wrapper) {
+            while (sliderContainer.scrollWidth <= wrapper.clientWidth + 50) {
+              sliderContainer.innerHTML += cardsHTML;
+            }
+          }
+          
           // Initialiser le slider manuel
           initManualSlider(sliderContainer);
         }
@@ -2737,8 +2745,8 @@
           startAutoScroll();
         }
 
-        // Initialiser au chargement de la page
-        document.addEventListener('DOMContentLoaded', async function() {
+        // Initialiser le slider (même si DOMContentLoaded est déjà passé)
+        async function initBetHistorySlider() {
           try {
             const bets = await loadBetHistoryForSlider();
             createBetSlider(bets);
@@ -2749,7 +2757,13 @@
               sliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Erreur de chargement.</p>';
             }
           }
-        });
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initBetHistorySlider);
+        } else {
+          initBetHistorySlider();
+        }
       })();
   </script>
 
