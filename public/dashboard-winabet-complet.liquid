@@ -2840,6 +2840,18 @@
       const isUserLoggedIn = {{ user_is_logged_in | json }} || isShopifyEditor;
       const accessLevel = '{{ access_level }}';
       
+      // ⭐ Pages d'historique accessibles à TOUS (pas besoin de connexion)
+      const publicPages = ['historique-bet', 'historique-parlay'];
+      const isPublicPage = publicPages.includes(pageName);
+      
+      // Si c'est une page publique, autoriser l'accès sans vérifications
+      if (isPublicPage) {
+        performNavigation(pageName);
+        return;
+      }
+      
+      // Pour les AUTRES pages : vérifications normales
+      
       // Si paiement échoué, forcer la page payment-failed
       if (accessLevel === 'payment_failed' && pageName !== 'payment-failed') {
         performNavigation('payment-failed');
@@ -3824,6 +3836,17 @@
     window.addEventListener('hashchange', () => {
       const hash = window.location.hash.substring(1);
       if (hash) {
+        navigateTo(null, hash);
+      }
+    });
+
+    // Au chargement de la page, vérifier le hash pour les pages publiques
+    document.addEventListener('DOMContentLoaded', function() {
+      const hash = window.location.hash.replace('#', '');
+      const publicPages = ['historique-bet', 'historique-parlay'];
+      
+      if (hash && publicPages.includes(hash)) {
+        // Autoriser l'accès direct via URL aux pages publiques
         navigateTo(null, hash);
       }
     });

@@ -2039,6 +2039,13 @@
               <p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Chargement de l'historique...</p>
             </div>
           </div>
+          
+          <!-- Bouton Voir l'historique complet -->
+          <div style="text-align: center; margin-top: 2rem;">
+            <a href="https://winabet.ai/pages/dashboard#historique-bet" class="bet-history-button">
+              📊 Voir l'historique complet
+            </a>
+          </div>
         </div>
 
       </div>
@@ -2591,6 +2598,11 @@
           
           // Dupliquer les cartes pour créer un effet de boucle infinie
           sliderContainer.innerHTML = cardsHTML + cardsHTML;
+          
+          // Forcer le reflow pour déclencher l'animation immédiatement
+          sliderContainer.style.animation = 'none';
+          sliderContainer.offsetHeight; // Trigger reflow
+          sliderContainer.style.animation = '';
         }
 
         // Initialiser au chargement de la page

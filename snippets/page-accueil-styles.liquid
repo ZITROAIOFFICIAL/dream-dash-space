@@ -2617,7 +2617,7 @@
       .bet-history-slider-container {
         display: flex;
         gap: 2rem;
-        animation: slideLeft 80s linear infinite;
+        animation: slideLeft 60s linear infinite;
         will-change: transform;
       }
 
@@ -2637,7 +2637,7 @@
       /* Cartes dans le slider */
       .bet-history-slider-container .card-wrapper {
         flex: 0 0 auto;
-        width: 400px;
+        width: 320px;
         margin: 0;
       }
 
@@ -2661,11 +2661,11 @@
         }
 
         .bet-history-slider-container .card-wrapper {
-          width: 300px;
+          width: 240px;
         }
 
         .bet-history-slider-container .history-card {
-          padding: 1.5rem;
+          padding: 1rem;
         }
 
         /* Réduire les tailles de police dans les cartes mobile */
@@ -2697,8 +2697,52 @@
 
       @media (min-width: 769px) and (max-width: 1024px) {
         .bet-history-slider-container .card-wrapper {
-          width: 350px;
+          width: 280px;
         }
+      }
+
+      /* Bouton Voir l'historique complet */
+      .bet-history-button {
+        display: inline-block;
+        padding: 1rem 2.5rem;
+        background: rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 0.75rem;
+        font-family: 'Outfit', sans-serif;
+        font-weight: 500;
+        font-size: 1.1rem;
+        text-decoration: none;
+        transition: all 0.3s;
+        cursor: pointer;
+      }
+
+      .bet-history-button:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.5);
+        transform: translateY(-2px);
+      }
+
+      /* Gradients fade sur les bords du slider */
+      .bet-history-slider-wrapper::before,
+      .bet-history-slider-wrapper::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100px;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .bet-history-slider-wrapper::before {
+        left: 0;
+        background: linear-gradient(to right, #000000, transparent);
+      }
+
+      .bet-history-slider-wrapper::after {
+        right: 0;
+        background: linear-gradient(to left, #000000, transparent);
       }
 
     </style>
