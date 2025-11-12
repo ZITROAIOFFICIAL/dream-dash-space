@@ -2590,8 +2590,32 @@
             return;
           }
 
-          // Trier par date de création (plus récent en premier)
-          completedBets.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+          // Trier par date de match (DD/MM/YYYY + HH:MM) décroissante, fallback sur created_at
+          const getBetDate = (bet) => {
+            try {
+              if (bet.match_date) {
+                const parts = String(bet.match_date).split(/[\/\-.]/).map(Number);
+                if (parts.length === 3) {
+                  const [dd, mm, yyyy] = parts; // Format attendu: DD/MM/YYYY
+                  const date = new Date(yyyy, (mm || 1) - 1, dd || 1);
+                  if (bet.match_time) {
+                    const [hh, mn] = String(bet.match_time).split(':').map(v => parseInt(v, 10));
+                    if (!isNaN(hh)) {
+                      date.setHours(hh, isNaN(mn) ? 0 : mn, 0, 0);
+                    } else {
+                      date.setHours(23, 59, 59, 999);
+                    }
+                  } else {
+                    date.setHours(23, 59, 59, 999);
+                  }
+                  return date;
+                }
+              }
+              if (bet.created_at) return new Date(bet.created_at);
+            } catch (_) {}
+            return new Date(0);
+          };
+          completedBets.sort((a, b) => getBetDate(b) - getBetDate(a));
 
           // Prendre les 10 derniers bets complétés
           const sliderBets = completedBets.slice(0, 10);
