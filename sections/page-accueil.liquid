@@ -1249,6 +1249,30 @@
           margin: 4rem 0;
         }
 
+        /* Desktop: Une colonne large comme mobile mais plus grosse */
+        @media (min-width: 769px) {
+          .pricing-plans-grid {
+            grid-template-columns: 1fr;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            gap: 2.5rem;
+          }
+
+          /* S'assurer que les titres sont centrés sur desktop */
+          .pricing-subtitle {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+          }
+
+          .pricing-plans-description {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+          }
+        }
+
         .pricing-plan-card {
           position: relative;
           background: #000000;
