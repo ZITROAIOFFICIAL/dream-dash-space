@@ -2590,6 +2590,9 @@
             return;
           }
 
+          // Trier par date de création (plus récent en premier)
+          completedBets.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
           // Prendre les 10 derniers bets complétés
           const sliderBets = completedBets.slice(0, 10);
           
