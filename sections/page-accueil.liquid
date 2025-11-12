@@ -2063,14 +2063,50 @@
           
           <!-- Bouton Voir l'historique complet -->
           <div style="text-align: center; margin-top: 2rem;">
-            <a href="https://winabet.ai/pages/dashboard#historique-bet" class="bet-history-button">
+            <button id="open-bet-history-drawer" class="bet-history-button">
               📊 Voir l'historique complet
-            </a>
+            </button>
           </div>
         </div>
 
       </div>
     </section>
+
+    <!-- Drawer Historique Bet Complet -->
+    <div id="bet-history-drawer" class="bet-history-drawer">
+      <div class="bet-history-drawer-overlay"></div>
+      <div class="bet-history-drawer-content">
+        <!-- Bouton fermer -->
+        <button class="bet-history-drawer-close" id="close-bet-history-drawer" aria-label="Fermer">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
+        
+        <!-- Contenu identique à la page historique -->
+        <div class="container" style="padding-top: 2rem;">
+          <h1 style="font-size: 2rem; font-weight: 700; text-align: center; margin-bottom: 0.5rem;">HISTORIQUE BET DU JOUR</h1>
+          <p class="subtitle" style="text-align: center; color: rgba(255, 255, 255, 0.6); margin-bottom: 2rem;">Consultez l'historique des bets du jour de winabet.ai</p>
+          
+          <!-- Statistiques globales -->
+          <div id="bet-stats-drawer" style="max-width: 40rem; margin: 2rem auto; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: 0 1rem;">
+            <!-- Rempli par JS -->
+          </div>
+          
+          <!-- Cartes -->
+          <div id="bet-history-container-drawer" class="cards-grid" style="padding: 0 1rem;">
+            <!-- Rempli par JS -->
+          </div>
+          
+          <!-- Message vide -->
+          <div id="bet-empty-state-drawer" class="card text-center" style="padding: 2rem; display: none; margin: 2rem 1rem;">
+            <p style="color: rgba(255, 255, 255, 0.6);">
+              Aucun pari dans l'historique.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </main>
 
@@ -3105,6 +3141,118 @@ document.addEventListener('DOMContentLoaded', function() {
       popup.style.display = 'none';
     });
   }
+  
+  // ============ GESTION DU DRAWER D'HISTORIQUE COMPLET ============
+  
+  // Fonction pour charger l'historique complet dans le drawer
+  async function loadBetHistoryInDrawer() {
+    try {
+      console.log("📥 Chargement de l'historique complet dans le drawer...");
+      const FUNCTIONS_URL = 'https://ycvfyorgkhuxcosfrsxs.functions.supabase.co';
+      const SHOP_DOMAIN = window.SUPABASE_CONFIG?.shopDomain || '{{ shop.permanent_domain }}';
+      const url = `${FUNCTIONS_URL}/get-bet-history?shop_domain=${SHOP_DOMAIN}`;
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error(`Erreur ${response.status}`);
+      }
+
+      const data = await response.json();
+      displayBetHistoryInDrawer(data);
+    } catch (error) {
+      console.error("❌ Erreur chargement historique drawer:", error);
+      const emptyState = document.getElementById("bet-empty-state-drawer");
+      if (emptyState) emptyState.style.display = "block";
+    }
+  }
+
+  // Fonction pour afficher l'historique dans le drawer
+  function displayBetHistoryInDrawer(data) {
+    const container = document.getElementById("bet-history-container-drawer");
+    const statsContainer = document.getElementById("bet-stats-drawer");
+    const emptyState = document.getElementById("bet-empty-state-drawer");
+
+    if (!container || !statsContainer) return;
+
+    // Si aucun bet
+    if (!data.bets || data.bets.length === 0) {
+      if (emptyState) emptyState.style.display = "block";
+      container.innerHTML = "";
+      statsContainer.innerHTML = "";
+      return;
+    }
+
+    if (emptyState) emptyState.style.display = "none";
+
+    // Calculer les couleurs des stats
+    const winsColor = (data.total_wins - data.total_losses >= 0) 
+      ? "rgba(34, 197, 94, 0.2)" 
+      : "rgba(239, 68, 68, 0.2)";
+
+    const unitsColor = (data.total_units >= 0) 
+      ? "rgba(34, 197, 94, 0.2)" 
+      : "rgba(239, 68, 68, 0.2)";
+
+    // Afficher les stats (même structure que dans le slider)
+    statsContainer.innerHTML = `
+      <div style="background: ${winsColor}; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.5rem; padding: 1rem; text-align: center;">
+        <div style="color: rgba(255, 255, 255, 0.9); font-weight: 700; font-size: 2rem;">
+          ${data.total_wins - data.total_losses >= 0 ? "+" : ""}${data.total_wins - data.total_losses}
+        </div>
+        <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem; margin-top: 0.25rem; font-weight: 600;">PARIS EN +</div>
+      </div>
+      <div style="background: ${unitsColor}; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.5rem; padding: 1rem; text-align: center;">
+        <div style="color: rgba(255, 255, 255, 0.9); font-weight: 700; font-size: 2rem;">
+          ${data.total_units >= 0 ? "+" : ""}${data.total_units.toFixed(2)}
+        </div>
+        <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem; margin-top: 0.25rem; font-weight: 600;">UNITS EN +</div>
+      </div>
+    `;
+
+    // Générer les cartes en utilisant la fonction existante generateBetCardHTML
+    container.innerHTML = data.bets.map((bet) => generateBetCardHTML(bet)).join("");
+  }
+
+  // Gestion de l'ouverture/fermeture du drawer
+  (function() {
+    const openBtn = document.getElementById('open-bet-history-drawer');
+    const closeBtn = document.getElementById('close-bet-history-drawer');
+    const drawer = document.getElementById('bet-history-drawer');
+    const overlay = document.querySelector('.bet-history-drawer-overlay');
+
+    function openDrawer() {
+      drawer.classList.add('active');
+      document.body.classList.add('drawer-open');
+      // Charger l'historique complet dans le drawer
+      loadBetHistoryInDrawer();
+    }
+
+    function closeDrawer() {
+      drawer.classList.remove('active');
+      document.body.classList.remove('drawer-open');
+    }
+
+    if (openBtn) {
+      openBtn.addEventListener('click', openDrawer);
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeDrawer);
+    }
+
+    if (overlay) {
+      overlay.addEventListener('click', closeDrawer);
+    }
+
+    // Fermer avec Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer.classList.contains('active')) {
+        closeDrawer();
+      }
+    });
+  })();
+  
+  // ============ FIN DRAWER HISTORIQUE ============
   
   if (!calculateBtn || !resultDiv || !loadingDiv) return;
 
