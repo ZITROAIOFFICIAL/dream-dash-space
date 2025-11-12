@@ -2638,14 +2638,16 @@
           let totalUnits = 0;
           
           sliderBets.forEach(bet => {
+            const betUnits = parseFloat(bet.bet_units || 1);
+            
             if (bet.result === 'win') {
               winsCount++;
               // Calcul des units gagnées: (cote - 1) * units misées
-              const unitsWon = (parseFloat(bet.multiplier) - 1) * parseFloat(bet.units || 1);
+              const unitsWon = (parseFloat(bet.multiplier) - 1) * betUnits;
               totalUnits += unitsWon;
             } else if (bet.result === 'loose') {
               // Perte = - units misées
-              totalUnits -= parseFloat(bet.units || 1);
+              totalUnits -= betUnits;
             }
           });
           
