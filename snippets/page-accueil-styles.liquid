@@ -2609,33 +2609,29 @@
 
       .bet-history-slider-wrapper {
         width: 100%;
+        overflow: hidden;
         position: relative;
         padding: 2rem 0;
-        overflow-x: auto;
-        overflow-y: hidden;
-        scroll-behavior: smooth;
-        -webkit-overflow-scrolling: touch;
-        overscroll-behavior-x: contain;
-        /* Cacher la scrollbar */
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-      }
-
-      .bet-history-slider-wrapper::-webkit-scrollbar {
-        display: none;
       }
 
       .bet-history-slider-container {
-        display: inline-flex;
-        min-width: max-content;
+        display: flex;
         gap: 2rem;
-        cursor: grab;
-        user-select: none;
-        touch-action: pan-x;
+        animation: slideLeft 60s linear infinite;
+        will-change: transform;
       }
 
-      .bet-history-slider-container:active {
-        cursor: grabbing;
+      .bet-history-slider-container:hover {
+        animation-play-state: paused;
+      }
+
+      @keyframes slideLeft {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
       }
 
       /* Cartes dans le slider */
@@ -2665,38 +2661,11 @@
         }
 
         .bet-history-slider-container .card-wrapper {
-          width: 290px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
+          width: 240px;
         }
 
         .bet-history-slider-container .history-card {
           padding: 1rem;
-          text-align: center;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-        }
-        
-        .bet-history-slider-container .history-card > * {
-          margin-left: auto !important;
-          margin-right: auto !important;
-          text-align: center !important;
-        }
-        
-        .bet-history-slider-container .history-card [style*="display: flex"] {
-          justify-content: center !important;
-          align-items: center !important;
-          margin-left: auto !important;
-          margin-right: auto !important;
-        }
-        
-        /* Forcer le centrage des divs avec max-width */
-        .bet-history-slider-container .history-card [style*="max-width"] {
-          margin-left: auto !important;
-          margin-right: auto !important;
         }
 
         /* Réduire les tailles de police dans les cartes mobile */
