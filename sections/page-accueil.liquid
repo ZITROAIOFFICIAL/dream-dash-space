@@ -2649,22 +2649,42 @@
             // Gestion du drag avec la souris
             let isDragging = false;
             let startX;
-            let scrollLeft;
+            let startTranslateX;
+            
+            const getTranslateX = (el) => {
+              const style = window.getComputedStyle(el);
+              const transform = style.transform || style.webkitTransform || 'matrix(1, 0, 0, 1, 0, 0)';
+              const match3d = transform.match(/matrix3d\(([^)]+)\)/);
+              if (match3d) {
+                const values = match3d[1].split(',').map(parseFloat);
+                return values[12] || 0;
+              }
+              const match2d = transform.match(/matrix\(([^)]+)\)/);
+              if (match2d) {
+                const values = match2d[1].split(',').map(parseFloat);
+                return values[4] || 0;
+              }
+              return 0;
+            };
             
             sliderWrapper.addEventListener('mousedown', (e) => {
               isDragging = true;
               sliderWrapper.style.cursor = 'grabbing';
-              startX = e.pageX - sliderWrapper.offsetLeft;
-              scrollLeft = sliderWrapper.scrollLeft;
-              // Pause animation pendant le drag pour permettre le contrôle manuel
-              sliderContainer.style.animationPlayState = 'paused';
+              startX = e.pageX;
+              startTranslateX = getTranslateX(sliderContainer);
+              // Désactiver l'animation pour contrôler via transform
+              sliderContainer.style.animation = 'none';
             });
             
             sliderWrapper.addEventListener('mouseleave', () => {
               if (isDragging) {
                 isDragging = false;
                 sliderWrapper.style.cursor = 'grab';
-                sliderContainer.style.animationPlayState = 'running';
+                // Reprendre l'animation depuis le début (simple et fiable)
+                sliderContainer.style.removeProperty('transform');
+                // reflow
+                void sliderContainer.offsetWidth;
+                sliderContainer.style.animation = '';
               }
             });
             
@@ -2672,33 +2692,31 @@
               if (isDragging) {
                 isDragging = false;
                 sliderWrapper.style.cursor = 'grab';
-                // Reprendre l'animation après le drag
-                setTimeout(() => {
-                  sliderContainer.style.animationPlayState = 'running';
-                }, 120);
+                sliderContainer.style.removeProperty('transform');
+                void sliderContainer.offsetWidth;
+                sliderContainer.style.animation = '';
               }
             });
             
             sliderWrapper.addEventListener('mousemove', (e) => {
               if (!isDragging) return;
               e.preventDefault();
-              const x = e.pageX - sliderWrapper.offsetLeft;
-              const walk = (x - startX) * 2;
-              sliderWrapper.scrollLeft = scrollLeft - walk;
+              const dx = e.pageX - startX;
+              sliderContainer.style.transform = `translateX(${startTranslateX + dx}px)`;
             });
 
             // Support tactile
             let touchStartX = 0;
             let touchStartY = 0;
-            let touchScrollLeft = 0;
+            let touchStartTranslateX = 0;
 
             sliderWrapper.addEventListener('touchstart', (e) => {
               if (!e.touches || e.touches.length === 0) return;
               const t = e.touches[0];
               touchStartX = t.clientX;
               touchStartY = t.clientY;
-              touchScrollLeft = sliderWrapper.scrollLeft;
-              sliderContainer.style.animationPlayState = 'paused';
+              touchStartTranslateX = getTranslateX(sliderContainer);
+              sliderContainer.style.animation = 'none';
             }, { passive: true });
 
             sliderWrapper.addEventListener('touchmove', (e) => {
@@ -2709,14 +2727,14 @@
               // Si le mouvement est principalement horizontal, on gère le slide
               if (Math.abs(dx) > Math.abs(dy)) {
                 e.preventDefault();
-                sliderWrapper.scrollLeft = touchScrollLeft - dx;
+                sliderContainer.style.transform = `translateX(${touchStartTranslateX + dx}px)`;
               }
             }, { passive: false });
 
             sliderWrapper.addEventListener('touchend', () => {
-              setTimeout(() => {
-                sliderContainer.style.animationPlayState = 'running';
-              }, 150);
+              sliderContainer.style.removeProperty('transform');
+              void sliderContainer.offsetWidth;
+              sliderContainer.style.animation = '';
             });
             
             // Style pour indiquer que c'est draggable
