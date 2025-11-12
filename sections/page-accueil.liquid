@@ -1251,50 +1251,42 @@
 
         .pricing-plan-card {
           position: relative;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 16px;
+          background: rgba(39, 39, 42, 0.5);
+          border: 2px solid rgba(113, 113, 122, 0.3);
+          border-radius: 12px;
           padding: 1.2rem 1.2rem;
           display: flex;
           flex-direction: column;
           align-items: center;
           text-align: center;
           transition: all 0.3s ease;
+          cursor: pointer;
         }
 
         .pricing-plan-card:hover {
-          border-color: rgba(255, 255, 255, 0.25);
-          background: rgba(255, 255, 255, 0.05);
-          transform: translateY(-4px);
+          border-color: rgba(113, 113, 122, 0.5);
         }
 
-        .pricing-plan-card-popular {
-          border-color: rgba(102, 126, 234, 0.5);
+        .pricing-plan-card.selected {
+          border-color: rgba(139, 92, 246, 1);
+          background: rgba(139, 92, 246, 0.05);
         }
 
-        .pricing-plan-card-best {
-          border-color: rgba(16, 185, 129, 0.5);
-        }
-
-        .pricing-plan-card-custom {
-          border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .pricing-plan-badge {
+        .pricing-plan-card.selected::after {
+          content: '✓';
           position: absolute;
-          top: -12px;
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          top: 1rem;
+          right: 1rem;
+          width: 24px;
+          height: 24px;
+          background: rgba(139, 92, 246, 1);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           color: white;
-          padding: 0.4rem 1rem;
-          border-radius: 9999px;
-          font-size: 0.75rem;
-          font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-        }
-
-        .pricing-plan-badge-best {
-          background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+          font-size: 14px;
+          font-weight: bold;
         }
 
         .pricing-plan-title {
@@ -2014,8 +2006,7 @@
             </div>
 
             <!-- Plan 2 - 6 mois -->
-            <div class="pricing-plan-card pricing-plan-card-popular">
-              <div class="pricing-plan-badge">Populaire</div>
+            <div class="pricing-plan-card">
               <h3 class="pricing-plan-title">6 mois</h3>
               <div class="pricing-plan-price">
                 <span class="pricing-plan-amount-old">99$</span>
@@ -2027,8 +2018,7 @@
             </div>
 
             <!-- Plan 3 - Annuel -->
-            <div class="pricing-plan-card pricing-plan-card-best">
-              <div class="pricing-plan-badge pricing-plan-badge-best">Meilleure valeur</div>
+            <div class="pricing-plan-card selected">
               <h3 class="pricing-plan-title">Annuel</h3>
               <div class="pricing-plan-price">
                 <span class="pricing-plan-amount-old">99$</span>
