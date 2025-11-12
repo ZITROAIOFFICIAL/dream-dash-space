@@ -2032,8 +2032,21 @@
               </g>
               <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
             </svg>
-            <h2>Historique de nos prédictions IA</h2>
+            <h2>Historique de nos 10 derniers paris</h2>
           </div>
+          
+          <!-- Statistiques calculées -->
+          <div id="bet-history-stats" style="display: flex; gap: 2rem; justify-content: center; margin: 2rem 0; flex-wrap: wrap;">
+            <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.75rem; padding: 1.5rem 2.5rem; text-align: center; min-width: 200px;">
+              <div style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Paris en positif</div>
+              <div id="wins-count" style="font-size: 2.5rem; font-weight: 700; color: #22c55e;">-</div>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.75rem; padding: 1.5rem 2.5rem; text-align: center; min-width: 200px;">
+              <div style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Units en positif</div>
+              <div id="units-count" style="font-size: 2.5rem; font-weight: 700;">-</div>
+            </div>
+          </div>
+          
           <div class="bet-history-slider-wrapper">
             <div id="bet-history-slider" class="bet-history-slider-container">
               <p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Chargement de l'historique...</p>
@@ -2619,6 +2632,36 @@
 
           // Prendre les 10 derniers bets complétés
           const sliderBets = completedBets.slice(0, 10);
+          
+          // Calculer les statistiques sur les 10 paris
+          let winsCount = 0;
+          let totalUnits = 0;
+          
+          sliderBets.forEach(bet => {
+            if (bet.result === 'win') {
+              winsCount++;
+              // Calcul des units gagnées: (cote - 1) * units misées
+              const unitsWon = (parseFloat(bet.multiplier) - 1) * parseFloat(bet.units || 1);
+              totalUnits += unitsWon;
+            } else if (bet.result === 'loose') {
+              // Perte = - units misées
+              totalUnits -= parseFloat(bet.units || 1);
+            }
+          });
+          
+          // Mettre à jour l'affichage des statistiques
+          const winsCountElement = document.getElementById('wins-count');
+          const unitsCountElement = document.getElementById('units-count');
+          
+          if (winsCountElement) {
+            winsCountElement.textContent = `${winsCount}/${sliderBets.length}`;
+          }
+          
+          if (unitsCountElement) {
+            const formattedUnits = totalUnits >= 0 ? `+${totalUnits.toFixed(2)}` : totalUnits.toFixed(2);
+            unitsCountElement.textContent = formattedUnits;
+            unitsCountElement.style.color = totalUnits >= 0 ? '#22c55e' : '#ef4444';
+          }
           
           // Générer le HTML pour chaque bet
           const cardsHTML = sliderBets.map(bet => generateBetCardHTML(bet)).join('');
