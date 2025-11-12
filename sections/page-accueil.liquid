@@ -2630,6 +2630,83 @@
           sliderContainer.style.animation = 'none';
           sliderContainer.offsetHeight; // Trigger reflow
           sliderContainer.style.animation = '';
+          
+          // Ajouter la fonctionnalité de scroll horizontal avec la souris/trackpad
+          const sliderWrapper = sliderContainer.parentElement;
+          if (sliderWrapper) {
+            let isScrolling = false;
+            
+            // Gestion du scroll avec la molette/trackpad
+            sliderWrapper.addEventListener('wheel', (e) => {
+              // Détecter si c'est un scroll horizontal (trackpad) ou vertical
+              const isHorizontalScroll = Math.abs(e.deltaX) > Math.abs(e.deltaY);
+              
+              // Si c'est un scroll horizontal OU si l'utilisateur maintient Shift pour forcer horizontal
+              if (isHorizontalScroll || e.shiftKey) {
+                e.preventDefault();
+                
+                // Temporairement mettre en pause l'animation CSS
+                sliderContainer.style.animationPlayState = 'paused';
+                
+                // Faire défiler manuellement
+                sliderWrapper.scrollLeft += e.deltaX || e.deltaY;
+                
+                // Reprendre l'animation après un court délai
+                clearTimeout(isScrolling);
+                isScrolling = setTimeout(() => {
+                  sliderContainer.style.animationPlayState = 'running';
+                }, 150);
+              }
+              // Si c'est un scroll vertical, laisser le comportement par défaut (scroll de page)
+            }, { passive: false });
+            
+            // Gestion du drag avec la souris
+            let isDragging = false;
+            let startX;
+            let scrollLeft;
+            
+            sliderWrapper.addEventListener('mousedown', (e) => {
+              isDragging = true;
+              sliderWrapper.style.cursor = 'grabbing';
+              startX = e.pageX - sliderWrapper.offsetLeft;
+              scrollLeft = sliderWrapper.scrollLeft;
+              
+              // Mettre en pause l'animation pendant le drag
+              sliderContainer.style.animationPlayState = 'paused';
+            });
+            
+            sliderWrapper.addEventListener('mouseleave', () => {
+              if (isDragging) {
+                isDragging = false;
+                sliderWrapper.style.cursor = 'grab';
+                sliderContainer.style.animationPlayState = 'running';
+              }
+            });
+            
+            sliderWrapper.addEventListener('mouseup', () => {
+              if (isDragging) {
+                isDragging = false;
+                sliderWrapper.style.cursor = 'grab';
+                
+                // Reprendre l'animation après le drag
+                setTimeout(() => {
+                  sliderContainer.style.animationPlayState = 'running';
+                }, 150);
+              }
+            });
+            
+            sliderWrapper.addEventListener('mousemove', (e) => {
+              if (!isDragging) return;
+              e.preventDefault();
+              const x = e.pageX - sliderWrapper.offsetLeft;
+              const walk = (x - startX) * 2; // Vitesse du drag
+              sliderWrapper.scrollLeft = scrollLeft - walk;
+            });
+            
+            // Style pour indiquer que c'est draggable
+            sliderWrapper.style.cursor = 'grab';
+            sliderWrapper.style.userSelect = 'none';
+          }
         }
 
         // Initialiser au chargement de la page
