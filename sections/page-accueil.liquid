@@ -1254,7 +1254,7 @@
           background: rgba(39, 39, 42, 0.5);
           border: 2px solid rgba(113, 113, 122, 0.3);
           border-radius: 12px;
-          padding: 1.2rem 1.2rem;
+          padding: 0.8rem 1rem;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -1268,47 +1268,47 @@
         }
 
         .pricing-plan-card.selected {
-          border-color: rgba(139, 92, 246, 1);
-          background: rgba(139, 92, 246, 0.05);
+          border-color: rgba(255, 255, 255, 1);
+          background: rgba(255, 255, 255, 0.08);
         }
 
         .pricing-plan-card.selected::after {
           content: '✓';
           position: absolute;
-          top: 1rem;
-          right: 1rem;
-          width: 24px;
-          height: 24px;
-          background: rgba(139, 92, 246, 1);
+          top: 0.8rem;
+          right: 0.8rem;
+          width: 20px;
+          height: 20px;
+          background: rgba(255, 255, 255, 1);
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: white;
-          font-size: 14px;
+          color: black;
+          font-size: 12px;
           font-weight: bold;
         }
 
         .pricing-plan-title {
           font-family: 'Outfit', sans-serif;
-          font-size: 1.3rem;
+          font-size: 1.1rem;
           font-weight: 600;
           color: rgba(255, 255, 255, 0.95);
-          margin-bottom: 0.8rem;
+          margin-bottom: 0.5rem;
         }
 
         .pricing-plan-price {
           display: flex;
           align-items: baseline;
           gap: 0.5rem;
-          margin-bottom: 0.8rem;
+          margin-bottom: 0.5rem;
           flex-wrap: wrap;
           justify-content: center;
         }
 
         .pricing-plan-amount-old {
           font-family: 'Outfit', sans-serif;
-          font-size: 1.5rem;
+          font-size: 1.2rem;
           font-weight: 400;
           color: rgba(255, 255, 255, 0.4);
           text-decoration: line-through;
@@ -1316,24 +1316,24 @@
 
         .pricing-plan-amount {
           font-family: 'Outfit', sans-serif;
-          font-size: 1.8rem;
+          font-size: 1.5rem;
           font-weight: 700;
           color: white;
         }
 
         .pricing-plan-period {
           font-family: 'Outfit', sans-serif;
-          font-size: 1rem;
+          font-size: 0.9rem;
           font-weight: 400;
           color: rgba(255, 255, 255, 0.6);
         }
 
         .pricing-plan-trial {
           font-family: 'Outfit', sans-serif;
-          font-size: 0.85rem;
+          font-size: 0.75rem;
           font-weight: 400;
           color: rgba(16, 185, 129, 0.8);
-          margin-bottom: 1rem;
+          margin-bottom: 0;
         }
 
         .pricing-plan-description {
@@ -1345,35 +1345,26 @@
           line-height: 1.6;
         }
 
-        .pricing-plan-button {
+        .pricing-continue-button {
           width: 100%;
-          padding: 0.7rem 1.2rem;
+          max-width: 400px;
+          padding: 1rem 2rem;
           background: white;
           color: black;
           font-family: 'Outfit', sans-serif;
-          font-size: 0.95rem;
+          font-size: 1.1rem;
           font-weight: 500;
           border: none;
-          border-radius: 8px;
+          border-radius: 9999px;
           cursor: pointer;
           transition: all 0.3s ease;
+          margin-top: 2rem;
         }
 
-        .pricing-plan-button:hover {
+        .pricing-continue-button:hover {
           background: rgba(255, 255, 255, 0.9);
           transform: translateY(-2px);
           box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
-        }
-
-        .pricing-plan-button-outline {
-          background: transparent;
-          color: white;
-          border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .pricing-plan-button-outline:hover {
-          background: rgba(255, 255, 255, 0.1);
-          border-color: rgba(255, 255, 255, 0.5);
         }
 
         /* Responsive Mobile */
@@ -2002,7 +1993,6 @@
                 <span class="pricing-plan-period">/mois</span>
               </div>
               <div class="pricing-plan-trial">+ essai gratuit 1 jour</div>
-              <button class="pricing-plan-button">Choisir ce forfait</button>
             </div>
 
             <!-- Plan 2 - 6 mois -->
@@ -2014,7 +2004,6 @@
                 <span class="pricing-plan-period">/mois</span>
               </div>
               <div class="pricing-plan-trial">+ essai gratuit 1 jour</div>
-              <button class="pricing-plan-button">Choisir ce forfait</button>
             </div>
 
             <!-- Plan 3 - Annuel -->
@@ -2026,18 +2015,19 @@
                 <span class="pricing-plan-period">/mois</span>
               </div>
               <div class="pricing-plan-trial">+ essai gratuit 1 jour</div>
-              <button class="pricing-plan-button">Choisir ce forfait</button>
             </div>
 
             <!-- Plan 4 - Virement Interac -->
-            <div class="pricing-plan-card pricing-plan-card-custom">
+            <div class="pricing-plan-card">
               <h3 class="pricing-plan-title">Virement Interac</h3>
               <div class="pricing-plan-description">
                 Découvrir nos options personnalisées
               </div>
-              <button class="pricing-plan-button pricing-plan-button-outline">En savoir plus</button>
             </div>
           </div>
+
+          <!-- Bouton Continuer -->
+          <button class="pricing-continue-button">Continuer</button>
         </div>
 
         <!-- Liste des avantages -->
