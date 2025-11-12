@@ -1272,13 +1272,17 @@
           backdrop-filter: blur(10px);
         }
 
+        /* ========== STYLES DESKTOP (par défaut) ========== */
+        
+        /* Légende "(selon notre vrai historique)" */
         .profit-simulator-legend {
           font-family: 'Outfit', sans-serif;
-          font-size: 1.3rem;
+          font-size: 1.3rem;  /* DESKTOP: Taille texte légende */
           font-weight: 300;
           color: rgba(255, 255, 255, 0.5);
           text-align: center;
-          margin-bottom: 1rem;
+          margin-top: 0;      /* DESKTOP: Marge haut légende */
+          margin-bottom: 1rem; /* DESKTOP: Marge bas légende */
           font-style: italic;
         }
 
@@ -1287,38 +1291,45 @@
           align-items: center;
           justify-content: center;
           gap: 1rem;
-          margin-bottom: 0.5rem;
+          margin-top: 0;      /* DESKTOP: Marge haut conteneur titre */
+          margin-bottom: 0.5rem; /* DESKTOP: Marge bas conteneur titre */
         }
 
+        /* Titre "Notre simulateur winabet.ai" */
         .profit-simulator-title {
           font-family: 'Outfit', sans-serif;
-          font-size: 3.5rem;
+          font-size: 3.5rem;  /* DESKTOP: Taille titre */
           font-weight: 300;
           color: #ffffff;
           text-align: center;
           margin: 0;
         }
 
+        /* Description sous le titre */
         .profit-simulator-subtitle {
           font-family: 'Outfit', sans-serif;
-          font-size: 1.8rem;
+          font-size: 1.8rem;  /* DESKTOP: Taille description */
           font-weight: 300;
           color: rgba(255, 255, 255, 0.6);
           text-align: center;
-          margin-bottom: 3rem;
+          margin-top: 0;      /* DESKTOP: Marge haut description */
+          margin-bottom: 3rem; /* DESKTOP: Marge bas description */
         }
 
         .profit-input-group {
-          margin-bottom: 1.5rem;
+          margin-top: 0;      /* DESKTOP: Marge haut groupe input */
+          margin-bottom: 1.5rem; /* DESKTOP: Marge bas groupe input */
         }
 
+        /* Label "Déterminer la valeur d'une unité" */
         .profit-input-label {
           display: block;
           font-family: 'Outfit', sans-serif;
-          font-size: 1.6rem;
+          font-size: 1.6rem;  /* DESKTOP: Taille label */
           font-weight: 300;
           color: rgba(255, 255, 255, 0.8);
-          margin-bottom: 0.5rem;
+          margin-top: 0;      /* DESKTOP: Marge haut label */
+          margin-bottom: 0.5rem; /* DESKTOP: Marge bas label */
           text-align: center;
         }
 
@@ -1360,18 +1371,21 @@
           pointer-events: none;
         }
 
+        /* Bouton principal "Lancer le simulateur" */
         .profit-calculate-btn {
           width: 100%;
           padding: 1.2rem;
           background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8));
           color: #000000;
           font-family: 'Outfit', sans-serif;
-          font-size: 1.4rem;
+          font-size: 1.4rem;  /* DESKTOP: Taille texte bouton principal */
           font-weight: 300;
           border: none;
           border-radius: 8px;
           cursor: pointer;
           transition: all 0.3s ease;
+          margin-top: 0;      /* DESKTOP: Marge haut bouton principal */
+          margin-bottom: 0;   /* DESKTOP: Marge bas bouton principal */
         }
 
         .profit-calculate-btn:hover {
@@ -1474,18 +1488,71 @@
           text-align: center;
         }
 
+        /* ========== STYLES MOBILE ========== */
         @media (max-width: 768px) {
           .profit-simulator {
             padding: 2rem 1.5rem;
             margin: 3rem auto 0;
           }
 
-          .profit-simulator-title {
-            font-size: 1.6rem;
+          /* MOBILE: Légende "(selon notre vrai historique)" */
+          .profit-simulator-legend {
+            font-size: 1rem;     /* MOBILE: Taille texte légende */
+            margin-top: 0;       /* MOBILE: Marge haut légende */
+            margin-bottom: 0.8rem; /* MOBILE: Marge bas légende */
           }
 
+          /* MOBILE: Conteneur titre */
+          .profit-simulator-title-container {
+            margin-top: 0;       /* MOBILE: Marge haut conteneur titre */
+            margin-bottom: 0.3rem; /* MOBILE: Marge bas conteneur titre */
+          }
+
+          /* MOBILE: Titre "Notre simulateur winabet.ai" */
+          .profit-simulator-title {
+            font-size: 1.6rem;   /* MOBILE: Taille titre */
+          }
+
+          /* MOBILE: Description sous le titre */
           .profit-simulator-subtitle {
-            font-size: 0.9rem;
+            font-size: 0.9rem;   /* MOBILE: Taille description */
+            margin-top: 0;       /* MOBILE: Marge haut description */
+            margin-bottom: 2rem; /* MOBILE: Marge bas description */
+          }
+
+          /* MOBILE: Groupe input */
+          .profit-input-group {
+            margin-top: 0;       /* MOBILE: Marge haut groupe input */
+            margin-bottom: 1rem; /* MOBILE: Marge bas groupe input */
+          }
+
+          /* MOBILE: Label "Déterminer la valeur d'une unité" */
+          .profit-input-label {
+            font-size: 1.1rem;   /* MOBILE: Taille label */
+            margin-top: 0;       /* MOBILE: Marge haut label */
+            margin-bottom: 0.5rem; /* MOBILE: Marge bas label */
+          }
+
+          /* MOBILE: Boutons de valeurs */
+          .profit-value-buttons {
+            gap: 0.5rem;
+            margin-top: 0.5rem;  /* MOBILE: Marge haut boutons valeurs */
+            margin-bottom: 0;    /* MOBILE: Marge bas boutons valeurs */
+          }
+          
+          .profit-value-btn {
+            padding: 0.6rem 1rem;
+            font-size: 0.9rem;   /* MOBILE: Taille texte boutons valeurs */
+            flex: 1 1 calc(33.333% - 0.5rem);
+            min-width: 70px;
+          }
+
+          /* MOBILE: Bouton principal "Lancer le simulateur" */
+          .profit-calculate-btn {
+            font-size: 1rem;     /* MOBILE: Taille texte bouton principal */
+            padding: 1rem;
+            margin-top: 0;       /* MOBILE: Marge haut bouton principal */
+            margin-bottom: 0;    /* MOBILE: Marge bas bouton principal */
           }
 
           .profit-value-big {
@@ -1493,12 +1560,13 @@
           }
         }
 
-        /* Boutons de valeurs prédéfinies */
+        /* Boutons de valeurs prédéfinies (20$, 40$, etc.) */
         .profit-value-buttons {
           display: flex;
           flex-wrap: wrap;
           gap: 0.75rem;
-          margin-top: 0.75rem;
+          margin-top: 0.75rem;  /* DESKTOP: Marge haut boutons valeurs */
+          margin-bottom: 0;     /* DESKTOP: Marge bas boutons valeurs */
         }
 
         .profit-value-btn {
@@ -1508,7 +1576,7 @@
           border-radius: 12px;
           color: rgba(255, 255, 255, 0.7);
           font-family: 'Outfit', sans-serif;
-          font-size: 1.2rem;
+          font-size: 1.2rem;  /* DESKTOP: Taille texte boutons valeurs */
           font-weight: 300;
           cursor: pointer;
           transition: all 0.3s ease;
@@ -1851,7 +1919,7 @@
           </div>
           
           <button id="calculate-profit-btn" class="profit-calculate-btn">
-            Simulez comme si j'avais fait les bets winabet.ai
+            Lancer le simulateur
           </button>
           
           <div id="profit-result" class="profit-result" style="display: none;">
