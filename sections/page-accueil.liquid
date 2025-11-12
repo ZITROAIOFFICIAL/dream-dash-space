@@ -2640,11 +2640,11 @@
           if (statsContainer) {
             statsContainer.innerHTML = `
               <div style="background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 1rem; padding: 1.5rem; text-align: center;">
-                <div style="color: rgba(255, 255, 255, 0.6); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">PARIS EN +</div>
+                <div style="color: rgba(255, 255, 255, 0.6); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Paris en positif +</div>
                 <div style="color: ${parisColor}; font-size: 2rem; font-weight: 700;">${parisSign}${parisEnPlus}</div>
               </div>
               <div style="background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 1rem; padding: 1.5rem; text-align: center;">
-                <div style="color: rgba(255, 255, 255, 0.6); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">UNITS EN +</div>
+                <div style="color: rgba(255, 255, 255, 0.6); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Units en positif</div>
                 <div style="color: ${unitsColor}; font-size: 2rem; font-weight: 700;">${unitsSign}${totalUnits.toFixed(2)}</div>
               </div>
             `;
@@ -2717,17 +2717,25 @@
 
           // Auto-scroll lent
           function startAutoScroll() {
+            clearInterval(autoScrollInterval);
             autoScrollInterval = setInterval(() => {
               if (!isDragging) {
                 slider.scrollLeft += 1;
                 // Boucle infinie : revenir au début si à la fin
                 if (slider.scrollLeft >= slider.scrollWidth / 2) {
-                  slider.scrollLeft = 0;
+                  // Reset sans animation pour éviter le "jump" visible
+                  const wrapper = slider.parentElement;
+                  wrapper.style.scrollBehavior = 'auto';
+                  slider.scrollLeft = 1;
+                  setTimeout(() => {
+                    wrapper.style.scrollBehavior = 'smooth';
+                  }, 50);
                 }
               }
             }, 30);
           }
-
+          
+          // Démarrer l'auto-scroll automatiquement
           startAutoScroll();
         }
 
