@@ -1337,6 +1337,13 @@
           color: rgba(255, 255, 255, 0.6);
         }
 
+        .pricing-plan-billing-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 1rem;
+        }
+
         .pricing-plan-billing {
           font-family: 'Outfit', sans-serif;
           font-size: 1.2rem;
@@ -1374,8 +1381,6 @@
           border-radius: 9999px;
           white-space: nowrap;
           text-align: center;
-          margin-top: 1.5rem;
-          align-self: flex-start;
         }
 
         .pricing-plan-description {
@@ -2036,10 +2041,12 @@
                     <span class="pricing-plan-amount">99$</span>
                     <span class="pricing-plan-period">/mois</span>
                   </div>
-                  <div class="pricing-plan-billing">Facturé chaque mois</div>
+                  <div class="pricing-plan-billing-row">
+                    <div class="pricing-plan-billing">Facturé chaque mois</div>
+                    <div class="pricing-plan-trial">Essai gratuit 1 jour</div>
+                  </div>
                   <div class="pricing-plan-billing-date">Premier paiement: <span class="billing-start-date"></span></div>
                 </div>
-                <div class="pricing-plan-trial">Essai gratuit 1 jour</div>
               </div>
             </div>
 
@@ -2053,10 +2060,12 @@
                     <span class="pricing-plan-amount">79$</span>
                     <span class="pricing-plan-period">/mois</span>
                   </div>
-                  <div class="pricing-plan-billing">Facturé chaque 6 mois</div>
+                  <div class="pricing-plan-billing-row">
+                    <div class="pricing-plan-billing">Facturé chaque 6 mois</div>
+                    <div class="pricing-plan-trial">Essai gratuit 1 jour</div>
+                  </div>
                   <div class="pricing-plan-billing-date">Premier paiement: <span class="billing-start-date"></span></div>
                 </div>
-                <div class="pricing-plan-trial">Essai gratuit 1 jour</div>
               </div>
             </div>
 
@@ -2070,10 +2079,12 @@
                     <span class="pricing-plan-amount">59$</span>
                     <span class="pricing-plan-period">/mois</span>
                   </div>
-                  <div class="pricing-plan-billing">Facturé chaque année</div>
+                  <div class="pricing-plan-billing-row">
+                    <div class="pricing-plan-billing">Facturé chaque année</div>
+                    <div class="pricing-plan-trial">Essai gratuit 1 jour</div>
+                  </div>
                   <div class="pricing-plan-billing-date">Premier paiement: <span class="billing-start-date"></span></div>
                 </div>
-                <div class="pricing-plan-trial">Essai gratuit 1 jour</div>
               </div>
             </div>
 
