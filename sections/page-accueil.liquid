@@ -2674,17 +2674,14 @@
           wrapper.addEventListener('mousedown', (e) => {
             isDragging = true;
             sliderContainer.style.cursor = 'grabbing';
-            startX = e.pageX - wrapper.offsetLeft;
-            scrollLeft = wrapper.scrollLeft;
+            startX = e.pageX + wrapper.scrollLeft;
             clearInterval(autoScrollInterval);
           });
 
           wrapper.addEventListener('mousemove', (e) => {
             if (!isDragging) return;
             e.preventDefault();
-            const x = e.pageX - wrapper.offsetLeft;
-            const walk = (x - startX) * 2;
-            wrapper.scrollLeft = scrollLeft - walk;
+            wrapper.scrollLeft = startX - e.pageX;
           });
 
           wrapper.addEventListener('mouseup', () => {
@@ -2703,16 +2700,14 @@
 
           // Touch pour mobile
           wrapper.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].pageX;
-            scrollLeft = wrapper.scrollLeft;
+            startX = e.touches[0].pageX + wrapper.scrollLeft;
             clearInterval(autoScrollInterval);
           });
 
           wrapper.addEventListener('touchmove', (e) => {
-            const x = e.touches[0].pageX;
-            const walk = (startX - x) * 2;
-            wrapper.scrollLeft = scrollLeft + walk;
-          });
+            e.preventDefault();
+            wrapper.scrollLeft = startX - e.touches[0].pageX;
+          }, { passive: false });
 
           wrapper.addEventListener('touchend', () => {
             startAutoScroll();
@@ -2737,7 +2732,8 @@
             }, 30);
           }
           
-          // Démarrer l'auto-scroll automatiquement
+          // Initialiser le scroll et démarrer l'auto-scroll
+          wrapper.scrollLeft = 1;
           startAutoScroll();
         }
 

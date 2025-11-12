@@ -2614,6 +2614,8 @@
         overflow-x: auto;
         overflow-y: hidden;
         scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
         /* Cacher la scrollbar */
         scrollbar-width: none;
         -ms-overflow-style: none;
@@ -2624,10 +2626,12 @@
       }
 
       .bet-history-slider-container {
-        display: flex;
+        display: inline-flex;
+        min-width: max-content;
         gap: 2rem;
         cursor: grab;
         user-select: none;
+        touch-action: pan-x;
       }
 
       .bet-history-slider-container:active {
