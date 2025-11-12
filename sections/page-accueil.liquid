@@ -2032,8 +2032,14 @@
               </g>
               <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
             </svg>
-            <h2>Historique de nos prédictions IA</h2>
+            <h2>Historique de nos 10 derniers paris IA</h2>
           </div>
+          
+          <!-- Statistiques du slider -->
+          <div id="bet-slider-stats" style="max-width: 40rem; margin: 2rem auto; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: 0 1rem;">
+            <!-- Sera rempli par JavaScript -->
+          </div>
+          
           <div class="bet-history-slider-wrapper">
             <div id="bet-history-slider" class="bet-history-slider-container">
               <p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Chargement de l'historique...</p>
@@ -2043,7 +2049,7 @@
           <!-- Bouton Voir l'historique complet -->
           <div style="text-align: center; margin-top: 2rem;">
             <a href="https://winabet.ai/pages/dashboard#historique-bet" class="bet-history-button">
-              📊 Voir l'historique complet
+              Voir historique bet complet
             </a>
           </div>
         </div>
@@ -2545,7 +2551,7 @@
                 </div>
               </div>
               
-              <div class="history-card" style="background: #000000; border: 2px solid ${unitsColor}; border-radius: 1rem; padding: 4rem; margin: 0 auto 2rem; max-width: 36rem; width: 100%; display: flex; flex-direction: column; align-items: center;">
+              <div class="history-card" style="background: #000000; border: 2px solid rgba(128, 128, 128, 0.3); border-radius: 1rem; padding: 4rem; margin: 0 auto 2rem; max-width: 36rem; width: 100%; display: flex; flex-direction: column; align-items: center;">
                 <div style="text-align: center; margin-bottom: 2rem;">
                   <div style="font-size: 1rem; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">COTE</div>
                   <div style="font-size: 2.5rem; font-weight: 700; color: #ffffff;">${bet.multiplier}</div>
@@ -2577,9 +2583,17 @@
           }
         }
 
+        // Fonction pour parser les dates DD/MM/YYYY
+        function parseDate(dateString) {
+          if (!dateString) return new Date(0);
+          const [day, month, year] = dateString.split('/').map(Number);
+          return new Date(year, month - 1, day);
+        }
+
         // Fonction pour créer le slider
         function createBetSlider(bets) {
           const sliderContainer = document.getElementById('bet-history-slider');
+          const statsContainer = document.getElementById('bet-slider-stats');
           if (!sliderContainer) return;
 
           // Filtrer pour ne garder que les bets terminés (win/loose)
@@ -2587,11 +2601,54 @@
           
           if (completedBets.length === 0) {
             sliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Aucune prédiction complétée pour le moment.</p>';
+            if (statsContainer) statsContainer.innerHTML = '';
             return;
           }
 
+          // Trier par date décroissante (plus récent d'abord)
+          const sortedBets = [...completedBets].sort((a, b) => {
+            const dateA = parseDate(a.match_date);
+            const dateB = parseDate(b.match_date);
+            return dateB - dateA;
+          });
+
           // Prendre les 10 derniers bets complétés
-          const sliderBets = completedBets.slice(0, 10);
+          const sliderBets = sortedBets.slice(0, 10);
+          
+          // Calculer les statistiques
+          let totalWins = 0;
+          let totalLosses = 0;
+          let totalUnits = 0;
+          
+          sliderBets.forEach(bet => {
+            if (bet.result === 'win') {
+              totalWins++;
+              totalUnits += parseFloat(bet.units) || 0;
+            } else if (bet.result === 'loose') {
+              totalLosses++;
+              totalUnits -= parseFloat(bet.units) || 0;
+            }
+          });
+          
+          const parisEnPlus = totalWins - totalLosses;
+          const parisColor = parisEnPlus >= 0 ? '#22c55e' : '#ef4444';
+          const unitsColor = totalUnits >= 0 ? '#22c55e' : '#ef4444';
+          const parisSign = parisEnPlus >= 0 ? '+' : '';
+          const unitsSign = totalUnits >= 0 ? '+' : '';
+          
+          // Afficher les statistiques
+          if (statsContainer) {
+            statsContainer.innerHTML = `
+              <div style="background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 1rem; padding: 1.5rem; text-align: center;">
+                <div style="color: rgba(255, 255, 255, 0.6); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">PARIS EN +</div>
+                <div style="color: ${parisColor}; font-size: 2rem; font-weight: 700;">${parisSign}${parisEnPlus}</div>
+              </div>
+              <div style="background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 1rem; padding: 1.5rem; text-align: center;">
+                <div style="color: rgba(255, 255, 255, 0.6); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">UNITS EN +</div>
+                <div style="color: ${unitsColor}; font-size: 2rem; font-weight: 700;">${unitsSign}${totalUnits.toFixed(2)}</div>
+              </div>
+            `;
+          }
           
           // Générer le HTML pour chaque bet
           const cardsHTML = sliderBets.map(bet => generateBetCardHTML(bet)).join('');
@@ -2599,10 +2656,79 @@
           // Dupliquer les cartes pour créer un effet de boucle infinie
           sliderContainer.innerHTML = cardsHTML + cardsHTML;
           
-          // Forcer le reflow pour déclencher l'animation immédiatement
-          sliderContainer.style.animation = 'none';
-          sliderContainer.offsetHeight; // Trigger reflow
-          sliderContainer.style.animation = '';
+          // Initialiser le slider manuel
+          initManualSlider(sliderContainer);
+        }
+
+        // Fonction pour initialiser le slider manuel (drag/swipe + auto-scroll)
+        function initManualSlider(slider) {
+          let isDragging = false;
+          let startX;
+          let scrollLeft;
+          let autoScrollInterval;
+
+          // Drag avec souris
+          slider.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            slider.style.cursor = 'grabbing';
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+            clearInterval(autoScrollInterval);
+          });
+
+          slider.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2;
+            slider.scrollLeft = scrollLeft - walk;
+          });
+
+          slider.addEventListener('mouseup', () => {
+            isDragging = false;
+            slider.style.cursor = 'grab';
+            startAutoScroll();
+          });
+
+          slider.addEventListener('mouseleave', () => {
+            if (isDragging) {
+              isDragging = false;
+              slider.style.cursor = 'grab';
+              startAutoScroll();
+            }
+          });
+
+          // Touch pour mobile
+          slider.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].pageX;
+            scrollLeft = slider.scrollLeft;
+            clearInterval(autoScrollInterval);
+          });
+
+          slider.addEventListener('touchmove', (e) => {
+            const x = e.touches[0].pageX;
+            const walk = (startX - x) * 2;
+            slider.scrollLeft = scrollLeft + walk;
+          });
+
+          slider.addEventListener('touchend', () => {
+            startAutoScroll();
+          });
+
+          // Auto-scroll lent
+          function startAutoScroll() {
+            autoScrollInterval = setInterval(() => {
+              if (!isDragging) {
+                slider.scrollLeft += 1;
+                // Boucle infinie : revenir au début si à la fin
+                if (slider.scrollLeft >= slider.scrollWidth / 2) {
+                  slider.scrollLeft = 0;
+                }
+              }
+            }, 30);
+          }
+
+          startAutoScroll();
         }
 
         // Initialiser au chargement de la page

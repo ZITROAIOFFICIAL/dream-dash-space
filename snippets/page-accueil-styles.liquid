@@ -2614,24 +2614,28 @@
         padding: 2rem 0;
       }
 
+      .bet-history-slider-wrapper {
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-behavior: smooth;
+        /* Cacher la scrollbar */
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
+      .bet-history-slider-wrapper::-webkit-scrollbar {
+        display: none;
+      }
+
       .bet-history-slider-container {
         display: flex;
         gap: 2rem;
-        animation: slideLeft 60s linear infinite;
-        will-change: transform;
+        cursor: grab;
+        user-select: none;
       }
 
-      .bet-history-slider-container:hover {
-        animation-play-state: paused;
-      }
-
-      @keyframes slideLeft {
-        0% {
-          transform: translateX(0);
-        }
-        100% {
-          transform: translateX(-50%);
-        }
+      .bet-history-slider-container:active {
+        cursor: grabbing;
       }
 
       /* Cartes dans le slider */
@@ -2666,6 +2670,16 @@
 
         .bet-history-slider-container .history-card {
           padding: 1rem;
+          text-align: center;
+        }
+        
+        .bet-history-slider-container .history-card > * {
+          margin-left: auto;
+          margin-right: auto;
+        }
+        
+        .bet-history-slider-container .history-card [style*="display: flex"] {
+          justify-content: center !important;
         }
 
         /* Réduire les tailles de police dans les cartes mobile */
