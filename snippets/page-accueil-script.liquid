@@ -1347,18 +1347,24 @@
         // Connecter le bouton au drawer existant
         document.addEventListener('DOMContentLoaded', function() {
           const homeBtn = document.getElementById('home-open-bet-history-drawer');
-          if (homeBtn) {
-            homeBtn.addEventListener('click', () => {
-              // Utiliser la même fonction que le slider pricing
-              const drawer = document.querySelector('.bet-history-drawer');
-              if (drawer) {
-                drawer.classList.add('active');
-                document.body.classList.add('drawer-open');
-                // ✅ Charger l'historique complet dans le drawer
-                loadBetHistoryInDrawer();
-              }
-            });
-          }
+          if (!homeBtn) return;
+
+          homeBtn.addEventListener('click', () => {
+            // Déléguer au bouton "Pricing" pour garantir un comportement IDENTIQUE
+            const pricingBtn = document.getElementById('open-bet-history-drawer');
+            if (pricingBtn) {
+              pricingBtn.click();
+              return;
+            }
+
+            // Fallback (au cas où)
+            const drawer = document.querySelector('.bet-history-drawer');
+            if (drawer) {
+              drawer.classList.add('active');
+              document.body.classList.add('drawer-open');
+              loadBetHistoryInDrawer();
+            }
+          });
         });
       })();
   </script>
@@ -1563,6 +1569,14 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Fonction pour charger l'historique complet dans le drawer
   async function loadBetHistoryInDrawer() {
+    // Afficher un état de chargement
+    const container = document.getElementById("bet-history-container-drawer");
+    const statsContainer = document.getElementById("bet-stats-drawer");
+    const emptyState = document.getElementById("bet-empty-state-drawer");
+    if (emptyState) emptyState.style.display = "none";
+    if (statsContainer) statsContainer.innerHTML = "";
+    if (container) container.innerHTML = '<p style="color: rgba(255,255,255,0.7); text-align:center; padding: 1rem;">Chargement…</p>';
+    
     try {
       console.log("📥 Chargement de l'historique complet dans le drawer...");
       const FUNCTIONS_URL = 'https://ycvfyorgkhuxcosfrsxs.functions.supabase.co';
