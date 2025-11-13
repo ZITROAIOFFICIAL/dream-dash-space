@@ -3091,20 +3091,32 @@
           const backToHomeButton = document.querySelector('.back-to-home-pricing');
           
           if (initialContent && plansSection && featuresList) {
-            // Afficher le contenu initial
-            initialContent.style.display = 'block';
+            // Afficher le contenu initial avec le bon style flex
+            initialContent.style.display = 'flex';
             featuresList.style.display = 'block';
             if (pricingLogo) {
               pricingLogo.style.display = 'block';
             }
             if (backToHomeButton) {
-              backToHomeButton.style.display = 'block';
+              backToHomeButton.style.display = 'flex';
             }
             // Cacher la section des forfaits
             plansSection.style.display = 'none';
             
-            // Réinitialiser à la vue régulière
-            showRegularView();
+            // Réinitialiser à la vue régulière (pour la prochaine fois)
+            regularGrid.style.display = 'grid';
+            interacGrid.style.display = 'none';
+            subtitle.textContent = 'Choisissez votre forfait';
+            description.style.display = 'block';
+            
+            // Réinitialiser la sélection
+            const regularCards = regularGrid.querySelectorAll('.pricing-plan-card');
+            regularCards.forEach(c => c.classList.remove('selected'));
+            regularCards[0].classList.add('selected');
+            updateContinueButton('monthly');
+            
+            // Réinitialiser currentView
+            currentView = 'regular';
             
             // Scroller vers le haut
             window.scrollTo({
