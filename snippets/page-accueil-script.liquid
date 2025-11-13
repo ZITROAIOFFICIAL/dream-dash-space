@@ -1113,184 +1113,18 @@
           }
         }
 
-        // Fonction pour créer le slider PRICING
-        function createPricingBetSlider(bets) {
-          const sliderContainer = document.getElementById('pricing-bet-history-slider');
-          if (!sliderContainer) return;
-
-          // Filtrer pour ne garder que les bets terminés (win/loose)
-          const completedBets = bets.filter(bet => bet.result === 'win' || bet.result === 'loose');
-          
-          if (completedBets.length === 0) {
-            sliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Aucune prédiction complétée pour le moment.</p>';
-            return;
-          }
-
-          // Trier par date de match (DD/MM/YYYY + HH:MM) décroissante, fallback sur created_at
-          const getBetDate = (bet) => {
-            try {
-              if (bet.match_date) {
-                const parts = String(bet.match_date).split(/[\/\-.]/).map(Number);
-                if (parts.length === 3) {
-                  const [dd, mm, yyyy] = parts; // Format attendu: DD/MM/YYYY
-                  const date = new Date(yyyy, (mm || 1) - 1, dd || 1);
-                  if (bet.match_time) {
-                    const [hh, mn] = String(bet.match_time).split(':').map(v => parseInt(v, 10));
-                    if (!isNaN(hh)) {
-                      date.setHours(hh, isNaN(mn) ? 0 : mn, 0, 0);
-                    } else {
-                      date.setHours(23, 59, 59, 999);
-                    }
-                  } else {
-                    date.setHours(23, 59, 59, 999);
-                  }
-                  return date;
-                }
-              }
-              if (bet.created_at) return new Date(bet.created_at);
-            } catch (_) {}
-            return new Date(0);
-          };
-          completedBets.sort((a, b) => getBetDate(b) - getBetDate(a));
-
-          // Prendre les 10 derniers bets complétés
-          const sliderBets = completedBets.slice(0, 10);
-          
-          // Calculer les statistiques sur les 10 paris
-          let winsCount = 0;
-          let totalUnits = 0;
-          
-          sliderBets.forEach(bet => {
-            const betUnits = parseFloat(bet.bet_units || 1);
-            
-            if (bet.result === 'win') {
-              winsCount++;
-              // Calcul des units gagnées: (cote - 1) * units misées
-              const unitsWon = (parseFloat(bet.multiplier) - 1) * betUnits;
-              totalUnits += unitsWon;
-            } else if (bet.result === 'loose') {
-              // Perte = - units misées
-              totalUnits -= betUnits;
-            }
-          });
-          
-          // Mettre à jour l'affichage des statistiques PRICING
-          const winsCountElement = document.getElementById('pricing-wins-count');
-          const unitsCountElement = document.getElementById('pricing-units-count');
-          
-          if (winsCountElement) {
-            winsCountElement.textContent = `+${winsCount}`;
-          }
-          
-          if (unitsCountElement) {
-            const formattedUnits = totalUnits >= 0 ? `+${totalUnits.toFixed(2)}` : totalUnits.toFixed(2);
-            unitsCountElement.textContent = `${formattedUnits} units`;
-            unitsCountElement.style.color = totalUnits >= 0 ? '#10b981' : '#ef4444';
-          }
-
-          // Générer le HTML des cartes
-          sliderContainer.innerHTML = sliderBets.map(bet => {
-            const isWin = bet.result === 'win';
-            const resultClass = isWin ? 'win' : 'loose';
-            const resultColor = isWin ? '#10b981' : '#ef4444';
-            const resultIcon = isWin ? '✓' : '✗';
-            const resultText = isWin ? 'WIN' : 'LOSE';
-            
-            const sport = (bet.sport || 'sport').toUpperCase();
-            const league = bet.league || 'League';
-            const matchup = bet.matchup || bet.home_team && bet.away_team ? `${bet.home_team} vs ${bet.away_team}` : 'Match';
-            const betType = bet.bet_type || 'Pari';
-            const multiplier = bet.multiplier || '1.00';
-            const matchDate = bet.match_date || '';
-            const matchTime = bet.match_time || '';
-            
-            return `
-              <div class="card-wrapper">
-                <div class="history-card ${resultClass}">
-                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                    <div style="display: flex; align-items: center; gap: 0.5rem;">
-                      <span style="font-weight: 600; color: rgba(255,255,255,0.9);">${sport}</span>
-                      <span style="color: rgba(255,255,255,0.5);">•</span>
-                      <span style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">${league}</span>
-                    </div>
-                    <div style="background: ${resultColor}; color: #000; font-weight: 700; padding: 0.25rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem;">
-                      ${resultIcon} ${resultText}
-                    </div>
-                  </div>
-                  
-                  <div style="margin-bottom: 1rem;">
-                    <div style="font-weight: 600; color: #ffffff; margin-bottom: 0.5rem; font-size: 1.1rem;">${matchup}</div>
-                    <div style="color: rgba(255,255,255,0.7); font-size: 0.95rem;">${betType}</div>
-                  </div>
-                  
-                  <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
-                    <div style="text-align: left;">
-                      <div style="font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-bottom: 0.25rem;">Cote</div>
-                      <div style="font-weight: 700; color: #ffffff; font-size: 1.2rem;">${multiplier}</div>
-                    </div>
-                    <div style="text-align: right;">
-                      <div style="font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-bottom: 0.25rem;">Date</div>
-                      <div style="font-size: 0.9rem; color: rgba(255,255,255,0.8);">${matchDate}${matchTime ? ' ' + matchTime : ''}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            `;
-          }).join('');
-
-          // Activer le défilement horizontal draggable pour le slider pricing
-          const sliderWrapper = sliderContainer.parentElement;
-          if (sliderWrapper) {
-            let isDown = false;
-            let startX;
-            let scrollLeft;
-
-            sliderWrapper.addEventListener('mousedown', (e) => {
-              isDown = true;
-              sliderWrapper.style.cursor = 'grabbing';
-              startX = e.pageX - sliderWrapper.offsetLeft;
-              scrollLeft = sliderWrapper.scrollLeft;
-            });
-
-            sliderWrapper.addEventListener('mouseleave', () => {
-              isDown = false;
-              sliderWrapper.style.cursor = 'grab';
-            });
-
-            sliderWrapper.addEventListener('mouseup', () => {
-              isDown = false;
-              sliderWrapper.style.cursor = 'grab';
-            });
-
-            sliderWrapper.addEventListener('mousemove', (e) => {
-              if (!isDown) return;
-              e.preventDefault();
-              const x = e.pageX - sliderWrapper.offsetLeft;
-              const walk = (x - startX) * 2;
-              sliderWrapper.scrollLeft = scrollLeft - walk;
-            });
-
-            // Style pour indiquer que c'est draggable
-            sliderWrapper.style.cursor = 'grab';
-            sliderWrapper.style.userSelect = 'none';
-          }
-        }
 
         // Initialiser au chargement de la page
         document.addEventListener('DOMContentLoaded', async function() {
           try {
             const bets = await loadBetHistoryForSlider();
             createBetSlider(bets);
-            createPricingBetSlider(bets);
+            
           } catch (error) {
             console.error('❌ Erreur initialisation slider:', error);
             const sliderContainer = document.getElementById('bet-history-slider');
             if (sliderContainer) {
               sliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Erreur de chargement.</p>';
-            }
-            const pricingSliderContainer = document.getElementById('pricing-bet-history-slider');
-            if (pricingSliderContainer) {
-              pricingSliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Erreur de chargement.</p>';
             }
           }
         });
