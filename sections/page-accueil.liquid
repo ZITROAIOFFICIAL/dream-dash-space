@@ -4326,8 +4326,8 @@ document.addEventListener('DOMContentLoaded', function() {
   window.SUPABASE_CONFIG.shopDomain = '{{ shop.permanent_domain }}';
 })();
 
-// Simulateur de profit
-document.addEventListener('DOMContentLoaded', function() {
+// Simulateur de profit - INITIALISATION IMMÉDIATE
+(function() {
   // ============ SIMULATEUR PAGE D'ACCUEIL (HOME) ============
   const calculateBtnHome = document.getElementById('calculate-profit-btn-home');
   const resultDivHome = document.getElementById('profit-result-home');
@@ -4339,9 +4339,16 @@ document.addEventListener('DOMContentLoaded', function() {
   const customInputHome = document.getElementById('custom-unit-input-home');
   const otherBtnHome = document.getElementById('other-value-btn-home');
 
+  console.log('Simulateur HOME initialisé:', {
+    boutons: valueButtonsHome.length,
+    calculateBtn: !!calculateBtnHome
+  });
+
   // Gérer la sélection des boutons de valeur (HOME)
   valueButtonsHome.forEach(btn => {
-    btn.addEventListener('click', function() {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      console.log('Bouton cliqué:', this.getAttribute('data-value'));
       valueButtonsHome.forEach(b => b.classList.remove('active'));
       this.classList.add('active');
       
@@ -4350,7 +4357,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (value === 'other') {
         customInputWrapperHome.style.display = 'block';
         selectedUnitValueHome = null;
-        customInputHome.focus();
+        if (customInputHome) customInputHome.focus();
       } else {
         customInputWrapperHome.style.display = 'none';
         selectedUnitValueHome = parseFloat(value);
@@ -4506,8 +4513,10 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
+})(); // Fin IIFE simulateur HOME
   
-  // ============ SIMULATEUR PAGE PRICING (ORIGINAL) ============
+// ============ SIMULATEUR PAGE PRICING (ORIGINAL) ============
+document.addEventListener('DOMContentLoaded', function() {
   const calculateBtn = document.getElementById('calculate-profit-btn');
   const resultDiv = document.getElementById('profit-result');
   const loadingDiv = document.getElementById('profit-loading');
