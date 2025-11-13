@@ -2065,8 +2065,8 @@
 
         <!-- Section des forfaits (cachée par défaut) -->
         <div id="pricing-plans-section" style="display: none;">
-          <!-- Bouton Retour (caché par défaut) -->
-          <button class="pricing-back-button" id="pricing-back-button" style="display: none;">
+          <!-- Bouton Retour (visible par défaut) -->
+          <button class="pricing-back-button" id="pricing-back-button">
             ← Retour
           </button>
 
@@ -3062,7 +3062,6 @@
           currentView = 'interac';
           regularGrid.style.display = 'none';
           interacGrid.style.display = 'grid';
-          backButton.style.display = 'block';
           subtitle.textContent = 'Choisissez votre forfait avec virement Interac';
           description.style.display = 'none';
           continueButton.textContent = 'Continuer';
@@ -3073,7 +3072,6 @@
           currentView = 'regular';
           regularGrid.style.display = 'grid';
           interacGrid.style.display = 'none';
-          backButton.style.display = 'none';
           subtitle.textContent = 'Choisissez votre forfait';
           description.style.display = 'block';
           
@@ -3084,9 +3082,47 @@
           updateContinueButton('monthly');
         }
         
+        // Fonction pour retourner à la section hero
+        function returnToHero() {
+          const initialContent = document.getElementById('pricing-initial-content');
+          const plansSection = document.getElementById('pricing-plans-section');
+          const featuresList = document.getElementById('pricing-features-list');
+          const pricingLogo = document.querySelector('.pricing-logo');
+          const backToHomeButton = document.querySelector('.back-to-home-pricing');
+          
+          if (initialContent && plansSection && featuresList) {
+            // Afficher le contenu initial
+            initialContent.style.display = 'block';
+            featuresList.style.display = 'block';
+            if (pricingLogo) {
+              pricingLogo.style.display = 'block';
+            }
+            if (backToHomeButton) {
+              backToHomeButton.style.display = 'block';
+            }
+            // Cacher la section des forfaits
+            plansSection.style.display = 'none';
+            
+            // Réinitialiser à la vue régulière
+            showRegularView();
+            
+            // Scroller vers le haut
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
+          }
+        }
+        
         // Gérer le clic sur le bouton retour
         backButton.addEventListener('click', function() {
-          showRegularView();
+          if (currentView === 'interac') {
+            // Si on est dans la vue Interac, retourner à la vue régulière
+            showRegularView();
+          } else {
+            // Si on est dans la vue régulière, retourner à la section hero
+            returnToHero();
+          }
         });
         
         // Fonction pour mettre à jour le texte du bouton
