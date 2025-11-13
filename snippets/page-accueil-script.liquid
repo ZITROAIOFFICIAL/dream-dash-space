@@ -1070,10 +1070,11 @@
               sliderContainer.style.transform = `translateX(${currentPosition}px)`;
             });
 
-            // Support tactile
+            // Support tactile amélioré
             let touchStartX = 0;
             let touchStartY = 0;
             let touchDragStartPosition = 0;
+            let touchDirection = null; // 'horizontal', 'vertical', ou null
 
             sliderWrapper.addEventListener('touchstart', (e) => {
               if (!e.touches || e.touches.length === 0) return;
@@ -1081,6 +1082,8 @@
               touchStartX = t.clientX;
               touchStartY = t.clientY;
               touchDragStartPosition = currentPosition;
+              touchDirection = null; // Reset direction
+              
               // Arrêter l'animation
               if (animationId) {
                 cancelAnimationFrame(animationId);
@@ -1093,8 +1096,14 @@
               const t = e.touches[0];
               const dx = t.clientX - touchStartX;
               const dy = t.clientY - touchStartY;
-              // Si le mouvement est principalement horizontal, on gère le slide
-              if (Math.abs(dx) > Math.abs(dy)) {
+              
+              // Détecter la direction au premier mouvement significatif
+              if (touchDirection === null && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
+                touchDirection = Math.abs(dx) > Math.abs(dy) ? 'horizontal' : 'vertical';
+              }
+              
+              // Ne bloquer que si mouvement horizontal intentionnel
+              if (touchDirection === 'horizontal' && Math.abs(dx) > 10) {
                 e.preventDefault();
                 currentPosition = touchDragStartPosition + dx;
                 
@@ -1104,12 +1113,14 @@
                 
                 sliderContainer.style.transform = `translateX(${currentPosition}px)`;
               }
+              // Si direction verticale, ne rien faire (laisser le scroll normal)
             }, { passive: false });
 
             sliderWrapper.addEventListener('touchend', () => {
-              // Reprendre l'animation là où on est
+              touchDirection = null;
+              // Reprendre l'animation
               animate();
-            });
+            }, { passive: true });
             
             // Style pour indiquer que c'est draggable
             sliderWrapper.style.cursor = 'grab';
@@ -1132,6 +1143,33 @@
             }
           }
         });
+        
+        // Observer pour initialiser le slider quand la section pricing devient visible
+        const rejoindreSection = document.getElementById('rejoindre');
+        if (rejoindreSection) {
+          const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+              if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                const isVisible = window.getComputedStyle(rejoindreSection).display !== 'none';
+                if (isVisible && document.getElementById('bet-history-slider')) {
+                  // Réinitialiser le slider quand la section devient visible
+                  loadBetHistoryForSlider().then(bets => {
+                    createBetSlider(bets);
+                  }).catch(error => {
+                    console.error('❌ Erreur initialisation slider pricing:', error);
+                  });
+                  // Se désabonner après la première initialisation
+                  observer.disconnect();
+                }
+              }
+            });
+          });
+          
+          observer.observe(rejoindreSection, { 
+            attributes: true, 
+            attributeFilter: ['style'] 
+          });
+        }
       })();
 
       // ==================== HOME PAGE BET HISTORY SLIDER ====================
