@@ -1009,7 +1009,8 @@
           
           // Ajouter la fonctionnalité de scroll horizontal manuel
           const sliderWrapper = sliderContainer.parentElement;
-          if (sliderWrapper) {
+          if (sliderWrapper && !sliderWrapper.dataset.eventsBound) {
+            sliderWrapper.dataset.eventsBound = 'true';
             // Gestion du scroll avec la molette/trackpad
             sliderWrapper.addEventListener('wheel', (e) => {
               // Détecter si c'est un scroll horizontal (trackpad) ou si Shift est pressé
@@ -1096,9 +1097,8 @@
               const t = e.touches[0];
               const dx = t.clientX - touchStartX;
               const dy = t.clientY - touchStartY;
-              
               // Détecter la direction au premier mouvement significatif
-              if (touchDirection === null && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
+              if (touchDirection === null && (Math.abs(dx) > 10 || Math.abs(dy) > 10)) {
                 touchDirection = Math.abs(dx) > Math.abs(dy) ? 'horizontal' : 'vertical';
               }
               
@@ -1125,6 +1125,7 @@
             // Style pour indiquer que c'est draggable
             sliderWrapper.style.cursor = 'grab';
             sliderWrapper.style.userSelect = 'none';
+            sliderWrapper.style.touchAction = 'pan-y';
           }
         }
 
