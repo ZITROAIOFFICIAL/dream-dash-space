@@ -1354,6 +1354,8 @@
               if (drawer) {
                 drawer.classList.add('active');
                 document.body.classList.add('drawer-open');
+                // ✅ Charger l'historique complet dans le drawer
+                loadBetHistoryInDrawer();
               }
             });
           }
