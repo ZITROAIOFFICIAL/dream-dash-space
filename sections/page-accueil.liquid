@@ -5148,88 +5148,60 @@ document.addEventListener('DOMContentLoaded', function() {
 
       try {
         const randomDelay = Math.floor(Math.random() * (3500 - 2000 + 1)) + 2000;
-
-        const extractUnitsFromDOM = () => {
-          const betSlider = document.querySelector('#bet-history-slider');
-          const parlaySlider = document.querySelector('#parlay-history-slider');
-          
-          if (!betSlider && !parlaySlider) return null;
-          
-          let betUnits = 0;
-          let parlayUnits = 0;
-          
-          if (betSlider) {
-            const betCards = betSlider.querySelectorAll('.history-card-unit-value');
-            betCards.forEach(card => {
-              const text = card.textContent.trim();
-              const match = text.match(/([+-]?\d+\.?\d*)\s*unit/i);
-              if (match) {
-                betUnits += parseFloat(match[1]);
-              }
-            });
-          }
-          
-          if (parlaySlider) {
-            const parlayCards = parlaySlider.querySelectorAll('.history-card-unit-value');
-            parlayCards.forEach(card => {
-              const text = card.textContent.trim();
-              const match = text.match(/([+-]?\d+\.?\d*)\s*unit/i);
-              if (match) {
-                parlayUnits += parseFloat(match[1]);
-              }
-            });
-          }
-          
-          return { betUnits, parlayUnits };
-        };
-
-        const fetchFromAPI = async () => {
-          const FUNCTIONS_URL = 'https://ycvfyorgkhuxcosfrsxs.functions.supabase.co';
-          const SHOP_DOMAIN = window.SUPABASE_CONFIG?.shopDomain || '{{ shop.permanent_domain }}';
-          
-          const betUrl = `${FUNCTIONS_URL}/get-bet-history?shop_domain=${SHOP_DOMAIN}`;
-          const parlayUrl = `${FUNCTIONS_URL}/get-parlay-history?shop_domain=${SHOP_DOMAIN}`;
-          
-          const [betResponse, parlayResponse] = await Promise.all([
-            fetch(betUrl),
-            fetch(parlayUrl)
-          ]);
-
-          if (!betResponse.ok || !parlayResponse.ok) {
-            throw new Error('Erreur lors de la récupération des données');
-          }
-
-          const betData = await betResponse.json();
-          const parlayData = await parlayResponse.json();
-          
-          return {
-            betUnits: betData.total_units || 0,
-            parlayUnits: parlayData.total_units || 0,
-            betData,
-            parlayData
-          };
-        };
         
-        let unitsData;
-        const domData = extractUnitsFromDOM();
+        console.log('🔄 Lancement du simulateur HOME avec unitValue:', unitValue);
         
-        if (domData) {
-          await new Promise(resolve => setTimeout(resolve, randomDelay));
-          unitsData = { 
-            betUnits: domData.betUnits, 
-            parlayUnits: domData.parlayUnits,
-            betData: { total_bets: 0 },
-            parlayData: { total_parlays: 0 }
-          };
-        } else {
-          const apiDataPromise = fetchFromAPI();
-          await new Promise(resolve => setTimeout(resolve, randomDelay));
-          unitsData = await apiDataPromise;
+        // Lancer l'API call ET le délai en parallèle
+        const FUNCTIONS_URL = 'https://ycvfyorgkhuxcosfrsxs.functions.supabase.co';
+        const SHOP_DOMAIN = window.SUPABASE_CONFIG?.shopDomain || '{{ shop.permanent_domain }}';
+        
+        console.log('📡 Shop domain:', SHOP_DOMAIN);
+        
+        const apiCallPromise = Promise.all([
+          fetch(`${FUNCTIONS_URL}/get-bet-history?shop_domain=${SHOP_DOMAIN}`),
+          fetch(`${FUNCTIONS_URL}/get-parlay-history?shop_domain=${SHOP_DOMAIN}`)
+        ]);
+        
+        // Attendre le délai d'animation
+        await new Promise(resolve => setTimeout(resolve, randomDelay));
+        
+        // Récupérer les résultats de l'API
+        const [betResponse, parlayResponse] = await apiCallPromise;
+        
+        console.log('📥 Réponses API:', { 
+          betOk: betResponse.ok, 
+          parlayOk: parlayResponse.ok 
+        });
+        
+        if (!betResponse.ok || !parlayResponse.ok) {
+          throw new Error('Erreur lors de la récupération des données');
         }
         
-        const totalUnits = unitsData.betUnits + unitsData.parlayUnits;
+        const betData = await betResponse.json();
+        const parlayData = await parlayResponse.json();
+        
+        console.log('✅ Données récupérées:', {
+          betUnits: betData.total_units,
+          parlayUnits: parlayData.total_units,
+          betWins: betData.total_wins,
+          parlayWins: parlayData.total_wins
+        });
+        
+        // Extraire les unités (avec validation)
+        const betUnits = parseFloat(betData.total_units) || 0;
+        const parlayUnits = parseFloat(parlayData.total_units) || 0;
+        const totalUnits = betUnits + parlayUnits;
         const profitDollars = totalUnits * unitValue;
-
+        
+        console.log('📊 Calcul final:', {
+          betUnits,
+          parlayUnits,
+          totalUnits,
+          unitValue,
+          profitDollars
+        });
+        
+        // Afficher les résultats
         const homeUnitsValueEl = document.getElementById('home-profit-units-value');
         const homeDollarsValueEl = document.getElementById('home-profit-dollars-value');
         const homeMessageEl = document.getElementById('home-profit-message');
@@ -5248,21 +5220,29 @@ document.addEventListener('DOMContentLoaded', function() {
           homeDollarsValueEl.classList.add('negative');
         }
 
-        if (totalUnits > 0) {
-          homeMessageEl.textContent = `🎉 Avec nos prédictions IA, vous auriez réalisé un profit de ${dollarsText} ! Ces résultats sont basés sur notre historique réel.`;
-        } else if (totalUnits < 0) {
-          homeMessageEl.textContent = `📊 Sur cette période, le résultat aurait été de ${dollarsText}. Nos performances varient selon les périodes, mais notre stratégie long terme vise la rentabilité.`;
+        if (totalUnits >= 100) {
+          homeMessageEl.textContent = "Wow ! Profit incroyable 🚀💰";
+        } else if (totalUnits >= 50) {
+          homeMessageEl.textContent = "Excellent ! Très bon profit 🎯";
+        } else if (totalUnits >= 20) {
+          homeMessageEl.textContent = "Bien joué ! Profit solide 💪";
+        } else if (totalUnits > 0) {
+          homeMessageEl.textContent = "Bon début ! Continue comme ça ✨";
+        } else if (totalUnits === 0) {
+          homeMessageEl.textContent = "À l'équilibre ! Prêt à gagner ? 🎲";
+        } else if (totalUnits >= -20) {
+          homeMessageEl.textContent = "Ce n'est qu'un début ! Remonte ça 💪";
         } else {
-          homeMessageEl.textContent = `📊 Aucune unité de profit/perte enregistrée pour le moment. Consultez nos historiques pour voir les performances détaillées.`;
+          homeMessageEl.textContent = "On rebondit ensemble ! 🔥";
         }
 
         homeLoadingDiv.style.display = 'none';
         homeResultDiv.style.display = 'block';
 
       } catch (error) {
-        console.error('Erreur lors du calcul des gains HOME:', error);
+        console.error('❌ Erreur détaillée:', error);
         homeLoadingDiv.style.display = 'none';
-        alert('Impossible de charger l\'historique. Veuillez réessayer plus tard.');
+        alert(`Erreur lors du calcul: ${error.message}`);
       }
     });
   }
