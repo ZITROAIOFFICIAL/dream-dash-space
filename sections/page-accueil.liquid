@@ -395,8 +395,9 @@
     </section>
 
     <!-- Simulateur de profit -->
-    <div class="profit-simulator">
-      <p class="profit-simulator-legend">(selon notre vrai historique)</p>
+    <section style="max-width: 1286px; margin: 6rem auto 4rem; padding: 0 2rem;">
+      <div class="profit-simulator">
+        <p class="profit-simulator-legend">(selon notre vrai historique)</p>
       
       <div class="profit-simulator-title-container">
         <svg id="atom-simulator-title" width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
@@ -518,10 +519,10 @@
           <p class="profit-loading-text">L'IA analyse vos gains potentiels...</p>
         </div>
       </div>
-    </div>
+      </div>
 
-    <!-- Popup d'information sur les unités -->
-    <div id="unit-info-popup" class="unit-info-popup" style="display: none;">
+      <!-- Popup d'information sur les unités -->
+      <div id="unit-info-popup" class="unit-info-popup" style="display: none;">
       <div class="unit-info-overlay"></div>
       <div class="unit-info-content">
         <button class="unit-info-close" id="close-popup-btn" type="button">
@@ -538,7 +539,8 @@
           bankroll petit ou gros comme vous voulez.
         </p>
       </div>
-    </div>
+      </div>
+    </section>
 
     <!-- Section Providers Card -->
    {% render 'providers-badges-section' %}
