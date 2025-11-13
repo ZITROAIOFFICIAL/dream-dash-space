@@ -2859,4 +2859,64 @@
         background: linear-gradient(to left, #000000, transparent);
       }
 
+      /* ============ SIMULATEUR HOMEPAGE ============ */
+      
+      .profit-simulator-homepage {
+        max-width: 48rem;
+        margin: -105rem auto 6rem;
+        padding: 3rem;
+        background: linear-gradient(135deg, rgba(20, 30, 48, 0.95), rgba(30, 41, 59, 0.9));
+        border-radius: 1.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 
+          0 20px 60px rgba(0, 0, 0, 0.4),
+          inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        position: relative;
+        z-index: 10;
+      }
+
+      /* Laptop étendu (1441-1920px) */
+      @media (min-width: 1441px) and (max-width: 1920px) {
+        .profit-simulator-homepage {
+          margin-top: calc(-105rem * var(--stats-scale-laptop, 0.85));
+        }
+      }
+
+      /* Desktop standard (1025-1440px) */
+      @media (min-width: 1025px) and (max-width: 1440px) {
+        .profit-simulator-homepage {
+          margin-top: -100rem;
+        }
+      }
+
+      /* Tablette (768-1024px) */
+      @media (min-width: 768px) and (max-width: 1024px) {
+        .profit-simulator-homepage {
+          margin-top: -90rem;
+          padding: 2.5rem;
+          max-width: 90%;
+        }
+      }
+
+      /* Mobile (< 768px) */
+      @media (max-width: 767px) {
+        .profit-simulator-homepage {
+          margin-top: -70rem;
+          padding: 2rem;
+          margin-left: 1rem;
+          margin-right: 1rem;
+          max-width: calc(100% - 2rem);
+        }
+      }
+
+      /* Très petit mobile (< 375px) */
+      @media (max-width: 374px) {
+        .profit-simulator-homepage {
+          margin-top: -60rem;
+          padding: 1.5rem;
+        }
+      }
+
+      /* ============ FIN SIMULATEUR HOMEPAGE ============ */
+
     </style>
