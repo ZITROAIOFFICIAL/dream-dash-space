@@ -1000,8 +1000,12 @@
             animationId = requestAnimationFrame(animate);
           }
           
-          // Démarrer l'animation
-          animate();
+          // Démarrer l'animation après que le DOM soit rendu
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              animate();
+            });
+          });
           
           // Ajouter la fonctionnalité de scroll horizontal manuel
           const sliderWrapper = sliderContainer.parentElement;
@@ -1216,8 +1220,12 @@
             animationId = requestAnimationFrame(animate);
           }
           
-          // Démarrer l'animation
-          animate();
+          // Démarrer l'animation après que le DOM soit rendu
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              animate();
+            });
+          });
           
           // Ajouter la fonctionnalité de scroll horizontal manuel
           const sliderWrapper = sliderContainer.parentElement;
