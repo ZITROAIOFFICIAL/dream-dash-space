@@ -3062,58 +3062,6 @@
           </div>
         </div>
 
-        <!-- Slider d'historique des bets PRICING -->
-        <div class="pricing-bet-history-slider-section">
-          <div class="pricing-bet-history-slider-title">
-            <svg width="50" height="50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
-              <defs>
-                <filter id="softGlowPricing" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="1.2" result="b"/>
-                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
-                <path id="orbitPricing0" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
-                <path id="orbitPricing1" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
-                <path id="orbitPricing2" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
-              </defs>
-              <g stroke="#68859e" stroke-width="2" fill="none">
-                <use href="#orbitPricing0"/>
-                <use href="#orbitPricing1"/>
-                <use href="#orbitPricing2"/>
-              </g>
-              <g stroke-linecap="round" filter="url(#softGlowPricing)">
-                <use href="#orbitPricing0" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                  <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
-                </use>
-                <use href="#orbitPricing1" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                  <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
-                </use>
-                <use href="#orbitPricing2" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                  <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
-                </use>
-              </g>
-              <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
-            </svg>
-            <h2>Historique de nos 10 derniers paris</h2>
-          </div>
-          
-          <!-- Statistiques calculées -->
-          <div id="pricing-bet-history-stats" style="display: flex; gap: 2rem; justify-content: center; margin: 2rem 0; flex-wrap: wrap;">
-            <div style="text-align: center;">
-              <div style="font-size: 2.5rem; font-weight: 700; color: #10b981;" id="pricing-wins-count">+0</div>
-              <div style="color: rgba(255,255,255,0.6); font-size: 1rem; margin-top: 0.25rem;">Paris gagnés</div>
-            </div>
-            <div style="text-align: center;">
-              <div style="font-size: 2.5rem; font-weight: 700; color: #10b981;" id="pricing-units-count">+0.00 units</div>
-              <div style="color: rgba(255,255,255,0.6); font-size: 1rem; margin-top: 0.25rem;">Sur 10 prédictions</div>
-            </div>
-          </div>
-          
-          <div class="pricing-bet-history-slider-wrapper">
-            <div id="pricing-bet-history-slider" class="pricing-bet-history-slider-container">
-              <p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Chargement de l'historique...</p>
-            </div>
-          </div>
-        </div>
 
         <!-- Popup d'information sur les unités -->
         <div id="unit-info-popup" class="unit-info-popup" style="display: none;">
