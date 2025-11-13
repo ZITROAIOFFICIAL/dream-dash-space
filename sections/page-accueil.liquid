@@ -395,7 +395,7 @@
     </section>
 
     <!-- Section Simulateur HOME PAGE -->
-    <section style="max-width: 1286px; margin: 6rem auto; padding: 0 2rem; position: relative; z-index: 1;">
+    <section style="max-width: 1286px; margin: 6rem auto; padding: 0 2rem; position: relative; z-index: 200; isolation: isolate;">
       <div class="profit-simulator" style="margin: 0 auto;">
       <p class="profit-simulator-legend">(selon notre vrai historique)</p>
       
@@ -1737,6 +1737,7 @@
         /* Styles du simulateur de profit */
         .profit-simulator {
           position: relative;
+          z-index: 200;
           width: 100%;
           max-width: 600px;
           margin: 6rem auto 0;
