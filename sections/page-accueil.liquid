@@ -2278,6 +2278,69 @@
 
           <!-- Bouton Continuer -->
           <button class="pricing-continue-button">Continuer</button>
+
+          <!-- Section instructions Interac (cachée par défaut) -->
+          <div id="interac-instructions-section" style="display: none;">
+            <div style="max-width: 800px; margin: 0 auto;">
+              <!-- Titre de l'abonnement -->
+              <h2 id="interac-subscription-title" style="font-family: 'Outfit', sans-serif; font-size: 2rem; font-weight: 600; color: #ffffff; text-align: center; margin-bottom: 2rem;">
+                Abonnement : 1 ans (59.99$ par mois)
+              </h2>
+
+              <!-- Message essai gratuit -->
+              <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem;">
+                <p style="font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 300; color: rgba(255, 255, 255, 0.9); line-height: 1.6; margin: 0;">
+                  Instantanément après le virement, vous allez avoir un accès complet. Vous avez donc 1 journée, à partir du virement, pour demander un remboursement intégral, aucune question posée. Donc vous avez un essai gratuit de 1 journée.
+                </p>
+              </div>
+
+              <!-- Étapes -->
+              <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                <!-- Étape A -->
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 1.5rem;">
+                  <div style="font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 500; color: #ffffff; margin-bottom: 0.5rem;">
+                    A- Vous devez avoir créé un compte
+                  </div>
+                  <p style="font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 300; color: rgba(255, 255, 255, 0.8); margin: 0.5rem 0 0 0;">
+                    <a href="#rejoindre" style="color: #667eea; text-decoration: underline;">Cliquez ici pour vous créer un compte</a>
+                  </p>
+                </div>
+
+                <!-- Étape 1 -->
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 1.5rem;">
+                  <div style="font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 500; color: #ffffff; margin-bottom: 0.5rem;">
+                    1- Faites le virement
+                  </div>
+                  <p id="interac-amount" style="font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 300; color: rgba(255, 255, 255, 0.8); margin: 0.5rem 0 0 0;">
+                    Montant : <strong style="color: #ffffff;">719.99$</strong><br>
+                    À : <strong style="color: #ffffff;">info@winabet.ai</strong><br>
+                    Réponse question de sécurité : <strong style="color: #ffffff;">winabet.ai</strong>
+                  </p>
+                </div>
+
+                <!-- Étape 2 -->
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 1.5rem;">
+                  <div style="font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 500; color: #ffffff; margin-bottom: 0.5rem;">
+                    2- Contactez-nous
+                  </div>
+                  <p style="font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 300; color: rgba(255, 255, 255, 0.8); margin: 0.5rem 0 0 0;">
+                    Une fois le virement fait, contactez notre numéro <strong style="color: #ffffff;">438-223-4581</strong>.<br>
+                    Dites-lui que le virement est fait, et quel est votre email de votre compte.
+                  </p>
+                </div>
+
+                <!-- Étape 3 -->
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 1.5rem;">
+                  <div style="font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 500; color: #ffffff; margin-bottom: 0.5rem;">
+                    3- Accès automatique
+                  </div>
+                  <p style="font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 300; color: rgba(255, 255, 255, 0.8); margin: 0.5rem 0 0 0;">
+                    Une fois le virement reçu, vous allez automatiquement avoir accès à tout au complet.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- Liste des avantages -->
@@ -3128,10 +3191,11 @@
         const backButton = document.getElementById('pricing-back-button');
         const regularGrid = document.getElementById('pricing-plans-grid-regular');
         const interacGrid = document.getElementById('pricing-plans-grid-interac');
+        const interacInstructions = document.getElementById('interac-instructions-section');
         const subtitle = document.getElementById('pricing-subtitle');
         const description = document.getElementById('pricing-description');
         
-        let currentView = 'regular'; // 'regular' ou 'interac'
+        let currentView = 'regular'; // 'regular', 'interac', ou 'interac-instructions'
         
         // URLs pour chaque plan
         const planUrls = {
@@ -3145,6 +3209,8 @@
           currentView = 'interac';
           regularGrid.style.display = 'none';
           interacGrid.style.display = 'grid';
+          interacInstructions.style.display = 'none';
+          continueButton.style.display = 'block';
           subtitle.textContent = 'Choisissez votre forfait avec virement Interac';
           description.style.display = 'none';
           
@@ -3159,12 +3225,47 @@
           }
         }
         
+        // Fonction pour afficher les instructions Interac
+        function showInteracInstructions(plan) {
+          currentView = 'interac-instructions';
+          regularGrid.style.display = 'none';
+          interacGrid.style.display = 'none';
+          interacInstructions.style.display = 'block';
+          continueButton.style.display = 'none';
+          subtitle.style.display = 'none';
+          description.style.display = 'none';
+          
+          // Mettre à jour le titre et le montant selon le plan
+          const titleElement = document.getElementById('interac-subscription-title');
+          const amountElement = document.getElementById('interac-amount');
+          
+          if (plan === 'interac-3months') {
+            titleElement.textContent = 'Abonnement : 3 mois (89.99$ par mois)';
+            amountElement.innerHTML = 'Montant : <strong style="color: #ffffff;">269.97$</strong><br>' +
+              'À : <strong style="color: #ffffff;">info@winabet.ai</strong><br>' +
+              'Réponse question de sécurité : <strong style="color: #ffffff;">winabet.ai</strong>';
+          } else if (plan === 'interac-6months') {
+            titleElement.textContent = 'Abonnement : 6 mois (79.99$ par mois)';
+            amountElement.innerHTML = 'Montant : <strong style="color: #ffffff;">479.94$</strong><br>' +
+              'À : <strong style="color: #ffffff;">info@winabet.ai</strong><br>' +
+              'Réponse question de sécurité : <strong style="color: #ffffff;">winabet.ai</strong>';
+          } else if (plan === 'interac-yearly') {
+            titleElement.textContent = 'Abonnement : 1 ans (59.99$ par mois)';
+            amountElement.innerHTML = 'Montant : <strong style="color: #ffffff;">719.99$</strong><br>' +
+              'À : <strong style="color: #ffffff;">info@winabet.ai</strong><br>' +
+              'Réponse question de sécurité : <strong style="color: #ffffff;">winabet.ai</strong>';
+          }
+        }
+        
         // Fonction pour retourner à la vue régulière
         function showRegularView() {
           currentView = 'regular';
           regularGrid.style.display = 'grid';
           interacGrid.style.display = 'none';
+          interacInstructions.style.display = 'none';
+          continueButton.style.display = 'block';
           subtitle.textContent = 'Choisissez votre forfait';
+          subtitle.style.display = 'block';
           description.style.display = 'block';
           
           // Réinitialiser la sélection
@@ -3220,7 +3321,11 @@
         
         // Gérer le clic sur le bouton retour
         backButton.addEventListener('click', function() {
-          if (currentView === 'interac') {
+          if (currentView === 'interac-instructions') {
+            // Si on est dans les instructions, retourner à la vue Interac
+            subtitle.style.display = 'block';
+            showInteracView();
+          } else if (currentView === 'interac') {
             // Si on est dans la vue Interac, retourner à la vue régulière
             showRegularView();
           } else {
@@ -3259,6 +3364,12 @@
             // Si on clique sur Interac dans la vue régulière, basculer vers la vue Interac
             if (selectedPlan === 'interac' && currentView === 'regular') {
               showInteracView();
+              return;
+            }
+            
+            // Si on est dans la vue Interac et qu'un plan Interac est sélectionné, afficher les instructions
+            if (currentView === 'interac' && selectedPlan.startsWith('interac-')) {
+              showInteracInstructions(selectedPlan);
               return;
             }
             
