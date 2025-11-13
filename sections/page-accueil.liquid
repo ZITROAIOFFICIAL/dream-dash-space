@@ -3219,16 +3219,21 @@
           subtitle.textContent = 'Choisissez votre forfait avec virement Interac';
           description.style.display = 'none';
           
+          // Sauvegarder l'état dans localStorage
+          localStorage.setItem('winabet_pricing_view', 'interac');
+          
           // Trouver quelle carte Interac est sélectionnée
           const selectedInteracCard = interacGrid.querySelector('.pricing-plan-card.selected');
           if (selectedInteracCard) {
             const selectedPlan = selectedInteracCard.getAttribute('data-plan');
             updateContinueButton(selectedPlan);
+            localStorage.setItem('winabet_selected_plan', selectedPlan);
           } else {
             // Par défaut, sélectionner 3 mois si aucune carte n'est sélectionnée
             const defaultCard = interacGrid.querySelector('[data-plan="interac-3months"]');
             if (defaultCard) defaultCard.classList.add('selected');
             updateContinueButton('interac-3months');
+            localStorage.setItem('winabet_selected_plan', 'interac-3months');
           }
         }
         
@@ -3241,6 +3246,10 @@
           continueButton.style.display = 'none';
           subtitle.style.display = 'none';
           description.style.display = 'none';
+          
+          // Sauvegarder l'état dans localStorage
+          localStorage.setItem('winabet_pricing_view', 'interac-instructions');
+          localStorage.setItem('winabet_selected_plan', plan);
           
           // Mettre à jour le titre et le montant selon le plan
           const titleElement = document.getElementById('interac-subscription-title');
@@ -3275,11 +3284,15 @@
           subtitle.style.display = 'block';
           description.style.display = 'block';
           
+          // Sauvegarder l'état dans localStorage
+          localStorage.setItem('winabet_pricing_view', 'regular');
+          
           // Réinitialiser la sélection
           const regularCards = regularGrid.querySelectorAll('.pricing-plan-card');
           regularCards.forEach(c => c.classList.remove('selected'));
           regularCards[0].classList.add('selected');
           updateContinueButton('monthly');
+          localStorage.setItem('winabet_selected_plan', 'monthly');
         }
         
         // Fonction pour retourner à la section hero
@@ -3315,8 +3328,11 @@
             regularCards[0].classList.add('selected');
             updateContinueButton('monthly');
             
-            // Réinitialiser currentView
+            // Réinitialiser currentView et localStorage
             currentView = 'regular';
+            localStorage.removeItem('winabet_pricing_view');
+            localStorage.removeItem('winabet_selected_plan');
+            localStorage.removeItem('winabet_show_pricing_plans');
             
             // Scroller vers le haut
             window.scrollTo({
@@ -3412,8 +3428,78 @@
             // Mettre à jour le bouton
             const selectedPlan = this.getAttribute('data-plan');
             updateContinueButton(selectedPlan);
+            
+            // Sauvegarder le plan sélectionné
+            localStorage.setItem('winabet_selected_plan', selectedPlan);
           });
         });
+        
+        // Restaurer l'état sauvegardé au chargement de la page
+        function restoreSavedState() {
+          const savedView = localStorage.getItem('winabet_pricing_view');
+          const savedPlan = localStorage.getItem('winabet_selected_plan');
+          const showPricingPlans = localStorage.getItem('winabet_show_pricing_plans');
+          
+          // Si on doit afficher les plans de tarification
+          if (showPricingPlans === 'true') {
+            const initialContent = document.getElementById('pricing-initial-content');
+            const plansSection = document.getElementById('pricing-plans-section');
+            const featuresList = document.getElementById('pricing-features-list');
+            const pricingLogo = document.querySelector('.pricing-logo');
+            const backToHomeButton = document.querySelector('.back-to-home-pricing');
+            
+            if (initialContent && plansSection) {
+              initialContent.style.display = 'none';
+              if (featuresList) featuresList.style.display = 'none';
+              if (pricingLogo) pricingLogo.style.display = 'none';
+              if (backToHomeButton) backToHomeButton.style.display = 'none';
+              plansSection.style.display = 'block';
+              
+              // Restaurer la vue
+              if (savedView === 'interac') {
+                // Restaurer la vue Interac
+                currentView = 'interac';
+                regularGrid.style.display = 'none';
+                interacGrid.style.display = 'grid';
+                interacInstructions.style.display = 'none';
+                continueButton.style.display = 'block';
+                subtitle.textContent = 'Choisissez votre forfait avec virement Interac';
+                description.style.display = 'none';
+                
+                // Sélectionner la carte appropriée
+                const interacCards = interacGrid.querySelectorAll('.pricing-plan-card');
+                interacCards.forEach(c => c.classList.remove('selected'));
+                if (savedPlan && savedPlan.startsWith('interac-')) {
+                  const cardToSelect = interacGrid.querySelector(`[data-plan="${savedPlan}"]`);
+                  if (cardToSelect) cardToSelect.classList.add('selected');
+                  updateContinueButton(savedPlan);
+                } else {
+                  const defaultCard = interacGrid.querySelector('[data-plan="interac-3months"]');
+                  if (defaultCard) defaultCard.classList.add('selected');
+                  updateContinueButton('interac-3months');
+                }
+              } else if (savedView === 'interac-instructions' && savedPlan) {
+                // Restaurer les instructions Interac
+                showInteracInstructions(savedPlan);
+              } else {
+                // Vue régulière par défaut
+                showRegularView();
+                if (savedPlan && !savedPlan.startsWith('interac')) {
+                  const regularCards = regularGrid.querySelectorAll('.pricing-plan-card');
+                  regularCards.forEach(c => c.classList.remove('selected'));
+                  const cardToSelect = regularGrid.querySelector(`[data-plan="${savedPlan}"]`);
+                  if (cardToSelect) {
+                    cardToSelect.classList.add('selected');
+                    updateContinueButton(savedPlan);
+                  }
+                }
+              }
+            }
+          }
+        }
+        
+        // Restaurer l'état sauvegardé
+        restoreSavedState();
         
         // Initialiser le texte du bouton avec le plan par défaut (monthly)
         const defaultCard = document.querySelector('.pricing-plan-card.selected');
@@ -3494,6 +3580,12 @@
               }
               // Afficher les forfaits
               plansSection.style.display = 'block';
+              
+              // Sauvegarder dans localStorage pour restaurer après refresh
+              localStorage.setItem('winabet_show_pricing_plans', 'true');
+              localStorage.setItem('winabet_pricing_view', 'regular');
+              localStorage.setItem('winabet_selected_plan', 'monthly');
+              
               // Scroller vers le haut pour voir les forfaits
               window.scrollTo({
                 top: 0,
