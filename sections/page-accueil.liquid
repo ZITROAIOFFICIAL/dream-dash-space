@@ -522,6 +522,80 @@
       </div>
     </section>
 
+    <!-- Section Historique Slider HOME -->
+    <section class="bet-history-slider-section" style="max-width: 1286px; margin: 6rem auto 4rem; padding: 0 2rem;">
+      <div style="position: relative; overflow: visible;">
+        <!-- Titre avec icône IA animée -->
+        <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 3rem;">
+          <div class="atom-icon-wrapper" style="position: relative; width: 50px; height: 50px;">
+            <svg id="softGlowHistoryHome" width="50" height="50" viewBox="0 0 100 100" style="filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.6));">
+              <defs>
+                <linearGradient id="coreGradientHistoryHome" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color: #8B5CF6; stop-opacity: 1">
+                    <animate attributeName="stop-color" values="#8B5CF6; #A78BFA; #8B5CF6" dur="3s" repeatCount="indefinite"/>
+                  </stop>
+                  <stop offset="100%" style="stop-color: #A78BFA; stop-opacity: 1">
+                    <animate attributeName="stop-color" values="#A78BFA; #8B5CF6; #A78BFA" dur="3s" repeatCount="indefinite"/>
+                  </stop>
+                </linearGradient>
+              </defs>
+              <circle cx="50" cy="50" r="8" fill="url(#coreGradientHistoryHome)">
+                <animate attributeName="r" values="8; 10; 8" dur="2s" repeatCount="indefinite"/>
+              </circle>
+              <g id="orbitHistoryHome0">
+                <circle cx="50" cy="25" r="4" fill="#8B5CF6" opacity="0.8">
+                  <animate attributeName="opacity" values="0.8; 1; 0.8" dur="2s" repeatCount="indefinite"/>
+                </circle>
+                <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="4s" repeatCount="indefinite"/>
+              </g>
+              <g id="orbitHistoryHome1">
+                <circle cx="50" cy="30" r="3" fill="#A78BFA" opacity="0.6">
+                  <animate attributeName="opacity" values="0.6; 0.9; 0.6" dur="2s" repeatCount="indefinite"/>
+                </circle>
+                <animateTransform attributeName="transform" type="rotate" from="120 50 50" to="480 50 50" dur="3s" repeatCount="indefinite"/>
+              </g>
+              <g id="orbitHistoryHome2">
+                <circle cx="50" cy="35" r="2.5" fill="#DDD6FE" opacity="0.5">
+                  <animate attributeName="opacity" values="0.5; 0.8; 0.5" dur="2s" repeatCount="indefinite"/>
+                </circle>
+                <animateTransform attributeName="transform" type="rotate" from="240 50 50" to="600 50 50" dur="5s" repeatCount="indefinite"/>
+              </g>
+            </svg>
+          </div>
+          <h2 class="section-title" style="margin: 0; background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+            Historique de nos 10 derniers paris
+          </h2>
+        </div>
+
+        <!-- Statistiques calculées -->
+        <div id="bet-history-stats-home" style="max-width: 40rem; margin: 2rem auto; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: 0 1rem;">
+          <div style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%); border: 1px solid rgba(34, 197, 94, 0.2); border-radius: 12px; padding: 1.5rem; text-align: center;">
+            <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.875rem; margin-bottom: 0.5rem;">Paris en positif</div>
+            <div id="wins-count-home" style="color: #22C55E; font-size: 2rem; font-weight: bold;">0</div>
+          </div>
+          <div style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 12px; padding: 1.5rem; text-align: center; position: relative;">
+            <button id="info-unit-btn-history-home" style="position: absolute; top: 0.5rem; right: 0.5rem; background: rgba(139, 92, 246, 0.2); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #A78BFA; font-size: 0.875rem; font-weight: bold;">?</button>
+            <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.875rem; margin-bottom: 0.5rem;">Units en positif</div>
+            <div id="units-count-home" style="color: #8B5CF6; font-size: 2rem; font-weight: bold;">0</div>
+          </div>
+        </div>
+
+        <!-- Container slider -->
+        <div id="bet-history-slider-home" style="overflow-x: auto; overflow-y: visible; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none; padding: 2rem 0;">
+          <div style="display: flex; gap: 1.5rem; min-width: min-content; padding: 0 1rem;">
+            <!-- Les cartes seront insérées ici par JavaScript -->
+          </div>
+        </div>
+
+        <!-- Bouton voir historique complet -->
+        <div style="text-align: center; margin-top: 2rem;">
+          <button id="open-bet-history-drawer-home" class="cta-button" style="background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%); color: white; border: none; padding: 1rem 2rem; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);">
+            Voir l'historique complet
+          </button>
+        </div>
+      </div>
+    </section>
+
     <!-- Section Providers Card -->
    {% render 'providers-badges-section' %}
 
