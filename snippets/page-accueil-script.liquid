@@ -682,6 +682,14 @@
             politique.style.display = 'none';
             support.style.display = 'none';
             rejoindre.style.display = 'block';
+            
+            // Nettoyer tout scroll lock du body
+            const body = document.body;
+            body.classList.remove('drawer-open', 'sidebar-open');
+            body.style.top = '';
+            body.style.position = '';
+            body.style.overflow = '';
+            
             window.scrollTo(0, 0);
           } else {
             home.style.display = 'block';
@@ -1097,6 +1105,7 @@
               const t = e.touches[0];
               const dx = t.clientX - touchStartX;
               const dy = t.clientY - touchStartY;
+              
               // Détecter la direction au premier mouvement significatif
               if (touchDirection === null && (Math.abs(dx) > 10 || Math.abs(dy) > 10)) {
                 touchDirection = Math.abs(dx) > Math.abs(dy) ? 'horizontal' : 'vertical';
@@ -1104,7 +1113,7 @@
               
               // Ne bloquer que si mouvement horizontal intentionnel
               if (touchDirection === 'horizontal' && Math.abs(dx) > 10) {
-                e.preventDefault();
+                // Pas de preventDefault: on laisse la verticale libre grâce à touch-action: pan-y
                 currentPosition = touchDragStartPosition + dx;
                 
                 // Gérer le wrap pour la boucle infinie
@@ -1114,7 +1123,7 @@
                 sliderContainer.style.transform = `translateX(${currentPosition}px)`;
               }
               // Si direction verticale, ne rien faire (laisser le scroll normal)
-            }, { passive: false });
+            }, { passive: true });
 
             sliderWrapper.addEventListener('touchend', () => {
               touchDirection = null;
@@ -1170,6 +1179,26 @@
             attributes: true, 
             attributeFilter: ['style'] 
           });
+        }
+        
+        // IntersectionObserver pour robustesse: démarrer l'animation si le slider devient visible
+        const betHistorySlider = document.getElementById('bet-history-slider');
+        if (betHistorySlider) {
+          const sliderObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting && !betHistorySlider.dataset.initialized) {
+                betHistorySlider.dataset.initialized = 'true';
+                loadBetHistoryForSlider().then(bets => {
+                  createBetSlider(bets);
+                  sliderObserver.disconnect();
+                }).catch(error => {
+                  console.error('❌ Erreur initialisation slider via IntersectionObserver:', error);
+                });
+              }
+            });
+          }, { threshold: 0.1 });
+          
+          sliderObserver.observe(betHistorySlider);
         }
       })();
 
