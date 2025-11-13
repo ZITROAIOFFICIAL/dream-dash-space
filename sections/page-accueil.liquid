@@ -522,6 +522,292 @@
       </div>
     </section>
 
+    <!-- Slider d'historique des bets (HOME) -->
+    <section style="max-width: 1286px; margin: 4rem auto; padding: 0 2rem;">
+      <div class="bet-history-slider-section">
+        <div class="bet-history-slider-title">
+          <svg width="50" height="50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+            <defs>
+              <filter id="softGlowHistoryHome" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="1.2" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <path id="orbitHistoryHome0" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+              <path id="orbitHistoryHome1" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+              <path id="orbitHistoryHome2" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+            </defs>
+            <g stroke="#68859e" stroke-width="2" fill="none">
+              <use href="#orbitHistoryHome0"/>
+              <use href="#orbitHistoryHome1"/>
+              <use href="#orbitHistoryHome2"/>
+            </g>
+            <g stroke-linecap="round" filter="url(#softGlowHistoryHome)">
+              <use href="#orbitHistoryHome0" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+              </use>
+              <use href="#orbitHistoryHome1" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+              </use>
+              <use href="#orbitHistoryHome2" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+              </use>
+            </g>
+            <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+          </svg>
+          <h2>Historique de nos 10 derniers paris</h2>
+        </div>
+        
+        <!-- Statistiques calculées -->
+        <div id="bet-history-stats-home" style="display: flex; gap: 2rem; justify-content: center; margin: 2rem 0; flex-wrap: wrap;">
+          <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.75rem; padding: 1.5rem 2.5rem; text-align: center; min-width: 200px;">
+            <div style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Paris en positif</div>
+            <div id="wins-count-home" style="font-size: 2.5rem; font-weight: 700; color: #22c55e;">-</div>
+          </div>
+          <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.75rem; padding: 1.5rem 2.5rem; text-align: center; min-width: 200px;">
+            <div style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+              Units en positif
+              <button class="info-icon" id="info-unit-btn-history-home" type="button" style="background: transparent; border: none; cursor: pointer; padding: 0; display: inline-flex; align-items: center; vertical-align: middle;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" stroke="rgba(255, 255, 255, 0.6)" stroke-width="2"></circle>
+                  <text x="12" y="17" text-anchor="middle" fill="rgba(255, 255, 255, 0.6)" font-size="14" font-weight="700" stroke="none">?</text>
+                </svg>
+              </button>
+            </div>
+            <div id="units-count-home" style="font-size: 2.5rem; font-weight: 700;">-</div>
+          </div>
+        </div>
+        
+        <div class="bet-history-slider-wrapper">
+          <div id="bet-history-slider-home" class="bet-history-slider-container">
+            <p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Chargement de l'historique...</p>
+          </div>
+        </div>
+        
+        <!-- Bouton Voir l'historique complet -->
+        <div style="text-align: center; margin-top: 0.5rem;">
+          <button id="open-bet-history-drawer-home" class="bet-history-button">
+            Voir l'historique complet
+          </button>
+        </div>
+        
+        <!-- Section Reviews -->
+        <section class="reviews-section">
+          <div class="reviews-container">
+            <div class="reviews-header">
+              <h2 class="reviews-title">ce que disent nos membres</h2>
+              <p class="reviews-description">
+                extraits réels de notre communauté — avis, retours et captures, mis à jour régulièrement.
+              </p>
+            </div>
+            
+            <div class="reviews-slider">
+              <div class="reviews-track" id="reviewsTrackBetHome">
+                <!-- Review Card 1 -->
+                <div class="review-card">
+                  <p class="review-text">
+                    "C'est vraiment bien winabet, honnetemenet, c'est le meilleur truc pour faire de l'argent facile, no cap ta rien a faire a part checker les cartes"
+                  </p>
+                  <div class="review-author">Émile castonguay</div>
+                  <div class="review-position">Abonné depuis +1 mois</div>
+                </div>
+                
+                <!-- Review Card 2 -->
+                <div class="review-card">
+                  <p class="review-text">
+                    "A date j'ai fait 2000$ de profit en un mois, c'est vraiment ezzzz"
+                  </p>
+                  <div class="review-author">Xavier Landry</div>
+                  <div class="review-position">Abonné depuis +1 mois</div>
+                </div>
+                
+                <!-- Review Card 3 -->
+                <div class="review-card">
+                  <p class="review-text">
+                    "Vraiment bien"
+                  </p>
+                  <div class="review-author">Louis Gagnon</div>
+                  <div class="review-position">Abonné depuis +1 mois</div>
+                </div>
+                
+                <!-- Review Card 4 -->
+                <div class="review-card">
+                  <p class="review-text">
+                    "L'ia est trop forte c,est juste cave, c'est rare qu,On perd asti, on win tout le temps "
+                  </p>
+                  <div class="review-author">Antony Boulier</div>
+                  <div class="review-position">Abonné depuis +1 mois</div>
+                </div>
+                
+                <!-- Review Card 6 -->
+                <div class="review-card">
+                  <p class="review-text">
+                    "Wallah c,est trop facie, tu peux facile faire 1000$ par mois si tu fait pas toutes les bets, je conceille si tu vex vraiment faire deL'argent a quick"
+                  </p>
+                  <div class="review-author">Samuel Charest</div>
+                  <div class="review-position">Abonné depuis +1 mois</div>
+                </div>
+                
+                <!-- Review Card 7 -->
+                <div class="review-card">
+                  <p class="review-text">
+                    "Très value, chu deja postifi sur mon abnnement en 1 journée"
+                  </p>
+                  <div class="review-author">Jonathan painchaud</div>
+                  <div class="review-position">Abonné depuis +1 mois</div>
+                </div>
+
+                <!-- Review Card 8 -->
+                <div class="review-card">
+                  <p class="review-text">
+                    "Juste avec le free trials, tu peux te faire la'rgent pour te payer l'abonnement par mois, c'est vraiment un glitch s'taffaire la "
+                  </p>
+                  <div class="review-author">William Bouchard</div>
+                  <div class="review-position">Abonné depuis +1 mois</div>
+                </div>
+
+
+                <!-- Review Card 9 -->
+                <div class="review-card">
+                  <p class="review-text">
+                    "J'travaile a shop, pis j'ai juste besoind de 2 min pour chekc er les bet pour me faire de l'argent, c'est vraiment simple honetement c'est bien fait. "
+                  </p>
+                  <div class="review-author">Julien Goselin</div>
+                  <div class="review-position">Abonné depuis +1 mois</div>
+                </div>
+
+                <!-- Review Card 10 -->
+                <div class="review-card">
+                  <p class="review-text">
+                    "J'avais besoin d'argent pour mon opération, je sais que ca va avoir l'air  fake, mais j'ai vraimenr reussis a me faire mon argent pur l'opération, avec ca, mais j'avais déja de l'argent, donc j'ia mis gros, mais j'ai fait gros. Si ta pas bcp, tu va fairr moin mais tu peux faire bcp pareil"
+                  </p>
+                  <div class="review-author">Xavier nevromont </div>
+                  <div class="review-position">Abonné depuis +1 mois</div>
+                </div>
+
+                <!-- Review Card 11 -->
+                <div class="review-card">
+                  <p class="review-text">
+                    "J'arrete l'école a 15 ans, a cause de ca, big j'capable de fair eplus par mois en me mettant a fond que d,avori ue vrai job "
+                  </p>
+                  <div class="review-author">Mathieu Bouthillette</div>
+                  <div class="review-position">Abonné depuis +1 mois</div>
+                </div>
+
+                <!-- Review Card 12 -->
+                <div class="review-card">
+                  <p class="review-text">
+                    "J'fait des paris sportifs depusi longrmeps, c,est de loin le meilleur outils, pour te faire gagner le sbet, c'est juste mathématique, l'ia scrape toute, c'est sur que c'est accurate un peu"
+                  </p>
+                  <div class="review-author">Emanuel Ducharme</div>
+                  <div class="review-position">Abonné depuis +1 mois</div>
+                </div>
+
+                <!-- Review Card 13 -->
+                <div class="review-card">
+                  <p class="review-text">
+                    "le site es trop bien, faire de l'argent c'est facile avec ca, gnr tu criss rien a part faire ce qui te dise,puis si tu te demande pk n fait dess review, y nous donne 25% si on fait u review sincere le mois suivant. ( jsp si j'ai le droti de le dire )  "
+                  </p>
+                  <div class="review-author">Hugo Vallière
+                  </div>
+                  <div class="review-position">Abonné depuis +1 mois</div>
+                </div>
+
+                <!-- Review Card 14 -->
+                <div class="review-card">
+                  <p class="review-text">
+                    "Bonne app pour le sparis sportifs"
+                  </p>
+                  <div class="review-author">Victor paldorer</div>
+                  <div class="review-position">Abonné depuis +1 mois</div>
+                </div>
+
+                <!-- Review Card 15 -->
+                <div class="review-card">
+                  <p class="review-text">
+                    "J'fait mes pti jogging tranquille, pis je place mes bets en meem trmps, 5 min par jours, pis tu pex faire 200-300 par jours, si tu met quand meme bcp"
+                  </p>
+                  <div class="review-author">Édouard ousset</div>
+                  <div class="review-position">Abonné depuis +1 mois</div>
+                </div>
+
+                <!-- Review Card 16 -->
+                <div class="review-card">
+                  <p class="review-text">
+                    "Tu gagne pas chaque bet, mais laplsu part, donc tu fini toujorus rentbale, mais faut que tu suivent les units qui mette, pis qu eut calcue bien, faut pas faire n'importe quoi non plus"
+                  </p>
+                  <div class="review-author">Emerick langevin</div>
+                  <div class="review-position">Abonné depuis +1 mois</div>
+                </div>
+
+                <!-- Review Card 17 -->
+                <div class="review-card">
+                  <p class="review-text">
+                    "Je connais rien la dedans, mais je fai tjsute lire les bet de la jurnée,pis je fait de l'argent "
+                  </p>
+                  <div class="review-author">Vincent Guay</div>
+                  <div class="review-position">Abonné depuis +1 mois</div>
+                </div>
+
+                <!-- Review Card 18 -->
+                <div class="review-card">
+                  <p class="review-text">
+                    "Jpeu renta tout mes mes trucs avec ca, le loud est vraiment pas chere quand c'est gratis"
+                  </p>
+                  <div class="review-author">Thomas Bilodeau</div>
+                  <div class="review-position">Abonné depuis +1 mois</div>
+                </div>
+
+                <!-- Review Card 19 -->
+                <div class="review-card">
+                  <p class="review-text">
+                    "J'ai fait 500$ en 2 semaines, c'est vraiment facile"
+                  </p>
+                  <div class="review-author">Marc-André Roy</div>
+                  <div class="review-position">Abonné depuis +1 mois</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- Drawer Historique Bet Complet (HOME) -->
+    <div id="bet-history-drawer-home" class="bet-history-drawer">
+      <div class="bet-history-drawer-overlay"></div>
+      <div class="bet-history-drawer-content">
+        <!-- Bouton fermer -->
+        <button class="bet-history-drawer-close" id="close-bet-history-drawer-home" aria-label="Fermer">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
+        
+        <!-- Contenu identique à la page historique -->
+        <div class="container" style="padding-top: 2rem;">
+          <h1 style="font-size: 2rem; font-weight: 700; text-align: center; margin-bottom: 0.5rem;">HISTORIQUE BET DU JOUR</h1>
+          <p class="subtitle" style="text-align: center; color: rgba(255, 255, 255, 0.6); margin-bottom: 2rem;">Consultez l'historique des bets du jour de winabet.ai</p>
+          
+          <!-- Statistiques globales -->
+          <div id="bet-stats-drawer-home" style="max-width: 40rem; margin: 2rem auto; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: 0 1rem;">
+            <!-- Rempli par JS -->
+          </div>
+          
+          <!-- Cartes -->
+          <div id="bet-history-container-drawer-home" class="cards-grid" style="padding: 0 1rem;">
+            <!-- Rempli par JS -->
+          </div>
+          
+          <!-- Message vide -->
+          <div id="bet-empty-state-drawer-home" class="card text-center" style="padding: 2rem; display: none; margin: 2rem 1rem;">
+            <p style="color: rgba(255, 255, 255, 0.6);">
+              Aucun pari dans l'historique.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Section Providers Card -->
    {% render 'providers-badges-section' %}
 
@@ -4122,6 +4408,312 @@
           } catch (error) {
             console.error('❌ Erreur initialisation slider:', error);
             const sliderContainer = document.getElementById('bet-history-slider');
+            if (sliderContainer) {
+              sliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Erreur de chargement.</p>';
+            }
+          }
+        });
+      })();
+
+      // ==================== BET HISTORY SLIDER HOME ====================
+      (function() {
+        // Fonction pour charger l'historique des bets (HOME)
+        async function loadBetHistoryForSliderHome() {
+          try {
+            const FUNCTIONS_URL = 'https://ycvfyorgkhuxcosfrsxs.functions.supabase.co';
+            const SHOP_DOMAIN = window.SUPABASE_CONFIG?.shopDomain || '{{ shop.permanent_domain }}';
+            
+            const response = await fetch(`${FUNCTIONS_URL}/get-bet-history?shop_domain=${SHOP_DOMAIN}`);
+            const data = await response.json();
+            
+            return data.bets || [];
+          } catch (error) {
+            console.error('❌ Erreur chargement slider HOME:', error);
+            return [];
+          }
+        }
+
+        // Fonction pour créer le slider HOME
+        function createBetSliderHome(bets) {
+          const sliderContainer = document.getElementById('bet-history-slider-home');
+          if (!sliderContainer) return;
+
+          // Filtrer pour ne garder que les bets terminés (win/loose)
+          const completedBets = bets.filter(bet => bet.result === 'win' || bet.result === 'loose');
+          
+          if (completedBets.length === 0) {
+            sliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Aucune prédiction complétée pour le moment.</p>';
+            return;
+          }
+
+          // Trier par date de match (DD/MM/YYYY + HH:MM) décroissante, fallback sur created_at
+          const getBetDate = (bet) => {
+            try {
+              if (bet.match_date) {
+                const parts = String(bet.match_date).split(/[\/\-.]/).map(Number);
+                if (parts.length === 3) {
+                  const [dd, mm, yyyy] = parts;
+                  const date = new Date(yyyy, (mm || 1) - 1, dd || 1);
+                  if (bet.match_time) {
+                    const [hh, mn] = String(bet.match_time).split(':').map(v => parseInt(v, 10));
+                    if (!isNaN(hh)) {
+                      date.setHours(hh, isNaN(mn) ? 0 : mn, 0, 0);
+                    } else {
+                      date.setHours(23, 59, 59, 999);
+                    }
+                  } else {
+                    date.setHours(23, 59, 59, 999);
+                  }
+                  return date;
+                }
+              }
+              if (bet.created_at) return new Date(bet.created_at);
+            } catch (_) {}
+            return new Date(0);
+          };
+          completedBets.sort((a, b) => getBetDate(b) - getBetDate(a));
+
+          // Prendre les 10 derniers bets complétés
+          const sliderBets = completedBets.slice(0, 10);
+          
+          // Calculer les statistiques sur les 10 paris
+          let winsCount = 0;
+          let totalUnits = 0;
+          
+          sliderBets.forEach(bet => {
+            const betUnits = parseFloat(bet.bet_units || 1);
+            
+            if (bet.result === 'win') {
+              winsCount++;
+              const unitsWon = (parseFloat(bet.multiplier) - 1) * betUnits;
+              totalUnits += unitsWon;
+            } else if (bet.result === 'loose') {
+              totalUnits -= betUnits;
+            }
+          });
+          
+          // Mettre à jour l'affichage des statistiques HOME
+          const winsCountElement = document.getElementById('wins-count-home');
+          const unitsCountElement = document.getElementById('units-count-home');
+          
+          if (winsCountElement) {
+            winsCountElement.textContent = `+${winsCount}`;
+          }
+          
+          if (unitsCountElement) {
+            const formattedUnits = totalUnits >= 0 ? `+${totalUnits.toFixed(2)}` : totalUnits.toFixed(2);
+            unitsCountElement.textContent = `${formattedUnits} units`;
+            unitsCountElement.style.color = totalUnits >= 0 ? '#22c55e' : '#ef4444';
+          }
+          
+          // Générer le HTML pour chaque bet
+          const cardsHTML = sliderBets.map(bet => generateBetCardHTML(bet)).join('');
+          
+          // Dupliquer 4 fois pour un effet de boucle infinie fluide
+          sliderContainer.innerHTML = cardsHTML + cardsHTML + cardsHTML + cardsHTML;
+          
+          // Animation avec requestAnimationFrame pour contrôle total
+          let animationId = null;
+          let currentPosition = 0;
+          const speed = 0.5;
+          const totalWidth = sliderContainer.scrollWidth / 4;
+          
+          function animate() {
+            if (!sliderContainer) return;
+            
+            currentPosition -= speed;
+            
+            if (Math.abs(currentPosition) >= totalWidth) {
+              currentPosition = 0;
+            }
+            
+            sliderContainer.style.transform = `translateX(${currentPosition}px)`;
+            animationId = requestAnimationFrame(animate);
+          }
+          
+          animate();
+          
+          // Ajouter la fonctionnalité de scroll horizontal manuel
+          const sliderWrapper = sliderContainer.parentElement;
+          if (sliderWrapper) {
+            sliderWrapper.addEventListener('wheel', (e) => {
+              const isHorizontalScroll = Math.abs(e.deltaX) > Math.abs(e.deltaY);
+              
+              if (isHorizontalScroll || e.shiftKey) {
+                e.preventDefault();
+                sliderWrapper.scrollLeft += e.deltaX || e.deltaY;
+              }
+            }, { passive: false });
+            
+            let isDragging = false;
+            let startX;
+            let dragStartPosition;
+            
+            sliderWrapper.addEventListener('mousedown', (e) => {
+              isDragging = true;
+              sliderWrapper.style.cursor = 'grabbing';
+              startX = e.pageX;
+              dragStartPosition = currentPosition;
+              if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+              }
+            });
+            
+            sliderWrapper.addEventListener('mouseleave', () => {
+              if (isDragging) {
+                isDragging = false;
+                sliderWrapper.style.cursor = 'grab';
+                animate();
+              }
+            });
+            
+            sliderWrapper.addEventListener('mouseup', () => {
+              if (isDragging) {
+                isDragging = false;
+                sliderWrapper.style.cursor = 'grab';
+                animate();
+              }
+            });
+            
+            sliderWrapper.addEventListener('mousemove', (e) => {
+              if (!isDragging) return;
+              e.preventDefault();
+              const dx = e.pageX - startX;
+              currentPosition = dragStartPosition + dx;
+              
+              while (currentPosition > 0) currentPosition -= totalWidth;
+              while (currentPosition <= -totalWidth) currentPosition += totalWidth;
+              
+              sliderContainer.style.transform = `translateX(${currentPosition}px)`;
+            });
+
+            let touchStartX = 0;
+            let touchStartY = 0;
+            let touchDragStartPosition = 0;
+
+            sliderWrapper.addEventListener('touchstart', (e) => {
+              if (!e.touches || e.touches.length === 0) return;
+              const t = e.touches[0];
+              touchStartX = t.clientX;
+              touchStartY = t.clientY;
+              touchDragStartPosition = currentPosition;
+              if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+              }
+            }, { passive: true });
+
+            sliderWrapper.addEventListener('touchmove', (e) => {
+              if (!e.touches || e.touches.length === 0) return;
+              const t = e.touches[0];
+              const dx = t.clientX - touchStartX;
+              const dy = t.clientY - touchStartY;
+              if (Math.abs(dx) > Math.abs(dy)) {
+                e.preventDefault();
+                currentPosition = touchDragStartPosition + dx;
+                
+                while (currentPosition > 0) currentPosition -= totalWidth;
+                while (currentPosition <= -totalWidth) currentPosition += totalWidth;
+                
+                sliderContainer.style.transform = `translateX(${currentPosition}px)`;
+              }
+            }, { passive: false });
+
+            sliderWrapper.addEventListener('touchend', () => {
+              animate();
+            });
+            
+            sliderWrapper.style.cursor = 'grab';
+            sliderWrapper.style.userSelect = 'none';
+          }
+        }
+
+        // Gestion du drawer HOME
+        document.addEventListener('DOMContentLoaded', function() {
+          const openBtn = document.getElementById('open-bet-history-drawer-home');
+          const closeBtn = document.getElementById('close-bet-history-drawer-home');
+          const drawer = document.getElementById('bet-history-drawer-home');
+          const overlay = drawer?.querySelector('.bet-history-drawer-overlay');
+
+          if (openBtn && drawer) {
+            openBtn.addEventListener('click', async function() {
+              drawer.classList.add('active');
+              document.body.style.overflow = 'hidden';
+              
+              // Charger les données pour le drawer
+              try {
+                const FUNCTIONS_URL = 'https://ycvfyorgkhuxcosfrsxs.functions.supabase.co';
+                const SHOP_DOMAIN = window.SUPABASE_CONFIG?.shopDomain || '{{ shop.permanent_domain }}';
+                const response = await fetch(`${FUNCTIONS_URL}/get-bet-history?shop_domain=${SHOP_DOMAIN}`);
+                const data = await response.json();
+                
+                const container = document.getElementById('bet-history-container-drawer-home');
+                const statsContainer = document.getElementById('bet-stats-drawer-home');
+                const emptyState = document.getElementById('bet-empty-state-drawer-home');
+                
+                if (data.bets && data.bets.length > 0) {
+                  // Afficher les stats
+                  const completedBets = data.bets.filter(b => b.result === 'win' || b.result === 'loose');
+                  let wins = 0;
+                  let totalUnits = 0;
+                  
+                  completedBets.forEach(bet => {
+                    const units = parseFloat(bet.bet_units || 1);
+                    if (bet.result === 'win') {
+                      wins++;
+                      totalUnits += (parseFloat(bet.multiplier) - 1) * units;
+                    } else if (bet.result === 'loose') {
+                      totalUnits -= units;
+                    }
+                  });
+                  
+                  statsContainer.innerHTML = `
+                    <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.75rem; padding: 1.5rem 2rem; text-align: center;">
+                      <div style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Paris en positif</div>
+                      <div style="font-size: 2rem; font-weight: 700; color: #22c55e;">+${wins}</div>
+                    </div>
+                    <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.75rem; padding: 1.5rem 2rem; text-align: center;">
+                      <div style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Units en positif</div>
+                      <div style="font-size: 2rem; font-weight: 700; color: ${totalUnits >= 0 ? '#22c55e' : '#ef4444'};">${totalUnits >= 0 ? '+' : ''}${totalUnits.toFixed(2)} units</div>
+                    </div>
+                  `;
+                  
+                  container.innerHTML = data.bets.map(bet => generateBetCardHTML(bet)).join('');
+                  container.style.display = 'grid';
+                  emptyState.style.display = 'none';
+                } else {
+                  container.style.display = 'none';
+                  emptyState.style.display = 'block';
+                  statsContainer.innerHTML = '';
+                }
+              } catch (error) {
+                console.error('Erreur chargement drawer HOME:', error);
+              }
+            });
+          }
+
+          if (closeBtn && drawer) {
+            const closeDrawer = () => {
+              drawer.classList.remove('active');
+              document.body.style.overflow = '';
+            };
+            
+            closeBtn.addEventListener('click', closeDrawer);
+            if (overlay) {
+              overlay.addEventListener('click', closeDrawer);
+            }
+          }
+        });
+
+        // Initialiser au chargement de la page
+        document.addEventListener('DOMContentLoaded', async function() {
+          try {
+            const bets = await loadBetHistoryForSliderHome();
+            createBetSliderHome(bets);
+          } catch (error) {
+            console.error('❌ Erreur initialisation slider HOME:', error);
+            const sliderContainer = document.getElementById('bet-history-slider-home');
             if (sliderContainer) {
               sliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Erreur de chargement.</p>';
             }
