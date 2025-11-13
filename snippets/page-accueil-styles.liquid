@@ -846,14 +846,14 @@
         max-width: var(--stats-section-max-width, 1400px);
         margin-left: auto;
         margin-right: auto;
-        margin-bottom: 100rem;
+        margin-bottom: -200rem;
         padding: var(--stats-section-padding, 0 2rem);
       }
 
       /* 🎯 Padding-bottom dashboard sur mobile uniquement */
       @media (max-width: 767px) {
         .stats-section {
-          padding-bottom: -200rem; /* 🔧 MODIFIEZ cette valeur pour contrôler l'espace en bas du dashboard sur mobile */
+          margin-bottom: -200rem; /* 🔧 MODIFIEZ cette valeur pour contrôler l'espace en bas du dashboard sur mobile */
         }
       }
 
@@ -1771,7 +1771,7 @@
     <style>
       /* ==================== PROVIDERS CARD SECTION ==================== */
       .providers-card-section {
-        margin-top: -70rem;
+        margin-top: -20rem;
         padding: 0 2rem;
         display: block; /* Visible on mobile */
         position: relative;
@@ -1781,14 +1781,14 @@
       /* 🎯 Gap mobile entre dashboard et providers card */
       @media (max-width: 767px) {
         .providers-card-section {
-          margin-top: -90rem; /* 🔧 MODIFIEZ cette valeur pour réduire/augmenter le gap sur mobile */
+          margin-top: 70rem; /* 🔧 MODIFIEZ cette valeur pour réduire/augmenter le gap sur mobile */
         }
       }
 
       /* 🎯 Gap desktop entre dashboard et providers card */
       @media (min-width: 768px) {
         .providers-card-section {
-          margin-top: -90rem; /* 🔧 MODIFIEZ cette valeur pour réduire/augmenter le gap sur desktop */
+          margin-top: 0rem; /* 🔧 MODIFIEZ cette valeur pour réduire/augmenter le gap sur desktop */
         }
       }
 
