@@ -1,4 +1,4 @@
-import { Menu, X, Trophy, Layers, History, Clock, MessageCircle, User, ShoppingBag, ChevronRight } from "lucide-react";
+import { Menu, X, Trophy, Layers, History, Clock, MessageCircle, User, ShoppingBag, ChevronRight, Sparkles } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -15,6 +15,7 @@ const Sidebar = () => {
     { label: "Historique Bet du jour", path: "/historique", icon: History, secondIcon: Trophy },
     { label: "Historique Parlay du jour", path: "/historique-parlay", icon: Clock, secondIcon: Layers },
     { label: "Notre stratégie", path: "/strategie", icon: Trophy },
+    { label: "Abonnement", path: "https://winabet.ai/#rejoindre", icon: Sparkles },
     { label: "Mon compte", path: "/mon-compte", icon: User },
     { label: "Boutique", path: "/boutique", icon: ShoppingBag },
     { label: "Support", path: "/support", icon: MessageCircle },
@@ -72,25 +73,45 @@ const Sidebar = () => {
               const active = isActive(item.path);
               const Icon = item.icon;
               const SecondIcon = item.secondIcon;
+              const isExternal = item.path.startsWith('http');
               
-              return (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  onClick={() => setIsOpen(false)}
-                  className={cn(
-                    "flex items-center justify-between px-4 py-3 rounded-lg transition-all duration-200 text-lg font-bold",
-                    active 
-                      ? "bg-green-600/20 border-2 border-green-600 font-bold text-green-500" 
-                      : "bg-transparent border-2 border-transparent text-white hover:bg-green-600/10"
-                  )}
-                >
+              const linkClassName = cn(
+                "flex items-center justify-between px-4 py-3 rounded-lg transition-all duration-200 text-lg font-bold",
+                active 
+                  ? "bg-green-600/20 border-2 border-green-600 font-bold text-green-500" 
+                  : "bg-transparent border-2 border-transparent text-white hover:bg-green-600/10"
+              );
+
+              const linkContent = (
+                <>
                   <div className="flex items-center gap-2">
                     <Icon className="h-5 w-5" />
                     <span>{item.label}</span>
                     {SecondIcon && <SecondIcon className="h-5 w-5" />}
                   </div>
                   <ChevronRight className="h-5 w-5" />
+                </>
+              );
+              
+              return isExternal ? (
+                <a
+                  key={item.path}
+                  href={item.path}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsOpen(false)}
+                  className={linkClassName}
+                >
+                  {linkContent}
+                </a>
+              ) : (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  onClick={() => setIsOpen(false)}
+                  className={linkClassName}
+                >
+                  {linkContent}
                 </Link>
               );
             })}
