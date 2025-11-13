@@ -1332,6 +1332,25 @@
           flex-direction: row;
           justify-content: space-between;
           align-items: center;
+          gap: 1rem;
+        }
+
+        .pricing-plan-card[data-plan="interac-3months"] .pricing-plan-left,
+        .pricing-plan-card[data-plan="interac-6months"] .pricing-plan-left,
+        .pricing-plan-card[data-plan="interac-yearly"] .pricing-plan-left {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .pricing-plan-card[data-plan="interac-3months"] .pricing-plan-price-row,
+        .pricing-plan-card[data-plan="interac-6months"] .pricing-plan-price-row,
+        .pricing-plan-card[data-plan="interac-yearly"] .pricing-plan-price-row {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          flex-wrap: wrap;
         }
 
         .pricing-plan-left {
@@ -2169,14 +2188,16 @@
                   <div class="pricing-plan-price">
                     <span class="pricing-plan-amount">3 mois</span>
                   </div>
-                  <div class="pricing-plan-price">
-                    <span class="pricing-plan-amount-old">99$</span>
-                    <span class="pricing-plan-amount" style="font-size: 1.8rem;">89.99$</span>
-                    <span class="pricing-plan-period">/mois</span>
+                  <div class="pricing-plan-price-row">
+                    <div class="pricing-plan-price">
+                      <span class="pricing-plan-amount-old">99$</span>
+                      <span class="pricing-plan-amount" style="font-size: 1.8rem;">89.99$</span>
+                      <span class="pricing-plan-period">/mois</span>
+                    </div>
+                    <div class="pricing-plan-trial">Essai gratuit 1 jour</div>
                   </div>
-                  <div class="pricing-plan-trial">Essai gratuit 1 jour</div>
                 </div>
-                <div style="display: flex; align-items: center;"><img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Image_c1fb4d5a-e6cd-4c82-9253-88010cccd2e8.jpg?v=1762986412" alt="Interac" style="height: 75px; width: auto;"></div>
+                <div style="display: flex; align-items: center; margin-left: auto;"><img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Image_c1fb4d5a-e6cd-4c82-9253-88010cccd2e8.jpg?v=1762986412" alt="Interac" style="height: 75px; width: auto;"></div>
               </div>
             </div>
 
@@ -2187,14 +2208,16 @@
                   <div class="pricing-plan-price">
                     <span class="pricing-plan-amount">6 mois</span>
                   </div>
-                  <div class="pricing-plan-price">
-                    <span class="pricing-plan-amount-old">99$</span>
-                    <span class="pricing-plan-amount" style="font-size: 1.8rem;">79.99$</span>
-                    <span class="pricing-plan-period">/mois</span>
+                  <div class="pricing-plan-price-row">
+                    <div class="pricing-plan-price">
+                      <span class="pricing-plan-amount-old">99$</span>
+                      <span class="pricing-plan-amount" style="font-size: 1.8rem;">79.99$</span>
+                      <span class="pricing-plan-period">/mois</span>
+                    </div>
+                    <div class="pricing-plan-trial">Essai gratuit 1 jour</div>
                   </div>
-                  <div class="pricing-plan-trial">Essai gratuit 1 jour</div>
                 </div>
-                <div style="display: flex; align-items: center;"><img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Image_c1fb4d5a-e6cd-4c82-9253-88010cccd2e8.jpg?v=1762986412" alt="Interac" style="height: 75px; width: auto;"></div>
+                <div style="display: flex; align-items: center; margin-left: auto;"><img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Image_c1fb4d5a-e6cd-4c82-9253-88010cccd2e8.jpg?v=1762986412" alt="Interac" style="height: 75px; width: auto;"></div>
               </div>
             </div>
 
@@ -2205,14 +2228,16 @@
                   <div class="pricing-plan-price">
                     <span class="pricing-plan-amount">1 ans</span>
                   </div>
-                  <div class="pricing-plan-price">
-                    <span class="pricing-plan-amount-old">99$</span>
-                    <span class="pricing-plan-amount" style="font-size: 1.8rem;">59.99$</span>
-                    <span class="pricing-plan-period">/mois</span>
+                  <div class="pricing-plan-price-row">
+                    <div class="pricing-plan-price">
+                      <span class="pricing-plan-amount-old">99$</span>
+                      <span class="pricing-plan-amount" style="font-size: 1.8rem;">59.99$</span>
+                      <span class="pricing-plan-period">/mois</span>
+                    </div>
+                    <div class="pricing-plan-trial">Essai gratuit 1 jour</div>
                   </div>
-                  <div class="pricing-plan-trial">Essai gratuit 1 jour</div>
                 </div>
-                <div style="display: flex; align-items: center;"><img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Image_c1fb4d5a-e6cd-4c82-9253-88010cccd2e8.jpg?v=1762986412" alt="Interac" style="height: 75px; width: auto;"></div>
+                <div style="display: flex; align-items: center; margin-left: auto;"><img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Image_c1fb4d5a-e6cd-4c82-9253-88010cccd2e8.jpg?v=1762986412" alt="Interac" style="height: 75px; width: auto;"></div>
               </div>
             </div>
           </div>
