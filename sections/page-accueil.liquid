@@ -1444,6 +1444,26 @@
           box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
         }
 
+        .pricing-back-button {
+          padding: 1rem 2rem;
+          background: transparent;
+          color: white;
+          font-family: 'Outfit', sans-serif;
+          font-size: 1.2rem;
+          font-weight: 400;
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          margin-bottom: 2rem;
+          display: inline-block;
+        }
+
+        .pricing-back-button:hover {
+          background: rgba(255, 255, 255, 0.1);
+          border-color: rgba(255, 255, 255, 0.5);
+        }
+
         /* Responsive Mobile */
         @media (max-width: 768px) {
           .back-to-home-pricing {
@@ -2051,17 +2071,22 @@
           </h1>
 
           <!-- Sous-titre -->
-          <h2 class="pricing-subtitle">
+          <h2 class="pricing-subtitle" id="pricing-subtitle">
             Choisissez votre forfait
           </h2>
 
           <!-- Description -->
-          <p class="pricing-plans-description">
+          <p class="pricing-plans-description" id="pricing-description">
             Vous ne serez pas facturé avant la fin de votre essai gratuit
           </p>
 
+          <!-- Bouton Retour (caché par défaut) -->
+          <button class="pricing-back-button" id="pricing-back-button" style="display: none;">
+            ← Retour
+          </button>
+
           <!-- Grille des 4 forfaits -->
-          <div class="pricing-plans-grid">
+          <div class="pricing-plans-grid" id="pricing-plans-grid-regular">
             <!-- Plan 1 - Mensuel -->
             <div class="pricing-plan-card selected" data-plan="monthly">
               <div class="pricing-plan-header">
@@ -2120,6 +2145,48 @@
                     <span class="pricing-plan-amount">Virement Interac</span>
                   </div>
                   <div class="pricing-plan-billing">Découvrir nos options virement interac</div>
+                </div>
+                <div style="display: flex; align-items: center;"><img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Image_c1fb4d5a-e6cd-4c82-9253-88010cccd2e8.jpg?v=1762986412" alt="Interac" style="height: 75px; width: auto;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grille des forfaits Interac (cachée par défaut) -->
+          <div class="pricing-plans-grid" id="pricing-plans-grid-interac" style="display: none;">
+            <!-- Plan Interac 1 - 3 mois -->
+            <div class="pricing-plan-card selected" data-plan="interac-3months">
+              <div class="pricing-plan-header">
+                <div class="pricing-plan-left">
+                  <div class="pricing-plan-price">
+                    <span class="pricing-plan-amount">3 mois</span>
+                  </div>
+                  <div class="pricing-plan-billing">Engagement de 3 mois</div>
+                </div>
+                <div style="display: flex; align-items: center;"><img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Image_c1fb4d5a-e6cd-4c82-9253-88010cccd2e8.jpg?v=1762986412" alt="Interac" style="height: 75px; width: auto;"></div>
+              </div>
+            </div>
+
+            <!-- Plan Interac 2 - 6 mois -->
+            <div class="pricing-plan-card" data-plan="interac-6months">
+              <div class="pricing-plan-header">
+                <div class="pricing-plan-left">
+                  <div class="pricing-plan-price">
+                    <span class="pricing-plan-amount">6 mois</span>
+                  </div>
+                  <div class="pricing-plan-billing">Engagement de 6 mois</div>
+                </div>
+                <div style="display: flex; align-items: center;"><img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Image_c1fb4d5a-e6cd-4c82-9253-88010cccd2e8.jpg?v=1762986412" alt="Interac" style="height: 75px; width: auto;"></div>
+              </div>
+            </div>
+
+            <!-- Plan Interac 3 - 1 an -->
+            <div class="pricing-plan-card" data-plan="interac-yearly">
+              <div class="pricing-plan-header">
+                <div class="pricing-plan-left">
+                  <div class="pricing-plan-price">
+                    <span class="pricing-plan-amount">1 an</span>
+                  </div>
+                  <div class="pricing-plan-billing">Engagement de 1 an</div>
                 </div>
                 <div style="display: flex; align-items: center;"><img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Image_c1fb4d5a-e6cd-4c82-9253-88010cccd2e8.jpg?v=1762986412" alt="Interac" style="height: 75px; width: auto;"></div>
               </div>
@@ -2974,16 +3041,53 @@
         initReviewsSlider('reviewsTrackBet');
 
         // Gestion des cartes de tarification cliquables
-        const pricingCards = document.querySelectorAll('.pricing-plan-card[data-plan]');
         const continueButton = document.querySelector('.pricing-continue-button');
+        const backButton = document.getElementById('pricing-back-button');
+        const regularGrid = document.getElementById('pricing-plans-grid-regular');
+        const interacGrid = document.getElementById('pricing-plans-grid-interac');
+        const subtitle = document.getElementById('pricing-subtitle');
+        const description = document.getElementById('pricing-description');
+        
+        let currentView = 'regular'; // 'regular' ou 'interac'
         
         // URLs pour chaque plan
         const planUrls = {
           monthly: 'https://winabet.ai/cart/clear?return_to=%2Fcart%2Fadd%3Fitems%5B0%5D%5Bid%5D%3D47693665468667%26items%5B0%5D%5Bquantity%5D%3D1%26items%5B0%5D%5Bselling_plan%5D%3D4543316219%26return_to%3D%252Fcheckout%253F',
           '6months': 'https://winabet.ai/cart/clear?return_to=%2Fcart%2Fadd%3Fitems%5B0%5D%5Bid%5D%3D47694846230779%26items%5B0%5D%5Bquantity%5D%3D1%26items%5B0%5D%5Bselling_plan%5D%3D4543348987%26return_to%3D%252Fcheckout%253F',
-          yearly: 'https://winabet.ai/cart/clear?return_to=%2Fcart%2Fadd%3Fitems%5B0%5D%5Bid%5D%3D47694852030715%26items%5B0%5D%5Bquantity%5D%3D1%26items%5B0%5D%5Bselling_plan%5D%3D4543381755%26return_to%3D%252Fcheckout%253F',
-          interac: '#'
+          yearly: 'https://winabet.ai/cart/clear?return_to=%2Fcart%2Fadd%3Fitems%5B0%5D%5Bid%5D%3D47694852030715%26items%5B0%5D%5Bquantity%5D%3D1%26items%5B0%5D%5Bselling_plan%5D%3D4543381755%26return_to%3D%252Fcheckout%253F'
         };
+        
+        // Fonction pour basculer vers la vue Interac
+        function showInteracView() {
+          currentView = 'interac';
+          regularGrid.style.display = 'none';
+          interacGrid.style.display = 'grid';
+          backButton.style.display = 'block';
+          subtitle.textContent = 'Choisissez votre forfait avec virement Interac';
+          description.style.display = 'none';
+          continueButton.textContent = 'Continuer';
+        }
+        
+        // Fonction pour retourner à la vue régulière
+        function showRegularView() {
+          currentView = 'regular';
+          regularGrid.style.display = 'grid';
+          interacGrid.style.display = 'none';
+          backButton.style.display = 'none';
+          subtitle.textContent = 'Choisissez votre forfait';
+          description.style.display = 'block';
+          
+          // Réinitialiser la sélection
+          const regularCards = regularGrid.querySelectorAll('.pricing-plan-card');
+          regularCards.forEach(c => c.classList.remove('selected'));
+          regularCards[0].classList.add('selected');
+          updateContinueButton('monthly');
+        }
+        
+        // Gérer le clic sur le bouton retour
+        backButton.addEventListener('click', function() {
+          showRegularView();
+        });
         
         // Fonction pour mettre à jour le texte du bouton
         function updateContinueButton(plan) {
@@ -3005,6 +3109,14 @@
           const selectedCard = document.querySelector('.pricing-plan-card.selected');
           if (selectedCard) {
             const selectedPlan = selectedCard.getAttribute('data-plan');
+            
+            // Si on clique sur Interac dans la vue régulière, basculer vers la vue Interac
+            if (selectedPlan === 'interac' && currentView === 'regular') {
+              showInteracView();
+              return;
+            }
+            
+            // Sinon, rediriger vers l'URL appropriée
             const url = planUrls[selectedPlan];
             if (url && url !== '#') {
               window.location.href = url;
@@ -3012,14 +3124,19 @@
           }
         });
         
-        pricingCards.forEach(card => {
+        // Gérer la sélection des cartes
+        const allCards = document.querySelectorAll('.pricing-plan-card[data-plan]');
+        allCards.forEach(card => {
           card.addEventListener('click', function() {
-            // Retirer la classe selected de toutes les cartes
-            pricingCards.forEach(c => c.classList.remove('selected'));
-            // Ajouter la classe selected à la carte cliquée
+            // Retirer la sélection de toutes les cartes de la grille actuelle
+            const currentGrid = currentView === 'regular' ? regularGrid : interacGrid;
+            const cardsInCurrentGrid = currentGrid.querySelectorAll('.pricing-plan-card');
+            cardsInCurrentGrid.forEach(c => c.classList.remove('selected'));
+            
+            // Ajouter la sélection à la carte cliquée
             this.classList.add('selected');
             
-            // Mettre à jour le texte du bouton
+            // Mettre à jour le bouton
             const selectedPlan = this.getAttribute('data-plan');
             updateContinueButton(selectedPlan);
           });
