@@ -3230,6 +3230,12 @@
             continueButton.textContent = 'Commencer pour (0$), puis 79$/mois';
           } else if (plan === 'yearly') {
             continueButton.textContent = 'Commencer pour (0$), puis 59$/mois';
+          } else if (plan === 'interac-3months') {
+            continueButton.textContent = 'Continuer avec 3 mois / essai gratuit 1 jour';
+          } else if (plan === 'interac-6months') {
+            continueButton.textContent = 'Continuer avec 6 mois / essai gratuit 1 jour';
+          } else if (plan === 'interac-yearly') {
+            continueButton.textContent = 'Continuer avec annuel / essai gratuit 1 jour';
           } else if (plan === 'interac') {
             continueButton.textContent = 'Continuer avec virement Interac';
           }
