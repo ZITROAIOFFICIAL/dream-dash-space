@@ -394,154 +394,6 @@
       </div>
     </section>
 
-    <!-- Simulateur de profit -->
-    <section style="max-width: 1286px; margin: 6rem auto 4rem; padding: 0 2rem;">
-      <div class="profit-simulator">
-        <p class="profit-simulator-legend">(selon notre vrai historique)</p>
-      
-      <div class="profit-simulator-title-container">
-        <svg id="atom-simulator-title" width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
-          <defs>
-            <filter id="softGlowSimulatorTitle" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="1.2" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-            <path id="orbit0SimulatorTitle" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
-            <path id="orbit1SimulatorTitle" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
-            <path id="orbit2SimulatorTitle" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
-          </defs>
-          <g stroke="#68859e" stroke-width="2" fill="none">
-            <use href="#orbit0SimulatorTitle"/>
-            <use href="#orbit1SimulatorTitle"/>
-            <use href="#orbit2SimulatorTitle"/>
-          </g>
-          <g stroke-linecap="round" filter="url(#softGlowSimulatorTitle)">
-            <use href="#orbit0SimulatorTitle" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-              <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
-            </use>
-            <use href="#orbit1SimulatorTitle" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-              <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
-            </use>
-            <use href="#orbit2SimulatorTitle" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-              <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
-            </use>
-          </g>
-          <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
-        </svg>
-        
-        <h3 class="profit-simulator-title">
-          Notre simulateur <span style="color: #ffffff;">wina</span><span style="color: rgba(255, 255, 255, 0.35);">bet</span><span style="color: #ffffff; font-size: 0.5em; margin-left: -0.05em;">.ai</span>
-        </h3>
-      </div>
-      
-      <p class="profit-simulator-subtitle">Le simulateur représente exactement si vous auriez fait tous nos bets du jour et parlay jusqu'à présent.</p>
-      
-      <div class="profit-input-group">
-        <label class="profit-input-label">
-          Déterminer la valeur d'une unité
-          <button class="info-icon" id="info-unit-btn" type="button">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="10" stroke="rgba(255, 255, 255, 0.8)" stroke-width="2"></circle>
-              <text x="12" y="17" text-anchor="middle" fill="rgba(255, 255, 255, 0.8)" font-size="14" font-weight="700" stroke="none">?</text>
-            </svg>
-          </button>
-        </label>
-        
-        <div class="profit-value-buttons">
-          <button class="profit-value-btn" data-value="20">20$</button>
-          <button class="profit-value-btn" data-value="40">40$</button>
-          <button class="profit-value-btn" data-value="60">60$</button>
-          <button class="profit-value-btn" data-value="100">100$</button>
-          <button class="profit-value-btn" data-value="200">200$</button>
-          <button class="profit-value-btn" data-value="500">500$</button>
-          <button class="profit-value-btn" data-value="1000">1000$</button>
-          <button class="profit-value-btn" id="other-value-btn" data-value="other">Autre</button>
-        </div>
-        
-        <!-- Input caché pour valeur personnalisée -->
-        <div id="custom-input-wrapper" class="custom-input-wrapper" style="display: none;">
-          <div class="profit-input-wrapper">
-            <input type="number" id="custom-unit-input" class="profit-input" placeholder="Entrez une valeur" min="1" step="1">
-            <span class="currency-symbol">$</span>
-          </div>
-        </div>
-      </div>
-      
-      <button id="calculate-profit-btn" class="profit-calculate-btn">
-        Lancer le simulateur
-      </button>
-      
-      <div id="profit-result" class="profit-result" style="display: none;">
-        <div class="profit-result-content">
-          <div class="profit-units-display">
-            <span class="profit-label">Total des unités en profit :</span>
-            <span id="profit-units-value" class="profit-value">+0</span>
-          </div>
-          <div class="profit-dollars-display">
-            <span class="profit-label">Vos gains potentiels :</span>
-            <span id="profit-dollars-value" class="profit-value-big">$0</span>
-          </div>
-          <p id="profit-message" class="profit-message"></p>
-        </div>
-      </div>
-      
-      <!-- Overlay de chargement -->
-      <div id="profit-loading" class="profit-loading" style="display: none;">
-        <div class="profit-loading-content">
-          <svg id="atom-profit-simulator" width="50" height="50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
-            <defs>
-              <filter id="softGlowSimulator" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="1.2" result="b"/>
-                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-              <path id="orbit0Simulator" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
-              <path id="orbit1Simulator" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
-              <path id="orbit2Simulator" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
-            </defs>
-            <g stroke="#68859e" stroke-width="2" fill="none">
-              <use href="#orbit0Simulator"/>
-              <use href="#orbit1Simulator"/>
-              <use href="#orbit2Simulator"/>
-            </g>
-            <g stroke-linecap="round" filter="url(#softGlowSimulator)">
-              <use href="#orbit0Simulator" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
-              </use>
-              <use href="#orbit1Simulator" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
-              </use>
-              <use href="#orbit2Simulator" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
-                <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
-              </use>
-            </g>
-            <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
-          </svg>
-          <p class="profit-loading-text">L'IA analyse vos gains potentiels...</p>
-        </div>
-      </div>
-      </div>
-
-      <!-- Popup d'information sur les unités -->
-      <div id="unit-info-popup" class="unit-info-popup" style="display: none;">
-      <div class="unit-info-overlay"></div>
-      <div class="unit-info-content">
-        <button class="unit-info-close" id="close-popup-btn" type="button">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
-        <h4>Qu'est-ce qu'une unité ?</h4>
-        <p>
-          Une unité est la valeur associée à un pourcentage de votre bankroll. 
-          Donc si votre bankroll est 1000$ et 1 unité (souvent 1-5%) = 50$ = 5%. 
-          C'est une unité de mesure pour bien bet. Vous pouvez commencer avec un 
-          bankroll petit ou gros comme vous voulez.
-        </p>
-      </div>
-      </div>
-    </section>
-
     <!-- Section Providers Card -->
    {% render 'providers-badges-section' %}
 
@@ -2580,6 +2432,152 @@
               <div class="pricing-feature-title">Support prioritaire 7j/7</div>
               <div class="pricing-feature-description">réponses rapides + conseils d'optimisation de vos mises</div>
             </div>
+          </div>
+        </div>
+
+        <!-- Simulateur de profit -->
+        <div class="profit-simulator">
+          <p class="profit-simulator-legend">(selon notre vrai historique)</p>
+          
+          <div class="profit-simulator-title-container">
+            <svg id="atom-simulator-title" width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+              <defs>
+                <filter id="softGlowSimulatorTitle" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="1.2" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <path id="orbit0SimulatorTitle" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                <path id="orbit1SimulatorTitle" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                <path id="orbit2SimulatorTitle" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+              </defs>
+              <g stroke="#68859e" stroke-width="2" fill="none">
+                <use href="#orbit0SimulatorTitle"/>
+                <use href="#orbit1SimulatorTitle"/>
+                <use href="#orbit2SimulatorTitle"/>
+              </g>
+              <g stroke-linecap="round" filter="url(#softGlowSimulatorTitle)">
+                <use href="#orbit0SimulatorTitle" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                  <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                </use>
+                <use href="#orbit1SimulatorTitle" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                  <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                </use>
+                <use href="#orbit2SimulatorTitle" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                  <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                </use>
+              </g>
+              <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+            </svg>
+            
+            <h3 class="profit-simulator-title">
+              Notre simulateur <span style="color: #ffffff;">wina</span><span style="color: rgba(255, 255, 255, 0.35);">bet</span><span style="color: #ffffff; font-size: 0.5em; margin-left: -0.05em;">.ai</span>
+            </h3>
+          </div>
+          
+          <p class="profit-simulator-subtitle">Le simulateur représente exactement si vous auriez fait tous nos bets du jour et parlay jusqu'à présent.</p>
+          
+          <div class="profit-input-group">
+            <label class="profit-input-label">
+              Déterminer la valeur d'une unité
+              <button class="info-icon" id="info-unit-btn" type="button">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" stroke="rgba(255, 255, 255, 0.8)" stroke-width="2"></circle>
+                  <text x="12" y="17" text-anchor="middle" fill="rgba(255, 255, 255, 0.8)" font-size="14" font-weight="700" stroke="none">?</text>
+                </svg>
+              </button>
+            </label>
+            
+            <div class="profit-value-buttons">
+              <button class="profit-value-btn" data-value="20">20$</button>
+              <button class="profit-value-btn" data-value="40">40$</button>
+              <button class="profit-value-btn" data-value="60">60$</button>
+              <button class="profit-value-btn" data-value="100">100$</button>
+              <button class="profit-value-btn" data-value="200">200$</button>
+              <button class="profit-value-btn" data-value="500">500$</button>
+              <button class="profit-value-btn" data-value="1000">1000$</button>
+              <button class="profit-value-btn" id="other-value-btn" data-value="other">Autre</button>
+            </div>
+            
+            <!-- Input caché pour valeur personnalisée -->
+            <div id="custom-input-wrapper" class="custom-input-wrapper" style="display: none;">
+              <div class="profit-input-wrapper">
+                <input type="number" id="custom-unit-input" class="profit-input" placeholder="Entrez une valeur" min="1" step="1">
+                <span class="currency-symbol">$</span>
+              </div>
+            </div>
+          </div>
+          
+          <button id="calculate-profit-btn" class="profit-calculate-btn">
+            Lancer le simulateur
+          </button>
+          
+          <div id="profit-result" class="profit-result" style="display: none;">
+            <div class="profit-result-content">
+              <div class="profit-units-display">
+                <span class="profit-label">Total des unités en profit :</span>
+                <span id="profit-units-value" class="profit-value">+0</span>
+              </div>
+              <div class="profit-dollars-display">
+                <span class="profit-label">Vos gains potentiels :</span>
+                <span id="profit-dollars-value" class="profit-value-big">$0</span>
+              </div>
+              <p id="profit-message" class="profit-message"></p>
+            </div>
+          </div>
+          
+          <!-- Overlay de chargement -->
+          <div id="profit-loading" class="profit-loading" style="display: none;">
+            <div class="profit-loading-content">
+              <svg id="atom-profit-simulator" width="50" height="50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                <defs>
+                  <filter id="softGlowSimulator" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="1.2" result="b"/>
+                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                  <path id="orbit0Simulator" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                  <path id="orbit1Simulator" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                  <path id="orbit2Simulator" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+                </defs>
+                <g stroke="#68859e" stroke-width="2" fill="none">
+                  <use href="#orbit0Simulator"/>
+                  <use href="#orbit1Simulator"/>
+                  <use href="#orbit2Simulator"/>
+                </g>
+                <g stroke-linecap="round" filter="url(#softGlowSimulator)">
+                  <use href="#orbit0Simulator" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                  <use href="#orbit1Simulator" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                  <use href="#orbit2Simulator" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                    <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                  </use>
+                </g>
+                <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+              </svg>
+              <p class="profit-loading-text">L'IA analyse vos gains potentiels...</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Popup d'information sur les unités -->
+        <div id="unit-info-popup" class="unit-info-popup" style="display: none;">
+          <div class="unit-info-overlay"></div>
+          <div class="unit-info-content">
+            <button class="unit-info-close" id="close-popup-btn" type="button">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+            <h4>Qu'est-ce qu'une unité ?</h4>
+            <p>
+              Une unité est la valeur associée à un pourcentage de votre bankroll. 
+              Donc si votre bankroll est 1000$ et 1 unité (souvent 1-5%) = 50$ = 5%. 
+              C'est une unité de mesure pour bien bet. Vous pouvez commencer avec un 
+              bankroll petit ou gros comme vous voulez.
+            </p>
           </div>
         </div>
 
