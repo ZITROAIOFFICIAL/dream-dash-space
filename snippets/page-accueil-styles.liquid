@@ -2872,7 +2872,29 @@
           0 20px 60px rgba(0, 0, 0, 0.4),
           inset 0 1px 0 rgba(255, 255, 255, 0.05);
         position: relative;
-        z-index: 10;
+        z-index: 200;
+      }
+
+      /* ===== Spacer après simulateur (rétablit le flux) ===== */
+      .simulator-flow-spacer {
+        height: 120rem;
+      }
+
+      /* Ajustements responsives */
+      @media (min-width: 1441px) and (max-width: 1920px) {
+        .simulator-flow-spacer { height: 130rem; }
+      }
+      @media (min-width: 1025px) and (max-width: 1440px) {
+        .simulator-flow-spacer { height: 110rem; }
+      }
+      @media (min-width: 768px) and (max-width: 1024px) {
+        .simulator-flow-spacer { height: 90rem; }
+      }
+      @media (max-width: 767px) {
+        .simulator-flow-spacer { height: 70rem; }
+      }
+      @media (max-width: 374px) {
+        .simulator-flow-spacer { height: 60rem; }
       }
 
       /* Laptop étendu (1441-1920px) */
