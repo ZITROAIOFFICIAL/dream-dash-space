@@ -394,6 +394,134 @@
       </div>
     </section>
 
+    <!-- ========== SIMULATEUR HOME (sous stats section) ========== -->
+    <section class="home-simulator-section">
+      <div class="home-profit-simulator">
+        <p class="home-profit-simulator-legend">(selon notre vrai historique)</p>
+        
+        <div class="home-profit-simulator-title-container">
+          <svg id="atom-home-simulator-title" width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+            <defs>
+              <filter id="softGlowHomeSimulatorTitle" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="1.2" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <path id="orbit0HomeSimulatorTitle" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+              <path id="orbit1HomeSimulatorTitle" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+              <path id="orbit2HomeSimulatorTitle" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+            </defs>
+            <g stroke="#68859e" stroke-width="2" fill="none">
+              <use href="#orbit0HomeSimulatorTitle"/>
+              <use href="#orbit1HomeSimulatorTitle"/>
+              <use href="#orbit2HomeSimulatorTitle"/>
+            </g>
+            <g stroke-linecap="round" filter="url(#softGlowHomeSimulatorTitle)">
+              <use href="#orbit0HomeSimulatorTitle" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+              </use>
+              <use href="#orbit1HomeSimulatorTitle" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+              </use>
+              <use href="#orbit2HomeSimulatorTitle" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+              </use>
+            </g>
+            <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+          </svg>
+          
+          <h3 class="home-profit-simulator-title">
+            Notre simulateur <span style="color: #ffffff;">wina</span><span style="color: rgba(255, 255, 255, 0.35);">bet</span><span style="color: #ffffff; font-size: 0.5em; margin-left: -0.05em;">.ai</span>
+          </h3>
+        </div>
+        
+        <p class="home-profit-simulator-subtitle">Le simulateur représente exactement si vous auriez fait tous nos bets du jour et parlay jusqu'à présent.</p>
+        
+        <div class="home-profit-input-group">
+          <label class="home-profit-input-label">
+            Déterminer la valeur d'une unité
+            <button class="home-info-icon" id="home-info-unit-btn" type="button">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10" stroke="rgba(255, 255, 255, 0.8)" stroke-width="2"></circle>
+                <text x="12" y="17" text-anchor="middle" fill="rgba(255, 255, 255, 0.8)" font-size="14" font-weight="700" stroke="none">?</text>
+              </svg>
+            </button>
+          </label>
+          
+          <div class="home-profit-value-buttons">
+            <button class="home-profit-value-btn" data-value="20">20$</button>
+            <button class="home-profit-value-btn" data-value="40">40$</button>
+            <button class="home-profit-value-btn" data-value="60">60$</button>
+            <button class="home-profit-value-btn" data-value="100">100$</button>
+            <button class="home-profit-value-btn" data-value="200">200$</button>
+            <button class="home-profit-value-btn" data-value="500">500$</button>
+            <button class="home-profit-value-btn" data-value="1000">1000$</button>
+            <button class="home-profit-value-btn" id="home-other-value-btn" data-value="other">Autre</button>
+          </div>
+          
+          <!-- Input caché pour valeur personnalisée -->
+          <div id="home-custom-input-wrapper" class="home-custom-input-wrapper" style="display: none;">
+            <div class="home-profit-input-wrapper">
+              <input type="number" id="home-custom-unit-input" class="home-profit-input" placeholder="Entrez une valeur" min="1" step="1">
+              <span class="home-currency-symbol">$</span>
+            </div>
+          </div>
+        </div>
+        
+        <button id="home-calculate-profit-btn" class="home-profit-calculate-btn">
+          Lancer le simulateur
+        </button>
+        
+        <div id="home-profit-result" class="home-profit-result" style="display: none;">
+          <div class="home-profit-result-content">
+            <div class="home-profit-units-display">
+              <span class="home-profit-label">Total des unités en profit :</span>
+              <span id="home-profit-units-value" class="home-profit-value">+0</span>
+            </div>
+            <div class="home-profit-dollars-display">
+              <span class="home-profit-label">Vos gains potentiels :</span>
+              <span id="home-profit-dollars-value" class="home-profit-value-big">$0</span>
+            </div>
+            <p id="home-profit-message" class="home-profit-message"></p>
+          </div>
+        </div>
+        
+        <!-- Overlay de chargement -->
+        <div id="home-profit-loading" class="home-profit-loading" style="display: none;">
+          <div class="home-profit-loading-content">
+            <svg id="atom-home-profit-simulator" width="50" height="50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+              <defs>
+                <filter id="softGlowHomeSimulator" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="1.2" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <path id="orbit0HomeSimulator" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                <path id="orbit1HomeSimulator" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                <path id="orbit2HomeSimulator" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+              </defs>
+              <g stroke="#68859e" stroke-width="2" fill="none">
+                <use href="#orbit0HomeSimulator"/>
+                <use href="#orbit1HomeSimulator"/>
+                <use href="#orbit2HomeSimulator"/>
+              </g>
+              <g stroke-linecap="round" filter="url(#softGlowHomeSimulator)">
+                <use href="#orbit0HomeSimulator" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                  <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                </use>
+                <use href="#orbit1HomeSimulator" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                  <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                </use>
+                <use href="#orbit2HomeSimulator" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                  <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                </use>
+              </g>
+              <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+            </svg>
+            <p class="home-profit-loading-text">Calcul en cours...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Section Providers Card -->
    {% render 'providers-badges-section' %}
 
@@ -2090,6 +2218,379 @@
           
           .unit-info-content p {
             font-size: 0.9rem;
+          }
+        }
+
+        /* ========== SIMULATEUR HOME (sous stats section) ========== */
+        .home-simulator-section {
+          max-width: 1286px;
+          margin: 8rem auto;
+          padding: 0 2rem;
+        }
+
+        /* Desktop styles */
+        .home-profit-simulator {
+          position: relative;
+          width: 100%;
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 2.5rem;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 16px;
+          backdrop-filter: blur(10px);
+        }
+
+        .home-profit-simulator-legend {
+          font-family: 'Outfit', sans-serif;
+          font-size: 2.3rem;
+          font-weight: 300;
+          color: rgba(255, 255, 255, 0.5);
+          text-align: center;
+          max-width: 600px;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 2rem;
+          margin-bottom: 4rem;
+          font-style: italic;
+        }
+
+        .home-profit-simulator-title-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 1rem;
+          margin-top: 0;
+          margin-bottom: 0rem;
+        }
+
+        .home-profit-simulator-title {
+          font-family: 'Outfit', sans-serif;
+          font-size: 3.7rem;
+          font-weight: 700;
+          color: #ffffff;
+          text-align: center;
+          margin-bottom: 0rem;
+        }
+
+        .home-profit-simulator-subtitle {
+          font-family: 'Outfit', sans-serif;
+          font-size: 2rem;
+          font-weight: 300;
+          color: #ffffff;
+          text-align: center;
+          margin-top: 4rem;
+          margin-bottom: 4rem;
+        }
+
+        .home-profit-input-group {
+          margin-top: 0;
+          margin-bottom: 1.5rem;
+        }
+
+        .home-profit-input-label {
+          display: block;
+          font-family: 'Outfit', sans-serif;
+          font-size: 1.6rem;
+          font-weight: 300;
+          color: rgba(255, 255, 255, 0.8);
+          margin-top: 0;
+          margin-bottom: 0.5rem;
+          text-align: center;
+        }
+
+        .home-profit-input-wrapper {
+          position: relative;
+          display: flex;
+          align-items: center;
+        }
+
+        .home-profit-input {
+          width: 100%;
+          padding: 1rem 2.5rem 1rem 1rem;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 8px;
+          color: #ffffff;
+          font-family: 'Outfit', sans-serif;
+          font-size: 1.1rem;
+          transition: all 0.3s ease;
+        }
+
+        .home-profit-input:focus {
+          outline: none;
+          border-color: rgba(255, 255, 255, 0.4);
+          background: rgba(255, 255, 255, 0.08);
+          box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+        }
+
+        .home-profit-input::placeholder {
+          color: rgba(255, 255, 255, 0.3);
+        }
+
+        .home-currency-symbol {
+          position: absolute;
+          right: 1rem;
+          font-family: 'Outfit', sans-serif;
+          font-size: 1.1rem;
+          color: rgba(255, 255, 255, 0.5);
+          pointer-events: none;
+        }
+
+        .home-profit-calculate-btn {
+          width: 100%;
+          padding: 1.2rem;
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8));
+          color: #000000;
+          font-family: 'Outfit', sans-serif;
+          font-size: 1.4rem;
+          font-weight: 300;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+
+        .home-profit-calculate-btn:hover {
+          background: linear-gradient(135deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.9));
+          transform: translateY(-2px);
+          box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+        }
+
+        .home-profit-result {
+          margin-top: 2rem;
+          padding: 2rem;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          border-radius: 12px;
+          animation: fadeIn 0.5s ease;
+        }
+
+        .home-profit-result-content {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+
+        .home-profit-units-display,
+        .home-profit-dollars-display {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .home-profit-label {
+          font-family: 'Outfit', sans-serif;
+          font-size: 1.2rem;
+          font-weight: 300;
+          color: rgba(255, 255, 255, 0.7);
+        }
+
+        .home-profit-value {
+          font-family: 'Outfit', sans-serif;
+          font-size: 2rem;
+          font-weight: 300;
+          color: #10b981;
+        }
+
+        .home-profit-value-big {
+          font-family: 'Outfit', sans-serif;
+          font-size: 3.5rem;
+          font-weight: 300;
+          color: #10b981;
+        }
+
+        .home-profit-value.negative,
+        .home-profit-value-big.negative {
+          color: #ef4444;
+        }
+
+        .home-profit-message {
+          margin-top: 1rem;
+          padding: 1rem;
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 8px;
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.9rem;
+          font-weight: 300;
+          color: rgba(255, 255, 255, 0.8);
+          text-align: center;
+        }
+
+        .home-profit-loading {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.8);
+          border-radius: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 10;
+        }
+
+        .home-profit-loading-content {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 1rem;
+        }
+
+        .home-profit-loading-text {
+          font-family: 'Outfit', sans-serif;
+          font-size: 1rem;
+          font-weight: 300;
+          color: rgba(255, 255, 255, 0.9);
+          text-align: center;
+        }
+
+        /* Mobile styles */
+        @media (max-width: 768px) {
+          .home-simulator-section {
+            margin: 4rem auto;
+          }
+
+          .home-profit-simulator {
+            padding: 2rem 1.5rem;
+            margin-top: 0rem;
+            margin-bottom: 2rem;
+          }
+
+          .home-profit-simulator-legend {
+            font-size: 1.3rem;
+            max-width: 90%;
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+          }
+
+          .home-profit-simulator-title-container {
+            margin-top: 0;
+            margin-bottom: 0.3rem;
+          }
+
+          .home-profit-simulator-title {
+            font-size: 2.1rem;
+          }
+
+          .home-profit-simulator-subtitle {
+            font-size: 1.4rem;
+            margin-top: 2rem;
+            margin-bottom: 2.5rem;
+          }
+
+          .home-profit-input-group {
+            margin-top: 0;
+            margin-bottom: 1rem;
+          }
+
+          .home-profit-input-label {
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+          }
+
+          .home-profit-value-buttons {
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+            margin-bottom: 1;
+          }
+
+          .home-profit-value-btn {
+            padding: 0.8rem 1.2rem;
+            font-size: 1.1rem;
+            flex: 1 1 calc(33.333% - 0.5rem);
+            min-width: 80px;
+          }
+
+          .home-profit-calculate-btn {
+            font-size: 1.5rem;
+            padding: 1.5rem;
+            margin-top: 0rem;
+            margin-bottom: -0.5rem;
+          }
+
+          .home-profit-value-big {
+            font-size: 2rem;
+          }
+        }
+
+        .home-profit-value-buttons {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 0.75rem;
+          margin-top: 0.75rem;
+          margin-bottom: 0;
+        }
+
+        .home-profit-value-btn {
+          padding: 1rem 1.8rem;
+          background: rgba(255, 255, 255, 0.05);
+          border: 2px solid rgba(255, 255, 255, 0.1);
+          border-radius: 12px;
+          color: rgba(255, 255, 255, 0.7);
+          font-family: 'Outfit', sans-serif;
+          font-size: 1.4rem;
+          font-weight: 300;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .home-profit-value-btn:hover {
+          background: rgba(255, 255, 255, 0.1);
+          border-color: rgba(255, 255, 255, 0.3);
+          color: rgba(255, 255, 255, 0.9);
+        }
+
+        .home-profit-value-btn.active {
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          border-color: #667eea;
+          color: #ffffff;
+          font-weight: 300;
+        }
+
+        .home-info-icon {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 20px;
+          height: 20px;
+          margin-left: 0.5rem;
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          vertical-align: middle;
+        }
+
+        .home-info-icon:hover {
+          opacity: 0.8;
+          transform: scale(1.1);
+        }
+
+        .home-info-icon svg {
+          width: 20px;
+          height: 20px;
+        }
+
+        .home-custom-input-wrapper {
+          margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+          .home-profit-value-buttons {
+            gap: 0.5rem;
+          }
+
+          .home-profit-value-btn {
+            padding: 0.6rem 1rem;
+            font-size: 1.2rem;
+            flex: 1 1 calc(33.333% - 0.5rem);
+            min-width: 70px;
+            font-weight: 600;
           }
         }
       </style>
@@ -4580,5 +5081,190 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.billing-start-date').forEach(el => {
     el.textContent = billingStartDate;
   });
+
+  // ============ SIMULATEUR HOME (sous stats section) ============
+  const homeCalculateBtn = document.getElementById('home-calculate-profit-btn');
+  const homeResultDiv = document.getElementById('home-profit-result');
+  const homeLoadingDiv = document.getElementById('home-profit-loading');
+  
+  let homeSelectedUnitValue = null;
+  const homeValueButtons = document.querySelectorAll('.home-profit-value-btn');
+  const homeCustomInputWrapper = document.getElementById('home-custom-input-wrapper');
+  const homeCustomInput = document.getElementById('home-custom-unit-input');
+  const homeOtherBtn = document.getElementById('home-other-value-btn');
+
+  // Gérer la sélection des boutons de valeur HOME
+  homeValueButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      homeValueButtons.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      
+      const value = this.getAttribute('data-value');
+      
+      if (value === 'other') {
+        homeCustomInputWrapper.style.display = 'block';
+        homeSelectedUnitValue = null;
+        homeCustomInput.focus();
+      } else {
+        homeCustomInputWrapper.style.display = 'none';
+        homeSelectedUnitValue = parseFloat(value);
+      }
+    });
+  });
+
+  // Gérer l'input personnalisé HOME
+  if (homeCustomInput) {
+    homeCustomInput.addEventListener('input', function() {
+      const value = parseFloat(this.value);
+      if (value && value > 0) {
+        homeSelectedUnitValue = value;
+      } else {
+        homeSelectedUnitValue = null;
+      }
+    });
+  }
+
+  // Gérer le popup d'information HOME (utilise le même popup que l'original)
+  const homeInfoBtn = document.getElementById('home-info-unit-btn');
+  if (homeInfoBtn && popup) {
+    homeInfoBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      popup.style.display = 'flex';
+    });
+  }
+
+  // Calcul du profit HOME
+  if (homeCalculateBtn) {
+    homeCalculateBtn.addEventListener('click', async function() {
+      if (homeSelectedUnitValue === null || homeSelectedUnitValue <= 0) {
+        alert('Veuillez sélectionner ou entrer une valeur d\'unité valide.');
+        return;
+      }
+
+      const unitValue = homeSelectedUnitValue;
+
+      homeResultDiv.style.display = 'none';
+      homeLoadingDiv.style.display = 'flex';
+
+      try {
+        const randomDelay = Math.floor(Math.random() * (3500 - 2000 + 1)) + 2000;
+
+        const extractUnitsFromDOM = () => {
+          const betSlider = document.querySelector('#bet-history-slider');
+          const parlaySlider = document.querySelector('#parlay-history-slider');
+          
+          if (!betSlider && !parlaySlider) return null;
+          
+          let betUnits = 0;
+          let parlayUnits = 0;
+          
+          if (betSlider) {
+            const betCards = betSlider.querySelectorAll('.history-card-unit-value');
+            betCards.forEach(card => {
+              const text = card.textContent.trim();
+              const match = text.match(/([+-]?\d+\.?\d*)\s*unit/i);
+              if (match) {
+                betUnits += parseFloat(match[1]);
+              }
+            });
+          }
+          
+          if (parlaySlider) {
+            const parlayCards = parlaySlider.querySelectorAll('.history-card-unit-value');
+            parlayCards.forEach(card => {
+              const text = card.textContent.trim();
+              const match = text.match(/([+-]?\d+\.?\d*)\s*unit/i);
+              if (match) {
+                parlayUnits += parseFloat(match[1]);
+              }
+            });
+          }
+          
+          return { betUnits, parlayUnits };
+        };
+
+        const fetchFromAPI = async () => {
+          const FUNCTIONS_URL = 'https://ycvfyorgkhuxcosfrsxs.functions.supabase.co';
+          const SHOP_DOMAIN = window.SUPABASE_CONFIG?.shopDomain || '{{ shop.permanent_domain }}';
+          
+          const betUrl = `${FUNCTIONS_URL}/get-bet-history?shop_domain=${SHOP_DOMAIN}`;
+          const parlayUrl = `${FUNCTIONS_URL}/get-parlay-history?shop_domain=${SHOP_DOMAIN}`;
+          
+          const [betResponse, parlayResponse] = await Promise.all([
+            fetch(betUrl),
+            fetch(parlayUrl)
+          ]);
+
+          if (!betResponse.ok || !parlayResponse.ok) {
+            throw new Error('Erreur lors de la récupération des données');
+          }
+
+          const betData = await betResponse.json();
+          const parlayData = await parlayResponse.json();
+          
+          return {
+            betUnits: betData.total_units || 0,
+            parlayUnits: parlayData.total_units || 0,
+            betData,
+            parlayData
+          };
+        };
+        
+        let unitsData;
+        const domData = extractUnitsFromDOM();
+        
+        if (domData) {
+          await new Promise(resolve => setTimeout(resolve, randomDelay));
+          unitsData = { 
+            betUnits: domData.betUnits, 
+            parlayUnits: domData.parlayUnits,
+            betData: { total_bets: 0 },
+            parlayData: { total_parlays: 0 }
+          };
+        } else {
+          const apiDataPromise = fetchFromAPI();
+          await new Promise(resolve => setTimeout(resolve, randomDelay));
+          unitsData = await apiDataPromise;
+        }
+        
+        const totalUnits = unitsData.betUnits + unitsData.parlayUnits;
+        const profitDollars = totalUnits * unitValue;
+
+        const homeUnitsValueEl = document.getElementById('home-profit-units-value');
+        const homeDollarsValueEl = document.getElementById('home-profit-dollars-value');
+        const homeMessageEl = document.getElementById('home-profit-message');
+
+        const unitsText = totalUnits >= 0 ? `+${totalUnits.toFixed(2)}` : totalUnits.toFixed(2);
+        homeUnitsValueEl.textContent = unitsText;
+        
+        const dollarsText = profitDollars >= 0 ? `+$${profitDollars.toFixed(2)}` : `-$${Math.abs(profitDollars).toFixed(2)}`;
+        homeDollarsValueEl.textContent = dollarsText;
+
+        if (totalUnits >= 0) {
+          homeUnitsValueEl.classList.remove('negative');
+          homeDollarsValueEl.classList.remove('negative');
+        } else {
+          homeUnitsValueEl.classList.add('negative');
+          homeDollarsValueEl.classList.add('negative');
+        }
+
+        if (totalUnits > 0) {
+          homeMessageEl.textContent = `🎉 Avec nos prédictions IA, vous auriez réalisé un profit de ${dollarsText} ! Ces résultats sont basés sur notre historique réel.`;
+        } else if (totalUnits < 0) {
+          homeMessageEl.textContent = `📊 Sur cette période, le résultat aurait été de ${dollarsText}. Nos performances varient selon les périodes, mais notre stratégie long terme vise la rentabilité.`;
+        } else {
+          homeMessageEl.textContent = `📊 Aucune unité de profit/perte enregistrée pour le moment. Consultez nos historiques pour voir les performances détaillées.`;
+        }
+
+        homeLoadingDiv.style.display = 'none';
+        homeResultDiv.style.display = 'block';
+
+      } catch (error) {
+        console.error('Erreur lors du calcul des gains HOME:', error);
+        homeLoadingDiv.style.display = 'none';
+        alert('Impossible de charger l\'historique. Veuillez réessayer plus tard.');
+      }
+    });
+  }
 });
 </script>
