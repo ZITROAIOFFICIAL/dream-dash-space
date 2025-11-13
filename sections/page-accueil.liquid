@@ -4678,6 +4678,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ============ SLIDER HISTORIQUE BET DU JOUR ============
 (function() {
+  console.log('🎠 Démarrage script slider historique');
+  
   const sliderTrack = document.getElementById('bet-history-slider-track');
   
   if (!sliderTrack) {
@@ -4685,19 +4687,16 @@ document.addEventListener('DOMContentLoaded', function() {
     return;
   }
 
-  console.log('🎠 Initialisation du slider historique bet du jour');
+  console.log('🎠 Slider track trouvé, chargement des données...');
 
   async function loadBetHistorySlider() {
     try {
-      const supabaseUrl = window.SUPABASE_CONFIG?.supabaseUrl;
-      const shopDomain = window.SUPABASE_CONFIG?.shopDomain;
+      const FUNCTIONS_URL = 'https://ycvfyorgkhuxcosfrsxs.functions.supabase.co';
+      const SHOP_DOMAIN = '{{ shop.permanent_domain }}';
 
-      if (!supabaseUrl || !shopDomain) {
-        console.error('❌ Configuration Supabase manquante pour le slider');
-        return;
-      }
+      console.log('🎠 Shop domain:', SHOP_DOMAIN);
 
-      const functionsUrl = `${supabaseUrl}/functions/v1/get-bet-history?shop_domain=${encodeURIComponent(shopDomain)}`;
+      const functionsUrl = `${FUNCTIONS_URL}/get-bet-history?shop_domain=${encodeURIComponent(SHOP_DOMAIN)}`;
       
       const response = await fetch(functionsUrl, {
         method: 'GET',
