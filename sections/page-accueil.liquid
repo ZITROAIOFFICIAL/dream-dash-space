@@ -2952,6 +2952,20 @@
       mobileToggle.classList.toggle('active');
     }
 
+    // Fermer le sidebar automatiquement quand on clique sur un lien
+    document.addEventListener('DOMContentLoaded', function() {
+      const sidebarLinks = document.querySelectorAll('.sidebar .nav-item, .sidebar .auth-btn-gray, .sidebar .auth-btn-white');
+      sidebarLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          // Fermer le sidebar si il est ouvert
+          const body = document.body;
+          if (body.classList.contains('sidebar-open')) {
+            toggleSidebar();
+          }
+        });
+      });
+    });
+
     // Update time
     function updateTime() {
       const now = new Date();
