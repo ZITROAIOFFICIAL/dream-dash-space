@@ -3221,15 +3221,14 @@
             updateContinueButton(selectedPlan);
           } else {
             // Par défaut, sélectionner 3 mois si aucune carte n'est sélectionnée
+            const defaultCard = interacGrid.querySelector('[data-plan="interac-3months"]');
+            if (defaultCard) defaultCard.classList.add('selected');
             updateContinueButton('interac-3months');
           }
         }
         
         // Fonction pour afficher les instructions Interac
         function showInteracInstructions(plan) {
-          console.log('📋 showInteracInstructions appelée avec plan:', plan);
-          console.log('📋 interacInstructions élément:', interacInstructions);
-          
           currentView = 'interac-instructions';
           regularGrid.style.display = 'none';
           interacGrid.style.display = 'none';
@@ -3238,14 +3237,9 @@
           subtitle.style.display = 'none';
           description.style.display = 'none';
           
-          console.log('📋 Éléments cachés/affichés');
-          
           // Mettre à jour le titre et le montant selon le plan
           const titleElement = document.getElementById('interac-subscription-title');
           const amountElement = document.getElementById('interac-amount');
-          
-          console.log('📋 titleElement:', titleElement);
-          console.log('📋 amountElement:', amountElement);
           
           if (plan === 'interac-3months') {
             titleElement.textContent = 'Abonnement : 3 mois (89.99$ par mois)';
@@ -3263,8 +3257,6 @@
               'À : <strong style="color: #ffffff;">info@winabet.ai</strong><br>' +
               'Réponse question de sécurité : <strong style="color: #ffffff;">winabet.ai</strong>';
           }
-          
-          console.log('📋 Titre et montant mis à jour');
         }
         
         // Fonction pour retourner à la vue régulière
@@ -3367,37 +3359,36 @@
         
         // Gérer le clic sur le bouton continuer
         continueButton.addEventListener('click', function() {
-          console.log('🔵 Click sur continuer');
-          const selectedCard = document.querySelector('.pricing-plan-card.selected');
-          console.log('🔵 Carte sélectionnée:', selectedCard);
+          // Chercher la carte sélectionnée uniquement dans la grille actuelle
+          const currentGridEl = currentView === 'interac' ? interacGrid : regularGrid;
+          const selectedCard = currentGridEl.querySelector('.pricing-plan-card.selected');
+          
+          // Fallback pour Interac si aucune carte n'est sélectionnée
+          if (currentView === 'interac' && !selectedCard) {
+            showInteracInstructions('interac-3months');
+            return;
+          }
           
           if (selectedCard) {
             const selectedPlan = selectedCard.getAttribute('data-plan');
-            console.log('🔵 Plan sélectionné:', selectedPlan);
-            console.log('🔵 Vue actuelle:', currentView);
             
             // Si on clique sur Interac dans la vue régulière, basculer vers la vue Interac
             if (selectedPlan === 'interac' && currentView === 'regular') {
-              console.log('🔵 Basculer vers vue Interac');
               showInteracView();
               return;
             }
             
             // Si on est dans la vue Interac et qu'un plan Interac est sélectionné, afficher les instructions
             if (currentView === 'interac' && selectedPlan.startsWith('interac-')) {
-              console.log('🔵 Afficher instructions Interac pour:', selectedPlan);
               showInteracInstructions(selectedPlan);
               return;
             }
             
             // Sinon, rediriger vers l'URL appropriée
-            console.log('🔵 Redirection vers URL');
             const url = planUrls[selectedPlan];
             if (url && url !== '#') {
               window.location.href = url;
             }
-          } else {
-            console.log('❌ Aucune carte sélectionnée');
           }
         });
         
