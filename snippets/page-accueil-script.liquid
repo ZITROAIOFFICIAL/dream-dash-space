@@ -899,8 +899,8 @@
 
       // ==================== BET HISTORY SLIDER (PRICING) ====================
       (function() {
-      // Fonction pour créer le slider (async pour attendre les images)
-      async function createBetSlider(bets) {
+        // Fonction pour créer le slider
+        function createBetSlider(bets) {
           const sliderContainer = document.getElementById('bet-history-slider');
           if (!sliderContainer) return;
 
@@ -977,44 +977,14 @@
           // Générer le HTML pour chaque bet
           const cardsHTML = sliderBets.map(bet => generateBetCardHTML(bet)).join('');
           
-        // Dupliquer 4 fois pour un effet de boucle infinie fluide
-        sliderContainer.innerHTML = cardsHTML + cardsHTML + cardsHTML + cardsHTML;
-        
-        // Attendre que toutes les images soient chargées
-        const images = sliderContainer.querySelectorAll('img');
-        await Promise.all(Array.from(images).map(img => {
-          if (img.complete) return Promise.resolve();
-          return new Promise(resolve => {
-            img.onload = resolve;
-            img.onerror = resolve; // Continuer même si une image échoue
-          });
-        }));
-        
-        // Attendre un frame supplémentaire pour le reflow
-        await new Promise(resolve => requestAnimationFrame(resolve));
-        
-        // Animation avec requestAnimationFrame pour contrôle total
-        let animationId = null;
-        let currentPosition = 0;
-        const speed = 0.5; // pixels par frame (ajustable)
-        
-        // Calculer les dimensions avec retry
-        let totalWidth = 0;
-        let attempts = 0;
-        while (attempts < 3 && totalWidth === 0) {
-          totalWidth = sliderContainer.scrollWidth / 4;
-          if (totalWidth === 0) {
-            await new Promise(resolve => setTimeout(resolve, 500));
-          }
-          attempts++;
-        }
-        
-        if (totalWidth === 0) {
-          console.error('❌ Impossible de calculer les dimensions du slider pricing');
-          return;
-        }
-        
-        console.log('✅ Slider pricing initialisé - totalWidth:', totalWidth);
+          // Dupliquer 4 fois pour un effet de boucle infinie fluide
+          sliderContainer.innerHTML = cardsHTML + cardsHTML + cardsHTML + cardsHTML;
+          
+          // Animation avec requestAnimationFrame pour contrôle total
+          let animationId = null;
+          let currentPosition = 0;
+          const speed = 0.5; // pixels par frame (ajustable)
+          const totalWidth = sliderContainer.scrollWidth / 4; // largeur d'un cycle complet
           
           function animate() {
             if (!sliderContainer) return;
@@ -1137,42 +1107,27 @@
               animate();
             });
             
-          // Style pour indiquer que c'est draggable
-          sliderWrapper.style.cursor = 'grab';
-          sliderWrapper.style.userSelect = 'none';
+            // Style pour indiquer que c'est draggable
+            sliderWrapper.style.cursor = 'grab';
+            sliderWrapper.style.userSelect = 'none';
+          }
         }
-        
-        // Observer les changements de taille pour recalculer si nécessaire
-        const resizeObserver = new ResizeObserver(entries => {
-          for (let entry of entries) {
-            const newTotalWidth = entry.target.scrollWidth / 4;
-            if (newTotalWidth !== totalWidth && newTotalWidth > 0) {
-              console.log('🔄 Dimensions du slider pricing mises à jour:', newTotalWidth);
-              totalWidth = newTotalWidth;
+
+
+        // Initialiser au chargement de la page
+        document.addEventListener('DOMContentLoaded', async function() {
+          try {
+            const bets = await loadBetHistoryForSlider();
+            createBetSlider(bets);
+            
+          } catch (error) {
+            console.error('❌ Erreur initialisation slider:', error);
+            const sliderContainer = document.getElementById('bet-history-slider');
+            if (sliderContainer) {
+              sliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Erreur de chargement.</p>';
             }
           }
         });
-        resizeObserver.observe(sliderContainer);
-      }
-
-
-      // Initialiser après le chargement complet (window.load au lieu de DOMContentLoaded)
-      window.addEventListener('load', async function() {
-        // Délai supplémentaire pour s'assurer que tout est rendu
-        await new Promise(resolve => setTimeout(resolve, 150));
-        
-        try {
-          const bets = await loadBetHistoryForSlider();
-          await createBetSlider(bets);
-          
-        } catch (error) {
-          console.error('❌ Erreur initialisation slider pricing:', error);
-          const sliderContainer = document.getElementById('bet-history-slider');
-          if (sliderContainer) {
-            sliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Erreur de chargement.</p>';
-          }
-        }
-      });
       })();
 
       // ==================== HOME PAGE BET HISTORY SLIDER ====================
@@ -1182,8 +1137,8 @@
         // - generateBetCardHTML() (déjà définie)
         // - loadBetHistoryForSlider() (déjà définie)
 
-      // NOUVELLE fonction createHomeBetSlider() (async pour attendre les images)
-      async function createHomeBetSlider(bets) {
+        // NOUVELLE fonction createHomeBetSlider()
+        function createHomeBetSlider(bets) {
           const sliderContainer = document.getElementById('home-bet-history-slider');
           if (!sliderContainer || !bets || bets.length === 0) {
             if (sliderContainer) {
@@ -1238,44 +1193,14 @@
           // Générer le HTML pour chaque bet
           const cardsHTML = sliderBets.map(bet => generateBetCardHTML(bet)).join('');
           
-        // Dupliquer 4 fois pour un effet de boucle infinie fluide
-        sliderContainer.innerHTML = cardsHTML + cardsHTML + cardsHTML + cardsHTML;
-        
-        // Attendre que toutes les images soient chargées
-        const images = sliderContainer.querySelectorAll('img');
-        await Promise.all(Array.from(images).map(img => {
-          if (img.complete) return Promise.resolve();
-          return new Promise(resolve => {
-            img.onload = resolve;
-            img.onerror = resolve; // Continuer même si une image échoue
-          });
-        }));
-        
-        // Attendre un frame supplémentaire pour le reflow
-        await new Promise(resolve => requestAnimationFrame(resolve));
-        
-        // Animation avec requestAnimationFrame pour contrôle total
-        let animationId = null;
-        let currentPosition = 0;
-        const speed = 0.5; // pixels par frame (ajustable)
-        
-        // Calculer les dimensions avec retry
-        let totalWidth = 0;
-        let attempts = 0;
-        while (attempts < 3 && totalWidth === 0) {
-          totalWidth = sliderContainer.scrollWidth / 4;
-          if (totalWidth === 0) {
-            await new Promise(resolve => setTimeout(resolve, 500));
-          }
-          attempts++;
-        }
-        
-        if (totalWidth === 0) {
-          console.error('❌ Impossible de calculer les dimensions du slider home');
-          return;
-        }
-        
-        console.log('✅ Slider home initialisé - totalWidth:', totalWidth);
+          // Dupliquer 4 fois pour un effet de boucle infinie fluide
+          sliderContainer.innerHTML = cardsHTML + cardsHTML + cardsHTML + cardsHTML;
+          
+          // Animation avec requestAnimationFrame pour contrôle total
+          let animationId = null;
+          let currentPosition = 0;
+          const speed = 0.5; // pixels par frame (ajustable)
+          const totalWidth = sliderContainer.scrollWidth / 4; // largeur d'un cycle complet
           
           function animate() {
             if (!sliderContainer) return;
@@ -1398,41 +1323,26 @@
               animate();
             });
             
-          // Style pour indiquer que c'est draggable
-          sliderWrapper.style.cursor = 'grab';
-          sliderWrapper.style.userSelect = 'none';
+            // Style pour indiquer que c'est draggable
+            sliderWrapper.style.cursor = 'grab';
+            sliderWrapper.style.userSelect = 'none';
+          }
         }
-        
-        // Observer les changements de taille pour recalculer si nécessaire
-        const resizeObserver = new ResizeObserver(entries => {
-          for (let entry of entries) {
-            const newTotalWidth = entry.target.scrollWidth / 4;
-            if (newTotalWidth !== totalWidth && newTotalWidth > 0) {
-              console.log('🔄 Dimensions du slider home mises à jour:', newTotalWidth);
-              totalWidth = newTotalWidth;
+
+        // Initialiser au chargement de la page
+        document.addEventListener('DOMContentLoaded', async function() {
+          try {
+            const bets = await loadBetHistoryForSlider();
+            createHomeBetSlider(bets);
+            
+          } catch (error) {
+            console.error('❌ Erreur initialisation slider home:', error);
+            const sliderContainer = document.getElementById('home-bet-history-slider');
+            if (sliderContainer) {
+              sliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Erreur de chargement.</p>';
             }
           }
         });
-        resizeObserver.observe(sliderContainer);
-      }
-
-      // Initialiser après le chargement complet (window.load au lieu de DOMContentLoaded)
-      window.addEventListener('load', async function() {
-        // Délai supplémentaire pour s'assurer que tout est rendu
-        await new Promise(resolve => setTimeout(resolve, 150));
-        
-        try {
-          const bets = await loadBetHistoryForSlider();
-          await createHomeBetSlider(bets);
-          
-        } catch (error) {
-          console.error('❌ Erreur initialisation slider home:', error);
-          const sliderContainer = document.getElementById('home-bet-history-slider');
-          if (sliderContainer) {
-            sliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Erreur de chargement.</p>';
-          }
-        }
-      });
 
         // Connecter le bouton au drawer existant
         document.addEventListener('DOMContentLoaded', function() {
