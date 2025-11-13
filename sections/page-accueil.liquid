@@ -394,8 +394,9 @@
       </div>
     </section>
 
-    <!-- Simulateur de profit HOME PAGE -->
-    <div class="profit-simulator" style="margin: 6rem auto;">
+    <!-- Section Simulateur HOME PAGE -->
+    <section style="max-width: 1286px; margin: 6rem auto; padding: 0 2rem; position: relative; z-index: 1;">
+      <div class="profit-simulator" style="margin: 0 auto;">
       <p class="profit-simulator-legend">(selon notre vrai historique)</p>
       
       <div class="profit-simulator-title-container">
@@ -519,6 +520,7 @@
         </div>
       </div>
     </div>
+    </section>
 
     <!-- Section Providers Card -->
    {% render 'providers-badges-section' %}
@@ -2095,6 +2097,13 @@
         .info-icon:hover {
           opacity: 0.8;
           transform: scale(1.1);
+        }
+
+        /* Assurer que le simulateur HOME est visible */
+        section .profit-simulator {
+          display: block;
+          visibility: visible;
+          opacity: 1;
         }
 
         .info-icon svg {
