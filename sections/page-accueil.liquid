@@ -394,6 +394,134 @@
       </div>
     </section>
 
+    <!-- Simulateur de profit (copié depuis section pricing) -->
+    <section style="max-width: 1286px; margin: 6rem auto; padding: 0 2rem;">
+      <div class="profit-simulator">
+        <p class="profit-simulator-legend">(selon notre vrai historique)</p>
+        
+        <div class="profit-simulator-title-container">
+          <svg id="atom-simulator-title-home" width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+            <defs>
+              <filter id="softGlowSimulatorTitleHome" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="1.2" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <path id="orbit0SimulatorTitleHome" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+              <path id="orbit1SimulatorTitleHome" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+              <path id="orbit2SimulatorTitleHome" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+            </defs>
+            <g stroke="#68859e" stroke-width="2" fill="none">
+              <use href="#orbit0SimulatorTitleHome"/>
+              <use href="#orbit1SimulatorTitleHome"/>
+              <use href="#orbit2SimulatorTitleHome"/>
+            </g>
+            <g stroke-linecap="round" filter="url(#softGlowSimulatorTitleHome)">
+              <use href="#orbit0SimulatorTitleHome" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+              </use>
+              <use href="#orbit1SimulatorTitleHome" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+              </use>
+              <use href="#orbit2SimulatorTitleHome" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+              </use>
+            </g>
+            <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+          </svg>
+          
+          <h3 class="profit-simulator-title">
+            Notre simulateur <span style="color: #ffffff;">wina</span><span style="color: rgba(255, 255, 255, 0.35);">bet</span><span style="color: #ffffff; font-size: 0.5em; margin-left: -0.05em;">.ai</span>
+          </h3>
+        </div>
+        
+        <p class="profit-simulator-subtitle">Le simulateur représente exactement si vous auriez fait tous nos bets du jour et parlay jusqu'à présent.</p>
+        
+        <div class="profit-input-group">
+          <label class="profit-input-label">
+            Déterminer la valeur d'une unité
+            <button class="info-icon" id="info-unit-btn-home" type="button">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10" stroke="rgba(255, 255, 255, 0.8)" stroke-width="2"></circle>
+                <text x="12" y="17" text-anchor="middle" fill="rgba(255, 255, 255, 0.8)" font-size="14" font-weight="700" stroke="none">?</text>
+              </svg>
+            </button>
+          </label>
+          
+          <div class="profit-value-buttons">
+            <button class="profit-value-btn profit-value-btn-home" data-value="20">20$</button>
+            <button class="profit-value-btn profit-value-btn-home" data-value="40">40$</button>
+            <button class="profit-value-btn profit-value-btn-home" data-value="60">60$</button>
+            <button class="profit-value-btn profit-value-btn-home" data-value="100">100$</button>
+            <button class="profit-value-btn profit-value-btn-home" data-value="200">200$</button>
+            <button class="profit-value-btn profit-value-btn-home" data-value="500">500$</button>
+            <button class="profit-value-btn profit-value-btn-home" data-value="1000">1000$</button>
+            <button class="profit-value-btn profit-value-btn-home" id="other-value-btn-home" data-value="other">Autre</button>
+          </div>
+          
+          <!-- Input caché pour valeur personnalisée -->
+          <div id="custom-input-wrapper-home" class="custom-input-wrapper" style="display: none;">
+            <div class="profit-input-wrapper">
+              <input type="number" id="custom-unit-input-home" class="profit-input" placeholder="Entrez une valeur" min="1" step="1">
+              <span class="currency-symbol">$</span>
+            </div>
+          </div>
+        </div>
+        
+        <button id="calculate-profit-btn-home" class="profit-calculate-btn">
+          Lancer le simulateur
+        </button>
+        
+        <div id="profit-result-home" class="profit-result" style="display: none;">
+          <div class="profit-result-content">
+            <div class="profit-units-display">
+              <span class="profit-label">Total des unités en profit :</span>
+              <span id="profit-units-value-home" class="profit-value">+0</span>
+            </div>
+            <div class="profit-dollars-display">
+              <span class="profit-label">Vos gains potentiels :</span>
+              <span id="profit-dollars-value-home" class="profit-value-big">$0</span>
+            </div>
+            <p id="profit-message-home" class="profit-message"></p>
+          </div>
+        </div>
+        
+        <!-- Overlay de chargement -->
+        <div id="profit-loading-home" class="profit-loading" style="display: none;">
+          <div class="profit-loading-content">
+            <svg id="atom-profit-simulator-home" width="50" height="50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+              <defs>
+                <filter id="softGlowSimulatorHome" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="1.2" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <path id="orbit0SimulatorHome" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+                <path id="orbit1SimulatorHome" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+                <path id="orbit2SimulatorHome" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+              </defs>
+              <g stroke="#68859e" stroke-width="2" fill="none">
+                <use href="#orbit0SimulatorHome"/>
+                <use href="#orbit1SimulatorHome"/>
+                <use href="#orbit2SimulatorHome"/>
+              </g>
+              <g stroke-linecap="round" filter="url(#softGlowSimulatorHome)">
+                <use href="#orbit0SimulatorHome" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                  <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+                </use>
+                <use href="#orbit1SimulatorHome" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                  <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+                </use>
+                <use href="#orbit2SimulatorHome" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+                  <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+                </use>
+              </g>
+              <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+            </svg>
+            <p class="profit-loading-text">L'IA analyse vos gains potentiels...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Section Providers Card -->
    {% render 'providers-badges-section' %}
 
@@ -4200,13 +4328,193 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Simulateur de profit
 document.addEventListener('DOMContentLoaded', function() {
+  // ============ SIMULATEUR PAGE D'ACCUEIL (HOME) ============
+  const calculateBtnHome = document.getElementById('calculate-profit-btn-home');
+  const resultDivHome = document.getElementById('profit-result-home');
+  const loadingDivHome = document.getElementById('profit-loading-home');
+  
+  let selectedUnitValueHome = null;
+  const valueButtonsHome = document.querySelectorAll('.profit-value-btn-home');
+  const customInputWrapperHome = document.getElementById('custom-input-wrapper-home');
+  const customInputHome = document.getElementById('custom-unit-input-home');
+  const otherBtnHome = document.getElementById('other-value-btn-home');
+
+  // Gérer la sélection des boutons de valeur (HOME)
+  valueButtonsHome.forEach(btn => {
+    btn.addEventListener('click', function() {
+      valueButtonsHome.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      
+      const value = this.getAttribute('data-value');
+      
+      if (value === 'other') {
+        customInputWrapperHome.style.display = 'block';
+        selectedUnitValueHome = null;
+        customInputHome.focus();
+      } else {
+        customInputWrapperHome.style.display = 'none';
+        selectedUnitValueHome = parseFloat(value);
+      }
+    });
+  });
+
+  // Gérer l'input personnalisé (HOME)
+  if (customInputHome) {
+    customInputHome.addEventListener('input', function() {
+      const value = parseFloat(this.value);
+      if (value && value > 0) {
+        selectedUnitValueHome = value;
+      } else {
+        selectedUnitValueHome = null;
+      }
+    });
+  }
+
+  // Gérer le popup d'information (HOME)
+  const infoBtnHome = document.getElementById('info-unit-btn-home');
+  const popup = document.getElementById('unit-info-popup');
+  
+  if (infoBtnHome && popup) {
+    infoBtnHome.addEventListener('click', function(e) {
+      e.preventDefault();
+      popup.style.display = 'flex';
+    });
+  }
+  
+  // Calculateur HOME
+  if (calculateBtnHome && resultDivHome && loadingDivHome) {
+    calculateBtnHome.addEventListener('click', async function() {
+      const unitValue = selectedUnitValueHome;
+      
+      if (!unitValue || unitValue <= 0) {
+        alert('Veuillez sélectionner une valeur d\'unité ou entrer une valeur personnalisée supérieure à 0');
+        return;
+      }
+
+      loadingDivHome.style.display = 'flex';
+      resultDivHome.style.display = 'none';
+
+      try {
+        const randomDelay = Math.floor(Math.random() * 3000) + 3000;
+        
+        const extractUnitsFromDOM = () => {
+          let betUnits = 0;
+          let parlayUnits = 0;
+          
+          const betStatsEl = document.getElementById('bet-stats');
+          if (betStatsEl) {
+            const betUnitsText = betStatsEl.textContent || '';
+            const betMatch = betUnitsText.match(/([+-]?\d+\.?\d*)\s*unités?/i);
+            if (betMatch) {
+              betUnits = parseFloat(betMatch[1]);
+            }
+          }
+          
+          const parlayStatsEl = document.getElementById('parlay-stats');
+          if (parlayStatsEl) {
+            const parlayUnitsText = parlayStatsEl.textContent || '';
+            const parlayMatch = parlayUnitsText.match(/([+-]?\d+\.?\d*)\s*unités?/i);
+            if (parlayMatch) {
+              parlayUnits = parseFloat(parlayMatch[1]);
+            }
+          }
+          
+          if (betUnits === 0 && parlayUnits === 0 && !betStatsEl && !parlayStatsEl) {
+            return null;
+          }
+          
+          return { betUnits, parlayUnits };
+        };
+        
+        const FUNCTIONS_URL = 'https://ycvfyorgkhuxcosfrsxs.functions.supabase.co';
+        const SHOP_DOMAIN = window.SUPABASE_CONFIG?.shopDomain || '{{ shop.permanent_domain }}';
+        
+        const fetchFromAPI = async () => {
+          const [betResponse, parlayResponse] = await Promise.all([
+            fetch(`${FUNCTIONS_URL}/get-bet-history?shop_domain=${SHOP_DOMAIN}`),
+            fetch(`${FUNCTIONS_URL}/get-parlay-history?shop_domain=${SHOP_DOMAIN}`)
+          ]);
+
+          if (!betResponse.ok || !parlayResponse.ok) {
+            throw new Error('Erreur lors du chargement de l\'historique');
+          }
+
+          const betData = await betResponse.json();
+          const parlayData = await parlayResponse.json();
+          
+          return {
+            betUnits: betData.total_units || 0,
+            parlayUnits: parlayData.total_units || 0,
+            betData,
+            parlayData
+          };
+        };
+        
+        let unitsData;
+        const domData = extractUnitsFromDOM();
+        
+        if (domData) {
+          await new Promise(resolve => setTimeout(resolve, randomDelay));
+          unitsData = { 
+            betUnits: domData.betUnits, 
+            parlayUnits: domData.parlayUnits,
+            betData: { total_bets: 0 },
+            parlayData: { total_parlays: 0 }
+          };
+        } else {
+          const apiDataPromise = fetchFromAPI();
+          await new Promise(resolve => setTimeout(resolve, randomDelay));
+          unitsData = await apiDataPromise;
+        }
+        
+        const totalUnits = unitsData.betUnits + unitsData.parlayUnits;
+        const profitDollars = totalUnits * unitValue;
+
+        const unitsValueEl = document.getElementById('profit-units-value-home');
+        const dollarsValueEl = document.getElementById('profit-dollars-value-home');
+        const messageEl = document.getElementById('profit-message-home');
+
+        const unitsText = totalUnits >= 0 ? `+${totalUnits.toFixed(2)}` : totalUnits.toFixed(2);
+        unitsValueEl.textContent = unitsText;
+        
+        const dollarsText = profitDollars >= 0 ? `+$${profitDollars.toFixed(2)}` : `-$${Math.abs(profitDollars).toFixed(2)}`;
+        dollarsValueEl.textContent = dollarsText;
+
+        if (totalUnits >= 0) {
+          unitsValueEl.classList.remove('negative');
+          dollarsValueEl.classList.remove('negative');
+        } else {
+          unitsValueEl.classList.add('negative');
+          dollarsValueEl.classList.add('negative');
+        }
+
+        if (totalUnits > 0) {
+          messageEl.textContent = `🎉 Avec nos prédictions IA, vous auriez réalisé un profit de ${dollarsText} ! Ces résultats sont basés sur notre historique réel.`;
+        } else if (totalUnits < 0) {
+          messageEl.textContent = `📊 Sur cette période, le résultat aurait été de ${dollarsText}. Nos performances varient selon les périodes, mais notre stratégie long terme vise la rentabilité.`;
+        } else {
+          messageEl.textContent = `📊 Aucune unité de profit/perte enregistrée pour le moment. Consultez nos historiques pour voir les performances détaillées.`;
+        }
+
+        loadingDivHome.style.display = 'none';
+        resultDivHome.style.display = 'block';
+
+      } catch (error) {
+        console.error('Erreur lors du calcul des gains:', error);
+        loadingDivHome.style.display = 'none';
+        alert('Impossible de charger l\'historique. Veuillez réessayer plus tard.');
+      }
+    });
+  }
+  
+  // ============ SIMULATEUR PAGE PRICING (ORIGINAL) ============
   const calculateBtn = document.getElementById('calculate-profit-btn');
   const resultDiv = document.getElementById('profit-result');
   const loadingDiv = document.getElementById('profit-loading');
   
   // Variables pour le simulateur
   let selectedUnitValue = null;
-  const valueButtons = document.querySelectorAll('.profit-value-btn');
+  const valueButtons = document.querySelectorAll('.profit-value-btn:not(.profit-value-btn-home)');
   const customInputWrapper = document.getElementById('custom-input-wrapper');
   const customInput = document.getElementById('custom-unit-input');
   const otherBtn = document.getElementById('other-value-btn');
