@@ -881,24 +881,24 @@
         `;
       }
 
-      // ==================== BET HISTORY SLIDER ====================
-      (function() {
-        // Fonction pour charger l'historique des bets
-        async function loadBetHistoryForSlider() {
-          try {
-            const FUNCTIONS_URL = 'https://ycvfyorgkhuxcosfrsxs.functions.supabase.co';
-            const SHOP_DOMAIN = window.SUPABASE_CONFIG?.shopDomain || '{{ shop.permanent_domain }}';
-            
-            const response = await fetch(`${FUNCTIONS_URL}/get-bet-history?shop_domain=${SHOP_DOMAIN}`);
-            const data = await response.json();
-            
-            return data.bets || [];
-          } catch (error) {
-            console.error('❌ Erreur chargement slider:', error);
-            return [];
-          }
+      // ==================== FONCTION GLOBALE POUR HISTORIQUE BET ====================
+      async function loadBetHistoryForSlider() {
+        try {
+          const FUNCTIONS_URL = 'https://ycvfyorgkhuxcosfrsxs.functions.supabase.co';
+          const SHOP_DOMAIN = window.SUPABASE_CONFIG?.shopDomain || '{{ shop.permanent_domain }}';
+          
+          const response = await fetch(`${FUNCTIONS_URL}/get-bet-history?shop_domain=${SHOP_DOMAIN}`);
+          const data = await response.json();
+          
+          return data.bets || [];
+        } catch (error) {
+          console.error('❌ Erreur chargement historique:', error);
+          throw error;
         }
+      }
 
+      // ==================== BET HISTORY SLIDER (PRICING) ====================
+      (function() {
         // Fonction pour créer le slider
         function createBetSlider(bets) {
           const sliderContainer = document.getElementById('bet-history-slider');
