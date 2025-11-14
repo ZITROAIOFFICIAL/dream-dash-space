@@ -1114,20 +1114,28 @@
         }
 
 
-        // Initialiser au chargement de la page
-        document.addEventListener('DOMContentLoaded', async function() {
-          try {
-            const bets = await loadBetHistoryForSlider();
-            createBetSlider(bets);
-            
-          } catch (error) {
-            console.error('❌ Erreur initialisation slider:', error);
-            const sliderContainer = document.getElementById('bet-history-slider');
-            if (sliderContainer) {
-              sliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Erreur de chargement.</p>';
-            }
-          }
-        });
+// Fonction d'initialisation du slider
+async function initializeBetSlider() {
+  try {
+    const bets = await loadBetHistoryForSlider();
+    createBetSlider(bets);
+    
+  } catch (error) {
+    console.error('❌ Erreur initialisation slider:', error);
+    const sliderContainer = document.getElementById('bet-history-slider');
+    if (sliderContainer) {
+      sliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Erreur de chargement.</p>';
+    }
+  }
+}
+
+// Initialiser immédiatement si le DOM est déjà chargé, sinon attendre
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeBetSlider);
+} else {
+  // Le DOM est déjà chargé, initialiser immédiatement
+  initializeBetSlider();
+}
       })();
   </script>
 
