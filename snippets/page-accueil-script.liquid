@@ -79,6 +79,49 @@
       mobileToggle.classList.toggle('active');
     }
 
+    // Fonction globale pour débloquer complètement le scroll
+    function unlockScroll() {
+      const body = document.body;
+      const html = document.documentElement;
+      
+      // Récupérer la position de scroll sauvegardée
+      const prevTop = parseInt(body.style.top || '0');
+      
+      // Retirer toutes les classes bloquantes
+      body.classList.remove('sidebar-open', 'drawer-open', 'body-no-scroll');
+      
+      // Nettoyer tous les styles inline
+      body.style.top = '';
+      body.style.overflow = '';
+      body.style.position = '';
+      html.style.overflow = '';
+      
+      // Fermer tous les overlays et éléments résiduels
+      const overlay = document.querySelector('.overlay');
+      const mobileToggle = document.querySelector('.mobile-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      const betDrawer = document.getElementById('bet-history-drawer');
+      const betDrawerAlt = document.querySelector('.bet-history-drawer');
+      
+      if (overlay) overlay.classList.remove('active');
+      if (mobileToggle) mobileToggle.classList.remove('active');
+      if (sidebar) sidebar.classList.remove('active');
+      if (betDrawer) betDrawer.classList.remove('active');
+      if (betDrawerAlt) betDrawerAlt.classList.remove('active');
+      
+      // Restaurer la position de scroll si elle était sauvegardée
+      if (prevTop < 0) {
+        window.scrollTo(0, Math.abs(prevTop));
+      }
+      
+      // Double passe de sécurité
+      setTimeout(function() {
+        body.classList.remove('sidebar-open', 'drawer-open', 'body-no-scroll');
+        body.style.overflow = '';
+        html.style.overflow = '';
+      }, 0);
+    }
+
     // Fermer le sidebar automatiquement quand on clique sur un lien
     document.addEventListener('DOMContentLoaded', function() {
       const sidebarLinks = document.querySelectorAll('.sidebar .nav-item, .sidebar .auth-btn-gray, .sidebar .auth-btn-white');
@@ -91,6 +134,28 @@
           }
         });
       });
+      
+      // Gérer les clics vers #rejoindre pour garantir le déblocage du scroll
+      document.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href="#rejoindre"]');
+        if (link) {
+          e.preventDefault();
+          unlockScroll();
+          setTimeout(function() {
+            window.location.hash = 'rejoindre';
+            setTimeout(function() {
+              unlockScroll();
+              window.scrollTo(0, 0);
+            }, 10);
+          }, 0);
+        }
+      });
+      
+      // Nettoyage initial si on arrive directement sur #rejoindre
+      if (window.location.hash === '#rejoindre') {
+        unlockScroll();
+        window.scrollTo(0, 0);
+      }
     });
 
     // Update time
@@ -665,18 +730,8 @@
           var rejoindre = document.getElementById('rejoindre');
           if (!home || !politique || !support || !rejoindre) return;
 
-          // Nettoyer toutes les classes qui bloquent le scroll
-          var body = document.body;
-          body.classList.remove('sidebar-open', 'drawer-open', 'body-no-scroll');
-          body.style.top = '';
-          
-          // Fermer le sidebar et l'overlay s'ils sont ouverts
-          var sidebar = document.querySelector('.sidebar');
-          var overlay = document.querySelector('.overlay');
-          var mobileToggle = document.querySelector('.mobile-toggle');
-          if (sidebar) sidebar.classList.remove('active');
-          if (overlay) overlay.classList.remove('active');
-          if (mobileToggle) mobileToggle.classList.remove('active');
+          // Débloquer complètement le scroll avant de changer de page
+          unlockScroll();
 
           if (hash === 'politique') {
             home.style.display = 'none';
@@ -695,7 +750,11 @@
             politique.style.display = 'none';
             support.style.display = 'none';
             rejoindre.style.display = 'block';
-            window.scrollTo(0, 0);
+            // Double nettoyage pour #rejoindre spécifiquement
+            setTimeout(function() {
+              unlockScroll();
+              window.scrollTo(0, 0);
+            }, 10);
           } else {
             home.style.display = 'block';
             politique.style.display = 'none';
