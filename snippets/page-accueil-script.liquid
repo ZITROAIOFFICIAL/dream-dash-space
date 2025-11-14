@@ -1,0 +1,1796 @@
+<script>
+    // Mobile responsive scaling pour stats-section
+    (function() {
+      function adjustStatsSection() {
+        var section = document.querySelector('.stats-section');
+        var container = document.querySelector('.stats-section .stats-container');
+        var grid = document.querySelector('.stats-grid');
+        
+        if (!section || !container || !grid) return;
+        
+        var viewportWidth = window.innerWidth;
+        
+        // Au-dessus de 1024px: reset (desktop)
+        if (viewportWidth > 1024) {
+          grid.style.transform = '';
+          section.style.height = '';
+          return;
+        }
+        
+        // En-dessous de 1024px: appliquer le scale sur .stats-grid
+        var computedStyles = getComputedStyle(document.documentElement);
+        
+        // Récupérer le scale manuel uniforme
+        var scale = parseFloat(computedStyles.getPropertyValue('--stats-grid-scale-mobile')) || 1;
+        
+        // Limiter à 400% max
+        scale = Math.min(scale, 4);
+        
+        // Récupérer les translations
+        var tx = (computedStyles.getPropertyValue('--stats-grid-translate-x-mobile') || '0px').trim();
+        var ty = (computedStyles.getPropertyValue('--stats-grid-translate-y-mobile') || '0px').trim();
+        
+        // Appliquer le scale + translation sur .stats-grid
+        grid.style.transformOrigin = 'top center';
+        grid.style.transform = 'translate(' + tx + ',' + ty + ') scale(' + scale + ')';
+        
+        // Ajuster la hauteur de la section
+        setTimeout(function() {
+          var rect = container.getBoundingClientRect();
+          section.style.height = rect.height + 'px';
+        }, 50);
+      }
+      
+      // Exécuter au chargement et au resize
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', adjustStatsSection);
+      } else {
+        adjustStatsSection();
+      }
+      
+      window.addEventListener('resize', adjustStatsSection);
+    })();
+    
+    // Toggle Sidebar
+    function toggleSidebar() {
+      const sidebar = document.querySelector('.sidebar');
+      const overlay = document.querySelector('.overlay');
+      const mobileToggle = document.querySelector('.mobile-toggle');
+      const body = document.body;
+      const isOpening = !body.classList.contains('sidebar-open');
+      
+      if (isOpening) {
+        // Sauvegarder la position du scroll avant d'ouvrir
+        const scrollY = window.scrollY;
+        body.style.top = `-${scrollY}px`;
+        body.classList.add('sidebar-open');
+      } else {
+        // Restaurer la position du scroll après fermeture
+        const scrollY = body.style.top;
+        body.classList.remove('sidebar-open');
+        body.style.top = '';
+        if (scrollY) {
+          window.scrollTo(0, parseInt(scrollY || '0') * -1);
+        }
+      }
+      
+      sidebar.classList.toggle('active');
+      overlay.classList.toggle('active');
+      mobileToggle.classList.toggle('active');
+    }
+
+    // Fermer le sidebar automatiquement quand on clique sur un lien
+    document.addEventListener('DOMContentLoaded', function() {
+      const sidebarLinks = document.querySelectorAll('.sidebar .nav-item, .sidebar .auth-btn-gray, .sidebar .auth-btn-white');
+      sidebarLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          // Fermer le sidebar si il est ouvert
+          const body = document.body;
+          if (body.classList.contains('sidebar-open')) {
+            toggleSidebar();
+          }
+        });
+      });
+    });
+
+    // Update time
+    function updateTime() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const timeString = `${hours}:${minutes}`;
+      
+      const sidebarTime = document.getElementById('sidebar-time');
+      const headerTime = document.getElementById('header-time');
+      const desktopTime = document.getElementById('desktop-time');
+      
+      if (sidebarTime) {
+        sidebarTime.textContent = timeString;
+      }
+      if (headerTime) {
+        headerTime.textContent = timeString;
+      }
+      if (desktopTime) {
+        desktopTime.textContent = timeString;
+      }
+    }
+
+    // Update member count with animation
+    function updateMemberCount() {
+      const sidebarMemberCount = document.getElementById('sidebar-member-count');
+      const headerMemberCount = document.getElementById('header-member-count');
+      const desktopMemberCount = document.getElementById('desktop-member-count');
+      
+      if (sidebarMemberCount) {
+        const baseCount = parseInt(sidebarMemberCount.textContent) || 50;
+        const variation = Math.floor(Math.random() * 11) - 5; // -5 to +5
+        const newCount = Math.max(30, baseCount + variation);
+        sidebarMemberCount.textContent = newCount;
+      }
+      
+      if (headerMemberCount) {
+        const baseCount = parseInt(headerMemberCount.textContent) || 50;
+        const variation = Math.floor(Math.random() * 11) - 5; // -5 to +5
+        const newCount = Math.max(30, baseCount + variation);
+        headerMemberCount.textContent = newCount;
+      }
+      
+      if (desktopMemberCount) {
+        const baseCount = parseInt(desktopMemberCount.textContent) || 50;
+        const variation = Math.floor(Math.random() * 11) - 5; // -5 to +5
+        const newCount = Math.max(30, baseCount + variation);
+        desktopMemberCount.textContent = newCount;
+      }
+    }
+
+    // Scroll detection for header effect
+    function handleScroll() {
+      const header = document.querySelector('.header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    }
+
+      // Initialize on page load
+      document.addEventListener('DOMContentLoaded', function() {
+        updateTime();
+        setInterval(updateTime, 60000); // Update every minute
+        setInterval(updateMemberCount, 30000); // Update member count every 30 seconds
+        
+        // Add scroll listener
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Check initial state
+
+        // Disable double-tap zoom on specific cards
+        const noZoomSelectors = ['.providers-card-inner', '.provider-badge-wrapper', '.special-card.card-providers', '.special-card.countries-card'];
+        let lastTouchEnd = 0;
+        noZoomSelectors.forEach(sel => {
+          document.querySelectorAll(sel).forEach(el => {
+            el.addEventListener('touchend', function(event) {
+              const now = Date.now();
+              if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+              }
+              lastTouchEnd = now;
+            }, { passive: false });
+          });
+        });
+
+        // Stats Platform Animation
+        function animateCounter(element, target, duration) {
+          const start = 0;
+          const startTime = performance.now();
+          
+          function update(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Easing function (ease-out)
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            const current = Math.floor(start + (target - start) * easeOut);
+            
+            element.textContent = current.toLocaleString('en-US');
+            
+            if (progress < 1) {
+              requestAnimationFrame(update);
+            } else {
+              element.textContent = target.toLocaleString('en-US');
+            }
+          }
+          
+          requestAnimationFrame(update);
+        }
+
+        // Intersection Observer for Stats Platform
+        const statsObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+              entry.target.classList.add('animated');
+              
+              const numbers = entry.target.querySelectorAll('.stats-platform-number');
+              numbers.forEach(number => {
+                const target = parseInt(number.dataset.target);
+                animateCounter(number, target, 2000); // 2 seconds animation
+              });
+            }
+          });
+        }, { threshold: 0.3 });
+
+        const statsSection = document.querySelector('.stats-platform-section');
+        if (statsSection) {
+          statsObserver.observe(statsSection);
+        }
+
+        // Reviews Auto-Scrolling Slider with Drag/Swipe Support (Fonction réutilisable)
+        function initReviewsSlider(trackId) {
+          const track = document.getElementById(trackId);
+          if (!track) return;
+          
+          const cards = Array.from(track.children);
+          
+          // Clone cards for infinite scroll
+          cards.forEach(card => {
+            const clone = card.cloneNode(true);
+            track.appendChild(clone);
+          });
+          
+          let position = 0;
+          const cardWidth = cards[0].offsetWidth + 32; // width + gap
+          const totalWidth = cardWidth * cards.length;
+          let isDragging = false;
+          let startX = 0;
+          let currentX = 0;
+          let animationId = null;
+          let velocity = 0;
+          
+          function autoScroll() {
+            if (!isDragging) {
+              position -= 0.5; // Slow scroll speed
+              velocity = -0.5;
+              
+              // Reset position when we've scrolled through all original cards
+              if (Math.abs(position) >= totalWidth) {
+                position = 0;
+              }
+              
+              track.style.transform = `translateX(${position}px)`;
+            }
+            animationId = requestAnimationFrame(autoScroll);
+          }
+          
+          // Mouse events
+          track.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.pageX - position;
+            track.style.cursor = 'grabbing';
+            velocity = 0;
+          });
+          
+          track.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            currentX = e.pageX - startX;
+            const delta = currentX - position;
+            velocity = delta;
+            position = currentX;
+            
+            // Reset position if dragged too far
+            if (Math.abs(position) >= totalWidth) {
+              position = position % totalWidth;
+              startX = e.pageX - position;
+            }
+            if (position > 0) {
+              position = -(totalWidth - Math.abs(position));
+              startX = e.pageX - position;
+            }
+            
+            track.style.transform = `translateX(${position}px)`;
+          });
+          
+          track.addEventListener('mouseup', () => {
+            isDragging = false;
+            track.style.cursor = 'grab';
+          });
+          
+          track.addEventListener('mouseleave', () => {
+            isDragging = false;
+            track.style.cursor = 'grab';
+          });
+          
+          // Touch events
+          track.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            startX = e.touches[0].pageX - position;
+            velocity = 0;
+          });
+          
+          track.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            currentX = e.touches[0].pageX - startX;
+            const delta = currentX - position;
+            velocity = delta;
+            position = currentX;
+            
+            // Reset position if dragged too far
+            if (Math.abs(position) >= totalWidth) {
+              position = position % totalWidth;
+              startX = e.touches[0].pageX - position;
+            }
+            if (position > 0) {
+              position = -(totalWidth - Math.abs(position));
+              startX = e.touches[0].pageX - position;
+            }
+            
+            track.style.transform = `translateX(${position}px)`;
+          });
+          
+          track.addEventListener('touchend', () => {
+            isDragging = false;
+          });
+          
+          track.style.cursor = 'grab';
+          autoScroll();
+        }
+        
+        // Initialiser les deux sliders
+        initReviewsSlider('reviewsTrack');
+        initReviewsSlider('reviewsTrackBet');
+
+        // Gestion des cartes de tarification cliquables
+        const continueButton = document.querySelector('.pricing-continue-button');
+        const backButton = document.getElementById('pricing-back-button');
+        const regularGrid = document.getElementById('pricing-plans-grid-regular');
+        const interacGrid = document.getElementById('pricing-plans-grid-interac');
+        const interacInstructions = document.getElementById('interac-instructions-section');
+        const subtitle = document.getElementById('pricing-subtitle');
+        const description = document.getElementById('pricing-description');
+        
+        let currentView = 'regular'; // 'regular', 'interac', ou 'interac-instructions'
+        
+        // URLs pour chaque plan
+        const planUrls = {
+          monthly: 'https://winabet.ai/cart/clear?return_to=%2Fcart%2Fadd%3Fitems%5B0%5D%5Bid%5D%3D47693665468667%26items%5B0%5D%5Bquantity%5D%3D1%26items%5B0%5D%5Bselling_plan%5D%3D4543316219%26return_to%3D%252Fcheckout%253F',
+          '6months': 'https://winabet.ai/cart/clear?return_to=%2Fcart%2Fadd%3Fitems%5B0%5D%5Bid%5D%3D47694846230779%26items%5B0%5D%5Bquantity%5D%3D1%26items%5B0%5D%5Bselling_plan%5D%3D4543348987%26return_to%3D%252Fcheckout%253F',
+          yearly: 'https://winabet.ai/cart/clear?return_to=%2Fcart%2Fadd%3Fitems%5B0%5D%5Bid%5D%3D47694852030715%26items%5B0%5D%5Bquantity%5D%3D1%26items%5B0%5D%5Bselling_plan%5D%3D4543381755%26return_to%3D%252Fcheckout%253F'
+        };
+        
+        // Fonction pour basculer vers la vue Interac
+        function showInteracView() {
+          currentView = 'interac';
+          regularGrid.style.display = 'none';
+          interacGrid.style.display = 'grid';
+          interacInstructions.style.display = 'none';
+          continueButton.style.display = 'block';
+          subtitle.textContent = 'Choisissez votre forfait avec virement Interac';
+          description.style.display = 'none';
+          
+          // Sauvegarder l'état dans localStorage
+          localStorage.setItem('winabet_pricing_view', 'interac');
+          
+          // Trouver quelle carte Interac est sélectionnée
+          const selectedInteracCard = interacGrid.querySelector('.pricing-plan-card.selected');
+          if (selectedInteracCard) {
+            const selectedPlan = selectedInteracCard.getAttribute('data-plan');
+            updateContinueButton(selectedPlan);
+            localStorage.setItem('winabet_selected_plan', selectedPlan);
+          } else {
+            // Par défaut, sélectionner 3 mois si aucune carte n'est sélectionnée
+            const defaultCard = interacGrid.querySelector('[data-plan="interac-3months"]');
+            if (defaultCard) defaultCard.classList.add('selected');
+            updateContinueButton('interac-3months');
+            localStorage.setItem('winabet_selected_plan', 'interac-3months');
+          }
+        }
+        
+        // Fonction pour afficher les instructions Interac
+        function showInteracInstructions(plan) {
+          currentView = 'interac-instructions';
+          regularGrid.style.display = 'none';
+          interacGrid.style.display = 'none';
+          interacInstructions.style.display = 'block';
+          continueButton.style.display = 'none';
+          subtitle.style.display = 'none';
+          description.style.display = 'none';
+          
+          // Sauvegarder l'état dans localStorage
+          localStorage.setItem('winabet_pricing_view', 'interac-instructions');
+          localStorage.setItem('winabet_selected_plan', plan);
+          
+          // Mettre à jour le titre et le montant selon le plan
+          const titleElement = document.getElementById('interac-subscription-title');
+          const amountElement = document.getElementById('interac-amount');
+          
+          if (plan === 'interac-3months') {
+            titleElement.textContent = 'Abonnement : 3 mois (89.99$ par mois)';
+            amountElement.innerHTML = 'Montant : <strong style="color: #ffffff; font-size: 1.25rem;">269.97$</strong><br>' +
+              'À : <strong style="color: #ffffff; font-size: 1.25rem;">info@winabet.ai</strong><br>' +
+              'Réponse question de sécurité : <strong style="color: #ffffff; font-size: 1.25rem;">winabet.ai</strong>';
+          } else if (plan === 'interac-6months') {
+            titleElement.textContent = 'Abonnement : 6 mois (79.99$ par mois)';
+            amountElement.innerHTML = 'Montant : <strong style="color: #ffffff; font-size: 1.25rem;">479.94$</strong><br>' +
+              'À : <strong style="color: #ffffff; font-size: 1.25rem;">info@winabet.ai</strong><br>' +
+              'Réponse question de sécurité : <strong style="color: #ffffff; font-size: 1.25rem;">winabet.ai</strong>';
+          } else if (plan === 'interac-yearly') {
+            titleElement.textContent = 'Abonnement : 1 ans (59.99$ par mois)';
+            amountElement.innerHTML = 'Montant : <strong style="color: #ffffff; font-size: 1.25rem;">719.99$</strong><br>' +
+              'À : <strong style="color: #ffffff; font-size: 1.25rem;">info@winabet.ai</strong><br>' +
+              'Réponse question de sécurité : <strong style="color: #ffffff; font-size: 1.25rem;">winabet.ai</strong>';
+          }
+        }
+        
+        // Fonction pour retourner à la vue régulière
+        function showRegularView() {
+          currentView = 'regular';
+          regularGrid.style.display = 'grid';
+          interacGrid.style.display = 'none';
+          interacInstructions.style.display = 'none';
+          continueButton.style.display = 'block';
+          subtitle.textContent = 'Choisissez votre forfait';
+          subtitle.style.display = 'block';
+          description.style.display = 'block';
+          
+          // Sauvegarder l'état dans localStorage
+          localStorage.setItem('winabet_pricing_view', 'regular');
+          
+          // Réinitialiser la sélection
+          const regularCards = regularGrid.querySelectorAll('.pricing-plan-card');
+          regularCards.forEach(c => c.classList.remove('selected'));
+          regularCards[0].classList.add('selected');
+          updateContinueButton('monthly');
+          localStorage.setItem('winabet_selected_plan', 'monthly');
+        }
+        
+        // Fonction pour retourner à la section hero
+        function returnToHero() {
+          const initialContent = document.getElementById('pricing-initial-content');
+          const plansSection = document.getElementById('pricing-plans-section');
+          const featuresList = document.getElementById('pricing-features-list');
+          const pricingLogo = document.querySelector('.pricing-logo');
+          const backToHomeButton = document.querySelector('.back-to-home-pricing');
+          
+          if (initialContent && plansSection && featuresList) {
+            // Afficher le contenu initial avec le bon style flex
+            initialContent.style.display = 'flex';
+            featuresList.style.display = 'block';
+            if (pricingLogo) {
+              pricingLogo.style.display = 'block';
+            }
+            if (backToHomeButton) {
+              backToHomeButton.style.display = 'flex';
+            }
+            // Cacher la section des forfaits
+            plansSection.style.display = 'none';
+            
+            // Réinitialiser à la vue régulière (pour la prochaine fois)
+            regularGrid.style.display = 'grid';
+            interacGrid.style.display = 'none';
+            subtitle.textContent = 'Choisissez votre forfait';
+            description.style.display = 'block';
+            
+            // Réinitialiser la sélection
+            const regularCards = regularGrid.querySelectorAll('.pricing-plan-card');
+            regularCards.forEach(c => c.classList.remove('selected'));
+            regularCards[0].classList.add('selected');
+            updateContinueButton('monthly');
+            
+            // Réinitialiser currentView et localStorage
+            currentView = 'regular';
+            localStorage.removeItem('winabet_pricing_view');
+            localStorage.removeItem('winabet_selected_plan');
+            localStorage.removeItem('winabet_show_pricing_plans');
+            
+            // Scroller vers le haut
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
+          }
+        }
+        
+        // Gérer le clic sur le bouton retour
+        backButton.addEventListener('click', function() {
+          if (currentView === 'interac-instructions') {
+            // Si on est dans les instructions, retourner à la vue Interac
+            subtitle.style.display = 'block';
+            showInteracView();
+          } else if (currentView === 'interac') {
+            // Si on est dans la vue Interac, retourner à la vue régulière
+            showRegularView();
+          } else {
+            // Si on est dans la vue régulière, retourner à la section hero
+            returnToHero();
+          }
+        });
+        
+        // Fonction pour mettre à jour le texte du bouton
+        function updateContinueButton(plan) {
+          if (!continueButton) return;
+          
+          if (plan === 'monthly') {
+            continueButton.textContent = 'Commencer pour (0$), puis 99$/mois';
+          } else if (plan === '6months') {
+            continueButton.textContent = 'Commencer pour (0$), puis 79$/mois';
+          } else if (plan === 'yearly') {
+            continueButton.textContent = 'Commencer pour (0$), puis 59$/mois';
+          } else if (plan === 'interac-3months') {
+            continueButton.textContent = 'Continuer avec 3 mois / essai gratuit 1 jour';
+          } else if (plan === 'interac-6months') {
+            continueButton.textContent = 'Continuer avec 6 mois / essai gratuit 1 jour';
+          } else if (plan === 'interac-yearly') {
+            continueButton.textContent = 'Continuer avec annuel / essai gratuit 1 jour';
+          } else if (plan === 'interac') {
+            continueButton.textContent = 'Continuer avec virement Interac';
+          }
+        }
+        
+        // Gérer le clic sur le bouton continuer
+        continueButton.addEventListener('click', function() {
+          // Chercher la carte sélectionnée uniquement dans la grille actuelle
+          const currentGridEl = currentView === 'interac' ? interacGrid : regularGrid;
+          const selectedCard = currentGridEl.querySelector('.pricing-plan-card.selected');
+          
+          // Fallback pour Interac si aucune carte n'est sélectionnée
+          if (currentView === 'interac' && !selectedCard) {
+            showInteracInstructions('interac-3months');
+            return;
+          }
+          
+          if (selectedCard) {
+            const selectedPlan = selectedCard.getAttribute('data-plan');
+            
+            // Si on clique sur Interac dans la vue régulière, basculer vers la vue Interac
+            if (selectedPlan === 'interac' && currentView === 'regular') {
+              showInteracView();
+              return;
+            }
+            
+            // Si on est dans la vue Interac et qu'un plan Interac est sélectionné, afficher les instructions
+            if (currentView === 'interac' && selectedPlan.startsWith('interac-')) {
+              showInteracInstructions(selectedPlan);
+              return;
+            }
+            
+            // Sinon, rediriger vers l'URL appropriée
+            const url = planUrls[selectedPlan];
+            if (url && url !== '#') {
+              window.location.href = url;
+            }
+          }
+        });
+        
+        // Gérer la sélection des cartes
+        const allCards = document.querySelectorAll('.pricing-plan-card[data-plan]');
+        allCards.forEach(card => {
+          card.addEventListener('click', function() {
+            // Retirer la sélection de toutes les cartes de la grille actuelle
+            const currentGrid = currentView === 'regular' ? regularGrid : interacGrid;
+            const cardsInCurrentGrid = currentGrid.querySelectorAll('.pricing-plan-card');
+            cardsInCurrentGrid.forEach(c => c.classList.remove('selected'));
+            
+            // Ajouter la sélection à la carte cliquée
+            this.classList.add('selected');
+            
+            // Mettre à jour le bouton
+            const selectedPlan = this.getAttribute('data-plan');
+            updateContinueButton(selectedPlan);
+            
+            // Sauvegarder le plan sélectionné
+            localStorage.setItem('winabet_selected_plan', selectedPlan);
+          });
+        });
+        
+        // Restaurer l'état sauvegardé au chargement de la page
+        function restoreSavedState() {
+          const savedView = localStorage.getItem('winabet_pricing_view');
+          const savedPlan = localStorage.getItem('winabet_selected_plan');
+          const showPricingPlans = localStorage.getItem('winabet_show_pricing_plans');
+          
+          // Si on doit afficher les plans de tarification
+          if (showPricingPlans === 'true') {
+            const initialContent = document.getElementById('pricing-initial-content');
+            const plansSection = document.getElementById('pricing-plans-section');
+            const featuresList = document.getElementById('pricing-features-list');
+            const pricingLogo = document.querySelector('.pricing-logo');
+            const backToHomeButton = document.querySelector('.back-to-home-pricing');
+            
+            if (initialContent && plansSection) {
+              initialContent.style.display = 'none';
+              if (featuresList) featuresList.style.display = 'none';
+              if (pricingLogo) pricingLogo.style.display = 'none';
+              if (backToHomeButton) backToHomeButton.style.display = 'none';
+              plansSection.style.display = 'block';
+              
+              // Restaurer la vue
+              if (savedView === 'interac') {
+                // Restaurer la vue Interac
+                currentView = 'interac';
+                regularGrid.style.display = 'none';
+                interacGrid.style.display = 'grid';
+                interacInstructions.style.display = 'none';
+                continueButton.style.display = 'block';
+                subtitle.textContent = 'Choisissez votre forfait avec virement Interac';
+                description.style.display = 'none';
+                
+                // Sélectionner la carte appropriée
+                const interacCards = interacGrid.querySelectorAll('.pricing-plan-card');
+                interacCards.forEach(c => c.classList.remove('selected'));
+                if (savedPlan && savedPlan.startsWith('interac-')) {
+                  const cardToSelect = interacGrid.querySelector(`[data-plan="${savedPlan}"]`);
+                  if (cardToSelect) cardToSelect.classList.add('selected');
+                  updateContinueButton(savedPlan);
+                } else {
+                  const defaultCard = interacGrid.querySelector('[data-plan="interac-3months"]');
+                  if (defaultCard) defaultCard.classList.add('selected');
+                  updateContinueButton('interac-3months');
+                }
+              } else if (savedView === 'interac-instructions' && savedPlan) {
+                // Restaurer les instructions Interac
+                showInteracInstructions(savedPlan);
+              } else {
+                // Vue régulière par défaut
+                showRegularView();
+                if (savedPlan && !savedPlan.startsWith('interac')) {
+                  const regularCards = regularGrid.querySelectorAll('.pricing-plan-card');
+                  regularCards.forEach(c => c.classList.remove('selected'));
+                  const cardToSelect = regularGrid.querySelector(`[data-plan="${savedPlan}"]`);
+                  if (cardToSelect) {
+                    cardToSelect.classList.add('selected');
+                    updateContinueButton(savedPlan);
+                  }
+                }
+              }
+            }
+          }
+        }
+        
+        // Restaurer l'état sauvegardé
+        restoreSavedState();
+        
+        // Initialiser le texte du bouton avec le plan par défaut (monthly)
+        const defaultCard = document.querySelector('.pricing-plan-card.selected');
+        if (defaultCard) {
+          updateContinueButton(defaultCard.getAttribute('data-plan'));
+        }
+      });
+
+      // Navigation interne pour la page Politique, Support et Rejoindre
+      (function() {
+        function showPage() {
+          var hash = window.location.hash.replace('#','');
+          var home = document.getElementById('accueil');
+          var politique = document.getElementById('politique');
+          var support = document.getElementById('support');
+          var rejoindre = document.getElementById('rejoindre');
+          if (!home || !politique || !support || !rejoindre) return;
+
+          if (hash === 'politique') {
+            home.style.display = 'none';
+            politique.style.display = 'block';
+            support.style.display = 'none';
+            rejoindre.style.display = 'none';
+            window.scrollTo(0, 0);
+          } else if (hash === 'support') {
+            home.style.display = 'none';
+            politique.style.display = 'none';
+            support.style.display = 'block';
+            rejoindre.style.display = 'none';
+            window.scrollTo(0, 0);
+          } else if (hash === 'rejoindre') {
+            home.style.display = 'none';
+            politique.style.display = 'none';
+            support.style.display = 'none';
+            rejoindre.style.display = 'block';
+            window.scrollTo(0, 0);
+          } else {
+            home.style.display = 'block';
+            politique.style.display = 'none';
+            support.style.display = 'none';
+            rejoindre.style.display = 'none';
+          }
+        }
+        
+        document.addEventListener('DOMContentLoaded', showPage);
+        window.addEventListener('hashchange', showPage);
+        
+        document.addEventListener('click', function(e) {
+          var btn = e.target.closest('.back-to-home');
+          if (btn) {
+            e.preventDefault();
+            window.location.hash = '';
+          }
+        });
+      })();
+
+      // ==================== GESTION DES FORFAITS PRICING ====================
+      (function() {
+        document.addEventListener('DOMContentLoaded', function() {
+          const startTrialButton = document.getElementById('start-trial-button');
+          const initialContent = document.getElementById('pricing-initial-content');
+          const plansSection = document.getElementById('pricing-plans-section');
+          const featuresList = document.getElementById('pricing-features-list');
+          const pricingLogo = document.querySelector('.pricing-logo');
+          const backButton = document.querySelector('.back-to-home-pricing');
+          
+          if (startTrialButton && initialContent && plansSection && featuresList) {
+            startTrialButton.addEventListener('click', function(e) {
+              e.preventDefault();
+              // Cacher le contenu initial, la liste des avantages, le logo et le bouton retour
+              initialContent.style.display = 'none';
+              featuresList.style.display = 'none';
+              if (pricingLogo) {
+                pricingLogo.style.display = 'none';
+              }
+              if (backButton) {
+                backButton.style.display = 'none';
+              }
+              // Afficher les forfaits
+              plansSection.style.display = 'block';
+              
+              // Sauvegarder dans localStorage pour restaurer après refresh
+              localStorage.setItem('winabet_show_pricing_plans', 'true');
+              localStorage.setItem('winabet_pricing_view', 'regular');
+              localStorage.setItem('winabet_selected_plan', 'monthly');
+              
+              // Scroller vers le haut pour voir les forfaits
+              window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+              });
+            });
+          }
+        });
+      })();
+
+      // ==================== FONCTIONS GLOBALES POUR HISTORIQUE BET ====================
+      // Fonction pour sanitizer les logos (éviter 404)
+      function sanitizeLogo(url) {
+        const pixel = "data:image/gif;base64,R0lGODlhAQABAAAAACw=";
+        if (!url) return pixel;
+        const u = String(url).trim();
+        if (/Liquid error/i.test(u)) return pixel;
+        if (u.startsWith("//")) return "https:" + u;
+        if (/^https?:\/\//.test(u)) return u;
+        return pixel;
+      }
+
+      // Fonction pour générer le HTML d'une carte de bet
+      function generateBetCardHTML(bet) {
+        let unitsText, unitsColor;
+        const betUnits = parseFloat(bet.bet_units || "1");
+
+        if (bet.result === "win") {
+          const unitsValue = (betUnits * (bet.multiplier - 1)).toFixed(2);
+          unitsText = `Win +${unitsValue} UNITS`;
+          unitsColor = "rgba(34, 197, 94, 0.2)";
+        } else if (bet.result === "loose") {
+          const unitsValue = betUnits.toFixed(2);
+          unitsText = `Lose -${unitsValue} UNITS`;
+          unitsColor = "rgba(239, 68, 68, 0.2)";
+        } else {
+          unitsText = "EN ATTENTE";
+          unitsColor = "rgba(255, 255, 255, 0.10)";
+        }
+
+        let matchHTML = "";
+
+        if (bet.bet_type === "moneyline") {
+          const showTeam1Win = bet.moneyline_team === "team1" && bet.result === "win";
+          const showTeam2Win = bet.moneyline_team === "team2" && bet.result === "win";
+          const showTeam1Loss = bet.moneyline_team === "team1" && bet.result === "loose";
+          const showTeam2Loss = bet.moneyline_team === "team2" && bet.result === "loose";
+
+          matchHTML = `
+            <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 2rem; font-weight: 600; margin-bottom: 2rem;">MONEYLINE</div>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
+              <div style="text-align: center; flex: 1;">
+                <div class="history-team-logo-container" style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem; ${showTeam1Win ? "border: 5px solid rgba(255, 255, 255, 0.5);" : ""} ${showTeam1Loss ? "border: 5px solid rgba(255, 255, 255, 0.2);" : ""}">
+                  <img src="${sanitizeLogo(bet.team1_logo)}" alt="${bet.team1_name}" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.style.display='none'">
+                </div>
+                <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team1_name}</div>
+                ${showTeam1Win ? '<div style="font-size: 1.75rem; font-weight: 700; color: rgba(255, 255, 255, 0.9); margin-top: 1rem; text-align: center;">VICTOIRE</div>' : ""}
+                ${showTeam1Loss ? '<div style="font-size: 1.75rem; font-weight: 700; color: rgba(255, 255, 255, 0.6); margin-top: 1rem; text-align: center;">DÉFAITE</div>' : ""}
+              </div>
+              <div style="text-align: center;">
+                <div style="font-size: 3rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
+              </div>
+              <div style="text-align: center; flex: 1;">
+                <div class="history-team-logo-container" style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem; ${showTeam2Win ? "border: 5px solid rgba(255, 255, 255, 0.5);" : ""} ${showTeam2Loss ? "border: 5px solid rgba(255, 255, 255, 0.2);" : ""}">
+                  <img src="${sanitizeLogo(bet.team2_logo)}" alt="${bet.team2_name}" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.style.display='none'">
+                </div>
+                <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team2_name}</div>
+                ${showTeam2Win ? '<div style="font-size: 1.75rem; font-weight: 700; color: rgba(255, 255, 255, 0.9); margin-top: 1rem; text-align: center;">VICTOIRE</div>' : ""}
+                ${showTeam2Loss ? '<div style="font-size: 1.75rem; font-weight: 700; color: rgba(255, 255, 255, 0.6); margin-top: 1rem; text-align: center;">DÉFAITE</div>' : ""}
+              </div>
+            </div>
+          `;
+        } else if (bet.bet_type === "spread") {
+          matchHTML = `
+            <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 2rem; font-weight: 600; margin-bottom: 2rem;">SPREAD</div>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
+              <div style="text-align: center; flex: 1;">
+                <div class="history-team-logo-container" style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem; ${bet.spread_team === "team1" ? "border: 5px solid rgba(255, 255, 255, 0.5);" : ""}">
+                  <img src="${sanitizeLogo(bet.team1_logo)}" alt="${bet.team1_name}" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.style.display='none'">
+                </div>
+                <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team1_name}</div>
+                ${bet.spread_team === "team1" ? `<div style="font-size: 1.75rem; font-weight: 700; color: rgba(255, 255, 255, 0.9); margin-top: 1rem; text-align: center;">${bet.spread_value}</div>` : ""}
+              </div>
+              <div style="text-align: center;">
+                <div style="font-size: 3rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
+              </div>
+              <div style="text-align: center; flex: 1;">
+                <div class="history-team-logo-container" style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem; ${bet.spread_team === "team2" ? "border: 5px solid rgba(255, 255, 255, 0.5);" : ""}">
+                  <img src="${sanitizeLogo(bet.team2_logo)}" alt="${bet.team2_name}" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.style.display='none'">
+                </div>
+                <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team2_name}</div>
+                ${bet.spread_team === "team2" ? `<div style="font-size: 1.75rem; font-weight: 700; color: rgba(255, 255, 255, 0.9); margin-top: 1rem; text-align: center;">${bet.spread_value}</div>` : ""}
+              </div>
+            </div>
+          `;
+        } else if (bet.bet_type === "over_under") {
+          const displayText = bet.over_under_text_custom || bet.over_under_type;
+          matchHTML = `
+            <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 2rem; font-weight: 600; margin-bottom: 2rem;">${displayText?.toUpperCase()}</div>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
+              <div style="text-align: center; flex: 1;">
+                <div class="history-team-logo-container" style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem;">
+                  <img src="${sanitizeLogo(bet.team1_logo)}" alt="${bet.team1_name}" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.style.display='none'">
+                </div>
+                <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team1_name}</div>
+              </div>
+              <div style="text-align: center;">
+                <div style="font-size: 3rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
+                <div class="history-over-under-display" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.5rem; padding: 1rem 1.25rem; margin-top: 1.25rem; max-width: 280px; margin-left: auto; margin-right: auto;">
+                  <div class="history-over-under-type" style="font-size: 1.5rem; font-weight: 700; color: rgba(255, 255, 255, 0.9); text-align: center; word-spacing: 9999px; line-height: 1.3;">${displayText?.toUpperCase()}</div>
+                  <div class="history-over-under-value" style="font-size: 2rem; font-weight: 700; color: #ffffff; margin-top: 0.5rem; text-align: center;">${bet.over_under_value}</div>
+                  ${bet.over_under_stat_type ? `<div class="history-over-under-stat" style="font-size: 1.5rem; color: rgba(255, 255, 255, 0.6); margin-top: 0.5rem; text-align: center; word-spacing: 9999px; line-height: 1.3;">${bet.over_under_stat_type}</div>` : ""}
+                </div>
+              </div>
+              <div style="text-align: center; flex: 1;">
+                <div class="history-team-logo-container" style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem;">
+                  <img src="${sanitizeLogo(bet.team2_logo)}" alt="${bet.team2_name}" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.style.display='none'">
+                </div>
+                <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team2_name}</div>
+              </div>
+            </div>
+          `;
+        }
+
+        return `
+          <div class="card-wrapper">
+            <div style="max-width: 32rem; margin: 2rem auto 0.5rem; padding: 0 2rem;">
+              <div style="background: ${unitsColor}; color: #ffffff; padding: 1rem 2rem; border-radius: 0.5rem; font-size: 1.5rem; font-weight: 700; text-align: center;">
+                ${unitsText}
+              </div>
+            </div>
+            
+            <div class="history-card" style="background: #000000; border: 2px solid rgba(255, 255, 255, 0.15); border-radius: 1rem; padding: 4rem; margin: 0 auto 2rem; max-width: 36rem; width: 100%; display: flex; flex-direction: column; align-items: center;">
+              <div style="text-align: center; margin-bottom: 2rem;">
+                <div style="font-size: 1rem; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">COTE</div>
+                <div style="font-size: 2.5rem; font-weight: 700; color: #ffffff;">${bet.multiplier}</div>
+              </div>
+              
+              <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.5rem; margin-bottom: 2.5rem;">
+                ${bet.match_date} - ${bet.match_time}
+              </div>
+              
+              ${matchHTML}
+            </div>
+          </div>
+        `;
+      }
+
+      // ==================== BET HISTORY SLIDER ====================
+      (function() {
+        // Fonction pour charger l'historique des bets
+        async function loadBetHistoryForSlider() {
+          try {
+            const FUNCTIONS_URL = 'https://ycvfyorgkhuxcosfrsxs.functions.supabase.co';
+            const SHOP_DOMAIN = window.SUPABASE_CONFIG?.shopDomain || '{{ shop.permanent_domain }}';
+            
+            const response = await fetch(`${FUNCTIONS_URL}/get-bet-history?shop_domain=${SHOP_DOMAIN}`);
+            const data = await response.json();
+            
+            return data.bets || [];
+          } catch (error) {
+            console.error('❌ Erreur chargement slider:', error);
+            return [];
+          }
+        }
+
+        // Fonction pour créer le slider
+        function createBetSlider(bets) {
+          const sliderContainer = document.getElementById('bet-history-slider');
+          if (!sliderContainer) return;
+
+          // Filtrer pour ne garder que les bets terminés (win/loose)
+          const completedBets = bets.filter(bet => bet.result === 'win' || bet.result === 'loose');
+          
+          if (completedBets.length === 0) {
+            sliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Aucune prédiction complétée pour le moment.</p>';
+            return;
+          }
+
+          // Trier par date de match (DD/MM/YYYY + HH:MM) décroissante, fallback sur created_at
+          const getBetDate = (bet) => {
+            try {
+              if (bet.match_date) {
+                const parts = String(bet.match_date).split(/[\/\-.]/).map(Number);
+                if (parts.length === 3) {
+                  const [dd, mm, yyyy] = parts; // Format attendu: DD/MM/YYYY
+                  const date = new Date(yyyy, (mm || 1) - 1, dd || 1);
+                  if (bet.match_time) {
+                    const [hh, mn] = String(bet.match_time).split(':').map(v => parseInt(v, 10));
+                    if (!isNaN(hh)) {
+                      date.setHours(hh, isNaN(mn) ? 0 : mn, 0, 0);
+                    } else {
+                      date.setHours(23, 59, 59, 999);
+                    }
+                  } else {
+                    date.setHours(23, 59, 59, 999);
+                  }
+                  return date;
+                }
+              }
+              if (bet.created_at) return new Date(bet.created_at);
+            } catch (_) {}
+            return new Date(0);
+          };
+          completedBets.sort((a, b) => getBetDate(b) - getBetDate(a));
+
+          // Prendre les 10 derniers bets complétés
+          const sliderBets = completedBets.slice(0, 10);
+          
+          // Calculer les statistiques sur les 10 paris
+          let winsCount = 0;
+          let totalUnits = 0;
+          
+          sliderBets.forEach(bet => {
+            const betUnits = parseFloat(bet.bet_units || 1);
+            
+            if (bet.result === 'win') {
+              winsCount++;
+              // Calcul des units gagnées: (cote - 1) * units misées
+              const unitsWon = (parseFloat(bet.multiplier) - 1) * betUnits;
+              totalUnits += unitsWon;
+            } else if (bet.result === 'loose') {
+              // Perte = - units misées
+              totalUnits -= betUnits;
+            }
+          });
+          
+          // Mettre à jour l'affichage des statistiques
+          const winsCountElement = document.getElementById('wins-count');
+          const unitsCountElement = document.getElementById('units-count');
+          
+          if (winsCountElement) {
+            winsCountElement.textContent = `+${winsCount}`;
+          }
+          
+          if (unitsCountElement) {
+            const formattedUnits = totalUnits >= 0 ? `+${totalUnits.toFixed(2)}` : totalUnits.toFixed(2);
+            unitsCountElement.textContent = `${formattedUnits} units`;
+            unitsCountElement.style.color = totalUnits >= 0 ? '#22c55e' : '#ef4444';
+          }
+          
+          // Générer le HTML pour chaque bet
+          const cardsHTML = sliderBets.map(bet => generateBetCardHTML(bet)).join('');
+          
+          // Dupliquer 4 fois pour un effet de boucle infinie fluide
+          sliderContainer.innerHTML = cardsHTML + cardsHTML + cardsHTML + cardsHTML;
+          
+          // Animation avec requestAnimationFrame pour contrôle total
+          let animationId = null;
+          let currentPosition = 0;
+          const speed = 0.5; // pixels par frame (ajustable)
+          const totalWidth = sliderContainer.scrollWidth / 4; // largeur d'un cycle complet
+          
+          function animate() {
+            if (!sliderContainer) return;
+            
+            currentPosition -= speed;
+            
+            // Reset quand on a parcouru un cycle complet (25% du total)
+            if (Math.abs(currentPosition) >= totalWidth) {
+              currentPosition = 0;
+            }
+            
+            sliderContainer.style.transform = `translateX(${currentPosition}px)`;
+            animationId = requestAnimationFrame(animate);
+          }
+          
+          // Démarrer l'animation
+          animate();
+          
+          // Ajouter la fonctionnalité de scroll horizontal manuel
+          const sliderWrapper = sliderContainer.parentElement;
+          if (sliderWrapper) {
+            // Gestion du scroll avec la molette/trackpad
+            sliderWrapper.addEventListener('wheel', (e) => {
+              // Détecter si c'est un scroll horizontal (trackpad) ou si Shift est pressé
+              const isHorizontalScroll = Math.abs(e.deltaX) > Math.abs(e.deltaY);
+              
+              if (isHorizontalScroll || e.shiftKey) {
+                e.preventDefault();
+                sliderWrapper.scrollLeft += e.deltaX || e.deltaY;
+              }
+              // Sinon, laisser le scroll vertical normal de la page
+            }, { passive: false });
+            
+            // Gestion du drag avec la souris
+            let isDragging = false;
+            let startX;
+            let dragStartPosition;
+            
+            sliderWrapper.addEventListener('mousedown', (e) => {
+              isDragging = true;
+              sliderWrapper.style.cursor = 'grabbing';
+              startX = e.pageX;
+              dragStartPosition = currentPosition;
+              // Arrêter l'animation pendant le drag
+              if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+              }
+            });
+            
+            sliderWrapper.addEventListener('mouseleave', () => {
+              if (isDragging) {
+                isDragging = false;
+                sliderWrapper.style.cursor = 'grab';
+                // Reprendre l'animation là où on est
+                animate();
+              }
+            });
+            
+            sliderWrapper.addEventListener('mouseup', () => {
+              if (isDragging) {
+                isDragging = false;
+                sliderWrapper.style.cursor = 'grab';
+                // Reprendre l'animation là où on est
+                animate();
+              }
+            });
+            
+            sliderWrapper.addEventListener('mousemove', (e) => {
+              if (!isDragging) return;
+              e.preventDefault();
+              const dx = e.pageX - startX;
+              currentPosition = dragStartPosition + dx;
+              
+              // Gérer le wrap autour pour la boucle infinie
+              while (currentPosition > 0) currentPosition -= totalWidth;
+              while (currentPosition <= -totalWidth) currentPosition += totalWidth;
+              
+              sliderContainer.style.transform = `translateX(${currentPosition}px)`;
+            });
+
+            // Support tactile
+            let touchStartX = 0;
+            let touchStartY = 0;
+            let touchDragStartPosition = 0;
+
+            sliderWrapper.addEventListener('touchstart', (e) => {
+              if (!e.touches || e.touches.length === 0) return;
+              const t = e.touches[0];
+              touchStartX = t.clientX;
+              touchStartY = t.clientY;
+              touchDragStartPosition = currentPosition;
+              // Arrêter l'animation
+              if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+              }
+            }, { passive: true });
+
+            sliderWrapper.addEventListener('touchmove', (e) => {
+              if (!e.touches || e.touches.length === 0) return;
+              const t = e.touches[0];
+              const dx = t.clientX - touchStartX;
+              const dy = t.clientY - touchStartY;
+              // Si le mouvement est principalement horizontal, on gère le slide
+              if (Math.abs(dx) > Math.abs(dy)) {
+                e.preventDefault();
+                currentPosition = touchDragStartPosition + dx;
+                
+                // Gérer le wrap pour la boucle infinie
+                while (currentPosition > 0) currentPosition -= totalWidth;
+                while (currentPosition <= -totalWidth) currentPosition += totalWidth;
+                
+                sliderContainer.style.transform = `translateX(${currentPosition}px)`;
+              }
+            }, { passive: false });
+
+            sliderWrapper.addEventListener('touchend', () => {
+              // Reprendre l'animation là où on est
+              animate();
+            });
+            
+            // Style pour indiquer que c'est draggable
+            sliderWrapper.style.cursor = 'grab';
+            sliderWrapper.style.userSelect = 'none';
+          }
+        }
+
+
+        // Initialiser au chargement de la page
+        document.addEventListener('DOMContentLoaded', async function() {
+          try {
+            const bets = await loadBetHistoryForSlider();
+            createBetSlider(bets);
+            
+          } catch (error) {
+            console.error('❌ Erreur initialisation slider:', error);
+            const sliderContainer = document.getElementById('bet-history-slider');
+            if (sliderContainer) {
+              sliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Erreur de chargement.</p>';
+            }
+          }
+        });
+      })();
+  </script>
+
+                <script>
+document.addEventListener('DOMContentLoaded', function() {
+  const graphContainer = document.querySelector('.analytics-graph-container');
+  if (!graphContainer) return;
+  
+  const tooltip = graphContainer.querySelector('.analytics-tooltip');
+  
+  // Résultat du graphique (mois avec valeurs progressives)
+  const dataPoints = [
+    { date: 'Analyse Jan', sales: 150, revenue: 45, customers: 25, x: 0.05 },
+    { date: 'Analyse Feb', sales: 180, revenue: 55, customers: 30, x: 0.15 },
+    { date: 'Analyse Mar', sales: 210, revenue: 70, customers: 35, x: 0.25 },
+    { date: 'Analyse Apr', sales: 250, revenue: 85, customers: 42, x: 0.35 },
+    { date: 'Analyse May', sales: 280, revenue: 120, customers: 55, x: 0.45 },
+    { date: 'Analyse Jun', sales: 320, revenue: 180, customers: 68, x: 0.55 },
+    { date: 'Analyse Jul', sales: 380, revenue: 240, customers: 85, x: 0.65 },
+    { date: 'Analyse Aug', sales: 420, revenue: 310, customers: 95, x: 0.75 },
+    { date: 'Analyse Sep', sales: 480, revenue: 390, customers: 110, x: 0.85 },
+    { date: 'Analyse Oct', sales: 520, revenue: 440, customers: 125, x: 0.90 },
+    { date: 'Analyse Dec', sales: 550, revenue: 480, customers: 135, x: 0.95 }
+  ];
+  
+  // Afficher les données du milieu par défaut
+  function showDefaultData() {
+    const middlePoint = dataPoints[5]; // Jun '23 - point du milieu
+    tooltip.querySelector('.tooltip-date').textContent = middlePoint.date;
+    tooltip.querySelector('.sales-value').textContent = middlePoint.sales;
+    tooltip.querySelector('.revenue-value').textContent = middlePoint.revenue;
+    tooltip.querySelector('.customers-value').textContent = middlePoint.customers;
+    tooltip.style.display = 'block';
+  }
+  
+  function updateTooltip(e) {
+    const rect = graphContainer.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const xPercent = x / rect.width;
+    
+    // Trouver le point de données le plus proche
+    let closestPoint = dataPoints[0];
+    let minDist = Math.abs(xPercent - dataPoints[0].x);
+    
+    for (let point of dataPoints) {
+      const dist = Math.abs(xPercent - point.x);
+      if (dist < minDist) {
+        minDist = dist;
+        closestPoint = point;
+      }
+    }
+    
+    // Mettre à jour le contenu du tooltip
+    tooltip.querySelector('.tooltip-date').textContent = closestPoint.date;
+    tooltip.querySelector('.sales-value').textContent = closestPoint.sales;
+    tooltip.querySelector('.revenue-value').textContent = closestPoint.revenue;
+    tooltip.querySelector('.customers-value').textContent = closestPoint.customers;
+    
+    // Afficher le tooltip en haut à gauche (position fixe)
+    tooltip.style.display = 'block';
+  }
+  
+  function resetTooltip() {
+    // Revenir au point du milieu quand la souris quitte
+    showDefaultData();
+  }
+  
+  // Afficher les données par défaut au chargement
+  showDefaultData();
+  
+  graphContainer.addEventListener('mousemove', updateTooltip);
+  graphContainer.addEventListener('mouseleave', resetTooltip);
+  
+  // Support tactile pour mobile avec détection de direction
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let isHorizontalSwipe = false;
+  
+  graphContainer.addEventListener('touchstart', function(e) {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    isHorizontalSwipe = false;
+  });
+  
+  graphContainer.addEventListener('touchmove', function(e) {
+    const touch = e.touches[0];
+    const deltaX = Math.abs(touch.clientX - touchStartX);
+    const deltaY = Math.abs(touch.clientY - touchStartY);
+    
+    // Déterminer si c'est un mouvement horizontal (pour le graphique) ou vertical (pour le scroll)
+    if (!isHorizontalSwipe && deltaX > 10 || deltaY > 10) {
+      isHorizontalSwipe = deltaX > deltaY;
+    }
+    
+    // Seulement empêcher le scroll et mettre à jour le tooltip si c'est un mouvement horizontal
+    if (isHorizontalSwipe) {
+      e.preventDefault();
+      const mouseEvent = new MouseEvent('mousemove', {
+        clientX: touch.clientX,
+        clientY: touch.clientY
+      });
+      graphContainer.dispatchEvent(mouseEvent);
+    }
+  }, { passive: false });
+  
+  graphContainer.addEventListener('touchend', resetTooltip);
+});
+
+// Initialisation SUPABASE_CONFIG avec shop.permanent_domain
+(function() {
+  if (!window.SUPABASE_CONFIG) {
+    window.SUPABASE_CONFIG = {};
+  }
+  window.SUPABASE_CONFIG.url = 'https://ycvfyorgkhuxcosfrsxs.supabase.co';
+  window.SUPABASE_CONFIG.shopDomain = '{{ shop.permanent_domain }}';
+})();
+
+// Simulateur de profit
+document.addEventListener('DOMContentLoaded', function() {
+  const calculateBtn = document.getElementById('calculate-profit-btn');
+  const resultDiv = document.getElementById('profit-result');
+  const loadingDiv = document.getElementById('profit-loading');
+  
+  // Variables pour le simulateur
+  let selectedUnitValue = null;
+  const valueButtons = document.querySelectorAll('.profit-value-btn');
+  const customInputWrapper = document.getElementById('custom-input-wrapper');
+  const customInput = document.getElementById('custom-unit-input');
+  const otherBtn = document.getElementById('other-value-btn');
+
+  // Gérer la sélection des boutons de valeur
+  valueButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      // Retirer la classe active de tous les boutons
+      valueButtons.forEach(b => b.classList.remove('active'));
+      
+      // Ajouter la classe active au bouton cliqué
+      this.classList.add('active');
+      
+      const value = this.getAttribute('data-value');
+      
+      if (value === 'other') {
+        // Afficher l'input personnalisé
+        customInputWrapper.style.display = 'block';
+        selectedUnitValue = null; // Attendre que l'utilisateur entre une valeur
+        customInput.focus();
+      } else {
+        // Masquer l'input personnalisé et utiliser la valeur prédéfinie
+        customInputWrapper.style.display = 'none';
+        selectedUnitValue = parseFloat(value);
+      }
+    });
+  });
+
+  // Gérer l'input personnalisé
+  if (customInput) {
+    customInput.addEventListener('input', function() {
+      const value = parseFloat(this.value);
+      if (value && value > 0) {
+        selectedUnitValue = value;
+      } else {
+        selectedUnitValue = null;
+      }
+    });
+  }
+
+  // Gérer le popup d'information
+  const infoBtn = document.getElementById('info-unit-btn');
+  const infoBtnHistory = document.getElementById('info-unit-btn-history');
+  const popup = document.getElementById('unit-info-popup');
+  const closePopupBtn = document.getElementById('close-popup-btn');
+  const popupOverlay = document.querySelector('.unit-info-overlay');
+
+  if (infoBtn && popup) {
+    infoBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      popup.style.display = 'flex';
+    });
+  }
+  
+  if (infoBtnHistory && popup) {
+    infoBtnHistory.addEventListener('click', function(e) {
+      e.preventDefault();
+      popup.style.display = 'flex';
+    });
+  }
+
+  if (closePopupBtn && popup) {
+    closePopupBtn.addEventListener('click', function() {
+      popup.style.display = 'none';
+    });
+  }
+
+  if (popupOverlay && popup) {
+    popupOverlay.addEventListener('click', function() {
+      popup.style.display = 'none';
+    });
+  }
+  
+  // ============ GESTION DU DRAWER D'HISTORIQUE COMPLET ============
+  
+  // Fonction pour charger l'historique complet dans le drawer
+  async function loadBetHistoryInDrawer() {
+    try {
+      console.log("📥 Chargement de l'historique complet dans le drawer...");
+      const FUNCTIONS_URL = 'https://ycvfyorgkhuxcosfrsxs.functions.supabase.co';
+      const SHOP_DOMAIN = window.SUPABASE_CONFIG?.shopDomain || '{{ shop.permanent_domain }}';
+      const url = `${FUNCTIONS_URL}/get-bet-history?shop_domain=${SHOP_DOMAIN}`;
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error(`Erreur ${response.status}`);
+      }
+
+      const data = await response.json();
+      displayBetHistoryInDrawer(data);
+    } catch (error) {
+      console.error("❌ Erreur chargement historique drawer:", error);
+      const emptyState = document.getElementById("bet-empty-state-drawer");
+      if (emptyState) emptyState.style.display = "block";
+    }
+  }
+
+  // Fonction pour afficher l'historique dans le drawer
+  function displayBetHistoryInDrawer(data) {
+    const container = document.getElementById("bet-history-container-drawer");
+    const statsContainer = document.getElementById("bet-stats-drawer");
+    const emptyState = document.getElementById("bet-empty-state-drawer");
+
+    if (!container || !statsContainer) return;
+
+    // Si aucun bet
+    if (!data.bets || data.bets.length === 0) {
+      if (emptyState) emptyState.style.display = "block";
+      container.innerHTML = "";
+      statsContainer.innerHTML = "";
+      return;
+    }
+
+    if (emptyState) emptyState.style.display = "none";
+
+    // Calculer les couleurs des stats
+    const winsColor = (data.total_wins - data.total_losses >= 0) 
+      ? "rgba(34, 197, 94, 0.2)" 
+      : "rgba(239, 68, 68, 0.2)";
+
+    const unitsColor = (data.total_units >= 0) 
+      ? "rgba(34, 197, 94, 0.2)" 
+      : "rgba(239, 68, 68, 0.2)";
+
+    // Afficher les stats (même structure que dans le slider)
+    statsContainer.innerHTML = `
+      <div style="background: ${winsColor}; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.5rem; padding: 1rem; text-align: center;">
+        <div style="color: rgba(255, 255, 255, 0.9); font-weight: 700; font-size: 2rem;">
+          ${data.total_wins - data.total_losses >= 0 ? "+" : ""}${data.total_wins - data.total_losses}
+        </div>
+        <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem; margin-top: 0.25rem; font-weight: 600;">PARIS EN +</div>
+      </div>
+      <div style="background: ${unitsColor}; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.5rem; padding: 1rem; text-align: center;">
+        <div style="color: rgba(255, 255, 255, 0.9); font-weight: 700; font-size: 2rem;">
+          ${data.total_units >= 0 ? "+" : ""}${data.total_units.toFixed(2)}
+        </div>
+        <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem; margin-top: 0.25rem; font-weight: 600;">UNITS EN +</div>
+      </div>
+    `;
+
+    // Trier les bets par date de match (DD/MM/YYYY + HH:MM) décroissante
+    const getBetDate = (bet) => {
+      try {
+        if (bet.match_date) {
+          const parts = String(bet.match_date).split(/[\/\-.]/).map(Number);
+          if (parts.length === 3) {
+            const [dd, mm, yyyy] = parts; // Format attendu: DD/MM/YYYY
+            const date = new Date(yyyy, (mm || 1) - 1, dd || 1);
+            if (bet.match_time) {
+              const [hh, mn] = String(bet.match_time).split(':').map(v => parseInt(v, 10));
+              if (!isNaN(hh)) {
+                date.setHours(hh, isNaN(mn) ? 0 : mn, 0, 0);
+              } else {
+                date.setHours(23, 59, 59, 999);
+              }
+            } else {
+              date.setHours(23, 59, 59, 999);
+            }
+            return date;
+          }
+        }
+        if (bet.created_at) return new Date(bet.created_at);
+      } catch (_) {}
+      return new Date(0);
+    };
+    
+    const sortedBets = [...data.bets].sort((a, b) => getBetDate(b) - getBetDate(a));
+
+    // Générer les cartes en utilisant la fonction existante generateBetCardHTML
+    container.innerHTML = sortedBets.map((bet) => generateBetCardHTML(bet)).join("");
+  }
+
+  // Gestion de l'ouverture/fermeture du drawer
+  (function() {
+    const openBtn = document.getElementById('open-bet-history-drawer');
+    const closeBtn = document.getElementById('close-bet-history-drawer');
+    const drawer = document.getElementById('bet-history-drawer');
+    const overlay = document.querySelector('.bet-history-drawer-overlay');
+
+    function openDrawer() {
+      drawer.classList.add('active');
+      document.body.classList.add('drawer-open');
+      // Charger l'historique complet dans le drawer
+      loadBetHistoryInDrawer();
+    }
+
+    function closeDrawer() {
+      drawer.classList.remove('active');
+      document.body.classList.remove('drawer-open');
+    }
+
+    if (openBtn) {
+      openBtn.addEventListener('click', openDrawer);
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeDrawer);
+    }
+
+    if (overlay) {
+      overlay.addEventListener('click', closeDrawer);
+    }
+
+    // Fermer avec Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer.classList.contains('active')) {
+        closeDrawer();
+      }
+    });
+  })();
+  
+  // ============ FIN DRAWER HISTORIQUE ============
+  
+  if (!calculateBtn || !resultDiv || !loadingDiv) return;
+
+  calculateBtn.addEventListener('click', async function() {
+    const unitValue = selectedUnitValue;
+    
+    // Validation
+    if (!unitValue || unitValue <= 0) {
+      alert('Veuillez sélectionner une valeur d\'unité ou entrer une valeur personnalisée supérieure à 0');
+      return;
+    }
+
+    // Afficher le loader
+    loadingDiv.style.display = 'flex';
+    resultDiv.style.display = 'none';
+
+    try {
+      // Délai aléatoire de 3 à 6 secondes
+      const randomDelay = Math.floor(Math.random() * 3000) + 3000; // 3000-6000ms
+      
+      // Fonction pour extraire les unités depuis les éléments HTML
+      const extractUnitsFromDOM = () => {
+        let betUnits = 0;
+        let parlayUnits = 0;
+        
+        // Chercher dans #bet-stats
+        const betStatsEl = document.getElementById('bet-stats');
+        if (betStatsEl) {
+          const betUnitsText = betStatsEl.textContent || '';
+          const betMatch = betUnitsText.match(/([+-]?\d+\.?\d*)\s*unités?/i);
+          if (betMatch) {
+            betUnits = parseFloat(betMatch[1]);
+          }
+        }
+        
+        // Chercher dans #parlay-stats
+        const parlayStatsEl = document.getElementById('parlay-stats');
+        if (parlayStatsEl) {
+          const parlayUnitsText = parlayStatsEl.textContent || '';
+          const parlayMatch = parlayUnitsText.match(/([+-]?\d+\.?\d*)\s*unités?/i);
+          if (parlayMatch) {
+            parlayUnits = parseFloat(parlayMatch[1]);
+          }
+        }
+        
+        // Retourner null si aucune donnée trouvée
+        if (betUnits === 0 && parlayUnits === 0 && !betStatsEl && !parlayStatsEl) {
+          return null;
+        }
+        
+        return { betUnits, parlayUnits };
+      };
+      
+      // Configuration Supabase (forcer l'utilisation du bon domain)
+      const FUNCTIONS_URL = 'https://ycvfyorgkhuxcosfrsxs.functions.supabase.co';
+      const SHOP_DOMAIN = window.SUPABASE_CONFIG?.shopDomain || '{{ shop.permanent_domain }}';
+      
+      // Fonction pour récupérer les données via edge functions
+      const fetchFromAPI = async () => {
+        const [betResponse, parlayResponse] = await Promise.all([
+          fetch(`${FUNCTIONS_URL}/get-bet-history?shop_domain=${SHOP_DOMAIN}`),
+          fetch(`${FUNCTIONS_URL}/get-parlay-history?shop_domain=${SHOP_DOMAIN}`)
+        ]);
+
+        if (!betResponse.ok || !parlayResponse.ok) {
+          throw new Error('Erreur lors du chargement de l\'historique');
+        }
+
+        const betData = await betResponse.json();
+        const parlayData = await parlayResponse.json();
+        
+        return {
+          betUnits: betData.total_units || 0,
+          parlayUnits: parlayData.total_units || 0,
+          betData,
+          parlayData
+        };
+      };
+      
+      // Tenter d'extraire depuis le DOM, sinon fallback sur l'API
+      let unitsData;
+      const domData = extractUnitsFromDOM();
+      
+      if (domData) {
+        // Attendre le délai avant d'afficher
+        await new Promise(resolve => setTimeout(resolve, randomDelay));
+        unitsData = { 
+          betUnits: domData.betUnits, 
+          parlayUnits: domData.parlayUnits,
+          betData: { total_bets: 0 },
+          parlayData: { total_parlays: 0 }
+        };
+      } else {
+        // Fallback: appeler les edge functions
+        const apiDataPromise = fetchFromAPI();
+        await new Promise(resolve => setTimeout(resolve, randomDelay));
+        unitsData = await apiDataPromise;
+      }
+      
+      // Calculer les unités totales
+      const totalUnits = unitsData.betUnits + unitsData.parlayUnits;
+
+      // Calculer le profit en dollars
+      const profitDollars = totalUnits * unitValue;
+
+      // Afficher les résultats
+      const unitsValueEl = document.getElementById('profit-units-value');
+      const dollarsValueEl = document.getElementById('profit-dollars-value');
+      const messageEl = document.getElementById('profit-message');
+
+      // Mettre à jour les valeurs
+      const unitsText = totalUnits >= 0 ? `+${totalUnits.toFixed(2)}` : totalUnits.toFixed(2);
+      unitsValueEl.textContent = unitsText;
+      
+      const dollarsText = profitDollars >= 0 ? `+$${profitDollars.toFixed(2)}` : `-$${Math.abs(profitDollars).toFixed(2)}`;
+      dollarsValueEl.textContent = dollarsText;
+
+      // Appliquer les classes de couleur
+      if (totalUnits >= 0) {
+        unitsValueEl.classList.remove('negative');
+        dollarsValueEl.classList.remove('negative');
+      } else {
+        unitsValueEl.classList.add('negative');
+        dollarsValueEl.classList.add('negative');
+      }
+
+      // Message contextuel
+      if (totalUnits > 0) {
+        messageEl.textContent = `🎉 Avec nos prédictions IA, vous auriez réalisé un profit de ${dollarsText} ! Ces résultats sont basés sur notre historique réel.`;
+      } else if (totalUnits < 0) {
+        messageEl.textContent = `📊 Sur cette période, le résultat aurait été de ${dollarsText}. Nos performances varient selon les périodes, mais notre stratégie long terme vise la rentabilité.`;
+      } else {
+        messageEl.textContent = `📊 Aucune unité de profit/perte enregistrée pour le moment. Consultez nos historiques pour voir les performances détaillées.`;
+      }
+
+      // Cacher le loader et afficher les résultats
+      loadingDiv.style.display = 'none';
+      resultDiv.style.display = 'block';
+
+    } catch (error) {
+      console.error('Erreur lors du calcul des gains:', error);
+      loadingDiv.style.display = 'none';
+      alert('Impossible de charger l\'historique. Veuillez réessayer plus tard.');
+    }
+  });
+
+  // Calculer et afficher la date de début de facturation (24h après maintenant)
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  
+  const months = ['jan', 'fév', 'mar', 'avr', 'mai', 'juin', 'juil', 'août', 'sep', 'oct', 'nov', 'déc'];
+  const day = tomorrow.getDate();
+  const month = months[tomorrow.getMonth()];
+  const year = tomorrow.getFullYear();
+  
+  const billingStartDate = `${day} ${month} ${year}`;
+  
+  // Mettre à jour tous les éléments de date de facturation
+  document.querySelectorAll('.billing-start-date').forEach(el => {
+    el.textContent = billingStartDate;
+  });
+
+  // ============ SIMULATEUR HOME (sous stats section) ============
+  const homeCalculateBtn = document.getElementById('home-calculate-profit-btn');
+  const homeResultDiv = document.getElementById('home-profit-result');
+  const homeLoadingDiv = document.getElementById('home-profit-loading');
+  
+  let homeSelectedUnitValue = null;
+  const homeValueButtons = document.querySelectorAll('.home-profit-value-btn');
+  const homeCustomInputWrapper = document.getElementById('home-custom-input-wrapper');
+  const homeCustomInput = document.getElementById('home-custom-unit-input');
+  const homeOtherBtn = document.getElementById('home-other-value-btn');
+
+  // Gérer la sélection des boutons de valeur HOME
+  homeValueButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      homeValueButtons.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      
+      const value = this.getAttribute('data-value');
+      
+      if (value === 'other') {
+        homeCustomInputWrapper.style.display = 'block';
+        homeSelectedUnitValue = null;
+        homeCustomInput.focus();
+      } else {
+        homeCustomInputWrapper.style.display = 'none';
+        homeSelectedUnitValue = parseFloat(value);
+      }
+    });
+  });
+
+  // Gérer l'input personnalisé HOME
+  if (homeCustomInput) {
+    homeCustomInput.addEventListener('input', function() {
+      const value = parseFloat(this.value);
+      if (value && value > 0) {
+        homeSelectedUnitValue = value;
+      } else {
+        homeSelectedUnitValue = null;
+      }
+    });
+  }
+
+  // Gérer le popup d'information HOME (utilise le même popup que l'original)
+  const homeInfoBtn = document.getElementById('home-info-unit-btn');
+  if (homeInfoBtn && popup) {
+    homeInfoBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      popup.style.display = 'flex';
+    });
+  }
+
+  // Calcul du profit HOME
+  if (homeCalculateBtn) {
+    homeCalculateBtn.addEventListener('click', async function() {
+      if (homeSelectedUnitValue === null || homeSelectedUnitValue <= 0) {
+        alert('Veuillez sélectionner ou entrer une valeur d\'unité valide.');
+        return;
+      }
+
+      const unitValue = homeSelectedUnitValue;
+
+      homeResultDiv.style.display = 'none';
+      homeLoadingDiv.style.display = 'flex';
+
+      try {
+        const randomDelay = Math.floor(Math.random() * (3500 - 2000 + 1)) + 2000;
+        
+        console.log('🔄 Lancement du simulateur HOME avec unitValue:', unitValue);
+        
+        // Lancer l'API call ET le délai en parallèle
+        const FUNCTIONS_URL = 'https://ycvfyorgkhuxcosfrsxs.functions.supabase.co';
+        const SHOP_DOMAIN = window.SUPABASE_CONFIG?.shopDomain || '{{ shop.permanent_domain }}';
+        
+        console.log('📡 Shop domain:', SHOP_DOMAIN);
+        
+        const apiCallPromise = Promise.all([
+          fetch(`${FUNCTIONS_URL}/get-bet-history?shop_domain=${SHOP_DOMAIN}`),
+          fetch(`${FUNCTIONS_URL}/get-parlay-history?shop_domain=${SHOP_DOMAIN}`)
+        ]);
+        
+        // Attendre le délai d'animation
+        await new Promise(resolve => setTimeout(resolve, randomDelay));
+        
+        // Récupérer les résultats de l'API
+        const [betResponse, parlayResponse] = await apiCallPromise;
+        
+        console.log('📥 Réponses API:', { 
+          betOk: betResponse.ok, 
+          parlayOk: parlayResponse.ok 
+        });
+        
+        if (!betResponse.ok || !parlayResponse.ok) {
+          throw new Error('Erreur lors de la récupération des données');
+        }
+        
+        const betData = await betResponse.json();
+        const parlayData = await parlayResponse.json();
+        
+        console.log('✅ Données récupérées:', {
+          betUnits: betData.total_units,
+          parlayUnits: parlayData.total_units,
+          betWins: betData.total_wins,
+          parlayWins: parlayData.total_wins
+        });
+        
+        // Extraire les unités (avec validation)
+        const betUnits = parseFloat(betData.total_units) || 0;
+        const parlayUnits = parseFloat(parlayData.total_units) || 0;
+        const totalUnits = betUnits + parlayUnits;
+        const profitDollars = totalUnits * unitValue;
+        
+        console.log('📊 Calcul final:', {
+          betUnits,
+          parlayUnits,
+          totalUnits,
+          unitValue,
+          profitDollars
+        });
+        
+        // Afficher les résultats
+        const homeUnitsValueEl = document.getElementById('home-profit-units-value');
+        const homeDollarsValueEl = document.getElementById('home-profit-dollars-value');
+        const homeMessageEl = document.getElementById('home-profit-message');
+
+        const unitsText = totalUnits >= 0 ? `+${totalUnits.toFixed(2)}` : totalUnits.toFixed(2);
+        homeUnitsValueEl.textContent = unitsText;
+        
+        const dollarsText = profitDollars >= 0 ? `+$${profitDollars.toFixed(2)}` : `-$${Math.abs(profitDollars).toFixed(2)}`;
+        homeDollarsValueEl.textContent = dollarsText;
+
+        if (totalUnits >= 0) {
+          homeUnitsValueEl.classList.remove('negative');
+          homeDollarsValueEl.classList.remove('negative');
+        } else {
+          homeUnitsValueEl.classList.add('negative');
+          homeDollarsValueEl.classList.add('negative');
+        }
+
+        if (totalUnits >= 100) {
+          homeMessageEl.textContent = "Wow ! Profit incroyable 🚀💰";
+        } else if (totalUnits >= 50) {
+          homeMessageEl.textContent = "Excellent ! Très bon profit 🎯";
+        } else if (totalUnits >= 20) {
+          homeMessageEl.textContent = "Bien joué ! Profit solide 💪";
+        } else if (totalUnits > 0) {
+          homeMessageEl.textContent = "Bon début ! Continue comme ça ✨";
+        } else if (totalUnits === 0) {
+          homeMessageEl.textContent = "À l'équilibre ! Prêt à gagner ? 🎲";
+        } else if (totalUnits >= -20) {
+          homeMessageEl.textContent = "Ce n'est qu'un début ! Remonte ça 💪";
+        } else {
+          homeMessageEl.textContent = "On rebondit ensemble ! 🔥";
+        }
+
+        homeLoadingDiv.style.display = 'none';
+        homeResultDiv.style.display = 'block';
+
+      } catch (error) {
+        console.error('❌ Erreur détaillée:', error);
+        homeLoadingDiv.style.display = 'none';
+        alert(`Erreur lors du calcul: ${error.message}`);
+      }
+    });
+  }
+});
+</script>
