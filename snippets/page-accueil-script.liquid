@@ -984,6 +984,7 @@
           let currentIndex = 0;
           const cards = sliderContainer.querySelectorAll('.card-wrapper');
           const totalCards = cards.length;
+          const wrapper = sliderContainer.closest('.bet-history-slider-wrapper');
 
           // Obtenir la largeur d'une carte + gap
           function getCardWidth() {
@@ -1010,7 +1011,7 @@
             if (prevBtn) prevBtn.disabled = currentIndex === 0;
             if (nextBtn) {
               // Calculer combien de cartes sont visibles
-              const wrapperWidth = sliderContainer.parentElement.offsetWidth;
+              const wrapperWidth = wrapper ? wrapper.offsetWidth : window.innerWidth;
               const cardWidth = getCardWidth();
               const visibleCards = Math.floor(wrapperWidth / cardWidth);
               const maxIndex = Math.max(0, totalCards - visibleCards);
@@ -1021,7 +1022,9 @@
           // Bouton précédent
           const prevBtn = document.getElementById('bet-slider-prev');
           if (prevBtn) {
-            prevBtn.addEventListener('click', () => {
+            prevBtn.replaceWith(prevBtn.cloneNode(true)); // Remove old listeners
+            const newPrevBtn = document.getElementById('bet-slider-prev');
+            newPrevBtn.addEventListener('click', () => {
               if (currentIndex > 0) {
                 currentIndex--;
                 updateSliderPosition();
@@ -1032,8 +1035,10 @@
           // Bouton suivant
           const nextBtn = document.getElementById('bet-slider-next');
           if (nextBtn) {
-            nextBtn.addEventListener('click', () => {
-              const wrapperWidth = sliderContainer.parentElement.offsetWidth;
+            nextBtn.replaceWith(nextBtn.cloneNode(true)); // Remove old listeners
+            const newNextBtn = document.getElementById('bet-slider-next');
+            newNextBtn.addEventListener('click', () => {
+              const wrapperWidth = wrapper ? wrapper.offsetWidth : window.innerWidth;
               const cardWidth = getCardWidth();
               const visibleCards = Math.floor(wrapperWidth / cardWidth);
               const maxIndex = Math.max(0, totalCards - visibleCards);
@@ -1046,11 +1051,18 @@
           }
 
           // Initialiser la position
-          updateSliderPosition();
+          setTimeout(() => {
+            updateSliderPosition();
+          }, 100);
 
           // Recalculer au resize
+          let resizeTimeout;
           window.addEventListener('resize', () => {
-            updateSliderPosition();
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+              currentIndex = 0; // Reset position on resize
+              updateSliderPosition();
+            }, 200);
           });
         }
 
