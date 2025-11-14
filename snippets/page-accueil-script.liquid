@@ -670,24 +670,36 @@
             politique.style.display = 'block';
             support.style.display = 'none';
             rejoindre.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            document.body.style.position = '';
+            document.body.style.width = '';
             window.scrollTo(0, 0);
           } else if (hash === 'support') {
             home.style.display = 'none';
             politique.style.display = 'none';
             support.style.display = 'block';
             rejoindre.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            document.body.style.position = '';
+            document.body.style.width = '';
             window.scrollTo(0, 0);
           } else if (hash === 'rejoindre') {
             home.style.display = 'none';
             politique.style.display = 'none';
             support.style.display = 'none';
             rejoindre.style.display = 'block';
+            document.body.style.overflow = 'auto';
+            document.body.style.position = '';
+            document.body.style.width = '';
             window.scrollTo(0, 0);
           } else {
             home.style.display = 'block';
             politique.style.display = 'none';
             support.style.display = 'none';
             rejoindre.style.display = 'none';
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.width = '';
           }
         }
         
