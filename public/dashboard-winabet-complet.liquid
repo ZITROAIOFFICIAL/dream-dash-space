@@ -964,11 +964,19 @@
           <div class="cards-grid">
           {% for block in bet_cards %}
             {% if block.settings.show_card %}
-              {% comment %} Limiter à 1 bet si free trial {% endcomment %}
-              {% if access_level == 'free_trial' and visible_bets >= 1 %}
-                {% comment %} Cacher les bets suivants {% endcomment %}
+              {% comment %} Déterminer si le bet doit être affiché {% endcomment %}
+              {% assign should_display = false %}
+              {% if access_level == 'free_trial' %}
+                {% if block.settings.available_for_free_trial %}
+                  {% assign should_display = true %}
+                  {% assign visible_bets = visible_bets | plus: 1 %}
+                {% endif %}
               {% else %}
+                {% assign should_display = true %}
                 {% assign visible_bets = visible_bets | plus: 1 %}
+              {% endif %}
+              
+              {% if should_display %}
               <div class="card-wrapper">
 
               <div class="bet-card" style="{% if block.settings.send_to_history == true %}display:none{% endif %}" 
@@ -992,6 +1000,7 @@
                    data-best-odds="{{ block.settings.best_odds }}"
                    data-result="{{ block.settings.result | default: 'pending' }}"
                    data-send-to-history="{{ block.settings.send_to_history }}"
+                   data-available-for-free-trial="{{ block.settings.available_for_free_trial }}"
                    data-spread-value="{{ block.settings.spread_value }}"
                    data-spread-team="{{ block.settings.spread_team }}"
                    data-over-under-type="{{ block.settings.over_under_type }}"
@@ -4548,6 +4557,13 @@
           "id": "show_card",
           "label": "Afficher cette carte",
           "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "available_for_free_trial",
+          "label": "🆓 Disponible pour Free Trial",
+          "default": false,
+          "info": "Cochez pour rendre ce bet visible aux utilisateurs en essai gratuit"
         }
       ]
     },
