@@ -737,6 +737,18 @@
           var rejoindre = document.getElementById('rejoindre');
           if (!home || !politique || !support || !rejoindre) return;
 
+          // Recharger la page automatiquement quand on arrive sur #rejoindre
+          if (hash === 'rejoindre' && !sessionStorage.getItem('rejoindre_reloaded')) {
+            sessionStorage.setItem('rejoindre_reloaded', 'true');
+            location.reload();
+            return;
+          }
+          
+          // Nettoyer le flag si on quitte #rejoindre
+          if (hash !== 'rejoindre') {
+            sessionStorage.removeItem('rejoindre_reloaded');
+          }
+
           // Débloquer complètement le scroll avant de changer de page
           unlockScroll();
 
