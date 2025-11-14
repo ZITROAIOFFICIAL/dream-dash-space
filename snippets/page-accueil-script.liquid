@@ -743,19 +743,34 @@
             politique.style.display = 'block';
             support.style.display = 'none';
             rejoindre.style.display = 'none';
-            instantScrollTop();
+            politique.offsetHeight; // Force reflow
+            requestAnimationFrame(function() {
+              requestAnimationFrame(function() {
+                instantScrollTop();
+              });
+            });
           } else if (hash === 'support') {
             home.style.display = 'none';
             politique.style.display = 'none';
             support.style.display = 'block';
             rejoindre.style.display = 'none';
-            instantScrollTop();
+            support.offsetHeight; // Force reflow
+            requestAnimationFrame(function() {
+              requestAnimationFrame(function() {
+                instantScrollTop();
+              });
+            });
           } else if (hash === 'rejoindre') {
             home.style.display = 'none';
             politique.style.display = 'none';
             support.style.display = 'none';
             rejoindre.style.display = 'block';
-            instantScrollTop();
+            rejoindre.offsetHeight; // Force reflow
+            requestAnimationFrame(function() {
+              requestAnimationFrame(function() {
+                instantScrollTop();
+              });
+            });
           } else {
             home.style.display = 'block';
             politique.style.display = 'none';
