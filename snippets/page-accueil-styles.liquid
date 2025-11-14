@@ -2612,7 +2612,7 @@
         width: 100%;
         overflow: hidden;
         position: relative;
-        padding: 2rem 80px;
+        padding: 2rem 0;
       }
 
       .bet-history-slider-container {
@@ -2621,11 +2621,18 @@
         transition: transform 0.4s ease;
       }
       
+      /* Conteneur des boutons de navigation */
+      .slider-nav-controls {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+        margin-top: 2rem;
+        padding: 0 2rem;
+      }
+      
       /* Boutons de navigation du slider */
       .slider-nav-btn {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
         background: rgba(255, 255, 255, 0.1);
         border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 50%;
@@ -2635,7 +2642,6 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        z-index: 10;
         transition: all 0.3s ease;
         color: white;
       }
@@ -2648,14 +2654,6 @@
       .slider-nav-btn:disabled {
         opacity: 0.3;
         cursor: not-allowed;
-      }
-
-      .slider-nav-prev {
-        left: 10px;
-      }
-
-      .slider-nav-next {
-        right: 10px;
       }
 
       /* Cartes dans le slider */
