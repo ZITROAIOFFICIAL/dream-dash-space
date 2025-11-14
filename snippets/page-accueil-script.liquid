@@ -977,157 +977,108 @@
           // Générer le HTML pour chaque bet
           const cardsHTML = sliderBets.map(bet => generateBetCardHTML(bet)).join('');
           
-          // Dupliquer 4 fois pour un effet de boucle infinie fluide
-          sliderContainer.innerHTML = cardsHTML + cardsHTML + cardsHTML + cardsHTML;
+          // Afficher les cartes une seule fois (pas de duplication)
+          sliderContainer.innerHTML = cardsHTML;
           
-          // Animation avec requestAnimationFrame pour contrôle total
-          let animationId = null;
-          let currentPosition = 0;
-          const speed = 0.5; // pixels par frame (ajustable)
-          const totalWidth = sliderContainer.scrollWidth / 4; // largeur d'un cycle complet
-          
-          function animate() {
-            if (!sliderContainer) return;
+          // Configuration de la pagination
+          let currentIndex = 0;
+          const cards = sliderContainer.querySelectorAll('.card-wrapper');
+          const totalCards = cards.length;
+
+          // Obtenir la largeur d'une carte + gap
+          function getCardWidth() {
+            if (cards.length === 0) return 0;
+            const cardWidth = cards[0].offsetWidth;
+            const gap = 32; // 2rem en pixels
+            return cardWidth + gap;
+          }
+
+          // Mettre à jour la position du slider
+          function updateSliderPosition() {
+            const cardWidth = getCardWidth();
+            const offset = -currentIndex * cardWidth;
+            sliderContainer.style.transform = `translateX(${offset}px)`;
+            sliderContainer.style.transition = 'transform 0.4s ease';
+            updateButtons();
+          }
+
+          // Mettre à jour l'état des boutons
+          function updateButtons() {
+            const prevBtn = document.getElementById('bet-slider-prev');
+            const nextBtn = document.getElementById('bet-slider-next');
             
-            currentPosition -= speed;
-            
-            // Reset quand on a parcouru un cycle complet (25% du total)
-            if (Math.abs(currentPosition) >= totalWidth) {
-              currentPosition = 0;
+            if (prevBtn) prevBtn.disabled = currentIndex === 0;
+            if (nextBtn) {
+              // Calculer combien de cartes sont visibles
+              const wrapperWidth = sliderContainer.parentElement.offsetWidth;
+              const cardWidth = getCardWidth();
+              const visibleCards = Math.floor(wrapperWidth / cardWidth);
+              const maxIndex = Math.max(0, totalCards - visibleCards);
+              nextBtn.disabled = currentIndex >= maxIndex;
             }
-            
-            sliderContainer.style.transform = `translateX(${currentPosition}px)`;
-            animationId = requestAnimationFrame(animate);
           }
-          
-          // Démarrer l'animation
-          animate();
-          
-          // Ajouter la fonctionnalité de scroll horizontal manuel
-          const sliderWrapper = sliderContainer.parentElement;
-          if (sliderWrapper) {
-            // Gestion du scroll avec la molette/trackpad
-            sliderWrapper.addEventListener('wheel', (e) => {
-              // Détecter si c'est un scroll horizontal (trackpad) ou si Shift est pressé
-              const isHorizontalScroll = Math.abs(e.deltaX) > Math.abs(e.deltaY);
-              
-              if (isHorizontalScroll || e.shiftKey) {
-                e.preventDefault();
-                sliderWrapper.scrollLeft += e.deltaX || e.deltaY;
-              }
-              // Sinon, laisser le scroll vertical normal de la page
-            }, { passive: false });
-            
-            // Gestion du drag avec la souris
-            let isDragging = false;
-            let startX;
-            let dragStartPosition;
-            
-            sliderWrapper.addEventListener('mousedown', (e) => {
-              isDragging = true;
-              sliderWrapper.style.cursor = 'grabbing';
-              startX = e.pageX;
-              dragStartPosition = currentPosition;
-              // Arrêter l'animation pendant le drag
-              if (animationId) {
-                cancelAnimationFrame(animationId);
-                animationId = null;
-              }
-            });
-            
-            sliderWrapper.addEventListener('mouseleave', () => {
-              if (isDragging) {
-                isDragging = false;
-                sliderWrapper.style.cursor = 'grab';
-                // Reprendre l'animation là où on est
-                animate();
-              }
-            });
-            
-            sliderWrapper.addEventListener('mouseup', () => {
-              if (isDragging) {
-                isDragging = false;
-                sliderWrapper.style.cursor = 'grab';
-                // Reprendre l'animation là où on est
-                animate();
-              }
-            });
-            
-            sliderWrapper.addEventListener('mousemove', (e) => {
-              if (!isDragging) return;
-              e.preventDefault();
-              const dx = e.pageX - startX;
-              currentPosition = dragStartPosition + dx;
-              
-              // Gérer le wrap autour pour la boucle infinie
-              while (currentPosition > 0) currentPosition -= totalWidth;
-              while (currentPosition <= -totalWidth) currentPosition += totalWidth;
-              
-              sliderContainer.style.transform = `translateX(${currentPosition}px)`;
-            });
 
-            // Support tactile
-            let touchStartX = 0;
-            let touchStartY = 0;
-            let touchDragStartPosition = 0;
-
-            sliderWrapper.addEventListener('touchstart', (e) => {
-              if (!e.touches || e.touches.length === 0) return;
-              const t = e.touches[0];
-              touchStartX = t.clientX;
-              touchStartY = t.clientY;
-              touchDragStartPosition = currentPosition;
-              // Arrêter l'animation
-              if (animationId) {
-                cancelAnimationFrame(animationId);
-                animationId = null;
+          // Bouton précédent
+          const prevBtn = document.getElementById('bet-slider-prev');
+          if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+              if (currentIndex > 0) {
+                currentIndex--;
+                updateSliderPosition();
               }
-            }, { passive: true });
-
-            sliderWrapper.addEventListener('touchmove', (e) => {
-              if (!e.touches || e.touches.length === 0) return;
-              const t = e.touches[0];
-              const dx = t.clientX - touchStartX;
-              const dy = t.clientY - touchStartY;
-              // Si le mouvement est principalement horizontal, on gère le slide
-              if (Math.abs(dx) > Math.abs(dy)) {
-                e.preventDefault();
-                currentPosition = touchDragStartPosition + dx;
-                
-                // Gérer le wrap pour la boucle infinie
-                while (currentPosition > 0) currentPosition -= totalWidth;
-                while (currentPosition <= -totalWidth) currentPosition += totalWidth;
-                
-                sliderContainer.style.transform = `translateX(${currentPosition}px)`;
-              }
-            }, { passive: false });
-
-            sliderWrapper.addEventListener('touchend', () => {
-              // Reprendre l'animation là où on est
-              animate();
             });
-            
-            // Style pour indiquer que c'est draggable
-            sliderWrapper.style.cursor = 'grab';
-            sliderWrapper.style.userSelect = 'none';
           }
+
+          // Bouton suivant
+          const nextBtn = document.getElementById('bet-slider-next');
+          if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+              const wrapperWidth = sliderContainer.parentElement.offsetWidth;
+              const cardWidth = getCardWidth();
+              const visibleCards = Math.floor(wrapperWidth / cardWidth);
+              const maxIndex = Math.max(0, totalCards - visibleCards);
+              
+              if (currentIndex < maxIndex) {
+                currentIndex++;
+                updateSliderPosition();
+              }
+            });
+          }
+
+          // Initialiser la position
+          updateSliderPosition();
+
+          // Recalculer au resize
+          window.addEventListener('resize', () => {
+            updateSliderPosition();
+          });
         }
 
 
-        // Initialiser au chargement de la page
-        document.addEventListener('DOMContentLoaded', async function() {
-          try {
-            const bets = await loadBetHistoryForSlider();
-            createBetSlider(bets);
-            
-          } catch (error) {
-            console.error('❌ Erreur initialisation slider:', error);
-            const sliderContainer = document.getElementById('bet-history-slider');
-            if (sliderContainer) {
-              sliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Erreur de chargement.</p>';
+        // Initialiser avec IntersectionObserver pour gérer la navigation sans refresh
+        const betHistoryObserver = new IntersectionObserver((entries) => {
+          entries.forEach(async entry => {
+            if (entry.isIntersecting && !entry.target.dataset.initialized) {
+              entry.target.dataset.initialized = 'true';
+              try {
+                const bets = await loadBetHistoryForSlider();
+                createBetSlider(bets);
+              } catch (error) {
+                console.error('❌ Erreur initialisation slider:', error);
+                const sliderContainer = document.getElementById('bet-history-slider');
+                if (sliderContainer) {
+                  sliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Erreur de chargement.</p>';
+                }
+              }
             }
-          }
-        });
+          });
+        }, { threshold: 0.1 });
+
+        // Observer la section du slider
+        const sliderSection = document.querySelector('.bet-history-slider-wrapper');
+        if (sliderSection) {
+          betHistoryObserver.observe(sliderSection);
+        }
       })();
   </script>
 
