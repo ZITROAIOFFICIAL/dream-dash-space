@@ -663,38 +663,32 @@
           var politique = document.getElementById('politique');
           var support = document.getElementById('support');
           var rejoindre = document.getElementById('rejoindre');
-
           if (!home || !politique || !support || !rejoindre) return;
 
-          // 1. Switch visible section WITHOUT scrolling yet
           if (hash === 'politique') {
             home.style.display = 'none';
             politique.style.display = 'block';
             support.style.display = 'none';
             rejoindre.style.display = 'none';
+            window.scrollTo(0, 0);
           } else if (hash === 'support') {
             home.style.display = 'none';
             politique.style.display = 'none';
             support.style.display = 'block';
             rejoindre.style.display = 'none';
+            window.scrollTo(0, 0);
           } else if (hash === 'rejoindre') {
             home.style.display = 'none';
             politique.style.display = 'none';
             support.style.display = 'none';
             rejoindre.style.display = 'block';
+            window.scrollTo(0, 0);
           } else {
             home.style.display = 'block';
             politique.style.display = 'none';
             support.style.display = 'none';
             rejoindre.style.display = 'none';
           }
-
-          // 2. Wait for layout/reflow to finish, THEN scroll to top
-          requestAnimationFrame(function() {
-            requestAnimationFrame(function() {
-              window.scrollTo(0, 0);
-            });
-          });
         }
         
         document.addEventListener('DOMContentLoaded', showPage);
@@ -887,24 +881,24 @@
         `;
       }
 
-      // ==================== FONCTION GLOBALE POUR HISTORIQUE BET ====================
-      async function loadBetHistoryForSlider() {
-        try {
-          const FUNCTIONS_URL = 'https://ycvfyorgkhuxcosfrsxs.functions.supabase.co';
-          const SHOP_DOMAIN = window.SUPABASE_CONFIG?.shopDomain || '{{ shop.permanent_domain }}';
-          
-          const response = await fetch(`${FUNCTIONS_URL}/get-bet-history?shop_domain=${SHOP_DOMAIN}`);
-          const data = await response.json();
-          
-          return data.bets || [];
-        } catch (error) {
-          console.error('❌ Erreur chargement historique:', error);
-          throw error;
-        }
-      }
-
-      // ==================== BET HISTORY SLIDER (PRICING) ====================
+      // ==================== BET HISTORY SLIDER ====================
       (function() {
+        // Fonction pour charger l'historique des bets
+        async function loadBetHistoryForSlider() {
+          try {
+            const FUNCTIONS_URL = 'https://ycvfyorgkhuxcosfrsxs.functions.supabase.co';
+            const SHOP_DOMAIN = window.SUPABASE_CONFIG?.shopDomain || '{{ shop.permanent_domain }}';
+            
+            const response = await fetch(`${FUNCTIONS_URL}/get-bet-history?shop_domain=${SHOP_DOMAIN}`);
+            const data = await response.json();
+            
+            return data.bets || [];
+          } catch (error) {
+            console.error('❌ Erreur chargement slider:', error);
+            return [];
+          }
+        }
+
         // Fonction pour créer le slider
         function createBetSlider(bets) {
           const sliderContainer = document.getElementById('bet-history-slider');
@@ -1135,244 +1129,6 @@
           }
         });
       })();
-
-      // ==================== HOME PAGE BET HISTORY SLIDER ====================
-      (function() {
-        // Réutiliser les fonctions globales existantes :
-        // - sanitizeLogo() (déjà définie)
-        // - generateBetCardHTML() (déjà définie)
-        // - loadBetHistoryForSlider() (déjà définie)
-
-        // NOUVELLE fonction createHomeBetSlider()
-        function createHomeBetSlider(bets) {
-          const sliderContainer = document.getElementById('home-bet-history-slider');
-          if (!sliderContainer || !bets || bets.length === 0) {
-            if (sliderContainer) {
-              sliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Aucun pari disponible pour le moment.</p>';
-            }
-            return;
-          }
-
-          // Filtrer les bets complétés
-          const completedBets = bets.filter(b => b.result && b.result !== 'pending');
-          
-          if (completedBets.length === 0) {
-            sliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Aucun pari complété.</p>';
-            return;
-          }
-          
-          // Prendre les 10 derniers bets complétés
-          const sliderBets = completedBets.slice(0, 10);
-          
-          // Calculer les statistiques sur les 10 paris
-          let winsCount = 0;
-          let totalUnits = 0;
-          
-          sliderBets.forEach(bet => {
-            const betUnits = parseFloat(bet.bet_units || 1);
-            
-            if (bet.result === 'win') {
-              winsCount++;
-              // Calcul des units gagnées: (cote - 1) * units misées
-              const unitsWon = (parseFloat(bet.multiplier) - 1) * betUnits;
-              totalUnits += unitsWon;
-            } else if (bet.result === 'loose') {
-              // Perte = - units misées
-              totalUnits -= betUnits;
-            }
-          });
-          
-          // Mettre à jour l'affichage des statistiques
-          const winsCountElement = document.getElementById('home-wins-count');
-          const unitsCountElement = document.getElementById('home-units-count');
-          
-          if (winsCountElement) {
-            winsCountElement.textContent = `+${winsCount}`;
-          }
-          
-          if (unitsCountElement) {
-            const formattedUnits = totalUnits >= 0 ? `+${totalUnits.toFixed(2)}` : totalUnits.toFixed(2);
-            unitsCountElement.textContent = `${formattedUnits} units`;
-            unitsCountElement.style.color = totalUnits >= 0 ? '#22c55e' : '#ef4444';
-          }
-          
-          // Générer le HTML pour chaque bet
-          const cardsHTML = sliderBets.map(bet => generateBetCardHTML(bet)).join('');
-          
-          // Dupliquer 4 fois pour un effet de boucle infinie fluide
-          sliderContainer.innerHTML = cardsHTML + cardsHTML + cardsHTML + cardsHTML;
-          
-          // Animation avec requestAnimationFrame pour contrôle total
-          let animationId = null;
-          let currentPosition = 0;
-          const speed = 0.5; // pixels par frame (ajustable)
-          const totalWidth = sliderContainer.scrollWidth / 4; // largeur d'un cycle complet
-          
-          function animate() {
-            if (!sliderContainer) return;
-            
-            currentPosition -= speed;
-            
-            // Reset quand on a parcouru un cycle complet (25% du total)
-            if (Math.abs(currentPosition) >= totalWidth) {
-              currentPosition = 0;
-            }
-            
-            sliderContainer.style.transform = `translateX(${currentPosition}px)`;
-            animationId = requestAnimationFrame(animate);
-          }
-          
-          // Démarrer l'animation
-          animate();
-          
-          // Ajouter la fonctionnalité de scroll horizontal manuel
-          const sliderWrapper = sliderContainer.parentElement;
-          if (sliderWrapper) {
-            // Gestion du scroll avec la molette/trackpad
-            sliderWrapper.addEventListener('wheel', (e) => {
-              // Détecter si c'est un scroll horizontal (trackpad) ou si Shift est pressé
-              const isHorizontalScroll = Math.abs(e.deltaX) > Math.abs(e.deltaY);
-              
-              if (isHorizontalScroll || e.shiftKey) {
-                e.preventDefault();
-                sliderWrapper.scrollLeft += e.deltaX || e.deltaY;
-              }
-              // Sinon, laisser le scroll vertical normal de la page
-            }, { passive: false });
-            
-            // Gestion du drag avec la souris
-            let isDragging = false;
-            let startX;
-            let dragStartPosition;
-            
-            sliderWrapper.addEventListener('mousedown', (e) => {
-              isDragging = true;
-              sliderWrapper.style.cursor = 'grabbing';
-              startX = e.pageX;
-              dragStartPosition = currentPosition;
-              // Arrêter l'animation pendant le drag
-              if (animationId) {
-                cancelAnimationFrame(animationId);
-                animationId = null;
-              }
-            });
-            
-            sliderWrapper.addEventListener('mouseleave', () => {
-              if (isDragging) {
-                isDragging = false;
-                sliderWrapper.style.cursor = 'grab';
-                // Reprendre l'animation là où on est
-                animate();
-              }
-            });
-            
-            sliderWrapper.addEventListener('mouseup', () => {
-              if (isDragging) {
-                isDragging = false;
-                sliderWrapper.style.cursor = 'grab';
-                // Reprendre l'animation là où on est
-                animate();
-              }
-            });
-            
-            sliderWrapper.addEventListener('mousemove', (e) => {
-              if (!isDragging) return;
-              e.preventDefault();
-              const dx = e.pageX - startX;
-              currentPosition = dragStartPosition + dx;
-              
-              // Gérer le wrap autour pour la boucle infinie
-              while (currentPosition > 0) currentPosition -= totalWidth;
-              while (currentPosition <= -totalWidth) currentPosition += totalWidth;
-              
-              sliderContainer.style.transform = `translateX(${currentPosition}px)`;
-            });
-
-            // Support tactile
-            let touchStartX = 0;
-            let touchStartY = 0;
-            let touchDragStartPosition = 0;
-
-            sliderWrapper.addEventListener('touchstart', (e) => {
-              if (!e.touches || e.touches.length === 0) return;
-              const t = e.touches[0];
-              touchStartX = t.clientX;
-              touchStartY = t.clientY;
-              touchDragStartPosition = currentPosition;
-              // Arrêter l'animation
-              if (animationId) {
-                cancelAnimationFrame(animationId);
-                animationId = null;
-              }
-            }, { passive: true });
-
-            sliderWrapper.addEventListener('touchmove', (e) => {
-              if (!e.touches || e.touches.length === 0) return;
-              const t = e.touches[0];
-              const dx = t.clientX - touchStartX;
-              const dy = t.clientY - touchStartY;
-              // Si le mouvement est principalement horizontal, on gère le slide
-              if (Math.abs(dx) > Math.abs(dy)) {
-                e.preventDefault();
-                currentPosition = touchDragStartPosition + dx;
-                
-                // Gérer le wrap pour la boucle infinie
-                while (currentPosition > 0) currentPosition -= totalWidth;
-                while (currentPosition <= -totalWidth) currentPosition += totalWidth;
-                
-                sliderContainer.style.transform = `translateX(${currentPosition}px)`;
-              }
-            }, { passive: false });
-
-            sliderWrapper.addEventListener('touchend', () => {
-              // Reprendre l'animation là où on est
-              animate();
-            });
-            
-            // Style pour indiquer que c'est draggable
-            sliderWrapper.style.cursor = 'grab';
-            sliderWrapper.style.userSelect = 'none';
-          }
-        }
-
-        // Initialiser au chargement de la page
-        document.addEventListener('DOMContentLoaded', async function() {
-          try {
-            const bets = await loadBetHistoryForSlider();
-            createHomeBetSlider(bets);
-            
-          } catch (error) {
-            console.error('❌ Erreur initialisation slider home:', error);
-            const sliderContainer = document.getElementById('home-bet-history-slider');
-            if (sliderContainer) {
-              sliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Erreur de chargement.</p>';
-            }
-          }
-        });
-
-        // Connecter le bouton au drawer existant
-        document.addEventListener('DOMContentLoaded', function() {
-          const homeBtn = document.getElementById('home-open-bet-history-drawer');
-          if (!homeBtn) return;
-
-          homeBtn.addEventListener('click', () => {
-            // Déléguer au bouton "Pricing" pour garantir un comportement IDENTIQUE
-            const pricingBtn = document.getElementById('open-bet-history-drawer');
-            if (pricingBtn) {
-              pricingBtn.click();
-              return;
-            }
-
-            // Fallback (au cas où)
-            const drawer = document.querySelector('.bet-history-drawer');
-            if (drawer) {
-              drawer.classList.add('active');
-              document.body.classList.add('drawer-open');
-              loadBetHistoryInDrawer();
-            }
-          });
-        });
-      })();
   </script>
 
                 <script>
@@ -1575,14 +1331,6 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Fonction pour charger l'historique complet dans le drawer
   async function loadBetHistoryInDrawer() {
-    // Afficher un état de chargement
-    const container = document.getElementById("bet-history-container-drawer");
-    const statsContainer = document.getElementById("bet-stats-drawer");
-    const emptyState = document.getElementById("bet-empty-state-drawer");
-    if (emptyState) emptyState.style.display = "none";
-    if (statsContainer) statsContainer.innerHTML = "";
-    if (container) container.innerHTML = '<p style="color: rgba(255,255,255,0.7); text-align:center; padding: 1rem;">Chargement…</p>';
-    
     try {
       console.log("📥 Chargement de l'historique complet dans le drawer...");
       const FUNCTIONS_URL = 'https://ycvfyorgkhuxcosfrsxs.functions.supabase.co';
