@@ -1098,54 +1098,71 @@
               sliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Aucun historique disponible</p>';
               return;
             }
-            
-            const sliderBets = data.bets.slice(0, 10).map(bet => {
-              const cashout = parseFloat(bet.cashout_amount) || 0;
-              const mise = parseFloat(bet.bet_amount) || 20;
-              const profit = cashout - mise;
-              const multiplicateur = mise > 0 ? cashout / mise : 0;
-              const resultat = profit > 0 ? 'won' : (profit < 0 ? 'lost' : 'push');
-              
-              return {
-                ...bet,
-                cashout_amount: cashout.toFixed(2),
-                profit: profit.toFixed(2),
-                multiplicateur: multiplicateur.toFixed(2),
-                result: resultat
-              };
-            });
-            
-            // Calculer les statistiques
+
+            // Reprendre exactement la logique du slider PRICING
+            const bets = Array.isArray(data.bets) ? data.bets : [];
+
+            // Garder uniquement les paris complétés
+            const completedBets = bets.filter(bet => bet.result === 'win' || bet.result === 'loose');
+
+            // Tri par date identique au slider PRICING
+            const getBetDate = (bet) => {
+              try {
+                if (bet.match_date) {
+                  const parts = String(bet.match_date).split(/[\/\-.]/).map(Number);
+                  if (parts.length === 3) {
+                    const [dd, mm, yyyy] = parts; // DD/MM/YYYY
+                    const date = new Date(yyyy, (mm || 1) - 1, dd || 1);
+                    if (bet.match_time) {
+                      const [hh, mn] = String(bet.match_time).split(':').map(v => parseInt(v, 10));
+                      if (!isNaN(hh)) {
+                        date.setHours(hh, isNaN(mn) ? 0 : mn, 0, 0);
+                      } else {
+                        date.setHours(23, 59, 59, 999);
+                      }
+                    } else {
+                      date.setHours(23, 59, 59, 999);
+                    }
+                    return date;
+                  }
+                }
+                if (bet.created_at) return new Date(bet.created_at);
+              } catch (_) {}
+              return new Date(0);
+            };
+            completedBets.sort((a, b) => getBetDate(b) - getBetDate(a));
+
+            // Prendre les 10 derniers
+            const sliderBets = completedBets.slice(0, 10);
+
+            // Statistiques (mêmes règles)
             let winsCount = 0;
             let totalUnits = 0;
-            
             sliderBets.forEach(bet => {
-              if (bet.result === 'won') {
+              const betUnits = parseFloat(bet.bet_units || 1);
+              if (bet.result === 'win') {
                 winsCount++;
-                totalUnits += parseFloat(bet.multiplicateur) - 1;
-              } else if (bet.result === 'lost') {
-                totalUnits -= 1;
+                const unitsWon = (parseFloat(bet.multiplier) - 1) * betUnits;
+                totalUnits += unitsWon;
+              } else if (bet.result === 'loose') {
+                totalUnits -= betUnits;
               }
             });
-            
-            // Mettre à jour l'affichage des statistiques
+
+            // Mettre à jour les compteurs HOME
             const winsCountElement = document.getElementById('home-wins-count');
             const unitsCountElement = document.getElementById('home-units-count');
-            
-            if (winsCountElement) {
-              winsCountElement.textContent = `+${winsCount}`;
-            }
-            
+            if (winsCountElement) winsCountElement.textContent = `+${winsCount}`;
             if (unitsCountElement) {
               const formattedUnits = totalUnits >= 0 ? `+${totalUnits.toFixed(2)}` : totalUnits.toFixed(2);
               unitsCountElement.textContent = `${formattedUnits} units`;
               unitsCountElement.style.color = totalUnits >= 0 ? '#22c55e' : '#ef4444';
             }
-            
-            // Générer le HTML pour chaque bet
+
+            // Générer le HTML des cartes comme PRICING
             const cardsHTML = sliderBets.map(bet => generateBetCardHTML(bet)).join('');
-            
-            // Afficher les cartes une seule fois (pas de duplication)
+
+            // Afficher les cartes
             sliderContainer.innerHTML = cardsHTML;
             
             // Configuration de la pagination
@@ -1268,10 +1285,10 @@
           });
         }, { threshold: 0.1 });
 
-        // Observer la section du slider
-        const sliderSection = document.querySelector('.bet-history-slider-wrapper');
-        if (sliderSection) {
-          betHistoryObserver.observe(sliderSection);
+        // Observer la section du slider (PRICING)
+        const pricingWrapper = document.getElementById('bet-history-slider')?.closest('.bet-history-slider-wrapper');
+        if (pricingWrapper) {
+          betHistoryObserver.observe(pricingWrapper);
         }
       })();
 
