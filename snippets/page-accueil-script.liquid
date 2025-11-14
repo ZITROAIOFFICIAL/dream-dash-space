@@ -986,17 +986,19 @@
           const totalCards = cards.length;
           const wrapper = sliderContainer.closest('.bet-history-slider-wrapper');
 
-          // Obtenir la largeur d'une carte + gap
+          // Obtenir la largeur d'une carte + gap (fiable)
           function getCardWidth() {
             if (cards.length === 0) return 0;
-            const cardWidth = cards[0].offsetWidth;
-            const gap = 32; // 2rem en pixels
-            return cardWidth + gap;
+            const cardWidth = cards[0].getBoundingClientRect().width;
+            const containerStyle = window.getComputedStyle(sliderContainer);
+            const gapPx = parseFloat(containerStyle.gap || containerStyle.columnGap || '0') || 0;
+            return cardWidth + gapPx;
           }
 
           // Mettre à jour la position du slider
           function updateSliderPosition() {
             const cardWidth = getCardWidth();
+            if (!cardWidth || !isFinite(cardWidth)) return; // attendre une largeur valide
             const offset = -currentIndex * cardWidth;
             sliderContainer.style.transform = `translateX(${offset}px)`;
             sliderContainer.style.transition = 'transform 0.4s ease';
@@ -1010,21 +1012,20 @@
             
             if (prevBtn) prevBtn.disabled = currentIndex === 0;
             if (nextBtn) {
-              // Calculer combien de cartes sont visibles
-              const wrapperWidth = wrapper ? wrapper.offsetWidth : window.innerWidth;
+              const wrapperWidth = (wrapper ? wrapper.clientWidth : window.innerWidth);
               const cardWidth = getCardWidth();
-              const visibleCards = Math.floor(wrapperWidth / cardWidth);
+              const visibleCards = Math.max(1, Math.floor(wrapperWidth / (cardWidth || 1)) || 1);
               const maxIndex = Math.max(0, totalCards - visibleCards);
               nextBtn.disabled = currentIndex >= maxIndex;
             }
           }
 
-          // Bouton précédent
+          // Assainir les écouteurs (au cas d'init multiples)
           const prevBtn = document.getElementById('bet-slider-prev');
           if (prevBtn) {
-            prevBtn.replaceWith(prevBtn.cloneNode(true)); // Remove old listeners
-            const newPrevBtn = document.getElementById('bet-slider-prev');
-            newPrevBtn.addEventListener('click', () => {
+            const prevClone = prevBtn.cloneNode(true);
+            prevBtn.replaceWith(prevClone);
+            prevClone.addEventListener('click', () => {
               if (currentIndex > 0) {
                 currentIndex--;
                 updateSliderPosition();
@@ -1032,17 +1033,15 @@
             });
           }
 
-          // Bouton suivant
           const nextBtn = document.getElementById('bet-slider-next');
           if (nextBtn) {
-            nextBtn.replaceWith(nextBtn.cloneNode(true)); // Remove old listeners
-            const newNextBtn = document.getElementById('bet-slider-next');
-            newNextBtn.addEventListener('click', () => {
-              const wrapperWidth = wrapper ? wrapper.offsetWidth : window.innerWidth;
+            const nextClone = nextBtn.cloneNode(true);
+            nextBtn.replaceWith(nextClone);
+            nextClone.addEventListener('click', () => {
+              const wrapperWidth = (wrapper ? wrapper.clientWidth : window.innerWidth);
               const cardWidth = getCardWidth();
-              const visibleCards = Math.floor(wrapperWidth / cardWidth);
+              const visibleCards = Math.max(1, Math.floor(wrapperWidth / (cardWidth || 1)) || 1);
               const maxIndex = Math.max(0, totalCards - visibleCards);
-              
               if (currentIndex < maxIndex) {
                 currentIndex++;
                 updateSliderPosition();
@@ -1050,19 +1049,30 @@
             });
           }
 
-          // Initialiser la position
-          setTimeout(() => {
+          // Observer les changements de taille (images / fonts / responsive)
+          const ro = new ResizeObserver(() => {
+            // remettre à 0 si l'index dépasse la nouvelle borne
+            const wrapperWidth = (wrapper ? wrapper.clientWidth : window.innerWidth);
+            const cardWidth = getCardWidth();
+            const visibleCards = Math.max(1, Math.floor(wrapperWidth / (cardWidth || 1)) || 1);
+            const maxIndex = Math.max(0, totalCards - visibleCards);
+            if (currentIndex > maxIndex) currentIndex = maxIndex;
             updateSliderPosition();
-          }, 100);
+          });
+          ro.observe(sliderContainer);
 
-          // Recalculer au resize
+          // Initialiser après une frame pour garantir les mesures
+          requestAnimationFrame(() => {
+            updateSliderPosition();
+          });
+
+          // Recalculer au resize (fallback)
           let resizeTimeout;
           window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
-              currentIndex = 0; // Reset position on resize
               updateSliderPosition();
-            }, 200);
+            }, 150);
           });
         }
 
