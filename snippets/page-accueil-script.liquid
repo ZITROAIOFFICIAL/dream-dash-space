@@ -682,12 +682,22 @@
             politique.style.display = 'none';
             support.style.display = 'none';
             rejoindre.style.display = 'block';
+            // Cacher explicitement les sliders historiques
+            const homeSlider = document.querySelector('.home-bet-history-slider-section');
+            const betSlider = document.querySelector('.bet-history-section');
+            if (homeSlider) homeSlider.style.display = 'none';
+            if (betSlider) betSlider.style.display = 'none';
             window.scrollTo(0, 0);
           } else {
             home.style.display = 'block';
             politique.style.display = 'none';
             support.style.display = 'none';
             rejoindre.style.display = 'none';
+            // Réafficher les sliders
+            const homeSlider = document.querySelector('.home-bet-history-slider-section');
+            const betSlider = document.querySelector('.bet-history-section');
+            if (homeSlider) homeSlider.style.display = 'block';
+            if (betSlider) betSlider.style.display = 'block';
           }
         }
         
