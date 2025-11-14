@@ -2620,6 +2620,30 @@
         margin: 0;
       }
 
+      /* SVG Desktop - visible sur desktop, caché sur mobile */
+      .bet-history-slider-title svg:not(#atom-mobile-home):not(#atom-mobile) {
+        display: block;
+      }
+      
+      /* SVG Mobile - caché sur desktop */
+      #atom-mobile-home,
+      #atom-mobile {
+        display: none;
+      }
+
+      @media (max-width: 768px) {
+        /* Sur mobile: cacher le SVG desktop et afficher le SVG mobile */
+        .bet-history-slider-title svg:not(#atom-mobile-home):not(#atom-mobile) {
+          display: none;
+        }
+        
+        #atom-mobile-home,
+        #atom-mobile {
+          display: block;
+        }
+      }
+
+
       .bet-history-slider-wrapper {
         width: 100%;
         overflow: hidden;
