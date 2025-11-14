@@ -1604,14 +1604,14 @@
         .pricing-plan-card[data-plan="interac-6months"] .pricing-plan-header > div:last-child,
         .pricing-plan-card[data-plan="interac-yearly"] .pricing-plan-header > div:last-child {
           margin-left: auto;
-          margin-right: -3rem; /* compense le padding droit de la carte */
+          margin-right: 0; /* Removed negative margin that was causing overflow */
         }
 
         @media (max-width: 768px) {
           .pricing-plan-card[data-plan="interac-3months"] .pricing-plan-header > div:last-child,
           .pricing-plan-card[data-plan="interac-6months"] .pricing-plan-header > div:last-child,
           .pricing-plan-card[data-plan="interac-yearly"] .pricing-plan-header > div:last-child {
-            margin-right: -1.5rem; /* compense le padding droit mobile */
+            margin-right: 0; /* Removed negative margin that was causing overflow */
           }
         }
 
