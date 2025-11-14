@@ -1076,6 +1076,179 @@
           });
         }
 
+        // ===== SLIDER HOME HISTORIQUE (COPIE) =====
+        // Charger l'historique pour le slider HOME
+        async function loadBetHistoryForHomeSlider() {
+          const sliderContainer = document.getElementById('home-bet-history-slider');
+          if (!sliderContainer) {
+            console.warn('Slider HOME historique introuvable');
+            return;
+          }
+          
+          try {
+            const response = await fetch(`${window.SUPABASE_CONFIG.functionsBase}/get-bet-history`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ shopDomain: window.SUPABASE_CONFIG.shopDomain })
+            });
+            
+            if (!response.ok) throw new Error('Erreur réseau');
+            
+            const data = await response.json();
+            if (!data.bets || data.bets.length === 0) {
+              sliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Aucun historique disponible</p>';
+              return;
+            }
+            
+            const sliderBets = data.bets.slice(0, 10).map(bet => {
+              const cashout = parseFloat(bet.cashout_amount) || 0;
+              const mise = parseFloat(bet.bet_amount) || 20;
+              const profit = cashout - mise;
+              const multiplicateur = mise > 0 ? cashout / mise : 0;
+              const resultat = profit > 0 ? 'won' : (profit < 0 ? 'lost' : 'push');
+              
+              return {
+                ...bet,
+                cashout_amount: cashout.toFixed(2),
+                profit: profit.toFixed(2),
+                multiplicateur: multiplicateur.toFixed(2),
+                result: resultat
+              };
+            });
+            
+            // Calculer les statistiques
+            let winsCount = 0;
+            let totalUnits = 0;
+            
+            sliderBets.forEach(bet => {
+              if (bet.result === 'won') {
+                winsCount++;
+                totalUnits += parseFloat(bet.multiplicateur) - 1;
+              } else if (bet.result === 'lost') {
+                totalUnits -= 1;
+              }
+            });
+            
+            // Mettre à jour l'affichage des statistiques
+            const winsCountElement = document.getElementById('home-wins-count');
+            const unitsCountElement = document.getElementById('home-units-count');
+            
+            if (winsCountElement) {
+              winsCountElement.textContent = `+${winsCount}`;
+            }
+            
+            if (unitsCountElement) {
+              const formattedUnits = totalUnits >= 0 ? `+${totalUnits.toFixed(2)}` : totalUnits.toFixed(2);
+              unitsCountElement.textContent = `${formattedUnits} units`;
+              unitsCountElement.style.color = totalUnits >= 0 ? '#22c55e' : '#ef4444';
+            }
+            
+            // Générer le HTML pour chaque bet
+            const cardsHTML = sliderBets.map(bet => generateBetCardHTML(bet)).join('');
+            
+            // Afficher les cartes une seule fois (pas de duplication)
+            sliderContainer.innerHTML = cardsHTML;
+            
+            // Configuration de la pagination
+            let currentIndex = 0;
+            const cards = sliderContainer.querySelectorAll('.card-wrapper');
+            const totalCards = cards.length;
+            const wrapper = sliderContainer.closest('.bet-history-slider-wrapper');
+
+            // Obtenir la largeur d'une carte + gap (fiable)
+            function getCardWidth() {
+              if (cards.length === 0) return 0;
+              const cardWidth = cards[0].getBoundingClientRect().width;
+              const containerStyle = window.getComputedStyle(sliderContainer);
+              const gapPx = parseFloat(containerStyle.gap || containerStyle.columnGap || '0') || 0;
+              return cardWidth + gapPx;
+            }
+
+            // Mettre à jour la position du slider
+            function updateSliderPosition() {
+              const cardWidth = getCardWidth();
+              if (!cardWidth || !isFinite(cardWidth)) return; // attendre une largeur valide
+              const offset = -currentIndex * cardWidth;
+              sliderContainer.style.transform = `translateX(${offset}px)`;
+              sliderContainer.style.transition = 'transform 0.4s ease';
+              updateButtons();
+            }
+
+            // Mettre à jour l'état des boutons
+            function updateButtons() {
+              const prevBtn = document.getElementById('home-bet-slider-prev');
+              const nextBtn = document.getElementById('home-bet-slider-next');
+              
+              if (prevBtn) prevBtn.disabled = currentIndex === 0;
+              if (nextBtn) {
+                const wrapperWidth = (wrapper ? wrapper.clientWidth : window.innerWidth);
+                const cardWidth = getCardWidth();
+                const visibleCards = Math.max(1, Math.floor(wrapperWidth / (cardWidth || 1)) || 1);
+                const maxIndex = Math.max(0, totalCards - visibleCards);
+                nextBtn.disabled = currentIndex >= maxIndex;
+              }
+            }
+
+            // Assainir les écouteurs (au cas d'init multiples)
+            const prevBtn = document.getElementById('home-bet-slider-prev');
+            if (prevBtn) {
+              const prevClone = prevBtn.cloneNode(true);
+              prevBtn.replaceWith(prevClone);
+              prevClone.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                  currentIndex--;
+                  updateSliderPosition();
+                }
+              });
+            }
+
+            const nextBtn = document.getElementById('home-bet-slider-next');
+            if (nextBtn) {
+              const nextClone = nextBtn.cloneNode(true);
+              nextBtn.replaceWith(nextClone);
+              nextClone.addEventListener('click', () => {
+                const wrapperWidth = (wrapper ? wrapper.clientWidth : window.innerWidth);
+                const cardWidth = getCardWidth();
+                const visibleCards = Math.max(1, Math.floor(wrapperWidth / (cardWidth || 1)) || 1);
+                const maxIndex = Math.max(0, totalCards - visibleCards);
+                if (currentIndex < maxIndex) {
+                  currentIndex++;
+                  updateSliderPosition();
+                }
+              });
+            }
+
+            // Observer les changements de taille (images / fonts / responsive)
+            const ro = new ResizeObserver(() => {
+              // remettre à 0 si l'index dépasse la nouvelle borne
+              const wrapperWidth = (wrapper ? wrapper.clientWidth : window.innerWidth);
+              const cardWidth = getCardWidth();
+              const visibleCards = Math.max(1, Math.floor(wrapperWidth / (cardWidth || 1)) || 1);
+              const maxIndex = Math.max(0, totalCards - visibleCards);
+              if (currentIndex > maxIndex) currentIndex = maxIndex;
+              updateSliderPosition();
+            });
+            ro.observe(sliderContainer);
+
+            // Initialiser après une frame pour garantir les mesures
+            requestAnimationFrame(() => {
+              updateSliderPosition();
+            });
+
+            // Recalculer au resize (fallback)
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+              clearTimeout(resizeTimeout);
+              resizeTimeout = setTimeout(() => {
+                updateSliderPosition();
+              }, 150);
+            });
+          } catch (error) {
+            console.error('Erreur lors du chargement du slider HOME:', error);
+            sliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Erreur de chargement</p>';
+          }
+        }
+
 
         // Initialiser avec IntersectionObserver pour gérer la navigation sans refresh
         const betHistoryObserver = new IntersectionObserver((entries) => {
@@ -1100,6 +1273,32 @@
         const sliderSection = document.querySelector('.bet-history-slider-wrapper');
         if (sliderSection) {
           betHistoryObserver.observe(sliderSection);
+        }
+      })();
+
+      // ===== OBSERVER POUR SLIDER HOME =====
+      (function() {
+        const homeSliderObserver = new IntersectionObserver((entries) => {
+          entries.forEach(async entry => {
+            if (entry.isIntersecting && !entry.target.dataset.initialized) {
+              entry.target.dataset.initialized = 'true';
+              try {
+                await loadBetHistoryForHomeSlider();
+              } catch (error) {
+                console.error('❌ Erreur initialisation slider HOME:', error);
+                const sliderContainer = document.getElementById('home-bet-history-slider');
+                if (sliderContainer) {
+                  sliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Erreur de chargement.</p>';
+                }
+              }
+            }
+          });
+        }, { threshold: 0.1 });
+
+        // Observer la section du slider HOME
+        const homeSliderSection = document.getElementById('home-bet-history-slider');
+        if (homeSliderSection) {
+          homeSliderObserver.observe(homeSliderSection.closest('.bet-history-slider-wrapper'));
         }
       })();
   </script>
