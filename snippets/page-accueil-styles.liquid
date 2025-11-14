@@ -2617,8 +2617,10 @@
 
       .bet-history-slider-container {
         display: flex;
+        flex-wrap: nowrap;
         gap: 2rem;
         transition: transform 0.4s ease;
+        will-change: transform;
       }
       
       /* Conteneur des boutons de navigation */
@@ -2629,6 +2631,7 @@
         align-items: center;
         margin-top: 2rem;
         padding: 0 2rem;
+        pointer-events: auto;
       }
       
       /* Boutons de navigation du slider */
@@ -2644,6 +2647,7 @@
         cursor: pointer;
         transition: all 0.3s ease;
         color: white;
+        pointer-events: auto;
       }
 
       .slider-nav-btn:hover:not(:disabled) {
@@ -2658,8 +2662,8 @@
 
       /* Cartes dans le slider */
       .bet-history-slider-container .card-wrapper {
-        flex: 0 0 auto;
-        width: 320px;
+        flex: 0 0 100%;
+        width: 100%;
         margin: 0;
       }
 
@@ -2703,7 +2707,8 @@
         }
 
         .bet-history-slider-container .card-wrapper {
-          width: 280px;
+          flex: 0 0 100%;
+          width: 100%;
         }
 
         .bet-history-slider-container .history-card {
