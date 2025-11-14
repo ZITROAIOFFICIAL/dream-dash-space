@@ -1401,6 +1401,17 @@
       }
 
       @media (max-width: 768px) {
+        /* Règles de secours pour garantir le scroll mobile */
+        html, body {
+          overflow-y: auto !important;
+        }
+        
+        /* Bloquer le scroll uniquement quand sidebar ou drawer sont ouverts */
+        body.sidebar-open,
+        body.drawer-open {
+          overflow: hidden !important;
+        }
+        
         .stats-platform-title {
           font-size: 2rem;
         }
