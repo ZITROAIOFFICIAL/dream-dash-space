@@ -1293,7 +1293,7 @@
       })();
 
       // ===== OBSERVER POUR SLIDER HOME =====
-      document.addEventListener('DOMContentLoaded', function() {
+      (function() {
         const homeSliderObserver = new IntersectionObserver((entries) => {
           entries.forEach(async entry => {
             if (entry.isIntersecting && !entry.target.dataset.initialized) {
@@ -1320,7 +1320,7 @@
         } else {
           console.warn('⚠️ Wrapper du slider HOME introuvable');
         }
-      });
+      })();
   </script>
 
                 <script>
