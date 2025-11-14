@@ -122,6 +122,17 @@
       }, 0);
     }
 
+    // Scroll instantané (bypass scroll-behavior: smooth)
+    function instantScrollTop() {
+      const html = document.documentElement;
+      const prev = html.style.scrollBehavior;
+      html.style.scrollBehavior = 'auto';
+      window.scrollTo(0, 0);
+      setTimeout(function() {
+        html.style.scrollBehavior = prev || '';
+      }, 0);
+    }
+
     // Fermer le sidebar automatiquement quand on clique sur un lien
     document.addEventListener('DOMContentLoaded', function() {
       const sidebarLinks = document.querySelectorAll('.sidebar .nav-item, .sidebar .auth-btn-gray, .sidebar .auth-btn-white');
@@ -141,20 +152,14 @@
         if (link) {
           e.preventDefault();
           unlockScroll();
-          setTimeout(function() {
-            window.location.hash = 'rejoindre';
-            setTimeout(function() {
-              unlockScroll();
-              window.scrollTo(0, 0);
-            }, 10);
-          }, 0);
+          window.location.hash = 'rejoindre';
         }
       });
       
       // Nettoyage initial si on arrive directement sur #rejoindre
       if (window.location.hash === '#rejoindre') {
         unlockScroll();
-        window.scrollTo(0, 0);
+        instantScrollTop();
       }
     });
 
@@ -738,23 +743,19 @@
             politique.style.display = 'block';
             support.style.display = 'none';
             rejoindre.style.display = 'none';
-            window.scrollTo(0, 0);
+            instantScrollTop();
           } else if (hash === 'support') {
             home.style.display = 'none';
             politique.style.display = 'none';
             support.style.display = 'block';
             rejoindre.style.display = 'none';
-            window.scrollTo(0, 0);
+            instantScrollTop();
           } else if (hash === 'rejoindre') {
             home.style.display = 'none';
             politique.style.display = 'none';
             support.style.display = 'none';
             rejoindre.style.display = 'block';
-            // Double nettoyage pour #rejoindre spécifiquement
-            setTimeout(function() {
-              unlockScroll();
-              window.scrollTo(0, 0);
-            }, 10);
+            instantScrollTop();
           } else {
             home.style.display = 'block';
             politique.style.display = 'none';
