@@ -4,17 +4,6 @@
       scroll-behavior: smooth;
     }
     
-    /* Désactiver smooth scroll sur mobile pour résoudre bug de scroll */
-    @media (max-width: 768px) {
-      html {
-        scroll-behavior: auto !important;
-      }
-      html, body {
-        overflow-y: auto !important;
-        height: auto !important;
-      }
-    }
-    
     /* Empêcher le scroll horizontal */
     html, body {
       overflow-x: hidden;
@@ -316,7 +305,7 @@
             Se Connecter
           </a>
         {% endif %}
-        <a href="#rejoindre" class="auth-btn-gray">
+        <a href="#rejoindre" class="auth-btn-gray" onclick="toggleSidebar()">
           Commencer Gratuitement
         </a>
       </div>
@@ -1412,17 +1401,6 @@
       }
 
       @media (max-width: 768px) {
-        /* Règles de secours pour garantir le scroll mobile */
-        html, body {
-          overflow-y: auto !important;
-        }
-        
-        /* Bloquer le scroll uniquement quand sidebar ou drawer sont ouverts */
-        body.sidebar-open,
-        body.drawer-open {
-          overflow: hidden !important;
-        }
-        
         .stats-platform-title {
           font-size: 2rem;
         }
@@ -2641,7 +2619,6 @@
         scrollbar-width: none; /* Firefox */
         -ms-overflow-style: none; /* IE et Edge */
         -webkit-overflow-scrolling: touch; /* iOS momentum scroll */
-        touch-action: pan-y; /* Permettre le scroll vertical sur mobile */
       }
       
       /* Cacher la scrollbar pour Chrome, Safari et Opera */
@@ -2915,7 +2892,6 @@
         scrollbar-width: none; /* Firefox */
         -ms-overflow-style: none; /* IE et Edge */
         -webkit-overflow-scrolling: touch; /* iOS momentum scroll */
-        touch-action: pan-y; /* Permettre le scroll vertical sur mobile */
       }
       
       /* Cacher la scrollbar pour Chrome, Safari et Opera */

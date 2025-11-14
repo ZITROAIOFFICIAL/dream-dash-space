@@ -79,62 +79,6 @@
       mobileToggle.classList.toggle('active');
     }
 
-    // Fonction globale pour débloquer complètement le scroll
-    function unlockScroll() {
-      const body = document.body;
-      const html = document.documentElement;
-      
-      // Récupérer la position de scroll sauvegardée
-      const prevTop = parseInt(body.style.top || '0');
-      
-      // Retirer toutes les classes bloquantes
-      body.classList.remove('sidebar-open', 'drawer-open', 'body-no-scroll');
-      
-      // Nettoyer tous les styles inline et forcer les valeurs correctes
-      body.style.top = '';
-      body.style.overflow = 'auto';
-      body.style.position = '';
-      body.style.height = 'auto';
-      html.style.overflow = 'auto';
-      html.style.height = 'auto';
-      
-      // Fermer tous les overlays et éléments résiduels
-      const overlay = document.querySelector('.overlay');
-      const mobileToggle = document.querySelector('.mobile-toggle');
-      const sidebar = document.querySelector('.sidebar');
-      const betDrawer = document.getElementById('bet-history-drawer');
-      const betDrawerAlt = document.querySelector('.bet-history-drawer');
-      
-      if (overlay) overlay.classList.remove('active');
-      if (mobileToggle) mobileToggle.classList.remove('active');
-      if (sidebar) sidebar.classList.remove('active');
-      if (betDrawer) betDrawer.classList.remove('active');
-      if (betDrawerAlt) betDrawerAlt.classList.remove('active');
-      
-      // Restaurer la position de scroll si elle était sauvegardée
-      if (prevTop < 0) {
-        window.scrollTo(0, Math.abs(prevTop));
-      }
-      
-      // Double passe de sécurité
-      setTimeout(function() {
-        body.classList.remove('sidebar-open', 'drawer-open', 'body-no-scroll');
-        body.style.overflow = '';
-        html.style.overflow = '';
-      }, 0);
-    }
-
-    // Scroll instantané (bypass scroll-behavior: smooth)
-    function instantScrollTop() {
-      const html = document.documentElement;
-      const prev = html.style.scrollBehavior;
-      html.style.scrollBehavior = 'auto';
-      window.scrollTo(0, 0);
-      setTimeout(function() {
-        html.style.scrollBehavior = prev || '';
-      }, 0);
-    }
-
     // Fermer le sidebar automatiquement quand on clique sur un lien
     document.addEventListener('DOMContentLoaded', function() {
       const sidebarLinks = document.querySelectorAll('.sidebar .nav-item, .sidebar .auth-btn-gray, .sidebar .auth-btn-white');
@@ -147,22 +91,6 @@
           }
         });
       });
-      
-      // Gérer les clics vers #rejoindre pour garantir le déblocage du scroll
-      document.addEventListener('click', function(e) {
-        const link = e.target.closest('a[href="#rejoindre"]');
-        if (link) {
-          e.preventDefault();
-          unlockScroll();
-          window.location.hash = 'rejoindre';
-        }
-      });
-      
-      // Nettoyage initial si on arrive directement sur #rejoindre
-      if (window.location.hash === '#rejoindre') {
-        unlockScroll();
-        instantScrollTop();
-      }
     });
 
     // Update time
@@ -737,54 +665,24 @@
           var rejoindre = document.getElementById('rejoindre');
           if (!home || !politique || !support || !rejoindre) return;
 
-          // Recharger la page automatiquement quand on arrive sur #rejoindre
-          if (hash === 'rejoindre' && !sessionStorage.getItem('rejoindre_reloaded')) {
-            sessionStorage.setItem('rejoindre_reloaded', 'true');
-            location.reload();
-            return;
-          }
-          
-          // Nettoyer le flag si on quitte #rejoindre
-          if (hash !== 'rejoindre') {
-            sessionStorage.removeItem('rejoindre_reloaded');
-          }
-
-          // Débloquer complètement le scroll avant de changer de page
-          unlockScroll();
-
           if (hash === 'politique') {
             home.style.display = 'none';
             politique.style.display = 'block';
             support.style.display = 'none';
             rejoindre.style.display = 'none';
-            politique.offsetHeight; // Force reflow
-            requestAnimationFrame(function() {
-              requestAnimationFrame(function() {
-                instantScrollTop();
-              });
-            });
+            window.scrollTo(0, 0);
           } else if (hash === 'support') {
             home.style.display = 'none';
             politique.style.display = 'none';
             support.style.display = 'block';
             rejoindre.style.display = 'none';
-            support.offsetHeight; // Force reflow
-            requestAnimationFrame(function() {
-              requestAnimationFrame(function() {
-                instantScrollTop();
-              });
-            });
+            window.scrollTo(0, 0);
           } else if (hash === 'rejoindre') {
             home.style.display = 'none';
             politique.style.display = 'none';
             support.style.display = 'none';
             rejoindre.style.display = 'block';
-            rejoindre.offsetHeight; // Force reflow
-            requestAnimationFrame(function() {
-              requestAnimationFrame(function() {
-                instantScrollTop();
-              });
-            });
+            window.scrollTo(0, 0);
           } else {
             home.style.display = 'block';
             politique.style.display = 'none';
@@ -836,15 +734,10 @@
               localStorage.setItem('winabet_selected_plan', 'monthly');
               
               // Scroller vers le haut pour voir les forfaits
-              // Sur mobile: scroll instant, sur desktop: smooth
-              if (window.innerWidth < 768) {
-                instantScrollTop();
-              } else {
-                window.scrollTo({
-                  top: 0,
-                  behavior: 'smooth'
-                });
-              }
+              window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+              });
             });
           }
         });
@@ -1196,8 +1089,8 @@
               const t = e.touches[0];
               const dx = t.clientX - touchStartX;
               const dy = t.clientY - touchStartY;
-              // Bloquer le scroll vertical seulement si le mouvement est clairement horizontal
-              if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 12) {
+              // Si le mouvement est principalement horizontal, on gère le slide
+              if (Math.abs(dx) > Math.abs(dy)) {
                 e.preventDefault();
                 currentPosition = touchDragStartPosition + dx;
                 
@@ -1412,8 +1305,8 @@
               const t = e.touches[0];
               const dx = t.clientX - touchStartX;
               const dy = t.clientY - touchStartY;
-              // Bloquer le scroll vertical seulement si le mouvement est clairement horizontal
-              if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 12) {
+              // Si le mouvement est principalement horizontal, on gère le slide
+              if (Math.abs(dx) > Math.abs(dy)) {
                 e.preventDefault();
                 currentPosition = touchDragStartPosition + dx;
                 
