@@ -133,43 +133,6 @@
       }, 0);
     }
 
-    // Garde du corps pour empêcher tout "relock" sur #rejoindre
-    var scrollLockObserver = null;
-    function startScrollLockObserver() {
-      if (scrollLockObserver) return;
-      scrollLockObserver = new MutationObserver(function() {
-        if (document.body.dataset.page === 'rejoindre') {
-          // Neutraliser toute réapparition de locks immédiatement
-          document.body.classList.remove('sidebar-open', 'drawer-open', 'body-no-scroll');
-          document.body.style.overflow = '';
-          document.body.style.position = '';
-          document.body.style.top = '';
-          document.documentElement.style.overflow = '';
-
-          var overlay = document.querySelector('.overlay');
-          var sidebar = document.querySelector('.sidebar');
-          var mobileToggle = document.querySelector('.mobile-toggle');
-          var betDrawer = document.getElementById('bet-history-drawer');
-          var betDrawerAlt = document.querySelector('.bet-history-drawer');
-
-          if (overlay) overlay.classList.remove('active');
-          if (sidebar) sidebar.classList.remove('active');
-          if (mobileToggle) mobileToggle.classList.remove('active');
-          if (betDrawer) betDrawer.classList.remove('active');
-          if (betDrawerAlt) betDrawerAlt.classList.remove('active');
-        }
-      });
-
-      scrollLockObserver.observe(document.body, { attributes: true, attributeFilter: ['class', 'style'] });
-    }
-
-    function stopScrollLockObserver() {
-      if (scrollLockObserver) {
-        scrollLockObserver.disconnect();
-        scrollLockObserver = null;
-      }
-    }
-
     // Fermer le sidebar automatiquement quand on clique sur un lien
     document.addEventListener('DOMContentLoaded', function() {
       const sidebarLinks = document.querySelectorAll('.sidebar .nav-item, .sidebar .auth-btn-gray, .sidebar .auth-btn-white');
@@ -189,7 +152,6 @@
         if (link) {
           e.preventDefault();
           unlockScroll();
-          startScrollLockObserver();
           window.location.hash = 'rejoindre';
         }
       });
@@ -198,7 +160,6 @@
       if (window.location.hash === '#rejoindre') {
         unlockScroll();
         instantScrollTop();
-        startScrollLockObserver();
       }
     });
 
@@ -776,38 +737,30 @@
 
           // Débloquer complètement le scroll avant de changer de page
           unlockScroll();
-          instantScrollTop();
-          
-          // Reset data-page
-          document.body.dataset.page = '';
-          document.documentElement.removeAttribute('data-page');
 
           if (hash === 'politique') {
             home.style.display = 'none';
             politique.style.display = 'block';
             support.style.display = 'none';
             rejoindre.style.display = 'none';
-            stopScrollLockObserver();
+            instantScrollTop();
           } else if (hash === 'support') {
             home.style.display = 'none';
             politique.style.display = 'none';
             support.style.display = 'block';
             rejoindre.style.display = 'none';
-            stopScrollLockObserver();
+            instantScrollTop();
           } else if (hash === 'rejoindre') {
             home.style.display = 'none';
             politique.style.display = 'none';
             support.style.display = 'none';
             rejoindre.style.display = 'block';
-            document.body.dataset.page = 'rejoindre';
-            document.documentElement.setAttribute('data-page', 'rejoindre');
-            startScrollLockObserver();
+            instantScrollTop();
           } else {
             home.style.display = 'block';
             politique.style.display = 'none';
             support.style.display = 'none';
             rejoindre.style.display = 'none';
-            stopScrollLockObserver();
           }
         }
         
