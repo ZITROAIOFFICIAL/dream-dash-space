@@ -1276,11 +1276,12 @@
       })();
 
       // ===== OBSERVER POUR SLIDER HOME =====
-      (function() {
+      document.addEventListener('DOMContentLoaded', function() {
         const homeSliderObserver = new IntersectionObserver((entries) => {
           entries.forEach(async entry => {
             if (entry.isIntersecting && !entry.target.dataset.initialized) {
               entry.target.dataset.initialized = 'true';
+              console.log('🎯 Slider HOME détecté, chargement en cours...');
               try {
                 await loadBetHistoryForHomeSlider();
               } catch (error) {
@@ -1295,11 +1296,14 @@
         }, { threshold: 0.1 });
 
         // Observer la section du slider HOME
-        const homeSliderSection = document.getElementById('home-bet-history-slider');
-        if (homeSliderSection) {
-          homeSliderObserver.observe(homeSliderSection.closest('.bet-history-slider-wrapper'));
+        const homeSliderWrapper = document.querySelector('.bet-history-slider-section .bet-history-slider-wrapper');
+        if (homeSliderWrapper) {
+          console.log('✅ Observer HOME attaché au wrapper');
+          homeSliderObserver.observe(homeSliderWrapper);
+        } else {
+          console.warn('⚠️ Wrapper du slider HOME introuvable');
         }
-      })();
+      });
   </script>
 
                 <script>
