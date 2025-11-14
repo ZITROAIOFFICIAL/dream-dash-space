@@ -678,27 +678,11 @@
             rejoindre.style.display = 'none';
             window.scrollTo(0, 0);
           } else if (hash === 'rejoindre') {
-            // Afficher l'overlay de chargement
-            var loadingOverlay = document.getElementById('pricing-loading-overlay');
-            if (loadingOverlay) {
-              loadingOverlay.style.display = 'flex';
-              // Bloquer le scroll
-              document.body.style.overflow = 'hidden';
-            }
-            
             home.style.display = 'none';
             politique.style.display = 'none';
             support.style.display = 'none';
             rejoindre.style.display = 'block';
             window.scrollTo(0, 0);
-            
-            // Cacher l'overlay après 1,5 secondes et débloquer le scroll
-            setTimeout(function() {
-              if (loadingOverlay) {
-                loadingOverlay.style.display = 'none';
-                document.body.style.overflow = '';
-              }
-            }, 1500);
           } else {
             home.style.display = 'block';
             politique.style.display = 'none';
