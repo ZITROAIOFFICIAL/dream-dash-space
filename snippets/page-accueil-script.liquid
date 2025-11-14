@@ -1080,12 +1080,15 @@
         }
 
 
-// Fonction d'initialisation du slider
+// Fonction d'initialisation du slider (avec garde anti double init)
 async function initializeBetSlider() {
   try {
+    const container = document.getElementById('bet-history-slider');
+    if (!container || container.dataset.initialized === 'true') return;
+    container.dataset.initialized = 'true';
+
     const bets = await loadBetHistoryForSlider();
     createBetSlider(bets);
-    
   } catch (error) {
     console.error('❌ Erreur initialisation slider:', error);
     const sliderContainer = document.getElementById('bet-history-slider');
@@ -1095,13 +1098,41 @@ async function initializeBetSlider() {
   }
 }
 
-// Initialiser immédiatement si le DOM est déjà chargé, sinon attendre
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initializeBetSlider);
-} else {
-  // Le DOM est déjà chargé, initialiser immédiatement
-  initializeBetSlider();
+// Utilitaire: exécute le callback dès que l'élément existe dans le DOM
+function onElementAvailable(selector, cb) {
+  const el = document.querySelector(selector);
+  if (el) return cb(el);
+
+  const observer = new MutationObserver((mutations, obs) => {
+    const elNow = document.querySelector(selector);
+    if (elNow) {
+      obs.disconnect();
+      cb(elNow);
+    }
+  });
+  observer.observe(document.documentElement, { childList: true, subtree: true });
+
+  // Sécurité: éviter un observer permanent
+  setTimeout(() => observer.disconnect(), 10000);
 }
+
+// Bootstrapping dans tous les scénarios de navigation
+function bootBetSlider() {
+  onElementAvailable('#bet-history-slider', () => initializeBetSlider());
+}
+
+// Au chargement initial
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', bootBetSlider);
+} else {
+  bootBetSlider();
+}
+
+// Cas navigation/retour & éditeur Shopify
+window.addEventListener('pageshow', bootBetSlider);        // inclut bfcache
+window.addEventListener('popstate', bootBetSlider);        // navigation historique
+document.addEventListener('shopify:section:load', bootBetSlider);
+document.addEventListener('shopify:section:select', bootBetSlider);
       })();
   </script>
 
