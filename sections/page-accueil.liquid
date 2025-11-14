@@ -1481,6 +1481,118 @@
           line-height: 1.5;
         }
 
+        /* Section FAQ */
+        .faq-section {
+          width: 100%;
+          max-width: 800px;
+          margin: 6rem auto 4rem;
+          padding: 0 2rem;
+        }
+
+        .faq-title {
+          font-family: 'Outfit', sans-serif;
+          font-size: 3rem;
+          font-weight: 700;
+          color: white;
+          text-align: center;
+          margin-bottom: 3rem;
+        }
+
+        .faq-accordion {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .faq-item {
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 12px;
+          overflow: hidden;
+          transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+          background: rgba(255, 255, 255, 0.08);
+          border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .faq-question {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 1.5rem 2rem;
+          background: transparent;
+          border: none;
+          font-family: 'Outfit', sans-serif;
+          font-size: 1.3rem;
+          font-weight: 600;
+          color: white;
+          text-align: left;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+          color: rgba(255, 255, 255, 0.8);
+        }
+
+        .faq-chevron {
+          flex-shrink: 0;
+          margin-left: 1rem;
+          transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-chevron {
+          transform: rotate(180deg);
+        }
+
+        .faq-answer {
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+          max-height: 500px;
+          padding: 0 2rem 1.5rem 2rem;
+        }
+
+        .faq-answer p {
+          font-family: 'Outfit', sans-serif;
+          font-size: 1.1rem;
+          font-weight: 400;
+          color: rgba(255, 255, 255, 0.7);
+          line-height: 1.6;
+          margin: 0;
+        }
+
+        @media (max-width: 768px) {
+          .faq-section {
+            margin: 4rem auto 3rem;
+            padding: 0 1.5rem;
+          }
+
+          .faq-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+          }
+
+          .faq-question {
+            padding: 1.2rem 1.5rem;
+            font-size: 1.1rem;
+          }
+
+          .faq-answer p {
+            font-size: 1rem;
+          }
+
+          .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.2rem 1.5rem;
+          }
+        }
+
         /* Grille des forfaits */
         .pricing-plans-grid {
           display: grid;
@@ -3051,6 +3163,78 @@
           </div>
         </div>
 
+        <!-- Section FAQ Accordéon -->
+        <div class="faq-section">
+          <h3 class="faq-title">Questions fréquentes</h3>
+          
+          <div class="faq-accordion">
+            <!-- Question 1 -->
+            <div class="faq-item">
+              <button class="faq-question" onclick="toggleFAQ(this)">
+                <span>Est-ce qu'il y a plusieurs abonnements ?</span>
+                <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-answer">
+                <p>Non, c'est seulement plusieurs options de paiement. Vous pouvez soit payer par mois, ou payer moins cher en payant plus d'un coup.</p>
+              </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="faq-item">
+              <button class="faq-question" onclick="toggleFAQ(this)">
+                <span>Quand ai-je accès ?</span>
+                <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-answer">
+                <p>Instantanément après l'achat de l'abonnement.</p>
+              </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="faq-item">
+              <button class="faq-question" onclick="toggleFAQ(this)">
+                <span>Puis-je me désabonner ?</span>
+                <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-answer">
+                <p>Oui, vous pouvez à tout moment vous désabonner. C'est ultra facile, il y a un gros bouton clair dans votre section compte, aucune question posée.</p>
+              </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="faq-item">
+              <button class="faq-question" onclick="toggleFAQ(this)">
+                <span>Suis-je déboursé si j'annule le free trial ?</span>
+                <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-answer">
+                <p>Non, vous êtes seulement déboursé après 24h que vous avez commencé l'essai. Si vous annulez avant, vous ne serez jamais déboursé.</p>
+              </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="faq-item">
+              <button class="faq-question" onclick="toggleFAQ(this)">
+                <span>Les remboursements</span>
+                <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="faq-answer">
+                <p>Si vous avez oublié de vous désabonner directement après un paiement, nous pouvons procéder à un remboursement sans problème. Si vous avez passé un mois complet, ensuite demander un remboursement, ce ne sera pas possible par contre.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Simulateur de profit -->
         <div class="profit-simulator">
           <p class="profit-simulator-legend">(selon notre vrai historique)</p>
@@ -3534,7 +3718,24 @@
 
   </main>
 
-{% render 'page-accueil-scripts' %} 
+  <script>
+    function toggleFAQ(button) {
+      const faqItem = button.closest('.faq-item');
+      const allItems = document.querySelectorAll('.faq-item');
+      
+      // Fermer tous les autres items
+      allItems.forEach(item => {
+        if (item !== faqItem && item.classList.contains('active')) {
+          item.classList.remove('active');
+        }
+      });
+      
+      // Toggle l'item actuel
+      faqItem.classList.toggle('active');
+    }
+  </script>
+
+{% render 'page-accueil-scripts' %}
 
 
 </body>
