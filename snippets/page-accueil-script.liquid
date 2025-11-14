@@ -902,14 +902,14 @@
         // Fonction pour créer le slider
         function createBetSlider(bets) {
           const sliderContainer = document.getElementById('bet-history-slider');
-          if (!sliderContainer) return;
+          if (!sliderContainer) return false;
 
           // Filtrer pour ne garder que les bets terminés (win/loose)
           const completedBets = bets.filter(bet => bet.result === 'win' || bet.result === 'loose');
           
           if (completedBets.length === 0) {
             sliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Aucune prédiction complétée pour le moment.</p>';
-            return;
+            return false;
           }
 
           // Trier par date de match (DD/MM/YYYY + HH:MM) décroissante, fallback sur created_at
@@ -980,75 +980,67 @@
           // Dupliquer 4 fois pour un effet de boucle infinie fluide
           sliderContainer.innerHTML = cardsHTML + cardsHTML + cardsHTML + cardsHTML;
           
-          // Variables pour le contrôle manuel
-          let currentPosition = 0;
-          const totalWidth = sliderContainer.scrollWidth / 4; // largeur d'un cycle complet
-          
           // Ajouter la fonctionnalité de scroll horizontal manuel
           const sliderWrapper = sliderContainer.parentElement;
-          if (sliderWrapper) {
+          if (sliderWrapper && !sliderWrapper.dataset.eventsAttached) {
+            // Réinit état
+            sliderWrapper.scrollLeft = 0;
+            sliderContainer.style.transform = 'translateX(0)';
+
             // Gestion du scroll avec la molette/trackpad
             sliderWrapper.addEventListener('wheel', (e) => {
-              // Détecter si c'est un scroll horizontal (trackpad) ou si Shift est pressé
-              const isHorizontalScroll = Math.abs(e.deltaX) > Math.abs(e.deltaY);
-              
-              if (isHorizontalScroll || e.shiftKey) {
+              const canScrollX = sliderWrapper.scrollWidth > sliderWrapper.clientWidth;
+              const isHorizontal = Math.abs(e.deltaX) > Math.abs(e.deltaY);
+              if (canScrollX && (isHorizontal || e.shiftKey)) {
                 e.preventDefault();
-                sliderWrapper.scrollLeft += e.deltaX || e.deltaY;
+                sliderWrapper.scrollLeft += (e.deltaX || e.deltaY);
               }
-              // Sinon, laisser le scroll vertical normal de la page
             }, { passive: false });
-            
-            // Gestion du drag avec la souris
+
+            // Drag souris
             let isDragging = false;
-            let startX;
-            let dragStartPosition;
-            
+            let startX = 0;
+            let startScrollLeft = 0;
+            let dragStarted = false;
+
             sliderWrapper.addEventListener('mousedown', (e) => {
+              if (e.button !== 0) return;
               isDragging = true;
+              dragStarted = false;
               sliderWrapper.style.cursor = 'grabbing';
               startX = e.pageX;
-              dragStartPosition = currentPosition;
-            });
-            
-            sliderWrapper.addEventListener('mouseleave', () => {
-              if (isDragging) {
-                isDragging = false;
-                sliderWrapper.style.cursor = 'grab';
-              }
-            });
-            
-            sliderWrapper.addEventListener('mouseup', () => {
-              if (isDragging) {
-                isDragging = false;
-                sliderWrapper.style.cursor = 'grab';
-              }
-            });
-            
-            sliderWrapper.addEventListener('mousemove', (e) => {
-              if (!isDragging) return;
-              e.preventDefault();
-              const dx = e.pageX - startX;
-              currentPosition = dragStartPosition + dx;
-              
-              // Gérer le wrap autour pour la boucle infinie
-              while (currentPosition > 0) currentPosition -= totalWidth;
-              while (currentPosition <= -totalWidth) currentPosition += totalWidth;
-              
-              sliderContainer.style.transform = `translateX(${currentPosition}px)`;
+              startScrollLeft = sliderWrapper.scrollLeft;
             });
 
-            // Support tactile
+            sliderWrapper.addEventListener('mousemove', (e) => {
+              if (!isDragging) return;
+              const dx = e.pageX - startX;
+              if (!dragStarted && Math.abs(dx) < 3) return; // seuil anti faux-positif
+              dragStarted = true;
+              e.preventDefault();
+              sliderWrapper.scrollLeft = startScrollLeft - dx;
+            });
+
+            const endMouseDrag = () => {
+              if (isDragging) {
+                isDragging = false;
+                sliderWrapper.style.cursor = 'grab';
+              }
+            };
+            sliderWrapper.addEventListener('mouseup', endMouseDrag);
+            sliderWrapper.addEventListener('mouseleave', endMouseDrag);
+
+            // Touch
             let touchStartX = 0;
             let touchStartY = 0;
-            let touchDragStartPosition = 0;
+            let touchStartScrollLeft = 0;
 
             sliderWrapper.addEventListener('touchstart', (e) => {
               if (!e.touches || e.touches.length === 0) return;
               const t = e.touches[0];
               touchStartX = t.clientX;
               touchStartY = t.clientY;
-              touchDragStartPosition = currentPosition;
+              touchStartScrollLeft = sliderWrapper.scrollLeft;
             }, { passive: true });
 
             sliderWrapper.addEventListener('touchmove', (e) => {
@@ -1056,44 +1048,54 @@
               const t = e.touches[0];
               const dx = t.clientX - touchStartX;
               const dy = t.clientY - touchStartY;
-              // Si le mouvement est principalement horizontal, on gère le slide
               if (Math.abs(dx) > Math.abs(dy)) {
                 e.preventDefault();
-                currentPosition = touchDragStartPosition + dx;
-                
-                // Gérer le wrap pour la boucle infinie
-                while (currentPosition > 0) currentPosition -= totalWidth;
-                while (currentPosition <= -totalWidth) currentPosition += totalWidth;
-                
-                sliderContainer.style.transform = `translateX(${currentPosition}px)`;
+                sliderWrapper.scrollLeft = touchStartScrollLeft - dx;
               }
             }, { passive: false });
 
-            sliderWrapper.addEventListener('touchend', () => {
-              // Touch ended - slider reste en place
-            });
-            
-            // Style pour indiquer que c'est draggable
             sliderWrapper.style.cursor = 'grab';
             sliderWrapper.style.userSelect = 'none';
+
+            // Marquer pour ne pas rattacher 2x
+            sliderWrapper.dataset.eventsAttached = 'true';
           }
+          
+          return true;
         }
 
 
-// Fonction d'initialisation du slider (avec garde anti double init)
+// Fonction d'initialisation du slider avec retries
 async function initializeBetSlider() {
   try {
     const container = document.getElementById('bet-history-slider');
-    if (!container || container.dataset.initialized === 'true') return;
-    container.dataset.initialized = 'true';
+    if (!container) return;
+    // Ne pas marquer comme initialisé avant succès
+    if (container.dataset.initialized === 'true') return;
 
     const bets = await loadBetHistoryForSlider();
-    createBetSlider(bets);
+    const ok = createBetSlider(bets);
+
+    if (ok) {
+      container.dataset.initialized = 'true';
+    } else {
+      const retries = Number(container.dataset.retries || '0');
+      if (retries < 5) {
+        container.dataset.retries = String(retries + 1);
+        setTimeout(initializeBetSlider, 600);
+      }
+    }
   } catch (error) {
     console.error('❌ Erreur initialisation slider:', error);
-    const sliderContainer = document.getElementById('bet-history-slider');
-    if (sliderContainer) {
-      sliderContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Erreur de chargement.</p>';
+    const container = document.getElementById('bet-history-slider');
+    if (container) {
+      const retries = Number(container.dataset.retries || '0');
+      if (retries < 5) {
+        container.dataset.retries = String(retries + 1);
+        setTimeout(initializeBetSlider, 600);
+      } else {
+        container.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Erreur de chargement.</p>';
+      }
     }
   }
 }
