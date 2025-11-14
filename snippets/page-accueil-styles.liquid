@@ -1561,7 +1561,11 @@
       /* Responsive mobile */
       @media (max-width: 768px) {
         .reviews-section {
-          padding: 4rem 1rem;
+          /* Utiliser des marges verticales sur mobile pour pouvoir monter/descendre le bloc */
+          margin-top: 2rem;
+          margin-bottom: 2rem;
+          /* Conserver uniquement le padding horizontal */
+          padding: 0 1rem;
         }
 
         .review-card {
