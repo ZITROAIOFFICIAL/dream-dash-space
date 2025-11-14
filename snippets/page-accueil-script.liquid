@@ -1619,6 +1619,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Gestion de l'ouverture/fermeture du drawer
   (function() {
     const openBtn = document.getElementById('open-bet-history-drawer');
+    const openBtnHome = document.getElementById('open-bet-history-drawer-home');
     const closeBtn = document.getElementById('close-bet-history-drawer');
     const drawer = document.getElementById('bet-history-drawer');
     const overlay = document.querySelector('.bet-history-drawer-overlay');
@@ -1637,6 +1638,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (openBtn) {
       openBtn.addEventListener('click', openDrawer);
+    }
+    
+    if (openBtnHome) {
+      openBtnHome.addEventListener('click', openDrawer);
     }
 
     if (closeBtn) {
