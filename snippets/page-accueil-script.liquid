@@ -1177,8 +1177,8 @@
               const t = e.touches[0];
               const dx = t.clientX - touchStartX;
               const dy = t.clientY - touchStartY;
-              // Si le mouvement est principalement horizontal, on gère le slide
-              if (Math.abs(dx) > Math.abs(dy)) {
+              // Bloquer le scroll vertical seulement si le mouvement est clairement horizontal
+              if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 12) {
                 e.preventDefault();
                 currentPosition = touchDragStartPosition + dx;
                 
@@ -1393,8 +1393,8 @@
               const t = e.touches[0];
               const dx = t.clientX - touchStartX;
               const dy = t.clientY - touchStartY;
-              // Si le mouvement est principalement horizontal, on gère le slide
-              if (Math.abs(dx) > Math.abs(dy)) {
+              // Bloquer le scroll vertical seulement si le mouvement est clairement horizontal
+              if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 12) {
                 e.preventDefault();
                 currentPosition = touchDragStartPosition + dx;
                 
