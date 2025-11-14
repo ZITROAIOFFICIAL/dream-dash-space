@@ -4,6 +4,17 @@
       scroll-behavior: smooth;
     }
     
+    /* Désactiver smooth scroll sur mobile pour résoudre bug de scroll */
+    @media (max-width: 768px) {
+      html {
+        scroll-behavior: auto !important;
+      }
+      html, body {
+        overflow-y: auto !important;
+        height: auto !important;
+      }
+    }
+    
     /* Empêcher le scroll horizontal */
     html, body {
       overflow-x: hidden;

@@ -90,11 +90,13 @@
       // Retirer toutes les classes bloquantes
       body.classList.remove('sidebar-open', 'drawer-open', 'body-no-scroll');
       
-      // Nettoyer tous les styles inline
+      // Nettoyer tous les styles inline et forcer les valeurs correctes
       body.style.top = '';
-      body.style.overflow = '';
+      body.style.overflow = 'auto';
       body.style.position = '';
-      html.style.overflow = '';
+      body.style.height = 'auto';
+      html.style.overflow = 'auto';
+      html.style.height = 'auto';
       
       // Fermer tous les overlays et éléments résiduels
       const overlay = document.querySelector('.overlay');
@@ -822,10 +824,15 @@
               localStorage.setItem('winabet_selected_plan', 'monthly');
               
               // Scroller vers le haut pour voir les forfaits
-              window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-              });
+              // Sur mobile: scroll instant, sur desktop: smooth
+              if (window.innerWidth < 768) {
+                instantScrollTop();
+              } else {
+                window.scrollTo({
+                  top: 0,
+                  behavior: 'smooth'
+                });
+              }
             });
           }
         });
