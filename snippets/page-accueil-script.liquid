@@ -334,9 +334,8 @@
           autoScroll();
         }
         
-        // Initialiser les deux sliders
+        // Initialiser le slider de la page d'accueil
         initReviewsSlider('reviewsTrack');
-        initReviewsSlider('reviewsTrackBet');
 
         // Gestion des cartes de tarification cliquables
         const continueButton = document.querySelector('.pricing-continue-button');
@@ -726,6 +725,9 @@
               }
               // Afficher les forfaits
               plansSection.style.display = 'block';
+              
+              // Initialiser le slider pricing maintenant que la section est visible
+              initReviewsSlider('reviewsTrackBet');
               
               // Sauvegarder dans localStorage pour restaurer après refresh
               localStorage.setItem('winabet_show_pricing_plans', 'true');
