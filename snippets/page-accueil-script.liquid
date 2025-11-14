@@ -670,19 +670,40 @@
             politique.style.display = 'block';
             support.style.display = 'none';
             rejoindre.style.display = 'none';
-            window.scrollTo(0, 0);
+            // Force immediate scroll reset on mobile
+            if (window.innerWidth <= 768) {
+              window.requestAnimationFrame(function() {
+                window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+              });
+            } else {
+              window.scrollTo(0, 0);
+            }
           } else if (hash === 'support') {
             home.style.display = 'none';
             politique.style.display = 'none';
             support.style.display = 'block';
             rejoindre.style.display = 'none';
-            window.scrollTo(0, 0);
+            // Force immediate scroll reset on mobile
+            if (window.innerWidth <= 768) {
+              window.requestAnimationFrame(function() {
+                window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+              });
+            } else {
+              window.scrollTo(0, 0);
+            }
           } else if (hash === 'rejoindre') {
             home.style.display = 'none';
             politique.style.display = 'none';
             support.style.display = 'none';
             rejoindre.style.display = 'block';
-            window.scrollTo(0, 0);
+            // Force immediate scroll reset on mobile
+            if (window.innerWidth <= 768) {
+              window.requestAnimationFrame(function() {
+                window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+              });
+            } else {
+              window.scrollTo(0, 0);
+            }
           } else {
             home.style.display = 'block';
             politique.style.display = 'none';
@@ -733,11 +754,17 @@
               localStorage.setItem('winabet_pricing_view', 'regular');
               localStorage.setItem('winabet_selected_plan', 'monthly');
               
-              // Scroller vers le haut pour voir les forfaits
-              window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-              });
+              // Scroller vers le haut - immediate on mobile, smooth on desktop
+              if (window.innerWidth <= 768) {
+                window.requestAnimationFrame(function() {
+                  window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+                });
+              } else {
+                window.scrollTo({
+                  top: 0,
+                  behavior: 'smooth'
+                });
+              }
             });
           }
         });
