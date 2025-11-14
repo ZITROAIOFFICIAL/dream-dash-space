@@ -663,32 +663,38 @@
           var politique = document.getElementById('politique');
           var support = document.getElementById('support');
           var rejoindre = document.getElementById('rejoindre');
+
           if (!home || !politique || !support || !rejoindre) return;
 
+          // 1. Switch visible section WITHOUT scrolling yet
           if (hash === 'politique') {
             home.style.display = 'none';
             politique.style.display = 'block';
             support.style.display = 'none';
             rejoindre.style.display = 'none';
-            window.scrollTo(0, 0);
           } else if (hash === 'support') {
             home.style.display = 'none';
             politique.style.display = 'none';
             support.style.display = 'block';
             rejoindre.style.display = 'none';
-            window.scrollTo(0, 0);
           } else if (hash === 'rejoindre') {
             home.style.display = 'none';
             politique.style.display = 'none';
             support.style.display = 'none';
             rejoindre.style.display = 'block';
-            window.scrollTo(0, 0);
           } else {
             home.style.display = 'block';
             politique.style.display = 'none';
             support.style.display = 'none';
             rejoindre.style.display = 'none';
           }
+
+          // 2. Wait for layout/reflow to finish, THEN scroll to top
+          requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+              window.scrollTo(0, 0);
+            });
+          });
         }
         
         document.addEventListener('DOMContentLoaded', showPage);
