@@ -1070,6 +1070,7 @@
             let touchStartX = 0;
             let touchStartY = 0;
             let touchDragStartPosition = 0;
+            const DEAD_ZONE = 10; // Seuil minimum de mouvement en pixels
 
             sliderWrapper.addEventListener('touchstart', (e) => {
               if (!e.touches || e.touches.length === 0) return;
@@ -1086,11 +1087,21 @@
 
             sliderWrapper.addEventListener('touchmove', (e) => {
               if (!e.touches || e.touches.length === 0) return;
+              
+              // Vérifier que le slider est visible
+              const rect = sliderWrapper.getBoundingClientRect();
+              if (rect.top > window.innerHeight || rect.bottom < 0) return;
+              
               const t = e.touches[0];
               const dx = t.clientX - touchStartX;
               const dy = t.clientY - touchStartY;
-              // Si le mouvement est principalement horizontal, on gère le slide
-              if (Math.abs(dx) > Math.abs(dy)) {
+              
+              // Dead zone : ignorer les petits mouvements
+              if (Math.abs(dx) < DEAD_ZONE && Math.abs(dy) < DEAD_ZONE) return;
+              
+              // Ratio plus strict : mouvement horizontal doit être 2x plus grand que vertical
+              // Cela permet au scroll vertical de fonctionner même avec un léger mouvement horizontal
+              if (Math.abs(dx) > Math.abs(dy) * 2) {
                 e.preventDefault();
                 currentPosition = touchDragStartPosition + dx;
                 
@@ -1100,6 +1111,7 @@
                 
                 sliderContainer.style.transform = `translateX(${currentPosition}px)`;
               }
+              // Sinon, laisser le scroll vertical normal
             }, { passive: false });
 
             sliderWrapper.addEventListener('touchend', () => {
@@ -1286,6 +1298,7 @@
             let touchStartX = 0;
             let touchStartY = 0;
             let touchDragStartPosition = 0;
+            const DEAD_ZONE = 10; // Seuil minimum de mouvement en pixels
 
             sliderWrapper.addEventListener('touchstart', (e) => {
               if (!e.touches || e.touches.length === 0) return;
@@ -1302,11 +1315,21 @@
 
             sliderWrapper.addEventListener('touchmove', (e) => {
               if (!e.touches || e.touches.length === 0) return;
+              
+              // Vérifier que le slider est visible
+              const rect = sliderWrapper.getBoundingClientRect();
+              if (rect.top > window.innerHeight || rect.bottom < 0) return;
+              
               const t = e.touches[0];
               const dx = t.clientX - touchStartX;
               const dy = t.clientY - touchStartY;
-              // Si le mouvement est principalement horizontal, on gère le slide
-              if (Math.abs(dx) > Math.abs(dy)) {
+              
+              // Dead zone : ignorer les petits mouvements
+              if (Math.abs(dx) < DEAD_ZONE && Math.abs(dy) < DEAD_ZONE) return;
+              
+              // Ratio plus strict : mouvement horizontal doit être 2x plus grand que vertical
+              // Cela permet au scroll vertical de fonctionner même avec un léger mouvement horizontal
+              if (Math.abs(dx) > Math.abs(dy) * 2) {
                 e.preventDefault();
                 currentPosition = touchDragStartPosition + dx;
                 
@@ -1316,6 +1339,7 @@
                 
                 sliderContainer.style.transform = `translateX(${currentPosition}px)`;
               }
+              // Sinon, laisser le scroll vertical normal
             }, { passive: false });
 
             sliderWrapper.addEventListener('touchend', () => {
