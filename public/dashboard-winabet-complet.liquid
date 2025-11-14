@@ -1196,23 +1196,6 @@
               {% endif %}
             {% endif %}
           {% endfor %}
-          
-{% comment %} Message de restriction pour free trial {% endcomment %}
-{% if access_level == 'free_trial' %}
-  <div class="card text-center" style="padding: 2.5rem; background: rgba(255, 255, 255, 0.03); border: 2px solid rgba(255, 255, 255, 0.1);">
-    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔒</div>
-    <h3 style="color: rgba(255, 255, 255, 0.95); font-size: 1.6rem; margin-bottom: 0.8rem; font-weight: 600;">Débloquer tous les bets</h3>
-    <p style="color: rgba(255, 255, 255, 0.7); font-size: 1.05rem; margin-bottom: 1.5rem; line-height: 1.5;">
-      Pour voir tous les bets, un plan payant est requis. Une fois votre essai gratuit terminé, vous y aurez accès.
-    </p>
-    <a href="https://winabet.ai" style="display: inline-block; background: rgba(255, 255, 255, 0.1); color: #ffffff; padding: 0.9rem 2rem; border-radius: 0.5rem; text-decoration: none; font-size: 1rem; font-weight: 600; border: 1px solid rgba(255, 255, 255, 0.2); transition: all 0.2s; margin-bottom: 1.2rem;">
-      Passer à un Abonnement
-    </a>
-    <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.9rem; margin-top: 1.2rem;">
-      Besoin d'assistance ? Contactez-nous au <a href="tel:4382234581" style="color: rgba(255, 255, 255, 0.8); text-decoration: underline;">438-223-4581</a> ou <a href="mailto:info@winabet.ai" style="color: rgba(255, 255, 255, 0.8); text-decoration: underline;">info@winabet.ai</a>
-    </p>
-  </div>
-{% endif %}
           </div> <!-- cards-grid -->
         {% else %}
           <div class="card text-center empty-state-card" style="padding: 2rem;">
@@ -1223,6 +1206,23 @@
               </svg>
               <p style="margin: 0;">IA en cours du prochain bet</p>
             </div>
+          </div>
+        {% endif %}
+        
+        {% comment %} Message de restriction pour free trial - toujours affiché {% endcomment %}
+        {% if access_level == 'free_trial' %}
+          <div class="card text-center" style="padding: 2.5rem; background: rgba(255, 255, 255, 0.03); border: 2px solid rgba(255, 255, 255, 0.1); {% if bet_cards.size == 0 %}max-width: 900px; margin-left: auto; margin-right: auto;{% endif %}">
+            <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔒</div>
+            <h3 style="color: rgba(255, 255, 255, 0.95); font-size: 1.6rem; margin-bottom: 0.8rem; font-weight: 600;">Débloquer tous les bets</h3>
+            <p style="color: rgba(255, 255, 255, 0.7); font-size: 1.05rem; margin-bottom: 1.5rem; line-height: 1.5;">
+              Pour voir tous les bets, un plan payant est requis. Une fois votre essai gratuit terminé, vous y aurez accès.
+            </p>
+            <a href="https://winabet.ai" style="display: inline-block; background: rgba(255, 255, 255, 0.1); color: #ffffff; padding: 0.9rem 2rem; border-radius: 0.5rem; text-decoration: none; font-size: 1rem; font-weight: 600; border: 1px solid rgba(255, 255, 255, 0.2); transition: all 0.2s; margin-bottom: 1.2rem;">
+              Passer à un Abonnement
+            </a>
+            <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.9rem; margin-top: 1.2rem;">
+              Contactez <a href="mailto:support@winabet.ai" style="color: rgba(255, 255, 255, 0.7); text-decoration: underline;">support@winabet.ai</a> pour toute question
+            </p>
           </div>
         {% endif %}
       </div>
