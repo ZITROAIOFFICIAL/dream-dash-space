@@ -137,6 +137,7 @@ export type Database = {
           block_id: string
           created_at: string
           id: string
+          leg_results: Json | null
           legs: Json
           match_date: string | null
           match_time: string | null
@@ -155,6 +156,7 @@ export type Database = {
           block_id: string
           created_at?: string
           id?: string
+          leg_results?: Json | null
           legs?: Json
           match_date?: string | null
           match_time?: string | null
@@ -173,6 +175,7 @@ export type Database = {
           block_id?: string
           created_at?: string
           id?: string
+          leg_results?: Json | null
           legs?: Json
           match_date?: string | null
           match_time?: string | null
