@@ -2610,24 +2610,52 @@
 
       .bet-history-slider-wrapper {
         width: 100%;
-        overflow-x: auto;
-        overflow-y: hidden;
+        overflow: hidden;
         position: relative;
-        padding: 2rem 0;
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE et Edge */
-        -webkit-overflow-scrolling: touch; /* iOS momentum scroll */
-      }
-      
-      /* Cacher la scrollbar pour Chrome, Safari et Opera */
-      .bet-history-slider-wrapper::-webkit-scrollbar {
-        display: none;
+        padding: 2rem 80px;
       }
 
       .bet-history-slider-container {
         display: flex;
         gap: 2rem;
-        will-change: transform;
+        transition: transform 0.4s ease;
+      }
+      
+      /* Boutons de navigation du slider */
+      .slider-nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 10;
+        transition: all 0.3s ease;
+        color: white;
+      }
+
+      .slider-nav-btn:hover:not(:disabled) {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.4);
+      }
+
+      .slider-nav-btn:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+
+      .slider-nav-prev {
+        left: 10px;
+      }
+
+      .slider-nav-next {
+        right: 10px;
       }
 
       /* Cartes dans le slider */
@@ -2646,6 +2674,26 @@
       }
 
       /* Ajustements responsive pour le slider */
+      @media (max-width: 1024px) {
+        .bet-history-slider-wrapper {
+          padding: 2rem 0;
+        }
+        
+        .slider-nav-prev {
+          left: 10px;
+        }
+        
+        .slider-nav-next {
+          right: 10px;
+        }
+        
+        .slider-nav-btn {
+          width: 40px;
+          height: 40px;
+          background: rgba(0, 0, 0, 0.7);
+        }
+      }
+
       @media (max-width: 768px) {
         .bet-history-slider-title h2 {
           font-size: 1.8rem;
