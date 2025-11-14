@@ -980,28 +980,9 @@
           // Dupliquer 4 fois pour un effet de boucle infinie fluide
           sliderContainer.innerHTML = cardsHTML + cardsHTML + cardsHTML + cardsHTML;
           
-          // Animation avec requestAnimationFrame pour contrôle total
-          let animationId = null;
+          // Variables pour le contrôle manuel
           let currentPosition = 0;
-          const speed = 0.5; // pixels par frame (ajustable)
           const totalWidth = sliderContainer.scrollWidth / 4; // largeur d'un cycle complet
-          
-          function animate() {
-            if (!sliderContainer) return;
-            
-            currentPosition -= speed;
-            
-            // Reset quand on a parcouru un cycle complet (25% du total)
-            if (Math.abs(currentPosition) >= totalWidth) {
-              currentPosition = 0;
-            }
-            
-            sliderContainer.style.transform = `translateX(${currentPosition}px)`;
-            animationId = requestAnimationFrame(animate);
-          }
-          
-          // Démarrer l'animation
-          animate();
           
           // Ajouter la fonctionnalité de scroll horizontal manuel
           const sliderWrapper = sliderContainer.parentElement;
@@ -1028,19 +1009,12 @@
               sliderWrapper.style.cursor = 'grabbing';
               startX = e.pageX;
               dragStartPosition = currentPosition;
-              // Arrêter l'animation pendant le drag
-              if (animationId) {
-                cancelAnimationFrame(animationId);
-                animationId = null;
-              }
             });
             
             sliderWrapper.addEventListener('mouseleave', () => {
               if (isDragging) {
                 isDragging = false;
                 sliderWrapper.style.cursor = 'grab';
-                // Reprendre l'animation là où on est
-                animate();
               }
             });
             
@@ -1048,8 +1022,6 @@
               if (isDragging) {
                 isDragging = false;
                 sliderWrapper.style.cursor = 'grab';
-                // Reprendre l'animation là où on est
-                animate();
               }
             });
             
@@ -1077,11 +1049,6 @@
               touchStartX = t.clientX;
               touchStartY = t.clientY;
               touchDragStartPosition = currentPosition;
-              // Arrêter l'animation
-              if (animationId) {
-                cancelAnimationFrame(animationId);
-                animationId = null;
-              }
             }, { passive: true });
 
             sliderWrapper.addEventListener('touchmove', (e) => {
@@ -1103,8 +1070,7 @@
             }, { passive: false });
 
             sliderWrapper.addEventListener('touchend', () => {
-              // Reprendre l'animation là où on est
-              animate();
+              // Touch ended - slider reste en place
             });
             
             // Style pour indiquer que c'est draggable
