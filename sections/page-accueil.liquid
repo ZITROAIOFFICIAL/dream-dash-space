@@ -522,6 +522,74 @@
       </div>
     </section>
 
+    <!-- Slider d'historique des bets - PAGE ACCUEIL -->
+    <div class="home-bet-history-slider-section">
+      <div class="home-bet-history-slider-title">
+        <svg width="50" height="50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+          <defs>
+            <filter id="softGlowHomeHistory" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="1.2" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <path id="orbitHomeHistory0" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" pathLength="1000"/>
+            <path id="orbitHomeHistory1" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(55 100 100)" pathLength="1000"/>
+            <path id="orbitHomeHistory2" d="M100 64a86 36 0 1 1 0 72a86 36 0 1 1 0-72" transform="rotate(-55 100 100)" pathLength="1000"/>
+          </defs>
+          <g stroke="#68859e" stroke-width="2" fill="none">
+            <use href="#orbitHomeHistory0"/>
+            <use href="#orbitHomeHistory1"/>
+            <use href="#orbitHomeHistory2"/>
+          </g>
+          <g stroke-linecap="round" filter="url(#softGlowHomeHistory)">
+            <use href="#orbitHomeHistory0" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+              <animate attributeName="stroke-dashoffset" values="0;-1000" dur="6s" repeatCount="indefinite" begin="0s"/>
+            </use>
+            <use href="#orbitHomeHistory1" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+              <animate attributeName="stroke-dashoffset" values="500;-500" dur="6s" repeatCount="indefinite" begin="0s"/>
+            </use>
+            <use href="#orbitHomeHistory2" stroke="#ffffff" stroke-width="2" fill="none" stroke-dasharray="120 880" stroke-linecap="butt" vector-effect="non-scaling-stroke" stroke-opacity="0.95">
+              <animate attributeName="stroke-dashoffset" values="750;-250" dur="6s" repeatCount="indefinite" begin="0s"/>
+            </use>
+          </g>
+          <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-weight="700" font-size="43">IA</text>
+        </svg>
+        <h2>Historique de nos 10 derniers paris</h2>
+      </div>
+      
+      <!-- Statistiques calculées -->
+      <div id="home-bet-history-stats" style="display: flex; gap: 2rem; justify-content: center; margin: 2rem 0; flex-wrap: wrap;">
+        <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.75rem; padding: 1.5rem 2.5rem; text-align: center; min-width: 200px;">
+          <div style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Paris en positif</div>
+          <div id="home-wins-count" style="font-size: 2.5rem; font-weight: 700; color: #22c55e;">-</div>
+        </div>
+        <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 0.75rem; padding: 1.5rem 2.5rem; text-align: center; min-width: 200px;">
+          <div style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+            Units en positif
+            <button class="info-icon" id="home-info-unit-btn-history" type="button" style="background: transparent; border: none; cursor: pointer; padding: 0; display: inline-flex; align-items: center; vertical-align: middle;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10" stroke="rgba(255, 255, 255, 0.6)" stroke-width="2"></circle>
+                <text x="12" y="17" text-anchor="middle" fill="rgba(255, 255, 255, 0.6)" font-size="14" font-weight="700" stroke="none">?</text>
+              </svg>
+            </button>
+          </div>
+          <div id="home-units-count" style="font-size: 2.5rem; font-weight: 700;">-</div>
+        </div>
+      </div>
+      
+      <div class="home-bet-history-slider-wrapper">
+        <div id="home-bet-history-slider" class="home-bet-history-slider-container">
+          <p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Chargement de l'historique...</p>
+        </div>
+      </div>
+      
+      <!-- Bouton Voir l'historique complet -->
+      <div style="text-align: center; margin-top: 0.5rem;">
+        <button id="home-open-bet-history-drawer" class="home-bet-history-button">
+          Voir l'historique complet
+        </button>
+      </div>
+    </div>
+
     <!-- Section Providers Card -->
    {% render 'providers-badges-section' %}
 
@@ -2451,7 +2519,8 @@
         /* Mobile styles */
         @media (max-width: 768px) {
           .home-simulator-section {
-            margin: -50rem auto;
+            margin-top: -50rem;
+            margin-bottom: 9rem;
           }
 
           .home-profit-simulator {

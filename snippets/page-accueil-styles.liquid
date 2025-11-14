@@ -1562,6 +1562,8 @@
       @media (max-width: 768px) {
         .reviews-section {
           padding: 4rem 1rem;
+          margin-top: 0rem;
+          margin-bottom: -5rem;
         }
 
         .review-card {
@@ -1781,14 +1783,14 @@
       /* 🎯 Gap mobile entre dashboard et providers card */
       @media (max-width: 767px) {
         .providers-card-section {
-          margin-top: 70rem; /* 🔧 MODIFIEZ cette valeur pour réduire/augmenter le gap sur mobile */
+          margin-top: 50rem; /* 🔧 MODIFIEZ cette valeur pour réduire/augmenter le gap sur mobile */
         }
       }
 
       /* 🎯 Gap desktop entre dashboard et providers card */
       @media (min-width: 768px) {
         .providers-card-section {
-          margin-top: 0rem; /* 🔧 MODIFIEZ cette valeur pour réduire/augmenter le gap sur desktop */
+          margin-top: 10rem; /* 🔧 MODIFIEZ cette valeur pour réduire/augmenter le gap sur desktop */
         }
       }
 
@@ -2855,6 +2857,177 @@
       }
 
       .bet-history-slider-wrapper::after {
+        right: 0;
+        background: linear-gradient(to left, #000000, transparent);
+      }
+
+      /* ==================== HOME BET HISTORY SLIDER ==================== */
+      .home-bet-history-slider-section {
+        margin-top: 10rem;
+        padding: 0 1rem;
+      }
+
+      .home-bet-history-slider-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .home-bet-history-slider-title h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #ffffff;
+        text-align: center;
+        margin: 0;
+      }
+
+      .home-bet-history-slider-wrapper {
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        position: relative;
+        padding: 2rem 0;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE et Edge */
+        -webkit-overflow-scrolling: touch; /* iOS momentum scroll */
+      }
+      
+      /* Cacher la scrollbar pour Chrome, Safari et Opera */
+      .home-bet-history-slider-wrapper::-webkit-scrollbar {
+        display: none;
+      }
+
+      .home-bet-history-slider-container {
+        display: flex;
+        gap: 2rem;
+        will-change: transform;
+      }
+
+      /* Cartes dans le slider */
+      .home-bet-history-slider-container .card-wrapper {
+        flex: 0 0 auto;
+        width: 320px;
+        margin: 0;
+      }
+
+      .home-bet-history-slider-container .history-card {
+        background: #000000;
+        border-radius: 1rem;
+        padding: 2rem;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      /* Ajustements responsive pour le slider */
+      @media (max-width: 768px) {
+        .home-bet-history-slider-section {
+          margin-top: 3rem;
+        }
+
+        .home-bet-history-slider-title {
+          display: flex;
+          margin-bottom: 1.5rem;
+          position: relative;
+          z-index: 20;
+        }
+
+        .home-bet-history-slider-title h2 {
+          font-size: 1.8rem;
+        }
+
+        .home-bet-history-slider-title svg {
+          width: 35px;
+          height: 35px;
+        }
+
+        .home-bet-history-slider-container .card-wrapper {
+          width: 280px;
+        }
+
+        .home-bet-history-slider-container .history-card {
+          padding: 1rem;
+          text-align: center;
+        }
+
+        /* Réduire les tailles de police dans les cartes mobile */
+        .home-bet-history-slider-container .history-card [style*="font-size: 2.5rem"] {
+          font-size: 1.8rem !important;
+        }
+
+        .home-bet-history-slider-container .history-card [style*="font-size: 2rem"] {
+          font-size: 1.5rem !important;
+        }
+
+        .home-bet-history-slider-container .history-card [style*="font-size: 3rem"] {
+          font-size: 2rem !important;
+        }
+
+        .home-bet-history-slider-container .history-card [style*="font-size: 1.75rem"] {
+          font-size: 1.3rem !important;
+        }
+
+        .home-bet-history-slider-container .history-card [style*="font-size: 1.5rem"] {
+          font-size: 1.1rem !important;
+        }
+
+        .home-bet-history-slider-container .history-team-logo-container {
+          width: 3.5rem !important;
+          height: 3.5rem !important;
+        }
+      }
+
+      @media (min-width: 769px) and (max-width: 1024px) {
+        .home-bet-history-slider-container .card-wrapper {
+          width: 280px;
+        }
+      }
+
+      /* Bouton Voir l'historique complet */
+      .home-bet-history-button {
+        display: inline-block;
+        padding: 1.5rem 4rem;
+        background: rgba(255, 255, 255, 0.15);
+        color: #ffffff;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        border-radius: 1rem;
+        font-family: 'Outfit', sans-serif;
+        font-weight: 700;
+        font-size: 1.5rem;
+        text-decoration: none;
+        transition: all 0.3s;
+        cursor: pointer;
+        box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .home-bet-history-button:hover {
+        background: rgba(255, 255, 255, 0.25);
+        border-color: rgba(255, 255, 255, 0.6);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 30px rgba(255, 255, 255, 0.2);
+      }
+
+      /* Gradients fade sur les bords du slider home */
+      .home-bet-history-slider-wrapper::before,
+      .home-bet-history-slider-wrapper::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100px;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .home-bet-history-slider-wrapper::before {
+        left: 0;
+        background: linear-gradient(to right, #000000, transparent);
+      }
+
+      .home-bet-history-slider-wrapper::after {
         right: 0;
         background: linear-gradient(to left, #000000, transparent);
       }
