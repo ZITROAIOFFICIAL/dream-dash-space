@@ -1400,10 +1400,22 @@
         height: 100%;
       }
 
+      /* Forcer le scroll sur la section Pricing (#rejoindre) */
+      body[data-page="rejoindre"],
+      html[data-page="rejoindre"] {
+        overflow-y: auto !important;
+      }
+
+      body[data-page="rejoindre"] {
+        position: static !important;
+      }
+
       @media (max-width: 768px) {
         /* Règles de secours pour garantir le scroll mobile */
         html, body {
           overflow-y: auto !important;
+          overscroll-behavior: contain;
+          -webkit-overflow-scrolling: touch;
         }
         
         /* Bloquer le scroll uniquement quand sidebar ou drawer sont ouverts */
@@ -1411,6 +1423,13 @@
         body.drawer-open {
           overflow: hidden !important;
         }
+
+        /* Sécurité renforcée pour #rejoindre en mobile */
+        body[data-page="rejoindre"] {
+          overflow-y: auto !important;
+          position: static !important;
+        }
+      }
         
         .stats-platform-title {
           font-size: 2rem;
