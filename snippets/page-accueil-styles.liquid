@@ -2623,12 +2623,16 @@
       /* SVG Desktop - visible sur desktop, caché sur mobile */
       .bet-history-slider-title svg:not(#atom-mobile-home):not(#atom-mobile) {
         display: block;
+        z-index: 50;
+        position: relative;
       }
       
       /* SVG Mobile - caché sur desktop */
       #atom-mobile-home,
       #atom-mobile {
         display: none;
+        z-index: 50;
+        position: relative;
       }
 
       @media (max-width: 768px) {
@@ -2640,12 +2644,21 @@
         #atom-mobile-home,
         #atom-mobile {
           display: block;
+          align-self: center;
+          margin-top: 0;
+          margin-bottom: 0;
         }
         
         /* Centrer le titre sur mobile */
         .bet-history-slider-title {
           justify-content: center;
           text-align: center;
+          align-items: center;
+        }
+        
+        .bet-history-slider-title h2 {
+          line-height: 1;
+          margin: 0;
         }
       }
 
