@@ -228,7 +228,22 @@
           const track = document.getElementById(trackId);
           if (!track) return;
           
+          // Éviter la réinitialisation multiple
+          if (track.dataset.initialized === 'true') return;
+          track.dataset.initialized = 'true';
+          
           const cards = Array.from(track.children);
+          const firstCard = cards[0];
+          if (!firstCard) return;
+          
+          // Vérifier si les dimensions sont valides
+          const rect = firstCard.getBoundingClientRect();
+          if (!rect || rect.width === 0) {
+            // Réessayer plus tard si pas encore de dimensions
+            track.dataset.initialized = 'false';
+            setTimeout(() => initReviewsSlider(trackId), 300);
+            return;
+          }
           
           // Clone cards for infinite scroll
           cards.forEach(card => {
@@ -237,7 +252,9 @@
           });
           
           let position = 0;
-          const cardWidth = cards[0].offsetWidth + 32; // width + gap
+          const styles = getComputedStyle(track);
+          const gap = parseFloat(styles.columnGap || styles.gap || '32') || 32;
+          const cardWidth = rect.width + gap;
           const totalWidth = cardWidth * cards.length;
           let isDragging = false;
           let startX = 0;
@@ -334,9 +351,9 @@
           autoScroll();
         }
         
-        // Initialiser le slider de la page d'accueil
+        // Initialiser les deux sliders
         initReviewsSlider('reviewsTrack');
-        // Le slider de pricing sera initialisé quand la section devient visible
+        initReviewsSlider('reviewsTrackBet');
 
         // Gestion des cartes de tarification cliquables
         const continueButton = document.querySelector('.pricing-continue-button');
@@ -726,9 +743,6 @@
               }
               // Afficher les forfaits
               plansSection.style.display = 'block';
-              
-              // Initialiser le slider reviews maintenant que la section est visible
-              initReviewsSlider('reviewsTrackBet');
               
               // Sauvegarder dans localStorage pour restaurer après refresh
               localStorage.setItem('winabet_show_pricing_plans', 'true');
