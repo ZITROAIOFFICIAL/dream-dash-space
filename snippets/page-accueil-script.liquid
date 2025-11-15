@@ -334,9 +334,11 @@
           autoScroll();
         }
         
-        // Initialiser les deux sliders
+        // Initialiser seulement le slider de la page d'accueil au chargement
         initReviewsSlider('reviewsTrack');
-        initReviewsSlider('reviewsTrackBet');
+        
+        // Flag pour initialiser le slider pricing une seule fois
+        let pricingSliderInitialized = false;
 
         // Gestion des cartes de tarification cliquables
         const continueButton = document.querySelector('.pricing-continue-button');
@@ -534,6 +536,14 @@
           // Fallback pour Interac si aucune carte n'est sélectionnée
           if (currentView === 'interac' && !selectedCard) {
             showInteracInstructions('interac-3months');
+            
+            // Initialiser le slider pricing une seule fois quand il devient visible
+            if (!pricingSliderInitialized) {
+              setTimeout(() => {
+                initReviewsSlider('reviewsTrackBet');
+                pricingSliderInitialized = true;
+              }, 100);
+            }
             return;
           }
           
@@ -549,6 +559,14 @@
             // Si on est dans la vue Interac et qu'un plan Interac est sélectionné, afficher les instructions
             if (currentView === 'interac' && selectedPlan.startsWith('interac-')) {
               showInteracInstructions(selectedPlan);
+              
+              // Initialiser le slider pricing une seule fois quand il devient visible
+              if (!pricingSliderInitialized) {
+                setTimeout(() => {
+                  initReviewsSlider('reviewsTrackBet');
+                  pricingSliderInitialized = true;
+                }, 100);
+              }
               return;
             }
             
@@ -628,6 +646,14 @@
               } else if (savedView === 'interac-instructions' && savedPlan) {
                 // Restaurer les instructions Interac
                 showInteracInstructions(savedPlan);
+                
+                // Initialiser le slider pricing quand on restaure l'état
+                if (!pricingSliderInitialized) {
+                  setTimeout(() => {
+                    initReviewsSlider('reviewsTrackBet');
+                    pricingSliderInitialized = true;
+                  }, 100);
+                }
               } else {
                 // Vue régulière par défaut
                 showRegularView();
