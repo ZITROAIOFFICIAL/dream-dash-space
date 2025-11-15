@@ -228,17 +228,31 @@
           const track = document.getElementById(trackId);
           if (!track) return;
           
-          const cards = Array.from(track.children);
+          // Protection contre les ré-initialisations multiples
+          if (track.dataset.initialized === 'true') return;
+          track.dataset.initialized = 'true';
+          
+          const originalCards = Array.from(track.children);
+          
+          // Calculer le gap dynamiquement depuis le CSS
+          const gapPx = parseFloat(window.getComputedStyle(track).gap) || 32;
+          
+          // Calculer totalWidth en sommant les largeurs réelles des cartes + gaps
+          let totalWidth = 0;
+          originalCards.forEach((card, index) => {
+            totalWidth += card.getBoundingClientRect().width;
+            if (index < originalCards.length - 1) {
+              totalWidth += gapPx;
+            }
+          });
           
           // Clone cards for infinite scroll
-          cards.forEach(card => {
+          originalCards.forEach(card => {
             const clone = card.cloneNode(true);
             track.appendChild(clone);
           });
           
           let position = 0;
-          const cardWidth = cards[0].offsetWidth + 32; // width + gap
-          const totalWidth = cardWidth * cards.length;
           let isDragging = false;
           let startX = 0;
           let currentX = 0;
@@ -250,9 +264,9 @@
               position -= 0.5; // Slow scroll speed
               velocity = -0.5;
               
-              // Reset position when we've scrolled through all original cards
-              if (Math.abs(position) >= totalWidth) {
-                position = 0;
+              // Wrap continu au lieu de reset
+              while (position <= -totalWidth) {
+                position += totalWidth;
               }
               
               track.style.transform = `translateX(${position}px)`;
@@ -276,13 +290,13 @@
             velocity = delta;
             position = currentX;
             
-            // Reset position if dragged too far
-            if (Math.abs(position) >= totalWidth) {
-              position = position % totalWidth;
+            // Wrap continu pour le drag
+            while (position <= -totalWidth) {
+              position += totalWidth;
               startX = e.pageX - position;
             }
-            if (position > 0) {
-              position = -(totalWidth - Math.abs(position));
+            while (position > 0) {
+              position -= totalWidth;
               startX = e.pageX - position;
             }
             
@@ -313,13 +327,13 @@
             velocity = delta;
             position = currentX;
             
-            // Reset position if dragged too far
-            if (Math.abs(position) >= totalWidth) {
-              position = position % totalWidth;
+            // Wrap continu pour le drag tactile
+            while (position <= -totalWidth) {
+              position += totalWidth;
               startX = e.touches[0].pageX - position;
             }
-            if (position > 0) {
-              position = -(totalWidth - Math.abs(position));
+            while (position > 0) {
+              position -= totalWidth;
               startX = e.touches[0].pageX - position;
             }
             
@@ -328,6 +342,30 @@
           
           track.addEventListener('touchend', () => {
             isDragging = false;
+          });
+          
+          // Recalculer totalWidth sur resize
+          let resizeTimeout;
+          window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+              const cards = Array.from(track.children).slice(0, originalCards.length);
+              totalWidth = 0;
+              cards.forEach((card, index) => {
+                totalWidth += card.getBoundingClientRect().width;
+                if (index < cards.length - 1) {
+                  totalWidth += gapPx;
+                }
+              });
+              
+              // Normaliser la position après recalcul
+              while (position <= -totalWidth) {
+                position += totalWidth;
+              }
+              while (position > 0) {
+                position -= totalWidth;
+              }
+            }, 200);
           });
           
           track.style.cursor = 'grab';
