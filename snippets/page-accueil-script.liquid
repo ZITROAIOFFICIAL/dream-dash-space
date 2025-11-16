@@ -351,9 +351,8 @@
           autoScroll();
         }
         
-        // Initialiser les deux sliders
+        // Initialiser le slider de la page d'accueil
         initReviewsSlider('reviewsTrack');
-        initReviewsSlider('reviewsTrackBet');
 
         // Gestion des cartes de tarification cliquables
         const continueButton = document.querySelector('.pricing-continue-button');
@@ -700,6 +699,11 @@
             support.style.display = 'none';
             rejoindre.style.display = 'block';
             window.scrollTo(0, 0);
+            
+            // Initialiser le slider des reviews une fois la section visible
+            setTimeout(function() {
+              initReviewsSlider('reviewsTrackBet');
+            }, 100);
           } else {
             home.style.display = 'block';
             politique.style.display = 'none';
