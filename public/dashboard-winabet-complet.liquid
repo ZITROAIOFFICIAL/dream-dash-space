@@ -147,6 +147,256 @@
       }
     }
     
+    /* Styles du modal de génération IA */
+    .ai-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 1rem;
+    }
+    
+    .ai-modal-overlay.active {
+      display: flex;
+    }
+    
+    .ai-modal-container {
+      background: #000000;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 1rem;
+      width: 90%;
+      max-width: 700px;
+      max-height: 85vh;
+      overflow-y: auto;
+      position: relative;
+      padding: 2rem;
+    }
+    
+    .ai-modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 0.5rem;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    
+    .ai-modal-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .ai-modal-title {
+      color: white;
+      font-size: 1.75rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-family: 'Outfit', sans-serif;
+    }
+    
+    .ai-modal-steps {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .ai-step-indicator {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 1rem;
+      font-family: 'Outfit', sans-serif;
+    }
+    
+    .ai-step-indicator.active {
+      color: white;
+      font-weight: 600;
+    }
+    
+    .ai-modal-content {
+      min-height: 300px;
+    }
+    
+    .ai-step {
+      display: none;
+    }
+    
+    .ai-step.active {
+      display: block;
+    }
+    
+    .ai-step-title {
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      font-family: 'Outfit', sans-serif;
+    }
+    
+    .ai-options-grid {
+      display: grid;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .ai-option-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+    
+    .ai-option-card:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+    
+    .ai-option-card.selected {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: white;
+    }
+    
+    .ai-option-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .ai-option-title {
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      font-family: 'Outfit', sans-serif;
+    }
+    
+    .ai-option-desc {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.9rem;
+      font-family: 'Outfit', sans-serif;
+    }
+    
+    .ai-modal-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+    
+    .ai-modal-btn {
+      padding: 0.875rem 2rem;
+      border-radius: 0.5rem;
+      border: none;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: 'Outfit', sans-serif;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .ai-modal-btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .ai-modal-btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+    
+    .ai-modal-btn-primary {
+      background: white;
+      color: black;
+    }
+    
+    .ai-modal-btn-primary:hover {
+      opacity: 0.9;
+    }
+    
+    .ai-modal-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    .ai-loading-screen {
+      display: none;
+      text-align: center;
+      padding: 2rem 0;
+    }
+    
+    .ai-loading-screen.active {
+      display: block;
+    }
+    
+    .ai-loading-spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid rgba(255, 255, 255, 0.1);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1.5rem;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .ai-loading-text {
+      color: white;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      font-family: 'Outfit', sans-serif;
+    }
+    
+    .ai-loading-subtext {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 1rem;
+      font-family: 'Outfit', sans-serif;
+    }
+    
+    @media (max-width: 768px) {
+      .ai-modal-container {
+        width: 95%;
+        padding: 1.5rem 1rem;
+      }
+      
+      .ai-modal-title {
+        font-size: 1.4rem;
+      }
+      
+      .ai-step-title {
+        font-size: 1.1rem;
+      }
+      
+      .ai-modal-actions {
+        flex-direction: column;
+      }
+      
+      .ai-modal-btn {
+        width: 100%;
+      }
+    }
+    
     .video-card-title {
       font-family: 'Fustat', sans-serif;
       margin-top: 0.2rem;
@@ -994,6 +1244,98 @@
               <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
             <p id="rotating-text">Analyse des meilleurs opportunitées en cours</p>
+          </div>
+        </div>
+        
+        <!-- Modal de génération IA pour Bet du jour -->
+        <div id="ai-modal-bet" class="ai-modal-overlay">
+          <div class="ai-modal-container">
+            <button class="ai-modal-close" onclick="closeAIModal('bet')">&times;</button>
+            <h2 class="ai-modal-title">Bet du jour</h2>
+            
+            <div class="ai-modal-steps">
+              <span class="ai-step-indicator active" data-step="1">Étape 1</span>
+              <span style="color: rgba(255,255,255,0.3);">•</span>
+              <span class="ai-step-indicator" data-step="2">Étape 2</span>
+              <span style="color: rgba(255,255,255,0.3);">•</span>
+              <span class="ai-step-indicator" data-step="3">Étape 3</span>
+            </div>
+            
+            <div class="ai-modal-content">
+              <!-- Étape 1: Choix du sport -->
+              <div class="ai-step active" data-step="1">
+                <h3 class="ai-step-title">Choisis le sport</h3>
+                <div class="ai-options-grid">
+                  <div class="ai-option-card" data-option="sport" data-value="all">
+                    <div class="ai-option-icon">🏆</div>
+                    <div class="ai-option-title">Tous les sports</div>
+                  </div>
+                  <div class="ai-option-card" data-option="sport" data-value="nhl">
+                    <div class="ai-option-icon">🏒</div>
+                    <div class="ai-option-title">NHL</div>
+                  </div>
+                  <div class="ai-option-card" data-option="sport" data-value="nfl">
+                    <div class="ai-option-icon">🏈</div>
+                    <div class="ai-option-title">NFL</div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Étape 2: Choix du type -->
+              <div class="ai-step" data-step="2">
+                <h3 class="ai-step-title">Choisis ton type</h3>
+                <div class="ai-options-grid">
+                  <div class="ai-option-card" data-option="type" data-value="safe">
+                    <div class="ai-option-icon">🛡️</div>
+                    <div class="ai-option-title">Les plus safe</div>
+                    <div class="ai-option-desc">Mais moins de gain</div>
+                  </div>
+                  <div class="ai-option-card" data-option="type" data-value="profitable">
+                    <div class="ai-option-icon">💰</div>
+                    <div class="ai-option-title">Les plus rentable</div>
+                  </div>
+                  <div class="ai-option-card" data-option="type" data-value="risky">
+                    <div class="ai-option-icon">🚀</div>
+                    <div class="ai-option-title">Les plus gros gain</div>
+                    <div class="ai-option-desc">Plus de risque</div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Étape 3: Type d'analyse -->
+              <div class="ai-step" data-step="3">
+                <h3 class="ai-step-title">Analyse de l'IA</h3>
+                <div class="ai-options-grid">
+                  <div class="ai-option-card" data-option="analysis" data-value="deep">
+                    <div class="ai-option-icon">🔬</div>
+                    <div class="ai-option-title">Analyse poussée</div>
+                    <div class="ai-option-desc">Recherche plus longue (40-60s)</div>
+                  </div>
+                  <div class="ai-option-card" data-option="analysis" data-value="normal">
+                    <div class="ai-option-icon">⚡</div>
+                    <div class="ai-option-title">Analyse normale</div>
+                    <div class="ai-option-desc">30-40 secondes</div>
+                  </div>
+                  <div class="ai-option-card" data-option="analysis" data-value="fast">
+                    <div class="ai-option-icon">🚀</div>
+                    <div class="ai-option-title">Analyse rapide</div>
+                    <div class="ai-option-desc">15-30 secondes</div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Écran de chargement -->
+              <div class="ai-loading-screen">
+                <div class="ai-loading-spinner"></div>
+                <div class="ai-loading-text">Analyse en cours...</div>
+                <div class="ai-loading-subtext" id="loading-subtext-bet">Analyse des statistiques</div>
+              </div>
+            </div>
+            
+            <div class="ai-modal-actions">
+              <button class="ai-modal-btn ai-modal-btn-secondary" id="prev-btn-bet" onclick="prevStepBet()" style="display: none;">Précédent</button>
+              <button class="ai-modal-btn ai-modal-btn-primary" id="next-btn-bet" onclick="nextStepBet()" disabled>Prochain</button>
+            </div>
           </div>
         </div>
         
@@ -4015,6 +4357,334 @@
         // Autoriser l'accès direct via URL aux pages publiques
         navigateTo(null, hash);
       }
+    });
+
+    // ===== GESTION DU MODAL DE GÉNÉRATION IA =====
+    let currentStepBet = 1;
+    let selectedOptionsBet = {
+      sport: null,
+      type: null,
+      analysis: null
+    };
+    
+    // Ouvrir le modal Bet
+    function openAIModalBet() {
+      document.getElementById('ai-modal-bet').classList.add('active');
+      document.body.classList.add('body-no-scroll');
+      currentStepBet = 1;
+      selectedOptionsBet = { sport: null, type: null, analysis: null };
+      updateStepDisplayBet();
+    }
+    
+    // Fermer le modal
+    function closeAIModal(type) {
+      document.getElementById(`ai-modal-${type}`).classList.remove('active');
+      document.body.classList.remove('body-no-scroll');
+    }
+    
+    // Étape suivante pour Bet
+    function nextStepBet() {
+      if (currentStepBet < 3) {
+        currentStepBet++;
+        updateStepDisplayBet();
+      } else if (currentStepBet === 3) {
+        startLoadingBet();
+      }
+    }
+    
+    // Étape précédente pour Bet
+    function prevStepBet() {
+      if (currentStepBet > 1) {
+        currentStepBet--;
+        updateStepDisplayBet();
+      }
+    }
+    
+    // Mettre à jour l'affichage de l'étape pour Bet
+    function updateStepDisplayBet() {
+      const modal = document.getElementById('ai-modal-bet');
+      
+      // Mettre à jour les indicateurs d'étapes
+      modal.querySelectorAll('.ai-step-indicator').forEach((indicator, index) => {
+        if (index + 1 === currentStepBet) {
+          indicator.classList.add('active');
+        } else {
+          indicator.classList.remove('active');
+        }
+      });
+      
+      // Afficher la bonne étape
+      modal.querySelectorAll('.ai-step').forEach((step, index) => {
+        if (index + 1 === currentStepBet) {
+          step.classList.add('active');
+        } else {
+          step.classList.remove('active');
+        }
+      });
+      
+      // Gérer les boutons
+      const prevBtn = document.getElementById('prev-btn-bet');
+      const nextBtn = document.getElementById('next-btn-bet');
+      
+      if (currentStepBet === 1) {
+        prevBtn.style.display = 'none';
+        nextBtn.textContent = 'Prochain';
+        nextBtn.disabled = !selectedOptionsBet.sport;
+      } else if (currentStepBet === 2) {
+        prevBtn.style.display = 'inline-flex';
+        nextBtn.textContent = 'Prochain';
+        nextBtn.disabled = !selectedOptionsBet.type;
+      } else if (currentStepBet === 3) {
+        prevBtn.style.display = 'inline-flex';
+        nextBtn.textContent = 'Lancé la recherche';
+        nextBtn.disabled = !selectedOptionsBet.analysis;
+      }
+    }
+    
+    // Démarrer le chargement pour Bet
+    function startLoadingBet() {
+      const modal = document.getElementById('ai-modal-bet');
+      const content = modal.querySelector('.ai-modal-content');
+      const actions = modal.querySelector('.ai-modal-actions');
+      const loadingScreen = modal.querySelector('.ai-loading-screen');
+      
+      // Cacher les étapes et boutons
+      content.querySelectorAll('.ai-step').forEach(step => step.style.display = 'none');
+      actions.style.display = 'none';
+      
+      // Afficher l'écran de chargement
+      loadingScreen.classList.add('active');
+      
+      // Déterminer la durée selon le type d'analyse
+      let duration;
+      if (selectedOptionsBet.analysis === 'deep') {
+        duration = 40000 + Math.random() * 20000; // 40-60s
+      } else if (selectedOptionsBet.analysis === 'normal') {
+        duration = 30000 + Math.random() * 10000; // 30-40s
+      } else {
+        duration = 15000 + Math.random() * 15000; // 15-30s
+      }
+      
+      // Textes changeants
+      const loadingTexts = [
+        'Analyse des statistiques',
+        'Calcul des probabilités',
+        'Optimisation des paris',
+        'Vérification des données',
+        'Finalisation de l\'analyse'
+      ];
+      
+      let textIndex = 0;
+      const textInterval = setInterval(() => {
+        textIndex = (textIndex + 1) % loadingTexts.length;
+        document.getElementById('loading-subtext-bet').textContent = loadingTexts[textIndex];
+      }, 2000);
+      
+      // Fermer après la durée
+      setTimeout(() => {
+        clearInterval(textInterval);
+        closeAIModal('bet');
+        
+        // Réinitialiser l'affichage
+        content.querySelectorAll('.ai-step').forEach(step => step.style.display = 'block');
+        actions.style.display = 'flex';
+        loadingScreen.classList.remove('active');
+        currentStepBet = 1;
+        selectedOptionsBet = { sport: null, type: null, analysis: null };
+        modal.querySelectorAll('.ai-option-card').forEach(card => card.classList.remove('selected'));
+        updateStepDisplayBet();
+      }, duration);
+    }
+    
+    // Gestion des clics sur les options pour Bet
+    document.addEventListener('DOMContentLoaded', () => {
+      const modalBet = document.getElementById('ai-modal-bet');
+      
+      // Ajouter l'event au bouton refresh pour Bet
+      document.querySelector('#page-bet .refresh-button').addEventListener('click', openAIModalBet);
+      
+      // Gestion des sélections d'options pour Bet
+      modalBet.querySelectorAll('.ai-option-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const option = card.dataset.option;
+          const value = card.dataset.value;
+          
+          // Désélectionner les autres options du même type
+          modalBet.querySelectorAll(`.ai-option-card[data-option="${option}"]`).forEach(c => {
+            c.classList.remove('selected');
+          });
+          
+          // Sélectionner cette option
+          card.classList.add('selected');
+          selectedOptionsBet[option] = value;
+          
+          // Activer le bouton suivant
+          updateStepDisplayBet();
+        });
+      });
+    });
+
+    // ===== GESTION DU MODAL DE GÉNÉRATION IA PARLAY =====
+    let currentStepParlay = 1;
+    let selectedOptionsParlay = {
+      sport: null,
+      type: null,
+      analysis: null
+    };
+    
+    // Ouvrir le modal Parlay
+    function openAIModalParlay() {
+      document.getElementById('ai-modal-parlay').classList.add('active');
+      document.body.classList.add('body-no-scroll');
+      currentStepParlay = 1;
+      selectedOptionsParlay = { sport: null, type: null, analysis: null };
+      updateStepDisplayParlay();
+    }
+    
+    // Étape suivante pour Parlay
+    function nextStepParlay() {
+      if (currentStepParlay < 3) {
+        currentStepParlay++;
+        updateStepDisplayParlay();
+      } else if (currentStepParlay === 3) {
+        startLoadingParlay();
+      }
+    }
+    
+    // Étape précédente pour Parlay
+    function prevStepParlay() {
+      if (currentStepParlay > 1) {
+        currentStepParlay--;
+        updateStepDisplayParlay();
+      }
+    }
+    
+    // Mettre à jour l'affichage de l'étape pour Parlay
+    function updateStepDisplayParlay() {
+      const modal = document.getElementById('ai-modal-parlay');
+      
+      // Mettre à jour les indicateurs d'étapes
+      modal.querySelectorAll('.ai-step-indicator').forEach((indicator, index) => {
+        if (index + 1 === currentStepParlay) {
+          indicator.classList.add('active');
+        } else {
+          indicator.classList.remove('active');
+        }
+      });
+      
+      // Afficher la bonne étape
+      modal.querySelectorAll('.ai-step').forEach((step, index) => {
+        if (index + 1 === currentStepParlay) {
+          step.classList.add('active');
+        } else {
+          step.classList.remove('active');
+        }
+      });
+      
+      // Gérer les boutons
+      const prevBtn = document.getElementById('prev-btn-parlay');
+      const nextBtn = document.getElementById('next-btn-parlay');
+      
+      if (currentStepParlay === 1) {
+        prevBtn.style.display = 'none';
+        nextBtn.textContent = 'Prochain';
+        nextBtn.disabled = !selectedOptionsParlay.sport;
+      } else if (currentStepParlay === 2) {
+        prevBtn.style.display = 'inline-flex';
+        nextBtn.textContent = 'Prochain';
+        nextBtn.disabled = !selectedOptionsParlay.type;
+      } else if (currentStepParlay === 3) {
+        prevBtn.style.display = 'inline-flex';
+        nextBtn.textContent = 'Lancé la recherche';
+        nextBtn.disabled = !selectedOptionsParlay.analysis;
+      }
+    }
+    
+    // Démarrer le chargement pour Parlay
+    function startLoadingParlay() {
+      const modal = document.getElementById('ai-modal-parlay');
+      const content = modal.querySelector('.ai-modal-content');
+      const actions = modal.querySelector('.ai-modal-actions');
+      const loadingScreen = modal.querySelector('.ai-loading-screen');
+      
+      // Cacher les étapes et boutons
+      content.querySelectorAll('.ai-step').forEach(step => step.style.display = 'none');
+      actions.style.display = 'none';
+      
+      // Afficher l'écran de chargement
+      loadingScreen.classList.add('active');
+      
+      // Déterminer la durée selon le type d'analyse
+      let duration;
+      if (selectedOptionsParlay.analysis === 'deep') {
+        duration = 40000 + Math.random() * 20000; // 40-60s
+      } else if (selectedOptionsParlay.analysis === 'normal') {
+        duration = 30000 + Math.random() * 10000; // 30-40s
+      } else {
+        duration = 15000 + Math.random() * 15000; // 15-30s
+      }
+      
+      // Textes changeants
+      const loadingTexts = [
+        'Analyse des statistiques',
+        'Calcul des probabilités',
+        'Optimisation des paris',
+        'Vérification des données',
+        'Finalisation de l\'analyse'
+      ];
+      
+      let textIndex = 0;
+      const textInterval = setInterval(() => {
+        textIndex = (textIndex + 1) % loadingTexts.length;
+        document.getElementById('loading-subtext-parlay').textContent = loadingTexts[textIndex];
+      }, 2000);
+      
+      // Fermer après la durée
+      setTimeout(() => {
+        clearInterval(textInterval);
+        closeAIModal('parlay');
+        
+        // Réinitialiser l'affichage
+        content.querySelectorAll('.ai-step').forEach(step => step.style.display = 'block');
+        actions.style.display = 'flex';
+        loadingScreen.classList.remove('active');
+        currentStepParlay = 1;
+        selectedOptionsParlay = { sport: null, type: null, analysis: null };
+        modal.querySelectorAll('.ai-option-card').forEach(card => card.classList.remove('selected'));
+        updateStepDisplayParlay();
+      }, duration);
+    }
+    
+    // Gestion des clics sur les options pour Parlay
+    document.addEventListener('DOMContentLoaded', () => {
+      const modalParlay = document.getElementById('ai-modal-parlay');
+      if (!modalParlay) return;
+      
+      // Ajouter l'event au bouton refresh pour Parlay
+      const parlayRefreshBtn = document.querySelector('#page-parlay .refresh-button');
+      if (parlayRefreshBtn) {
+        parlayRefreshBtn.addEventListener('click', openAIModalParlay);
+      }
+      
+      // Gestion des sélections d'options pour Parlay
+      modalParlay.querySelectorAll('.ai-option-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const option = card.dataset.option;
+          const value = card.dataset.value;
+          
+          // Désélectionner les autres options du même type
+          modalParlay.querySelectorAll(`.ai-option-card[data-option="${option}"]`).forEach(c => {
+            c.classList.remove('selected');
+          });
+          
+          // Sélectionner cette option
+          card.classList.add('selected');
+          selectedOptionsParlay[option] = value;
+          
+          // Activer le bouton suivant
+          updateStepDisplayParlay();
+        });
+      });
     });
 
     // ===== GESTION DES MEMBRES CONNECTÉS LIVE =====
