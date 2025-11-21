@@ -366,7 +366,7 @@ function generateBetCardHTML(bet) {
       <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 2rem; font-weight: 600; margin-bottom: 2rem;">MONEYLINE</div>
       <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
         <div style="text-align: center; flex: 1;">
-          <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem; ${showTeam1Win ? "border: 5px solid rgba(255, 255, 255, 0.5);" : ""} ${showTeam1Loss ? "border: 5px solid rgba(255, 255, 255, 0.2);" : ""}">
+          <div class="history-bet-logo" style="border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem; ${showTeam1Win ? "border: 5px solid rgba(255, 255, 255, 0.5);" : ""} ${showTeam1Loss ? "border: 5px solid rgba(255, 255, 255, 0.2);" : ""}">
             <img src="${sanitizeLogo(bet.team1_logo)}" alt="${bet.team1_name}" style="width: 100%; height: 100%; object-fit: contain;">
           </div>
           <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team1_name}</div>
@@ -377,7 +377,7 @@ function generateBetCardHTML(bet) {
           <div style="font-size: 3rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
         </div>
         <div style="text-align: center; flex: 1;">
-          <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem; ${showTeam2Win ? "border: 5px solid rgba(255, 255, 255, 0.5);" : ""} ${showTeam2Loss ? "border: 5px solid rgba(255, 255, 255, 0.2);" : ""}">
+          <div class="history-bet-logo" style="border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem; ${showTeam2Win ? "border: 5px solid rgba(255, 255, 255, 0.5);" : ""} ${showTeam2Loss ? "border: 5px solid rgba(255, 255, 255, 0.2);" : ""}">
             <img src="${sanitizeLogo(bet.team2_logo)}" alt="${bet.team2_name}" style="width: 100%; height: 100%; object-fit: contain;">
           </div>
           <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team2_name}</div>
@@ -391,7 +391,7 @@ function generateBetCardHTML(bet) {
       <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 2rem; font-weight: 600; margin-bottom: 2rem;">SPREAD</div>
       <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
         <div style="text-align: center; flex: 1;">
-          <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem; ${bet.spread_team === "team1" ? "border: 5px solid rgba(255, 255, 255, 0.5);" : ""}">
+          <div class="history-bet-logo" style="border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem; ${bet.spread_team === "team1" ? "border: 5px solid rgba(255, 255, 255, 0.5);" : ""}">
             <img src="${sanitizeLogo(bet.team1_logo)}" alt="${bet.team1_name}" style="width: 100%; height: 100%; object-fit: contain;">
           </div>
           <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team1_name}</div>
@@ -401,7 +401,7 @@ function generateBetCardHTML(bet) {
           <div style="font-size: 3rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
         </div>
         <div style="text-align: center; flex: 1;">
-          <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem; ${bet.spread_team === "team2" ? "border: 5px solid rgba(255, 255, 255, 0.5);" : ""}">
+          <div class="history-bet-logo" style="border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem; ${bet.spread_team === "team2" ? "border: 5px solid rgba(255, 255, 255, 0.5);" : ""}">
             <img src="${sanitizeLogo(bet.team2_logo)}" alt="${bet.team2_name}" style="width: 100%; height: 100%; object-fit: contain;">
           </div>
           <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team2_name}</div>
@@ -415,7 +415,7 @@ function generateBetCardHTML(bet) {
       <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 2rem; font-weight: 600; margin-bottom: 2rem;">${displayText?.toUpperCase()}</div>
       <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
         <div style="text-align: center; flex: 1;">
-          <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem;">
+          <div class="history-bet-logo" style="border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem;">
             <img src="${sanitizeLogo(bet.team1_logo)}" alt="${bet.team1_name}" style="width: 100%; height: 100%; object-fit: contain;">
           </div>
           <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team1_name}</div>
@@ -429,7 +429,7 @@ function generateBetCardHTML(bet) {
           </div>
         </div>
         <div style="text-align: center; flex: 1;">
-          <div style="width: 5rem; height: 5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem;">
+          <div class="history-bet-logo" style="border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; padding: 1rem;">
             <img src="${sanitizeLogo(bet.team2_logo)}" alt="${bet.team2_name}" style="width: 100%; height: 100%; object-fit: contain;">
           </div>
           <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${bet.team2_name}</div>
@@ -515,7 +515,7 @@ function generateParlayCardHTML(parlay) {
         <div style="text-align: center; color: rgba(255, 255, 255, 0.6); font-size: 1.5rem; margin-bottom: 1.25rem;">MONEYLINE</div>
         <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
           <div style="text-align: center; flex: 1;">
-            <div style="width: 4.5rem; height: 4.5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; padding: 0.75rem; ${showTeam1Win ? "border: 4px solid rgba(255, 255, 255, 0.5);" : ""} ${showTeam1Loss ? "border: 4px solid rgba(255, 255, 255, 0.2);" : ""}">
+            <div class="history-parlay-leg-logo" style="border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; padding: 0.75rem; ${showTeam1Win ? "border: 4px solid rgba(255, 255, 255, 0.5);" : ""} ${showTeam1Loss ? "border: 4px solid rgba(255, 255, 255, 0.2);" : ""}">
               <img src="${sanitizeLogo(leg.team1_logo)}" alt="${leg.team1_name}" style="width: 100%; height: 100%; object-fit: contain;">
             </div>
             <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${leg.team1_name}</div>
@@ -526,7 +526,7 @@ function generateParlayCardHTML(parlay) {
             <div style="font-size: 2rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
           </div>
           <div style="text-align: center; flex: 1;">
-            <div style="width: 4.5rem; height: 4.5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; padding: 0.75rem; ${showTeam2Win ? "border: 4px solid rgba(255, 255, 255, 0.5);" : ""} ${showTeam2Loss ? "border: 4px solid rgba(255, 255, 255, 0.2);" : ""}">
+            <div class="history-parlay-leg-logo" style="border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; padding: 0.75rem; ${showTeam2Win ? "border: 4px solid rgba(255, 255, 255, 0.5);" : ""} ${showTeam2Loss ? "border: 4px solid rgba(255, 255, 255, 0.2);" : ""}">
               <img src="${sanitizeLogo(leg.team2_logo)}" alt="${leg.team2_name}" style="width: 100%; height: 100%; object-fit: contain;">
             </div>
             <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${leg.team2_name}</div>
@@ -540,7 +540,7 @@ function generateParlayCardHTML(parlay) {
         <div style="text-align: center; color: rgba(255, 255, 255, 0.6); font-size: 1.5rem; margin-bottom: 1.25rem;">SPREAD</div>
         <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
           <div style="text-align: center; flex: 1;">
-            <div style="width: 4.5rem; height: 4.5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; padding: 0.75rem; ${leg.spread_team === "team1" ? "border: 4px solid rgba(255, 255, 255, 0.5);" : ""}">
+            <div class="history-parlay-leg-logo" style="border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; padding: 0.75rem; ${leg.spread_team === "team1" ? "border: 4px solid rgba(255, 255, 255, 0.5);" : ""}">
               <img src="${sanitizeLogo(leg.team1_logo)}" alt="${leg.team1_name}" style="width: 100%; height: 100%; object-fit: contain;">
             </div>
             <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${leg.team1_name}</div>
@@ -550,7 +550,7 @@ function generateParlayCardHTML(parlay) {
             <div style="font-size: 2rem; font-weight: 700; color: rgba(255, 255, 255, 0.5);">VS</div>
           </div>
           <div style="text-align: center; flex: 1;">
-            <div style="width: 4.5rem; height: 4.5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; padding: 0.75rem; ${leg.spread_team === "team2" ? "border: 4px solid rgba(255, 255, 255, 0.5);" : ""}">
+            <div class="history-parlay-leg-logo" style="border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; padding: 0.75rem; ${leg.spread_team === "team2" ? "border: 4px solid rgba(255, 255, 255, 0.5);" : ""}">
               <img src="${sanitizeLogo(leg.team2_logo)}" alt="${leg.team2_name}" style="width: 100%; height: 100%; object-fit: contain;">
             </div>
             <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${leg.team2_name}</div>
@@ -564,7 +564,7 @@ function generateParlayCardHTML(parlay) {
         <div style="text-align: center; color: rgba(255, 255, 255, 0.6); font-size: 1.5rem; margin-bottom: 1.25rem;">${displayText?.toUpperCase()}</div>
         <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
           <div style="text-align: center; flex: 1;">
-            <div style="width: 4.5rem; height: 4.5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; padding: 0.75rem;">
+            <div class="history-parlay-leg-logo" style="border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; padding: 0.75rem;">
               <img src="${sanitizeLogo(leg.team1_logo)}" alt="${leg.team1_name}" style="width: 100%; height: 100%; object-fit: contain;">
             </div>
             <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${leg.team1_name}</div>
@@ -578,7 +578,7 @@ function generateParlayCardHTML(parlay) {
             </div>
           </div>
           <div style="text-align: center; flex: 1;">
-            <div style="width: 4.5rem; height: 4.5rem; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; padding: 0.75rem;">
+            <div class="history-parlay-leg-logo" style="border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; padding: 0.75rem;">
               <img src="${sanitizeLogo(leg.team2_logo)}" alt="${leg.team2_name}" style="width: 100%; height: 100%; object-fit: contain;">
             </div>
             <div style="font-size: 1rem; font-weight: 600; color: #ffffff; text-align: center;">${leg.team2_name}</div>
