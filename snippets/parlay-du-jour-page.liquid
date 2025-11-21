@@ -43,6 +43,98 @@
           </div>
         </div>
         
+        <!-- Modal de génération IA pour Parlay du jour -->
+        <div id="ai-modal-parlay" class="ai-modal-overlay">
+          <div class="ai-modal-container">
+            <button class="ai-modal-close" onclick="closeAIModal('parlay')">&times;</button>
+            <h2 class="ai-modal-title">Parlay du jour</h2>
+            
+            <div class="ai-modal-steps">
+              <span class="ai-step-indicator active" data-step="1">Étape 1</span>
+              <span style="color: rgba(255,255,255,0.3);">•</span>
+              <span class="ai-step-indicator" data-step="2">Étape 2</span>
+              <span style="color: rgba(255,255,255,0.3);">•</span>
+              <span class="ai-step-indicator" data-step="3">Étape 3</span>
+            </div>
+            
+            <div class="ai-modal-content">
+              <!-- Étape 1: Choix du sport -->
+              <div class="ai-step active" data-step="1">
+                <h3 class="ai-step-title">Choisis le sport</h3>
+                <div class="ai-options-grid">
+                  <div class="ai-option-card" data-option="sport" data-value="all">
+                    <div class="ai-option-icon">🏆</div>
+                    <div class="ai-option-title">Tous les sports</div>
+                  </div>
+                  <div class="ai-option-card" data-option="sport" data-value="nhl">
+                    <div class="ai-option-icon">🏒</div>
+                    <div class="ai-option-title">NHL</div>
+                  </div>
+                  <div class="ai-option-card" data-option="sport" data-value="nfl">
+                    <div class="ai-option-icon">🏈</div>
+                    <div class="ai-option-title">NFL</div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Étape 2: Choix du type -->
+              <div class="ai-step" data-step="2">
+                <h3 class="ai-step-title">Choisis ton type</h3>
+                <div class="ai-options-grid">
+                  <div class="ai-option-card" data-option="type" data-value="safe">
+                    <div class="ai-option-icon">🛡️</div>
+                    <div class="ai-option-title">Les plus safe</div>
+                    <div class="ai-option-desc">Mais moins de gain</div>
+                  </div>
+                  <div class="ai-option-card" data-option="type" data-value="profitable">
+                    <div class="ai-option-icon">💰</div>
+                    <div class="ai-option-title">Les plus rentable</div>
+                  </div>
+                  <div class="ai-option-card" data-option="type" data-value="risky">
+                    <div class="ai-option-icon">🚀</div>
+                    <div class="ai-option-title">Les plus gros gain</div>
+                    <div class="ai-option-desc">Plus de risque</div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Étape 3: Type d'analyse -->
+              <div class="ai-step" data-step="3">
+                <h3 class="ai-step-title">Analyse de l'IA</h3>
+                <div class="ai-options-grid">
+                  <div class="ai-option-card" data-option="analysis" data-value="deep">
+                    <div class="ai-option-icon">🔬</div>
+                    <div class="ai-option-title">Analyse poussée</div>
+                    <div class="ai-option-desc">Recherche plus longue (40-60s)</div>
+                  </div>
+                  <div class="ai-option-card" data-option="analysis" data-value="normal">
+                    <div class="ai-option-icon">⚡</div>
+                    <div class="ai-option-title">Analyse normale</div>
+                    <div class="ai-option-desc">30-40 secondes</div>
+                  </div>
+                  <div class="ai-option-card" data-option="analysis" data-value="fast">
+                    <div class="ai-option-icon">🚀</div>
+                    <div class="ai-option-title">Analyse rapide</div>
+                    <div class="ai-option-desc">15-30 secondes</div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Écran de chargement -->
+              <div class="ai-loading-screen">
+                <div class="ai-loading-spinner"></div>
+                <div class="ai-loading-text">Analyse en cours...</div>
+                <div class="ai-loading-subtext" id="loading-subtext-parlay">Analyse des statistiques</div>
+              </div>
+            </div>
+            
+            <div class="ai-modal-actions">
+              <button class="ai-modal-btn ai-modal-btn-secondary" id="prev-btn-parlay" onclick="prevStepParlay()" style="display: none;">Précédent</button>
+              <button class="ai-modal-btn ai-modal-btn-primary" id="next-btn-parlay" onclick="nextStepParlay()" disabled>Prochain</button>
+            </div>
+          </div>
+        </div>
+        
         <h1>PARLAY DU JOUR</h1>
         <p class="subtitle">Les parlay avec la meilleur probabilité de réussite aujourd'hui. Nous affichons tous les parlay avec minimum de 60% de chance de gagner selon notre IA.</p>
 
