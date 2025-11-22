@@ -122,7 +122,64 @@
               
               <!-- Écran de chargement -->
               <div class="ai-loading-screen">
-                <div class="ai-loading-spinner"></div>
+                <div class="ai-atom-container">
+                  <!-- Cercle de progression externe -->
+                  <svg class="progress-circle" width="200" height="200" viewBox="0 0 200 200">
+                    <circle 
+                      cx="100" 
+                      cy="100" 
+                      r="90" 
+                      fill="none" 
+                      stroke="rgba(255,255,255,0.1)" 
+                      stroke-width="4"
+                    />
+                    <circle 
+                      id="progress-circle-parlay"
+                      cx="100" 
+                      cy="100" 
+                      r="90" 
+                      fill="none" 
+                      stroke="white" 
+                      stroke-width="4" 
+                      stroke-dasharray="565.48" 
+                      stroke-dashoffset="565.48"
+                      transform="rotate(-90 100 100)"
+                      style="transition: stroke-dashoffset 0.1s linear;"
+                    />
+                  </svg>
+                  
+                  <!-- SVG Atome IA par-dessus -->
+                  <svg class="atom-svg" width="160" height="160" viewBox="0 0 200 200">
+                    <defs>
+                      <filter id="softGlow-parlay" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                        <feMerge>
+                          <feMergeNode in="coloredBlur"/>
+                          <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                      </filter>
+                    </defs>
+                    
+                    <!-- Orbites -->
+                    <g filter="url(#softGlow-parlay)">
+                      <ellipse cx="100" cy="100" rx="70" ry="30" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5">
+                        <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="8s" repeatCount="indefinite"/>
+                      </ellipse>
+                      <ellipse cx="100" cy="100" rx="70" ry="30" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5">
+                        <animateTransform attributeName="transform" type="rotate" from="60 100 100" to="420 100 100" dur="8s" repeatCount="indefinite"/>
+                      </ellipse>
+                      <ellipse cx="100" cy="100" rx="70" ry="30" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5">
+                        <animateTransform attributeName="transform" type="rotate" from="120 100 100" to="480 100 100" dur="8s" repeatCount="indefinite"/>
+                      </ellipse>
+                    </g>
+                    
+                    <!-- Noyau central -->
+                    <circle cx="100" cy="100" r="8" fill="white" opacity="0.9"/>
+                    
+                    <!-- Pourcentage au centre -->
+                    <text id="progress-percentage-parlay" x="100" y="110" class="progress-percentage" text-anchor="middle">0%</text>
+                  </svg>
+                </div>
                 <div class="ai-loading-text">Analyse en cours...</div>
                 <div class="ai-loading-subtext" id="loading-subtext-parlay">Analyse des statistiques</div>
               </div>
