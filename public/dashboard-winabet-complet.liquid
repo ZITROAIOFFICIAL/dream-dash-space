@@ -233,11 +233,43 @@
     }
     
     .ai-step {
-      display: none;
+      display: none !important;
     }
     
     .ai-step.active {
-      display: block;
+      display: block !important;
+      animation: fadeIn 0.3s ease-in;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .ai-option-images {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .sport-icon {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+    }
+
+    .sport-icon-single {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin-bottom: 0.75rem;
+    }
+
+    .ai-option-card:hover .sport-icon,
+    .ai-option-card:hover .sport-icon-single {
+      transform: scale(1.1);
+      transition: transform 0.2s ease;
     }
     
     .ai-step-title {
@@ -1293,15 +1325,22 @@
                 <h3 class="ai-step-title">Choisis le sport</h3>
                 <div class="ai-options-grid">
                   <div class="ai-option-card" data-option="sport" data-value="all">
-                    <div class="ai-option-icon">🏆</div>
+                    <div class="ai-option-images">
+                      <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Untitled_design-67_cafd428b-ced8-42b4-ba01-5acb849f28f1.png?v=1763771742" 
+                           alt="NFL" class="sport-icon">
+                      <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Untitled_design-68_6926abde-3b9e-4114-a163-6b2f934f73a6.png?v=1763771741" 
+                           alt="NHL" class="sport-icon">
+                    </div>
                     <div class="ai-option-title">Tous les sports</div>
                   </div>
                   <div class="ai-option-card" data-option="sport" data-value="nhl">
-                    <div class="ai-option-icon">🏒</div>
+                    <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Untitled_design-68_6926abde-3b9e-4114-a163-6b2f934f73a6.png?v=1763771741" 
+                         alt="NHL" class="sport-icon-single">
                     <div class="ai-option-title">NHL</div>
                   </div>
                   <div class="ai-option-card" data-option="sport" data-value="nfl">
-                    <div class="ai-option-icon">🏈</div>
+                    <img src="https://cdn.shopify.com/s/files/1/0781/8490/7003/files/Untitled_design-67_cafd428b-ced8-42b4-ba01-5acb849f28f1.png?v=1763771742" 
+                         alt="NFL" class="sport-icon-single">
                     <div class="ai-option-title">NFL</div>
                   </div>
                 </div>
@@ -4493,14 +4532,16 @@
         }
       });
       
-      // Afficher la bonne étape
-      modal.querySelectorAll('.ai-step').forEach((step, index) => {
-        if (index + 1 === currentStepBet) {
-          step.classList.add('active');
-        } else {
-          step.classList.remove('active');
-        }
+      // Retirer active de toutes les étapes d'abord
+      modal.querySelectorAll('.ai-step').forEach(step => {
+        step.classList.remove('active');
       });
+      
+      // Afficher uniquement l'étape courante
+      const activeStep = modal.querySelector(`.ai-step[data-step="${currentStepBet}"]`);
+      if (activeStep) {
+        activeStep.classList.add('active');
+      }
       
       // Gérer les boutons
       const prevBtn = document.getElementById('prev-btn-bet');
@@ -4681,14 +4722,16 @@
         }
       });
       
-      // Afficher la bonne étape
-      modal.querySelectorAll('.ai-step').forEach((step, index) => {
-        if (index + 1 === currentStepParlay) {
-          step.classList.add('active');
-        } else {
-          step.classList.remove('active');
-        }
+      // Retirer active de toutes les étapes d'abord
+      modal.querySelectorAll('.ai-step').forEach(step => {
+        step.classList.remove('active');
       });
+      
+      // Afficher uniquement l'étape courante
+      const activeStep = modal.querySelector(`.ai-step[data-step="${currentStepParlay}"]`);
+      if (activeStep) {
+        activeStep.classList.add('active');
+      }
       
       // Gérer les boutons
       const prevBtn = document.getElementById('prev-btn-parlay');
