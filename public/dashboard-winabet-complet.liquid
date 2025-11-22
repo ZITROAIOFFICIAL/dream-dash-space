@@ -346,17 +346,43 @@
       display: block;
     }
     
-    .ai-loading-spinner {
-      width: 60px;
-      height: 60px;
-      border: 4px solid rgba(255, 255, 255, 0.1);
-      border-top-color: white;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
+    .ai-atom-container {
+      position: relative;
+      width: 200px;
+      height: 200px;
       margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .progress-circle {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+    
+    .atom-svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
+    
+    .atom-svg .progress-percentage {
+      font-family: 'Outfit', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      fill: white;
     }
     
     @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    @keyframes orbitRotate {
       to { transform: rotate(360deg); }
     }
     
@@ -1326,7 +1352,64 @@
               
               <!-- Écran de chargement -->
               <div class="ai-loading-screen">
-                <div class="ai-loading-spinner"></div>
+                <div class="ai-atom-container">
+                  <!-- Cercle de progression externe -->
+                  <svg class="progress-circle" width="200" height="200" viewBox="0 0 200 200">
+                    <circle 
+                      cx="100" 
+                      cy="100" 
+                      r="90" 
+                      fill="none" 
+                      stroke="rgba(255,255,255,0.1)" 
+                      stroke-width="4"
+                    />
+                    <circle 
+                      id="progress-circle-bet"
+                      cx="100" 
+                      cy="100" 
+                      r="90" 
+                      fill="none" 
+                      stroke="white" 
+                      stroke-width="4" 
+                      stroke-dasharray="565.48" 
+                      stroke-dashoffset="565.48"
+                      transform="rotate(-90 100 100)"
+                      style="transition: stroke-dashoffset 0.1s linear;"
+                    />
+                  </svg>
+                  
+                  <!-- SVG Atome IA par-dessus -->
+                  <svg class="atom-svg" width="160" height="160" viewBox="0 0 200 200">
+                    <defs>
+                      <filter id="softGlow-bet" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                        <feMerge>
+                          <feMergeNode in="coloredBlur"/>
+                          <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                      </filter>
+                    </defs>
+                    
+                    <!-- Orbites -->
+                    <g filter="url(#softGlow-bet)">
+                      <ellipse cx="100" cy="100" rx="70" ry="30" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5">
+                        <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="8s" repeatCount="indefinite"/>
+                      </ellipse>
+                      <ellipse cx="100" cy="100" rx="70" ry="30" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5">
+                        <animateTransform attributeName="transform" type="rotate" from="60 100 100" to="420 100 100" dur="8s" repeatCount="indefinite"/>
+                      </ellipse>
+                      <ellipse cx="100" cy="100" rx="70" ry="30" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5">
+                        <animateTransform attributeName="transform" type="rotate" from="120 100 100" to="480 100 100" dur="8s" repeatCount="indefinite"/>
+                      </ellipse>
+                    </g>
+                    
+                    <!-- Noyau central -->
+                    <circle cx="100" cy="100" r="8" fill="white" opacity="0.9"/>
+                    
+                    <!-- Pourcentage au centre -->
+                    <text id="progress-percentage-bet" x="100" y="110" class="progress-percentage" text-anchor="middle">0%</text>
+                  </svg>
+                </div>
                 <div class="ai-loading-text">Analyse en cours...</div>
                 <div class="ai-loading-subtext" id="loading-subtext-bet">Analyse des statistiques</div>
               </div>
@@ -4465,6 +4548,29 @@
         duration = 15000 + Math.random() * 15000; // 15-30s
       }
       
+      // Animation du pourcentage et du cercle
+      const progressCircle = document.getElementById('progress-circle-bet');
+      const progressPercentage = document.getElementById('progress-percentage-bet');
+      const circumference = 2 * Math.PI * 90; // 2πr où r=90
+      let currentProgress = 0;
+      
+      const progressInterval = setInterval(() => {
+        // Calculer l'incrément basé sur la durée totale
+        const increment = 100 / (duration / 100); // Mise à jour chaque 100ms
+        currentProgress = Math.min(currentProgress + increment, 100);
+        
+        // Mettre à jour le pourcentage affiché
+        progressPercentage.textContent = Math.floor(currentProgress) + '%';
+        
+        // Mettre à jour le cercle de progression
+        const offset = circumference - (currentProgress / 100) * circumference;
+        progressCircle.style.strokeDashoffset = offset;
+        
+        if (currentProgress >= 100) {
+          clearInterval(progressInterval);
+        }
+      }, 100);
+      
       // Textes changeants
       const loadingTexts = [
         'Analyse des statistiques',
@@ -4483,12 +4589,18 @@
       // Fermer après la durée
       setTimeout(() => {
         clearInterval(textInterval);
+        clearInterval(progressInterval);
         closeAIModal('bet');
         
         // Réinitialiser l'affichage
         content.querySelectorAll('.ai-step').forEach(step => step.style.display = 'block');
         actions.style.display = 'flex';
         loadingScreen.classList.remove('active');
+        
+        // Réinitialiser le cercle et le pourcentage
+        progressCircle.style.strokeDashoffset = circumference;
+        progressPercentage.textContent = '0%';
+        
         currentStepBet = 1;
         selectedOptionsBet = { sport: null, type: null, analysis: null };
         modal.querySelectorAll('.ai-option-card').forEach(card => card.classList.remove('selected'));
@@ -4624,6 +4736,29 @@
         duration = 15000 + Math.random() * 15000; // 15-30s
       }
       
+      // Animation du pourcentage et du cercle
+      const progressCircle = document.getElementById('progress-circle-parlay');
+      const progressPercentage = document.getElementById('progress-percentage-parlay');
+      const circumference = 2 * Math.PI * 90; // 2πr où r=90
+      let currentProgress = 0;
+      
+      const progressInterval = setInterval(() => {
+        // Calculer l'incrément basé sur la durée totale
+        const increment = 100 / (duration / 100); // Mise à jour chaque 100ms
+        currentProgress = Math.min(currentProgress + increment, 100);
+        
+        // Mettre à jour le pourcentage affiché
+        progressPercentage.textContent = Math.floor(currentProgress) + '%';
+        
+        // Mettre à jour le cercle de progression
+        const offset = circumference - (currentProgress / 100) * circumference;
+        progressCircle.style.strokeDashoffset = offset;
+        
+        if (currentProgress >= 100) {
+          clearInterval(progressInterval);
+        }
+      }, 100);
+      
       // Textes changeants
       const loadingTexts = [
         'Analyse des statistiques',
@@ -4642,12 +4777,18 @@
       // Fermer après la durée
       setTimeout(() => {
         clearInterval(textInterval);
+        clearInterval(progressInterval);
         closeAIModal('parlay');
         
         // Réinitialiser l'affichage
         content.querySelectorAll('.ai-step').forEach(step => step.style.display = 'block');
         actions.style.display = 'flex';
         loadingScreen.classList.remove('active');
+        
+        // Réinitialiser le cercle et le pourcentage
+        progressCircle.style.strokeDashoffset = circumference;
+        progressPercentage.textContent = '0%';
+        
         currentStepParlay = 1;
         selectedOptionsParlay = { sport: null, type: null, analysis: null };
         modal.querySelectorAll('.ai-option-card').forEach(card => card.classList.remove('selected'));
