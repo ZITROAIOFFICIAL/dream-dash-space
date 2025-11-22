@@ -413,6 +413,19 @@
       min-height: 400px;
     }
     
+    /* FORCER le masquage du bouton X pendant le chargement - TRÈS IMPORTANT */
+    .ai-modal.loading .ai-modal-close {
+      display: none !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      z-index: -1 !important;
+    }
+    .ai-modal.loading .ai-modal-content {
+      position: relative;
+      min-height: 400px;
+    }
+    
     .ai-atom-container {
       position: relative;
       width: 200px;
@@ -473,20 +486,39 @@
         padding: 1.5rem 1rem;
       }
       
+      /* AUGMENTER au lieu de réduire ! */
       .ai-modal-title {
-        font-size: 1.4rem;
+        font-size: 2.2rem;
       }
       
       .ai-step-title {
-        font-size: 1.1rem;
+        font-size: 1.6rem;
+      }
+      
+      .ai-option-title {
+        font-size: 1.3rem;
+      }
+      
+      .ai-option-desc {
+        font-size: 1.05rem;
+      }
+      
+      .ai-option-icon {
+        font-size: 2.8rem;
+      }
+      
+      .ai-modal-btn {
+        font-size: 1.15rem;
+        padding: 1.1rem 2.2rem;
+        width: 100%;
+      }
+      
+      .ai-step-indicator {
+        font-size: 1.15rem;
       }
       
       .ai-modal-actions {
         flex-direction: column;
-      }
-      
-      .ai-modal-btn {
-        width: 100%;
       }
     }
     
@@ -4823,13 +4855,27 @@
       const content = modal.querySelector('.ai-modal-content');
       const actions = modal.querySelector('.ai-modal-actions');
       const loadingScreen = modal.querySelector('.ai-loading-screen');
+      const stepsIndicator = modal.querySelector('.ai-modal-steps');
       
-      // Cacher les étapes et boutons
-      content.querySelectorAll('.ai-step').forEach(step => step.style.display = 'none');
-      actions.style.display = 'none';
+      // FORCER le masquage de TOUTES les étapes avec !important via style inline
+      content.querySelectorAll('.ai-step').forEach(step => {
+        step.style.cssText = 'display: none !important; opacity: 0 !important; visibility: hidden !important;';
+      });
+      
+      // Cacher les boutons d'action
+      actions.style.cssText = 'display: none !important; opacity: 0 !important; visibility: hidden !important;';
+      
+      // Ajouter la classe loading au modal (cache le bouton X)
+      modal.classList.add('loading');
+      
+      // FORCER le masquage des indicateurs d'étapes
+      if (stepsIndicator) {
+        stepsIndicator.style.cssText = 'display: none !important; opacity: 0 !important; visibility: hidden !important;';
+      }
       
       // Afficher l'écran de chargement
       loadingScreen.classList.add('active');
+      loadingScreen.style.display = 'block';
       
       // Déterminer la durée selon le type d'analyse
       let duration;
@@ -4844,18 +4890,13 @@
       // Animation du pourcentage et du cercle
       const progressCircle = document.getElementById('progress-circle-parlay');
       const progressPercentage = document.getElementById('progress-percentage-parlay');
-      const circumference = 2 * Math.PI * 90; // 2πr où r=90
+      const circumference = 2 * Math.PI * 90;
       let currentProgress = 0;
       
       const progressInterval = setInterval(() => {
-        // Calculer l'incrément basé sur la durée totale
-        const increment = 100 / (duration / 100); // Mise à jour chaque 100ms
+        const increment = 100 / (duration / 100);
         currentProgress = Math.min(currentProgress + increment, 100);
-        
-        // Mettre à jour le pourcentage affiché
         progressPercentage.textContent = Math.floor(currentProgress) + '%';
-        
-        // Mettre à jour le cercle de progression
         const offset = circumference - (currentProgress / 100) * circumference;
         progressCircle.style.strokeDashoffset = offset;
         
@@ -4883,21 +4924,31 @@
       setTimeout(() => {
         clearInterval(textInterval);
         clearInterval(progressInterval);
-        closeAIModal('parlay');
         
-        // Réinitialiser l'affichage
-        content.querySelectorAll('.ai-step').forEach(step => step.style.display = 'block');
-        actions.style.display = 'flex';
+        // Retirer la classe loading
+        modal.classList.remove('loading');
+        
+        // Réinitialiser les étapes
+        content.querySelectorAll('.ai-step').forEach(step => {
+          step.style.cssText = '';
+        });
+        
+        // Réinitialiser les actions
+        actions.style.cssText = '';
+        
+        // Réafficher les indicateurs d'étapes
+        if (stepsIndicator) {
+          stepsIndicator.style.cssText = '';
+        }
+        
+        // Cacher l'écran de chargement
         loadingScreen.classList.remove('active');
         
-        // Réinitialiser le cercle et le pourcentage
-        progressCircle.style.strokeDashoffset = circumference;
+        // Réinitialiser le pourcentage et le cercle
         progressPercentage.textContent = '0%';
+        progressCircle.style.strokeDashoffset = circumference;
         
-        currentStepParlay = 1;
-        selectedOptionsParlay = { sport: null, type: null, analysis: null };
-        modal.querySelectorAll('.ai-option-card').forEach(card => card.classList.remove('selected'));
-        updateStepDisplayParlay();
+        closeAIModal('parlay');
       }, duration);
     }
     
