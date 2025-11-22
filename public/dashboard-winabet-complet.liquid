@@ -378,6 +378,17 @@
       display: block;
     }
     
+    /* Masquer les indicateurs d'étapes pendant le chargement */
+    .ai-loading-screen.active ~ .ai-modal-steps {
+      display: none !important;
+    }
+    
+    /* Masquer le bouton X pendant le chargement */
+    .ai-modal.loading .ai-modal-close {
+      display: none !important;
+      pointer-events: none;
+    }
+    
     .ai-atom-container {
       position: relative;
       width: 200px;
@@ -1358,6 +1369,7 @@
                   <div class="ai-option-card" data-option="type" data-value="profitable">
                     <div class="ai-option-icon">💰</div>
                     <div class="ai-option-title">Les plus rentable</div>
+                    <div class="ai-option-desc">C'est le plus équilibré entre gain et risque</div>
                   </div>
                   <div class="ai-option-card" data-option="type" data-value="risky">
                     <div class="ai-option-icon">🚀</div>
@@ -1374,17 +1386,17 @@
                   <div class="ai-option-card" data-option="analysis" data-value="deep">
                     <div class="ai-option-icon">🔬</div>
                     <div class="ai-option-title">Analyse poussée</div>
-                    <div class="ai-option-desc">Recherche plus longue (40-60s)</div>
+                    <div class="ai-option-desc">Recherche approfondie des meilleures opportunités</div>
                   </div>
                   <div class="ai-option-card" data-option="analysis" data-value="normal">
                     <div class="ai-option-icon">⚡</div>
                     <div class="ai-option-title">Analyse normale</div>
-                    <div class="ai-option-desc">30-40 secondes</div>
+                    <div class="ai-option-desc">Équilibre entre rapidité et précision</div>
                   </div>
                   <div class="ai-option-card" data-option="analysis" data-value="fast">
                     <div class="ai-option-icon">🚀</div>
                     <div class="ai-option-title">Analyse rapide</div>
-                    <div class="ai-option-desc">15-30 secondes</div>
+                    <div class="ai-option-desc">Résultats optimisés en un instant</div>
                   </div>
                 </div>
               </div>
@@ -4568,10 +4580,19 @@
       const content = modal.querySelector('.ai-modal-content');
       const actions = modal.querySelector('.ai-modal-actions');
       const loadingScreen = modal.querySelector('.ai-loading-screen');
+      const stepsIndicator = modal.querySelector('.ai-modal-steps');
       
       // Cacher les étapes et boutons
       content.querySelectorAll('.ai-step').forEach(step => step.style.display = 'none');
       actions.style.display = 'none';
+      
+      // Ajouter la classe loading au modal pour cacher le bouton X
+      modal.classList.add('loading');
+      
+      // Cacher les indicateurs d'étapes
+      if (stepsIndicator) {
+        stepsIndicator.style.display = 'none';
+      }
       
       // Afficher l'écran de chargement
       loadingScreen.classList.add('active');
@@ -4628,6 +4649,15 @@
       setTimeout(() => {
         clearInterval(textInterval);
         clearInterval(progressInterval);
+        
+        // Retirer la classe loading
+        modal.classList.remove('loading');
+        
+        // Réafficher les indicateurs d'étapes
+        if (stepsIndicator) {
+          stepsIndicator.style.display = 'flex';
+        }
+        
         closeAIModal('bet');
         
         // Réinitialiser l'affichage
