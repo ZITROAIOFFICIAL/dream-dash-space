@@ -202,7 +202,7 @@
     
     .ai-modal-title {
       color: white;
-      font-size: 1.75rem;
+      font-size: 2rem;
       font-weight: 600;
       text-align: center;
       margin-bottom: 1.5rem;
@@ -219,7 +219,7 @@
     
     .ai-step-indicator {
       color: rgba(255, 255, 255, 0.5);
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-family: 'Outfit', sans-serif;
     }
     
@@ -274,7 +274,7 @@
     
     .ai-step-title {
       color: white;
-      font-size: 1.3rem;
+      font-size: 1.5rem;
       font-weight: 600;
       margin-bottom: 1.5rem;
       text-align: center;
@@ -308,13 +308,13 @@
     }
     
     .ai-option-icon {
-      font-size: 2rem;
+      font-size: 2.5rem;
       margin-bottom: 0.5rem;
     }
     
     .ai-option-title {
       color: white;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       font-weight: 600;
       margin-bottom: 0.25rem;
       font-family: 'Outfit', sans-serif;
@@ -322,7 +322,7 @@
     
     .ai-option-desc {
       color: rgba(255, 255, 255, 0.6);
-      font-size: 0.9rem;
+      font-size: 1rem;
       font-family: 'Outfit', sans-serif;
     }
     
@@ -334,10 +334,10 @@
     }
     
     .ai-modal-btn {
-      padding: 0.875rem 2rem;
+      padding: 1rem 2.5rem;
       border-radius: 0.5rem;
       border: none;
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 600;
       font-family: 'Outfit', sans-serif;
       cursor: pointer;
@@ -387,6 +387,30 @@
     .ai-modal.loading .ai-modal-close {
       display: none !important;
       pointer-events: none;
+    }
+    
+    /* Forcer le masquage de TOUTES les étapes pendant le chargement */
+    .ai-modal.loading .ai-step {
+      display: none !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+    }
+    
+    /* Forcer l'affichage UNIQUEMENT de l'écran de chargement */
+    .ai-modal.loading .ai-loading-screen.active {
+      display: block !important;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      z-index: 1000;
+    }
+    
+    /* S'assurer que le contenu du modal ne déborde pas */
+    .ai-modal.loading .ai-modal-content {
+      position: relative;
+      min-height: 400px;
     }
     
     .ai-atom-container {
@@ -4582,20 +4606,25 @@
       const loadingScreen = modal.querySelector('.ai-loading-screen');
       const stepsIndicator = modal.querySelector('.ai-modal-steps');
       
-      // Cacher les étapes et boutons
-      content.querySelectorAll('.ai-step').forEach(step => step.style.display = 'none');
-      actions.style.display = 'none';
+      // FORCER le masquage de TOUTES les étapes avec !important via style inline
+      content.querySelectorAll('.ai-step').forEach(step => {
+        step.style.cssText = 'display: none !important; opacity: 0 !important; visibility: hidden !important;';
+      });
       
-      // Ajouter la classe loading au modal pour cacher le bouton X
+      // Cacher les boutons d'action
+      actions.style.cssText = 'display: none !important; opacity: 0 !important; visibility: hidden !important;';
+      
+      // Ajouter la classe loading au modal (cache le bouton X)
       modal.classList.add('loading');
       
-      // Cacher les indicateurs d'étapes
+      // FORCER le masquage des indicateurs d'étapes
       if (stepsIndicator) {
-        stepsIndicator.style.display = 'none';
+        stepsIndicator.style.cssText = 'display: none !important; opacity: 0 !important; visibility: hidden !important;';
       }
       
       // Afficher l'écran de chargement
       loadingScreen.classList.add('active');
+      loadingScreen.style.display = 'block';
       
       // Déterminer la durée selon le type d'analyse
       let duration;
@@ -4653,21 +4682,27 @@
         // Retirer la classe loading
         modal.classList.remove('loading');
         
+        // Réinitialiser les étapes
+        content.querySelectorAll('.ai-step').forEach(step => {
+          step.style.cssText = '';
+        });
+        
+        // Réinitialiser les actions
+        actions.style.cssText = '';
+        
         // Réafficher les indicateurs d'étapes
         if (stepsIndicator) {
-          stepsIndicator.style.display = 'flex';
+          stepsIndicator.style.cssText = '';
         }
         
-        closeAIModal('bet');
-        
-        // Réinitialiser l'affichage
-        content.querySelectorAll('.ai-step').forEach(step => step.style.display = 'block');
-        actions.style.display = 'flex';
+        // Cacher l'écran de chargement
         loadingScreen.classList.remove('active');
         
         // Réinitialiser le cercle et le pourcentage
         progressCircle.style.strokeDashoffset = circumference;
         progressPercentage.textContent = '0%';
+        
+        closeAIModal('bet');
         
         currentStepBet = 1;
         selectedOptionsBet = { sport: null, type: null, analysis: null };
